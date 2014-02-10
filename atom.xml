@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-09T16:04:55-08:00</updated>
+  <updated>2014-02-09T16:25:21-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,18 +12,5 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Moving SushiHangover to GitHub Pages]]></title>
-    <link href="http://sushihangover.github.io/moving-the-blog-to-github-pages"/>
-    <updated>2014-02-09T14:51:17-08:00</updated>
-    <id>http://sushihangover.github.io/moving-the-blog-to-github-pages</id>
-    <content type="html"><![CDATA[<p>I am moving SushiHangover once again and using Octopus and thus going to a static publishing method as I really do not need features of a dynamic blog engine behind these pages&hellip;</p>
-
-<p>So bare with me as I get everything moved over and get the kinks worked out.</p>
-
-<p>As always, comment or email if you need anything&hellip;</p>
-]]></content>
-  </entry>
   
 </feed>
