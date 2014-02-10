@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[SushiHangover]]></title>
-  <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: GitHub | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
   <updated>2014-02-09T17:11:37-08:00</updated>
   <id>http://sushihangover.github.io/</id>
