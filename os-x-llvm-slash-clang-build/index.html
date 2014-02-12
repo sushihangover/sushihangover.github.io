@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Moving to GitHub Pages - SushiHangover</title>
+  <title>OS-X LLVM / CLANG Build - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="I am moving SushiHangover from Blogger and an Azure-based blog engine to GitHub Pages using Octopress so hang in there for a few days as I get the &hellip;">
+  <meta name="description" content="I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/moving-to-github-pages">
+  <link rel="canonical" href="http://sushihangover.github.io/os-x-llvm-slash-clang-build">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Moving to GitHub Pages</h1>
+      <h1 class="entry-title">OS-X LLVM / CLANG Build</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-02-09T16:49:16-08:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
+<time datetime="2014-02-11T00:00:00-08:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://sushihangover.github.io">Comments</a>
@@ -106,13 +106,31 @@
   </header>
 
 
-<div class="entry-content"><p>I am moving <strong><a href="http://sushihangover.blogspot.com">SushiHangover</a></strong> from Blogger and an Azure-based blog engine to GitHub Pages using Octopress so hang in there for a few days as I get the older content parsed and set to use markdown&hellip;</p>
+<div class="entry-content"><p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
 
-<p>As always, email or post a comment if you need anything.</p>
+<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
 
-<p>-R</p>
+<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;&ndash;)</p>
 
-<p><img src="http://sushihangover.github.io/images/PowerShellLogo.jpg" alt="image" /></p>
+<div><script src='https://gist.github.com/8946898.js'></script>
+<noscript><pre><code>git clone http://llvm.org/git/llvm.git
+pushd llvm/tools
+git clone http://llvm.org/git/clang.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/compiler-rt.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/test-suite.git
+popd
+mkdir llvmbuild
+pushd llvmbuild
+../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
+make
+</code></pre></noscript></div>
+
+
+<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
 </div>
 
 
@@ -135,12 +153,12 @@
   
 
 
-<time datetime="2014-02-09T16:49:16-08:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
+<time datetime="2014-02-11T00:00:00-08:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/github/'>GitHub</a>
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-Metal</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/embedded/'>Embedded</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>, <a class='category' href='/blog/categories/os-x/'>OS-X</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>
   
 </span>
 
@@ -149,7 +167,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/moving-to-github-pages" data-via="" data-counturl="http://sushihangover.github.io/moving-to-github-pages" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/os-x-llvm-slash-clang-build" data-via="" data-counturl="http://sushihangover.github.io/os-x-llvm-slash-clang-build" >Tweet</a>
   
   
   
@@ -158,8 +176,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/ometa-binary-data-parsing" title="Previous Post: OMeta Binary data parsing">&laquo; OMeta Binary data parsing</a>
       
-        <a class="basic-alignment right" href="/ometa-binary-data-parsing" title="Next Post: OMeta Binary data parsing">OMeta Binary data parsing &raquo;</a>
       
     </p>
   </footer>
@@ -246,8 +264,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/moving-to-github-pages';
-        var disqus_url = 'http://sushihangover.github.io/moving-to-github-pages';
+        var disqus_identifier = 'http://sushihangover.github.io/os-x-llvm-slash-clang-build';
+        var disqus_url = 'http://sushihangover.github.io/os-x-llvm-slash-clang-build';
         var disqus_script = 'embed.js';
       
     (function () {

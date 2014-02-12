@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ometa | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ometa/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-10T09:31:22-08:00</updated>
+  <updated>2014-02-11T16:20:53-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -53,7 +53,7 @@
 </code></p>
 
 <p>This is a working example of parsing binary data parsing in Ometa/JS.
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>OMeta/JS PNG Parse <a href="https://gist.github.com/sushihangover/8919188">https://gist.github.com/sushihangover/8919188</a> linenos:true </span></figcaption>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>OMeta/JS PNG Parse <a href="https://gist.github.com/sushihangover/8919188">https://gist.github.com/sushihangover/8919188</a> </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
