@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C# | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-11T22:28:03-08:00</updated>
+  <updated>2014-02-12T08:48:33-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[GtkSharp-Explorer Update for Irony]]></title>
+    <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony"/>
+    <updated>2014-02-12T08:14:14-08:00</updated>
+    <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
+    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+
+<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
+``` bash
+git branch &mdash;all
+* master
+  remotes/origin/HEAD &ndash;> origin/master
+  remotes/origin/gtksharp-explorer
+  remotes/origin/master
+  remotes/origin/xplat-nunit-fix
+git checkout gtksharp-explorer
+  Branch gtksharp-explorer set up to track remote branch gtksharp-explorer from origin.
+  Switched to a new branch &lsquo;gtksharp-explorer&rsquo;</p>
+
+<p>git branch &mdash;all
+* gtksharp-explorer
+  master
+  remotes/origin/HEAD &ndash;> origin/master
+  remotes/origin/gtksharp-explorer
+  remotes/origin/master
+  remotes/origin/xplat-nunit-fix<br/>
+open Irony_All.MonoDevelop.sln
+```</p>
+
+<p>==============================</p>
+
+<h1>Grammar Explorer based on Gtk#</h1>
+
+<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
+Instructions for building on Mono:</p>
+
+<h2>Via MonoDevelop/Xamarin IDE:</h2>
+
+<ul>
+<li>Release or Debug Targets:
+      Load and build via the Irony_All.MonoDevelop.sln
+Via cmd line:</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li><p>Release:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+<li><p>Debug:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OMeta Binary Data Parsing]]></title>

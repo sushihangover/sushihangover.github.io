@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ironshell - SushiHangover</title>
+  <title>GtkSharp-Explorer Update for Irony - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Ironshell Feb 9th, 2014 IronShell : An open-source cross-platform PowerShell implementation Feb 9th, 2014 Tweet Comments Please enable JavaScript to &hellip;">
+  <meta name="description" content="I was working on a Irony/C# based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/ironshell">
+  <link rel="canonical" href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -76,34 +76,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Ironshell</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-09T17:48:00-08:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time></p>
-  </header>
-  
-  <p><a href="https://github.com/IronShell">IronShell</a> : An open-source cross-platform PowerShell implementation</p>
-
-<p><img src="images/IronShellLogo.png" alt="image" /></p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">GtkSharp-Explorer Update for Irony</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -115,21 +96,138 @@
   
 
 
-<time datetime="2014-02-09T17:48:00-08:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
+<time datetime="2014-02-12T08:14:14-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="Irony.GtkSharp.Explorer" alt="Irony GtkSharp Explorer"></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+
+<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch --all
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>git checkout gtksharp-explorer
+</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
+</span><span class='line'>  Switched to a new branch <span class="s1">&#39;gtksharp-explorer&#39;</span>
+</span><span class='line'>
+</span><span class='line'>git branch --all
+</span><span class='line'>* gtksharp-explorer
+</span><span class='line'>  master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>open Irony_All.MonoDevelop.sln
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>==============================</p>
+
+<h1>Grammar Explorer based on Gtk#</h1>
+
+<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
+Instructions for building on Mono:</p>
+
+<h2>Via MonoDevelop/Xamarin IDE:</h2>
+
+<ul>
+<li>Release or Debug Targets:
+      Load and build via the Irony_All.MonoDevelop.sln
+Via cmd line:</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li><p>Release:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+<li><p>Debug:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/ironshell/index.html" data-via="" data-counturl="http://sushihangover.github.io/ironshell/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-12T08:14:14-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/irony/'>Irony</a>, <a class='category' href='/blog/categories/mono/'>Mono</a>, <a class='category' href='/blog/categories/os-x/'>OS-X</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/gtksharp-explorer-update-for-irony" data-via="" data-counturl="http://sushihangover.github.io/gtksharp-explorer-update-for-irony" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/ellcc-dot-org-build-fix-for-os-x" title="Previous Post: Ellcc.org build fix for OS-X">&laquo; Ellcc.org build fix for OS-X</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
   <section>
@@ -221,8 +319,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/ironshell/index.html';
-        var disqus_url = 'http://sushihangover.github.io/ironshell/index.html';
+        var disqus_identifier = 'http://sushihangover.github.io/gtksharp-explorer-update-for-irony';
+        var disqus_url = 'http://sushihangover.github.io/gtksharp-explorer-update-for-irony';
         var disqus_script = 'embed.js';
       
     (function () {
