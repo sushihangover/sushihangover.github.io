@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ELLCC | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ellcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-11T20:41:23-08:00</updated>
+  <updated>2014-02-11T22:28:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -20,7 +20,9 @@
     <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
     <content type="html"><![CDATA[<p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
 
-<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). I will update when I hear back.</p>
+<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
+
+<p><blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&hellip;</p><footer><strong>Rich <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571</a> What is ELLCC all about</strong></footer></blockquote></p>
 
 <p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
 
