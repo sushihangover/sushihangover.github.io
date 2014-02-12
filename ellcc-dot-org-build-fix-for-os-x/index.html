@@ -124,7 +124,9 @@
 </span><span class='line'>make: *** [subdir-i386-softmmu] Error 2</span></code></pre></td></tr></table></div></figure>
 
 
-<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not install anything to &rdquo;/usr/bin&#8221; or other systems places that can muck everything up (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint). Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
+<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin&#8221; or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
+
+<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
 
 <blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &#8211;force<br/>Note that doing so can interfere with building software.</p></blockquote>
 
@@ -182,7 +184,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Everything is fine after that&hellip;</p>
+<p>Everything builds fine after that&hellip;</p>
 
 <p>The entire file is here:</p>
 

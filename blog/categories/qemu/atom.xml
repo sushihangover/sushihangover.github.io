@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QEMU | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/qemu/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-11T20:36:51-08:00</updated>
+  <updated>2014-02-11T20:41:23-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -31,7 +31,9 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 make[1]: *** [qemu-system-i386] Error 1
 make: *** [subdir-i386-softmmu] Error 2
 </code>
-I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not install anything to &rdquo;/usr/bin" or other systems places that can muck everything up (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint). Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
+I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin" or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
+
+<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
 
 <p><blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &mdash;force<br/>Note that doing so can interfere with building software.</p></blockquote></p>
 
@@ -72,7 +74,7 @@ svn diff build</p>
 <p> # Finally, install into the target specific bin dir.
  mkdir -p $bindir
 ```
-Everything is fine after that&hellip;</p>
+Everything builds fine after that&hellip;</p>
 
 <p>The entire file is here:
 <div><script src='https://gist.github.com/8949755.js'></script>
