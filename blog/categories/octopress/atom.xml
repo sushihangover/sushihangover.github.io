@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2014-02-12T21:33:15-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[Robert N.]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress: Backing Up Your Source Directory]]></title>
+    <link href="http://sushihangover.github.io/octopress-backing-up-your-source-directory"/>
+    <updated>2014-02-12T21:00:12-08:00</updated>
+    <id>http://sushihangover.github.io/octopress-backing-up-your-source-directory</id>
+    <content type="html"><![CDATA[<p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
+
+<p>My Missing Octopress Items:</p>
+
+<blockquote><ul>
+<li>Image Auto Thumbnailing</li>
+<li>Image Popups from those Thumbnails</li>
+<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
+<li>Auto source directory version control</li>
+</ul>
+</blockquote>
+
+<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
+
+<p>Here is my quick way of doing this using the deployment repo.</p>
+
+<blockquote><ul>
+<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
+<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
+<li>Commit and Push after you do a <em>rake deploy</em></li>
+</ul>
+</blockquote>
+
+<p>So lets add a source branch to your GitHub Page repo:</p>
+
+<pre><code>    Note: This is my quick way (ie. hackie) to get an ***EMPTY* new *remote* branch** into an existing repo. If someone knows a better way, I'd love to hear it.
+</code></pre>
+
+<p>``` bash</p>
+
+<h1>Get your current repo and place it into a a temp directory</h1>
+
+<p>git clone <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> foo.bar
+pushd foo.bar</p>
+
+<h1>Add a new branch to your local copy</h1>
+
+<p>git checkout -b source</p>
+
+<h1>Delete all the existing context</h1>
+
+<p>rm -Rf *</p>
+
+<h1>Commit all those deletes</h1>
+
+<p>git commit &mdash;all &mdash;message=&ldquo;Initial Empty source branch&rdquo;</p>
+
+<h1>Push that emopty branch back to GitHub</h1>
+
+<p>git push
+popd</p>
+
+<h1>GEt rid of that temp. directory</h1>
+
+<p>rm -Rf foo.bar
+<code>
+You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.
+</code> bash</p>
+
+<h1>Move your existing source directory out of the way for now</h1>
+
+<p>mv source source.org</p>
+
+<h1>Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</h1>
+
+<h1>Note: The &ldquo;&mdash;single-branch -branch source&rdquo; options are not used by most git users but can make speciallized repo copies quick and fool-proof</h1>
+
+<p>git clone &mdash;single-branch -branch source <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> source</p>
+
+<h1>Now copy your existing source files into this empty repo directory</h1>
+
+<p>cp -R source.org source
+pushd source</p>
+
+<h1>Commit and Push your sources files to GitHub</h1>
+
+<p>git commit &mdash;all &mdash;message=&ldquo;Initial source branch commit&rdquo;</p>
+
+<h1>Add your commit comment and save</h1>
+
+<p>git push
+```
+Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
+
+<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:
+<code>
+pushd source; git commit --all --message="Blog updated"; git push; popd
+</code>
+I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;&ndash;)</p>
+
+<ul>
+<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
