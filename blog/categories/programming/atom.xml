@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-14T10:58:09-08:00</updated>
+  <updated>2014-02-14T11:25:08-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Embedded 'Bare-Metal' ARM Development - Part 1]]></title>
-    <link href="http://sushihangover.github.io/embedded-bare-medal-arm-development-part-1"/>
+    <link href="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1"/>
     <updated>2014-02-14T06:01:48-08:00</updated>
-    <id>http://sushihangover.github.io/embedded-bare-medal-arm-development-part-1</id>
+    <id>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1</id>
     <content type="html"><![CDATA[<p>This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded &lsquo;Bare-Metal&rsquo; compilers and tools and in the end(?) cleared up my confusion about what I can and can not do on a restricted budget and time.</p>
 
 <p>The reasoning behind this is I wanted to do some bare metal ARM C coding for a project that might become some type of OSHW or even a commerical offering so I wanted to keep my options open, try to future proof my decisions.</p>
