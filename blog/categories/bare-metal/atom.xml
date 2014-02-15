@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bare-metal | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/bare-metal/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-15T07:33:39-08:00</updated>
+  <updated>2014-02-15T11:41:33-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What Is Bare Metal ARM]]></title>
+    <link href="http://sushihangover.github.io/what-is-bare-metal-arm"/>
+    <updated>2014-02-16T08:12:02-08:00</updated>
+    <id>http://sushihangover.github.io/what-is-bare-metal-arm</id>
+    <content type="html"><![CDATA[<h2>What is Bare Metal ARM Development?</h2>
+
+<blockquote><p>Bare-Metal ARM Development, also called <a href="http://en.wikipedia.org/wiki/Bare_machine">Bare-Machine</a> is the development of &lsquo;embedded&rsquo; applications, that run without an operating system or other supporting programs, maybe a bootloader, on an ARM processor. The application sits on top of the “bare metal”, runs ARM instructions (including THUMB), directly controls the processor (MCU) to manage power consumption, GPIOs, ADC, DAC, etc&hellip;</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Embedded 'Bare-Metal' ARM Development - Part 1]]></title>
