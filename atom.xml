@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-14T16:01:05-08:00</updated>
+  <updated>2014-02-15T07:33:39-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[FleaFPGA Experimenters Board]]></title>
+    <link href="http://sushihangover.github.io/fleafpga-experimenters-board"/>
+    <updated>2014-02-15T07:14:40-08:00</updated>
+    <id>http://sushihangover.github.io/fleafpga-experimenters-board</id>
+    <content type="html"><![CDATA[<p><a href="http://sushihangover.github.io/images/Flea_2v4_white2.jpg"><img class="left" src="http://sushihangover.github.io/images/Flea_2v4_white2.jpg" width="360" height="240" title="OSHW FPGA Flea Dev Board" alt="FPGA Flea"></a></p>
+
+<blockquote><p>FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL and Verilog. FleaFPGA is suited for professional and hobbyist uses.</p><footer><strong>&#8220;Valentin Angelovski&#8221;</strong> <cite><a href='http://www.fleasystems.com/fleaFPGA.html'>www.fleasystems.com/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Valentin is looking at producing at limited run of his <a href="http://www.latticesemi.com/Products/FPGAandCPLD.aspx">Lattice</a> MachXO2-based <a href="http://www.fleasystems.com/fleaFPGA.html">FleaFPGA boards</a> that are designed to get beginners up, running and experimentings with FPGA programming quickly. For ~100.00 sounds like a great deal. Head over to his site and <a href="http://www.fleasystems.com/forums/showthread.php?tid=29&amp;pid=127#pid127">pre-order</a> one.</p>
+
+<p><img src="http://sushihangover.github.io/images/oshw.jpg" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Embedded 'Bare-Metal' ARM Development - Part 1]]></title>
