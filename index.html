@@ -9,7 +9,7 @@
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="What is Bare Metal ARM Development? Bare-Metal ARM Development, also called Bare-Machine is the development of &lsquo;embedded&rsquo; applications, &hellip;">
+  <meta name="description" content="Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,47 +83,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/what-is-bare-metal-arm">What Is Bare Metal ARM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-16T08:12:02-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
-        
-           | <a href="/what-is-bare-metal-arm#disqus_thread"
-             data-disqus-identifier="http://sushihangover.github.io/what-is-bare-metal-arm">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>What is Bare Metal ARM Development?</h2>
-
-<blockquote><p>Bare-Metal ARM Development, also called <a href="http://en.wikipedia.org/wiki/Bare_machine">Bare-Machine</a> is the development of &lsquo;embedded&rsquo; applications, that run without an operating system or other supporting programs, maybe a bootloader, on an ARM processor. The application sits on top of the “bare metal”, runs ARM instructions (including THUMB), directly controls the processor (MCU) to manage power consumption, GPIOs, ADC, DAC, etc&hellip;</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/homebrew-git-1-dot-9-0-release">Homebrew: Git 1.9.0 Release</a></h1>
     
     
@@ -140,7 +99,7 @@
   
 
 
-<time datetime="2014-02-16T07:32:41-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-02-16T10:32:41-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
         
            | <a href="/homebrew-git-1-dot-9-0-release#disqus_thread"
              data-disqus-identifier="http://sushihangover.github.io/homebrew-git-1-dot-9-0-release">Comments</a>
@@ -150,7 +109,9 @@
   </header>
 
 
-  <div class="entry-content"><p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and comments out the patch that is no longer required.</p>
+  <div class="entry-content"><blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
+
+<p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>
 
 <p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
 
@@ -302,6 +263,47 @@ end
 
 
 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/what-is-bare-metal-arm">What Is Bare Metal ARM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T08:12:02-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+           | <a href="/what-is-bare-metal-arm#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io/what-is-bare-metal-arm">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is Bare Metal ARM Development?</h2>
+
+<blockquote><p>Bare-Metal ARM Development, also called <a href="http://en.wikipedia.org/wiki/Bare_machine">Bare-Machine</a> is the development of &lsquo;embedded&rsquo; applications, that run without an operating system or other supporting programs, maybe a bootloader, on an ARM processor. The application sits on top of the “bare metal”, runs ARM instructions (including THUMB), directly controls the processor (MCU) to manage power consumption, GPIOs, ADC, DAC, etc&hellip;</p></blockquote>
 </div>
   
   
@@ -1310,11 +1312,11 @@ make
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/what-is-bare-metal-arm">What Is Bare Metal ARM</a>
+        <a href="/homebrew-git-1-dot-9-0-release">Homebrew: Git 1.9.0 Release</a>
       </li>
     
       <li class="post">
-        <a href="/homebrew-git-1-dot-9-0-release">Homebrew: Git 1.9.0 Release</a>
+        <a href="/what-is-bare-metal-arm">What Is Bare Metal ARM</a>
       </li>
     
       <li class="post">
