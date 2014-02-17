@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: M0+ | SushiHangover]]></title>
-  <link href="http://sushihangover.github.io/blog/categories/m0-plus/atom.xml" rel="self"/>
+  <title><![CDATA[Category: M0 | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/m0/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-17T00:32:39-08:00</updated>
+  <updated>2014-02-17T00:45:34-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ARM Cortex-M0 Overview]]></title>
+    <link href="http://sushihangover.github.io/arm-cortex-m0-overview"/>
+    <updated>2014-02-17T06:02:25-08:00</updated>
+    <id>http://sushihangover.github.io/arm-cortex-m0-overview</id>
+    <content type="html"><![CDATA[<p>ARM Cortex-M0 Overview By: Daniel Widyanto September 2010</p>
+
+<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View ARM Cortex-M0 Overview on Scribd" href="http://www.scribd.com/doc/38226967"  style="text-decoration: underline;" >ARM Cortex-M0 Overview</a></p>
+
+
+<iframe class="scribd_iframe_embed" src="http://sushihangover.github.io//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bare Metal ARM Terminology]]></title>

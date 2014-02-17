@@ -52,7 +52,15 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/bare-metal-arm-terminology</loc>
-        <lastmod>2014-02-17T00:32:27-08:00</lastmod>
+        <lastmod>2014-02-17T00:44:41-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sushihangover.github.io/arm-cortex-m0-overview</loc>
+        <lastmod>2014-02-17T00:38:47-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sushihangover.github.io/powershell-and-bash-dot-sourcing</loc>
+        <lastmod>2014-02-17T00:45:14-08:00</lastmod>
     </url>
     <url>
         <loc>http://sushihangover.github.io/bitcoin/</loc>
@@ -60,7 +68,7 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/blog/archives/</loc>
-        <lastmod>2014-02-17T00:32:27-08:00</lastmod>
+        <lastmod>2014-02-17T00:45:14-08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -70,7 +78,7 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/</loc>
-        <lastmod>2014-02-17T00:32:27-08:00</lastmod>
+        <lastmod>2014-02-17T00:45:14-08:00</lastmod>
     </url>
     <url>
         <loc>http://sushihangover.github.io/ironshell/</loc>
