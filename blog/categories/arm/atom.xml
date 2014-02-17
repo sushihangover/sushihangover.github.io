@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ARM | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-16T11:13:18-08:00</updated>
+  <updated>2014-02-17T00:32:39-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bare Metal ARM Terminology]]></title>
+    <link href="http://sushihangover.github.io/bare-metal-arm-terminology"/>
+    <updated>2014-02-16T21:35:45-08:00</updated>
+    <id>http://sushihangover.github.io/bare-metal-arm-terminology</id>
+    <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
+
+<p>Thread mode :</p>
+
+<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
+
+<p>Privileged or unprivileged software execution :</p>
+
+<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
+
+<p>Handler mode :</p>
+
+<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
+
+<p>SysTick : A 24-bit count-down timer.</p>
+
+<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
+
+<p>System Control Block :</p>
+
+<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
+
+<p>NVIC : Nested Vectored Interrupt Controller</p>
+
+<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
+Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What Is Bare Metal ARM]]></title>

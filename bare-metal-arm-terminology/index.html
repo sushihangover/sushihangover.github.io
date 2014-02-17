@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: FPGA - SushiHangover</title>
+  <title>Bare Metal ARM Terminology - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Category: FPGA">
+  <meta name="description" content="CMSIS : ARM® Cortex™ Microcontroller Software Interface Standard Thread mode : Used to execute application software. The processor enters Thread mode &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.ioblog/categories/fpga">
+  <link rel="canonical" href="http://sushihangover.github.io/bare-metal-arm-terminology">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -76,36 +76,119 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: FPGA</h1>
+    
+      <h1 class="entry-title">Bare Metal ARM Terminology</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T21:35:45-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
 
-  
-  <h2>2014</h2>
+<p>Thread mode :</p>
 
-<article>
-  
-<h1><a href="/fleafpga-experimenters-board">FleaFPGA Experimenters Board</a></h1>
-<time datetime="2014-02-15T07:14:40-08:00" pubdate><span class='month'>Feb</span> <span class='day'>15</span> <span class='year'>2014</span></time>
+<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/fpga/'>FPGA</a>, <a class='category' href='/blog/categories/hardware/'>Hardware</a>, <a class='category' href='/blog/categories/oshw/'>OSHW</a></span>
-</footer>
+<p>Privileged or unprivileged software execution :</p>
 
+<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
 
-</article>
+<p>Handler mode :</p>
 
+<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
+
+<p>SysTick : A 24-bit count-down timer.</p>
+
+<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
+
+<p>System Control Block :</p>
+
+<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
+
+<p>NVIC : Nested Vectored Interrupt Controller</p>
+
+<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
+Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T21:35:45-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-metal</a>, <a class='category' href='/blog/categories/cortex/'>Cortex</a>, <a class='category' href='/blog/categories/m0-plus/'>M0+</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/bare-metal-arm-terminology" data-via="" data-counturl="http://sushihangover.github.io/bare-metal-arm-terminology" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/homebrew-git-1-dot-9-0-release" title="Previous Post: Homebrew: Git 1.9.0 release">&laquo; Homebrew: Git 1.9.0 release</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -189,7 +272,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/bare-metal-arm-terminology';
+        var disqus_url = 'http://sushihangover.github.io/bare-metal-arm-terminology';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
