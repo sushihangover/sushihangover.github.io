@@ -146,7 +146,7 @@
 </span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
 
 
-<p>What? Why is it not 3? and it it is 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script of getting a <strong>copy</strong> of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
+<p>What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
 
 <p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
 
@@ -221,6 +221,8 @@
         <a class="basic-alignment left" href="/arm-cortex-m0-overview" title="Previous Post: ARM Cortex-M0 Overview">&laquo; ARM Cortex-M0 Overview</a>
       
       
+        <a class="basic-alignment right" href="/building-lldb-on-mac-os-x" title="Next Post: BUILDING LLDB ON MAC OS X">BUILDING LLDB ON MAC OS X &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -240,6 +242,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/building-lldb-on-mac-os-x">BUILDING LLDB on MAC OS X</a>
+      </li>
+    
+      <li class="post">
         <a href="/powershell-and-bash-dot-sourcing">PowerShell and Bash 'Dot' Sourcing</a>
       </li>
     
@@ -253,10 +259,6 @@
     
       <li class="post">
         <a href="/homebrew-git-1-dot-9-0-release">Homebrew: Git 1.9.0 Release</a>
-      </li>
-    
-      <li class="post">
-        <a href="/what-is-bare-metal-arm">What Is Bare Metal ARM</a>
       </li>
     
   </ul>

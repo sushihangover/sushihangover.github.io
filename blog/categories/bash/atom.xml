@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bash | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-17T00:45:34-08:00</updated>
+  <updated>2014-02-18T09:41:43-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -48,7 +48,7 @@ So we got a result of 2 which is what you wanted right? Well, maybe&hellip; Let 
 $x
 1
 </code>
-What? Why is it not 3? and it it is 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script of getting a <strong>copy</strong> of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
+What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
 
 <p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
 
