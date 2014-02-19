@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Triple | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/triple/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2014-02-19T10:46:50-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[Robert N.]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM ARM Triple CPU Targets]]></title>
+    <link href="http://sushihangover.github.io/llvm-arm-triple-cpu-targets"/>
+    <updated>2014-02-19T06:36:42-08:00</updated>
+    <id>http://sushihangover.github.io/llvm-arm-triple-cpu-targets</id>
+    <content type="html"><![CDATA[<p>I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core list available.</p>
+
+<p>LLVM makes it soooo easy to get that information from the LLVM static compiler binary (<a href="http://llvm.org/docs/CommandGuide/llc.html">llc</a>), just pass it a generic ARM triple, here is the lsit from my build:
+<code>
+llc -mtriple=arm-none-eabi -mcpu=help
+</code>
+```
+Available CPUs for this target:</p>
+
+<p>  arm1020e      &ndash; Select the arm1020e processor.
+  arm1020t      &ndash; Select the arm1020t processor.
+  arm1022e      &ndash; Select the arm1022e processor.
+  arm10e        &ndash; Select the arm10e processor.
+  arm10tdmi     &ndash; Select the arm10tdmi processor.
+  arm1136j-s    &ndash; Select the arm1136j-s processor.
+  arm1136jf-s   &ndash; Select the arm1136jf-s processor.
+  arm1156t2-s   &ndash; Select the arm1156t2-s processor.
+  arm1156t2f-s  &ndash; Select the arm1156t2f-s processor.
+  arm1176jz-s   &ndash; Select the arm1176jz-s processor.
+  arm1176jzf-s  &ndash; Select the arm1176jzf-s processor.
+  arm710t       &ndash; Select the arm710t processor.
+  arm720t       &ndash; Select the arm720t processor.
+  arm7tdmi      &ndash; Select the arm7tdmi processor.
+  arm7tdmi-s    &ndash; Select the arm7tdmi-s processor.
+  arm8          &ndash; Select the arm8 processor.
+  arm810        &ndash; Select the arm810 processor.
+  arm9          &ndash; Select the arm9 processor.
+  arm920        &ndash; Select the arm920 processor.
+  arm920t       &ndash; Select the arm920t processor.
+  arm922t       &ndash; Select the arm922t processor.
+  arm926ej-s    &ndash; Select the arm926ej-s processor.
+  arm940t       &ndash; Select the arm940t processor.
+  arm946e-s     &ndash; Select the arm946e-s processor.
+  arm966e-s     &ndash; Select the arm966e-s processor.
+  arm968e-s     &ndash; Select the arm968e-s processor.
+  arm9e         &ndash; Select the arm9e processor.
+  arm9tdmi      &ndash; Select the arm9tdmi processor.
+  cortex-a12    &ndash; Select the cortex-a12 processor.
+  cortex-a15    &ndash; Select the cortex-a15 processor.
+  cortex-a5     &ndash; Select the cortex-a5 processor.
+  cortex-a53    &ndash; Select the cortex-a53 processor.
+  cortex-a57    &ndash; Select the cortex-a57 processor.
+  cortex-a7     &ndash; Select the cortex-a7 processor.
+  cortex-a8     &ndash; Select the cortex-a8 processor.
+  cortex-a9     &ndash; Select the cortex-a9 processor.
+  cortex-a9-mp  &ndash; Select the cortex-a9-mp processor.
+  cortex-m0     &ndash; Select the cortex-m0 processor.
+  cortex-m3     &ndash; Select the cortex-m3 processor.
+  cortex-m4     &ndash; Select the cortex-m4 processor.
+  cortex-r5     &ndash; Select the cortex-r5 processor.
+  ep9312        &ndash; Select the ep9312 processor.
+  generic       &ndash; Select the generic processor.
+  iwmmxt        &ndash; Select the iwmmxt processor.
+  krait         &ndash; Select the krait processor.
+  mpcore        &ndash; Select the mpcore processor.
+  mpcorenovfp   &ndash; Select the mpcorenovfp processor.
+  strongarm     &ndash; Select the strongarm processor.
+  strongarm110  &ndash; Select the strongarm110 processor.
+  strongarm1100 &ndash; Select the strongarm1100 processor.
+  strongarm1110 &ndash; Select the strongarm1110 processor.
+  swift         &ndash; Select the swift processor.
+  xscale        &ndash; Select the xscale processor.
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

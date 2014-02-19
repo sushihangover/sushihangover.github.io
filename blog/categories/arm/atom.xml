@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ARM | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-18T09:41:43-08:00</updated>
+  <updated>2014-02-19T10:46:50-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM ARM Triple CPU Targets]]></title>
+    <link href="http://sushihangover.github.io/llvm-arm-triple-cpu-targets"/>
+    <updated>2014-02-19T06:36:42-08:00</updated>
+    <id>http://sushihangover.github.io/llvm-arm-triple-cpu-targets</id>
+    <content type="html"><![CDATA[<p>I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core list available.</p>
+
+<p>LLVM makes it soooo easy to get that information from the LLVM static compiler binary (<a href="http://llvm.org/docs/CommandGuide/llc.html">llc</a>), just pass it a generic ARM triple, here is the lsit from my build:
+<code>
+llc -mtriple=arm-none-eabi -mcpu=help
+</code>
+```
+Available CPUs for this target:</p>
+
+<p>  arm1020e      &ndash; Select the arm1020e processor.
+  arm1020t      &ndash; Select the arm1020t processor.
+  arm1022e      &ndash; Select the arm1022e processor.
+  arm10e        &ndash; Select the arm10e processor.
+  arm10tdmi     &ndash; Select the arm10tdmi processor.
+  arm1136j-s    &ndash; Select the arm1136j-s processor.
+  arm1136jf-s   &ndash; Select the arm1136jf-s processor.
+  arm1156t2-s   &ndash; Select the arm1156t2-s processor.
+  arm1156t2f-s  &ndash; Select the arm1156t2f-s processor.
+  arm1176jz-s   &ndash; Select the arm1176jz-s processor.
+  arm1176jzf-s  &ndash; Select the arm1176jzf-s processor.
+  arm710t       &ndash; Select the arm710t processor.
+  arm720t       &ndash; Select the arm720t processor.
+  arm7tdmi      &ndash; Select the arm7tdmi processor.
+  arm7tdmi-s    &ndash; Select the arm7tdmi-s processor.
+  arm8          &ndash; Select the arm8 processor.
+  arm810        &ndash; Select the arm810 processor.
+  arm9          &ndash; Select the arm9 processor.
+  arm920        &ndash; Select the arm920 processor.
+  arm920t       &ndash; Select the arm920t processor.
+  arm922t       &ndash; Select the arm922t processor.
+  arm926ej-s    &ndash; Select the arm926ej-s processor.
+  arm940t       &ndash; Select the arm940t processor.
+  arm946e-s     &ndash; Select the arm946e-s processor.
+  arm966e-s     &ndash; Select the arm966e-s processor.
+  arm968e-s     &ndash; Select the arm968e-s processor.
+  arm9e         &ndash; Select the arm9e processor.
+  arm9tdmi      &ndash; Select the arm9tdmi processor.
+  cortex-a12    &ndash; Select the cortex-a12 processor.
+  cortex-a15    &ndash; Select the cortex-a15 processor.
+  cortex-a5     &ndash; Select the cortex-a5 processor.
+  cortex-a53    &ndash; Select the cortex-a53 processor.
+  cortex-a57    &ndash; Select the cortex-a57 processor.
+  cortex-a7     &ndash; Select the cortex-a7 processor.
+  cortex-a8     &ndash; Select the cortex-a8 processor.
+  cortex-a9     &ndash; Select the cortex-a9 processor.
+  cortex-a9-mp  &ndash; Select the cortex-a9-mp processor.
+  cortex-m0     &ndash; Select the cortex-m0 processor.
+  cortex-m3     &ndash; Select the cortex-m3 processor.
+  cortex-m4     &ndash; Select the cortex-m4 processor.
+  cortex-r5     &ndash; Select the cortex-r5 processor.
+  ep9312        &ndash; Select the ep9312 processor.
+  generic       &ndash; Select the generic processor.
+  iwmmxt        &ndash; Select the iwmmxt processor.
+  krait         &ndash; Select the krait processor.
+  mpcore        &ndash; Select the mpcore processor.
+  mpcorenovfp   &ndash; Select the mpcorenovfp processor.
+  strongarm     &ndash; Select the strongarm processor.
+  strongarm110  &ndash; Select the strongarm110 processor.
+  strongarm1100 &ndash; Select the strongarm1100 processor.
+  strongarm1110 &ndash; Select the strongarm1110 processor.
+  swift         &ndash; Select the swift processor.
+  xscale        &ndash; Select the xscale processor.
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM Cortex-M0 Overview]]></title>
@@ -115,165 +186,6 @@ Tail chaining > If another exception is pending when an ISR exits, the processor
 <p>So an ARM compiler choice is not as easy as just saying GNU/GCC as you have other options and while in the end they all produce an ELF/BIN that you flash on your bare-metal ARM, how that binary gets created and the size and speed of the ARM code and/or THUMB instructions that was produced can vary greatly&hellip;</p>
 
 <p>Next time, we look into some compilers&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ellcc.org Build Fix for OS-X]]></title>
-    <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x"/>
-    <updated>2014-02-12T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
-    <content type="html"><![CDATA[<p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
-
-<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
-
-<p><blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&hellip;</p><footer><strong>Rich <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571</a> What is ELLCC all about</strong></footer></blockquote></p>
-
-<p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
-
-<p><code>
-LINK  i386-softmmu/qemu-system-i386
-ld: library not found for -lintl
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make[1]: *** [qemu-system-i386] Error 1
-make: *** [subdir-i386-softmmu] Error 2
-</code>
-I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin" or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
-
-<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
-
-<p><blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &mdash;force<br/>Note that doing so can interfere with building software.</p></blockquote></p>
-
-<p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
-
-<p>``` bash
-svn diff build</p>
-
-<h1>Index: build</h1>
-
-<p>&mdash;&ndash; build   (revision 3780)
-+++ build   (working copy)
-@@ -69,6 +69,10 @@</p>
-
-<pre><code> ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user"
-</code></pre>
-
-<p> fi
- echo Configuring package qemu for $targets
-+if [!  -e <code>which brew</code> ]; then
-+   ruby -e &ldquo;$(curl -fsSL <a href="https://raw.github.com/Homebrew/homebrew/go/install">https://raw.github.com/Homebrew/homebrew/go/install</a>)&rdquo;
-+fi
-+brew link gettext &mdash;force
- qemu_target_list=<code>echo $qemu_target_list | sed -e "s/ /,/g"</code>
- make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \</p>
-
-<pre><code> targetlist=$qemu_target_list haslibs=$haslibs \
-</code></pre>
-
-<p>@@ -76,6 +80,7 @@</p>
-
-<pre><code> qemu.configure || exit 1
-</code></pre>
-
-<p> make -C src/qemu || exit 1
-+brew unlink gettext</p>
-
-<p> # Finally, install into the target specific bin dir.
- mkdir -p $bindir
-```
-Everything builds fine after that&hellip;</p>
-
-<p>The entire file is here:
-<div><script src='https://gist.github.com/8949755.js'></script>
-<noscript><pre><code>#!/bin/sh
-# ELLCC GNU tools build script.
-
-# Get the staging directory.
-prefix=`cd ..; pwd`
-
-# Figure out the compilers to use.
-. ../build-setup $*
-
-echo Configured to $WHY.
-echo C compiler: $cc $CFLAGS
-echo C++ compiler: $cxx $CXXFLAGS
-echo In: gnu-build$builddir
-
-# Configure for GNU tools.
-mkdir -p gnu-build$builddir
-
-# Configure for binutils.
-# binutils are build to support all targets in the target list.
-echo Configuring package binutils for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    binutils.configure || exit 1
-
-make -C gnu-build$builddir/binutils || exit 1
-
-# Configure for assemblers for all targets.
-for t in $targets; do
-  echo Configuring the assembler for $t
-  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-      target=$t haslibs=$haslibs \
-      bindir=$bindir prefix=$prefix build=$build \
-      gas.configure || exit 1
-
-  make -C gnu-build$builddir/binutils/$t || exit 1
-done
-
-# Configure for GDB.
-# GDB is built to support all GDB targets.
-echo Configuring package gdb for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    gdb.configure || exit 1
-
-make -C gnu-build$builddir/gdb || exit 1
-
-if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
-  # The host system is not the build system.
-  # Build only  binutils, the assemblers, and gdb.
-  # Finally, install into the target specific bin dir.
-  mkdir -p $bindir
-  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
-  exit 0
-fi
-
-# Configure for QEMU.
-# The QEMU system targets.
-qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
-    microblaze-softmmu mips-softmmu mipsel-softmmu \
-    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
-
-if [ `uname` = &quot;Linux&quot; ] ; then
-    # The QEMU Linux user space targets.
-    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
-    x86_64-linux-user arm-linux-user armeb-linux-user \
-    microblaze-linux-user mips-linux-user mipsel-linux-user \
-    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
-fi
-echo Configuring package qemu for $targets
-if [!  -e `which brew` ]; then
-        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
-fi
-brew link gettext --force
-qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
-make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
-    targetlist=$qemu_target_list haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    qemu.configure || exit 1
-
-make -C src/qemu || exit 1
-brew unlink gettext
-
-# Finally, install into the target specific bin dir.
-mkdir -p $bindir
-make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
-</code></pre></noscript></div>
-</p>
 ]]></content>
   </entry>
   
