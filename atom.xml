@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-19T22:22:50-08:00</updated>
+  <updated>2014-02-19T22:34:47-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -34,22 +34,23 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
 <p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="http://sushihangover.github.io/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
 
-<figure class='code'><figcaption><span>shell &#8220;Your git setup is:&#8221; </span></figcaption>
+<figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git config --global diff.tool diffmerge
-</span><span class='line'>git config --global difftool.diffmerge.cmd 'diffmerge "$LOCAL" "$REMOTE"'
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config --global diff.tool diffmerge
+</span><span class='line'>git config --global difftool.diffmerge.cmd <span class="s1">&#39;diffmerge &quot;$LOCAL&quot; &quot;$REMOTE&quot;&#39;</span>
 </span><span class='line'>git config --global merge.tool diffmerge
-</span><span class='line'>git config --global mergetool.diffmerge.cmd 'diffmerge --merge --result="$MERGED" "$LOCAL" "$(if test -f "$BASE"; then echo "$BASE"; else echo "$LOCAL"; fi)" "$REMOTE"'
-</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode true</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>git config --global mergetool.diffmerge.cmd <span class="s1">&#39;diffmerge --merge --result=&quot;$MERGED&quot; &quot;$LOCAL&quot; &quot;$(if test -f &quot;$BASE&quot;; then echo &quot;$BASE&quot;; else echo &quot;$LOCAL&quot;; fi)&quot; &quot;$REMOTE&quot;&#39;</span>
+</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<figure class='code'><figcaption><span>shell &#8220;Your git shortcuts are:&#8221; linenos:false </span></figcaption>
+<figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -58,18 +59,15 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># diff the local file.m against the checked-in version
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># diff the local file.m against the checked-in version</span>
 </span><span class='line'>git difftool file.m
-</span><span class='line'>
-</span><span class='line'># diff the local file.m against the version in some-feature-branch
+</span><span class='line'><span class="c"># diff the local file.m against the version in some-feature-branch</span>
 </span><span class='line'>git difftool some-feature-branch file.m
-</span><span class='line'>
-</span><span class='line'># diff the file.m from the Build-54 tag to the Build-55 tag
+</span><span class='line'><span class="c"># diff the file.m from the Build-54 tag to the Build-55 tag</span>
 </span><span class='line'>git difftool Build-54..Build-55 file.m
-</span><span class='line'>#To resolve merge conflicts, just run git mergetool:
-</span><span class='line'>git mergetool</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="c">#To resolve merge conflicts, just run git mergetool:</span>
+</span><span class='line'>git mergetool
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
