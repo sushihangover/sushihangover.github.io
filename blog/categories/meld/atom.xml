@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meld | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/meld/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-19T22:34:47-08:00</updated>
+  <updated>2014-02-23T01:08:46-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -21,8 +21,8 @@
     <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo;" ></a>
 I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
 
-<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 beta release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
-(cheaper) options that work just as well for personal developement.</p>
+<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
+(cheaper) options that work just as well for personal development.</p>
 
 <p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
 

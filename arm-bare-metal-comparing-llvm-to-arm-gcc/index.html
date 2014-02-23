@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC - SushiHangover</title>
+  <meta name="author" content="Robert N.">
+
+  
+  <meta name="description" content="With the ever maturing and stable ARM backend of LLVM it is hard to find information using it vs. the well known ARM-GCC release. So lets start with &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc">
+  <link href="/images/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-28024782-2', 'sushihangover.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sushihangover.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-22T20:43:28-08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>With the ever maturing and stable ARM backend of LLVM it is hard to find information using it vs. the well known ARM-GCC release.</p>
+
+<p>So lets start with the most simple HelloWorld example and compare LLVM and <a href="https://launchpad.net/gcc-arm-embedded">ARM-GCC</a>.</p>
+
+<p><a href="http://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/">Balau&rsquo;s post</a> is a popular one showing an ARM bare metal Hello World and test using QEMU, so lets start with that one. First, lets reproduce the compile/link steps to make sure it works:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-as -mcpu=arm926ej-s src/startup.s -o obj/startup.o
+</span><span class='line'>arm-none-eabi-gcc -c -mcpu=arm926ej-s -O0 src/HelloWorldSimple.c -o obj/HelloWorldSimple.o
+</span><span class='line'>arm-none-eabi-ld -T src/HelloWorldSimple.ld obj/HelloWorldSimple.o obj/startup.o -o bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>Hello world!
+</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Works just fine, so lets reproduce that using   my <a href="https://github.com/sushihangover/llvm_baremetal">LLVM bare metal build</a>. All the compiler options are being shown even though some are defaulted in my build of LLVM so you can see everything it is required to get the LLVM bitcode conversion to produce a valid object file for our ARM target (I&rsquo;m using the Clang driver, but you can use LLVM and pipe bitcode through the various tools so you can deeply control the optimization phase):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g startup.s -o startup.o
+</span><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g HelloWorldSimple.c -o main.o
+</span><span class='line'>arm-none-eabi-ld -T HelloWorldSimple.ld main.o startup.o -o main.axf_llvm
+</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel main.axf_llvm
+</span><span class='line'>Hello world!
+</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>target : Option providing the triple that you are &lsquo;targeting&rsquo;</li>
+<li>mpcu : Option provding the ARM core that will be flashed</li>
+<li>mfloat-abi : Soft or Hard depending upon if your ARM core has an FPU implementation on it. Cores that can support an FPU does not mean your vendor&rsquo;s core has one, comes down to features/price of the core.</li>
+</ul>
+
+
+<h6>Note: In both, I am turning off the optimizers via the compile drivers.</h6>
+
+<p>Lets look at the size of the AXF (ARM Executable Format) produced by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   text     data     bss     dec     hex filename
+</span><span class='line'>    140         0       0     140      8c bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>    
+</span><span class='line'>   text      data     bss     dec     hex filename
+</span><span class='line'>    150         0       0     150      96 bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is a 10 byte difference, interesting&hellip; lets look at that a little more:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> llvm </th>
+<th></th>
+<th></th>
+<th> arm-gcc </th>
+<th> </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> section  </td>
+<td> size </td>
+<td> addr</td>
+<td>section </td>
+<td>size</td>
+<td> addr</td>
+</tr>
+<tr>
+<td></td>
+<td>.startup  </td>
+<td>16</td>
+<td>   65536</td>
+<td>.startup </td>
+<td> 16 </td>
+<td>65536</td>
+</tr>
+<tr>
+<td></td>
+<td>.text </td>
+<td>             108 </td>
+<td>  65552</td>
+<td>.text              </td>
+<td>104   </td>
+<td>65552</td>
+</tr>
+<tr>
+<td></td>
+<td>.ARM.exidx</td>
+<td>           8 </td>
+<td>  65660</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>.rodata   </td>
+<td>           4 </td>
+<td>  65668</td>
+<td>.rodata  </td>
+<td>           20  </td>
+<td> 65656</td>
+</tr>
+<tr>
+<td></td>
+<td>.rodata.str1.1</td>
+<td>      14 </td>
+<td>  65672</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>.ARM.attributes</td>
+<td>     40 </td>
+<td>      0</td>
+<td>.ARM.attributes </td>
+<td>    46 </td>
+<td>      0</td>
+</tr>
+<tr>
+<td></td>
+<td>.comment       </td>
+<td>     19 </td>
+<td>      0</td>
+<td>.comment  </td>
+<td>         112  </td>
+<td>     0</td>
+</tr>
+<tr>
+<td></td>
+<td>Total          </td>
+<td>    209</td>
+<td></td>
+<td>Total              </td>
+<td>298</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<h6>Note: I ran strip on the arm-gcc version to remove the empty debug sections that gcc inserts automatically</h6>
+
+<p>The <strong>.startup</strong> are the same size since this code is assembly and no codegen or optimization will happen there.</p>
+
+<p>It is interesting that LLVM inserts a <strong>.ARM.exidx</strong> section even though this is <em>only</em> .c code. I&rsquo;ll have to look at LLVM to see if <em>-funwind-tables</em> and/or <em>-fexceptions</em> are defaulted to on, but I disassemble it below so we can look at that as that is 8 bytes and accounts for the size difference in this really basic example.</p>
+
+<blockquote><p>.ARM.exidx is the section containing information for unwinding the stack</p></blockquote>
+
+<h6>Note: Understanding the <a href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0044e/IHI0044E_aaelf.pdf">ARM ELF format</a> is not really required to do bare metal programming, but, understanding how your code is allocated and loaded can maek a world of differences when you are writting linker definitions files for different cores, so send a few minutes and read the 46 pages :&ndash;)</h6>
+
+<p>First the gcc disassembly so we can compare the LLVM version to it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf_gcc:     file format elf32-littlearm
+</span><span class='line'>Disassembly of section .startup:
+</span><span class='line'>00010000 &lt;_Reset&gt;:
+</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
+</span><span class='line'>   10004: eb000015    bl  10060 &lt;c_entry&gt;
+</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
+</span><span class='line'>   1000c: 00011090    .word   0x00011090
+</span><span class='line'>Disassembly of section .text:
+</span><span class='line'>00010010 &lt;print_uart0&gt;:
+</span><span class='line'>   10010: e52db004    push    {fp}        ; (str fp, [sp, #-4]!)
+</span><span class='line'>   10014: e28db000    add fp, sp, #0
+</span><span class='line'>   10018: e24dd00c    sub sp, sp, #12
+</span><span class='line'>   1001c: e50b0008    str r0, [fp, #-8]
+</span><span class='line'>   10020: ea000006    b   10040 &lt;print_uart0+0x30&gt;
+</span><span class='line'>   10024: e59f3030    ldr r3, [pc, #48]   ; 1005c &lt;print_uart0+0x4c&gt;
+</span><span class='line'>   10028: e51b2008    ldr r2, [fp, #-8]
+</span><span class='line'>   1002c: e5d22000    ldrb    r2, [r2]
+</span><span class='line'>   10030: e5832000    str r2, [r3]
+</span><span class='line'>   10034: e51b3008    ldr r3, [fp, #-8]
+</span><span class='line'>   10038: e2833001    add r3, r3, #1
+</span><span class='line'>   1003c: e50b3008    str r3, [fp, #-8]
+</span><span class='line'>   10040: e51b3008    ldr r3, [fp, #-8]
+</span><span class='line'>   10044: e5d33000    ldrb    r3, [r3]
+</span><span class='line'>   10048: e3530000    cmp r3, #0
+</span><span class='line'>   1004c: 1afffff4    bne 10024 &lt;print_uart0+0x14&gt;
+</span><span class='line'>   10050: e24bd000    sub sp, fp, #0
+</span><span class='line'>   10054: e49db004    pop {fp}        ; (ldr fp, [sp], #4)
+</span><span class='line'>   10058: e12fff1e    bx  lr
+</span><span class='line'>   1005c: 101f1000    .word   0x101f1000
+</span><span class='line'>00010060 &lt;c_entry&gt;:
+</span><span class='line'>   10060: e92d4800    push    {fp, lr}
+</span><span class='line'>   10064: e28db004    add fp, sp, #4
+</span><span class='line'>   10068: e59f0004    ldr r0, [pc, #4]    ; 10074 &lt;c_entry+0x14&gt;
+</span><span class='line'>   1006c: ebffffe7    bl  10010 &lt;print_uart0&gt;
+</span><span class='line'>   10070: e8bd8800    pop {fp, pc}
+</span><span class='line'>   10074: 0001007c    .word   0x0001007c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the LLVM version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf:     file format elf32-littlearm
+</span><span class='line'>Disassembly of section .startup:
+</span><span class='line'>00010000 &lt;_Reset&gt;:
+</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
+</span><span class='line'>   10004: eb000016    bl  10064 &lt;c_entry&gt;
+</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
+</span><span class='line'>   1000c: 00011098    .word   0x00011098
+</span><span class='line'>Disassembly of section .text:
+</span><span class='line'>00010010 &lt;print_uart0&gt;:
+</span><span class='line'>   10010: e24dd008    sub sp, sp, #8
+</span><span class='line'>   10014: e1a01000    mov r1, r0
+</span><span class='line'>   10018: e58d0004    str r0, [sp, #4]
+</span><span class='line'>   1001c: e58d1000    str r1, [sp]
+</span><span class='line'>   10020: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   10024: e5d00000    ldrb    r0, [r0]
+</span><span class='line'>   10028: e3500000    cmp r0, #0
+</span><span class='line'>   1002c: 0a000009    beq 10058 &lt;print_uart0+0x48&gt;
+</span><span class='line'>   10030: eaffffff    b   10034 &lt;print_uart0+0x24&gt;
+</span><span class='line'>   10034: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   10038: e5d00000    ldrb    r0, [r0]
+</span><span class='line'>   1003c: e59f101c    ldr r1, [pc, #28]   ; 10060 &lt;print_uart0+0x50&gt;
+</span><span class='line'>   10040: e5911000    ldr r1, [r1]
+</span><span class='line'>   10044: e5810000    str r0, [r1]
+</span><span class='line'>   10048: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   1004c: e2800001    add r0, r0, #1
+</span><span class='line'>   10050: e58d0004    str r0, [sp, #4]
+</span><span class='line'>   10054: eafffff1    b   10020 &lt;print_uart0+0x10&gt;
+</span><span class='line'>   10058: e28dd008    add sp, sp, #8
+</span><span class='line'>   1005c: e12fff1e    bx  lr
+</span><span class='line'>   10060: 00010084    .word   0x00010084
+</span><span class='line'>00010064 &lt;c_entry&gt;:
+</span><span class='line'>   10064: e92d4800    push    {fp, lr}
+</span><span class='line'>   10068: e1a0b00d    mov fp, sp
+</span><span class='line'>   1006c: e59f0004    ldr r0, [pc, #4]    ; 10078 &lt;c_entry+0x14&gt;
+</span><span class='line'>   10070: ebffffe6    bl  10010 &lt;print_uart0&gt;
+</span><span class='line'>   10074: e8bd8800    pop {fp, pc}
+</span><span class='line'>   10078: 00010088    .word   0x00010088</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="/images/llvm-gcc-diff_large.png"><img class="left" src="/images/llvm-gcc-diff_small.png" title="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;" alt="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;"></a> We can ignore the _Reset section as that is hand coded assembly and the same for both.</p>
+
+<p>The c_entry is interesting as LLVM uses a move to copy the stack register to fp (r11 = frame pointer) which I what I would do, but arm-gcc does an &ldquo;&#8221;add&rdquo;&ldquo; to get fp into the sp and does that by adding fp to register #4(?) This is flagged as general variable for gcc&hellip; I am slightly confused by gcc&rsquo;s choice to do that, now that question is when would #4 not contain zero? The rest of this function is the same between the two compilers.</p>
+
+<p>The print_uart0 function is a hack function as it does not implement FIFO/flow-control to an actual UART, but in this case it points to a memory address where the discontinued ARM Versatile PB dev-board does have a UART and QEMU board simulation echos those writes. I am not going to do a line by line comparision of the generated code as for un-optimized code they are both getting the job done, but in slightly different ways in almost the same number of instructions.</p>
+
+<p>So we are able to produce a working bare metal ARM AXF from LLVM and next time, I will spend a little time on compiler optimizations to see how the two code generators/optimizisers compare&hellip;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-22T20:43:28-08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/arm-gcc/'>ARM-GCC</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-metal</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc" data-via="" data-counturl="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool" title="Previous Post: OS-X : Using DiffMerge as your Git visual merge and diff tool">&laquo; OS-X : Using DiffMerge as your Git visual merge and diff tool</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/arm-bare-metal-comparing-llvm-to-arm-gcc">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a>
+      </li>
+    
+      <li class="post">
+        <a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a>
+      </li>
+    
+      <li class="post">
+        <a href="/llvm-arm-triple-cpu-targets">LLVM ARM Triple CPU Targets</a>
+      </li>
+    
+      <li class="post">
+        <a href="/building-lldb-on-mac-os-x">BUILDING LLDB on MAC OS X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/powershell-and-bash-dot-sourcing">PowerShell and Bash 'Dot' Sourcing</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 7,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Robert N. <br/>
+  <a href="/bitcoin/index.html">BitCoin Address : 1H2bKz8PKrUrHshruoukNtzcBGehs6Tmk8 : Send bitcoins and I'll buy ARM based hardware of your choice and write some tutorials for it ;-)</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc';
+        var disqus_url = 'http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
