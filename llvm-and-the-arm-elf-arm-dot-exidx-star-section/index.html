@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>LLVM and the ARM ELF .ARM.exidx* Section - SushiHangover</title>
+  <meta name="author" content="Robert N.">
+
+  
+  <meta name="description" content="In my last post I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section">
+  <link href="/images/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-28024782-2', 'sushihangover.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sushihangover.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">LLVM and the ARM ELF .ARM.exidx* Section</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-23T06:39:45-08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
+
+<p>So what is a <em>.ARM.exidx</em> section?</p>
+
+<p>ARM ELF manual show this under the special sections chapter:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name </th>
+<th>￼Type </th>
+<th>￼Attributes </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> ARM.exidx </td>
+<td>￼ SHT_ARM_EXIDX </td>
+<td> SHF_ALLOC + SHF_LINK_ORDER </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>_</p>
+
+<blockquote><p>Names beginning .ARM.exidx name sections containing index entries for section unwinding. Names beginning .ARM.extab name sections containing exception unwinding information. See [EHABI] for details.</p></blockquote>
+
+<p>Table 4_4 from that manual shows the Processor specific section types and our attribute is:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name </th>
+<th> Value </th>
+<th> Comment </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> &ldquo;SHT_ARM_EXIDX&rdquo; </td>
+<td> 0x70000001 </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>_</p>
+
+<p>So the question remains, what is in the section and what is being created? Lets dump HelloWorldSimple.o and only look at that section:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x580 contains 2 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x1 [cantunwind]
+</span><span class='line'>0x54 &lt;c_entry>: 0x1 [cantunwind]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So it added both function calls to the table, but are marked <em>cantunwind</em>, which makes sense, but since nothing in the section can be unwound, why include the section? Using gc-sections during linking does not remove it as it has references to functions that are being used&hellip;</p>
+
+<p><span class='pullquote-right' data-pullquote='Research is on-going on this one&#8230;'>
+Let do a quick test and add <em>-funwind-tables</em>, recompile and yes we get a fully populated unwind table and using <em>-fno-unwind-tables</em> produces the results from above, so that is the default one that is being use. Research is on-going on this one&hellip;
+</span></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x5a4 contains 4 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000000  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
+</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x8001b0b0
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x01      vsp = vsp + 8
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>0x54 &lt;c_entry>: 0x809b8480
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x9b      vsp = r11
+</span><span class='line'>  0x84 0x80 pop {r11, r14}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Additional Reading: <a href="https://sourceware.org/ml/binutils/2009-05/msg00048.html">ARM unwind table linker processing</a>; this concerns a patch to bintutils/ld:</p>
+
+<blockquote><p>The patch below implements linker processing of ARM unwinding tables
+(SHT_ARM_EXIDX).</p>
+
+<p>ARM exception index tables only define the start address of each region. This
+means that code with no unwinding information is effectively covered by the
+preceding unwinding table entry.</p>
+
+<p>For normal exceptions that doesn&rsquo;t matter so much &ndash; the user should ensure
+that any code they throw exceptions through has proper unwinding information.</p></blockquote>
+
+<p>Just as a quick quick, I grep&rsquo;d some source and the *.ARM.exidx** section is generated by the ARMELFStreamer:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html
+</span><span class='line'>00274 inline void ARMELFStreamer::SwitchToExIdxSection(const MCSymbol &FnStart) {
+</span><span class='line'>00275   SwitchToEHSection(".ARM.exidx",
+</span><span class='line'>00276                     ELF::SHT_ARM_EXIDX,
+</span><span class='line'>00277                     ELF::SHF_ALLOC | ELF::SHF_LINK_ORDER,
+</span><span class='line'>00278                     SectionKind::getDataRel(),
+</span><span class='line'>00279                     FnStart);
+</span><span class='line'>00280 }</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145   // Fixme: All this is duplicated in MCSectionELF. Why??
+</span><span class='line'>01146   // Exception Index table
+</span><span class='line'>01147   SHT_ARM_EXIDX           = 0x70000001U,</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-23T06:39:45-08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/arm-gcc/'>ARM-GCC</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-metal</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section" data-via="" data-counturl="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why" title="Previous Post: 01145   // Fixme: All this is duplicated in MCSectionELF. Why??">&laquo; 01145   // Fixme: All this is duplicated in MCSectionELF. Why??</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section">LLVM and the ARM ELF .ARM.exidx* Section</a>
+      </li>
+    
+      <li class="post">
+        <a href="/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why">01145 // Fixme: All This Is Duplicated in MCSectionELF. Why??</a>
+      </li>
+    
+      <li class="post">
+        <a href="/arm-bare-metal-comparing-llvm-to-arm-gcc">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a>
+      </li>
+    
+      <li class="post">
+        <a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a>
+      </li>
+    
+      <li class="post">
+        <a href="/llvm-arm-triple-cpu-targets">LLVM ARM Triple CPU Targets</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 7,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Robert N. <br/>
+  <a href="/bitcoin/index.html">BitCoin Address : 1H2bKz8PKrUrHshruoukNtzcBGehs6Tmk8 : Send bitcoins and I'll buy ARM based hardware of your choice and write some tutorials for it ;-)</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section';
+        var disqus_url = 'http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QEMU | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/qemu/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-02-23T01:08:46-08:00</updated>
+  <updated>2014-02-23T05:12:38-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM and the ARM ELF .ARM.exidx* Section]]></title>
+    <link href="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section"/>
+    <updated>2014-02-23T06:39:45-08:00</updated>
+    <id>http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section</id>
+    <content type="html"><![CDATA[<p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
+
+<p>So what is a <em>.ARM.exidx</em> section?</p>
+
+<p>ARM ELF manual show this under the special sections chapter:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name </th>
+<th>￼Type </th>
+<th>￼Attributes </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> ARM.exidx </td>
+<td>￼ SHT_ARM_EXIDX </td>
+<td> SHF_ALLOC + SHF_LINK_ORDER </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>_</p>
+
+<blockquote><p>Names beginning .ARM.exidx name sections containing index entries for section unwinding. Names beginning .ARM.extab name sections containing exception unwinding information. See [EHABI] for details.</p></blockquote>
+
+<p>Table 4_4 from that manual shows the Processor specific section types and our attribute is:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name </th>
+<th> Value </th>
+<th> Comment </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> &ldquo;SHT_ARM_EXIDX&rdquo; </td>
+<td> 0x70000001 </td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>_</p>
+
+<p>So the question remains, what is in the section and what is being created? Lets dump HelloWorldSimple.o and only look at that section:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section &lsquo;.rel.ARM.exidx&rsquo; at offset 0x580 contains 2 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>Unwind table index &lsquo;.ARM.exidx&rsquo; at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x1 [cantunwind]
+</span><span class='line'>0x54 &lt;c_entry>: 0x1 [cantunwind]</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So it added both function calls to the table, but are marked <em>cantunwind</em>, which makes sense, but since nothing in the section can be unwound, why include the section? Using gc-sections during linking does not remove it as it has references to functions that are being used&hellip;</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section &lsquo;.rel.ARM.exidx&rsquo; at offset 0x5a4 contains 4 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000000  00001600 R_ARM_NONE        00000000   &lt;strong>aeabi_unwind_cpp_pr0
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00001600 R_ARM_NONE        00000000   &lt;/strong>aeabi_unwind_cpp_pr0
+</span><span class='line'>Unwind table index &lsquo;.ARM.exidx&rsquo; at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x8001b0b0
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x01      vsp = vsp + 8
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>0x54 &lt;c_entry>: 0x809b8480
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x9b      vsp = r11
+</span><span class='line'>  0x84 0x80 pop {r11, r14}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Additional Reading: <a href="https://sourceware.org/ml/binutils/2009-05/msg00048.html">ARM unwind table linker processing</a>; this concerns a patch to bintutils/ld:</p>
+
+<blockquote><p>The patch below implements linker processing of ARM unwinding tables
+(SHT_ARM_EXIDX).</p>
+
+<p>ARM exception index tables only define the start address of each region. This
+means that code with no unwinding information is effectively covered by the
+preceding unwinding table entry.</p>
+
+<p>For normal exceptions that doesn&rsquo;t matter so much &ndash; the user should ensure
+that any code they throw exceptions through has proper unwinding information.</p></blockquote>
+
+<p>Just as a quick quick, I grep&rsquo;d some source and the *.ARM.exidx** section is generated by the ARMELFStreamer:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a href="http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html">http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html&lt;/a>
+</span><span class='line'>00274 inline void ARMELFStreamer::SwitchToExIdxSection(const MCSymbol &amp;FnStart) {
+</span><span class='line'>00275   SwitchToEHSection(&ldquo;.ARM.exidx&rdquo;,
+</span><span class='line'>00276                     ELF::SHT_ARM_EXIDX,
+</span><span class='line'>00277                     ELF::SHF_ALLOC | ELF::SHF_LINK_ORDER,
+</span><span class='line'>00278                     SectionKind::getDataRel(),
+</span><span class='line'>00279                     FnStart);
+</span><span class='line'>00280 }</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a href="http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145">http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145&lt;/a>   // Fixme: All this is duplicated in MCSectionELF. Why??
+</span><span class='line'>01146   // Exception Index table
+</span><span class='line'>01147   SHT_ARM_EXIDX           = 0x70000001U,</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC]]></title>

@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MonoMac: Detect When Mac Sleeps or Wakes - SushiHangover</title>
+  <title>01145 // Fixme: All This Is Duplicated in MCSectionELF. Why?? - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes">
+  <link rel="canonical" href="http://sushihangover.github.io/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">MonoMac: Detect When Mac Sleeps or Wakes</h1>
+      <h1 class="entry-title">01145 // Fixme: All This Is Duplicated in MCSectionELF. Why??</h1>
     
     
       <p class="meta">
@@ -97,7 +98,7 @@
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-02-23T01:32:56-08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://sushihangover.github.io">Comments</a>
@@ -107,28 +108,7 @@
   </header>
 
 
-<div class="entry-content"><p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
-
-<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
-
-<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
-
-<figure class='code'><figcaption><span>C# &#8220;Wake and Sleep Events&#8221; </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine ("Add the sleep/wake observers");
-</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Your Mac is getting sleepy\n");
-</span><span class='line'>);
-</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Time to go to work again\n");
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
+<div class="entry-content">
 </div>
 
 
@@ -151,21 +131,15 @@
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-02-23T01:32:56-08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/mono/'>Mono</a>, <a class='category' href='/blog/categories/monomac/'>MonoMac</a>, <a class='category' href='/blog/categories/os-x/'>OS-X</a>, <a class='category' href='/blog/categories/xamarin/'>Xamarin</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" data-via="" data-counturl="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why" data-via="" data-counturl="http://sushihangover.github.io/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why" >Tweet</a>
   
   
   
@@ -174,10 +148,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/playscript-what-happened-to-the-open-source-version-on-github" title="Previous Post: PlayScript :What happened to the open source version on GitHub">&laquo; PlayScript :What happened to the open source version on GitHub</a>
+        <a class="basic-alignment left" href="/arm-bare-metal-comparing-llvm-to-arm-gcc" title="Previous Post: ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC">&laquo; ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a>
       
       
-        <a class="basic-alignment right" href="/moving-to-github-pages" title="Next Post: Moving to GitHub Pages">Moving to GitHub Pages &raquo;</a>
+        <a class="basic-alignment right" href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section" title="Next Post: LLVM and the ARM ELF .ARM.exidx* section">LLVM and the ARM ELF .ARM.exidx* section &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +246,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
-        var disqus_url = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
+        var disqus_identifier = 'http://sushihangover.github.io/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why';
+        var disqus_url = 'http://sushihangover.github.io/01145-slash-slash-fixme-all-this-is-duplicated-in-mcsectionelf-why';
         var disqus_script = 'embed.js';
       
     (function () {

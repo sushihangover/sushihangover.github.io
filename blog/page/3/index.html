@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MonoMac: Detect When Mac Sleeps or Wakes - SushiHangover</title>
+  <title>SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the &hellip;">
+  <meta name="description" content="Poof: An open source project disappears: https://github.com/playscript/playscript-mono.git I am assuming with removal of PlayScript&rsquo;s public &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes">
+  <link rel="canonical" href="http://sushihangover.github.io/blog/page/3">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -76,12 +76,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">MonoMac: Detect When Mac Sleeps or Wakes</h1>
+      <h1 class="entry-title"><a href="/playscript-what-happened-to-the-open-source-version-on-github">PlayScript :What Happened to the Open Source Version on GitHub</a></h1>
     
     
       <p class="meta">
@@ -97,100 +100,39 @@
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2013-12-27T19:04:55-08:00" pubdate data-updated="true">Dec 27<span>th</span>, 2013</time>
         
-           | <a href="#disqus_thread"
-             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+           | <a href="/playscript-what-happened-to-the-open-source-version-on-github#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
+  <div class="entry-content"><p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
 
-<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
+<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="'PlayScript, Going, going, gone'" >
+I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
 
-<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
+<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
 
-<figure class='code'><figcaption><span>C# &#8220;Wake and Sleep Events&#8221; </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine ("Add the sleep/wake observers");
-</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Your Mac is getting sleepy\n");
-</span><span class='line'>);
-</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Time to go to work again\n");
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
+<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/mono/'>Mono</a>, <a class='category' href='/blog/categories/monomac/'>MonoMac</a>, <a class='category' href='/blog/categories/os-x/'>OS-X</a>, <a class='category' href='/blog/categories/xamarin/'>Xamarin</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" data-via="" data-counturl="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/playscript-what-happened-to-the-open-source-version-on-github" title="Previous Post: PlayScript :What happened to the open source version on GitHub">&laquo; PlayScript :What happened to the open source version on GitHub</a>
-      
-      
-        <a class="basic-alignment right" href="/moving-to-github-pages" title="Next Post: Moving to GitHub Pages">Moving to GitHub Pages &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -223,7 +165,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
@@ -256,7 +198,6 @@
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -271,10 +212,7 @@
       var disqus_shortname = 'sushihangover';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
-        var disqus_url = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
