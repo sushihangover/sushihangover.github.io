@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Bare Metal Debugging With Affinic Debugger - SushiHangover</title>
+  <meta name="author" content="Robert N.">
+
+  
+  <meta name="description" content="I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an ARM targeting Clang/LLVM build) since I &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger">
+  <link href="/images/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-28024782-2', 'sushihangover.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:sushihangover.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Bare Metal Debugging With Affinic Debugger</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T23:19:58-08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
+
+<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;&ndash;) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
+
+<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
+
+<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
+
+<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
+
+<p><a href="/images/Affinic_preferences_large.png"><img class="right" src="/images/Affinic_preferences_small.png" title="&#34;Affinic gdb location&#34;" alt="&#34;Affinic gdb location&#34;"></a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
+
+<p>Lets debug something!</p>
+
+<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/startup.o -c src/startup.s
+</span><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
+</span><span class='line'>arm-none-eabi-ld -Lobj --gc-sections --print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
+
+<h6>* -s              shorthand for -gdb tcp::1234</h6>
+
+<h6>* -S              freeze CPU at startup</h6>
+
+<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>target remote localhost:1234
+</span><span class='line'>file bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
+
+<p><a href="/images/Affinic_assembly_view_large.png"><img class="left" src="/images/Affinic_assembly_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
+<a href="/images/Affinic_source_view_large.png"><img class="right" src="/images/Affinic_source_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a></p>
+
+<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T23:19:58-08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/affinic/'>Affinic</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-metal</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/cortex-m/'>Cortex-M</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>, <a class='category' href='/blog/categories/arm-none-eabi-gdb/'>arm-none-eabi-gdb</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger" data-via="" data-counturl="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/arm-cortex-m-semihosting-with-qemu" title="Previous Post: ARM Cortex-M Semihosting">&laquo; ARM Cortex-M Semihosting</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/bare-metal-debugging-with-affinic-debugger">Bare Metal Debugging With Affinic Debugger</a>
+      </li>
+    
+      <li class="post">
+        <a href="/arm-cortex-m-semihosting-with-qemu">ARM Cortex-M Semihosting</a>
+      </li>
+    
+      <li class="post">
+        <a href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section">LLVM and the ARM ELF .ARM.exidx* Section</a>
+      </li>
+    
+      <li class="post">
+        <a href="/arm-bare-metal-comparing-llvm-to-arm-gcc">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a>
+      </li>
+    
+      <li class="post">
+        <a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 7,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Robert N. <br/>
+  <a href="/bitcoin/index.html">BitCoin Address : 1H2bKz8PKrUrHshruoukNtzcBGehs6Tmk8 : Send bitcoins and I'll buy ARM based hardware of your choice and write some tutorials for it ;-)</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger';
+        var disqus_url = 'http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
