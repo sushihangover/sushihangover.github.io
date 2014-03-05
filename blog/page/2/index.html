@@ -9,7 +9,7 @@
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the &hellip;">
+  <meta name="description" content="CMSIS : ARM® Cortex™ Microcontroller Software Interface Standard Thread mode : Used to execute application software. The processor enters Thread mode &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/bare-metal-arm-terminology">Bare Metal ARM Terminology</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T21:35:45-08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+           | <a href="/bare-metal-arm-terminology#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io/bare-metal-arm-terminology">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
+
+<p>Thread mode :</p>
+
+<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
+
+<p>Privileged or unprivileged software execution :</p>
+
+<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
+
+<p>Handler mode :</p>
+
+<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
+
+<p>SysTick : A 24-bit count-down timer.</p>
+
+<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
+
+<p>System Control Block :</p>
+
+<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
+
+<p>NVIC : Nested Vectored Interrupt Controller</p>
+
+<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
+Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1253,51 +1317,6 @@ make
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/moving-to-github-pages">Moving to GitHub Pages</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-09T16:49:16-08:00" pubdate data-updated="true">Feb 9<span>th</span>, 2014</time>
-        
-           | <a href="/moving-to-github-pages#disqus_thread"
-             data-disqus-identifier="http://sushihangover.github.io/moving-to-github-pages">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am moving <strong><a href="http://sushihangover.blogspot.com">SushiHangover</a></strong> from Blogger and an Azure-based blog engine to GitHub Pages using Octopress so hang in there for a few days as I get the older content parsed and set to use markdown&hellip;</p>
-
-<p>As always, email or post a comment if you need anything.</p>
-
-<p>-R</p>
-
-<p><img src="http://sushihangover.github.io/images/PowerShellLogo.jpg" alt="image" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1315,6 +1334,10 @@ make
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/arm-cortex-m3-bare-metal-with-newlib">ARM Cortex-M3 Bare-metal With NEWLIB</a>
+      </li>
+    
+      <li class="post">
         <a href="/bare-metal-debugging-with-affinic-debugger">Bare Metal Debugging With Affinic Debugger</a>
       </li>
     
@@ -1328,10 +1351,6 @@ make
     
       <li class="post">
         <a href="/arm-bare-metal-comparing-llvm-to-arm-gcc">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a>
       </li>
     
   </ul>
