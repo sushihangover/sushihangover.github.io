@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Arm-none-eabi-gdb | SushiHangover]]></title>
-  <link href="http://sushihangover.github.io/blog/categories/arm-none-eabi-gdb/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Gdb | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/gdb/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-04T20:17:18-08:00</updated>
+  <updated>2014-03-05T00:09:32-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>

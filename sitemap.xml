@@ -90,11 +90,15 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</loc>
-        <lastmod>2014-02-27T01:19:55-08:00</lastmod>
+        <lastmod>2014-03-04T23:41:42-08:00</lastmod>
     </url>
     <url>
         <loc>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib</loc>
         <lastmod>2014-03-04T20:15:50-08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld</loc>
+        <lastmod>2014-03-05T00:09:02-08:00</lastmod>
     </url>
     <url>
         <loc>http://sushihangover.github.io/bitcoin/</loc>
@@ -102,7 +106,7 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/blog/archives/</loc>
-        <lastmod>2014-03-04T20:15:50-08:00</lastmod>
+        <lastmod>2014-03-05T00:09:02-08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -112,7 +116,7 @@
     </url>
     <url>
         <loc>http://sushihangover.github.io/</loc>
-        <lastmod>2014-03-04T20:15:50-08:00</lastmod>
+        <lastmod>2014-03-05T00:09:02-08:00</lastmod>
     </url>
     <url>
         <loc>http://sushihangover.github.io/ironshell/</loc>
