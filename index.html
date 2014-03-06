@@ -391,9 +391,9 @@
 
   <div class="entry-content"><p><a href="/images/ARM_Cortex-M_instruction_set_large.png"><img class="left" src="/images/ARM_Cortex-M_instruction_set_small.png" title="&#34;ARM Cortex-M instruction set&#34;" alt="&#34;ARM Cortex-M instruction set&#34;"></a> One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld to do your linking.</p>
 
-<p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
+<p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times to get the options correct (and the <strong>order</strong> of options does matter) as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
 
-<p>One of the areas using it directly that can bit you, is not linking to the proper libgcc.a for the Cortex-M that you are targeting. Looking into your <em>arm-none-eabi/lib/gcc/arm-none-eabi/X.X.X</em> tool-chain directory and you will find multiple directories. One for each ARM architecture; armv6-m, armv7-ar, armv7-m, thumb, thumb2, etc&hellip;</p>
+<p>One of the areas using it directly that can bite you is not linking to the proper libgcc.a for the Cortex-M that you are targeting. Looking into your <em>arm-none-eabi/lib/gcc/arm-none-eabi/X.X.X</em> tool-chain directory and you will find multiple directories. One for each ARM architecture; armv6-m, armv7-ar, armv7-m, thumb, thumb2, etc&hellip;</p>
 
 <p>Add a library include for <em>architecture</em> directory that matches the core that you compiled against and everything will be fine:</p>
 
