@@ -4,7 +4,7 @@
   <title><![CDATA[Category: LLVM | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-05T00:09:32-08:00</updated>
+  <updated>2014-03-05T23:14:36-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,262 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM, CMSIS DSP and Cortex-M3 &amp; M0]]></title>
+    <link href="http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0"/>
+    <updated>2014-03-05T22:34:20-08:00</updated>
+    <id>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0</id>
+    <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"><img class="left" src="/images/cmsis-version-3-block-diagram.png" title="&ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo;" ></a> I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied.</p>
+
+<p>I borrowed one of the cos/sin examples and added some semihosting <em>printf</em>s using NEWLIB and cleaned up the code a bit.</p>
+
+<blockquote><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php?tab=Download+CMSIS">CMSIS-DSP</a>: DSP Library Collection with over 60 Functions for various data types: fix-point (fractional q7, q15, q31) and single precision floating-point (32-bit). The library is available for Cortex-M0, Cortex-M3, and Cortex-M4. The Cortex-M4 implementation is optimized for the SIMD instruction set.</p></blockquote>
+
+<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result works great for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>).</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/arm_sin_cos_example_f32.o -c src/arm_sin_cos_example_f32.c
+</span><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/startup.o -c src/startup.c
+</span><span class='line'>arm-none-eabi-ld -nostartfiles   -nostdlib -nostartupfiles  &amp;mdash;gc-sections  &amp;mdash;print-gc-sections  -Map bin/main.axf.map  -T src/cortex_M0.ld  &amp;mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 &amp;mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m &amp;mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/LIB/GCC    obj/arm_sin_cos_example_f32.o obj/startup.o &amp;mdash;start-group &amp;mdash;library<span class="o">=</span>gcc &amp;mdash;library<span class="o">=</span>c &amp;mdash;library<span class="o">=</span>m &amp;mdash;library<span class="o">=</span>arm_cortexM0l_math &amp;mdash;end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span><a href="https://github.com/sushihangover/llvm_baremetal">https://github.com/sushihangover/llvm_baremetal</a> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">stdlib</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">math</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">arm_math</span><span class="p">.</span><span class="n">h</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span>
+</span><span class='line'><span class="o">*</span> <span class="n">Defines</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">tests</span> <span class="n">performed</span>
+</span><span class='line'><span class="o">*</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">MAX_BLOCKSIZE</span>   <span class="mi">32</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">DELTA</span>           <span class="p">(</span><span class="mf">0.000001f</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span>
+</span><span class='line'><span class="o">*</span> <span class="n">Test</span> <span class="n">input</span> <span class="n">data</span> <span class="k">for</span> <span class="n">Floating</span> <span class="n">point</span> <span class="n">sin_cos</span> <span class="n">example</span> <span class="k">for</span> <span class="mi">32</span><span class="o">-</span><span class="n">blockSize</span>
+</span><span class='line'><span class="o">*</span> <span class="n">Generated</span> <span class="n">by</span> <span class="n">the</span> <span class="n">MATLAB</span> <span class="n">randn</span><span class="p">()</span> <span class="n">function</span>
+</span><span class='line'><span class="o">*</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">const</span> <span class="n">float32_t</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">MAX_BLOCKSIZE</span><span class="p">]</span> <span class="o">=&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="p">{</span>  <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.244916875853235400</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.793533929171324800</span><span class="p">,</span>  <span class="mf">0.360705030233248850</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.827929644170887320</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.299532218312426900</span><span class="p">,</span>  <span class="mf">3.427441903227623800</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'>  <span class="mf">3.422401784294607700</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.108308165334010680</span><span class="p">,</span>  <span class="mf">0.941943896490312180</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.502609575000365850</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.537345278736373500</span><span class="p">,</span>  <span class="mf">2.088817392965764500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.693168684143455700</span><span class="p">,</span>  <span class="mf">6.283185307179590700</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.392545884746175080</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.327893095115825040</span><span class="p">,</span>  <span class="mf">3.070147440456292300</span><span class="p">,</span>  <span class="mf">0.170611405884662230</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">0.275275082396073010</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.395492805446796300</span><span class="p">,</span>  <span class="mf">0.847311163536506600</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">3.845517018083148800</span><span class="p">,</span>  <span class="mf">2.055818378415868300</span><span class="p">,</span>  <span class="mf">4.672594161978930800</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.990923030266425800</span><span class="p">,</span>  <span class="mf">2.469305197656249500</span><span class="p">,</span>  <span class="mf">3.609002606064021000</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">4.586736582331667500</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.147080139136136300</span><span class="p">,</span>  <span class="mf">1.643756718868359500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.150866392366494800</span><span class="p">,</span>  <span class="mf">1.985805026477433800</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">const</span> <span class="n">float32_t</span> <span class="n">testRefOutput_f32</span> <span class="o">=</span> <span class="mf">1.000000000</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span>
+</span><span class='line'><span class="o">*</span> <span class="n">Declare</span> <span class="n">Global</span> <span class="n">variables</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">*</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="kt">uint32_t</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'><span class="n">float32_t</span>  <span class="n">testOutput</span><span class="p">;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="n">float32_t</span>  <span class="n">cosOutput</span><span class="p">;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="n">float32_t</span>  <span class="n">sinOutput</span><span class="p">;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="n">float32_t</span>  <span class="n">cosSquareOutput</span><span class="p">;</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="n">float32_t</span>  <span class="n">sinSquareOutput</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span>
+</span><span class='line'><span class="o">*</span> <span class="n">Max</span> <span class="n">magnitude</span> <span class="n">FFT</span> <span class="n">Bin</span> <span class="n">test</span>
+</span><span class='line'><span class="o">*</span> <span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">mdash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">arm_status</span> <span class="n">status</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int32_t</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>   <span class="n">float32_t</span> <span class="n">diff</span><span class="p">;</span>
+</span><span class='line'>   <span class="kt">uint32_t</span> <span class="n">i</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>   <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">Starting</span> <span class="n">Test</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span>
+</span><span class='line'>   <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">blockSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>   <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">cosOutput</span> <span class="o">=</span> <span class="n">arm_cos_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cosOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">sinOutput</span> <span class="o">=</span> <span class="n">arm_sin_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sinOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosOutput</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sinOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">arm_add_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">testOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Add %f and %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">,</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* absolute value of difference between ref and test */</span>
+</span><span class='line'>  <span class="n">diff</span> <span class="o">=</span> <span class="n">fabsf</span><span class="p">(</span><span class="n">testRefOutput_f32</span> <span class="o">-</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>  <span class="cm">/* Comparison of sin_cos value with reference */</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">DELTA</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Diff failure %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">diff</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
+</span><span class='line'>     <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>   <span class="p">}</span>
+</span><span class='line'>   <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">Ending</span> <span class="n">Test</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span>
+</span><span class='line'>   <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">just</span> <span class="k">for</span> <span class="n">QEMU</span> <span class="n">testing</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">main</span> <span class="n">function</span> <span class="n">does</span> <span class="n">not</span> <span class="k">return</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Starting Test&amp;hellip;
+</span><span class='line'>Cos -1.244917 <span class="o">=</span> 0.320142
+</span><span class='line'>Sin -1.244917 <span class="o">=</span> -0.947370
+</span><span class='line'>Cos squared 0.320142 <span class="o">=</span> 0.102491
+</span><span class='line'>Sin squared -0.947370 <span class="o">=</span> 0.897509
+</span><span class='line'>Add 0.102491 and 0.897509 <span class="o">=</span> 1.000000
+</span><span class='line'>Cos -4.793534 <span class="o">=</span> 0.081056
+</span><span class='line'>Sin -4.793534 <span class="o">=</span> 0.996710
+</span><span class='line'>Cos squared 0.081056 <span class="o">=</span> 0.006570
+</span><span class='line'>Sin squared 0.996710 <span class="o">=</span> 0.993430
+</span><span class='line'>Add 0.006570 and 0.993430 <span class="o">=</span> 1.000000
+</span><span class='line'>&amp;hellip;
+</span><span class='line'>&amp;hellip;
+</span><span class='line'>Cos 1.985805 <span class="o">=</span> -0.403198
+</span><span class='line'>Sin 1.985805 <span class="o">=</span> 0.915113
+</span><span class='line'>Cos squared -0.403198 <span class="o">=</span> 0.162568
+</span><span class='line'>Sin squared 0.915113 <span class="o">=</span> 0.837431
+</span><span class='line'>Add 0.162568 and 0.837431 <span class="o">=</span> 1.000000
+</span><span class='line'>Ending Test&amp;hellip;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cortex-M0 vs. M3 : LLVM and LD]]></title>
@@ -767,161 +1023,6 @@ Print this to my jtag debugger
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>PS: SYS_TMPNAM and SYS_READC are not implemented in Qemu (up to and including 1.7.0), so consult the &ldquo;qemu/target-arm/arm-semi.c&rdquo; source if you are have questions about how those SVC calls are implemented.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LLVM and the ARM ELF .ARM.exidx* Section]]></title>
-    <link href="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section"/>
-    <updated>2014-02-23T06:39:45-08:00</updated>
-    <id>http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section</id>
-    <content type="html"><![CDATA[<p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
-
-<p>So what is a <em>.ARM.exidx</em> section?</p>
-
-<p>ARM ELF manual show this under the special sections chapter:</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> Name </th>
-<th>￼Type </th>
-<th>￼Attributes </th>
-<th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> ARM.exidx </td>
-<td>￼ SHT_ARM_EXIDX </td>
-<td> SHF_ALLOC + SHF_LINK_ORDER </td>
-<td> </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>_</p>
-
-<blockquote><p>Names beginning .ARM.exidx name sections containing index entries for section unwinding. Names beginning .ARM.extab name sections containing exception unwinding information. See [EHABI] for details.</p></blockquote>
-
-<p>Table 4_4 from that manual shows the Processor specific section types and our attribute is:</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> Name </th>
-<th> Value </th>
-<th> Comment </th>
-<th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> &ldquo;SHT_ARM_EXIDX&rdquo; </td>
-<td> 0x70000001 </td>
-<td> </td>
-<td> </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>_</p>
-
-<p>So the question remains, what is in the section and what is being created? Lets dump HelloWorldSimple.o and only look at that section:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section &lsquo;.rel.ARM.exidx&rsquo; at offset 0x580 contains 2 entries:
-</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
-</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>Unwind table index &lsquo;.ARM.exidx&rsquo; at offset 0xcc contains 2 entries:
-</span><span class='line'>0x0 &lt;print_uart0>: 0x1 [cantunwind]
-</span><span class='line'>0x54 &lt;c_entry>: 0x1 [cantunwind]</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>So it added both function calls to the table, but are marked <em>cantunwind</em>, which makes sense, but since nothing in the section can be unwound, why include the section? Using gc-sections during linking does not remove it as it has references to functions that are being used&hellip;</p>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section &lsquo;.rel.ARM.exidx&rsquo; at offset 0x5a4 contains 4 entries:
-</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
-</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000000  00001600 R_ARM_NONE        00000000   &lt;strong>aeabi_unwind_cpp_pr0
-</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000008  00001600 R_ARM_NONE        00000000   &lt;/strong>aeabi_unwind_cpp_pr0
-</span><span class='line'>Unwind table index &lsquo;.ARM.exidx&rsquo; at offset 0xcc contains 2 entries:
-</span><span class='line'>0x0 &lt;print_uart0>: 0x8001b0b0
-</span><span class='line'>  Compact model index: 0
-</span><span class='line'>  0x01      vsp = vsp + 8
-</span><span class='line'>  0xb0      finish
-</span><span class='line'>  0xb0      finish
-</span><span class='line'>0x54 &lt;c_entry>: 0x809b8480
-</span><span class='line'>  Compact model index: 0
-</span><span class='line'>  0x9b      vsp = r11
-</span><span class='line'>  0x84 0x80 pop {r11, r14}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Additional Reading: <a href="https://sourceware.org/ml/binutils/2009-05/msg00048.html">ARM unwind table linker processing</a>; this concerns a patch to bintutils/ld:</p>
-
-<blockquote><p>The patch below implements linker processing of ARM unwinding tables
-(SHT_ARM_EXIDX).</p>
-
-<p>ARM exception index tables only define the start address of each region. This
-means that code with no unwinding information is effectively covered by the
-preceding unwinding table entry.</p>
-
-<p>For normal exceptions that doesn&rsquo;t matter so much &ndash; the user should ensure
-that any code they throw exceptions through has proper unwinding information.</p></blockquote>
-
-<p>Just as a quick check, I grep&rsquo;d some source and the *.ARM.exidx** section is generated by the ARMELFStreamer:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a href="http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html">http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html&lt;/a>
-</span><span class='line'>00274 inline void ARMELFStreamer::SwitchToExIdxSection(const MCSymbol &amp;FnStart) {
-</span><span class='line'>00275   SwitchToEHSection(&ldquo;.ARM.exidx&rdquo;,
-</span><span class='line'>00276                     ELF::SHT_ARM_EXIDX,
-</span><span class='line'>00277                     ELF::SHF_ALLOC | ELF::SHF_LINK_ORDER,
-</span><span class='line'>00278                     SectionKind::getDataRel(),
-</span><span class='line'>00279                     FnStart);
-</span><span class='line'>00280 }</span></code></pre></td></tr></table></div></figure></notextile></div>
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a href="http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145">http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145&lt;/a>   // Fixme: All this is duplicated in MCSectionELF. Why??
-</span><span class='line'>01146   // Exception Index table
-</span><span class='line'>01147   SHT_ARM_EXIDX           = 0x70000001U,</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
