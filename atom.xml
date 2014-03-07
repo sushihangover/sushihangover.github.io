@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-05T23:22:14-08:00</updated>
+  <updated>2014-03-07T11:23:19-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -24,7 +24,9 @@
 
 <blockquote><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php?tab=Download+CMSIS">CMSIS-DSP</a>: DSP Library Collection with over 60 Functions for various data types: fix-point (fractional q7, q15, q31) and single precision floating-point (32-bit). The library is available for Cortex-M0, Cortex-M3, and Cortex-M4. The Cortex-M4 implementation is optimized for the SIMD instruction set.</p></blockquote>
 
-<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result works great for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>).</p>
+<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result <em>works great</em> for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>) and everything looks on this core also.</p>
+
+<p>Clang/LLVM compile and link:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -32,6 +34,51 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/arm_sin_cos_example_f32.o -c src/arm_sin_cos_example_f32.c
 </span><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/startup.o -c src/startup.c
 </span><span class='line'>arm-none-eabi-ld -nostartfiles   -nostdlib -nostartupfiles  --gc-sections  --print-gc-sections  -Map bin/main.axf.map  -T src/cortex_M0.ld  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/LIB/GCC    obj/arm_sin_cos_example_f32.o obj/startup.o --start-group --library<span class="o">=</span>gcc --library<span class="o">=</span>c --library<span class="o">=</span>m --library<span class="o">=</span>arm_cortexM0l_math --end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sample semihousting output from a Cortex-M3:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Starting Test...
+</span><span class='line'>Cos -1.244917 <span class="o">=</span> 0.320142
+</span><span class='line'>Sin -1.244917 <span class="o">=</span> -0.947370
+</span><span class='line'>Cos squared 0.320142 <span class="o">=</span> 0.102491
+</span><span class='line'>Sin squared -0.947370 <span class="o">=</span> 0.897509
+</span><span class='line'>Add 0.102491 and 0.897509 <span class="o">=</span> 1.000000
+</span><span class='line'>Cos -4.793534 <span class="o">=</span> 0.081056
+</span><span class='line'>Sin -4.793534 <span class="o">=</span> 0.996710
+</span><span class='line'>Cos squared 0.081056 <span class="o">=</span> 0.006570
+</span><span class='line'>Sin squared 0.996710 <span class="o">=</span> 0.993430
+</span><span class='line'>Add 0.006570 and 0.993430 <span class="o">=</span> 1.000000
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>Cos 1.985805 <span class="o">=</span> -0.403198
+</span><span class='line'>Sin 1.985805 <span class="o">=</span> 0.915113
+</span><span class='line'>Cos squared -0.403198 <span class="o">=</span> 0.162568
+</span><span class='line'>Sin squared 0.915113 <span class="o">=</span> 0.837431
+</span><span class='line'>Add 0.162568 and 0.837431 <span class="o">=</span> 1.000000
+</span><span class='line'>Ending Test...
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -210,51 +257,6 @@
 </span><span class='line'>   <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
 </span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="cm">/* main function does not return */</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
-</span><span class='line'>Starting Test...
-</span><span class='line'>Cos -1.244917 <span class="o">=</span> 0.320142
-</span><span class='line'>Sin -1.244917 <span class="o">=</span> -0.947370
-</span><span class='line'>Cos squared 0.320142 <span class="o">=</span> 0.102491
-</span><span class='line'>Sin squared -0.947370 <span class="o">=</span> 0.897509
-</span><span class='line'>Add 0.102491 and 0.897509 <span class="o">=</span> 1.000000
-</span><span class='line'>Cos -4.793534 <span class="o">=</span> 0.081056
-</span><span class='line'>Sin -4.793534 <span class="o">=</span> 0.996710
-</span><span class='line'>Cos squared 0.081056 <span class="o">=</span> 0.006570
-</span><span class='line'>Sin squared 0.996710 <span class="o">=</span> 0.993430
-</span><span class='line'>Add 0.006570 and 0.993430 <span class="o">=</span> 1.000000
-</span><span class='line'>...
-</span><span class='line'>...
-</span><span class='line'>Cos 1.985805 <span class="o">=</span> -0.403198
-</span><span class='line'>Sin 1.985805 <span class="o">=</span> 0.915113
-</span><span class='line'>Cos squared -0.403198 <span class="o">=</span> 0.162568
-</span><span class='line'>Sin squared 0.915113 <span class="o">=</span> 0.837431
-</span><span class='line'>Add 0.162568 and 0.837431 <span class="o">=</span> 1.000000
-</span><span class='line'>Ending Test...
 </span></code></pre></td></tr></table></div></figure>
 
 
