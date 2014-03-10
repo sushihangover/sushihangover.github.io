@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-07T11:23:19-08:00</updated>
+  <updated>2014-03-09T20:18:01-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
+    <link href="http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts"/>
+    <updated>2014-03-09T19:24:34-07:00</updated>
+    <id>http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts</id>
+    <content type="html"><![CDATA[<p><a href="http://sushihangover.github.io/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="http://sushihangover.github.io/images/ARM_CortexM_CMSIS_small.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
+
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
+
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
+
+<p>The semihosting output of this app (via QEMU):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+</span><span class='line'>SysTick should not be active yet...
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>Enable SysTick and lets poll it...
+</span><span class='line'>...Current value: 6913
+</span><span class='line'>...Current value: 2825
+</span><span class='line'>...Current value: 2450
+</span><span class='line'>...Current value: 2138
+</span><span class='line'>...Current value: 1825
+</span><span class='line'>...Current value: 1525
+</span><span class='line'>...Current value: 1225
+</span><span class='line'>...Current value: 913
+</span><span class='line'>...Current value: 613
+</span><span class='line'>...Current value: 313
+</span><span class='line'>Enable SysTick Interrupts and watch <span class="nb">local </span>var get incremented...
+</span><span class='line'>...myTicks <span class="o">=</span> 1; SysTick-&gt;VAL <span class="o">=</span> 0
+</span><span class='line'>...myTicks <span class="o">=</span> 2; SysTick-&gt;VAL <span class="o">=</span> 3425
+</span><span class='line'>...myTicks <span class="o">=</span> 3; SysTick-&gt;VAL <span class="o">=</span> 8725
+</span><span class='line'>...myTicks <span class="o">=</span> 4; SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 5; SysTick-&gt;VAL <span class="o">=</span> 8113
+</span><span class='line'>...myTicks <span class="o">=</span> 6; SysTick-&gt;VAL <span class="o">=</span> 2550
+</span><span class='line'>...myTicks <span class="o">=</span> 7; SysTick-&gt;VAL <span class="o">=</span> 7725
+</span><span class='line'>...myTicks <span class="o">=</span> 8; SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 9; SysTick-&gt;VAL <span class="o">=</span> 8125
+</span><span class='line'>...myTicks <span class="o">=</span> 10; SysTick-&gt;VAL <span class="o">=</span> 2563
+</span><span class='line'>...myTicks <span class="o">=</span> 11; SysTick-&gt;VAL <span class="o">=</span> 8100
+</span><span class='line'>...myTicks <span class="o">=</span> 12; SysTick-&gt;VAL <span class="o">=</span> 3038
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;CortexM3_xx.h&quot;</span>
+</span><span class='line'><span class="cp">#include &lt;core_cm3.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdint.h&gt; </span>
+</span><span class='line'><span class="cp">#include &quot;svc.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">myTicks</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">SysTick_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">myTicks</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...myTicks = %lu; SysTick-&gt;VAL = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">myTicks</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;SysTick should not be active yet...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick and lets poll it...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">clock</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">LOAD</span> <span class="o">=</span> <span class="n">clock</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_CLKSOURCE_Msk : Use core&#39;s clock</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_ENABLE_Msk    : Enable SysTick</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_ENABLE_Msk</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick Interrupts and watch local var get incremented...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">myTicks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span>  <span class="n">SysTick_CTRL_ENABLE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_TICKINT_Msk</span><span class="p">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">myTicks</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">asm</span><span class="p">(</span><span class="s">&quot;nop&quot;</span><span class="p">);</span> <span class="c1">// Do nothing till SysTick_Handler been been called at least 10 times</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[LLVM, CMSIS DSP and Cortex-M3 &amp; M0]]></title>
@@ -2282,191 +2464,6 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.e
 xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
 mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ellcc.org Build Fix for OS-X]]></title>
-    <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x"/>
-    <updated>2014-02-12T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
-    <content type="html"><![CDATA[<p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
-
-<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
-
-<blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&#8230;</p><footer><strong>Rich</strong> <cite><a href='http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571'>What Is ELLCC All About</a></cite></footer></blockquote>
-
-
-<p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>LINK  i386-softmmu/qemu-system-i386
-</span><span class='line'>ld: library not found for -lintl
-</span><span class='line'>clang: error: linker command failed with exit code 1 (use -v to see invocation)
-</span><span class='line'>make[1]: *** [qemu-system-i386] Error 1
-</span><span class='line'>make: *** [subdir-i386-softmmu] Error 2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin&#8221; or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
-
-<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
-
-<blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &#8211;force<br/>Note that doing so can interfere with building software.</p></blockquote>
-
-
-<p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn diff build
-</span><span class='line'>Index: <span class="nv">build</span>
-</span><span class='line'><span class="o">===================================================================</span>
-</span><span class='line'>--- build <span class="o">(</span>revision 3780<span class="o">)</span>
-</span><span class='line'>+++ build <span class="o">(</span>working copy<span class="o">)</span>
-</span><span class='line'>@@ -69,6 +69,10 @@
-</span><span class='line'>     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user<span class="s2">&quot;</span>
-</span><span class='line'><span class="s2"> fi</span>
-</span><span class='line'><span class="s2"> echo Configuring package qemu for $targets</span>
-</span><span class='line'><span class="s2">+if [!  -e `which brew` ]; then</span>
-</span><span class='line'><span class="s2">+    ruby -e &quot;</span><span class="k">$(</span>curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install<span class="k">)</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">+fi</span>
-</span><span class='line'><span class="s2">+brew link gettext --force</span>
-</span><span class='line'><span class="s2"> qemu_target_list=`echo $qemu_target_list | sed -e &quot;</span>s/ /,/g<span class="err">&quot;</span><span class="sb">`</span>
-</span><span class='line'> make <span class="nv">DIR</span><span class="o">=</span>src/qemu <span class="nv">CC</span><span class="o">=</span><span class="nv">$cc</span> <span class="nv">HCC</span><span class="o">=</span><span class="nv">$hcc</span> <span class="nv">AR</span><span class="o">=</span><span class="nv">$ar</span> <span class="nv">TARGET</span><span class="o">=</span><span class="nv">$host</span> <span class="nv">OS</span><span class="o">=</span><span class="nv">$os</span> <span class="se">\</span>
-</span><span class='line'>     <span class="nv">targetlist</span><span class="o">=</span><span class="nv">$qemu_target_list</span> <span class="nv">haslibs</span><span class="o">=</span><span class="nv">$haslibs</span> <span class="se">\</span>
-</span><span class='line'>@@ -76,6 +80,7 @@
-</span><span class='line'>     qemu.configure <span class="o">||</span> <span class="nb">exit </span>1
-</span><span class='line'>
-</span><span class='line'> make -C src/qemu <span class="o">||</span> <span class="nb">exit </span>1
-</span><span class='line'>+brew unlink gettext
-</span><span class='line'>
-</span><span class='line'> <span class="c"># Finally, install into the target specific bin dir.</span>
-</span><span class='line'> mkdir -p <span class="nv">$bindir</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Everything builds fine after that&hellip;</p>
-
-<p>The entire file is here:</p>
-
-<div><script src='https://gist.github.com/8949755.js'></script>
-<noscript><pre><code>#!/bin/sh
-# ELLCC GNU tools build script.
-
-# Get the staging directory.
-prefix=`cd ..; pwd`
-
-# Figure out the compilers to use.
-. ../build-setup $*
-
-echo Configured to $WHY.
-echo C compiler: $cc $CFLAGS
-echo C++ compiler: $cxx $CXXFLAGS
-echo In: gnu-build$builddir
-
-# Configure for GNU tools.
-mkdir -p gnu-build$builddir
-
-# Configure for binutils.
-# binutils are build to support all targets in the target list.
-echo Configuring package binutils for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    binutils.configure || exit 1
-
-make -C gnu-build$builddir/binutils || exit 1
-
-# Configure for assemblers for all targets.
-for t in $targets; do
-  echo Configuring the assembler for $t
-  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-      target=$t haslibs=$haslibs \
-      bindir=$bindir prefix=$prefix build=$build \
-      gas.configure || exit 1
-
-  make -C gnu-build$builddir/binutils/$t || exit 1
-done
-
-# Configure for GDB.
-# GDB is built to support all GDB targets.
-echo Configuring package gdb for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    gdb.configure || exit 1
-
-make -C gnu-build$builddir/gdb || exit 1
-
-if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
-  # The host system is not the build system.
-  # Build only  binutils, the assemblers, and gdb.
-  # Finally, install into the target specific bin dir.
-  mkdir -p $bindir
-  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
-  exit 0
-fi
-
-# Configure for QEMU.
-# The QEMU system targets.
-qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
-    microblaze-softmmu mips-softmmu mipsel-softmmu \
-    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
-
-if [ `uname` = &quot;Linux&quot; ] ; then
-    # The QEMU Linux user space targets.
-    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
-    x86_64-linux-user arm-linux-user armeb-linux-user \
-    microblaze-linux-user mips-linux-user mipsel-linux-user \
-    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
-fi
-echo Configuring package qemu for $targets
-if [!  -e `which brew` ]; then
-        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
-fi
-brew link gettext --force
-qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
-make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
-    targetlist=$qemu_target_list haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    qemu.configure || exit 1
-
-make -C src/qemu || exit 1
-brew unlink gettext
-
-# Finally, install into the target specific bin dir.
-mkdir -p $bindir
-make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
-</code></pre></noscript></div>
-
-
 
 ]]></content>
   </entry>
