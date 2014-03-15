@@ -9,13 +9,7 @@
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="1
-2
-3
-4
-/llvm/tools/lldb/tools/debugserver/source/MacOSX/dbgnub-mig.defs:13:10: fatal error: 'DNBConfig.h' file not found
-#include "DNBConfig.h" ^
-1 &hellip;">
+  <meta name="description" content="I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +78,163 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/llvm-arm-triple-cpu-targets">LLVM ARM Triple CPU Targets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-19T06:36:42-08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2014</time>
+        
+           | <a href="/llvm-arm-triple-cpu-targets#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io/llvm-arm-triple-cpu-targets">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core list available.</p>
+
+<p>LLVM makes it soooo easy to get that information from the LLVM static compiler binary (<a href="http://llvm.org/docs/CommandGuide/llc.html">llc</a>), just pass it a generic ARM triple, here is the lsit from my build:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>llc -mtriple=arm-none-eabi -mcpu=help</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Available CPUs for this target:
+</span><span class='line'>
+</span><span class='line'>  arm1020e      - Select the arm1020e processor.
+</span><span class='line'>  arm1020t      - Select the arm1020t processor.
+</span><span class='line'>  arm1022e      - Select the arm1022e processor.
+</span><span class='line'>  arm10e        - Select the arm10e processor.
+</span><span class='line'>  arm10tdmi     - Select the arm10tdmi processor.
+</span><span class='line'>  arm1136j-s    - Select the arm1136j-s processor.
+</span><span class='line'>  arm1136jf-s   - Select the arm1136jf-s processor.
+</span><span class='line'>  arm1156t2-s   - Select the arm1156t2-s processor.
+</span><span class='line'>  arm1156t2f-s  - Select the arm1156t2f-s processor.
+</span><span class='line'>  arm1176jz-s   - Select the arm1176jz-s processor.
+</span><span class='line'>  arm1176jzf-s  - Select the arm1176jzf-s processor.
+</span><span class='line'>  arm710t       - Select the arm710t processor.
+</span><span class='line'>  arm720t       - Select the arm720t processor.
+</span><span class='line'>  arm7tdmi      - Select the arm7tdmi processor.
+</span><span class='line'>  arm7tdmi-s    - Select the arm7tdmi-s processor.
+</span><span class='line'>  arm8          - Select the arm8 processor.
+</span><span class='line'>  arm810        - Select the arm810 processor.
+</span><span class='line'>  arm9          - Select the arm9 processor.
+</span><span class='line'>  arm920        - Select the arm920 processor.
+</span><span class='line'>  arm920t       - Select the arm920t processor.
+</span><span class='line'>  arm922t       - Select the arm922t processor.
+</span><span class='line'>  arm926ej-s    - Select the arm926ej-s processor.
+</span><span class='line'>  arm940t       - Select the arm940t processor.
+</span><span class='line'>  arm946e-s     - Select the arm946e-s processor.
+</span><span class='line'>  arm966e-s     - Select the arm966e-s processor.
+</span><span class='line'>  arm968e-s     - Select the arm968e-s processor.
+</span><span class='line'>  arm9e         - Select the arm9e processor.
+</span><span class='line'>  arm9tdmi      - Select the arm9tdmi processor.
+</span><span class='line'>  cortex-a12    - Select the cortex-a12 processor.
+</span><span class='line'>  cortex-a15    - Select the cortex-a15 processor.
+</span><span class='line'>  cortex-a5     - Select the cortex-a5 processor.
+</span><span class='line'>  cortex-a53    - Select the cortex-a53 processor.
+</span><span class='line'>  cortex-a57    - Select the cortex-a57 processor.
+</span><span class='line'>  cortex-a7     - Select the cortex-a7 processor.
+</span><span class='line'>  cortex-a8     - Select the cortex-a8 processor.
+</span><span class='line'>  cortex-a9     - Select the cortex-a9 processor.
+</span><span class='line'>  cortex-a9-mp  - Select the cortex-a9-mp processor.
+</span><span class='line'>  cortex-m0     - Select the cortex-m0 processor.
+</span><span class='line'>  cortex-m3     - Select the cortex-m3 processor.
+</span><span class='line'>  cortex-m4     - Select the cortex-m4 processor.
+</span><span class='line'>  cortex-r5     - Select the cortex-r5 processor.
+</span><span class='line'>  ep9312        - Select the ep9312 processor.
+</span><span class='line'>  generic       - Select the generic processor.
+</span><span class='line'>  iwmmxt        - Select the iwmmxt processor.
+</span><span class='line'>  krait         - Select the krait processor.
+</span><span class='line'>  mpcore        - Select the mpcore processor.
+</span><span class='line'>  mpcorenovfp   - Select the mpcorenovfp processor.
+</span><span class='line'>  strongarm     - Select the strongarm processor.
+</span><span class='line'>  strongarm110  - Select the strongarm110 processor.
+</span><span class='line'>  strongarm1100 - Select the strongarm1100 processor.
+</span><span class='line'>  strongarm1110 - Select the strongarm1110 processor.
+</span><span class='line'>  swift         - Select the swift processor.
+</span><span class='line'>  xscale        - Select the xscale processor.</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -854,116 +1005,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/gtksharp-explorer-update-for-irony">GtkSharp-Explorer Update for Irony</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-12T08:14:14-08:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
-        
-           | <a href="/gtksharp-explorer-update-for-irony#disqus_thread"
-             data-disqus-identifier="http://sushihangover.github.io/gtksharp-explorer-update-for-irony">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="Irony.GtkSharp.Explorer" alt="Irony GtkSharp Explorer"></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
-
-<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch --all
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>git checkout gtksharp-explorer
-</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
-</span><span class='line'>  Switched to a new branch <span class="s1">&#39;gtksharp-explorer&#39;</span>
-</span><span class='line'>
-</span><span class='line'>git branch --all
-</span><span class='line'>* gtksharp-explorer
-</span><span class='line'>  master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>open Irony_All.MonoDevelop.sln
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>==============================</p>
-
-<h1>Grammar Explorer based on Gtk#</h1>
-
-<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
-Instructions for building on Mono:</p>
-
-<h2>Via MonoDevelop/Xamarin IDE:</h2>
-
-<ul>
-<li>Release or Debug Targets:
-      Load and build via the Irony_All.MonoDevelop.sln
-Via cmd line:</li>
-</ul>
-
-
-<hr />
-
-<ul>
-<li><p>Release:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
-<li><p>Debug:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -981,6 +1022,10 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/new-arm-features-in-qemu-2-dot-0">New ARM &#8216;Machines&#8217; in QEMU 2.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/cortex-m-systick-polling-vs-interrupts">Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven</a>
       </li>
     
@@ -994,10 +1039,6 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
     
       <li class="post">
         <a href="/arm-cortex-m3-bare-metal-with-newlib">ARM Cortex-M3 Bare-metal With NEWLIB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/bare-metal-debugging-with-affinic-debugger">Bare Metal Debugging With Affinic Debugger</a>
       </li>
     
   </ul>

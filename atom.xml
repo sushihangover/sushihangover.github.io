@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-09T20:20:03-07:00</updated>
+  <updated>2014-03-15T00:24:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New ARM 'Machines' in QEMU 2.0]]></title>
+    <link href="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0"/>
+    <updated>2014-03-14T23:32:19-07:00</updated>
+    <id>http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="http://sushihangover.github.io/images/QEMU_new_machine_large.png"><img class="left" src="http://sushihangover.github.io/images/QEMU_new_machine_small.png" title="&#34;QEMU 2.0 New ARM Machines&#34;" alt="&#34;QEMU 2.0 New ARM Machines&#34;"></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
+
+<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model a couple of cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
+
+<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
+</span><span class='line'>QEMU emulator version 1.7.90, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a few new machines available:</p>
+
+<pre><code>* canon-a1100          Canon PowerShot A1100 IS
+* cubieboard           cubietech cubieboard
+* virt                 ARM Virtual Machine
+</code></pre>
+
+<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
+
+<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
+
+<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
+
+<p>The change log for ARM shows the following:</p>
+
+<pre><code>* Support for "-M virt", a board type that only uses virtio devices
+* Support for "-cpu host" when running under KVM
+* Support for new 32-bit mode ARMv8 instructions in TCG
+* Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
+* Support for AArch64 user-mode emulation
+* Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
+* Support for the Canon PowerShot A1100 DIGIC board using "-M canon-a1100"
+* Support for the allwinner-a10-based board "-M cubieboard"
+* Support for flow control in the Cadence UART
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
@@ -2383,86 +2428,6 @@ end
 
 <ul>
 <li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GtkSharp-Explorer Update for Irony]]></title>
-    <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony"/>
-    <updated>2014-02-12T08:14:14-08:00</updated>
-    <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
-    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="Irony.GtkSharp.Explorer" alt="Irony GtkSharp Explorer"></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
-
-<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch --all
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>git checkout gtksharp-explorer
-</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
-</span><span class='line'>  Switched to a new branch <span class="s1">&#39;gtksharp-explorer&#39;</span>
-</span><span class='line'>
-</span><span class='line'>git branch --all
-</span><span class='line'>* gtksharp-explorer
-</span><span class='line'>  master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>open Irony_All.MonoDevelop.sln
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>==============================</p>
-
-<h1>Grammar Explorer based on Gtk#</h1>
-
-<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
-Instructions for building on Mono:</p>
-
-<h2>Via MonoDevelop/Xamarin IDE:</h2>
-
-<ul>
-<li>Release or Debug Targets:
-      Load and build via the Irony_All.MonoDevelop.sln
-Via cmd line:</li>
-</ul>
-
-
-<hr />
-
-<ul>
-<li><p>Release:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
-<li><p>Debug:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
 </ul>
 
 ]]></content>

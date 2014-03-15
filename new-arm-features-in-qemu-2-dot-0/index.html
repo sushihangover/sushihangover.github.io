@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MonoMac: Detect When Mac Sleeps or Wakes - SushiHangover</title>
+  <title>New ARM 'Machines' in QEMU 2.0 - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the &hellip;">
+  <meta name="description" content="I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on. While technically speaking QEMU does not have a &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes">
+  <link rel="canonical" href="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">MonoMac: Detect When Mac Sleeps or Wakes</h1>
+      <h1 class="entry-title">New ARM 'Machines' in QEMU 2.0</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-03-14T23:32:19-07:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://sushihangover.github.io">Comments</a>
@@ -107,28 +107,43 @@
   </header>
 
 
-<div class="entry-content"><p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
+<div class="entry-content"><p><a href="/images/QEMU_new_machine_large.png"><img class="left" src="/images/QEMU_new_machine_small.png" title="&#34;QEMU 2.0 New ARM Machines&#34;" alt="&#34;QEMU 2.0 New ARM Machines&#34;"></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
 
-<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
+<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model a couple of cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
 
-<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
+<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
 
-<figure class='code'><figcaption><span>C# &#8220;Wake and Sleep Events&#8221; </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine ("Add the sleep/wake observers");
-</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Your Mac is getting sleepy\n");
-</span><span class='line'>);
-</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write ("Time to go to work again\n");
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
+</span><span class='line'>QEMU emulator version 1.7.90, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
 
+
+<p>There are a few new machines available:</p>
+
+<pre><code>* canon-a1100          Canon PowerShot A1100 IS
+* cubieboard           cubietech cubieboard
+* virt                 ARM Virtual Machine
+</code></pre>
+
+<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
+
+<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
+
+<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
+
+<p>The change log for ARM shows the following:</p>
+
+<pre><code>* Support for "-M virt", a board type that only uses virtio devices
+* Support for "-cpu host" when running under KVM
+* Support for new 32-bit mode ARMv8 instructions in TCG
+* Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
+* Support for AArch64 user-mode emulation
+* Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
+* Support for the Canon PowerShot A1100 DIGIC board using "-M canon-a1100"
+* Support for the allwinner-a10-based board "-M cubieboard"
+* Support for flow control in the Cadence UART
+</code></pre>
 </div>
 
 
@@ -151,12 +166,12 @@
   
 
 
-<time datetime="2014-01-12T20:44:00-08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-03-14T23:32:19-07:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-number/'>C#</a>, <a class='category' href='/blog/categories/mono/'>Mono</a>, <a class='category' href='/blog/categories/monomac/'>MonoMac</a>, <a class='category' href='/blog/categories/os-x/'>OS-X</a>, <a class='category' href='/blog/categories/xamarin/'>Xamarin</a>
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>arm-none-eabi</a>
   
 </span>
 
@@ -165,7 +180,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" data-via="" data-counturl="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0" data-via="" data-counturl="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0" >Tweet</a>
   
   
   
@@ -174,10 +189,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/playscript-what-happened-to-the-open-source-version-on-github" title="Previous Post: PlayScript :What happened to the open source version on GitHub">&laquo; PlayScript :What happened to the open source version on GitHub</a>
+        <a class="basic-alignment left" href="/cortex-m-systick-polling-vs-interrupts" title="Previous Post: Cortex-M0 & M3 SysTick: Polling vs. Interrupt driven">&laquo; Cortex-M0 & M3 SysTick: Polling vs. Interrupt driven</a>
       
-      
-        <a class="basic-alignment right" href="/moving-to-github-pages" title="Next Post: Moving to GitHub Pages">Moving to GitHub Pages &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +285,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
-        var disqus_url = 'http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes';
+        var disqus_identifier = 'http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0';
+        var disqus_url = 'http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0';
         var disqus_script = 'embed.js';
       
     (function () {

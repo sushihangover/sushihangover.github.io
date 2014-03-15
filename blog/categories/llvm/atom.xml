@@ -4,7 +4,7 @@
   <title><![CDATA[Category: LLVM | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-09T20:20:03-07:00</updated>
+  <updated>2014-03-15T00:24:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New ARM 'Machines' in QEMU 2.0]]></title>
+    <link href="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0"/>
+    <updated>2014-03-14T23:32:19-07:00</updated>
+    <id>http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="/images/QEMU_new_machine_large.png"><img class="left" src="/images/QEMU_new_machine_small.png" title="&ldquo;QEMU 2.0 New ARM Machines&rdquo;" ></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
+
+<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model a couple of cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
+
+<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
+</span><span class='line'>QEMU emulator version 1.7.90, Copyright &copy; 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>There are a few new machines available:</p>
+
+<pre><code>* canon-a1100          Canon PowerShot A1100 IS
+* cubieboard           cubietech cubieboard
+* virt                 ARM Virtual Machine
+</code></pre>
+
+<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
+
+<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
+
+<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
+
+<p>The change log for ARM shows the following:</p>
+
+<pre><code>* Support for "-M virt", a board type that only uses virtio devices
+* Support for "-cpu host" when running under KVM
+* Support for new 32-bit mode ARMv8 instructions in TCG
+* Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
+* Support for AArch64 user-mode emulation
+* Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
+* Support for the Canon PowerShot A1100 DIGIC board using "-M canon-a1100"
+* Support for the allwinner-a10-based board "-M cubieboard"
+* Support for flow control in the Cadence UART
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
@@ -999,62 +1043,6 @@ architecture</th>
 </span><span class='line'>448 bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
 </span><span class='line'>Out of memory!
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bare Metal Debugging With Affinic Debugger]]></title>
-    <link href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger"/>
-    <updated>2014-02-26T23:19:58-08:00</updated>
-    <id>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</id>
-    <content type="html"><![CDATA[<p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&ldquo;Affinic gdb on OS-X&rdquo;" ></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
-
-<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;&ndash;) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
-
-<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
-
-<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
-
-<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
-
-<p><a href="/images/Affinic_preferences_large.png"><img class="right" src="/images/Affinic_preferences_small.png" title="&ldquo;Affinic gdb location&rdquo;" ></a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
-
-<p>Lets debug something!</p>
-
-<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/startup.o -c src/startup.s
-</span><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
-</span><span class='line'>arm-none-eabi-ld -Lobj &amp;mdash;gc-sections &amp;mdash;print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
-</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
-
-<h6>* -s              shorthand for -gdb tcp::1234</h6>
-
-<h6>* -S              freeze CPU at startup</h6>
-
-<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:
-<code>
-target remote localhost:1234
-file bin/HelloWorldSimple.axf
-</code>
-Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
-
-<p><a href="/images/Affinic_assembly_view_large.png"><img class="left" src="/images/Affinic_assembly_view_small.png" title="&ldquo;Affinic gdb on OS-X&rdquo;" ></a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
-<a href="/images/Affinic_source_view_large.png"><img class="right" src="/images/Affinic_source_view_small.png" title="&ldquo;Affinic gdb on OS-X&rdquo;" ></a></p>
-
-<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
 ]]></content>
   </entry>
   
