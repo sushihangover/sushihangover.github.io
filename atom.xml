@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-18T02:12:11-07:00</updated>
+  <updated>2014-03-18T02:15:51-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -30,10 +30,9 @@
 
 <p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
 
-<p>What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
+<p><img class="right" src="http://sushihangover.github.io/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;">What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
 
-<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500
-<img class="right" src="http://sushihangover.github.io/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;"></p>
+<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
 ]]></content>
   </entry>
   
