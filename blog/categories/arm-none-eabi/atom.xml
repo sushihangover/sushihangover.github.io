@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ARM-NONE-EABI | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm-none-eabi/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-18T02:15:51-07:00</updated>
+  <updated>2014-03-26T23:11:24-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
+    <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0"/>
+    <updated>2014-03-26T20:54:58-07:00</updated>
+    <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>
+    <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&ldquo;OpenJTAG&rdquo;" ></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
+</span><span class='line'>{
+</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /&lt;em> 8K &lt;/em>/
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x00020000, LENGTH = 0x00800 /&lt;em> 2K &lt;/em>/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
+
+<p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &lt;stdio.h>&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>printf("BKPT Hello World\n");
+</span><span class='line'>printf("How small is this?\n");
+</span><span class='line'>
+</span><span class='line'>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
+The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure></notextile></div>
+So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>void putc (void* p, char c)
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>svcPutChar(&amp;c);
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>set_putc(putc);
+</span><span class='line'>printf("BKPT Hello World\n");
+</span><span class='line'>printf("How small is this?\n");
+</span><span class='line'>
+</span><span class='line'>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>A quick break down of elf size:
+<strong>text</strong>: your code, vector table plus constants.
+<strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)
+<strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM DS5 Compiler Price]]></title>

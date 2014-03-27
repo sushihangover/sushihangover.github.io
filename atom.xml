@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-03-18T02:15:51-07:00</updated>
+  <updated>2014-03-26T23:11:24-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
+    <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0"/>
+    <updated>2014-03-26T20:54:58-07:00</updated>
+    <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>
+    <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="http://sushihangover.github.io/images/openjtag2_small.jpg" title="&#34;OpenJTAG&#34;" alt="&#34;OpenJTAG&#34;"></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
+</span><span class='line'>{
+</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /* 8K */
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x00020000, LENGTH = 0x00800 /* 2K */
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
+
+<p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h>
+</span><span class='line'>#include "printf_svc.h"
+</span><span class='line'>
+</span><span class='line'>int main (void)
+</span><span class='line'>{
+</span><span class='line'>  printf("BKPT Hello World\n");
+</span><span class='line'>  printf("How small is this?\n");
+</span><span class='line'>  
+</span><span class='line'>  svcExit(); // QEMU system exit
+</span><span class='line'>  
+</span><span class='line'>  while (1) { };
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "printf.h"
+</span><span class='line'>#include "printf_svc.h"
+</span><span class='line'>
+</span><span class='line'>void putc (void* p, char c)
+</span><span class='line'>{
+</span><span class='line'>  svcPutChar(&c);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main (void)
+</span><span class='line'>{
+</span><span class='line'>  set_putc(putc);
+</span><span class='line'>  printf("BKPT Hello World\n");
+</span><span class='line'>  printf("How small is this?\n");
+</span><span class='line'>  
+</span><span class='line'>  svcExit(); // QEMU system exit
+</span><span class='line'>  
+</span><span class='line'>  while (1) { };
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A quick break down of elf size:
+<strong>text</strong>: your code, vector table plus constants.
+<strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)
+<strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM DS5 Compiler Price]]></title>
@@ -2296,52 +2424,6 @@ end
 <p>Valentin is looking at producing at limited run of his <a href="http://www.latticesemi.com/Products/FPGAandCPLD.aspx">Lattice</a> MachXO2-based <a href="http://www.fleasystems.com/fleaFPGA.html">FleaFPGA boards</a> that are designed to get beginners up, running and experimentings with FPGA programming quickly. For ~100.00 sounds like a great deal. Head over to his site and <a href="http://www.fleasystems.com/forums/showthread.php?tid=29&amp;pid=127#pid127">pre-order</a> one.</p>
 
 <p><img src="http://sushihangover.github.io/images/oshw.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Embedded 'Bare-Metal' ARM Development - Part 1]]></title>
-    <link href="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1"/>
-    <updated>2014-02-14T06:01:48-08:00</updated>
-    <id>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1</id>
-    <content type="html"><![CDATA[<p>This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded &lsquo;Bare-Metal&rsquo; compilers and tools and in the end(?) cleared up my confusion about what I can and can not do on a restricted budget and time.</p>
-
-<p>The reasoning behind this is I wanted to do some bare metal ARM C coding for a project that might become some type of OSHW or even a commerical offering so I wanted to keep my options open, try to future proof my decisions.</p>
-
-<p>Instead of falling back to my comfort zone with AVR 8-bit MCU C-codings and forcing a project that really is beyond what AVRs offer (mainly execution speed and size related plus I tired of all the bit-banging to &lsquo;add&rsquo; protocals) and the fact that ARM-based core offerings that are now available have not just tons of digital GPIOs, footprints that are as small, but also have great signal processing options (input and output) that can match or exceed what is available in Amtel&rsquo;s AVR 8-bit line up and<strong> match them at price.</strong></p>
-
-<p>Just compare the Atmel AVR line up to their D20 ARM-core offerings and for non-legacy new embedded projects the decision matrix might be almost equal, but if you are adding &lsquo;future-proofing&rsquo; to the mix and what MCUs will be offering in the next decade, ARM-based MCUs become a clear choice (would love to hear someone&rsquo;s counter-point!).</p>
-
-<p>So first I figured I look at ARM compilers/linkers as if you can not compile/link your code, than you are just screwed ;&ndash;) So in terms of ARM compilers available there <strong>is</strong> more than one:</p>
-
-<ul>
-<li><a href="https://launchpad.net/gcc-arm-embedded">GNU C Compiler</a>(1)</li>
-<li><a href="http://www.freescale.com/codewarrior">CodeWarrior</a> ARM C Compiler(2)</li>
-<li><a href="http://www.iar.com">IAR</a> ARM C Compiler</li>
-<li><a href="https://www.imagecraft.com">ImageCraft</a> C Compiler Tools</li>
-<li><a href="http://www.keil.com">Kiel</a> ARM C/C++ Compiler(3)</li>
-<li><a href="http://ds.arm.com">ARM DS-5</a> RealView C/C++ Compiler(3)</li>
-<li>ARM <a href="http://clang.llvm.org">Clang</a>/<a href="http://llvm.org">LLVM</a> Compiler</li>
-<li>Microsoft Visual Studio C/C++ Native ARM Compiler(4)</li>
-</ul>
-
-
-<h6>* 1: Technically the launchpad link is the &lsquo;output&rsquo; of an ARM version of GCC and binutils but is the best starting point for info on the ARM version as it is the offical distro end-point ;&ndash;)</h6>
-
-<blockquote><p>ARM employees are maintaining this project. Contributing to this project should be via GCC trunk http://gcc.gnu.org and binutils trunk http://www.gnu.org/software/binutils/. This launchpad project is for communication and downloading. No code change is done in lp project.</p></blockquote>
-
-
-<h6>* 2: The &lsquo;Freescale Kinetis Compiler&rsquo; is in maintance mode. The GNU compiler is the &lsquo;active&rsquo; mainline of ARM compiler within CodeWarror now and thus I am not looking at this one at all as it fails my future proofing rules. For existing &lsquo;legacy&rsquo; embedded projects based on it, <a href="http://en.wikipedia.org/wiki/CodeWarrior">MetroWorks</a> was acquired by Motorola which was then included in the Freescale spinoff, so go to Freescale if you need a version&hellip;</h6>
-
-<h6>* 3: ARM acquired Kiel and thus the compiler IP from the two is now within one toolchain simply called &ldquo;ARM Compiler toolchain&rdquo; and thus RealView no longer exists, but some old-timers ;&ndash;) still call the new version by the RealView name. Note: There are still different development IDEs from each company; Kiel has uVision and ARM has Eclipse intergation (via a standalone version or plugins for your existing install), but again, they use just the &lsquo;new&rsquo; version of the compiler, but more on the IDEs in a future post of this series.</h6>
-
-<h6>* 4: Yes, you can produce ARM code as you would have to in order to cross-compile Windows RT apps, but can you do bare metal programming with it? I am not sure if you can get a CMSIS setup using it and handle the .S/SystemInit/Reset_Handler/__main() of bare metal programming&hellip;</h6>
-
-<h6>* If I missed one, please let me know!.</h6>
-
-<p>So an ARM compiler choice is not as easy as just saying GNU/GCC as you have other options and while in the end they all produce an ELF/BIN that you flash on your bare-metal ARM, how that binary gets created and the size and speed of the ARM code and/or THUMB instructions that was produced can vary greatly&hellip;</p>
-
-<p>Next time, we look into some compilers&hellip;</p>
 ]]></content>
   </entry>
   
