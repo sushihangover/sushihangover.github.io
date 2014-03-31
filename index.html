@@ -120,7 +120,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
 </span><span class='line'>{
 </span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /* 8K */
-</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x00020000, LENGTH = 0x00800 /* 2K */
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /* 2K */
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
@@ -226,10 +226,13 @@
 </span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure>
 
 
-<p>A quick break down of elf size:
-<strong>text</strong>: your code, vector table plus constants.
-<strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)
-<strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
+<p>A quick break down of elf size:</p>
+
+<p><strong>text</strong>: your code, vector table plus constants.</p>
+
+<p><strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)</p>
+
+<p><strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
 </div>
   
   
