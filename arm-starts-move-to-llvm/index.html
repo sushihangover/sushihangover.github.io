@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: ARM-Beginners - SushiHangover</title>
+  <title>ARM Starts Move to LLVM - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="Category: ARM-Beginners">
+  <meta name="description" content="Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.ioblog/categories/arm-beginners">
+  <link rel="canonical" href="http://sushihangover.github.io/arm-starts-move-to-llvm">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -77,36 +77,102 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: ARM-Beginners</h1>
+    
+      <h1 class="entry-title">ARM Starts Move to LLVM</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-10T22:03:36-07:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
 
-  
-  <h2>2014</h2>
+<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
 
-<article>
-  
-<h1><a href="/embedded-bare-metal-arm-development-part-1">Embedded 'Bare-Metal' ARM Development - Part 1</a></h1>
-<time datetime="2014-02-14T06:01:48-08:00" pubdate><span class='month'>Feb</span> <span class='day'>14</span> <span class='year'>2014</span></time>
+<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/arm-beginners/'>ARM-Beginners</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-metal</a>, <a class='category' href='/blog/categories/embedded/'>Embedded</a>, <a class='category' href='/blog/categories/programming/'>Programming</a></span>
-</footer>
+<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
 
-
-</article>
-
+<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :&ndash;)</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Robert N.</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-10T22:03:36-07:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/cortex/'>CORTEX</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/arm-starts-move-to-llvm" data-via="" data-counturl="http://sushihangover.github.io/arm-starts-move-to-llvm" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/qemu-machine-and-cpu-list" title="Previous Post: Qemu Machine and CPU list">&laquo; Qemu Machine and CPU list</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -190,7 +256,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/arm-starts-move-to-llvm';
+        var disqus_url = 'http://sushihangover.github.io/arm-starts-move-to-llvm';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
