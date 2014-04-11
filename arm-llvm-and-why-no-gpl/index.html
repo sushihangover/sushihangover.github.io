@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Qemu Machine and CPU List - SushiHangover</title>
+  <title>ARM: LLVM and Why No GPL - SushiHangover</title>
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine& &hellip;">
+  <meta name="description" content="As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM. Seems that more of the GPL-only mindset are upset &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/qemu-machine-and-cpu-list">
+  <link rel="canonical" href="http://sushihangover.github.io/arm-llvm-and-why-no-gpl">
   <link href="/images/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Qemu Machine and CPU List</h1>
+      <h1 class="entry-title">ARM: LLVM and Why No GPL</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2014-04-05T12:27:42-07:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+<time datetime="2014-04-11T07:28:16-07:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://sushihangover.github.io">Comments</a>
@@ -107,81 +107,13 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:</p>
+<div class="entry-content"><p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -cpu help
-</span><span class='line'>No machine specified, and there is no default.
-</span><span class='line'>Use -machine help to list supported machines!</span></code></pre></td></tr></table></div></figure>
+<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
 
+<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
 
-<p>So now, you will need to include any machine (&mdash;machine help) in order to see the cpu listing, using the ARM Cortex-M0+ dev board that I am putting together (<em>sushi-m0plus-board</em>), you can get the cpu listing.</p>
-
-<blockquote><p>The cores; cortex-m0, cortex-m0+ and machine; sushi-m0plus-board, are my additions and not apart of the QEMU main-line code.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --machine sushi-m0plus-board -cpu help
-</span><span class='line'>Available CPUs:
-</span><span class='line'>  arm1026
-</span><span class='line'>  arm1136
-</span><span class='line'>  arm1136-r2
-</span><span class='line'>  arm1176
-</span><span class='line'>  arm11mpcore
-</span><span class='line'>  arm926
-</span><span class='line'>  arm946
-</span><span class='line'>  cortex-a15
-</span><span class='line'>  cortex-a8
-</span><span class='line'>  cortex-a9
-</span><span class='line'>  cortex-m0
-</span><span class='line'>  cortex-m0plus
-</span><span class='line'>  cortex-m3
-</span><span class='line'>  pxa250
-</span><span class='line'>  pxa255
-</span><span class='line'>  pxa260
-</span><span class='line'>  pxa261
-</span><span class='line'>  pxa262
-</span><span class='line'>  pxa270-a0
-</span><span class='line'>  pxa270-a1
-</span><span class='line'>  pxa270
-</span><span class='line'>  pxa270-b0
-</span><span class='line'>  pxa270-b1
-</span><span class='line'>  pxa270-c0
-</span><span class='line'>  pxa270-c5
-</span><span class='line'>  sa1100
-</span><span class='line'>  sa1110
-</span><span class='line'>  ti925t</span></code></pre></td></tr></table></div></figure>
-
+<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
 </div>
 
 
@@ -204,12 +136,12 @@
   
 
 
-<time datetime="2014-04-05T12:27:42-07:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+<time datetime="2014-04-11T07:28:16-07:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>ARM-NONE-EABI</a>, <a class='category' href='/blog/categories/bare-metal/'>Bare-Metal</a>, <a class='category' href='/blog/categories/qemu/'>QEMU</a>, <a class='category' href='/blog/categories/semi-hosting/'>Semi-hosting</a>
+    <a class='category' href='/blog/categories/arm/'>ARM</a>, <a class='category' href='/blog/categories/clang/'>CLANG</a>, <a class='category' href='/blog/categories/gcc/'>GCC</a>, <a class='category' href='/blog/categories/gpl/'>GPL</a>, <a class='category' href='/blog/categories/llvm/'>LLVM</a>
   
 </span>
 
@@ -218,7 +150,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/qemu-machine-and-cpu-list" data-via="" data-counturl="http://sushihangover.github.io/qemu-machine-and-cpu-list" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/arm-llvm-and-why-no-gpl" data-via="" data-counturl="http://sushihangover.github.io/arm-llvm-and-why-no-gpl" >Tweet</a>
   
   
   
@@ -227,10 +159,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/bkpt-service-calls-on-the-cortex-m0" title="Previous Post: BKPT: Printf Service Calls on the Cortex-M0">&laquo; BKPT: Printf Service Calls on the Cortex-M0</a>
+        <a class="basic-alignment left" href="/arm-starts-move-to-llvm" title="Previous Post: ARM starts move to LLVM">&laquo; ARM starts move to LLVM</a>
       
-      
-        <a class="basic-alignment right" href="/arm-starts-move-to-llvm" title="Next Post: ARM starts move to LLVM">ARM starts move to LLVM &raquo;</a>
       
     </p>
   </footer>
@@ -325,8 +255,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/qemu-machine-and-cpu-list';
-        var disqus_url = 'http://sushihangover.github.io/qemu-machine-and-cpu-list';
+        var disqus_identifier = 'http://sushihangover.github.io/arm-llvm-and-why-no-gpl';
+        var disqus_url = 'http://sushihangover.github.io/arm-llvm-and-why-no-gpl';
         var disqus_script = 'embed.js';
       
     (function () {

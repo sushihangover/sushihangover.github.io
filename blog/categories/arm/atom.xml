@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ARM | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-10T22:19:20-07:00</updated>
+  <updated>2014-04-10T22:51:41-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
+    <link href="http://sushihangover.github.io/arm-llvm-and-why-no-gpl"/>
+    <updated>2014-04-11T07:28:16-07:00</updated>
+    <id>http://sushihangover.github.io/arm-llvm-and-why-no-gpl</id>
+    <content type="html"><![CDATA[<p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
+
+<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
+
+<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
+
+<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
@@ -274,50 +289,6 @@ So lets use a printf that is self-contained and uses no heap (malloc) and update
 <p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&ldquo;ARM DSTREAM&rdquo;" >What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
 
 <p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New ARM 'Machines' in QEMU 2.0]]></title>
-    <link href="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0"/>
-    <updated>2014-03-14T23:32:19-07:00</updated>
-    <id>http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0</id>
-    <content type="html"><![CDATA[<p><a href="/images/QEMU_new_machine_large.png"><img class="left" src="/images/QEMU_new_machine_small.png" title="&ldquo;QEMU 2.0 New ARM Machines&rdquo;" ></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
-
-<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model some cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
-
-<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
-</span><span class='line'>QEMU emulator version 1.7.90, Copyright &copy; 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>There are a few new machines available:</p>
-
-<pre><code>* canon-a1100          Canon PowerShot A1100 IS
-* cubieboard           cubietech cubieboard
-* virt                 ARM Virtual Machine
-</code></pre>
-
-<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
-
-<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
-
-<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
-
-<p>The change log for ARM shows the following:</p>
-
-<pre><code>* Support for "-M virt", a board type that only uses virtio devices
-* Support for "-cpu host" when running under KVM
-* Support for new 32-bit mode ARMv8 instructions in TCG
-* Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
-* Support for AArch64 user-mode emulation
-* Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
-* Support for the Canon PowerShot A1100 DIGIC board using "-M canon-a1100"
-* Support for the allwinner-a10-based board "-M cubieboard"
-* Support for flow control in the Cadence UART
-</code></pre>
 ]]></content>
   </entry>
   
