@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-10T22:51:41-07:00</updated>
+  <updated>2014-04-11T07:10:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[XKCD: Heartbleed Explanation]]></title>
+    <link href="http://sushihangover.github.io/heartbleed-explanation"/>
+    <updated>2014-04-11T07:51:37-07:00</updated>
+    <id>http://sushihangover.github.io/heartbleed-explanation</id>
+    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/HeartBleed.png" width="200" height="200" title="&#34;Heartbleed&#34;" alt="&#34;Heartbleed&#34;"></a> If you have not checked and/or patched your OpenSSL deployment, better get to it:
+<a href="http://heartbleed.com">Heartbleed</a></p>
+
+<p>XKCD does it again and provides the best explanation of how Heartbleed, one of the worst (THE worst?), Internet security flaw, works:</p>
+
+<p><img src="http://imgs.xkcd.com/comics/heartbleed_explanation.png" alt="image" /></p>
+
+<h4>What versions of the OpenSSL are affected?</h4>
+
+<h4>* OpenSSL 1.0.1 through 1.0.1f (inclusive) are vulnerable</h4>
+
+<h4>* OpenSSL 1.0.1g is NOT vulnerable</h4>
+
+<h4>* OpenSSL 1.0.0 branch is NOT vulnerable</h4>
+
+<h4>* OpenSSL 0.9.8 branch is NOT vulnerable</h4>
+
+<h4>* Bug was introduced to OpenSSL in December 2011 and has been out in the wild since OpenSSL release 1.0.1 on 14th of March 2012. OpenSSL 1.0.1g released on 7th of April 2014 fixes the bug.</h4>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
@@ -2319,40 +2345,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
 <iframe class="scribd_iframe_embed" src="http://sushihangover.github.io//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bare Metal ARM Terminology]]></title>
-    <link href="http://sushihangover.github.io/bare-metal-arm-terminology"/>
-    <updated>2014-02-16T21:35:45-08:00</updated>
-    <id>http://sushihangover.github.io/bare-metal-arm-terminology</id>
-    <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
-
-<p>Thread mode :</p>
-
-<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
-
-<p>Privileged or unprivileged software execution :</p>
-
-<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
-
-<p>Handler mode :</p>
-
-<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
-
-<p>SysTick : A 24-bit count-down timer.</p>
-
-<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
-
-<p>System Control Block :</p>
-
-<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
-
-<p>NVIC : Nested Vectored Interrupt Controller</p>
-
-<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
-Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
 ]]></content>
   </entry>
   
