@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-12T00:18:16-07:00</updated>
+  <updated>2014-04-12T00:21:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -16,11 +16,13 @@
   <entry>
     <title type="html"><![CDATA[LLVM 3.4.1]]></title>
     <link href="http://sushihangover.github.io/llvm-3-dot-4-1"/>
-    <updated>2014-04-12T00:05:07-07:00</updated>
+    <updated>2014-04-12T06:05:07-07:00</updated>
     <id>http://sushihangover.github.io/llvm-3-dot-4-1</id>
     <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/llvm_logo_small.png" title="&#34;LLVM&#34;" alt="&#34;LLVM&#34;"></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
 
-<p>Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. Surround your pullquote like this {&ldquo; text to be quoted &rdquo;}</p>
+<p><span class='pullquote-right' data-pullquote='LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.'>
+Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.
+</span></p>
 
 <p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
 
