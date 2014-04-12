@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-12T00:21:03-07:00</updated>
+  <updated>2014-04-12T00:25:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -28,13 +28,15 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
 <p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
 
-<h5>./clang &mdash;version</h5>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./clang --version
+</span><span class='line'>clang version 3.5.0 
+</span><span class='line'>Target: arm-none--eabi
+</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
 
-<h5>clang version 3.5.0</h5>
-
-<h5>Target: arm-none&mdash;eabi</h5>
-
-<h5>Thread model: posix</h5>
 ]]></content>
   </entry>
   
