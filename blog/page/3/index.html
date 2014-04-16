@@ -9,7 +9,7 @@
   <meta name="author" content="Robert N.">
 
   
-  <meta name="description" content="ARM Cortex-M0 Overview By: Daniel Widyanto September 2010 ARM Cortex-M0 Overview ">
+  <meta name="description" content="Parent/Child scoping of variables and functions can really mess with people starting out with PowerShell (or Bash). In terms of &ldquo;Dot-sourcing& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,111 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/powershell-and-bash-dot-sourcing">PowerShell and Bash &#8216;Dot&#8217; Sourcing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-17T06:21:11-08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
+        
+           | <a href="/powershell-and-bash-dot-sourcing#disqus_thread"
+             data-disqus-identifier="http://sushihangover.github.io/powershell-and-bash-dot-sourcing">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Parent/Child scoping of variables and functions can really mess with people starting out with PowerShell (or Bash).</p>
+
+<p>In terms of &ldquo;Dot-sourcing&rdquo; a .ps1 file, it is like running the PowerShell script it contains <strong>inline</strong> in the current scope. Thus when that script finishes, any variables set/updated within it are changed within the current scope.</p>
+
+<p>Let create a .ps1 file that increments the variable $x by one and &lsquo;outputs&rsquo; it to the pipe:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo "`$x++;`$x;" &gt; inc_x_by_one.ps1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now assign the variable $x to be 1</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$x=1
+</span><span class='line'>$x
+</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run the <em>inc_x_by_one.ps1</em> routine:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
+</span><span class='line'>2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we got a result of 2 which is what you wanted right? Well, maybe&hellip; Let run the same thing again:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
+</span><span class='line'>2
+</span><span class='line'>$x
+</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
+
+<p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>. .\inc_x_by_one.ps1
+</span><span class='line'>2
+</span><span class='line'>. .\inc_x_by_one.ps1
+</span><span class='line'>3
+</span><span class='line'>$x
+</span><span class='line'>3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is compariable to the way shell variables work under bash, zsh, &hellip; and I&rsquo;m assuming the PowerShell term borrowed &lsquo;dot sourcing&rsquo; in that regard as the syntax if the same: <strong>Period Space File.ps1|.sh</strong></p>
+
+<p>Take a few minutes and read the help on <strong>scope</strong>, it just might save you a headache in the future ;&ndash;)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>help scope</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: In PowerShell, you can assign variables to the global scope and not &lsquo;worry&rsquo; about parent/child scoping rules. Normally this is not a preferred way  as it create it creates messy code, issues of which function/module is changing it, debugging nightmares, etc&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1009,69 +1114,6 @@ make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/os-x-llvm-slash-clang-build">OS-X LLVM / CLANG Build</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-11T00:00:00-08:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
-        
-           | <a href="/os-x-llvm-slash-clang-build#disqus_thread"
-             data-disqus-identifier="http://sushihangover.github.io/os-x-llvm-slash-clang-build">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
-
-<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
-
-<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;&ndash;)</p>
-
-<div><script src='https://gist.github.com/8946898.js'></script>
-<noscript><pre><code>git clone http://llvm.org/git/llvm.git
-pushd llvm/tools
-git clone http://llvm.org/git/clang.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/compiler-rt.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/test-suite.git
-popd
-mkdir llvmbuild
-pushd llvmbuild
-../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
-make
-</code></pre></noscript></div>
-
-
-<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1089,6 +1131,10 @@ make
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/0-60msps-logic-analyzer">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
         <a href="/llvm-3-dot-4-1">LLVM 3.4.1</a>
       </li>
     
@@ -1102,10 +1148,6 @@ make
     
       <li class="post">
         <a href="/arm-starts-move-to-llvm">ARM Starts Move to LLVM</a>
-      </li>
-    
-      <li class="post">
-        <a href="/qemu-machine-and-cpu-list">Qemu Machine and CPU List</a>
       </li>
     
   </ul>
