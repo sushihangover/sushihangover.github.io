@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T16:01:21-07:00</updated>
+  <updated>2014-04-22T16:01:44-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -24,21 +24,33 @@
 
 <p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
 
-<p>{% codeblock C# &ldquo;Wake and Sleep Events&rdquo; %}
-Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
-NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {</p>
-
-<pre><code>Console.Write ("Your Mac is getting sleepy\n");
-</code></pre>
-
-<p>);
-NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {</p>
-
-<pre><code>Console.Write ("Time to go to work again\n");
-</code></pre>
-
-<p>};
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>Console.Write ("Your Mac is getting sleepy\n");
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>Console.Write ("Time to go to work again\n");
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>};</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   

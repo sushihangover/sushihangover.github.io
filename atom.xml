@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T15:55:17-07:00</updated>
+  <updated>2014-04-22T16:01:44-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
     <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements"/>
-    <updated>2014-04-22T08:35:15-07:00</updated>
+    <updated>2014-04-22T18:35:15-07:00</updated>
     <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
     <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
 
@@ -34,13 +34,13 @@ Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-d
 <code>The Local Register Allocator, introduced in GCC 4.8.0 for ia32 and x86-64 targets only, is now used also on the Aarch64, ARM, S/390 and ARC targets by default..</code>
 </span></p>
 
-<p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was&#8221;&#8221;</p>
+<p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>clang: error: unsupported option '-static-libgcc'</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Well, yes, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build. Manually hacking on the make files and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &ldquo;-static-libgcc&rdquo; issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
+<p>Well, duh&hellip;, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build using the same configure options as 4.8.x. Manually hacking on the make files to get passed this and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &ldquo;-static-libgcc&rdquo; issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
 
 <p>So I build a native version on the master branch (4.10.x now):</p>
 
@@ -56,7 +56,7 @@ Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-d
 </span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></code></pre></td></tr></table></div></figure>
 
 
-<p>And than used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;&ndash;)</p>
+<p>And then used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;&ndash;)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -101,6 +101,8 @@ Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-d
 </span><span class='line'>Target: x86_64-apple-darwin13.1.0
 </span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
 
+
+<p>ARM enhancements from the change list include:</p>
 
 <ul>
 <li><strong>ARM:</strong></li>
