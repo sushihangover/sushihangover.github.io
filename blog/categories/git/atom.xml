@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T15:55:17-07:00</updated>
+  <updated>2014-04-22T16:01:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -14,162 +14,156 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Homebrew: Git 1.9.0 Release]]></title>
-    <link href="http://sushihangover.github.io/homebrew-git-1-dot-9-0-release"/>
-    <updated>2014-02-16T10:32:41-08:00</updated>
-    <id>http://sushihangover.github.io/homebrew-git-1-dot-9-0-release</id>
-    <content type="html"><![CDATA[<blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
+    <title type="html"><![CDATA[OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool]]></title>
+    <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool"/>
+    <updated>2014-02-19T20:56:11-08:00</updated>
+    <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
+    <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png">{% img right /images/diffmerge_small.png &ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo; %}</a>
+I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
 
-<p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>
+<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
+(cheaper) options that work just as well for personal development.</p>
 
-<p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
+<p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
 
-<p><div><script src='https://gist.github.com/9036063.js?file=git.rb'></script>
-<noscript><pre><code>require &#39;formula&#39;
+<p>So some searching landed me on an old post by <a href="http://twobitlabs.com/2011/08/install-diffmerge-git-mac-os-x/">Todd Huss</a> about using DiffMerge as your visual diff/merge for git and it was actually what I was looking for, well almost ;&ndash;) It is missing a few features, but they have a free version and it works really well and has a great OS-X interface&hellip; search is over for now&hellip;</p>
 
-class Git &lt; Formula
-  homepage &#39;http://git-scm.com&#39;
-  url &#39;https://git-core.googlecode.com/files/git-1.9.0.tar.gz&#39;
-  sha1 &#39;e60667fc16e5a5f1cde46616b0458cc802707743&#39;
-  head &#39;https://github.com/git/git.git&#39;
+<blockquote><p><a href="http://www.sourcegear.com/diffmerge/">SourceGear</a> has a $19.00 USD version that include file export with HTML formatting and if I could see example HTML code that it produces, I pay for that feature in a heart-beat, but the feature is completely locked out till you actaully register, bummer&hellip;</p></blockquote>
 
-  bottle do
-    sha1 &quot;582a276b608de17888da01922648522bf7a9c11a&quot; =&gt; :mavericks
-    sha1 &quot;f308b293aa5664b65c57c3b206b892537397d3b9&quot; =&gt; :mountain_lion
-    sha1 &quot;fa5f896b766bb103804800abde58e25579cf58a7&quot; =&gt; :lion
-  end
+<p>Todd recommends using the DiffMerge installer version vs. the dmg version, I go the other way on that. Download the dmg version, open it and drag/drop the app to your Applications. Then in a term window you can copy the <em>Extras/diffmerge.sh</em> to your <em>/usr/local/bin</em> directory (Execute attrib is already set, so no chmod needed..), but I copied it as just <em>vdiff</em> as that is quicker to type. No admin rights are need to install it that way and that makes me happy&hellip; I can <em>vdiff file1.c file2.c</em> on the cmd line to pop the GUI open and populate it.</p>
 
-  option &#39;with-blk-sha1&#39;, &#39;Compile with the block-optimized SHA1 implementation&#39;
-  option &#39;without-completions&#39;, &#39;Disable bash/zsh completions from &quot;contrib&quot; directory&#39;
-  option &#39;with-brewed-openssl&#39;, &quot;Build with Homebrew OpenSSL instead of the system version&quot;
-  option &#39;with-brewed-curl&#39;, &quot;Use Homebrew&#39;s version of cURL library&quot;
-  option &#39;with-persistent-https&#39;, &#39;Build git-remote-persistent-https from &quot;contrib&quot; directory&#39;
+<p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
 
-  depends_on &#39;pcre&#39; =&gt; :optional
-  depends_on &#39;gettext&#39; =&gt; :optional
-  depends_on &#39;openssl&#39; if build.with? &#39;brewed-openssl&#39;
-  depends_on &#39;curl&#39; if build.with? &#39;brewed-curl&#39;
-  depends_on &#39;go&#39; =&gt; :build if build.with? &#39;persistent-https&#39;
+<p>{% codeblock lang:bash Your git setup is: %}
+git config &mdash;global diff.tool diffmerge
+git config &mdash;global difftool.diffmerge.cmd &lsquo;diffmerge &ldquo;$LOCAL&rdquo; &ldquo;$REMOTE&rdquo;&rsquo;
+git config &mdash;global merge.tool diffmerge
+git config &mdash;global mergetool.diffmerge.cmd &lsquo;diffmerge &mdash;merge &mdash;result=&ldquo;$MERGED&rdquo; &ldquo;$LOCAL&rdquo; &ldquo;$(if test -f &rdquo;$BASE"; then echo &ldquo;$BASE&rdquo;; else echo &ldquo;$LOCAL&rdquo;; fi)&ldquo; &rdquo;$REMOTE"&rsquo;
+git config &mdash;global mergetool.diffmerge.trustExitCode true
+{% endcodeblock %}</p>
 
-  resource &#39;man&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-manpages-1.9.0.tar.gz&#39;
-    sha1 &#39;cff590c92b4d1c8a143c078473140b653cc5d56a&#39;
-  end
+<p>{% codeblock lang:bash Your git shortcuts are: linenos:false %}</p>
 
-  resource &#39;html&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-htmldocs-1.9.0.tar.gz&#39;
-    sha1 &#39;65eb3f411f4699695c7081a7c716cabb9ce23d75&#39;
-  end
+<h1>diff the local file.m against the checked-in version</h1>
 
-  def patches
-    if MacOS.version &gt;= :mavericks and not build.head?
-      # Allow using PERLLIB_EXTRA to find Subversion Perl bindings location
-      # in the CLT/Xcode. Should be included in Git 1.8.6.
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=07981d
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=0386dd
-      #[&#39;https://git.kernel.org/cgit/git/git.git/patch/?id=07981d&#39;,
-      # &#39;https://git.kernel.org/cgit/git/git.git/patch/?id=0386dd&#39;]
-    end
-  end
+<p>git difftool file.m</p>
 
-  def install
-    # If these things are installed, tell Git build system to not use them
-    ENV[&#39;NO_FINK&#39;] = &#39;1&#39;
-    ENV[&#39;NO_DARWIN_PORTS&#39;] = &#39;1&#39;
-    ENV[&#39;V&#39;] = &#39;1&#39; # build verbosely
-    ENV[&#39;NO_R_TO_GCC_LINKER&#39;] = &#39;1&#39; # pass arguments to LD correctly
-    ENV[&#39;PYTHON_PATH&#39;] = which &#39;python&#39;
-    ENV[&#39;PERL_PATH&#39;] = which &#39;perl&#39;
+<h1>diff the local file.m against the version in some-feature-branch</h1>
 
-    if MacOS.version &gt;= :mavericks and MacOS.dev_tools_prefix
-      ENV[&#39;PERLLIB_EXTRA&#39;] = &quot;#{MacOS.dev_tools_prefix}/Library/Perl/5.16/darwin-thread-multi-2level&quot;
-    end
+<p>git difftool some-feature-branch file.m</p>
 
-    unless quiet_system ENV[&#39;PERL_PATH&#39;], &#39;-e&#39;, &#39;use ExtUtils::MakeMaker&#39;
-      ENV[&#39;NO_PERL_MAKEMAKER&#39;] = &#39;1&#39;
-    end
+<h1>diff the file.m from the Build-54 tag to the Build-55 tag</h1>
 
-    ENV[&#39;BLK_SHA1&#39;] = &#39;1&#39; if build.with? &#39;blk-sha1&#39;
+<p>git difftool Build-54..Build-55 file.m</p>
 
-    if build.with? &#39;pcre&#39;
-      ENV[&#39;USE_LIBPCRE&#39;] = &#39;1&#39;
-      ENV[&#39;LIBPCREDIR&#39;] = Formula.factory(&#39;pcre&#39;).opt_prefix
-    end
+<h1>To resolve merge conflicts, just run git mergetool:</h1>
 
-    ENV[&#39;NO_GETTEXT&#39;] = &#39;1&#39; unless build.with? &#39;gettext&#39;
+<p>git mergetool
+{% endcodeblock %}</p>
 
-    system &quot;make&quot;, &quot;prefix=#{prefix}&quot;,
-                   &quot;sysconfdir=#{etc}&quot;,
-                   &quot;CC=#{ENV.cc}&quot;,
-                   &quot;CFLAGS=#{ENV.cflags}&quot;,
-                   &quot;LDFLAGS=#{ENV.ldflags}&quot;,
-                   &quot;install&quot;
+<p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress: Backing Up Your Source Directory]]></title>
+    <link href="http://sushihangover.github.io/octopress-backing-up-your-source-directory"/>
+    <updated>2014-02-12T21:00:12-08:00</updated>
+    <id>http://sushihangover.github.io/octopress-backing-up-your-source-directory</id>
+    <content type="html"><![CDATA[<p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
 
-    bin.install Dir[&quot;contrib/remote-helpers/git-remote-{hg,bzr}&quot;]
+<p>My Missing Octopress Items:</p>
 
-    # Install the OS X keychain credential helper
-    cd &#39;contrib/credential/osxkeychain&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-credential-osxkeychain&#39;
-      system &quot;make&quot;, &quot;clean&quot;
-    end
+<blockquote><ul>
+<li>Image Auto Thumbnailing</li>
+<li>Image Popups from those Thumbnails</li>
+<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
+<li>Auto source directory version control</li>
+</ul>
+</blockquote>
 
-    # Install git-subtree
-    cd &#39;contrib/subtree&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-subtree&#39;
-    end
+<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
 
-    if build.with? &#39;persistent-https&#39;
-      cd &#39;contrib/persistent-https&#39; do
-        system &quot;make&quot;
-        bin.install &#39;git-remote-persistent-http&#39;,
-                    &#39;git-remote-persistent-https&#39;,
-                    &#39;git-remote-persistent-https--proxy&#39;
-      end
-    end
+<p>Here is my quick way of doing this using the deployment repo.</p>
 
-    unless build.without? &#39;completions&#39;
-      # install the completion script first because it is inside &#39;contrib&#39;
-      bash_completion.install &#39;contrib/completion/git-completion.bash&#39;
-      bash_completion.install &#39;contrib/completion/git-prompt.sh&#39;
+<blockquote><ul>
+<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
+<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
+<li>Commit and Push after you do a <em>rake deploy</em></li>
+</ul>
+</blockquote>
 
-      zsh_completion.install &#39;contrib/completion/git-completion.zsh&#39; =&gt; &#39;_git&#39;
-      cp &quot;#{bash_completion}/git-completion.bash&quot;, zsh_completion
-    end
+<p>So lets add a source branch to your GitHub Page repo:</p>
 
-    (share+&#39;git-core&#39;).install &#39;contrib&#39;
+<pre><code>    Note: This is my quick way (ie. hackie) to get an ***EMPTY* new *remote* branch** into an existing repo. If someone knows a better way, I'd love to hear it.
+</code></pre>
 
-    # We could build the manpages ourselves, but the build process depends
-    # on many other packages, and is somewhat crazy, this way is easier.
-    man.install resource(&#39;man&#39;)
-    (share+&#39;doc/git-doc&#39;).install resource(&#39;html&#39;)
+<p>``` bash</p>
 
-    # Make html docs world-readable; check if this is still needed at 1.8.6
-    chmod 0644, Dir[&quot;#{share}/doc/git-doc/**/*.{html,txt}&quot;]
-  end
+<h1>Get your current repo and place it into a a temp directory</h1>
 
-  def caveats; &lt;&lt;-EOS.undent
-    The OS X keychain credential helper has been installed to:
-      #{HOMEBREW_PREFIX}/bin/git-credential-osxkeychain
+<p>git clone <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> foo.bar
+pushd foo.bar</p>
 
-    The &#39;contrib&#39; directory has been installed to:
-      #{HOMEBREW_PREFIX}/share/git-core/contrib
-    EOS
-  end
+<h1>Add a new branch to your local copy</h1>
 
-  test do
-    HOMEBREW_REPOSITORY.cd do
-      assert_equal &#39;bin/brew&#39;, `#{bin}/git ls-files -- bin`.strip
-    end
-  end
-end
-</code></pre></noscript></div>
-</p>
+<p>git checkout -b source</p>
+
+<h1>Delete all the existing context</h1>
+
+<p>rm -Rf *</p>
+
+<h1>Commit all those deletes</h1>
+
+<p>git commit &mdash;all &mdash;message=&ldquo;Initial Empty source branch&rdquo;</p>
+
+<h1>Push that emopty branch back to GitHub</h1>
+
+<p>git push
+popd</p>
+
+<h1>GEt rid of that temp. directory</h1>
+
+<p>rm -Rf foo.bar
+<code>
+You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.
+</code> bash</p>
+
+<h1>Move your existing source directory out of the way for now</h1>
+
+<p>mv source source.org</p>
+
+<h1>Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</h1>
+
+<h1>Note: The &ldquo;&mdash;single-branch -branch source&rdquo; options are not used by most git users but can make speciallized repo copies quick and fool-proof</h1>
+
+<p>git clone &mdash;single-branch -branch source <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> source</p>
+
+<h1>Now copy your existing source files into this empty repo directory</h1>
+
+<p>cp -R source.org source
+pushd source</p>
+
+<h1>Commit and Push your sources files to GitHub</h1>
+
+<p>git commit &mdash;all &mdash;message=&ldquo;Initial source branch commit&rdquo;</p>
+
+<h1>Add your commit comment and save</h1>
+
+<p>git push
+```
+Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
+
+<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:
+<code>
+pushd source; git commit --all --message="Blog updated"; git push; popd
+</code>
+I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;&ndash;)</p>
+
+<ul>
+<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
+</ul>
+
 ]]></content>
   </entry>
   

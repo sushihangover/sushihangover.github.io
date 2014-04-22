@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: CORTEX | SushiHangover]]></title>
+  <title><![CDATA[Category: Cortex | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/cortex/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T15:55:17-07:00</updated>
+  <updated>2014-04-22T16:01:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -14,19 +14,51 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
-    <link href="http://sushihangover.github.io/arm-starts-move-to-llvm"/>
-    <updated>2014-04-10T22:03:36-07:00</updated>
-    <id>http://sushihangover.github.io/arm-starts-move-to-llvm</id>
-    <content type="html"><![CDATA[<p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
+    <title type="html"><![CDATA[ARM Cortex-M0 Overview]]></title>
+    <link href="http://sushihangover.github.io/arm-cortex-m0-overview"/>
+    <updated>2014-02-17T06:02:25-08:00</updated>
+    <id>http://sushihangover.github.io/arm-cortex-m0-overview</id>
+    <content type="html"><![CDATA[<p>ARM Cortex-M0 Overview By: Daniel Widyanto September 2010</p>
 
-<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
+<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View ARM Cortex-M0 Overview on Scribd" href="http://www.scribd.com/doc/38226967"  style="text-decoration: underline;" >ARM Cortex-M0 Overview</a></p>
 
-<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
 
-<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
+<iframe class="scribd_iframe_embed" src="http://sushihangover.github.io//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
 
-<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :&ndash;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bare Metal ARM Terminology]]></title>
+    <link href="http://sushihangover.github.io/bare-metal-arm-terminology"/>
+    <updated>2014-02-16T21:35:45-08:00</updated>
+    <id>http://sushihangover.github.io/bare-metal-arm-terminology</id>
+    <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
+
+<p>Thread mode :</p>
+
+<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
+
+<p>Privileged or unprivileged software execution :</p>
+
+<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
+
+<p>Handler mode :</p>
+
+<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
+
+<p>SysTick : A 24-bit count-down timer.</p>
+
+<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
+
+<p>System Control Block :</p>
+
+<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
+
+<p>NVIC : Nested Vectored Interrupt Controller</p>
+
+<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
+Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
 ]]></content>
   </entry>
   

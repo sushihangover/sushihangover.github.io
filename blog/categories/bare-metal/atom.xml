@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: BARE-METAL | SushiHangover]]></title>
+  <title><![CDATA[Category: Bare-metal | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/bare-metal/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T15:55:17-07:00</updated>
+  <updated>2014-04-22T16:01:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -14,131 +14,663 @@
 
   
   <entry>
-    <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
-    <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements"/>
-    <updated>2014-04-22T08:35:15-07:00</updated>
-    <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
-    <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
+    <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
+    <link href="http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts"/>
+    <updated>2014-03-09T19:24:34-07:00</updated>
+    <id>http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts</id>
+    <content type="html"><![CDATA[<p><a href="/images/ARM_CortexM_CMSIS_large.png">{% img left /images/ARM_CortexM_CMSIS_small.png &ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo; %}</a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
 
-<p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;&ndash;)</p>
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
 
-<p>So what is listed in the man for &ldquo;-mslow-flash-data&rdquo; is:
-<strong>Assume loading data from flash is slower than fetching instruction. Therefore literal load is minimized for better performance. This option is only supported when compiling for ARMv7 M-profile and off by default.</strong></p>
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>The semihosting output of this app (via QEMU):
+{% codeblock lang:bash %}
+qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+SysTick should not be active yet&hellip;
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+&hellip;Current value: 0
+Enable SysTick and lets poll it&hellip;
+&hellip;Current value: 6913
+&hellip;Current value: 2825
+&hellip;Current value: 2450
+&hellip;Current value: 2138
+&hellip;Current value: 1825
+&hellip;Current value: 1525
+&hellip;Current value: 1225
+&hellip;Current value: 913
+&hellip;Current value: 613
+&hellip;Current value: 313
+Enable SysTick Interrupts and watch local var get incremented&hellip;
+&hellip;myTicks = 1; SysTick->VAL = 0
+&hellip;myTicks = 2; SysTick->VAL = 3425
+&hellip;myTicks = 3; SysTick->VAL = 8725
+&hellip;myTicks = 4; SysTick->VAL = 2938
+&hellip;myTicks = 5; SysTick->VAL = 8113
+&hellip;myTicks = 6; SysTick->VAL = 2550
+&hellip;myTicks = 7; SysTick->VAL = 7725
+&hellip;myTicks = 8; SysTick->VAL = 2938
+&hellip;myTicks = 9; SysTick->VAL = 8125
+&hellip;myTicks = 10; SysTick->VAL = 2563
+&hellip;myTicks = 11; SysTick->VAL = 8100
+&hellip;myTicks = 12; SysTick->VAL = 3038
+{% endcodeblock %}</p>
 
-<p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was"&ldquo;
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>clang: error: unsupported option &lsquo;-static-libgcc&rsquo;</span></code></pre></td></tr></table></div></figure></notextile></div>
-Well, yes, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build. Manually hacking on the make files and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &rdquo;-static-libgcc" issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
+<p>{% codeblock lang:c %}</p>
 
-<p>So I build a native version on the master branch (4.10.x now):
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./gcc &mdash;version
-</span><span class='line'>gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright &copy; 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<h1>include &lt;stdlib.h></h1>
 
-<p>And than used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;&ndash;)
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./arm-none-eabi-gcc &mdash;version
-</span><span class='line'>arm-none-eabi-gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright &copy; 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</span><span class='line'>&hellip;
-</span><span class='line'>  Known ARM architectures (for use with the -march= option):&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code>armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te armv6
-</span><span class='line'>armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7 armv7-a armv7-m
-</span><span class='line'>armv7-r armv7e-m armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
-</span><span class='line'>&lt;/code>&lt;/pre>
-</span><span class='line'>
-</span><span class='line'>&lt;p>&hellip;</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<h1>include &ldquo;CortexM3_xx.h&rdquo;</h1>
 
-<p>FYI: I&rsquo;m on OS-X 10.9.2:
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Software  OS X 10.9.2 (13C64)
-</span><span class='line'>clang &mdash;version
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>gcc &mdash;version
-</span><span class='line'>Configured with: &mdash;prefix=/Applications/Xcode.app/Contents/Developer/usr &mdash;with-gxx-include-dir=/usr/include/c++/4.2.1
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>Target: x86_64-apple-darwin13.1.0
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<h1>include &lt;core_cm3.h></h1>
 
-<ul>
-<li><strong>ARM:</strong></li>
-<li>Use of Advanced SIMD (Neon) for 64-bit scalar computations has been disabled by default. This was found to generate better code in only a small number of cases. It can be turned back on with the -mneon-for-64bits option.</li>
-<li>Further support for the ARMv8-A architecture, notably implementing the restriction around IT blocks in the Thumb32 instruction set has been added. The -mrestrict-it option can be used with -march=armv7-a or the -march=armv7ve options to make code generation fully compatible with the deprecated instructions in ARMv8-A.</li>
-<li>Support has now been added for the ARMv7ve variant of the architecture. This can be used by the -march=armv7ve option.</li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics and are available through the -march=armv8-a+crc and mfpu=crypto-neon-fp-armv8 options.</li>
-<li>LRA is now on by default for the ARM target. This can be turned off using the -mno-lra option. This option is purely transitionary command line option and will be removed in a future release. We are interested in any bug reports regarding functional and performance regressions with LRA.</li>
-<li><strong>A new option -mslow-flash-data to improve performance of programs fetching data on slow flash memory has now been introduced for the ARMv7-M profile cores.</strong></li>
-<li>A new option -mpic-data-is-text-relative for targets that allows data segments to be relative to text segments has been added. This is on by default for all targets except VxWorks RTP.</li>
-<li>A number of infrastructural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-<li>GCC now supports Cortex-A12 and the Cortex-R7 through the -mcpu=cortex-a12 and -mcpu=cortex-r7 options.</li>
-<li>GCC now has tuning for the Cortex-A57 and Cortex-A53 through the -mcpu=cortex-a57 and -mcpu=cortex-a53 options.
-Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option. Similar support was added for the combination of Cortex-A15 and Cortex-A7 through the -mcpu=cortex-a15.cortex-a7 option.</li>
-<li>Further performance optimizations for the Cortex-A15 and the Cortex-M4 have been added.</li>
-<li><p><strong> A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors.</strong></p></li>
-<li><p><strong>AArch64:</strong></p></li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics. These are enabled when the architecture supports these and are available through the -march=armv8-a+crc and -march=armv8-a+crypto options.</li>
-<li>Initial support for ILP32 has now been added to the compiler. This is now available through the command line option -mabi=ilp32. + Support for ILP32 is considered experimental as the ABI specification is still beta.</li>
-<li>Coverage of more of the ISA including the SIMD extensions has been added. The Advanced SIMD intrinsics have also been improved.</li>
-<li>The new local register allocator (LRA) is now on by default for the AArch64 backend.</li>
-<li>The REE (Redundant extension elimination) pass has now been enabled by default for the AArch64 backend.</li>
-<li>Tuning for the Cortex-A53 and Cortex-A57 has been improved.</li>
-<li>Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option.</li>
-<li>A number of structural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-</ul>
+<h1>include &lt;stdint.h></h1>
+
+<h1>include &ldquo;svc.h&rdquo;</h1>
+
+<p>volatile uint32_t myTicks;</p>
+
+<p>void SysTick_Handler(void) {
+  myTicks++;
+  printf(&ldquo;&hellip;myTicks = %lu; SysTick->VAL = %lu\n&rdquo;, myTicks, SysTick->VAL);
+}</p>
+
+<p>int main(void) {</p>
+
+<pre><code>printf("SysTick should not be active yet...\n");
+for (int x=0; x&lt;10; x++) {
+    printf("...Current value: %lu\n", SysTick-&gt;VAL);
+}
+printf("Enable SysTick and lets poll it...\n");
+
+volatile uint32_t clock = 10000;
+SysTick-&gt;LOAD = clock - 1;
+/*
+    * SysTick_CTRL_CLKSOURCE_Msk : Use core's clock
+    * SysTick_CTRL_ENABLE_Msk    : Enable SysTick
+    * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC
+*/ 
+SysTick-&gt;CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+for (int x=0; x&lt;10; x++) {
+    printf("...Current value: %lu\n", SysTick-&gt;VAL);
+}
+
+printf("Enable SysTick Interrupts and watch local var get incremented...\n");
+myTicks = 0;
+SysTick-&gt;CTRL = SysTick_CTRL_CLKSOURCE_Msk |  SysTick_CTRL_ENABLE_Msk | SysTick_CTRL_TICKINT_Msk;
+
+while(myTicks &lt;= 10) {
+    asm("nop"); // Do nothing till SysTick_Handler been been called at least 10 times
+}
+exit(0);
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM, CMSIS DSP and Cortex-M3 &amp; M0]]></title>
+    <link href="http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0"/>
+    <updated>2014-03-05T22:34:20-08:00</updated>
+    <id>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0</id>
+    <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">{% img left /images/cmsis-version-3-block-diagram.png  &ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo; %}</a> I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied.</p>
+
+<p>I borrowed one of the cos/sin examples and added some semihosting <em>printf</em>s using NEWLIB and cleaned up the code a bit.</p>
+
+<blockquote><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php?tab=Download+CMSIS">CMSIS-DSP</a>: DSP Library Collection with over 60 Functions for various data types: fix-point (fractional q7, q15, q31) and single precision floating-point (32-bit). The library is available for Cortex-M0, Cortex-M3, and Cortex-M4. The Cortex-M4 implementation is optimized for the SIMD instruction set.</p></blockquote>
+
+<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result <em>works great</em> for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>) and everything looks on this core also.</p>
+
+<p>Clang/LLVM compile and link:
+{% codeblock lang:bash %}
+clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu=cortex-m0   -mfloat-abi=soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/arm_sin_cos_example_f32.o -c src/arm_sin_cos_example_f32.c
+clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu=cortex-m0   -mfloat-abi=soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/startup.o -c src/startup.c
+arm-none-eabi-ld -nostartfiles   -nostdlib -nostartupfiles  &mdash;gc-sections  &mdash;print-gc-sections  -Map bin/main.axf.map  -T src/cortex_M0.ld  &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/LIB/GCC    obj/arm_sin_cos_example_f32.o obj/startup.o &mdash;start-group &mdash;library=gcc &mdash;library=c &mdash;library=m &mdash;library=arm_cortexM0l_math &mdash;end-group -o bin/main.axf
+{% endcodeblock %}</p>
+
+<p>Sample semihousting output from a Cortex-M3:
+{% codeblock lang:bash %}
+qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+Starting Test&hellip;
+Cos -1.244917 = 0.320142
+Sin -1.244917 = -0.947370
+Cos squared 0.320142 = 0.102491
+Sin squared -0.947370 = 0.897509
+Add 0.102491 and 0.897509 = 1.000000
+Cos -4.793534 = 0.081056
+Sin -4.793534 = 0.996710
+Cos squared 0.081056 = 0.006570
+Sin squared 0.996710 = 0.993430
+Add 0.006570 and 0.993430 = 1.000000
+&hellip;
+&hellip;
+Cos 1.985805 = -0.403198
+Sin 1.985805 = 0.915113
+Cos squared -0.403198 = 0.162568
+Sin squared 0.915113 = 0.837431
+Add 0.162568 and 0.837431 = 1.000000
+Ending Test&hellip;
+{% endcodeblock %}</p>
+
+<p>{% codeblock lang:c <a href="https://github.com/sushihangover/llvm_baremetal">https://github.com/sushihangover/llvm_baremetal</a> %}</p>
+
+<h1>include &lt;stdlib.h></h1>
+
+<h1>include &lt;math.h></h1>
+
+<h1>include &ldquo;arm_math.h&rdquo;</h1>
+
+<p>/<em> &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+* Defines each of the tests performed
+* &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/</p>
+
+<h1>define MAX_BLOCKSIZE   32</h1>
+
+<h1>define DELTA           (0.000001f)</h1>
+
+<p>/<em> &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+* Test input data for Floating point sin_cos example for 32-blockSize
+* Generated by the MATLAB randn() function
+* &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/</p>
+
+<p>const float32_t testInput_f32[MAX_BLOCKSIZE] =<br/>
+{  <br/>
+ -1.244916875853235400, -4.793533929171324800,  0.360705030233248850,
+  0.827929644170887320, -3.299532218312426900,  3.427441903227623800, <br/>
+  3.422401784294607700, -0.108308165334010680,  0.941943896490312180,
+  0.502609575000365850, -0.537345278736373500,  2.088817392965764500,
+ -1.693168684143455700,  6.283185307179590700, -0.392545884746175080,
+  0.327893095115825040,  3.070147440456292300,  0.170611405884662230,
+ -0.275275082396073010, -2.395492805446796300,  0.847311163536506600,
+ -3.845517018083148800,  2.055818378415868300,  4.672594161978930800,
+ -1.990923030266425800,  2.469305197656249500,  3.609002606064021000,
+ -4.586736582331667500, -4.147080139136136300,  1.643756718868359500,
+ -1.150866392366494800,  1.985805026477433800
+};</p>
+
+<p>const float32_t testRefOutput_f32 = 1.000000000;</p>
+
+<p>/<em> &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+* Declare Global variables<br/>
+* &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/
+uint32_t blockSize = 32;
+float32_t  testOutput;<br/>
+float32_t  cosOutput;<br/>
+float32_t  sinOutput;<br/>
+float32_t  cosSquareOutput;<br/>
+float32_t  sinSquareOutput;</p>
+
+<p>/<em> &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+* Max magnitude FFT Bin test
+* &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/</p>
+
+<p>arm_status status;</p>
+
+<p>int32_t main(void)
+{
+   float32_t diff;
+   uint32_t i;</p>
+
+<p>   printf(&ldquo;Starting Test&hellip;\n&rdquo;);
+   for (i=0; i &lt; blockSize; i++)
+   {</p>
+
+<pre><code>  cosOutput = arm_cos_f32(testInput_f32[i]); 
+  printf("Cos %f = %f\n", testInput_f32[i], cosOutput);
+
+  sinOutput = arm_sin_f32(testInput_f32[i]); 
+  printf("Sin %f = %f\n", testInput_f32[i], sinOutput);
+
+  arm_mult_f32(&amp;cosOutput, &amp;cosOutput, &amp;cosSquareOutput, 1); 
+  printf("Cos squared %f = %f\n", cosOutput, cosSquareOutput);
+
+  arm_mult_f32(&amp;sinOutput, &amp;sinOutput, &amp;sinSquareOutput, 1); 
+  printf("Sin squared %f = %f\n", sinOutput, sinSquareOutput);
+
+  arm_add_f32(&amp;cosSquareOutput, &amp;sinSquareOutput, &amp;testOutput, 1);
+  printf("Add %f and %f = %f\n", cosSquareOutput, sinSquareOutput, testOutput);
+
+  /* absolute value of difference between ref and test */ 
+  diff = fabsf(testRefOutput_f32 - testOutput); 
+  /* Comparison of sin_cos value with reference */ 
+  if (diff &gt; DELTA) 
+  { 
+     printf("Diff failure %f\n", diff);
+     exit(EXIT_FAILURE); /* just for QEMU testing */
+     while(1); 
+  } 
+</code></pre>
+
+<p>   }
+   printf(&ldquo;Ending Test&hellip;\n&rdquo;);
+   exit(EXIT_SUCCESS); /<em> just for QEMU testing </em>/
+   while(1); /<em> main function does not return </em>/
+}
+{% endcodeblock %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cortex-M0 vs. M3 : LLVM and LD]]></title>
+    <link href="http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld"/>
+    <updated>2014-03-05T06:30:13-08:00</updated>
+    <id>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld</id>
+    <content type="html"><![CDATA[<p><a href="/images/ARM_Cortex-M_instruction_set_large.png">{% img left /images/ARM_Cortex-M_instruction_set_small.png  &ldquo;ARM Cortex-M instruction set&rdquo; %}</a> One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld to do your linking.</p>
+
+<p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times to get the options correct (and the <strong>order</strong> of options does matter) as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
+
+<p>One of the areas using it directly that can bite you is not linking to the proper libgcc.a for the Cortex-M that you are targeting. Looking into your <em>arm-none-eabi/lib/gcc/arm-none-eabi/X.X.X</em> tool-chain directory and you will find multiple directories. One for each ARM architecture; armv6-m, armv7-ar, armv7-m, thumb, thumb2, etc&hellip;</p>
+
+<p>Add a library include for <em>architecture</em> directory that matches the core that you compiled against and everything will be fine:</p>
+
+<p>Cortex M3 example:
+<code>
+arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m -g   obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf
+</code></p>
+
+<p>Cortex M0+ example:
+<code>
+arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M0.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv6-m  --gc-sections --print-gc-sections  obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf
+</code></p>
+
+<p><a href="http://en.wikipedia.org/wiki/ARM_Cortex-M#Instruction_sets">ARM Cortex-M instruction sets</a></p>
+
+<table class="wikitable">
+<tbody><tr>
+<th>ARM<br>
+Cortex-M</th>
+<th>Thumb</th>
+<th>Thumb-2</th>
+<th>Hardware<br>
+multiply</th>
+<th>Hardware<br>
+divide</th>
+<th>Saturated<br>
+math</th>
+<th>DSP<br>
+extensions</th>
+<th>Floating-point</th>
+<th>ARM<br>
+architecture</th>
+<th>Core<br>
+architecture</th>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0<sup id="cite_ref-M0-TRM_1-2" class="reference"><a href="#cite_note-M0-TRM-1"><span>[</span>1<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-8" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="http://sushihangover.github.io/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0+<sup id="cite_ref-M0.2B-TRM_2-2" class="reference"><a href="#cite_note-M0.2B-TRM-2"><span>[</span>2<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-9" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="http://sushihangover.github.io/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M1<sup id="cite_ref-M1-TRM_3-2" class="reference"><a href="#cite_note-M1-TRM-3"><span>[</span>3<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>3 or 33 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-10" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="http://sushihangover.github.io/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M3<sup id="cite_ref-M3-TRM_4-2" class="reference"><a href="#cite_note-M3-TRM-4"><span>[</span>4<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv7-M<sup id="cite_ref-ARMv7-M-Manual_7-9" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="http://sushihangover.github.io/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M4<sup id="cite_ref-M4-TRM_5-2" class="reference"><a href="#cite_note-M4-TRM-5"><span>[</span>5<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: yellow">
+<center>Optional</center>
+</td>
+<td>
+<center>ARMv7E-M<sup id="cite_ref-ARMv7-M-Manual_7-10" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="http://sushihangover.github.io/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+</tbody></table>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[$30 60MSPS Logic Analyzer - Logic Pirate]]></title>
-    <link href="http://sushihangover.github.io/0-60msps-logic-analyzer"/>
-    <updated>2014-04-15T20:16:37-07:00</updated>
-    <id>http://sushihangover.github.io/0-60msps-logic-analyzer</id>
-    <content type="html"><![CDATA[<p><a href="http://http://dangerousprototypes.com"><img class="left" src="/images/dangerous_logo.png" title="&ldquo;Dangerous Prototypes&rdquo;" ></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! &ndash; overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
+    <title type="html"><![CDATA[ARM Cortex-M3 Bare-metal With NEWLIB]]></title>
+    <link href="http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib"/>
+    <updated>2014-03-04T18:18:56-08:00</updated>
+    <id>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib</id>
+    <content type="html"><![CDATA[<p>I am working on a custom NEWLIB but first I wanted to make sure that <a href="https://sourceware.org/newlib/">NEWLIB</a> compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal <a href="http://llvm.org">Clang/LLVM</a> build and Qemu.</p>
 
-<p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
+<p>Lets start with a simple main() that includes printf, puts and malloc. The first test is related to malloc, as if your linker script is not setting up your heap properly and providing the heap &ldquo;end&rdquo; address as defined in NEWLIB then not much else is going to work (i.e. printf uses malloc). If malloc works, then lets so some printfs including one with a random string. After that lets keep increasing the size of our mallocs till we run out of heap space.</p>
 
-<p>So check it out yourself:</p>
+<p>{% codeblock lang:c %}</p>
 
-<p>DP Blog post: <a href="http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/">http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/</a></p>
+<h1>include &lt;stdio.h>      /<em> printf, scanf, NULL </em>/</h1>
 
-<p>Product page: <a href="http://dangerousprototypes.com/docs/Logic_Pirate">http://dangerousprototypes.com/docs/Logic_Pirate</a></p>
+<h1>include &lt;stdlib.h>     /<em> malloc, free, rand </em>/</h1>
 
-<p>Available from Seeed @ <a href="http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html">http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html</a></p>
+<p>int main ()
+{
+  extern char <em>heap_start; /<em> Defined by the linker from src/cortex_M3.ld </em>/
+  extern char </em>heap_end; /<em> Defined by the linker from src/cortex_M3.Ld. </em>/
+  int i,n;
+  char * buffer;</p>
 
-<p>Client Software: <a href="http://www.lxtreme.nl/ols/">Logic Sniffer (An alternative OLS client)</a></p>
+<p>  i = 43;
+  buffer = (char*) malloc (i);
+  if (buffer==NULL)
+  {</p>
+
+<pre><code> puts ("Malloc failed\n");
+ exit (1);
+</code></pre>
+
+<p>  }</p>
+
+<p>  printf (&ldquo;Printf string\n&rdquo;);
+  for (n=0; n&lt;i; n++)
+  {</p>
+
+<pre><code>buffer[n]=rand()%26+'a';
+</code></pre>
+
+<p>  }
+  buffer[i]=&lsquo;\0&rsquo;;
+  printf (&ldquo;Random string: %s\n&rdquo;,buffer);</p>
+
+<p>  i = 32;
+  do
+  {</p>
+
+<pre><code> buffer = realloc(buffer, i);
+ if (buffer == NULL)
+ {
+    puts("Out of memory!\n");
+    exit (1);
+ } else {
+    printf("%d bytes @ address 0x%X (Low=0x%X:Hi=0x%X)\n",
+       i,
+       (unsigned int)buffer,
+       (unsigned int)&amp;_heap_start,
+       (unsigned int)&amp;_heap_end
+   );
+   i = i + 32;
+ }
+</code></pre>
+
+<p>  } while (buffer != NULL);</p>
+
+<p>  exit(0); /<em> cause qemu to exit </em>/
+  return 0;
+}
+{% endcodeblock %}</p>
+
+<p>Easy enough, so lets create a linker script that is geared for a Cortex-M3, the main section to pay attention to in this example is <strong>.heap</strong>:
+{% codeblock lang:bash %}
+OUTPUT_FORMAT (&ldquo;elf32-littlearm&rdquo;, &ldquo;elf32-bigarm&rdquo;, &ldquo;elf32-littlearm&rdquo;)</p>
+
+<p>ENTRY(Reset_Handler)</p>
+
+<p>/<em> Specify the memory areas </em>/
+MEMORY
+{
+  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x10000 /<em> 64K </em>/
+  RAM (xrw)       : ORIGIN = 0x00020000, LENGTH = 0x04000 /<em> 16K </em>/
+}</p>
+
+<p>heap_size = 0x800; /<em> 2K </em>/</p>
+
+<p>SECTIONS {</p>
+
+<pre><code>. = ORIGIN(FLASH);
+
+.vectors :
+{
+    . = ALIGN(4);
+    KEEP(*(.vectors)) /* Startup code */
+    . = ALIGN(4);
+} &gt;FLASH
+
+.text :
+{
+    . = ALIGN(4);
+    _start_text = .;
+    *(.text)
+    *(.text*)
+    *(.rodata)
+    *(.rodata*)
+    _end_text = .;
+} &gt;FLASH
+
+    .ARM.extab : 
+    {
+            *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } &gt; FLASH
+
+    __exidx_start = .;
+    .ARM.exidx :
+    {
+            *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+    } &gt; FLASH
+    __exidx_end = .;
+
+_end_text = .;
+
+.data : AT (_end_text)
+{
+    _start_data = .;
+    *(.data)
+    *(.data*) 
+    . = ALIGN(4);
+    _end_data = .;
+} &gt;RAM 
+
+.bss :
+{
+     . = ALIGN(4);
+    _start_bss = .;
+    *(.bss)
+    *(.bss*)
+    *(COMMON)
+    . = ALIGN(4);
+    _end_bss = .;
+} &gt;RAM
+
+. = ALIGN(4);
+.heap :
+{
+    __end__ = .;
+    /* _heap_start = .; */
+    /* "end" is used by newlib's syscalls!!! */
+    PROVIDE(end = .);
+    PROVIDE(_heap_start = end );
+    . = . + heap_size;
+    PROVIDE(_heap_end = .);
+} &gt;RAM
+
+.ARM.attributes 0 : { *(.ARM.attributes) }
+
+.stack_dummy (COPY):
+{
+    _end_stack = .;
+    *(.stack*)
+} &gt; RAM
+
+/* Set stack top to end of RAM, and stack limit move down by
+ * size of stack_dummy section */
+_start_stack = ORIGIN(RAM) + LENGTH(RAM);
+_size_stack = _start_stack - SIZEOF(.stack_dummy);
+PROVIDE(__stack = _start_stack);
+
+/* Check if data + heap + stack exceeds RAM limit */
+ASSERT(_size_stack &gt;= _heap_end, "region RAM overflowed with stack")
+</code></pre>
+
+<p>}
+_end = .;
+{% endcodeblock %}</p>
+
+<p>Ok, now that we have a linker script that defines our stack and heap properly, lets reuse our startup.c routine for the Cortex-M cores and compile it all with CLang/LLVM and link it with arm-none-eabi-ld:</p>
+
+<p>{% codeblock lang:bash %}
+clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu=cortex-m3  -mfloat-abi=soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/printf_with_malloc.o -c src/printf_with_malloc.c
+clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu=cortex-m3  -mfloat-abi=soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/startup.o -c src/startup.c
+arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  &mdash;library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/thumb -g   obj/printf_with_malloc.o obj/startup.o &mdash;start-group -lgcc -lc &mdash;end-group -o bin/main.axf
+{% endcodeblock %}</p>
+
+<p>And now we can run a simulation of it with QEMU:</p>
+
+<p>{% codeblock lang:bash %}
+qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+Puts string
+Printf string
+Random string: lvqdyoqykfdbxnqdquhydjaeebzqmtblcabwgmscrno
+32 bytes @ address 0x209C0 (Low=0x209B4:Hi=0x211B4)
+64 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+96 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+128 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+160 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+192 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+224 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+256 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+288 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+320 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+352 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+384 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+416 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+448 bytes @ address 0x20DF8 (Low=0x209B4:Hi=0x211B4)
+Out of memory!
+{% endcodeblock %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bare Metal Debugging With Affinic Debugger]]></title>
+    <link href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger"/>
+    <updated>2014-02-26T23:19:58-08:00</updated>
+    <id>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</id>
+    <content type="html"><![CDATA[<p><a href="/images/Affinic_gui_large.png">{% img left /images/Affinic_gui_small.png &ldquo;Affinic gdb on OS-X&rdquo; %}</a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
+
+<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;&ndash;) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
+
+<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
+
+<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
+
+<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
+
+<p><a href="/images/Affinic_preferences_large.png">{% img right /images/Affinic_preferences_small.png &ldquo;Affinic gdb location&rdquo; %}</a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
+
+<p>Lets debug something!</p>
+
+<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
+
+<p>{% codeblock lang:bash %}
+clang -g -O0 -target arm-none-eabi -mcpu=arm926ej-s -mfloat-abi=soft -o obj/startup.o -c src/startup.s
+clang -g -O0 -target arm-none-eabi -mcpu=arm926ej-s -mfloat-abi=soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
+arm-none-eabi-ld -Lobj &mdash;gc-sections &mdash;print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
+arm-none-eabi-size bin/HelloWorldSimple.axf
+{% endcodeblock %}</p>
+
+<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.
+{% codeblock lang:bash %}
+qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
+{% endcodeblock %}</p>
+
+<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
+
+<h6>* -s              shorthand for -gdb tcp::1234</h6>
+
+<h6>* -S              freeze CPU at startup</h6>
+
+<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:
+<code>
+target remote localhost:1234
+file bin/HelloWorldSimple.axf
+</code>
+Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
+
+<p><a href="/images/Affinic_assembly_view_large.png">{% img left /images/Affinic_assembly_view_small.png &ldquo;Affinic gdb on OS-X&rdquo; %}</a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
+<a href="/images/Affinic_source_view_large.png">{% img right /images/Affinic_source_view_small.png &ldquo;Affinic gdb on OS-X&rdquo; %}</a></p>
+
+<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
 ]]></content>
   </entry>
   

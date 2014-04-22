@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GitHub | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T15:55:17-07:00</updated>
+  <updated>2014-04-22T16:01:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -137,7 +137,7 @@ I&rsquo;ll be including this in the Github Page deploy plugin in the future so e
     <id>http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github</id>
     <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
 
-<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
+<p>{% img left /images/Playscript404.gif 360 240 &lsquo;PlayScript, Going, going, gone&rsquo; %}
 I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
 
 <p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
