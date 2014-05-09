@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2014-04-22T16:01:44-07:00</updated>
+  <updated>2014-05-09T15:50:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[Robert N.]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Throttle the FCC]]></title>
+    <link href="http://sushihangover.github.io/throttle-the-fcc"/>
+    <updated>2014-05-09T15:33:45-07:00</updated>
+    <id>http://sushihangover.github.io/throttle-the-fcc</id>
+    <content type="html"><![CDATA[<p><a href="https://neocities.org/blog/the-fcc-is-now-rate-limited">We are rate limiting the FCC to dialup modem speeds until they pay us for bandwidth</a></p>
+
+<p><strong>How to throttle the FCC to dial up modem speeds on your website</strong>: <a href="https://gist.github.com/kyledrake/e6046644115f185f7af0">https://gist.github.com/kyledrake/e6046644115f185f7af0</a></p>
+
+<p><a href="http://www.washingtonpost.com/blogs/the-switch/wp/2014/05/09/how-to-officially-weigh-in-on-net-neutrality-in-two-clicks/">How to officially weigh in on net neutrality, in two clicks</a></p>
+
+<p><a href="http://socialtimes.com/tech-giants-protest-fccs-net-neutrality-rules-ahead-may-15-vote_b148196">Tech Giants Protest FCC’s Net Neutrality Rules Ahead of May 15 Vote</a></p>
+
+<p><a href="http://arstechnica.com/tech-policy/2014/04/net-neutrality-dead-for-good-fcc-may-endorse-pay-for-play-deals/">Net neutrality dead for good? FCC may endorse pay-for-play deals</a></p>
+
+<p><a href="http://www.wired.com/2014/05/fcc_net/">How the FCC Created Its Own Net Neutrality Mess</a></p>
+
+<p>Net Neutrality News &ndash; <a href="http://www.bing.com/news/search?q=Net+Neutrality&amp;qpvt=Net+Neutrality&amp;FORM=EWRE">Bing</a> <a href="https://www.google.com/search?hl=en&amp;gl=us&amp;tbm=nws&amp;authuser=0&amp;q=Net+Neutrality&amp;oq=Net+Neutrality&amp;gs_l=news-cc.3..43j0l4j0i5l3j43i53.39174.39174.0.41612.1.1.0.0.0.0.378.378.3-1.1.0...0.0...1ac.2.Hr-vCuvanjQ">Google</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
@@ -2239,67 +2260,6 @@ that any code they throw exceptions through has proper unwinding information.</p
 <p>The print_uart0 function is a hack function as it does not implement FIFO/flow-control to an actual UART, but in this case it points to a memory address where the discontinued ARM Versatile PB dev-board does have a UART and QEMU board simulation echos those writes. I am not going to do a line by line comparision of the generated code as for un-optimized code they are both getting the job done, but in slightly different ways in almost the same number of instructions.</p>
 
 <p>So we are able to produce a working bare metal ARM AXF from LLVM and next time, I will spend a little time on compiler optimizations to see how the two code generators/optimizisers compare&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool]]></title>
-    <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool"/>
-    <updated>2014-02-19T20:56:11-08:00</updated>
-    <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
-    <content type="html"><![CDATA[<p><a href="http://sushihangover.github.io/images/diffmerge_large.png"><img class="right" src="http://sushihangover.github.io/images/diffmerge_small.png" title="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;" alt="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;"></a>
-I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
-
-<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
-(cheaper) options that work just as well for personal development.</p>
-
-<p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
-
-<p>So some searching landed me on an old post by <a href="http://twobitlabs.com/2011/08/install-diffmerge-git-mac-os-x/">Todd Huss</a> about using DiffMerge as your visual diff/merge for git and it was actually what I was looking for, well almost ;&ndash;) It is missing a few features, but they have a free version and it works really well and has a great OS-X interface&hellip; search is over for now&hellip;</p>
-
-<blockquote><p><a href="http://www.sourcegear.com/diffmerge/">SourceGear</a> has a $19.00 USD version that include file export with HTML formatting and if I could see example HTML code that it produces, I pay for that feature in a heart-beat, but the feature is completely locked out till you actaully register, bummer&hellip;</p></blockquote>
-
-<p>Todd recommends using the DiffMerge installer version vs. the dmg version, I go the other way on that. Download the dmg version, open it and drag/drop the app to your Applications. Then in a term window you can copy the <em>Extras/diffmerge.sh</em> to your <em>/usr/local/bin</em> directory (Execute attrib is already set, so no chmod needed..), but I copied it as just <em>vdiff</em> as that is quicker to type. No admin rights are need to install it that way and that makes me happy&hellip; I can <em>vdiff file1.c file2.c</em> on the cmd line to pop the GUI open and populate it.</p>
-
-<p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="http://sushihangover.github.io/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
-
-<figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config --global diff.tool diffmerge
-</span><span class='line'>git config --global difftool.diffmerge.cmd <span class="s1">&#39;diffmerge &quot;$LOCAL&quot; &quot;$REMOTE&quot;&#39;</span>
-</span><span class='line'>git config --global merge.tool diffmerge
-</span><span class='line'>git config --global mergetool.diffmerge.cmd <span class="s1">&#39;diffmerge --merge --result=&quot;$MERGED&quot; &quot;$LOCAL&quot; &quot;$(if test -f &quot;$BASE&quot;; then echo &quot;$BASE&quot;; else echo &quot;$LOCAL&quot;; fi)&quot; &quot;$REMOTE&quot;&#39;</span>
-</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># diff the local file.m against the checked-in version</span>
-</span><span class='line'>git difftool file.m
-</span><span class='line'><span class="c"># diff the local file.m against the version in some-feature-branch</span>
-</span><span class='line'>git difftool some-feature-branch file.m
-</span><span class='line'><span class="c"># diff the file.m from the Build-54 tag to the Build-55 tag</span>
-</span><span class='line'>git difftool Build-54..Build-55 file.m
-</span><span class='line'><span class="c">#To resolve merge conflicts, just run git mergetool:</span>
-</span><span class='line'>git mergetool
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
 ]]></content>
   </entry>
   
