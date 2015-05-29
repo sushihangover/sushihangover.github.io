@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their change/log &hellip;">
+  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-29T17:22:05-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to the large number of changes that occur on that repo.</p>
+
+<p>While I do different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
+
+<p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
+</span><span class='line'>origin    https://github.com/sushihangover/PlayScript.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin    https://github.com/sushihangover/PlayScript.git <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>upstream  https://github.com/mono/mono.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>upstream  https://github.com/mono/mono.git <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One local clone is named &lsquo;PlayScript-master&rsquo; and the other is &lsquo;PlayScript&rsquo;.</p>
+
+<p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
+
+<p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
+</span><span class='line'>git fetch upstream
+</span><span class='line'>git merge upstream/master
+</span><span class='line'>git push origin
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>FYI: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -721,49 +790,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/arm-compiler-price/">ARM DS5 Compiler Price</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-18T06:30:29-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/ARM_DS5.jpg" title="&#34;ARM DS-5&#34;" alt="&#34;ARM DS-5&#34;"> I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
-
-<p>But I was wondering how much <a href="http://ds.arm.com">ARM&rsquo;s DS-5</a> (Keil) IDE and compiler cost and found a couple of places in the &lsquo;net that actually publish the prices (like <a href="http://www.newark.com">Newark / Element14</a>):</p>
-
-<h5>ARM DS-5 PROFESSIONAL:</h5>
-
-<h5>Floating license price: $10,750.00 (USD)</h5>
-
-<h5>Node locked price: $6,600.00 (USD)</h5>
-
-<p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
-
-<p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;">What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
-
-<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -779,6 +805,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
       </li>
     
@@ -792,10 +822,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
       </li>
     
   </ul>
