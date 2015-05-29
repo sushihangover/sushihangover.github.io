@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Xamarin | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MonoMac: Detect When Mac Sleeps or Wakes]]></title>
+    <link href="http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes/"/>
+    <updated>2014-01-12T20:44:00-08:00</updated>
+    <id>http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes</id>
+    <content type="html"><![CDATA[<p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
+
+<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
+
+<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
+
+<p><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
+</span><span class='line'>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+</feed>

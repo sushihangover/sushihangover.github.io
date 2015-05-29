@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Clang | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/clang/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LLVM 3.4.1]]></title>
+    <link href="http://sushihangover.github.io/blog/llvm-3-dot-4-1/"/>
+    <updated>2014-04-12T06:05:07-07:00</updated>
+    <id>http://sushihangover.github.io/blog/llvm-3-dot-4-1</id>
+    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="/images/llvm_logo_small.png" title="&ldquo;LLVM&rdquo;" ></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
+
+<p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./clang &ndash;version
+</span><span class='line'>clang version 3.5.0
+</span><span class='line'>Target: arm-none&ndash;eabi
+</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
+    <link href="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/"/>
+    <updated>2014-04-11T07:28:16-07:00</updated>
+    <id>http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl</id>
+    <content type="html"><![CDATA[<p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
+
+<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
+
+<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
+
+<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
+    <link href="http://sushihangover.github.io/blog/arm-starts-move-to-llvm/"/>
+    <updated>2014-04-10T22:03:36-07:00</updated>
+    <id>http://sushihangover.github.io/blog/arm-starts-move-to-llvm</id>
+    <content type="html"><![CDATA[<p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
+
+<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
+
+<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
+
+<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
+
+<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :-)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
+    <link href="http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0/"/>
+    <updated>2014-03-26T20:54:58-07:00</updated>
+    <id>http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0</id>
+    <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&ldquo;OpenJTAG&rdquo;" ></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
+</span><span class='line'>{
+</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /&lt;em> 8K &lt;/em>/
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /&lt;em> 2K &lt;/em>/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></p>
+
+<p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
+
+<p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &lt;stdio.h>&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{
+</span><span class='line'>    printf(&ldquo;BKPT Hello World\n&rdquo;);
+</span><span class='line'>    printf(&ldquo;How small is this?\n&rdquo;);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure>
+The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure>
+So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>void putc (void* p, char c)
+</span><span class='line'>{
+</span><span class='line'>    svcPutChar(&amp;c);
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{
+</span><span class='line'>    set_putc(putc);
+</span><span class='line'>    printf(&ldquo;BKPT Hello World\n&rdquo;);
+</span><span class='line'>    printf(&ldquo;How small is this?\n&rdquo;);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
+
+<p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
+
+<p>A quick break down of elf size:</p>
+
+<p><strong>text</strong>: your code, vector table plus constants.</p>
+
+<p><strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)</p>
+
+<p><strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ARM DS5 Compiler Price]]></title>
+    <link href="http://sushihangover.github.io/blog/arm-compiler-price/"/>
+    <updated>2014-03-18T06:30:29-07:00</updated>
+    <id>http://sushihangover.github.io/blog/arm-compiler-price</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/ARM_DS5.jpg" title="&ldquo;ARM DS-5&rdquo;" > I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
+
+<p>But I was wondering how much <a href="http://ds.arm.com">ARM&rsquo;s DS-5</a> (Keil) IDE and compiler cost and found a couple of places in the &lsquo;net that actually publish the prices (like <a href="http://www.newark.com">Newark / Element14</a>):</p>
+
+<h5>ARM DS-5 PROFESSIONAL:</h5>
+
+<h5>Floating license price: $10,750.00 (USD)</h5>
+
+<h5>Node locked price: $6,600.00 (USD)</h5>
+
+<p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
+
+<p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&ldquo;ARM DSTREAM&rdquo;" >What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
+
+<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
+]]></content>
+  </entry>
+  
+</feed>

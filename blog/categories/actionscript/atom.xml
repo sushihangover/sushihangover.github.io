@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Actionscript | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/actionscript/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript :What Happened to the Open Source Version on GitHub]]></title>
+    <link href="http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github/"/>
+    <updated>2013-12-27T19:04:55-08:00</updated>
+    <id>http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github</id>
+    <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
+
+<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
+I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
+
+<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
+
+<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>

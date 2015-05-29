@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ellcc.org Build Fix for OS-X - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="In my ARM Bare Metal searches for using Clang/LLVM I stumbled across The ELLCC Embedded Compiler Collection that provides a one-stop build enviroment &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/blog/ellcc-dot-org-build-fix-for-os-x/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ellcc.org Build Fix for OS-X</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
+
+<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
+
+<blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC...</p><footer><strong>Rich</strong> <cite><a href='http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571'>What Is ELLCC All About</a></cite></footer></blockquote>
+
+
+<p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LINK  i386-softmmu/qemu-system-i386
+</span><span class='line'>ld: library not found for -lintl
+</span><span class='line'>clang: error: linker command failed with exit code 1 (use -v to see invocation)
+</span><span class='line'>make[1]: *** [qemu-system-i386] Error 1
+</span><span class='line'>make: *** [subdir-i386-softmmu] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin" or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
+
+<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
+
+<blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with --force<br/>Note that doing so can interfere with building software.</p></blockquote>
+
+
+<p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn diff build
+</span><span class='line'>Index: <span class="nv">build</span>
+</span><span class='line'><span class="o">===================================================================</span>
+</span><span class='line'>--- build <span class="o">(</span>revision 3780<span class="o">)</span>
+</span><span class='line'>+++ build <span class="o">(</span>working copy<span class="o">)</span>
+</span><span class='line'>@@ -69,6 +69,10 @@
+</span><span class='line'>     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user<span class="s2">&quot;</span>
+</span><span class='line'><span class="s2"> fi</span>
+</span><span class='line'><span class="s2"> echo Configuring package qemu for $targets</span>
+</span><span class='line'><span class="s2">+if [!  -e `which brew` ]; then</span>
+</span><span class='line'><span class="s2">+    ruby -e &quot;</span><span class="k">$(</span>curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install<span class="k">)</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">+fi</span>
+</span><span class='line'><span class="s2">+brew link gettext --force</span>
+</span><span class='line'><span class="s2"> qemu_target_list=`echo $qemu_target_list | sed -e &quot;</span>s/ /,/g<span class="err">&quot;</span><span class="sb">`</span>
+</span><span class='line'> make <span class="nv">DIR</span><span class="o">=</span>src/qemu <span class="nv">CC</span><span class="o">=</span><span class="nv">$cc</span> <span class="nv">HCC</span><span class="o">=</span><span class="nv">$hcc</span> <span class="nv">AR</span><span class="o">=</span><span class="nv">$ar</span> <span class="nv">TARGET</span><span class="o">=</span><span class="nv">$host</span> <span class="nv">OS</span><span class="o">=</span><span class="nv">$os</span> <span class="se">\</span>
+</span><span class='line'>     <span class="nv">targetlist</span><span class="o">=</span><span class="nv">$qemu_target_list</span> <span class="nv">haslibs</span><span class="o">=</span><span class="nv">$haslibs</span> <span class="se">\</span>
+</span><span class='line'>@@ -76,6 +80,7 @@
+</span><span class='line'>     qemu.configure <span class="o">||</span> <span class="nb">exit </span>1
+</span><span class='line'>
+</span><span class='line'> make -C src/qemu <span class="o">||</span> <span class="nb">exit </span>1
+</span><span class='line'>+brew unlink gettext
+</span><span class='line'>
+</span><span class='line'> <span class="c"># Finally, install into the target specific bin dir.</span>
+</span><span class='line'> mkdir -p <span class="nv">$bindir</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Everything builds fine after that&hellip;</p>
+
+<p>The entire file is here:</p>
+
+<div><script src='https://gist.github.com/8949755.js'></script>
+<noscript><pre><code>#!/bin/sh
+# ELLCC GNU tools build script.
+
+# Get the staging directory.
+prefix=`cd ..; pwd`
+
+# Figure out the compilers to use.
+. ../build-setup $*
+
+echo Configured to $WHY.
+echo C compiler: $cc $CFLAGS
+echo C++ compiler: $cxx $CXXFLAGS
+echo In: gnu-build$builddir
+
+# Configure for GNU tools.
+mkdir -p gnu-build$builddir
+
+# Configure for binutils.
+# binutils are build to support all targets in the target list.
+echo Configuring package binutils for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    binutils.configure || exit 1
+
+make -C gnu-build$builddir/binutils || exit 1
+
+# Configure for assemblers for all targets.
+for t in $targets; do
+  echo Configuring the assembler for $t
+  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+      target=$t haslibs=$haslibs \
+      bindir=$bindir prefix=$prefix build=$build \
+      gas.configure || exit 1
+
+  make -C gnu-build$builddir/binutils/$t || exit 1
+done
+
+# Configure for GDB.
+# GDB is built to support all GDB targets.
+echo Configuring package gdb for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    gdb.configure || exit 1
+
+make -C gnu-build$builddir/gdb || exit 1
+
+if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
+  # The host system is not the build system.
+  # Build only  binutils, the assemblers, and gdb.
+  # Finally, install into the target specific bin dir.
+  mkdir -p $bindir
+  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
+  exit 0
+fi
+
+# Configure for QEMU.
+# The QEMU system targets.
+qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
+    microblaze-softmmu mips-softmmu mipsel-softmmu \
+    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
+
+if [ `uname` = &quot;Linux&quot; ] ; then
+    # The QEMU Linux user space targets.
+    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
+    x86_64-linux-user arm-linux-user armeb-linux-user \
+    microblaze-linux-user mips-linux-user mipsel-linux-user \
+    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
+fi
+echo Configuring package qemu for $targets
+if [!  -e `which brew` ]; then
+        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
+fi
+brew link gettext --force
+qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
+make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
+    targetlist=$qemu_target_list haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    qemu.configure || exit 1
+
+make -C src/qemu || exit 1
+brew unlink gettext
+
+# Finally, install into the target specific bin dir.
+mkdir -p $bindir
+make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
+</code></pre></noscript></div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-02-12'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/bare-metal/'>bare-metal</a>, <a class='category' href='/blog/categories/clang/'>clang</a>, <a class='category' href='/blog/categories/ellcc/'>ellcc</a>, <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>, <a class='category' href='/blog/categories/qemu/'>qemu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/ellcc-dot-org-build-fix-for-os-x/" data-via="" data-counturl="http://sushihangover.github.io/blog/ellcc-dot-org-build-fix-for-os-x/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/os-x-llvm-slash-clang-build/" title="Previous Post: OS-X LLVM / CLANG Build">&laquo; OS-X LLVM / CLANG Build</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/gtksharp-explorer-update-for-irony/" title="Next Post: GtkSharp-Explorer update for Irony">GtkSharp-Explorer update for Irony &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/posts/3/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/llvm-arm-triple-cpu-targets/">LLVM ARM Triple CPU Targets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-19T06:36:42-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core list available.</p>
+
+<p>LLVM makes it soooo easy to get that information from the LLVM static compiler binary (<a href="http://llvm.org/docs/CommandGuide/llc.html">llc</a>), just pass it a generic ARM triple, here is the lsit from my build:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>llc -mtriple=arm-none-eabi -mcpu=help</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Available CPUs for this target:
+</span><span class='line'>
+</span><span class='line'>  arm1020e      - Select the arm1020e processor.
+</span><span class='line'>  arm1020t      - Select the arm1020t processor.
+</span><span class='line'>  arm1022e      - Select the arm1022e processor.
+</span><span class='line'>  arm10e        - Select the arm10e processor.
+</span><span class='line'>  arm10tdmi     - Select the arm10tdmi processor.
+</span><span class='line'>  arm1136j-s    - Select the arm1136j-s processor.
+</span><span class='line'>  arm1136jf-s   - Select the arm1136jf-s processor.
+</span><span class='line'>  arm1156t2-s   - Select the arm1156t2-s processor.
+</span><span class='line'>  arm1156t2f-s  - Select the arm1156t2f-s processor.
+</span><span class='line'>  arm1176jz-s   - Select the arm1176jz-s processor.
+</span><span class='line'>  arm1176jzf-s  - Select the arm1176jzf-s processor.
+</span><span class='line'>  arm710t       - Select the arm710t processor.
+</span><span class='line'>  arm720t       - Select the arm720t processor.
+</span><span class='line'>  arm7tdmi      - Select the arm7tdmi processor.
+</span><span class='line'>  arm7tdmi-s    - Select the arm7tdmi-s processor.
+</span><span class='line'>  arm8          - Select the arm8 processor.
+</span><span class='line'>  arm810        - Select the arm810 processor.
+</span><span class='line'>  arm9          - Select the arm9 processor.
+</span><span class='line'>  arm920        - Select the arm920 processor.
+</span><span class='line'>  arm920t       - Select the arm920t processor.
+</span><span class='line'>  arm922t       - Select the arm922t processor.
+</span><span class='line'>  arm926ej-s    - Select the arm926ej-s processor.
+</span><span class='line'>  arm940t       - Select the arm940t processor.
+</span><span class='line'>  arm946e-s     - Select the arm946e-s processor.
+</span><span class='line'>  arm966e-s     - Select the arm966e-s processor.
+</span><span class='line'>  arm968e-s     - Select the arm968e-s processor.
+</span><span class='line'>  arm9e         - Select the arm9e processor.
+</span><span class='line'>  arm9tdmi      - Select the arm9tdmi processor.
+</span><span class='line'>  cortex-a12    - Select the cortex-a12 processor.
+</span><span class='line'>  cortex-a15    - Select the cortex-a15 processor.
+</span><span class='line'>  cortex-a5     - Select the cortex-a5 processor.
+</span><span class='line'>  cortex-a53    - Select the cortex-a53 processor.
+</span><span class='line'>  cortex-a57    - Select the cortex-a57 processor.
+</span><span class='line'>  cortex-a7     - Select the cortex-a7 processor.
+</span><span class='line'>  cortex-a8     - Select the cortex-a8 processor.
+</span><span class='line'>  cortex-a9     - Select the cortex-a9 processor.
+</span><span class='line'>  cortex-a9-mp  - Select the cortex-a9-mp processor.
+</span><span class='line'>  cortex-m0     - Select the cortex-m0 processor.
+</span><span class='line'>  cortex-m3     - Select the cortex-m3 processor.
+</span><span class='line'>  cortex-m4     - Select the cortex-m4 processor.
+</span><span class='line'>  cortex-r5     - Select the cortex-r5 processor.
+</span><span class='line'>  ep9312        - Select the ep9312 processor.
+</span><span class='line'>  generic       - Select the generic processor.
+</span><span class='line'>  iwmmxt        - Select the iwmmxt processor.
+</span><span class='line'>  krait         - Select the krait processor.
+</span><span class='line'>  mpcore        - Select the mpcore processor.
+</span><span class='line'>  mpcorenovfp   - Select the mpcorenovfp processor.
+</span><span class='line'>  strongarm     - Select the strongarm processor.
+</span><span class='line'>  strongarm110  - Select the strongarm110 processor.
+</span><span class='line'>  strongarm1100 - Select the strongarm1100 processor.
+</span><span class='line'>  strongarm1110 - Select the strongarm1110 processor.
+</span><span class='line'>  swift         - Select the swift processor.
+</span><span class='line'>  xscale        - Select the xscale processor.</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/building-lldb-on-mac-os-x/">BUILDING LLDB on MAC OS X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-18T08:21:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/llvm/tools/lldb/tools/debugserver/source/MacOSX/dbgnub-mig.defs:13:10: fatal error: 'DNBConfig.h' file not found
+</span><span class='line'>#include "DNBConfig.h"
+</span><span class='line'>         ^
+</span><span class='line'>1 error generated.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I was trying to build LLDB &lsquo;out-of-source&rsquo; at the same time as LLVM, Polly, cloog, libcxx, etc&hellip; using ninja and got the error above. Missing source from a LLVM sub-project? I really doubted that and was right&hellip;</p>
+
+<blockquote><p>DNBConfig.h is autogenerated by a perl script that is run as a build script in XCode. XCode is responsible for calling the script and setting the include paths correctly to locate it. The file will exist in the derived sources directory in the build folder.</p></blockquote>
+
+<p>Well, the <a href="http://lldb.llvm.org/build.html">LLDB build instructions</a> are <em>clear</em> in that you need to build lldb from Xcode when on OS-X but I &lsquo;assumed&rsquo; that the <em>make</em> would call &ldquo;"xcodebuild -workspace lldb.xcworkspace -configuration Release -scheme LLVB clean build&rdquo; or some like that to build it&hellip; but I assumed wrong :-( &hellip; thus your ninja/make build will always fail&hellip;</p>
+
+<p>I also can not find a disable option for LLDB when running llvm&rsquo;s &lsquo;configure&rsquo;, so if you have the lldb source in llvm/tools your configure will always include it and thus your build will always fail..?&hellip;</p>
+
+<p>Why is this? Is this due to Apple preventing an <strong><em>un-codesigned</em></strong> version to be built/run on OS-X? Really confused by the whole thing. If someone knows, ping me&hellip; thanks&hellip;</p>
+
+<p>Note: This is only on OS-X, building LLDB that has been included under llvm/tools under Linux/FreeBSD works as expected&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/powershell-and-bash-dot-sourcing/">PowerShell and Bash 'Dot' Sourcing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-17T06:21:11-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Parent/Child scoping of variables and functions can really mess with people starting out with PowerShell (or Bash).</p>
+
+<p>In terms of &ldquo;Dot-sourcing&rdquo; a .ps1 file, it is like running the PowerShell script it contains <strong>inline</strong> in the current scope. Thus when that script finishes, any variables set/updated within it are changed within the current scope.</p>
+
+<p>Let create a .ps1 file that increments the variable $x by one and &lsquo;outputs&rsquo; it to the pipe:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo "`$x++;`$x;" &gt; inc_x_by_one.ps1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now assign the variable $x to be 1</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$x=1
+</span><span class='line'>$x
+</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run the <em>inc_x_by_one.ps1</em> routine:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
+</span><span class='line'>2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we got a result of 2 which is what you wanted right? Well, maybe&hellip; Let run the same thing again:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
+</span><span class='line'>2
+</span><span class='line'>$x
+</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
+
+<p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>. .\inc_x_by_one.ps1
+</span><span class='line'>2
+</span><span class='line'>. .\inc_x_by_one.ps1
+</span><span class='line'>3
+</span><span class='line'>$x
+</span><span class='line'>3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is compariable to the way shell variables work under bash, zsh, &hellip; and I&rsquo;m assuming the PowerShell term borrowed &lsquo;dot sourcing&rsquo; in that regard as the syntax if the same: <strong>Period Space File.ps1|.sh</strong></p>
+
+<p>Take a few minutes and read the help on <strong>scope</strong>, it just might save you a headache in the future ;-)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>help scope</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: In PowerShell, you can assign variables to the global scope and not &lsquo;worry&rsquo; about parent/child scoping rules. Normally this is not a preferred way  as it create it creates messy code, issues of which function/module is changing it, debugging nightmares, etc&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/arm-cortex-m0-overview/">ARM Cortex-M0 Overview</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-17T06:02:25-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:02 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ARM Cortex-M0 Overview By: Daniel Widyanto September 2010</p>
+
+<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View ARM Cortex-M0 Overview on Scribd" href="http://www.scribd.com/doc/38226967"  style="text-decoration: underline;" >ARM Cortex-M0 Overview</a></p>
+
+
+<iframe class="scribd_iframe_embed" src="//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/bare-metal-arm-terminology/">Bare Metal ARM Terminology</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-16T21:35:45-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:35 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
+
+<p>Thread mode :</p>
+
+<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
+
+<p>Privileged or unprivileged software execution :</p>
+
+<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
+
+<p>Handler mode :</p>
+
+<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
+
+<p>SysTick : A 24-bit count-down timer.</p>
+
+<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
+
+<p>System Control Block :</p>
+
+<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
+
+<p>NVIC : Nested Vectored Interrupt Controller</p>
+
+<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
+Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/homebrew-git-1-dot-9-0-release/">Homebrew: Git 1.9.0 Release</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-16T10:32:41-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:32 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
+
+<p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>
+
+<p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
+
+<div><script src='https://gist.github.com/9036063.js?file=git.rb'></script>
+<noscript><pre><code>require &#39;formula&#39;
+
+class Git &lt; Formula
+  homepage &#39;http://git-scm.com&#39;
+  url &#39;https://git-core.googlecode.com/files/git-1.9.0.tar.gz&#39;
+  sha1 &#39;e60667fc16e5a5f1cde46616b0458cc802707743&#39;
+  head &#39;https://github.com/git/git.git&#39;
+
+  bottle do
+    sha1 &quot;582a276b608de17888da01922648522bf7a9c11a&quot; =&gt; :mavericks
+    sha1 &quot;f308b293aa5664b65c57c3b206b892537397d3b9&quot; =&gt; :mountain_lion
+    sha1 &quot;fa5f896b766bb103804800abde58e25579cf58a7&quot; =&gt; :lion
+  end
+
+  option &#39;with-blk-sha1&#39;, &#39;Compile with the block-optimized SHA1 implementation&#39;
+  option &#39;without-completions&#39;, &#39;Disable bash/zsh completions from &quot;contrib&quot; directory&#39;
+  option &#39;with-brewed-openssl&#39;, &quot;Build with Homebrew OpenSSL instead of the system version&quot;
+  option &#39;with-brewed-curl&#39;, &quot;Use Homebrew&#39;s version of cURL library&quot;
+  option &#39;with-persistent-https&#39;, &#39;Build git-remote-persistent-https from &quot;contrib&quot; directory&#39;
+
+  depends_on &#39;pcre&#39; =&gt; :optional
+  depends_on &#39;gettext&#39; =&gt; :optional
+  depends_on &#39;openssl&#39; if build.with? &#39;brewed-openssl&#39;
+  depends_on &#39;curl&#39; if build.with? &#39;brewed-curl&#39;
+  depends_on &#39;go&#39; =&gt; :build if build.with? &#39;persistent-https&#39;
+
+  resource &#39;man&#39; do
+    url &#39;http://git-core.googlecode.com/files/git-manpages-1.9.0.tar.gz&#39;
+    sha1 &#39;cff590c92b4d1c8a143c078473140b653cc5d56a&#39;
+  end
+
+  resource &#39;html&#39; do
+    url &#39;http://git-core.googlecode.com/files/git-htmldocs-1.9.0.tar.gz&#39;
+    sha1 &#39;65eb3f411f4699695c7081a7c716cabb9ce23d75&#39;
+  end
+
+  def patches
+    if MacOS.version &gt;= :mavericks and not build.head?
+      # Allow using PERLLIB_EXTRA to find Subversion Perl bindings location
+      # in the CLT/Xcode. Should be included in Git 1.8.6.
+      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=07981d
+      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=0386dd
+      #[&#39;https://git.kernel.org/cgit/git/git.git/patch/?id=07981d&#39;,
+      # &#39;https://git.kernel.org/cgit/git/git.git/patch/?id=0386dd&#39;]
+    end
+  end
+
+  def install
+    # If these things are installed, tell Git build system to not use them
+    ENV[&#39;NO_FINK&#39;] = &#39;1&#39;
+    ENV[&#39;NO_DARWIN_PORTS&#39;] = &#39;1&#39;
+    ENV[&#39;V&#39;] = &#39;1&#39; # build verbosely
+    ENV[&#39;NO_R_TO_GCC_LINKER&#39;] = &#39;1&#39; # pass arguments to LD correctly
+    ENV[&#39;PYTHON_PATH&#39;] = which &#39;python&#39;
+    ENV[&#39;PERL_PATH&#39;] = which &#39;perl&#39;
+
+    if MacOS.version &gt;= :mavericks and MacOS.dev_tools_prefix
+      ENV[&#39;PERLLIB_EXTRA&#39;] = &quot;#{MacOS.dev_tools_prefix}/Library/Perl/5.16/darwin-thread-multi-2level&quot;
+    end
+
+    unless quiet_system ENV[&#39;PERL_PATH&#39;], &#39;-e&#39;, &#39;use ExtUtils::MakeMaker&#39;
+      ENV[&#39;NO_PERL_MAKEMAKER&#39;] = &#39;1&#39;
+    end
+
+    ENV[&#39;BLK_SHA1&#39;] = &#39;1&#39; if build.with? &#39;blk-sha1&#39;
+
+    if build.with? &#39;pcre&#39;
+      ENV[&#39;USE_LIBPCRE&#39;] = &#39;1&#39;
+      ENV[&#39;LIBPCREDIR&#39;] = Formula.factory(&#39;pcre&#39;).opt_prefix
+    end
+
+    ENV[&#39;NO_GETTEXT&#39;] = &#39;1&#39; unless build.with? &#39;gettext&#39;
+
+    system &quot;make&quot;, &quot;prefix=#{prefix}&quot;,
+                   &quot;sysconfdir=#{etc}&quot;,
+                   &quot;CC=#{ENV.cc}&quot;,
+                   &quot;CFLAGS=#{ENV.cflags}&quot;,
+                   &quot;LDFLAGS=#{ENV.ldflags}&quot;,
+                   &quot;install&quot;
+
+    bin.install Dir[&quot;contrib/remote-helpers/git-remote-{hg,bzr}&quot;]
+
+    # Install the OS X keychain credential helper
+    cd &#39;contrib/credential/osxkeychain&#39; do
+      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
+                     &quot;CFLAGS=#{ENV.cflags}&quot;,
+                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
+      bin.install &#39;git-credential-osxkeychain&#39;
+      system &quot;make&quot;, &quot;clean&quot;
+    end
+
+    # Install git-subtree
+    cd &#39;contrib/subtree&#39; do
+      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
+                     &quot;CFLAGS=#{ENV.cflags}&quot;,
+                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
+      bin.install &#39;git-subtree&#39;
+    end
+
+    if build.with? &#39;persistent-https&#39;
+      cd &#39;contrib/persistent-https&#39; do
+        system &quot;make&quot;
+        bin.install &#39;git-remote-persistent-http&#39;,
+                    &#39;git-remote-persistent-https&#39;,
+                    &#39;git-remote-persistent-https--proxy&#39;
+      end
+    end
+
+    unless build.without? &#39;completions&#39;
+      # install the completion script first because it is inside &#39;contrib&#39;
+      bash_completion.install &#39;contrib/completion/git-completion.bash&#39;
+      bash_completion.install &#39;contrib/completion/git-prompt.sh&#39;
+
+      zsh_completion.install &#39;contrib/completion/git-completion.zsh&#39; =&gt; &#39;_git&#39;
+      cp &quot;#{bash_completion}/git-completion.bash&quot;, zsh_completion
+    end
+
+    (share+&#39;git-core&#39;).install &#39;contrib&#39;
+
+    # We could build the manpages ourselves, but the build process depends
+    # on many other packages, and is somewhat crazy, this way is easier.
+    man.install resource(&#39;man&#39;)
+    (share+&#39;doc/git-doc&#39;).install resource(&#39;html&#39;)
+
+    # Make html docs world-readable; check if this is still needed at 1.8.6
+    chmod 0644, Dir[&quot;#{share}/doc/git-doc/**/*.{html,txt}&quot;]
+  end
+
+  def caveats; &lt;&lt;-EOS.undent
+    The OS X keychain credential helper has been installed to:
+      #{HOMEBREW_PREFIX}/bin/git-credential-osxkeychain
+
+    The &#39;contrib&#39; directory has been installed to:
+      #{HOMEBREW_PREFIX}/share/git-core/contrib
+    EOS
+  end
+
+  test do
+    HOMEBREW_REPOSITORY.cd do
+      assert_equal &#39;bin/brew&#39;, `#{bin}/git ls-files -- bin`.strip
+    end
+  end
+end
+</code></pre></noscript></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/what-is-bare-metal-arm/">What Is Bare Metal ARM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-16T08:12:02-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is Bare Metal ARM Development?</h2>
+
+<blockquote><p>Bare-Metal ARM Development, also called <a href="http://en.wikipedia.org/wiki/Bare_machine">Bare-Machine</a> is the development of &lsquo;embedded&rsquo; applications, that run without an operating system or other supporting programs, maybe a bootloader, on an ARM processor. The application sits on top of the “bare metal”, runs ARM instructions (including THUMB), directly controls the processor (MCU) to manage power consumption, GPIOs, ADC, DAC, etc&hellip;</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/fleafpga-experimenters-board/">FleaFPGA Experimenters Board</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-15T07:14:40-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/Flea_2v4_white2.jpg"><img class="left" src="/images/Flea_2v4_white2.jpg" width="360" height="240" title="OSHW FPGA Flea Dev Board" alt="FPGA Flea"></a></p>
+
+<blockquote><p>FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL and Verilog. FleaFPGA is suited for professional and hobbyist uses.</p><footer><strong>"Valentin Angelovski"</strong> <cite><a href='http://www.fleasystems.com/fleaFPGA.html'>www.fleasystems.com/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Valentin is looking at producing at limited run of his <a href="http://www.latticesemi.com/Products/FPGAandCPLD.aspx">Lattice</a> MachXO2-based <a href="http://www.fleasystems.com/fleaFPGA.html">FleaFPGA boards</a> that are designed to get beginners up, running and experimentings with FPGA programming quickly. For ~100.00 sounds like a great deal. Head over to his site and <a href="http://www.fleasystems.com/forums/showthread.php?tid=29&amp;pid=127#pid127">pre-order</a> one.</p>
+
+<p><img src="/images/oshw.jpg" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/embedded-bare-metal-arm-development-part-1/">Embedded 'Bare-Metal' ARM Development - Part 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T06:01:48-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:01 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded &lsquo;Bare-Metal&rsquo; compilers and tools and in the end(?) cleared up my confusion about what I can and can not do on a restricted budget and time.</p>
+
+<p>The reasoning behind this is I wanted to do some bare metal ARM C coding for a project that might become some type of OSHW or even a commerical offering so I wanted to keep my options open, try to future proof my decisions.</p>
+
+<p>Instead of falling back to my comfort zone with AVR 8-bit MCU C-codings and forcing a project that really is beyond what AVRs offer (mainly execution speed and size related plus I tired of all the bit-banging to &lsquo;add&rsquo; protocals) and the fact that ARM-based core offerings that are now available have not just tons of digital GPIOs, footprints that are as small, but also have great signal processing options (input and output) that can match or exceed what is available in Amtel&rsquo;s AVR 8-bit line up and<strong> match them at price.</strong></p>
+
+<p>Just compare the Atmel AVR line up to their D20 ARM-core offerings and for non-legacy new embedded projects the decision matrix might be almost equal, but if you are adding &lsquo;future-proofing&rsquo; to the mix and what MCUs will be offering in the next decade, ARM-based MCUs become a clear choice (would love to hear someone&rsquo;s counter-point!).</p>
+
+<p>So first I figured I look at ARM compilers/linkers as if you can not compile/link your code, than you are just screwed ;-) So in terms of ARM compilers available there <strong>is</strong> more than one:</p>
+
+<ul>
+<li><a href="https://launchpad.net/gcc-arm-embedded">GNU C Compiler</a>(1)</li>
+<li><a href="http://www.freescale.com/codewarrior">CodeWarrior</a> ARM C Compiler(2)</li>
+<li><a href="http://www.iar.com">IAR</a> ARM C Compiler</li>
+<li><a href="https://www.imagecraft.com">ImageCraft</a> C Compiler Tools</li>
+<li><a href="http://www.keil.com">Kiel</a> ARM C/C++ Compiler(3)</li>
+<li><a href="http://ds.arm.com">ARM DS-5</a> RealView C/C++ Compiler(3)</li>
+<li>ARM <a href="http://clang.llvm.org">Clang</a>/<a href="http://llvm.org">LLVM</a> Compiler</li>
+<li>Microsoft Visual Studio C/C++ Native ARM Compiler(4)</li>
+</ul>
+
+
+<h6>* 1: Technically the launchpad link is the &lsquo;output&rsquo; of an ARM version of GCC and binutils but is the best starting point for info on the ARM version as it is the offical distro end-point ;-)</h6>
+
+<blockquote><p>ARM employees are maintaining this project. Contributing to this project should be via GCC trunk http://gcc.gnu.org and binutils trunk http://www.gnu.org/software/binutils/. This launchpad project is for communication and downloading. No code change is done in lp project.</p></blockquote>
+
+
+<h6>* 2: The &lsquo;Freescale Kinetis Compiler&rsquo; is in maintance mode. The GNU compiler is the &lsquo;active&rsquo; mainline of ARM compiler within CodeWarror now and thus I am not looking at this one at all as it fails my future proofing rules. For existing &lsquo;legacy&rsquo; embedded projects based on it, <a href="http://en.wikipedia.org/wiki/CodeWarrior">MetroWorks</a> was acquired by Motorola which was then included in the Freescale spinoff, so go to Freescale if you need a version&hellip;</h6>
+
+<h6>* 3: ARM acquired Kiel and thus the compiler IP from the two is now within one toolchain simply called &ldquo;ARM Compiler toolchain&rdquo; and thus RealView no longer exists, but some old-timers ;-) still call the new version by the RealView name. Note: There are still different development IDEs from each company; Kiel has uVision and ARM has Eclipse intergation (via a standalone version or plugins for your existing install), but again, they use just the &lsquo;new&rsquo; version of the compiler, but more on the IDEs in a future post of this series.</h6>
+
+<h6>* 4: Yes, you can produce ARM code as you would have to in order to cross-compile Windows RT apps, but can you do bare metal programming with it? I am not sure if you can get a CMSIS setup using it and handle the .S/SystemInit/Reset_Handler/__main() of bare metal programming&hellip;</h6>
+
+<h6>* If I missed one, please let me know!.</h6>
+
+<p>So an ARM compiler choice is not as easy as just saying GNU/GCC as you have other options and while in the end they all produce an ELF/BIN that you flash on your bare-metal ARM, how that binary gets created and the size and speed of the ARM code and/or THUMB instructions that was produced can vary greatly&hellip;</p>
+
+<p>Next time, we look into some compilers&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/octopress-backing-up-your-source-directory/">Octopress: Backing Up Your Source Directory</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12T21:00:12-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
+
+<p>My Missing Octopress Items:</p>
+
+<blockquote><ul>
+<li>Image Auto Thumbnailing</li>
+<li>Image Popups from those Thumbnails</li>
+<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
+<li>Auto source directory version control</li>
+</ul>
+</blockquote>
+
+<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
+
+<p>Here is my quick way of doing this using the deployment repo.</p>
+
+<blockquote><ul>
+<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
+<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
+<li>Commit and Push after you do a <em>rake deploy</em></li>
+</ul>
+</blockquote>
+
+<p>So lets add a source branch to your GitHub Page repo:
+        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Get your current repo and place it into a a temp directory</span>
+</span><span class='line'>git clone https://github.com/sushihangover/sushihangover.github.io.git foo.bar
+</span><span class='line'><span class="nb">pushd </span>foo.bar
+</span><span class='line'><span class="c"># Add a new branch to your local copy</span>
+</span><span class='line'>git checkout -b <span class="nb">source</span>
+</span><span class='line'><span class="c"># Delete all the existing context</span>
+</span><span class='line'>rm -Rf *
+</span><span class='line'><span class="c"># Commit all those deletes</span>
+</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial Empty source branch&quot;</span>
+</span><span class='line'><span class="c"># Push that emopty branch back to GitHub</span>
+</span><span class='line'>git push
+</span><span class='line'><span class="nb">popd</span>
+</span><span class='line'><span class="c"># GEt rid of that temp. directory</span>
+</span><span class='line'>rm -Rf foo.bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Move your existing source directory out of the way for now</span>
+</span><span class='line'>mv <span class="nb">source </span>source.org
+</span><span class='line'><span class="c"># Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</span>
+</span><span class='line'><span class="c"># Note: The &quot;--single-branch -branch source&quot; options are not used by most git users but can make speciallized repo copies quick and fool-proof</span>
+</span><span class='line'>git clone --single-branch -branch <span class="nb">source </span>https://github.com/sushihangover/sushihangover.github.io.git <span class="nb">source</span>
+</span><span class='line'><span class="c"># Now copy your existing source files into this empty repo directory</span>
+</span><span class='line'>cp -R source.org <span class="nb">source</span>
+</span><span class='line'><span class="nb">pushd source</span>
+</span><span class='line'><span class="c"># Commit and Push your sources files to GitHub</span>
+</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial source branch commit&quot;</span>
+</span><span class='line'><span class="c"># Add your commit comment and save</span>
+</span><span class='line'>git push
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
+
+<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pushd source; git commit --all --message="Blog updated"; git push; popd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
+
+<ul>
+<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/4">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/2">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

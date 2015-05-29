@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Logic Pirate | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/logic-pirate/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[$30 60MSPS Logic Analyzer - Logic Pirate]]></title>
+    <link href="http://sushihangover.github.io/blog/0-60msps-logic-analyzer/"/>
+    <updated>2014-04-15T20:16:37-07:00</updated>
+    <id>http://sushihangover.github.io/blog/0-60msps-logic-analyzer</id>
+    <content type="html"><![CDATA[<p><a href="http://http://dangerousprototypes.com"><img class="left" src="/images/dangerous_logo.png" title="&ldquo;Dangerous Prototypes&rdquo;" ></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! - overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
+
+<p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
+
+<p>So check it out yourself:</p>
+
+<p>DP Blog post: <a href="http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/">http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/</a></p>
+
+<p>Product page: <a href="http://dangerousprototypes.com/docs/Logic_Pirate">http://dangerousprototypes.com/docs/Logic_Pirate</a></p>
+
+<p>Available from Seeed @ <a href="http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html">http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html</a></p>
+
+<p>Client Software: <a href="http://www.lxtreme.nl/ols/">Logic Sniffer (An alternative OLS client)</a></p>
+]]></content>
+  </entry>
+  
+</feed>

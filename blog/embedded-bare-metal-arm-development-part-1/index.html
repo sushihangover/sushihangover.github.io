@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Embedded 'Bare-Metal' ARM Development - Part 1 - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded & &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/blog/embedded-bare-metal-arm-development-part-1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Embedded 'Bare-Metal' ARM Development - Part 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T06:01:48-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:01 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded &lsquo;Bare-Metal&rsquo; compilers and tools and in the end(?) cleared up my confusion about what I can and can not do on a restricted budget and time.</p>
+
+<p>The reasoning behind this is I wanted to do some bare metal ARM C coding for a project that might become some type of OSHW or even a commerical offering so I wanted to keep my options open, try to future proof my decisions.</p>
+
+<p>Instead of falling back to my comfort zone with AVR 8-bit MCU C-codings and forcing a project that really is beyond what AVRs offer (mainly execution speed and size related plus I tired of all the bit-banging to &lsquo;add&rsquo; protocals) and the fact that ARM-based core offerings that are now available have not just tons of digital GPIOs, footprints that are as small, but also have great signal processing options (input and output) that can match or exceed what is available in Amtel&rsquo;s AVR 8-bit line up and<strong> match them at price.</strong></p>
+
+<p>Just compare the Atmel AVR line up to their D20 ARM-core offerings and for non-legacy new embedded projects the decision matrix might be almost equal, but if you are adding &lsquo;future-proofing&rsquo; to the mix and what MCUs will be offering in the next decade, ARM-based MCUs become a clear choice (would love to hear someone&rsquo;s counter-point!).</p>
+
+<p>So first I figured I look at ARM compilers/linkers as if you can not compile/link your code, than you are just screwed ;-) So in terms of ARM compilers available there <strong>is</strong> more than one:</p>
+
+<ul>
+<li><a href="https://launchpad.net/gcc-arm-embedded">GNU C Compiler</a>(1)</li>
+<li><a href="http://www.freescale.com/codewarrior">CodeWarrior</a> ARM C Compiler(2)</li>
+<li><a href="http://www.iar.com">IAR</a> ARM C Compiler</li>
+<li><a href="https://www.imagecraft.com">ImageCraft</a> C Compiler Tools</li>
+<li><a href="http://www.keil.com">Kiel</a> ARM C/C++ Compiler(3)</li>
+<li><a href="http://ds.arm.com">ARM DS-5</a> RealView C/C++ Compiler(3)</li>
+<li>ARM <a href="http://clang.llvm.org">Clang</a>/<a href="http://llvm.org">LLVM</a> Compiler</li>
+<li>Microsoft Visual Studio C/C++ Native ARM Compiler(4)</li>
+</ul>
+
+
+<h6>* 1: Technically the launchpad link is the &lsquo;output&rsquo; of an ARM version of GCC and binutils but is the best starting point for info on the ARM version as it is the offical distro end-point ;-)</h6>
+
+<blockquote><p>ARM employees are maintaining this project. Contributing to this project should be via GCC trunk http://gcc.gnu.org and binutils trunk http://www.gnu.org/software/binutils/. This launchpad project is for communication and downloading. No code change is done in lp project.</p></blockquote>
+
+
+<h6>* 2: The &lsquo;Freescale Kinetis Compiler&rsquo; is in maintance mode. The GNU compiler is the &lsquo;active&rsquo; mainline of ARM compiler within CodeWarror now and thus I am not looking at this one at all as it fails my future proofing rules. For existing &lsquo;legacy&rsquo; embedded projects based on it, <a href="http://en.wikipedia.org/wiki/CodeWarrior">MetroWorks</a> was acquired by Motorola which was then included in the Freescale spinoff, so go to Freescale if you need a version&hellip;</h6>
+
+<h6>* 3: ARM acquired Kiel and thus the compiler IP from the two is now within one toolchain simply called &ldquo;ARM Compiler toolchain&rdquo; and thus RealView no longer exists, but some old-timers ;-) still call the new version by the RealView name. Note: There are still different development IDEs from each company; Kiel has uVision and ARM has Eclipse intergation (via a standalone version or plugins for your existing install), but again, they use just the &lsquo;new&rsquo; version of the compiler, but more on the IDEs in a future post of this series.</h6>
+
+<h6>* 4: Yes, you can produce ARM code as you would have to in order to cross-compile Windows RT apps, but can you do bare metal programming with it? I am not sure if you can get a CMSIS setup using it and handle the .S/SystemInit/Reset_Handler/__main() of bare metal programming&hellip;</h6>
+
+<h6>* If I missed one, please let me know!.</h6>
+
+<p>So an ARM compiler choice is not as easy as just saying GNU/GCC as you have other options and while in the end they all produce an ELF/BIN that you flash on your bare-metal ARM, how that binary gets created and the size and speed of the ARM code and/or THUMB instructions that was produced can vary greatly&hellip;</p>
+
+<p>Next time, we look into some compilers&hellip;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T06:01:48-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:01 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-beginners/'>arm-beginners</a>, <a class='category' href='/blog/categories/bare-metal/'>bare-metal</a>, <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/embedded-bare-metal-arm-development-part-1/" data-via="" data-counturl="http://sushihangover.github.io/blog/embedded-bare-metal-arm-development-part-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/octopress-backing-up-your-source-directory/" title="Previous Post: Octopress: Backing up your source directory">&laquo; Octopress: Backing up your source directory</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/fleafpga-experimenters-board/" title="Next Post: FleaFPGA Experimenters Board">FleaFPGA Experimenters Board &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

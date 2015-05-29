@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I was working on a Irony/C# based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/posts/4/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/gtksharp-explorer-update-for-irony/">GtkSharp-Explorer Update for Irony</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12T08:14:14-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="Irony.GtkSharp.Explorer" alt="Irony GtkSharp Explorer"></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+
+<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch --all
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>git checkout gtksharp-explorer
+</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
+</span><span class='line'>  Switched to a new branch <span class="s1">&#39;gtksharp-explorer&#39;</span>
+</span><span class='line'>
+</span><span class='line'>git branch --all
+</span><span class='line'>* gtksharp-explorer
+</span><span class='line'>  master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>open Irony_All.MonoDevelop.sln
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<hr />
+
+<h1>Grammar Explorer based on Gtk#</h1>
+
+<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
+Instructions for building on Mono:</p>
+
+<h2>Via MonoDevelop/Xamarin IDE:</h2>
+
+<ul>
+<li>Release or Debug Targets:
+      Load and build via the Irony_All.MonoDevelop.sln
+Via cmd line:</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li><p>Release:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+<li><p>Debug:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/ellcc-dot-org-build-fix-for-os-x/">Ellcc.org Build Fix for OS-X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
+
+<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
+
+<blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC...</p><footer><strong>Rich</strong> <cite><a href='http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571'>What Is ELLCC All About</a></cite></footer></blockquote>
+
+
+<p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LINK  i386-softmmu/qemu-system-i386
+</span><span class='line'>ld: library not found for -lintl
+</span><span class='line'>clang: error: linker command failed with exit code 1 (use -v to see invocation)
+</span><span class='line'>make[1]: *** [qemu-system-i386] Error 1
+</span><span class='line'>make: *** [subdir-i386-softmmu] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin" or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
+
+<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
+
+<blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with --force<br/>Note that doing so can interfere with building software.</p></blockquote>
+
+
+<p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn diff build
+</span><span class='line'>Index: <span class="nv">build</span>
+</span><span class='line'><span class="o">===================================================================</span>
+</span><span class='line'>--- build <span class="o">(</span>revision 3780<span class="o">)</span>
+</span><span class='line'>+++ build <span class="o">(</span>working copy<span class="o">)</span>
+</span><span class='line'>@@ -69,6 +69,10 @@
+</span><span class='line'>     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user<span class="s2">&quot;</span>
+</span><span class='line'><span class="s2"> fi</span>
+</span><span class='line'><span class="s2"> echo Configuring package qemu for $targets</span>
+</span><span class='line'><span class="s2">+if [!  -e `which brew` ]; then</span>
+</span><span class='line'><span class="s2">+    ruby -e &quot;</span><span class="k">$(</span>curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install<span class="k">)</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">+fi</span>
+</span><span class='line'><span class="s2">+brew link gettext --force</span>
+</span><span class='line'><span class="s2"> qemu_target_list=`echo $qemu_target_list | sed -e &quot;</span>s/ /,/g<span class="err">&quot;</span><span class="sb">`</span>
+</span><span class='line'> make <span class="nv">DIR</span><span class="o">=</span>src/qemu <span class="nv">CC</span><span class="o">=</span><span class="nv">$cc</span> <span class="nv">HCC</span><span class="o">=</span><span class="nv">$hcc</span> <span class="nv">AR</span><span class="o">=</span><span class="nv">$ar</span> <span class="nv">TARGET</span><span class="o">=</span><span class="nv">$host</span> <span class="nv">OS</span><span class="o">=</span><span class="nv">$os</span> <span class="se">\</span>
+</span><span class='line'>     <span class="nv">targetlist</span><span class="o">=</span><span class="nv">$qemu_target_list</span> <span class="nv">haslibs</span><span class="o">=</span><span class="nv">$haslibs</span> <span class="se">\</span>
+</span><span class='line'>@@ -76,6 +80,7 @@
+</span><span class='line'>     qemu.configure <span class="o">||</span> <span class="nb">exit </span>1
+</span><span class='line'>
+</span><span class='line'> make -C src/qemu <span class="o">||</span> <span class="nb">exit </span>1
+</span><span class='line'>+brew unlink gettext
+</span><span class='line'>
+</span><span class='line'> <span class="c"># Finally, install into the target specific bin dir.</span>
+</span><span class='line'> mkdir -p <span class="nv">$bindir</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Everything builds fine after that&hellip;</p>
+
+<p>The entire file is here:</p>
+
+<div><script src='https://gist.github.com/8949755.js'></script>
+<noscript><pre><code>#!/bin/sh
+# ELLCC GNU tools build script.
+
+# Get the staging directory.
+prefix=`cd ..; pwd`
+
+# Figure out the compilers to use.
+. ../build-setup $*
+
+echo Configured to $WHY.
+echo C compiler: $cc $CFLAGS
+echo C++ compiler: $cxx $CXXFLAGS
+echo In: gnu-build$builddir
+
+# Configure for GNU tools.
+mkdir -p gnu-build$builddir
+
+# Configure for binutils.
+# binutils are build to support all targets in the target list.
+echo Configuring package binutils for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    binutils.configure || exit 1
+
+make -C gnu-build$builddir/binutils || exit 1
+
+# Configure for assemblers for all targets.
+for t in $targets; do
+  echo Configuring the assembler for $t
+  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+      target=$t haslibs=$haslibs \
+      bindir=$bindir prefix=$prefix build=$build \
+      gas.configure || exit 1
+
+  make -C gnu-build$builddir/binutils/$t || exit 1
+done
+
+# Configure for GDB.
+# GDB is built to support all GDB targets.
+echo Configuring package gdb for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    gdb.configure || exit 1
+
+make -C gnu-build$builddir/gdb || exit 1
+
+if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
+  # The host system is not the build system.
+  # Build only  binutils, the assemblers, and gdb.
+  # Finally, install into the target specific bin dir.
+  mkdir -p $bindir
+  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
+  exit 0
+fi
+
+# Configure for QEMU.
+# The QEMU system targets.
+qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
+    microblaze-softmmu mips-softmmu mipsel-softmmu \
+    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
+
+if [ `uname` = &quot;Linux&quot; ] ; then
+    # The QEMU Linux user space targets.
+    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
+    x86_64-linux-user arm-linux-user armeb-linux-user \
+    microblaze-linux-user mips-linux-user mipsel-linux-user \
+    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
+fi
+echo Configuring package qemu for $targets
+if [!  -e `which brew` ]; then
+        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
+fi
+brew link gettext --force
+qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
+make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
+    targetlist=$qemu_target_list haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    qemu.configure || exit 1
+
+make -C src/qemu || exit 1
+brew unlink gettext
+
+# Finally, install into the target specific bin dir.
+mkdir -p $bindir
+make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
+</code></pre></noscript></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/os-x-llvm-slash-clang-build/">OS-X LLVM / CLANG Build</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-11'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
+
+<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
+
+<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;-)</p>
+
+<div><script src='https://gist.github.com/8946898.js'></script>
+<noscript><pre><code>git clone http://llvm.org/git/llvm.git
+pushd llvm/tools
+git clone http://llvm.org/git/clang.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/compiler-rt.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/test-suite.git
+popd
+mkdir llvmbuild
+pushd llvmbuild
+../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
+make
+</code></pre></noscript></div>
+
+
+<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/ometa-binary-data-parsing/">OMeta Binary Data Parsing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-10'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://joshondesign.com/">Josh Marinacci </a>has a blog post concerning using OMeta to parse binary data and while there was not a complete cut/paste of all the Javascript code needed to run it in <a href="http://tinlizzie.org/ometa-js">OMeta/JS</a>, I saved his grammar for review as I was working on binary parsing using an OMeta that was using C# as the host language. Recently I give the link of his posting to someone else, but turns out Josh&rsquo;s blog was offline (crashed?).  (Update; Appears his blog is working again, so you can refer to the link below for his original post)</p>
+
+<p>So I dug up what I had and whipped up an OMeta/JS example for a complete working proof of concept and here are the results. I am not a JavaScript kind-of-guy, so be nice regarding the code. ;-)</p>
+
+<p>Note: The W3 spec has 18 chunks that can be defined in PNG files and I added &lsquo;iTXt&rsquo; to Josh&rsquo;s original as the PNG I was using as an example had a large chunk of XML data in it, but a lot of chunks are still missing as this is just a proof of concept and the original binaries that I was parsing were not PNGs, but custom AMF2 byte streams that were getting converted to objects &lsquo;on the 'fly&rsquo; via IlGenerator in C#&hellip;</p>
+
+<p>Original PNG parse concept from Josh is at the following link assuming he gets the blog working: <a href="http://joshondesign.com/2013/03/18/ConciseComputing">http://joshondesign.com/2013/03/18/ConciseComputing</a></p>
+
+<p>And his related email thread on vpri.org : <a href="http://vpri.org/pipermail/ometa/2013-March/000524.html">http://vpri.org/pipermail/ometa/2013-March/000524.html</a></p>
+
+<p>So if you load up OMeta/JS, the complete grammar and Javascript functions needed is shown below. Just open up your JS console before doing a &ldquo;Do It&rdquo; so you can see the chunk information found in the PNG and interact with the final object.</p>
+
+<p>Here is an example console output of parsing a PNG file via this OMeta/JS script:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Log] loaded
+</span><span class='line'>[Log] got 24648 bytes
+</span><span class='line'>[Log] i32 : 13 &lt;= [13, 0, 0, 0]
+</span><span class='line'>[Log] ChunkType :IHDR : [73, 72, 68, 82]
+</span><span class='line'>[Log] i32 : 139 &lt;= [139, 0, 0, 0]
+</span><span class='line'>[Log] i32 : 119 &lt;= [119, 0, 0, 0]
+</span><span class='line'>[Log] i32 : 25 &lt;= [25, 0, 0, 0]
+</span><span class='line'>[Log] ChunkType :tEXt : [116, 69, 88, 116]
+</span><span class='line'>[Log] String:SoftwareAdobe ImageReady (...byteArrayOmitted...)
+</span><span class='line'>[Log] i32 : 1974 &lt;= [182, 7, 0, 0]
+</span><span class='line'>[Log] ChunkType :iTXt : [105, 84, 88, 116]
+</span><span class='line'>[Log] String:ML:com.adobe.xmp&lt;?xpacket begin="ï»¿" id="W5M (...only first 50 bytes shown...)
+</span><span class='line'>[Log] i32 : 22568 &lt;= [40, 88, 0, 0]
+</span><span class='line'>[Log] ChunkType :IDAT : [73, 68, 65, 84]
+</span><span class='line'>[Log] i32 : 0 &lt;= [0, 0, 0, 0]
+</span><span class='line'>[Log] ChunkType :IEND : [73, 69, 78, 68]
+</span><span class='line'>[Log] ["PNG HEADER", Array[5], Array[0]]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is a working example of parsing binary data parsing in Ometa/JS.</p>
+
+<figure class='code'><figcaption><span>OMeta/JS PNG Parse</span><a href='https://gist.github.com/sushihangover/8919188'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">ometa</span> <span class="nx">BinaryParser</span> <span class="o">&lt;:</span> <span class="nx">Parser</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Portable Network Graphics (PNG) Specification (Second Edition)</span>
+</span><span class='line'>    <span class="c1">// http://www.w3.org/TR/PNG/</span>
+</span><span class='line'>    <span class="c1">// Note: not all chunk are defined, this is just a POC</span>
+</span><span class='line'>    <span class="c1">//entire PNG stream</span>
+</span><span class='line'>    <span class="nx">START</span>  <span class="o">=</span> <span class="p">[</span><span class="nx">header</span><span class="o">:</span><span class="nx">h</span> <span class="p">(</span><span class="nx">chunk</span><span class="o">+</span><span class="p">)</span><span class="o">:</span><span class="nx">c</span> <span class="nx">number</span><span class="o">*:</span><span class="nx">n</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="nx">h</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">n</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//chunk definition</span>
+</span><span class='line'>    <span class="nx">chunk</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">len</span> <span class="nx">str4</span><span class="o">:</span><span class="nx">t</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span> <span class="nx">byte4</span><span class="o">:</span><span class="nx">crc</span>
+</span><span class='line'>        <span class="o">-&gt;</span> <span class="p">[</span><span class="err">#</span><span class="nx">chunk</span><span class="p">,</span> <span class="p">[</span><span class="err">#</span><span class="nx">type</span><span class="p">,</span> <span class="nx">t</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">length</span><span class="p">,</span> <span class="nx">len</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">data</span><span class="p">,</span> <span class="nx">d</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">crc</span><span class="p">,</span> <span class="nx">crc</span><span class="p">]],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//chunk types</span>
+</span><span class='line'>    <span class="nx">IHDR</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">w</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">h</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">dep</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">type</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">comp</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">filter</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">inter</span>
+</span><span class='line'>        <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IHDR&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="p">{</span><span class="nx">width</span><span class="o">:</span><span class="nx">w</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span><span class="nx">h</span><span class="p">,</span> <span class="nx">bitdepth</span><span class="o">:</span><span class="nx">dep</span><span class="p">,</span> <span class="nx">colortype</span><span class="o">:</span><span class="nx">type</span><span class="p">,</span> <span class="nx">compression</span><span class="o">:</span><span class="nx">comp</span><span class="p">,</span> <span class="nx">filter</span><span class="o">:</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">interlace</span><span class="o">:</span><span class="nx">inter</span><span class="p">}},</span>
+</span><span class='line'>    <span class="nx">gAMA</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">g</span>                  <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;gAMA&quot;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="nx">g</span><span class="p">},</span>
+</span><span class='line'>    <span class="nx">pHYs</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">x</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">y</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">u</span>    <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;pHYs&quot;</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="nx">y</span><span class="p">,</span> <span class="nx">units</span><span class="o">:</span><span class="nx">u</span><span class="p">},</span>
+</span><span class='line'>    <span class="nx">tEXt</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;tEXt&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="nx">toAscii</span><span class="p">(</span><span class="nx">d</span><span class="p">)},</span>
+</span><span class='line'>    <span class="nx">iTXt</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;iTXt&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="nx">toShortAscii</span><span class="p">(</span><span class="nx">d</span><span class="p">)},</span>
+</span><span class='line'>    <span class="nx">tIME</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int2</span><span class="o">:</span><span class="nx">y</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">mo</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">day</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">hr</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">min</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">sec</span>
+</span><span class='line'>        <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;tIME&quot;</span><span class="p">,</span> <span class="nx">year</span><span class="o">:</span><span class="nx">y</span><span class="p">,</span> <span class="nx">month</span><span class="o">:</span><span class="nx">mo</span><span class="p">,</span> <span class="nx">day</span><span class="o">:</span><span class="nx">day</span><span class="p">,</span> <span class="nx">hour</span><span class="o">:</span><span class="nx">hr</span><span class="p">,</span> <span class="nx">minute</span><span class="o">:</span><span class="nx">min</span><span class="p">,</span> <span class="nx">second</span><span class="o">:</span><span class="nx">sec</span><span class="p">},</span>
+</span><span class='line'>    <span class="nx">IDAT</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IDAT&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="s2">&quot;omitted&quot;</span><span class="p">},</span>
+</span><span class='line'>    <span class="nx">IEND</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&gt;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IEND&quot;</span><span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//useful definitions</span>
+</span><span class='line'>    <span class="kr">byte</span>    <span class="o">=</span> <span class="nx">number</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">header</span>  <span class="o">=</span> <span class="mi">137</span> <span class="mi">80</span> <span class="mi">78</span> <span class="mi">71</span> <span class="mi">13</span> <span class="mi">10</span> <span class="mi">26</span> <span class="mi">10</span>    <span class="o">-&gt;</span> <span class="s2">&quot;PNG HEADER&quot;</span><span class="p">,</span>        <span class="c1">//mandatory header</span>
+</span><span class='line'>    <span class="nx">int2</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span>               <span class="o">-&gt;</span> <span class="nx">byteArrayToInt16</span><span class="p">([</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]),</span>  <span class="c1">//2 bytes to a 16bit integer</span>
+</span><span class='line'>    <span class="nx">int4</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">c</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&gt;</span> <span class="nx">byteArrayToInt32</span><span class="p">([</span><span class="nx">d</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]),</span> <span class="c1">//4 bytes to 32bit integer</span>
+</span><span class='line'>    <span class="nx">str4</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">c</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&gt;</span> <span class="nx">toChunkType</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">]),</span>  <span class="c1">//4 byte string</span>
+</span><span class='line'>    <span class="nx">byte4</span>   <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&gt;</span> <span class="nx">d</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">END</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">BinaryParser</span><span class="p">.</span><span class="nx">repeat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rule</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">count</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_apply</span><span class="p">(</span><span class="nx">rule</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toAscii</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s2">&quot;String:&quot;</span> <span class="o">+</span> <span class="nx">foo</span> <span class="o">+</span> <span class="s2">&quot; (...byteArrayOmitted...)&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">foo</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toShortAscii</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">embeddedText</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">// The iTxt chunk can contain a lot of text/xml, so truncate for proof of concept</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s2">&quot;String:&quot;</span> <span class="o">+</span> <span class="nx">embeddedText</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; (...only first 50 bytes shown...)&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">embeddedText</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toChunkType</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">aChuckType</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s2">&quot;ChunkType :&quot;</span> <span class="o">+</span> <span class="nx">aChuckType</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="nx">byteArray</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">aChuckType</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">byteArrayToInt32</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">localByteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">uint8array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">localByteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">uint32array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span>
+</span><span class='line'>                    <span class="nx">uint8array</span><span class="p">.</span><span class="nx">buffer</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">uint8array</span><span class="p">.</span><span class="nx">byteOffset</span> <span class="o">+</span> <span class="nx">uint8array</span><span class="p">.</span><span class="nx">byteLength</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>                    <span class="mi">1</span> <span class="c1">// 4Bytes long</span>
+</span><span class='line'>                  <span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">newInt32</span> <span class="o">=</span> <span class="nx">uint32array</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span> <span class="s2">&quot;i32 : &quot;</span> <span class="o">+</span> <span class="nx">newInt32</span> <span class="o">+</span> <span class="s2">&quot; &lt;= &quot;</span> <span class="o">+</span> <span class="nx">localByteArray</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">newInt32</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">byteArrayToInt16</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ints</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">byteArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//ints.push((byteArray[i] &lt;&lt; 8) | (byteArray[i+1]));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">ints</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">ints</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">fetchBinary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="s2">&quot;http://sushihangover.azurewebsites.net/Content/Static/IronyLogoSmall.png&quot;</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s2">&quot;arraybuffer&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">buf</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">response</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">byteArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">buf</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;got &quot;</span> <span class="o">+</span> <span class="nx">byteArray</span><span class="p">.</span><span class="nx">byteLength</span> <span class="o">+</span> <span class="s2">&quot; bytes&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>            <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">byteArray</span><span class="p">.</span><span class="nx">byteLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="c1">// watch out if you uncomment the next line, it can kill your browser w/ large png files</span>
+</span><span class='line'>            <span class="c1">// console.log(arr);</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">parserResults</span> <span class="o">=</span> <span class="nx">BinaryParser</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="s2">&quot;START&quot;</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parserResults</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">fetchBinary</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/moving-to-github-pages/">Moving to GitHub Pages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-09T16:49:16-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:49 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am moving <strong><a href="http://sushihangover.blogspot.com">SushiHangover</a></strong> from Blogger and an Azure-based blog engine to GitHub Pages using Octopress so hang in there for a few days as I get the older content parsed and set to use markdown&hellip;</p>
+
+<p>As always, email or post a comment if you need anything.</p>
+
+<p>-R</p>
+
+<p><img src="http://sushihangover.github.io/images/PowerShellLogo.jpg" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/monomac-detect-when-mac-sleeps-or-wakes/">MonoMac: Detect When Mac Sleeps or Wakes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-12T20:44:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
+
+<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
+
+<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
+
+<figure class='code'><figcaption><span>C# "Wake and Sleep Events" </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine ("Add the sleep/wake observers");
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write ("Your Mac is getting sleepy\n");
+</span><span class='line'>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write ("Time to go to work again\n");
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/playscript-what-happened-to-the-open-source-version-on-github/">PlayScript :What Happened to the Open Source Version on GitHub</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-27T19:04:55-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:04 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
+
+<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="'PlayScript, Going, going, gone'" >
+I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
+
+<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
+
+<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/3">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

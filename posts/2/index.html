@@ -1,0 +1,2113 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on. While technically speaking QEMU does not have a &ldquo; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/posts/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/new-arm-features-in-qemu-2-dot-0/">New ARM 'Machines' in QEMU 2.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-14T23:32:19-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:32 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/QEMU_new_machine_large.png"><img class="left" src="/images/QEMU_new_machine_small.png" title="&#34;QEMU 2.0 New ARM Machines&#34;" alt="&#34;QEMU 2.0 New ARM Machines&#34;"></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
+
+<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model some cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
+
+<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
+</span><span class='line'>QEMU emulator version 1.7.90, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a few new machines available:
+    * canon-a1100          Canon PowerShot A1100 IS
+    * cubieboard           cubietech cubieboard
+    * virt                 ARM Virtual Machine</p>
+
+<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
+
+<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
+
+<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
+
+<p>The change log for ARM shows the following:
+    * Support for &ldquo;-M virt&rdquo;, a board type that only uses virtio devices
+    * Support for &ldquo;-cpu host&rdquo; when running under KVM
+    * Support for new 32-bit mode ARMv8 instructions in TCG
+    * Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
+    * Support for AArch64 user-mode emulation
+    * Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
+    * Support for the Canon PowerShot A1100 DIGIC board using &ldquo;-M canon-a1100&rdquo;
+    * Support for the allwinner-a10-based board &ldquo;-M cubieboard&rdquo;
+    * Support for flow control in the Cadence UART</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/cortex-m-systick-polling-vs-interrupts/">Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-09T19:24:34-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:24 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="/images/ARM_CortexM_CMSIS_small.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
+
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
+
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
+
+<p>The semihosting output of this app (via QEMU):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+</span><span class='line'>SysTick should not be active yet...
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>Enable SysTick and lets poll it...
+</span><span class='line'>...Current value: 6913
+</span><span class='line'>...Current value: 2825
+</span><span class='line'>...Current value: 2450
+</span><span class='line'>...Current value: 2138
+</span><span class='line'>...Current value: 1825
+</span><span class='line'>...Current value: 1525
+</span><span class='line'>...Current value: 1225
+</span><span class='line'>...Current value: 913
+</span><span class='line'>...Current value: 613
+</span><span class='line'>...Current value: 313
+</span><span class='line'>Enable SysTick Interrupts and watch <span class="nb">local </span>var get incremented...
+</span><span class='line'>...myTicks <span class="o">=</span> 1<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 0
+</span><span class='line'>...myTicks <span class="o">=</span> 2<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3425
+</span><span class='line'>...myTicks <span class="o">=</span> 3<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8725
+</span><span class='line'>...myTicks <span class="o">=</span> 4<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 5<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8113
+</span><span class='line'>...myTicks <span class="o">=</span> 6<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2550
+</span><span class='line'>...myTicks <span class="o">=</span> 7<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 7725
+</span><span class='line'>...myTicks <span class="o">=</span> 8<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 9<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8125
+</span><span class='line'>...myTicks <span class="o">=</span> 10<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2563
+</span><span class='line'>...myTicks <span class="o">=</span> 11<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8100
+</span><span class='line'>...myTicks <span class="o">=</span> 12<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3038
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;CortexM3_xx.h&quot;</span>
+</span><span class='line'><span class="cp">#include &lt;core_cm3.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdint.h&gt; </span>
+</span><span class='line'><span class="cp">#include &quot;svc.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">myTicks</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">SysTick_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">myTicks</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...myTicks = %lu; SysTick-&gt;VAL = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">myTicks</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;SysTick should not be active yet...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick and lets poll it...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">clock</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">LOAD</span> <span class="o">=</span> <span class="n">clock</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_CLKSOURCE_Msk : Use core&#39;s clock</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_ENABLE_Msk    : Enable SysTick</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_ENABLE_Msk</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick Interrupts and watch local var get incremented...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">myTicks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span>  <span class="n">SysTick_CTRL_ENABLE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_TICKINT_Msk</span><span class="p">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">myTicks</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">asm</span><span class="p">(</span><span class="s">&quot;nop&quot;</span><span class="p">);</span> <span class="c1">// Do nothing till SysTick_Handler been been called at least 10 times</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/llvm-cmsis-dsp-and-cortex-m3-and-m0/">LLVM, CMSIS DSP and Cortex-M3 &amp; M0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-05T22:34:20-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"><img class="left" src="/images/cmsis-version-3-block-diagram.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a> I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied.</p>
+
+<p>I borrowed one of the cos/sin examples and added some semihosting <em>printf</em>s using NEWLIB and cleaned up the code a bit.</p>
+
+<blockquote><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php?tab=Download+CMSIS">CMSIS-DSP</a>: DSP Library Collection with over 60 Functions for various data types: fix-point (fractional q7, q15, q31) and single precision floating-point (32-bit). The library is available for Cortex-M0, Cortex-M3, and Cortex-M4. The Cortex-M4 implementation is optimized for the SIMD instruction set.</p></blockquote>
+
+<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result <em>works great</em> for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>) and everything looks on this core also.</p>
+
+<p>Clang/LLVM compile and link:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/arm_sin_cos_example_f32.o -c src/arm_sin_cos_example_f32.c
+</span><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/startup.o -c src/startup.c
+</span><span class='line'>arm-none-eabi-ld -nostartfiles   -nostdlib -nostartupfiles  --gc-sections  --print-gc-sections  -Map bin/main.axf.map  -T src/cortex_M0.ld  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/LIB/GCC    obj/arm_sin_cos_example_f32.o obj/startup.o --start-group --library<span class="o">=</span>gcc --library<span class="o">=</span>c --library<span class="o">=</span>m --library<span class="o">=</span>arm_cortexM0l_math --end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sample semihousting output from a Cortex-M3:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Starting Test...
+</span><span class='line'>Cos -1.244917 <span class="o">=</span> 0.320142
+</span><span class='line'>Sin -1.244917 <span class="o">=</span> -0.947370
+</span><span class='line'>Cos squared 0.320142 <span class="o">=</span> 0.102491
+</span><span class='line'>Sin squared -0.947370 <span class="o">=</span> 0.897509
+</span><span class='line'>Add 0.102491 and 0.897509 <span class="o">=</span> 1.000000
+</span><span class='line'>Cos -4.793534 <span class="o">=</span> 0.081056
+</span><span class='line'>Sin -4.793534 <span class="o">=</span> 0.996710
+</span><span class='line'>Cos squared 0.081056 <span class="o">=</span> 0.006570
+</span><span class='line'>Sin squared 0.996710 <span class="o">=</span> 0.993430
+</span><span class='line'>Add 0.006570 and 0.993430 <span class="o">=</span> 1.000000
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>Cos 1.985805 <span class="o">=</span> -0.403198
+</span><span class='line'>Sin 1.985805 <span class="o">=</span> 0.915113
+</span><span class='line'>Cos squared -0.403198 <span class="o">=</span> 0.162568
+</span><span class='line'>Sin squared 0.915113 <span class="o">=</span> 0.837431
+</span><span class='line'>Add 0.162568 and 0.837431 <span class="o">=</span> 1.000000
+</span><span class='line'>Ending Test...
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>https://github.com/sushihangover/llvm_baremetal </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt; </span>
+</span><span class='line'><span class="cp">#include &lt;math.h&gt;     </span>
+</span><span class='line'><span class="cp">#include &quot;arm_math.h&quot; </span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Defines each of the tests performed </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'><span class="cp">#define MAX_BLOCKSIZE    32 </span>
+</span><span class='line'><span class="cp">#define DELTA           (0.000001f) </span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Test input data for Floating point sin_cos example for 32-blockSize </span>
+</span><span class='line'><span class="cm">* Generated by the MATLAB randn() function </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="kt">float32_t</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">MAX_BLOCKSIZE</span><span class="p">]</span> <span class="o">=</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.244916875853235400</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.793533929171324800</span><span class="p">,</span>  <span class="mf">0.360705030233248850</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.827929644170887320</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.299532218312426900</span><span class="p">,</span>  <span class="mf">3.427441903227623800</span><span class="p">,</span> 
+</span><span class='line'>  <span class="mf">3.422401784294607700</span><span class="p">,</span>    <span class="o">-</span><span class="mf">0.108308165334010680</span><span class="p">,</span>  <span class="mf">0.941943896490312180</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.502609575000365850</span><span class="p">,</span>    <span class="o">-</span><span class="mf">0.537345278736373500</span><span class="p">,</span>  <span class="mf">2.088817392965764500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.693168684143455700</span><span class="p">,</span>  <span class="mf">6.283185307179590700</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.392545884746175080</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.327893095115825040</span><span class="p">,</span>     <span class="mf">3.070147440456292300</span><span class="p">,</span>  <span class="mf">0.170611405884662230</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">0.275275082396073010</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.395492805446796300</span><span class="p">,</span>  <span class="mf">0.847311163536506600</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">3.845517018083148800</span><span class="p">,</span>  <span class="mf">2.055818378415868300</span><span class="p">,</span>  <span class="mf">4.672594161978930800</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.990923030266425800</span><span class="p">,</span>  <span class="mf">2.469305197656249500</span><span class="p">,</span>  <span class="mf">3.609002606064021000</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">4.586736582331667500</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.147080139136136300</span><span class="p">,</span>  <span class="mf">1.643756718868359500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.150866392366494800</span><span class="p">,</span>  <span class="mf">1.985805026477433800</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="kt">float32_t</span> <span class="n">testRefOutput_f32</span> <span class="o">=</span> <span class="mf">1.000000000</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Declare Global variables  </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'><span class="kt">uint32_t</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">testOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">cosOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">sinOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">cosSquareOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">sinSquareOutput</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Max magnitude FFT Bin test </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">arm_status</span> <span class="n">status</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int32_t</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>   <span class="kt">float32_t</span> <span class="n">diff</span><span class="p">;</span>
+</span><span class='line'>   <span class="kt">uint32_t</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Starting Test...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>   <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">blockSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>   <span class="p">{</span>
+</span><span class='line'>      <span class="n">cosOutput</span> <span class="o">=</span> <span class="n">arm_cos_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cosOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">sinOutput</span> <span class="o">=</span> <span class="n">arm_sin_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sinOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosOutput</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sinOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_add_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">testOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Add %f and %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">,</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="cm">/* absolute value of difference between ref and test */</span>
+</span><span class='line'>      <span class="n">diff</span> <span class="o">=</span> <span class="n">fabsf</span><span class="p">(</span><span class="n">testRefOutput_f32</span> <span class="o">-</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>      <span class="cm">/* Comparison of sin_cos value with reference */</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="n">DELTA</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Diff failure %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">diff</span><span class="p">);</span>
+</span><span class='line'>         <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
+</span><span class='line'>         <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ending Test...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>   <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="cm">/* main function does not return */</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/cortex-m0-vs-m3-llvm-and-ld/">Cortex-M0 vs. M3 : LLVM and LD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-05T06:30:13-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_Cortex-M_instruction_set_large.png"><img class="left" src="/images/ARM_Cortex-M_instruction_set_small.png" title="&#34;ARM Cortex-M instruction set&#34;" alt="&#34;ARM Cortex-M instruction set&#34;"></a> One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld to do your linking.</p>
+
+<p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times to get the options correct (and the <strong>order</strong> of options does matter) as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
+
+<p>One of the areas using it directly that can bite you is not linking to the proper libgcc.a for the Cortex-M that you are targeting. Looking into your <em>arm-none-eabi/lib/gcc/arm-none-eabi/X.X.X</em> tool-chain directory and you will find multiple directories. One for each ARM architecture; armv6-m, armv7-ar, armv7-m, thumb, thumb2, etc&hellip;</p>
+
+<p>Add a library include for <em>architecture</em> directory that matches the core that you compiled against and everything will be fine:</p>
+
+<p>Cortex M3 example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m -g   obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cortex M0+ example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M0.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv6-m  --gc-sections --print-gc-sections  obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://en.wikipedia.org/wiki/ARM_Cortex-M#Instruction_sets">ARM Cortex-M instruction sets</a></p>
+
+<table class="wikitable">
+<tbody><tr>
+<th>ARM<br>
+Cortex-M</th>
+<th>Thumb</th>
+<th>Thumb-2</th>
+<th>Hardware<br>
+multiply</th>
+<th>Hardware<br>
+divide</th>
+<th>Saturated<br>
+math</th>
+<th>DSP<br>
+extensions</th>
+<th>Floating-point</th>
+<th>ARM<br>
+architecture</th>
+<th>Core<br>
+architecture</th>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0<sup id="cite_ref-M0-TRM_1-2" class="reference"><a href="#cite_note-M0-TRM-1"><span>[</span>1<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-8" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0+<sup id="cite_ref-M0.2B-TRM_2-2" class="reference"><a href="#cite_note-M0.2B-TRM-2"><span>[</span>2<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-9" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M1<sup id="cite_ref-M1-TRM_3-2" class="reference"><a href="#cite_note-M1-TRM-3"><span>[</span>3<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>3 or 33 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-10" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M3<sup id="cite_ref-M3-TRM_4-2" class="reference"><a href="#cite_note-M3-TRM-4"><span>[</span>4<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv7-M<sup id="cite_ref-ARMv7-M-Manual_7-9" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M4<sup id="cite_ref-M4-TRM_5-2" class="reference"><a href="#cite_note-M4-TRM-5"><span>[</span>5<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: yellow">
+<center>Optional</center>
+</td>
+<td>
+<center>ARMv7E-M<sup id="cite_ref-ARMv7-M-Manual_7-10" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+</tbody></table>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/arm-cortex-m3-bare-metal-with-newlib/">ARM Cortex-M3 Bare-metal With NEWLIB</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-04T18:18:56-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am working on a custom NEWLIB but first I wanted to make sure that <a href="https://sourceware.org/newlib/">NEWLIB</a> compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal <a href="http://llvm.org">Clang/LLVM</a> build and Qemu.</p>
+
+<p>Lets start with a simple main() that includes printf, puts and malloc. The first test is related to malloc, as if your linker script is not setting up your heap properly and providing the heap &ldquo;end&rdquo; address as defined in NEWLIB then not much else is going to work (i.e. printf uses malloc). If malloc works, then lets so some printfs including one with a random string. After that lets keep increasing the size of our mallocs till we run out of heap space.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;      </span><span class="cm">/* printf, scanf, NULL */</span><span class="cp"></span>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;     </span><span class="cm">/* malloc, free, rand */</span><span class="cp"></span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">extern</span> <span class="kt">char</span> <span class="n">_heap_start</span><span class="p">;</span> <span class="cm">/* Defined by the linker from src/cortex_M3.ld */</span>
+</span><span class='line'>  <span class="k">extern</span> <span class="kt">char</span> <span class="n">_heap_end</span><span class="p">;</span> <span class="cm">/* Defined by the linker from src/cortex_M3.Ld. */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span> <span class="n">buffer</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">i</span> <span class="o">=</span> <span class="mi">43</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span> <span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">buffer</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>     <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;Malloc failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">exit</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;Printf string</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="n">buffer</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">26</span><span class="o">+</span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;Random string: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">buffer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">i</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">do</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>     <span class="n">buffer</span> <span class="o">=</span> <span class="n">realloc</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span><span class='line'>     <span class="k">if</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">{</span>
+</span><span class='line'>        <span class="n">puts</span><span class="p">(</span><span class="s">&quot;Out of memory!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">exit</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d bytes @ address 0x%X (Low=0x%X:Hi=0x%X)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">i</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">buffer</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">_heap_start</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">_heap_end</span>
+</span><span class='line'>       <span class="p">);</span>
+</span><span class='line'>       <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="cm">/* cause qemu to exit */</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Easy enough, so lets create a linker script that is geared for a Cortex-M3, the main section to pay attention to in this example is <strong>.heap</strong>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>OUTPUT_FORMAT <span class="o">(</span><span class="s2">&quot;elf32-littlearm&quot;</span>, <span class="s2">&quot;elf32-bigarm&quot;</span>, <span class="s2">&quot;elf32-littlearm&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>ENTRY<span class="o">(</span>Reset_Handler<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>/* Specify the memory areas */
+</span><span class='line'>MEMORY
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  FLASH <span class="o">(</span>rx<span class="o">)</span>      : <span class="nv">ORIGIN</span> <span class="o">=</span> 0x00000000, <span class="nv">LENGTH</span> <span class="o">=</span> 0x10000 /* 64K */
+</span><span class='line'>  RAM <span class="o">(</span>xrw<span class="o">)</span>       : <span class="nv">ORIGIN</span> <span class="o">=</span> 0x00020000, <span class="nv">LENGTH</span> <span class="o">=</span> 0x04000 /* 16K */
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">heap_size</span> <span class="o">=</span> 0x800<span class="p">;</span> /* 2K */
+</span><span class='line'>
+</span><span class='line'>SECTIONS <span class="o">{</span>
+</span><span class='line'>    . <span class="o">=</span> ORIGIN<span class="o">(</span>FLASH<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    .vectors :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        KEEP<span class="o">(</span>*<span class="o">(</span>.vectors<span class="o">))</span> /* Startup code */
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;FLASH
+</span><span class='line'>
+</span><span class='line'>    .text :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_start_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.text<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.text*<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.rodata<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.rodata*<span class="o">)</span>
+</span><span class='line'>        <span class="nv">_end_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;FLASH
+</span><span class='line'>
+</span><span class='line'>        .ARM.extab :
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>                *<span class="o">(</span>.ARM.extab* .gnu.linkonce.armextab.*<span class="o">)</span>
+</span><span class='line'>        <span class="o">}</span> &gt; FLASH
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">__exidx_start</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        .ARM.exidx :
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>                *<span class="o">(</span>.ARM.exidx* .gnu.linkonce.armexidx.*<span class="o">)</span>
+</span><span class='line'>        <span class="o">}</span> &gt; FLASH
+</span><span class='line'>        <span class="nv">__exidx_end</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">_end_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    .data : AT <span class="o">(</span>_end_text<span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">_start_data</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.data<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.data*<span class="o">)</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_end_data</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    .bss :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>         . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_start_bss</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.bss<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.bss*<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>COMMON<span class="o">)</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_end_bss</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    .heap :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">__end__</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        /* <span class="nv">_heap_start</span> <span class="o">=</span> .<span class="p">;</span> */
+</span><span class='line'>        /* <span class="s2">&quot;end&quot;</span> is used by newlib<span class="err">&#39;</span>s syscalls!!! */
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">end</span> <span class="o">=</span> .<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">_heap_start</span> <span class="o">=</span> end <span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        . <span class="o">=</span> . + heap_size<span class="p">;</span>
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">_heap_end</span> <span class="o">=</span> .<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    .ARM.attributes <span class="m">0</span> : <span class="o">{</span> *<span class="o">(</span>.ARM.attributes<span class="o">)</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    .stack_dummy <span class="o">(</span>COPY<span class="o">)</span>:
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">_end_stack</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.stack*<span class="o">)</span>
+</span><span class='line'>    <span class="o">}</span> &gt; RAM
+</span><span class='line'>
+</span><span class='line'>    /* Set stack top to end of RAM, and stack limit move down by
+</span><span class='line'>     * size of stack_dummy section */
+</span><span class='line'>    <span class="nv">_start_stack</span> <span class="o">=</span> ORIGIN<span class="o">(</span>RAM<span class="o">)</span> + LENGTH<span class="o">(</span>RAM<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">_size_stack</span> <span class="o">=</span> _start_stack - SIZEOF<span class="o">(</span>.stack_dummy<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    PROVIDE<span class="o">(</span><span class="nv">__stack</span> <span class="o">=</span> _start_stack<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    /* Check <span class="k">if</span> data + heap + stack exceeds RAM limit */
+</span><span class='line'>    ASSERT<span class="o">(</span>_size_stack &gt;<span class="o">=</span> _heap_end, <span class="s2">&quot;region RAM overflowed with stack&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="nv">_end</span> <span class="o">=</span> .<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, now that we have a linker script that defines our stack and heap properly, lets reuse our startup.c routine for the Cortex-M cores and compile it all with CLang/LLVM and link it with arm-none-eabi-ld:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu<span class="o">=</span>cortex-m3  -mfloat-abi<span class="o">=</span>soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/printf_with_malloc.o -c src/printf_with_malloc.c
+</span><span class='line'>clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu<span class="o">=</span>cortex-m3  -mfloat-abi<span class="o">=</span>soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/startup.o -c src/startup.c
+</span><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/thumb -g   obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now we can run a simulation of it with QEMU:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Puts string
+</span><span class='line'>Printf string
+</span><span class='line'>Random string: lvqdyoqykfdbxnqdquhydjaeebzqmtblcabwgmscrno
+</span><span class='line'><span class="m">32</span> bytes @ address 0x209C0 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">64</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">96</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">128</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">160</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">192</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">224</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">256</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">288</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">320</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">352</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">384</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">416</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">448</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'>Out of memory!
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/bare-metal-debugging-with-affinic-debugger/">Bare Metal Debugging With Affinic Debugger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-26T23:19:58-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
+
+<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;-) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
+
+<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
+
+<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
+
+<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
+
+<p><a href="/images/Affinic_preferences_large.png"><img class="right" src="/images/Affinic_preferences_small.png" title="&#34;Affinic gdb location&#34;" alt="&#34;Affinic gdb location&#34;"></a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
+
+<p>Lets debug something!</p>
+
+<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/startup.o -c src/startup.s
+</span><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
+</span><span class='line'>arm-none-eabi-ld -Lobj --gc-sections --print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
+
+<h6>* -s              shorthand for -gdb tcp::1234</h6>
+
+<h6>* -S              freeze CPU at startup</h6>
+
+<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>target remote localhost:1234
+</span><span class='line'>file bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
+
+<p><a href="/images/Affinic_assembly_view_large.png"><img class="left" src="/images/Affinic_assembly_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
+<a href="/images/Affinic_source_view_large.png"><img class="right" src="/images/Affinic_source_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a></p>
+
+<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/arm-cortex-m-semihosting-with-qemu/">ARM Cortex-M Semihosting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-24T21:02:34-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:02 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_Semihosting_large.png"><img class="left" src="/images/ARM_Semihosting.png" title="&#34;ARM Semihosting&#34;" alt="&#34;ARM Semihosting&#34;"></a> <strong><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471c/Bgbjjgij.html">What is semihosting?</a></strong> <em>&hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this mechanism to enable functions in the C library, such as printf() and scanf(), to use the screen and keyboard of the host instead of having a screen and keyboard on the target system&hellip;</em></p>
+
+<p>So you need to output some debug messages via your host debugging session (via JTAG or such) or working with QEMU to prototype some ARM code? Well semihosting is simple use, but it can come at a large price in memory and overhead if you use stdio to do it&hellip;</p>
+
+<p>You can skip the &ldquo;#include &lt;stdio.h>&rdquo; and linking the semihosting newlib library (assuming you have the syscalls inplementated) and just use some simple inline assembly to get the job done.</p>
+
+<p>Lets take a quick look at two of the twenty-some service calls (SVC) that are available, SYS_WRITEC (0x03) and WRITE0 (0x04).</p>
+
+<h5>* SYS_WRITEC outputs a single character, an address pointer to that character is loaded in register R1. Register R0 is loaded with 0x03 and then you can execute a <em>SuperVisor Call</em> (SVC 0x00123456).</h5>
+
+<h5>* SYS_WRITE0 outputs a null-term string, the string&rsquo;s beginning address is stored in R1, R0 is loaded with 0x04 and you execute a supervisor call again.</h5>
+
+<p>If we translate that knowledge into inline assembly:</p>
+
+<figure class='code'><figcaption><span>main.c </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITEC</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITE0</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg0</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r0&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg1</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r1&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;_&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;!&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0, r0&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITE0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="s">&quot;Print this to my jtag debugger</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h6>Note: This is not pretty inline styling as it is meant to break each step down. Normally you would create a couple of functions (i.e: a &lsquo;PutChar&rsquo; for SYS_WRITEC) and include the R0/R1 clobbers, etc&hellip;</h6>
+
+<p>And the output that we get:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -nographic -monitor null -serial null -semihosting -kernel main.axf 
+</span><span class='line'>!
+</span><span class='line'>Print this to my jtag debugger</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>main.o: file format elf32-littlearm </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='c-objdump'><span class='line'><span class="mh">00000000</span> <span class="p">&lt;</span><span class="nf">main</span><span class="p">&gt;:</span>
+</span><span class='line'>   <span class="mi">0</span><span class="o">:</span>  <span class="n">e52db004</span>     <span class="n">push</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>       <span class="p">;</span> <span class="p">(</span><span class="n">str</span> <span class="n">fp</span><span class="p">,</span> <span class="p">[</span><span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+</span><span class='line'>   <span class="mi">4</span><span class="o">:</span>  <span class="n">e28db000</span>     <span class="n">add</span>  <span class="n">fp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>   <span class="mi">8</span><span class="o">:</span>  <span class="n">e24dd014</span>     <span class="n">sub</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">20</span>
+</span><span class='line'>   <span class="nl">c</span><span class="p">:</span>  <span class="n">e3a03003</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">3</span>
+</span><span class='line'>  <span class="mi">10</span><span class="o">:</span>  <span class="n">e50b3008</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">14</span><span class="o">:</span>  <span class="n">e3a03004</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>  <span class="mi">18</span><span class="o">:</span>  <span class="n">e50b300c</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">1</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e3a0305f</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">95</span>  <span class="p">;</span> <span class="mh">0x5f</span>
+</span><span class='line'>  <span class="mi">20</span><span class="o">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">24</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">28</span><span class="o">:</span>  <span class="n">e3a03021</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">33</span>  <span class="p">;</span> <span class="mh">0x21</span>
+</span><span class='line'>  <span class="mi">2</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">30</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">34</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
+</span><span class='line'>  <span class="mi">38</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">3</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">40</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">44</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">48</span><span class="o">:</span>  <span class="n">e3a0300a</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">10</span>
+</span><span class='line'>  <span class="mi">4</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">50</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
+</span><span class='line'>  <span class="mi">54</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">58</span><span class="o">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">5</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">60</span><span class="o">:</span>  <span class="n">e51b000c</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">64</span><span class="o">:</span>  <span class="n">e59f3010</span>     <span class="n">ldr</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">pc</span><span class="p">,</span> <span class="err">#</span><span class="mi">16</span><span class="p">]</span>    <span class="p">;</span> <span class="mi">7</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mh">0x7c</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="mi">68</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">6</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">70</span><span class="o">:</span>  <span class="n">e28bd000</span>     <span class="n">add</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>  <span class="mi">74</span><span class="o">:</span>  <span class="n">e8bd0800</span>     <span class="n">ldmfd</span>    <span class="n">sp</span><span class="o">!</span><span class="p">,</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>
+</span><span class='line'>  <span class="mi">78</span><span class="o">:</span>  <span class="n">e12fff1e</span>     <span class="n">bx</span>   <span class="n">lr</span>
+</span><span class='line'>  <span class="mi">7</span><span class="nl">c</span><span class="p">:</span>  <span class="mo">00000000</span>    <span class="p">.</span><span class="n">word</span> <span class="mh">0x00000000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS: SYS_TMPNAM and SYS_READC are not implemented in Qemu (up to and including 1.7.0), so consult the &ldquo;qemu/target-arm/arm-semi.c&rdquo; source if you are have questions about how those SVC calls are implemented.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/llvm-and-the-arm-elf-arm-dot-exidx-star-section/">LLVM and the ARM ELF .ARM.exidx* Section</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-23T06:39:45-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
+
+<p>So what is a <em>.ARM.exidx</em> section?</p>
+
+<p>ARM ELF manual show this under the special sections chapter:</p>
+
+<p>| Name |￼Type |￼Attributes |
+| - | - | - |
+| ARM.exidx |￼ SHT_ARM_EXIDX | SHF_ALLOC + SHF_LINK_ORDER |
+_</p>
+
+<blockquote><p>Names beginning .ARM.exidx name sections containing index entries for section unwinding. Names beginning .ARM.extab name sections containing exception unwinding information. See [EHABI] for details.</p></blockquote>
+
+<p>Table 4_4 from that manual shows the Processor specific section types and our attribute is:</p>
+
+<p>| Name | Value | Comment |
+| - | - | - |
+| &ldquo;SHT_ARM_EXIDX&rdquo; | 0x70000001 | |
+_</p>
+
+<p>So the question remains, what is in the section and what is being created? Lets dump HelloWorldSimple.o and only look at that section:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x580 contains 2 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x1 [cantunwind]
+</span><span class='line'>0x54 &lt;c_entry>: 0x1 [cantunwind]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So it added both function calls to the table, but are marked <em>cantunwind</em>, which makes sense, but since nothing in the section can be unwound, why include the section? Using gc-sections during linking does not remove it as it has references to functions that are being used&hellip;</p>
+
+<p><span class='pullquote-right' data-pullquote='Research is on-going on this one&#8230;'>
+Let do a quick test and add <em>-funwind-tables</em>, recompile and yes we get a fully populated unwind table and using <em>-fno-unwind-tables</em> produces the results from above, so that is the default one that is being use. Research is on-going on this one&hellip;
+</span></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x5a4 contains 4 entries:
+</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
+</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000000  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
+</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
+</span><span class='line'>00000008  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
+</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
+</span><span class='line'>0x0 &lt;print_uart0>: 0x8001b0b0
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x01      vsp = vsp + 8
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>  0xb0      finish
+</span><span class='line'>0x54 &lt;c_entry>: 0x809b8480
+</span><span class='line'>  Compact model index: 0
+</span><span class='line'>  0x9b      vsp = r11
+</span><span class='line'>  0x84 0x80 pop {r11, r14}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Additional Reading: <a href="https://sourceware.org/ml/binutils/2009-05/msg00048.html">ARM unwind table linker processing</a>; this concerns a patch to bintutils/ld:</p>
+
+<blockquote><p>The patch below implements linker processing of ARM unwinding tables
+(SHT_ARM_EXIDX).</p>
+
+<p>ARM exception index tables only define the start address of each region. This
+means that code with no unwinding information is effectively covered by the
+preceding unwinding table entry.</p>
+
+<p>For normal exceptions that doesn&rsquo;t matter so much - the user should ensure
+that any code they throw exceptions through has proper unwinding information.</p></blockquote>
+
+<p>Just as a quick check, I grep&rsquo;d some source and the *.ARM.exidx** section is generated by the ARMELFStreamer:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html
+</span><span class='line'>00274 inline void ARMELFStreamer::SwitchToExIdxSection(const MCSymbol &FnStart) {
+</span><span class='line'>00275   SwitchToEHSection(".ARM.exidx",
+</span><span class='line'>00276                     ELF::SHT_ARM_EXIDX,
+</span><span class='line'>00277                     ELF::SHF_ALLOC | ELF::SHF_LINK_ORDER,
+</span><span class='line'>00278                     SectionKind::getDataRel(),
+</span><span class='line'>00279                     FnStart);
+</span><span class='line'>00280 }</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145   // Fixme: All this is duplicated in MCSectionELF. Why??
+</span><span class='line'>01146   // Exception Index table
+</span><span class='line'>01147   SHT_ARM_EXIDX           = 0x70000001U,</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/arm-bare-metal-comparing-llvm-to-arm-gcc/">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-22T20:43:28-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>8:43 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>With the ever maturing and stable ARM backend of LLVM it is hard to find information using it vs. the well known ARM-GCC release.</p>
+
+<p>So lets start with the most simple HelloWorld example and compare LLVM and <a href="https://launchpad.net/gcc-arm-embedded">ARM-GCC</a>.</p>
+
+<p><a href="http://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/">Balau&rsquo;s post</a> is a popular one showing an ARM bare metal Hello World and test using QEMU, so lets start with that one. First, lets reproduce the compile/link steps to make sure it works:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-as -mcpu=arm926ej-s src/startup.s -o obj/startup.o
+</span><span class='line'>arm-none-eabi-gcc -c -mcpu=arm926ej-s -O0 src/HelloWorldSimple.c -o obj/HelloWorldSimple.o
+</span><span class='line'>arm-none-eabi-ld -T src/HelloWorldSimple.ld obj/HelloWorldSimple.o obj/startup.o -o bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>Hello world!
+</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Works just fine, so lets reproduce that using   my <a href="https://github.com/sushihangover/llvm_baremetal">LLVM bare metal build</a>. All the compiler options are being shown even though some are defaulted in my build of LLVM so you can see everything it is required to get the LLVM bitcode conversion to produce a valid object file for our ARM target (I&rsquo;m using the Clang driver, but you can use LLVM and pipe bitcode through the various tools so you can deeply control the optimization phase):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g startup.s -o startup.o
+</span><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g HelloWorldSimple.c -o main.o
+</span><span class='line'>arm-none-eabi-ld -T HelloWorldSimple.ld main.o startup.o -o main.axf_llvm
+</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel main.axf_llvm
+</span><span class='line'>Hello world!
+</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>target : Option providing the triple that you are &lsquo;targeting&rsquo;</li>
+<li>mpcu : Option provding the ARM core that will be flashed</li>
+<li>mfloat-abi : Soft or Hard depending upon if your ARM core has an FPU implementation on it. Cores that can support an FPU does not mean your vendor&rsquo;s core has one, comes down to features/price of the core.</li>
+</ul>
+
+
+<h6>Note: In both, I am turning off the optimizers via the compile drivers.</h6>
+
+<p>Lets look at the size of the AXF (ARM Executable Format) produced by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   text     data     bss     dec     hex filename
+</span><span class='line'>    140         0       0     140      8c bin/HelloWorldSimple.axf_gcc
+</span><span class='line'>    
+</span><span class='line'>   text      data     bss     dec     hex filename
+</span><span class='line'>    150         0       0     150      96 bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is a 10 byte difference, interesting&hellip; lets look at that a little more:</p>
+
+<table>
+<thead>
+<tr>
+<th> llvm </th>
+<th></th>
+<th></th>
+<th> arm-gcc </th>
+<th> </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> section  </td>
+<td> size </td>
+<td> addr</td>
+<td>section </td>
+<td>size</td>
+<td> addr</td>
+</tr>
+<tr>
+<td>.startup  </td>
+<td>16</td>
+<td>   65536</td>
+<td>.startup </td>
+<td> 16 </td>
+<td>65536</td>
+</tr>
+<tr>
+<td>.text </td>
+<td>             108 </td>
+<td>  65552</td>
+<td>.text              </td>
+<td>104   </td>
+<td>65552</td>
+</tr>
+<tr>
+<td>.ARM.exidx</td>
+<td>           8 </td>
+<td>  65660</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>.rodata   </td>
+<td>           4 </td>
+<td>  65668</td>
+<td>.rodata  </td>
+<td>           20  </td>
+<td> 65656</td>
+</tr>
+<tr>
+<td>.rodata.str1.1</td>
+<td>      14 </td>
+<td>  65672</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>.ARM.attributes</td>
+<td>     40 </td>
+<td>      0</td>
+<td>.ARM.attributes </td>
+<td>    46 </td>
+<td>      0</td>
+</tr>
+<tr>
+<td>.comment       </td>
+<td>     19 </td>
+<td>      0</td>
+<td>.comment  </td>
+<td>         112  </td>
+<td>     0</td>
+</tr>
+<tr>
+<td>Total          </td>
+<td>    209</td>
+<td></td>
+<td>Total              </td>
+<td>298</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<h6>Note: I ran strip on the arm-gcc version to remove the empty debug sections that gcc inserts automatically</h6>
+
+<p>The <strong>.startup</strong> are the same size since this code is assembly and no codegen or optimization will happen there.</p>
+
+<p>It is interesting that LLVM inserts a <strong>.ARM.exidx</strong> section even though this is <em>only</em> .c code. I&rsquo;ll have to look at LLVM to see if <em>-funwind-tables</em> and/or <em>-fexceptions</em> are defaulted to on, but I disassemble it below so we can look at that as that is 8 bytes and accounts for the size difference in this really basic example.</p>
+
+<blockquote><p>.ARM.exidx is the section containing information for unwinding the stack</p></blockquote>
+
+<h6>Note: Understanding the <a href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0044e/IHI0044E_aaelf.pdf">ARM ELF format</a> is not really required to do bare metal programming, but, understanding how your code is allocated and loaded can maek a world of differences when you are writting linker definitions files for different cores, so send a few minutes and read the 46 pages :-)</h6>
+
+<p>First the gcc disassembly so we can compare the LLVM version to it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf_gcc:     file format elf32-littlearm
+</span><span class='line'>Disassembly of section .startup:
+</span><span class='line'>00010000 &lt;_Reset&gt;:
+</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
+</span><span class='line'>   10004: eb000015    bl  10060 &lt;c_entry&gt;
+</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
+</span><span class='line'>   1000c: 00011090    .word   0x00011090
+</span><span class='line'>Disassembly of section .text:
+</span><span class='line'>00010010 &lt;print_uart0&gt;:
+</span><span class='line'>   10010: e52db004    push    {fp}        ; (str fp, [sp, #-4]!)
+</span><span class='line'>   10014: e28db000    add fp, sp, #0
+</span><span class='line'>   10018: e24dd00c    sub sp, sp, #12
+</span><span class='line'>   1001c: e50b0008    str r0, [fp, #-8]
+</span><span class='line'>   10020: ea000006    b   10040 &lt;print_uart0+0x30&gt;
+</span><span class='line'>   10024: e59f3030    ldr r3, [pc, #48]   ; 1005c &lt;print_uart0+0x4c&gt;
+</span><span class='line'>   10028: e51b2008    ldr r2, [fp, #-8]
+</span><span class='line'>   1002c: e5d22000    ldrb    r2, [r2]
+</span><span class='line'>   10030: e5832000    str r2, [r3]
+</span><span class='line'>   10034: e51b3008    ldr r3, [fp, #-8]
+</span><span class='line'>   10038: e2833001    add r3, r3, #1
+</span><span class='line'>   1003c: e50b3008    str r3, [fp, #-8]
+</span><span class='line'>   10040: e51b3008    ldr r3, [fp, #-8]
+</span><span class='line'>   10044: e5d33000    ldrb    r3, [r3]
+</span><span class='line'>   10048: e3530000    cmp r3, #0
+</span><span class='line'>   1004c: 1afffff4    bne 10024 &lt;print_uart0+0x14&gt;
+</span><span class='line'>   10050: e24bd000    sub sp, fp, #0
+</span><span class='line'>   10054: e49db004    pop {fp}        ; (ldr fp, [sp], #4)
+</span><span class='line'>   10058: e12fff1e    bx  lr
+</span><span class='line'>   1005c: 101f1000    .word   0x101f1000
+</span><span class='line'>00010060 &lt;c_entry&gt;:
+</span><span class='line'>   10060: e92d4800    push    {fp, lr}
+</span><span class='line'>   10064: e28db004    add fp, sp, #4
+</span><span class='line'>   10068: e59f0004    ldr r0, [pc, #4]    ; 10074 &lt;c_entry+0x14&gt;
+</span><span class='line'>   1006c: ebffffe7    bl  10010 &lt;print_uart0&gt;
+</span><span class='line'>   10070: e8bd8800    pop {fp, pc}
+</span><span class='line'>   10074: 0001007c    .word   0x0001007c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the LLVM version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf:     file format elf32-littlearm
+</span><span class='line'>Disassembly of section .startup:
+</span><span class='line'>00010000 &lt;_Reset&gt;:
+</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
+</span><span class='line'>   10004: eb000016    bl  10064 &lt;c_entry&gt;
+</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
+</span><span class='line'>   1000c: 00011098    .word   0x00011098
+</span><span class='line'>Disassembly of section .text:
+</span><span class='line'>00010010 &lt;print_uart0&gt;:
+</span><span class='line'>   10010: e24dd008    sub sp, sp, #8
+</span><span class='line'>   10014: e1a01000    mov r1, r0
+</span><span class='line'>   10018: e58d0004    str r0, [sp, #4]
+</span><span class='line'>   1001c: e58d1000    str r1, [sp]
+</span><span class='line'>   10020: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   10024: e5d00000    ldrb    r0, [r0]
+</span><span class='line'>   10028: e3500000    cmp r0, #0
+</span><span class='line'>   1002c: 0a000009    beq 10058 &lt;print_uart0+0x48&gt;
+</span><span class='line'>   10030: eaffffff    b   10034 &lt;print_uart0+0x24&gt;
+</span><span class='line'>   10034: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   10038: e5d00000    ldrb    r0, [r0]
+</span><span class='line'>   1003c: e59f101c    ldr r1, [pc, #28]   ; 10060 &lt;print_uart0+0x50&gt;
+</span><span class='line'>   10040: e5911000    ldr r1, [r1]
+</span><span class='line'>   10044: e5810000    str r0, [r1]
+</span><span class='line'>   10048: e59d0004    ldr r0, [sp, #4]
+</span><span class='line'>   1004c: e2800001    add r0, r0, #1
+</span><span class='line'>   10050: e58d0004    str r0, [sp, #4]
+</span><span class='line'>   10054: eafffff1    b   10020 &lt;print_uart0+0x10&gt;
+</span><span class='line'>   10058: e28dd008    add sp, sp, #8
+</span><span class='line'>   1005c: e12fff1e    bx  lr
+</span><span class='line'>   10060: 00010084    .word   0x00010084
+</span><span class='line'>00010064 &lt;c_entry&gt;:
+</span><span class='line'>   10064: e92d4800    push    {fp, lr}
+</span><span class='line'>   10068: e1a0b00d    mov fp, sp
+</span><span class='line'>   1006c: e59f0004    ldr r0, [pc, #4]    ; 10078 &lt;c_entry+0x14&gt;
+</span><span class='line'>   10070: ebffffe6    bl  10010 &lt;print_uart0&gt;
+</span><span class='line'>   10074: e8bd8800    pop {fp, pc}
+</span><span class='line'>   10078: 00010088    .word   0x00010088</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="/images/llvm-gcc-diff_large.png"><img class="left" src="/images/llvm-gcc-diff_small.png" title="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;" alt="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;"></a> We can ignore the _Reset section as that is hand coded assembly and the same for both.</p>
+
+<p>The c_entry is interesting as LLVM uses a move to copy the stack register to fp (r11 = frame pointer) which I what I would do, but arm-gcc does an &ldquo;"add&rdquo;&ldquo; to get fp into the sp and does that by adding fp to register #4(?) This is flagged as general variable for gcc&hellip; I am slightly confused by gcc&rsquo;s choice to do that, now that question is when would #4 not contain zero? The rest of this function is the same between the two compilers.</p>
+
+<p>The print_uart0 function is a hack function as it does not implement FIFO/flow-control to an actual UART, but in this case it points to a memory address where the discontinued ARM Versatile PB dev-board does have a UART and QEMU board simulation echos those writes. I am not going to do a line by line comparision of the generated code as for un-optimized code they are both getting the job done, but in slightly different ways in almost the same number of instructions.</p>
+
+<p>So we are able to produce a working bare metal ARM AXF from LLVM and next time, I will spend a little time on compiler optimizations to see how the two code generators/optimizisers compare&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-19T20:56:11-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:56 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;" alt="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;"></a>
+I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
+
+<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
+(cheaper) options that work just as well for personal development.</p>
+
+<p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
+
+<p>So some searching landed me on an old post by <a href="http://twobitlabs.com/2011/08/install-diffmerge-git-mac-os-x/">Todd Huss</a> about using DiffMerge as your visual diff/merge for git and it was actually what I was looking for, well almost ;-) It is missing a few features, but they have a free version and it works really well and has a great OS-X interface&hellip; search is over for now&hellip;</p>
+
+<blockquote><p><a href="http://www.sourcegear.com/diffmerge/">SourceGear</a> has a $19.00 USD version that include file export with HTML formatting and if I could see example HTML code that it produces, I pay for that feature in a heart-beat, but the feature is completely locked out till you actaully register, bummer&hellip;</p></blockquote>
+
+<p>Todd recommends using the DiffMerge installer version vs. the dmg version, I go the other way on that. Download the dmg version, open it and drag/drop the app to your Applications. Then in a term window you can copy the <em>Extras/diffmerge.sh</em> to your <em>/usr/local/bin</em> directory (Execute attrib is already set, so no chmod needed..), but I copied it as just <em>vdiff</em> as that is quicker to type. No admin rights are need to install it that way and that makes me happy&hellip; I can <em>vdiff file1.c file2.c</em> on the cmd line to pop the GUI open and populate it.</p>
+
+<p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
+
+<figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config --global diff.tool diffmerge
+</span><span class='line'>git config --global difftool.diffmerge.cmd <span class="s1">&#39;diffmerge &quot;$LOCAL&quot; &quot;$REMOTE&quot;&#39;</span>
+</span><span class='line'>git config --global merge.tool diffmerge
+</span><span class='line'>git config --global mergetool.diffmerge.cmd <span class="s1">&#39;diffmerge --merge --result=&quot;$MERGED&quot; &quot;$LOCAL&quot; &quot;$(if test -f &quot;$BASE&quot;; then echo &quot;$BASE&quot;; else echo &quot;$LOCAL&quot;; fi)&quot; &quot;$REMOTE&quot;&#39;</span>
+</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># diff the local file.m against the checked-in version</span>
+</span><span class='line'>git difftool file.m
+</span><span class='line'><span class="c"># diff the local file.m against the version in some-feature-branch</span>
+</span><span class='line'>git difftool some-feature-branch file.m
+</span><span class='line'><span class="c"># diff the file.m from the Build-54 tag to the Build-55 tag</span>
+</span><span class='line'>git difftool Build-54..Build-55 file.m
+</span><span class='line'><span class="c">#To resolve merge conflicts, just run git mergetool:</span>
+</span><span class='line'>git mergetool
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/3">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/index.html">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/heartbleed-explanation/">XKCD: Heartbleed Explanation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

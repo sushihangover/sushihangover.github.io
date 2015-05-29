@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Powershell | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/powershell/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PowerShell and Bash 'Dot' Sourcing]]></title>
+    <link href="http://sushihangover.github.io/blog/powershell-and-bash-dot-sourcing/"/>
+    <updated>2014-02-17T06:21:11-08:00</updated>
+    <id>http://sushihangover.github.io/blog/powershell-and-bash-dot-sourcing</id>
+    <content type="html"><![CDATA[<p>Parent/Child scoping of variables and functions can really mess with people starting out with PowerShell (or Bash).</p>
+
+<p>In terms of &ldquo;Dot-sourcing&rdquo; a .ps1 file, it is like running the PowerShell script it contains <strong>inline</strong> in the current scope. Thus when that script finishes, any variables set/updated within it are changed within the current scope.</p>
+
+<p>Let create a .ps1 file that increments the variable $x by one and &lsquo;outputs&rsquo; it to the pipe:</p>
+
+<pre><code>echo "`$x++;`$x;" &gt; inc_x_by_one.ps1
+</code></pre>
+
+<p>Now assign the variable $x to be 1</p>
+
+<pre><code>$x=1
+$x
+1
+</code></pre>
+
+<p>Now run the <em>inc_x_by_one.ps1</em> routine:</p>
+
+<pre><code>.\inc_x_by_one.ps1
+2
+</code></pre>
+
+<p>So we got a result of 2 which is what you wanted right? Well, maybe&hellip; Let run the same thing again:</p>
+
+<pre><code>.\inc_x_by_one.ps1
+2
+$x
+1
+</code></pre>
+
+<p>What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
+
+<p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
+
+<pre><code>. .\inc_x_by_one.ps1
+2
+. .\inc_x_by_one.ps1
+3
+$x
+3
+</code></pre>
+
+<p>This is compariable to the way shell variables work under bash, zsh, &hellip; and I&rsquo;m assuming the PowerShell term borrowed &lsquo;dot sourcing&rsquo; in that regard as the syntax if the same: <strong>Period Space File.ps1|.sh</strong></p>
+
+<p>Take a few minutes and read the help on <strong>scope</strong>, it just might save you a headache in the future ;-)</p>
+
+<pre><code>help scope
+</code></pre>
+
+<p>Note: In PowerShell, you can assign variables to the global scope and not &lsquo;worry&rsquo; about parent/child scoping rules. Normally this is not a preferred way  as it create it creates messy code, issues of which function/module is changing it, debugging nightmares, etc&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

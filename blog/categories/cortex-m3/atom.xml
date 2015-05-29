@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cortex-m3 | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/cortex-m3/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
+    <link href="http://sushihangover.github.io/blog/cortex-m-systick-polling-vs-interrupts/"/>
+    <updated>2014-03-09T19:24:34-07:00</updated>
+    <id>http://sushihangover.github.io/blog/cortex-m-systick-polling-vs-interrupts</id>
+    <content type="html"><![CDATA[<p><a href="/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="/images/ARM_CortexM_CMSIS_small.png" title="&ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo;" ></a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
+
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
+
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
+
+<p>The semihosting output of this app (via QEMU):
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+</span><span class='line'>SysTick should not be active yet<span class="p">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 0
+</span><span class='line'>Enable SysTick and lets poll it<span class="p">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 6913
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 2825
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 2450
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 2138
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 1825
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 1525
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 1225
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 913
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 613
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span>Current value: 313
+</span><span class='line'>Enable SysTick Interrupts and watch <span class="nb">local </span>var get incremented<span class="p">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 1<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 0
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 2<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3425
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 3<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8725
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 4<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 5<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8113
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 6<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2550
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 7<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 7725
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 8<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 9<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8125
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 10<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2563
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 11<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8100
+</span><span class='line'><span class="p">&amp;</span>hellip<span class="p">;</span><span class="nv">myTicks</span> <span class="o">=</span> 12<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3038
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">stdlib</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">CortexM3_xx</span><span class="p">.</span><span class="n">h</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">core_cm3</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">stdint</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">include</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">svc</span><span class="p">.</span><span class="n">h</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">myTicks</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">SysTick_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">myTicks</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="n">myTicks</span> <span class="o">=</span> <span class="o">%</span><span class="n">lu</span><span class="p">;</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span> <span class="o">=</span> <span class="o">%</span><span class="n">lu</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">myTicks</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">SysTick</span> <span class="n">should</span> <span class="n">not</span> <span class="n">be</span> <span class="n">active</span> <span class="n">yet</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="n">Current</span> <span class="nl">value</span><span class="p">:</span> <span class="o">%</span><span class="n">lu</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">Enable</span> <span class="n">SysTick</span> <span class="n">and</span> <span class="n">lets</span> <span class="n">poll</span> <span class="n">it</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="err">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">clock</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span><span class='line'><span class="n">SysTick</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">LOAD</span> <span class="o">=</span> <span class="n">clock</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm">    * SysTick_CTRL_CLKSOURCE_Msk : Use core&#39;s clock</span>
+</span><span class='line'><span class="cm">    * SysTick_CTRL_ENABLE_Msk    : Enable SysTick</span>
+</span><span class='line'><span class="cm">    * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="n">SysTick</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_ENABLE_Msk</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick Interrupts and watch local var get incremented...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">myTicks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="n">SysTick</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span>  <span class="n">SysTick_CTRL_ENABLE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_TICKINT_Msk</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">myTicks</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">asm</span><span class="p">(</span><span class="s">&quot;nop&quot;</span><span class="p">);</span> <span class="c1">// Do nothing till SysTick_Handler been been called at least 10 times</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></p>
+]]></content>
+  </entry>
+  
+</feed>

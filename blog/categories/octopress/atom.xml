@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-05-29T11:00:43-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress: Backing Up Your Source Directory]]></title>
+    <link href="http://sushihangover.github.io/blog/octopress-backing-up-your-source-directory/"/>
+    <updated>2014-02-12T21:00:12-08:00</updated>
+    <id>http://sushihangover.github.io/blog/octopress-backing-up-your-source-directory</id>
+    <content type="html"><![CDATA[<p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
+
+<p>My Missing Octopress Items:</p>
+
+<blockquote><ul>
+<li>Image Auto Thumbnailing</li>
+<li>Image Popups from those Thumbnails</li>
+<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
+<li>Auto source directory version control</li>
+</ul>
+</blockquote>
+
+<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
+
+<p>Here is my quick way of doing this using the deployment repo.</p>
+
+<blockquote><ul>
+<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
+<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
+<li>Commit and Push after you do a <em>rake deploy</em></li>
+</ul>
+</blockquote>
+
+<p>So lets add a source branch to your GitHub Page repo:
+        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Get your current repo and place it into a a temp directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git clone &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; foo.bar
+</span><span class='line'><span class="nb">pushd </span>foo.bar&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Add a new branch to your <span class="nb">local </span>copy&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git checkout -b <span class="nb">source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Delete all the existing context&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rm -Rf *&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Commit all those deletes&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial Empty <span class="nb">source </span>branch<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Push that emopty branch back to GitHub&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git push
+</span><span class='line'><span class="nb">popd</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;GEt rid of that temp. directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rm -Rf foo.bar
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Move your existing <span class="nb">source </span>directory out of the way <span class="k">for</span> now&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;mv <span class="nb">source </span>source.org&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Clone your GitHub Page repo BUT only a single branch of it, only the <span class="nb">source </span>branch and into a directory named <span class="nb">source</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Note: The <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span><span class="p">&amp;</span>rdquo<span class="p">;</span> options are not used by most git users but can make speciallized repo copies quick and fool-proof&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git clone <span class="p">&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span> &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; <span class="nb">source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Now copy your existing <span class="nb">source </span>files into this empty repo directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;cp -R source.org <span class="nb">source</span>
+</span><span class='line'><span class="nb">pushd source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Commit and Push your sources files to GitHub&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial <span class="nb">source </span>branch commit<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Add your commit comment and save&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git push
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
+
+<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:
+<code>
+pushd source; git commit --all --message="Blog updated"; git push; popd
+</code>
+I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
+
+<ul>
+<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
