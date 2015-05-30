@@ -228,6 +228,44 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/git-accept-another-branchs-changes-without-generated-conflicts/">Git - Accept Another Branch's Changes Without Generated Conflicts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-24T17:54:37-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
+
+<p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge -Xtheirs contentpipeline/version123
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a></h1>
     
     
@@ -585,43 +623,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/arm-starts-move-to-llvm/">ARM Starts Move to LLVM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-10T22:03:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:03 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
-
-<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
-
-<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
-
-<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
-
-<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -649,11 +650,11 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
       </li>
     
       <li class="post">
-        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
+        <a href="/blog/git-accept-another-branchs-changes-without-generated-conflicts/">Git - Accept Another Branch's Changes Without Generated Conflicts</a>
       </li>
     
       <li class="post">
-        <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
+        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
       </li>
     
   </ul>

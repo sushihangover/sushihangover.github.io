@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Diffmerge - SushiHangover</title>
+  <title>Git - Accept Another Branch's Changes Without Generated Conflicts - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: diffmerge">
+  <meta name="description" content="I not sure when exactly -Xtheirs was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/diffmerge/">
+  <link rel="canonical" href="http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -64,35 +64,81 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Diffmerge</h1>
+    
+      <h1 class="entry-title">Git - Accept Another Branch's Changes Without Generated Conflicts</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-24T17:54:37-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:54 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
 
-  
-  <h2>2014</h2>
+<p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>
 
-<article>
-  
-<h1><a href="/blog/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
-<time datetime="2014-02-19T20:56:11-08:00" pubdate><span class='month'>Feb</span> <span class='day'>19</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/beyond-compare/'>beyond compare</a>, <a class='category' href='/blog/categories/diff/'>diff</a>, <a class='category' href='/blog/categories/diffmerge/'>diffmerge</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/meld/'>meld</a>, <a class='category' href='/blog/categories/merge/'>merge</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge -Xtheirs contentpipeline/version123
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-05-24T17:54:37-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:54 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts/" data-via="" data-counturl="http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/" title="Previous Post: GCC 4.9 is out with ARM enhancements">&laquo; GCC 4.9 is out with ARM enhancements</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/" title="Next Post: Add a local repo as a remote to a different local repo">Add a local repo as a remote to a different local repo &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>
