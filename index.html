@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to &hellip;">
+  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,9 +87,9 @@
   </header>
 
 
-  <div class="entry-content"><p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to the large number of changes that occur on that repo.</p>
+  <div class="entry-content"><p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
-<p>While I do different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
+<p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
@@ -106,7 +106,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>One local clone is named &lsquo;PlayScript-master&rsquo; and the other is &lsquo;PlayScript&rsquo;.</p>
+<p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
 <p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
 
@@ -127,7 +127,95 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>FYI: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+<p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
+
+<p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-28T18:24:08-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:24 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git reset --merge ORIG_HEAD
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or, depending upon your git version, you can also:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge --abort
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a Local Repo as a Remote to a Different Local Repo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-27T19:34:36-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
+
+<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -534,262 +622,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/qemu-machine-and-cpu-list/">Qemu Machine and CPU List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-05T12:27:42-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:27 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -cpu help
-</span><span class='line'>No machine specified, and there is no default.
-</span><span class='line'>Use -machine help to list supported machines!</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So now, you will need to include any machine (&ndash;machine help) in order to see the cpu listing, using the ARM Cortex-M0+ dev board that I am putting together (<em>sushi-m0plus-board</em>), you can get the cpu listing.</p>
-
-<blockquote><p>The cores; cortex-m0, cortex-m0+ and machine; sushi-m0plus-board, are my additions and not apart of the QEMU main-line code.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --machine sushi-m0plus-board -cpu help
-</span><span class='line'>Available CPUs:
-</span><span class='line'>  arm1026
-</span><span class='line'>  arm1136
-</span><span class='line'>  arm1136-r2
-</span><span class='line'>  arm1176
-</span><span class='line'>  arm11mpcore
-</span><span class='line'>  arm926
-</span><span class='line'>  arm946
-</span><span class='line'>  cortex-a15
-</span><span class='line'>  cortex-a8
-</span><span class='line'>  cortex-a9
-</span><span class='line'>  cortex-m0
-</span><span class='line'>  cortex-m0plus
-</span><span class='line'>  cortex-m3
-</span><span class='line'>  pxa250
-</span><span class='line'>  pxa255
-</span><span class='line'>  pxa260
-</span><span class='line'>  pxa261
-</span><span class='line'>  pxa262
-</span><span class='line'>  pxa270-a0
-</span><span class='line'>  pxa270-a1
-</span><span class='line'>  pxa270
-</span><span class='line'>  pxa270-b0
-</span><span class='line'>  pxa270-b1
-</span><span class='line'>  pxa270-c0
-</span><span class='line'>  pxa270-c5
-</span><span class='line'>  sa1100
-</span><span class='line'>  sa1110
-</span><span class='line'>  ti925t</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/bkpt-service-calls-on-the-cortex-m0/">BKPT: Printf Service Calls on the Cortex-M0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-26T20:54:58-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&#34;OpenJTAG&#34;" alt="&#34;OpenJTAG&#34;"></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
-</span><span class='line'>{
-</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /* 8K */
-</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /* 2K */
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
-
-<p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h>
-</span><span class='line'>#include "printf_svc.h"
-</span><span class='line'>
-</span><span class='line'>int main (void)
-</span><span class='line'>{
-</span><span class='line'>  printf("BKPT Hello World\n");
-</span><span class='line'>  printf("How small is this?\n");
-</span><span class='line'>  
-</span><span class='line'>  svcExit(); // QEMU system exit
-</span><span class='line'>  
-</span><span class='line'>  while (1) { };
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
-</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include "printf.h"
-</span><span class='line'>#include "printf_svc.h"
-</span><span class='line'>
-</span><span class='line'>void putc (void* p, char c)
-</span><span class='line'>{
-</span><span class='line'>  svcPutChar(&c);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main (void)
-</span><span class='line'>{
-</span><span class='line'>  set_putc(putc);
-</span><span class='line'>  printf("BKPT Hello World\n");
-</span><span class='line'>  printf("How small is this?\n");
-</span><span class='line'>  
-</span><span class='line'>  svcExit(); // QEMU system exit
-</span><span class='line'>  
-</span><span class='line'>  while (1) { };
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
-</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
-</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
-</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>A quick break down of elf size:</p>
-
-<p><strong>text</strong>: your code, vector table plus constants.</p>
-
-<p><strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)</p>
-
-<p><strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -809,19 +641,19 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
       </li>
     
       <li class="post">
+        <a href="/blog/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a Local Repo as a Remote to a Different Local Repo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
       </li>
     
       <li class="post">
         <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
       </li>
     
   </ul>

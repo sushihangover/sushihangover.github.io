@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ARM: LLVM and Why No GPL - SushiHangover</title>
+  <title>Undo Your Most Recent (Screwed Up) Git Merge - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM. Seems that more of the GPL-only mindset are upset &hellip;">
+  <meta name="description" content="Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/">
+  <link rel="canonical" href="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">ARM: LLVM and Why No GPL</h1>
+      <h1 class="entry-title">Undo Your Most Recent (Screwed Up) Git Merge</h1>
     
     
       <p class="meta">
@@ -77,20 +77,28 @@
 
 
 
-<time class='entry-date' datetime='2014-04-11T07:28:16-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:28 am</span></time>
+<time class='entry-date' datetime='2015-05-28T18:24:08-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:24 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
+<div class="entry-content"><p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
 
-<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git reset --merge ORIG_HEAD
+</span></code></pre></td></tr></table></div></figure>
 
-<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
 
-<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
+<p>Or, depending upon your git version, you can also:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge --abort
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
 </div>
 
 
@@ -106,12 +114,12 @@
 
 
 
-<time class='entry-date' datetime='2014-04-11T07:28:16-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:28 am</span></time>
+<time class='entry-date' datetime='2015-05-28T18:24:08-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:24 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/clang/'>clang</a>, <a class='category' href='/blog/categories/gcc/'>gcc</a>, <a class='category' href='/blog/categories/gpl/'>gpl</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>
+    <a class='category' href='/blog/categories/git/'>git</a>
   
 </span>
 
@@ -120,7 +128,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/" data-via="" data-counturl="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/" data-via="" data-counturl="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/" >Tweet</a>
   
   
   
@@ -129,10 +137,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/arm-starts-move-to-llvm/" title="Previous Post: ARM starts move to LLVM">&laquo; ARM starts move to LLVM</a>
+        <a class="basic-alignment left" href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/" title="Previous Post: Add a local repo as a remote to a different local repo">&laquo; Add a local repo as a remote to a different local repo</a>
       
       
-        <a class="basic-alignment right" href="/blog/heartbleed-explanation/" title="Next Post: XKCD: Heartbleed Explanation">XKCD: Heartbleed Explanation &raquo;</a>
+        <a class="basic-alignment right" href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/" title="Next Post: Keeping a GitHub fork up to date with origin repo">Keeping a GitHub fork up to date with origin repo &raquo;</a>
       
     </p>
   </footer>

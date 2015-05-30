@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ARM: LLVM and Why No GPL - SushiHangover</title>
+  <title>Add a Local Repo as a Remote to a Different Local Repo - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM. Seems that more of the GPL-only mindset are upset &hellip;">
+  <meta name="description" content="Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo? Will, you are in luck, git allows a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/">
+  <link rel="canonical" href="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">ARM: LLVM and Why No GPL</h1>
+      <h1 class="entry-title">Add a Local Repo as a Remote to a Different Local Repo</h1>
     
     
       <p class="meta">
@@ -77,20 +77,28 @@
 
 
 
-<time class='entry-date' datetime='2014-04-11T07:28:16-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:28 am</span></time>
+<time class='entry-date' datetime='2015-05-27T19:34:36-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:34 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
+<div class="entry-content"><p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
 
-<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
+<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
 
-<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
+</span></code></pre></td></tr></table></div></figure>
 
-<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -106,12 +114,12 @@
 
 
 
-<time class='entry-date' datetime='2014-04-11T07:28:16-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:28 am</span></time>
+<time class='entry-date' datetime='2015-05-27T19:34:36-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:34 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/clang/'>clang</a>, <a class='category' href='/blog/categories/gcc/'>gcc</a>, <a class='category' href='/blog/categories/gpl/'>gpl</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>
+    <a class='category' href='/blog/categories/git/'>git</a>
   
 </span>
 
@@ -120,7 +128,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/" data-via="" data-counturl="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/" data-via="" data-counturl="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/" >Tweet</a>
   
   
   
@@ -129,10 +137,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/arm-starts-move-to-llvm/" title="Previous Post: ARM starts move to LLVM">&laquo; ARM starts move to LLVM</a>
+        <a class="basic-alignment left" href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/" title="Previous Post: GCC 4.9 is out with ARM enhancements">&laquo; GCC 4.9 is out with ARM enhancements</a>
       
       
-        <a class="basic-alignment right" href="/blog/heartbleed-explanation/" title="Next Post: XKCD: Heartbleed Explanation">XKCD: Heartbleed Explanation &raquo;</a>
+        <a class="basic-alignment right" href="/blog/undo-your-most-recent-screwed-up-git-merge/" title="Next Post: Undo your most recent (screwed up) git merge">Undo your most recent (screwed up) git merge &raquo;</a>
       
     </p>
   </footer>

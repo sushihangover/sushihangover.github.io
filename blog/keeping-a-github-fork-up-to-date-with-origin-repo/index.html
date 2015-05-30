@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to &hellip;">
+  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,9 +84,9 @@
   </header>
 
 
-<div class="entry-content"><p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to the large number of changes that occur on that repo.</p>
+<div class="entry-content"><p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
-<p>While I do different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
+<p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
@@ -103,7 +103,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>One local clone is named &lsquo;PlayScript-master&rsquo; and the other is &lsquo;PlayScript&rsquo;.</p>
+<p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
 <p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
 
@@ -124,7 +124,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>FYI: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+<p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
+
+<p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
 </div>
 
 
@@ -163,7 +165,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/" title="Previous Post: GCC 4.9 is out with ARM enhancements">&laquo; GCC 4.9 is out with ARM enhancements</a>
+        <a class="basic-alignment left" href="/blog/undo-your-most-recent-screwed-up-git-merge/" title="Previous Post: Undo your most recent (screwed up) git merge">&laquo; Undo your most recent (screwed up) git merge</a>
       
       
     </p>
@@ -183,19 +185,19 @@
       </li>
     
       <li class="post">
+        <a href="/blog/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a Local Repo as a Remote to a Different Local Repo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
       </li>
     
       <li class="post">
         <a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-05-29T12:39:54-07:00</updated>
+  <updated>2015-05-29T18:41:53-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,9 +18,9 @@
     <link href="http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
     <updated>2015-05-29T17:22:05-07:00</updated>
     <id>http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo</id>
-    <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain do to the large number of changes that occur on that repo.</p>
+    <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
-<p>While I do different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
+<p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
@@ -36,7 +36,7 @@
 </span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>One local clone is named &lsquo;PlayScript-master&rsquo; and the other is &lsquo;PlayScript&rsquo;.</p>
+<p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
 <p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
 
@@ -56,7 +56,49 @@
 </span><span class='line'>make install
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>FYI: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+<p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
+
+<p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Undo Your Most Recent (Screwed Up) Git Merge]]></title>
+    <link href="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/"/>
+    <updated>2015-05-28T18:24:08-07:00</updated>
+    <id>http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge</id>
+    <content type="html"><![CDATA[<p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git reset <span class="p">&amp;</span>ndash<span class="p">;</span>merge ORIG_HEAD
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Or, depending upon your git version, you can also:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge <span class="p">&amp;</span>ndash<span class="p">;</span>abort
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Add a Local Repo as a Remote to a Different Local Repo]]></title>
+    <link href="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
+    <updated>2015-05-27T19:34:36-07:00</updated>
+    <id>http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
+    <content type="html"><![CDATA[<p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
+
+<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
+</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   
@@ -292,160 +334,6 @@ class Git &lt; Formula
 end
 </code></pre></noscript></div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress: Backing Up Your Source Directory]]></title>
-    <link href="http://sushihangover.github.io/blog/octopress-backing-up-your-source-directory/"/>
-    <updated>2014-02-12T21:00:12-08:00</updated>
-    <id>http://sushihangover.github.io/blog/octopress-backing-up-your-source-directory</id>
-    <content type="html"><![CDATA[<p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
-
-<p>My Missing Octopress Items:</p>
-
-<blockquote><ul>
-<li>Image Auto Thumbnailing</li>
-<li>Image Popups from those Thumbnails</li>
-<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
-<li>Auto source directory version control</li>
-</ul>
-</blockquote>
-
-<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
-
-<p>Here is my quick way of doing this using the deployment repo.</p>
-
-<blockquote><ul>
-<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
-<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
-<li>Commit and Push after you do a <em>rake deploy</em></li>
-</ul>
-</blockquote>
-
-<p>So lets add a source branch to your GitHub Page repo:
-        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Get your current repo and place it into a a temp directory&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git clone &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; foo.bar
-</span><span class='line'><span class="nb">pushd </span>foo.bar&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Add a new branch to your <span class="nb">local </span>copy&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git checkout -b <span class="nb">source</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Delete all the existing context&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;rm -Rf *&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Commit all those deletes&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial Empty <span class="nb">source </span>branch<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Push that emopty branch back to GitHub&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git push
-</span><span class='line'><span class="nb">popd</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;GEt rid of that temp. directory&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;rm -Rf foo.bar
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Move your existing <span class="nb">source </span>directory out of the way <span class="k">for</span> now&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;mv <span class="nb">source </span>source.org&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Clone your GitHub Page repo BUT only a single branch of it, only the <span class="nb">source </span>branch and into a directory named <span class="nb">source</span>&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Note: The <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span><span class="p">&amp;</span>rdquo<span class="p">;</span> options are not used by most git users but can make speciallized repo copies quick and fool-proof&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git clone <span class="p">&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span> &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; <span class="nb">source</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Now copy your existing <span class="nb">source </span>files into this empty repo directory&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;cp -R source.org <span class="nb">source</span>
-</span><span class='line'><span class="nb">pushd source</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Commit and Push your sources files to GitHub&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial <span class="nb">source </span>branch commit<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Add your commit comment and save&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git push
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
-
-<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:
-<code>
-pushd source; git commit --all --message="Blog updated"; git push; popd
-</code>
-I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
-
-<ul>
-<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
