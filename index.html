@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-31T22:16:23-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="images/PlayscriptLogo.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
+
+<p>I will be migrating it to the Mono 4.x compiler in the days and weeks ahead before working on finishing and getting the ActionScript language side stable (feature complete?). Not really looking forwarded to the Mono 4.x migration as the number of internal API changes to the mcs compiler since the 3.2.0 release is quite extensive.</p>
+
+<p>If you want to compile and use the current 3.2.2002 release, just autogen.sh like normal.</p>
+
+<p>Note: Due to dependency updates on OS-X since Mono 3.2 was release, I had to supply &ldquo; <u>&ndash;with-tls</u>&rdquo; option as it was auto-selecting <strong>__thread</strong> instead of <strong>_posix</strong>.</p>
+
+<pre><code>./autogen.sh --with-tls=posix --enable-nls=no --prefix=/Users/administrator/mono-install
+</code></pre>
+
+<p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -588,41 +630,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/arm-llvm-and-why-no-gpl/">ARM: LLVM and Why No GPL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-11T07:28:16-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:28 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
-
-<p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
-
-<p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
-
-<p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -638,6 +645,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a>
       </li>
     
@@ -651,10 +662,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/blog/git-accept-another-branchs-changes-without-generated-conflicts/">Git - Accept Another Branch's Changes Without Generated Conflicts</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a>
       </li>
     
   </ul>

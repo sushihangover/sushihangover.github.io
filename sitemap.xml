@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/blog/playscript-3-dot-2-2002-posted/</loc>
+    <lastmod>2015-05-31T22:16:23-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo/</loc>
     <lastmod>2015-05-29T17:22:05-07:00</lastmod>
   </url>
