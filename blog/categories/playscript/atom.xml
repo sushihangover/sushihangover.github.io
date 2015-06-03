@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T12:31:26-07:00</updated>
+  <updated>2015-06-03T12:33:18-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Playscript 3.2.3003 Posted]]></title>
+    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted/"/>
+    <updated>2015-06-03T19:22:01-07:00</updated>
+    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted</id>
+    <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler 3.2.3003 to <a href="https://github.com/sushihangover/playscript">Github</a> which fixes a bunch of build issues, including a clang/ld failure if you are running the latest and greatest version from Apple.</p>
+
+<p>Root repo : playscript-small-build.sh</p>
+
+<pre><code>./autogen.sh --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=$HOME/playscript-install
+make
+make install
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
