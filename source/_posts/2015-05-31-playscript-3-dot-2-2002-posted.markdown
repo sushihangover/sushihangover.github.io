@@ -8,7 +8,7 @@ categories:
 - PlayScript
 - Mono
 ---
-![](images/PlayscriptLogo.png)
+![](/images/PlayscriptLogo.png)
 
 I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.
 
