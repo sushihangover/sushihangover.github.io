@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Syntevo | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/syntevo/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T13:49:16-07:00</updated>
+  <updated>2015-06-03T13:53:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,11 +20,11 @@
     <id>http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/smartgit.png">  Surround your pullquote like this {" text to be quoted "}</p>
 
-<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is fast and clean&hellip;</p>
+<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
 
-<p>I&rsquo;ve used a couple of other git GUIs and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
+<p>I&rsquo;ve used a couple of <a href="http://www.git-scm.com/downloads/guis">other git GUIs</a> and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
 
-<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for noncommercial use, so download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
+<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for non-commercial use, so just download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
 ]]></content>
   </entry>
   
