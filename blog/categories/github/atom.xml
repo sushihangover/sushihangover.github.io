@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-05-31T22:34:39-07:00</updated>
+  <updated>2015-06-03T00:49:54-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
+    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted/"/>
+    <updated>2015-06-03T00:40:59-07:00</updated>
+    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted</id>
+    <content type="html"><![CDATA[<p><img src="images/PlayscriptLogo_small.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
+
+<p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
+
+<p>``./configure &ndash;with-mcs-docs=no &ndash;with-profile2=no &ndash;with-profile4=no &ndash;with-profile4_5=yes &ndash;with-moonlight=no &ndash;with-tls=posix &ndash;enable-nls=no &ndash;prefix=/Users/administrator/playscript-install</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.2002 Posted]]></title>
@@ -250,22 +265,6 @@ I&rsquo;ll be including this in the Github Page deploy plugin in the future so e
 <p>-R</p>
 
 <p><img src="http://sushihangover.github.io/images/PowerShellLogo.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript :What Happened to the Open Source Version on GitHub]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github/"/>
-    <updated>2013-12-27T19:04:55-08:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github</id>
-    <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
-
-<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
-I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
-
-<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
-
-<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
 ]]></content>
   </entry>
   
