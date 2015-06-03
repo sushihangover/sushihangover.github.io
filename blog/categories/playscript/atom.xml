@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T00:49:54-07:00</updated>
+  <updated>2015-06-03T00:53:55-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
     <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted/"/>
-    <updated>2015-06-03T00:40:59-07:00</updated>
+    <updated>2015-06-03T06:10:59-07:00</updated>
     <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted</id>
     <content type="html"><![CDATA[<p><img src="images/PlayscriptLogo_small.png" alt="" /></p>
 
@@ -24,7 +24,8 @@
 
 <p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
 
-<p>``./configure &ndash;with-mcs-docs=no &ndash;with-profile2=no &ndash;with-profile4=no &ndash;with-profile4_5=yes &ndash;with-moonlight=no &ndash;with-tls=posix &ndash;enable-nls=no &ndash;prefix=/Users/administrator/playscript-install</p>
+<pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
+</code></pre>
 ]]></content>
   </entry>
   
