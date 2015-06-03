@@ -109,6 +109,41 @@ make install
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/">SmartGit - the Best Git GUI There Is... And Its Free</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T13:06:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>1:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="./images/smartgit.png">  <a href="http://www.syntevo.com">Syntevo&rsquo;s</a> <a href="http://www.syntevo.com/smartgit/">SmartGit</a> is a Git client with Mercurial and Subversion support, and while I can not commit on its mg or svn support, its git and GitHub support is amazing. And the best thing is Surround your pullquote like this {&ldquo; text to be quoted &rdquo;} Commercial licenses seem to be very reasonable and on par with other commercial git products.</p>
+
+<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is fast and clean&hellip;</p>
+
+<p>I&rsquo;ve used a couple of other git GUIs and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
+
+<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for noncommercial use, so download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/playscript-3-dot-2-3001-posted/">PlayScript 3.2.3001 Posted</a></h1>
     
     
@@ -447,146 +482,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-22T18:35:15-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:35 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
-
-<p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;-)</p>
-
-<p>So what is listed in the man for &ldquo;-mslow-flash-data&rdquo; is:
-<strong>Assume loading data from flash is slower than fetching instruction. Therefore literal load is minimized for better performance. This option is only supported when compiling for ARMv7 M-profile and off by default.</strong></p>
-
-<p><span class='pullquote-right' data-pullquote='Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-data? Only M3 and M4x support? Need to find the commit(s) for this feature.'>
-Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-data? Only M3 and M4x support? Need to find the commit(s) for this feature.</p>
-
-<p>Also everyone always loves items like: <strong>A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors</strong>. Free code size reduction is always a great thing when during with those dirt-cheap <a href="http://www.nuvoton.com/NuvotonMOSS/Community/ProductInfo.aspx?tp_GUID=5dbf7d7a-b6df-4fe1-91c9-063449500ce7">Nuvoton NuMicro M0 chips</a>, well, assuming it comes with using &ldquo;-Os&rdquo; and not with a speed impact when throughput matters more&hellip; small is good, but it is not always what everyone needs.</p>
-
-<p>And the &ldquo;<a href="http://en.wikipedia.org/wiki/Register_allocation">Local Register Allocator</a>&rdquo; is turned on for ARM by default:
-<code>The Local Register Allocator, introduced in GCC 4.8.0 for ia32 and x86-64 targets only, is now used also on the Aarch64, ARM, S/390 and ARC targets by default..</code>
-</span></p>
-
-<p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>clang: error: unsupported option '-static-libgcc'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Well, duh&hellip;, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build using the same configure options as 4.8.x. Manually hacking on the make files to get passed this and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &ldquo;-static-libgcc&rdquo; issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
-
-<p>So I build a native version on the master branch (4.10.x now):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./gcc --version
-</span><span class='line'>gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright (C) 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And then used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;-)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./arm-none-eabi-gcc --version
-</span><span class='line'>arm-none-eabi-gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright (C) 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</span><span class='line'>...
-</span><span class='line'>  Known ARM architectures (for use with the -march= option):
-</span><span class='line'>    armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te armv6
-</span><span class='line'>    armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7 armv7-a armv7-m
-</span><span class='line'>    armv7-r armv7e-m armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
-
-<p>FYI: I&rsquo;m on OS-X 10.9.2:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Software  OS X 10.9.2 (13C64)
-</span><span class='line'>clang --version
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>gcc --version
-</span><span class='line'>Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>Target: x86_64-apple-darwin13.1.0
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ARM enhancements from the change list include:</p>
-
-<ul>
-<li><strong>ARM:</strong></li>
-<li>Use of Advanced SIMD (Neon) for 64-bit scalar computations has been disabled by default. This was found to generate better code in only a small number of cases. It can be turned back on with the -mneon-for-64bits option.</li>
-<li>Further support for the ARMv8-A architecture, notably implementing the restriction around IT blocks in the Thumb32 instruction set has been added. The -mrestrict-it option can be used with -march=armv7-a or the -march=armv7ve options to make code generation fully compatible with the deprecated instructions in ARMv8-A.</li>
-<li>Support has now been added for the ARMv7ve variant of the architecture. This can be used by the -march=armv7ve option.</li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics and are available through the -march=armv8-a+crc and mfpu=crypto-neon-fp-armv8 options.</li>
-<li>LRA is now on by default for the ARM target. This can be turned off using the -mno-lra option. This option is purely transitionary command line option and will be removed in a future release. We are interested in any bug reports regarding functional and performance regressions with LRA.</li>
-<li><strong>A new option -mslow-flash-data to improve performance of programs fetching data on slow flash memory has now been introduced for the ARMv7-M profile cores.</strong></li>
-<li>A new option -mpic-data-is-text-relative for targets that allows data segments to be relative to text segments has been added. This is on by default for all targets except VxWorks RTP.</li>
-<li>A number of infrastructural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-<li>GCC now supports Cortex-A12 and the Cortex-R7 through the -mcpu=cortex-a12 and -mcpu=cortex-r7 options.</li>
-<li>GCC now has tuning for the Cortex-A57 and Cortex-A53 through the -mcpu=cortex-a57 and -mcpu=cortex-a53 options.
-Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option. Similar support was added for the combination of Cortex-A15 and Cortex-A7 through the -mcpu=cortex-a15.cortex-a7 option.</li>
-<li>Further performance optimizations for the Cortex-A15 and the Cortex-M4 have been added.</li>
-<li><p><strong> A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors.</strong></p></li>
-<li><p><strong>AArch64:</strong></p></li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics. These are enabled when the architecture supports these and are available through the -march=armv8-a+crc and -march=armv8-a+crypto options.</li>
-<li>Initial support for ILP32 has now been added to the compiler. This is now available through the command line option -mabi=ilp32. + Support for ILP32 is considered experimental as the ABI specification is still beta.</li>
-<li>Coverage of more of the ISA including the SIMD extensions has been added. The Advanced SIMD intrinsics have also been improved.</li>
-<li>The new local register allocator (LRA) is now on by default for the AArch64 backend.</li>
-<li>The REE (Redundant extension elimination) pass has now been enabled by default for the AArch64 backend.</li>
-<li>Tuning for the Cortex-A53 and Cortex-A57 has been improved.</li>
-<li>Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option.</li>
-<li>A number of structural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -606,6 +501,10 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
       </li>
     
       <li class="post">
+        <a href="/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/">SmartGit - the Best Git GUI There Is... And Its Free</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/playscript-3-dot-2-3001-posted/">PlayScript 3.2.3001 Posted</a>
       </li>
     
@@ -615,10 +514,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
     
       <li class="post">
         <a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a>
       </li>
     
   </ul>

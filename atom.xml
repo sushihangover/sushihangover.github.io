@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T12:33:18-07:00</updated>
+  <updated>2015-06-03T13:45:50-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -28,6 +28,21 @@
 make
 make install
 </code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SmartGit - the Best Git GUI There Is... And Its Free]]></title>
+    <link href="http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
+    <updated>2015-06-03T13:06:35-07:00</updated>
+    <id>http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
+    <content type="html"><![CDATA[<p><img class="left" src="./images/smartgit.png">  <a href="http://www.syntevo.com">Syntevo&rsquo;s</a> <a href="http://www.syntevo.com/smartgit/">SmartGit</a> is a Git client with Mercurial and Subversion support, and while I can not commit on its mg or svn support, its git and GitHub support is amazing. And the best thing is Surround your pullquote like this {&ldquo; text to be quoted &rdquo;} Commercial licenses seem to be very reasonable and on par with other commercial git products.</p>
+
+<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is fast and clean&hellip;</p>
+
+<p>I&rsquo;ve used a couple of other git GUIs and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
+
+<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for noncommercial use, so download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
 ]]></content>
   </entry>
   
@@ -709,47 +724,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 <p><img class="right" src="http://sushihangover.github.io/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;">What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
 
 <p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New ARM 'Machines' in QEMU 2.0]]></title>
-    <link href="http://sushihangover.github.io/blog/new-arm-features-in-qemu-2-dot-0/"/>
-    <updated>2014-03-14T23:32:19-07:00</updated>
-    <id>http://sushihangover.github.io/blog/new-arm-features-in-qemu-2-dot-0</id>
-    <content type="html"><![CDATA[<p><a href="http://sushihangover.github.io/images/QEMU_new_machine_large.png"><img class="left" src="http://sushihangover.github.io/images/QEMU_new_machine_small.png" title="&#34;QEMU 2.0 New ARM Machines&#34;" alt="&#34;QEMU 2.0 New ARM Machines&#34;"></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
-
-<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model some cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
-
-<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
-</span><span class='line'>QEMU emulator version 1.7.90, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There are a few new machines available:
-    * canon-a1100          Canon PowerShot A1100 IS
-    * cubieboard           cubietech cubieboard
-    * virt                 ARM Virtual Machine</p>
-
-<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
-
-<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
-
-<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
-
-<p>The change log for ARM shows the following:
-    * Support for &ldquo;-M virt&rdquo;, a board type that only uses virtio devices
-    * Support for &ldquo;-cpu host&rdquo; when running under KVM
-    * Support for new 32-bit mode ARMv8 instructions in TCG
-    * Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
-    * Support for AArch64 user-mode emulation
-    * Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
-    * Support for the Canon PowerShot A1100 DIGIC board using &ldquo;-M canon-a1100&rdquo;
-    * Support for the allwinner-a10-based board &ldquo;-M cubieboard&rdquo;
-    * Support for flow control in the Cadence UART</p>
 ]]></content>
   </entry>
   
