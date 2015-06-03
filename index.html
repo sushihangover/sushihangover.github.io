@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the PlayScript compiler 3.2.3001 to Github which is a merge of the mono-3.2.3 tag into the playscript-mono branch. To speed up testing &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler 3.2.3003 to Github which fixes a bunch of build issues, including a clang/ld failure if you are running the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T19:22:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:22 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler 3.2.3003 to <a href="https://github.com/sushihangover/playscript">Github</a> which fixes a bunch of build issues, including a clang/ld failure if you are running the latest and greatest version from Apple.</p>
+
+<p>Root repo : playscript-small-build.sh
+    ./autogen.sh &ndash;with-mcs-docs=no &ndash;with-profile2=no &ndash;with-profile4=no &ndash;with-profile4_5=yes &ndash;with-moonlight=no &ndash;with-tls=posix &ndash;enable-nls=no &ndash;prefix=$HOME/playscript-install
+    make
+    make install</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -549,59 +585,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-17T23:20:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
-
-<p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
-
-<p>It appears that doing a checkout of tag &lsquo;v2.0.0&rsquo;, build and install will produce a binary that reports version 1.7.9</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status
-</span><span class='line'>HEAD detached at v2.0.0
-</span><span class='line'>nothing to commit, working directory clean
-</span><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 1.7.93, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I did a quick look and they are pulling the version during the ./configure stage so since I am always on the master (bleed-edge) branch, my installed version shows up as 1.7.9. You will need to checkout, <strong>configure</strong>, build and install to produce a binary that has the correct version (<del>QEMUVERSION</del>) assigned:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 2.0.0, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -617,6 +600,10 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/playscript-3-dot-2-3001-posted/">PlayScript 3.2.3001 Posted</a>
       </li>
     
@@ -630,10 +617,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
     
       <li class="post">
         <a href="/blog/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a Local Repo as a Remote to a Different Local Repo</a>
       </li>
     
   </ul>
