@@ -344,6 +344,76 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/git-commit-only-specific-staged-files/">Git - Commit Only Specific Staged Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-14T17:34:13-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I needed to commit a limited number of changes that were already staged.</p>
+
+<p>In the early days of git, I remember having to stash all the changes and pop only the changes that I need to commit and push. I&rsquo;m not sure when the &lsquo;&ndash;only&rsquo; option was added to commit, but it sure saves a bunch of extra steps:</p>
+
+<pre><code>git commit --only configure.in
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/git-overlay-a-directory-with-a-different-branch-version/">Git - Overlay a Directory With a Different Branch Version</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-11T16:10:28-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way to do it with just one git command.</p>
+
+<p>So using git ls-files and xargs this is my solution:</p>
+
+<pre><code>git ls-files |xargs -J %  git checkout -f mono-3.2.4 -- %
+</code></pre>
+
+<p>If anyone has a way to do this without using xargs I&rsquo;m all ears&hellip; ;-</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/gcc-4-dot-9-is-out-with-arm-enhancements/">GCC 4.9 Is Out With ARM Enhancements</a></h1>
     
     
@@ -524,94 +594,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --version
 </span><span class='line'>QEMU emulator version 2.0.0, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/0-60msps-logic-analyzer/">$30 60MSPS Logic Analyzer - Logic Pirate</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-15T20:16:37-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:16 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://http://dangerousprototypes.com"><img class="left" src="/images/dangerous_logo.png" title="&#34;Dangerous Prototypes&#34;" alt="&#34;Dangerous Prototypes&#34;"></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! - overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
-
-<p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
-
-<p>So check it out yourself:</p>
-
-<p>DP Blog post: <a href="http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/">http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/</a></p>
-
-<p>Product page: <a href="http://dangerousprototypes.com/docs/Logic_Pirate">http://dangerousprototypes.com/docs/Logic_Pirate</a></p>
-
-<p>Available from Seeed @ <a href="http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html">http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html</a></p>
-
-<p>Client Software: <a href="http://www.lxtreme.nl/ols/">Logic Sniffer (An alternative OLS client)</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/llvm-3-dot-4-1/">LLVM 3.4.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-12T06:05:07-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:05 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://heartbleed.com"><img class="left" src="/images/llvm_logo_small.png" title="&#34;LLVM&#34;" alt="&#34;LLVM&#34;"></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
-
-<p><span class='pullquote-right' data-pullquote='LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.'>
-Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.
-</span></p>
-
-<p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
-
-<p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./clang --version
-</span><span class='line'>clang version 3.5.0 
-</span><span class='line'>Target: arm-none--eabi
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
 
 </div>
   

@@ -25,6 +25,14 @@
     <lastmod>2015-05-24T17:54:37-07:00</lastmod>
   </url>
   <url>
+    <loc>http://sushihangover.github.io/blog/git-commit-only-specific-staged-files/</loc>
+    <lastmod>2015-05-14T17:34:13-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/git-overlay-a-directory-with-a-different-branch-version/</loc>
+    <lastmod>2015-05-11T16:10:28-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements/</loc>
     <lastmod>2014-04-22T18:35:15-07:00</lastmod>
   </url>
@@ -366,5 +374,17 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/arm-none-eabi/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/5/</loc>
   </url>
 </urlset>
