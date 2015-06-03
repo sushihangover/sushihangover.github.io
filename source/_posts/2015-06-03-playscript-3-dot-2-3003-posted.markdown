@@ -4,6 +4,8 @@ title: "Playscript 3.2.3003 Posted"
 date: 2015-06-03 19:22:01 -0700
 comments: true
 categories: 
+- playscript
+- github
 ---
 ![](/images/PlayscriptLogo_small.png) 
 
