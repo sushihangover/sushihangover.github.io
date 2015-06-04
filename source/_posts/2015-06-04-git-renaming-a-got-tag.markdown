@@ -1,19 +1,19 @@
 ---
 layout: post
-title: "Git - Renaming a got tag"
+title: "Git - Renaming a git tag"
 date: 2015-06-04 07:39:49 -0700
 comments: true
 categories: 
 - git
 ---
--{% img left http://sushihangover.github.io/images/gitlogo.png %}  Everyone screws up, and that comes to finger flops when typing that new tag name. 
+{% img left http://sushihangover.github.io/images/gitlogo.png %}  Everyone screws up, and that comes to finger flops when typing that new tag name. 
 
 If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:
 
     git tag new_tag_name old_tag_name
     git tag -d old_tag_name
 
-But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an ''empty' source. Assuming your remote is named origin (git remote -v), than this what you need to do (REMEMBER TO INCLUDE THAT **COLON**):
+But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an ''empty' source. Assuming your remote is named origin (git remote -v), than this what you need to do (<u>REMEMBER TO INCLUDE THAT **COLON**</u>):
 
     git push origin :refs/tags/old_tag_name
 
