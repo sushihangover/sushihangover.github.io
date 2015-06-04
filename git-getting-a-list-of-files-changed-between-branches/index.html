@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Merge - SushiHangover</title>
+  <title>Git - Getting a List of Files Changed Between Branches - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: merge">
+  <meta name="description" content="Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/merge/">
+  <link rel="canonical" href="http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -76,36 +76,106 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Merge</h1>
+    
+      <h1 class="entry-title">Git - Getting a List of Files Changed Between Branches</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-04T07:01:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:01 am</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff option:</p>
 
-  
-  <h2>2014</h2>
+<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6
 
-<article>
-  
-<h1><a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
-<time datetime="2014-02-19T20:56:11-08:00" pubdate><span class='month'>Feb</span> <span class='day'>19</span> <span class='year'>2014</span></time>
+configure.in
+mcs/class/Facades/Makefile
+mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
+mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
+mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Makefile
+...
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/beyond-compare/'>beyond compare</a>, <a class='category' href='/blog/categories/diff/'>diff</a>, <a class='category' href='/blog/categories/diffmerge/'>diffmerge</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/meld/'>meld</a>, <a class='category' href='/blog/categories/merge/'>merge</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a></span>
-</footer>
+<p>A quickie to get the number of files changed:</p>
 
+<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6|wc -l
+      28
+</code></pre>
 
-</article>
+<p>And using the &lsquo;&ndash;name-status&rsquo; option can get you a nice two column output with the change type attribute with each file name, makes it easy to pipe to those maintenace scripts.</p>
 
+<pre><code>git diff --name-status mono-3.2.5 mono-3.2.6
+M       configure.in
+M       mcs/class/Facades/Makefile
+M       mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
+A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
+</code></pre>
+
+<p><strong>Note</strong>: You can feed the &lsquo;&ndash;no-color&rsquo; option to make sure that none of those ansi escape codes get send down-stream in your pipe.</p>
+
+<p><strong>Note</strong>: &lsquo;&ndash;'porcelain&rsquo; works within the diff mode sub-option but not as a primary option.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-04T07:01:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:01 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/" data-via="" data-counturl="http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/playscript-3-dot-2-5001-posted/" title="Previous Post: Playscript 3.2.5001 Posted">&laquo; Playscript 3.2.5001 Posted</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -189,7 +259,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/';
+        var disqus_url = 'http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
