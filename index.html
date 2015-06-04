@@ -123,7 +123,7 @@ playscript-3.2.6001
       
   <header>
     
-      <h1 class="entry-title"><a href="/git-renaming-a-got-tag/">Git - Renaming a Got Tag</a></h1>
+      <h1 class="entry-title"><a href="/git-renaming-a-got-tag/">Git - Renaming a Git Tag</a></h1>
     
     
       <p class="meta">
@@ -139,7 +139,7 @@ playscript-3.2.6001
   </header>
 
 
-  <div class="entry-content"><p>-<img class="left" src="http://sushihangover.github.io/images/gitlogo.png">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
 
 <p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
 
@@ -147,7 +147,7 @@ playscript-3.2.6001
 git tag -d old_tag_name
 </code></pre>
 
-<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (REMEMBER TO INCLUDE THAT <strong>COLON</strong>):</p>
+<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (<u>REMEMBER TO INCLUDE THAT <strong>COLON</strong></u>):</p>
 
 <pre><code>git push origin :refs/tags/old_tag_name
 </code></pre>
@@ -532,7 +532,7 @@ make install
       </li>
     
       <li class="post">
-        <a href="/git-renaming-a-got-tag/">Git - Renaming a Got Tag</a>
+        <a href="/git-renaming-a-got-tag/">Git - Renaming a Git Tag</a>
       </li>
     
       <li class="post">
