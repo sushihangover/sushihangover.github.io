@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.4001 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-4001-posted/"/>
     <updated>2015-06-03T20:04:56-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-4001-posted</id>
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
 
 <p>Have fun&hellip;</p>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.3003 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-3003-posted/"/>
     <updated>2015-06-03T19:22:01-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-3003-posted</id>
     <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler 3.2.3003 to <a href="https://github.com/sushihangover/playscript">Github</a> which fixes a bunch of build issues, including a clang/ld failure if you are running the latest and greatest version from Apple.</p>
@@ -44,9 +44,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-3001-posted/"/>
     <updated>2015-06-03T06:10:59-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-3001-posted</id>
     <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
@@ -60,9 +60,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.2002 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-2002-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/"/>
     <updated>2015-05-31T22:16:23-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-2002-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-2002-posted</id>
     <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
@@ -82,9 +82,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Keeping a GitHub Fork Up to Date With Origin Repo]]></title>
-    <link href="http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
+    <link href="http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
     <updated>2015-05-29T17:22:05-07:00</updated>
-    <id>http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo</id>
+    <id>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo</id>
     <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
 <p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>

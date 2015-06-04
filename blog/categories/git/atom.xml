@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[SmartGit - the Best Git GUI There Is... And Its Free]]></title>
-    <link href="http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
+    <link href="http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
     <updated>2015-06-03T15:06:35-07:00</updated>
-    <id>http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
+    <id>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/smartgit.png">http://sushihangover.github.io/images/smartgit.png</a>">  Surround your pullquote like this {" text to be quoted "}</p>
 
 <p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
@@ -30,9 +30,9 @@
   
   <entry>
     <title type="html"><![CDATA[Keeping a GitHub Fork Up to Date With Origin Repo]]></title>
-    <link href="http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
+    <link href="http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
     <updated>2015-05-29T17:22:05-07:00</updated>
-    <id>http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo</id>
+    <id>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo</id>
     <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
 <p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
@@ -79,9 +79,9 @@
   
   <entry>
     <title type="html"><![CDATA[Undo Your Most Recent (Screwed Up) Git Merge]]></title>
-    <link href="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/"/>
+    <link href="http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge/"/>
     <updated>2015-05-28T18:24:08-07:00</updated>
-    <id>http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge</id>
+    <id>http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge</id>
     <content type="html"><![CDATA[<p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -100,9 +100,9 @@
   
   <entry>
     <title type="html"><![CDATA[Add a Local Repo as a Remote to a Different Local Repo]]></title>
-    <link href="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
+    <link href="http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
     <updated>2015-05-27T19:34:36-07:00</updated>
-    <id>http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
+    <id>http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
     <content type="html"><![CDATA[<p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
 
 <p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
@@ -119,9 +119,9 @@
   
   <entry>
     <title type="html"><![CDATA[Git - Accept Another Branch's Changes Without Generated Conflicts]]></title>
-    <link href="http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts/"/>
+    <link href="http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts/"/>
     <updated>2015-05-24T17:54:37-07:00</updated>
-    <id>http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts</id>
+    <id>http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts</id>
     <content type="html"><![CDATA[<p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
 
 <p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>

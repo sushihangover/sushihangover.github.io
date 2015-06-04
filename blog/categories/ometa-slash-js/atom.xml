@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ometa/js | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ometa-slash-js/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OMeta Binary Data Parsing]]></title>
-    <link href="http://sushihangover.github.io/blog/ometa-binary-data-parsing/"/>
+    <link href="http://sushihangover.github.io/ometa-binary-data-parsing/"/>
     <updated>2014-02-10T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/blog/ometa-binary-data-parsing</id>
+    <id>http://sushihangover.github.io/ometa-binary-data-parsing</id>
     <content type="html"><![CDATA[<p><a href="http://joshondesign.com/">Josh Marinacci </a>has a blog post concerning using OMeta to parse binary data and while there was not a complete cut/paste of all the Javascript code needed to run it in <a href="http://tinlizzie.org/ometa-js">OMeta/JS</a>, I saved his grammar for review as I was working on binary parsing using an OMeta that was using C# as the host language. Recently I give the link of his posting to someone else, but turns out Josh&rsquo;s blog was offline (crashed?).  (Update; Appears his blog is working again, so you can refer to the link below for his original post)</p>
 
 <p>So I dug up what I had and whipped up an OMeta/JS example for a complete working proof of concept and here are the results. I am not a JavaScript kind-of-guy, so be nice regarding the code. ;-)</p>

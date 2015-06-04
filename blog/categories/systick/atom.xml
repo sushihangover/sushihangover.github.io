@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Systick | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/systick/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cortex-M0 & M3 SysTick: Polling vs. Interrupt Driven]]></title>
-    <link href="http://sushihangover.github.io/blog/cortex-m-systick-polling-vs-interrupts/"/>
+    <link href="http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts/"/>
     <updated>2014-03-09T19:24:34-07:00</updated>
-    <id>http://sushihangover.github.io/blog/cortex-m-systick-polling-vs-interrupts</id>
+    <id>http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts</id>
     <content type="html"><![CDATA[<p><a href="/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="/images/ARM_CortexM_CMSIS_small.png" title="&ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo;" ></a>
 This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
 

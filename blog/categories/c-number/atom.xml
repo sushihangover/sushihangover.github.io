@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C# | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GtkSharp-Explorer Update for Irony]]></title>
-    <link href="http://sushihangover.github.io/blog/gtksharp-explorer-update-for-irony/"/>
+    <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony/"/>
     <updated>2014-02-12T08:14:14-08:00</updated>
-    <id>http://sushihangover.github.io/blog/gtksharp-explorer-update-for-irony</id>
+    <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
     <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
 
 <p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
@@ -91,9 +91,9 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   
   <entry>
     <title type="html"><![CDATA[OMeta Binary Data Parsing]]></title>
-    <link href="http://sushihangover.github.io/blog/ometa-binary-data-parsing/"/>
+    <link href="http://sushihangover.github.io/ometa-binary-data-parsing/"/>
     <updated>2014-02-10T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/blog/ometa-binary-data-parsing</id>
+    <id>http://sushihangover.github.io/ometa-binary-data-parsing</id>
     <content type="html"><![CDATA[<p><a href="http://joshondesign.com/">Josh Marinacci </a>has a blog post concerning using OMeta to parse binary data and while there was not a complete cut/paste of all the Javascript code needed to run it in <a href="http://tinlizzie.org/ometa-js">OMeta/JS</a>, I saved his grammar for review as I was working on binary parsing using an OMeta that was using C# as the host language. Recently I give the link of his posting to someone else, but turns out Josh&rsquo;s blog was offline (crashed?).  (Update; Appears his blog is working again, so you can refer to the link below for his original post)</p>
 
 <p>So I dug up what I had and whipped up an OMeta/JS example for a complete working proof of concept and here are the results. I am not a JavaScript kind-of-guy, so be nice regarding the code. ;-)</p>
@@ -335,9 +335,9 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   
   <entry>
     <title type="html"><![CDATA[MonoMac: Detect When Mac Sleeps or Wakes]]></title>
-    <link href="http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes/"/>
+    <link href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/"/>
     <updated>2014-01-12T20:44:00-08:00</updated>
-    <id>http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes</id>
+    <id>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes</id>
     <content type="html"><![CDATA[<p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
 
 <p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
@@ -364,9 +364,9 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   
   <entry>
     <title type="html"><![CDATA[PlayScript :What Happened to the Open Source Version on GitHub]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github/"/>
+    <link href="http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github/"/>
     <updated>2013-12-27T19:04:55-08:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github</id>
+    <id>http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github</id>
     <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
 
 <p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >

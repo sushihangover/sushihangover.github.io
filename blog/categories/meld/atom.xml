@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meld | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/meld/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool]]></title>
-    <link href="http://sushihangover.github.io/blog/using-diffmerge-as-your-git-visual-merge-and-diff-tool/"/>
+    <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/"/>
     <updated>2014-02-19T20:56:11-08:00</updated>
-    <id>http://sushihangover.github.io/blog/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
+    <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
     <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo;" ></a>
 I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
 

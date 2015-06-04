@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.4001 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-4001-posted/"/>
     <updated>2015-06-03T20:04:56-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-4001-posted</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
 
 <p>Have fun&hellip;</p>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.3003 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-3003-posted/"/>
     <updated>2015-06-03T19:22:01-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3003-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-3003-posted</id>
     <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/PlayscriptLogo_small.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler 3.2.3003 to <a href="https://github.com/sushihangover/playscript">Github</a> which fixes a bunch of build issues, including a clang/ld failure if you are running the latest and greatest version from Apple.</p>
@@ -44,9 +44,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[SmartGit - the Best Git GUI There Is... And Its Free]]></title>
-    <link href="http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
+    <link href="http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
     <updated>2015-06-03T15:06:35-07:00</updated>
-    <id>http://sushihangover.github.io/blog/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
+    <id>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/smartgit.png">  <span class='pullquote-right' data-pullquote='SmartGit is free for non-commercial use and runs on Mac OS X, Windows and Linux'>  <a href="http://www.syntevo.com">Syntevo&rsquo;s</a> <a href="http://www.syntevo.com/smartgit/">SmartGit</a> is a Git client with Mercurial and Subversion support, and while I can not comment on its mg or svn support, its git and GitHub support is amazing. And the best thing is SmartGit is free for non-commercial use and runs on Mac OS X, Windows and Linux. Commercial licenses seem to be very reasonable and on par with other commercial git products. </span></p>
 
 <p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
@@ -59,9 +59,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-3001-posted/"/>
     <updated>2015-06-03T06:10:59-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-3001-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-3001-posted</id>
     <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/PlayscriptLogo_small.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
@@ -75,9 +75,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[PlayScript 3.2.2002 Posted]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-2002-posted/"/>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/"/>
     <updated>2015-05-31T22:16:23-07:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-2002-posted</id>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-2002-posted</id>
     <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/PlayscriptLogo.png" alt="" /></p>
 
 <p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
@@ -97,9 +97,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Keeping a GitHub Fork Up to Date With Origin Repo]]></title>
-    <link href="http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
+    <link href="http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
     <updated>2015-05-29T17:22:05-07:00</updated>
-    <id>http://sushihangover.github.io/blog/keeping-a-github-fork-up-to-date-with-origin-repo</id>
+    <id>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo</id>
     <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
 
 <p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
@@ -148,9 +148,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Undo Your Most Recent (Screwed Up) Git Merge]]></title>
-    <link href="http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge/"/>
+    <link href="http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge/"/>
     <updated>2015-05-28T18:24:08-07:00</updated>
-    <id>http://sushihangover.github.io/blog/undo-your-most-recent-screwed-up-git-merge</id>
+    <id>http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge</id>
     <content type="html"><![CDATA[<p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -171,9 +171,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Add a Local Repo as a Remote to a Different Local Repo]]></title>
-    <link href="http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
+    <link href="http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
     <updated>2015-05-27T19:34:36-07:00</updated>
-    <id>http://sushihangover.github.io/blog/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
+    <id>http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
     <content type="html"><![CDATA[<p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
 
 <p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
@@ -194,9 +194,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Git - Accept Another Branch's Changes Without Generated Conflicts]]></title>
-    <link href="http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts/"/>
+    <link href="http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts/"/>
     <updated>2015-05-24T17:54:37-07:00</updated>
-    <id>http://sushihangover.github.io/blog/git-accept-another-branchs-changes-without-generated-conflicts</id>
+    <id>http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts</id>
     <content type="html"><![CDATA[<p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
 
 <p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>
@@ -212,9 +212,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Git - Commit Only Specific Staged Files]]></title>
-    <link href="http://sushihangover.github.io/blog/git-commit-only-specific-staged-files/"/>
+    <link href="http://sushihangover.github.io/git-commit-only-specific-staged-files/"/>
     <updated>2015-05-14T17:34:13-07:00</updated>
-    <id>http://sushihangover.github.io/blog/git-commit-only-specific-staged-files</id>
+    <id>http://sushihangover.github.io/git-commit-only-specific-staged-files</id>
     <content type="html"><![CDATA[<p>I needed to commit a limited number of changes that were already staged.</p>
 
 <p>In the early days of git, I remember having to stash all the changes and pop only the changes that I need to commit and push. I&rsquo;m not sure when the &lsquo;&ndash;only&rsquo; option was added to commit, but it sure saves a bunch of extra steps:</p>
@@ -226,9 +226,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[Git - Overlay a Directory With a Different Branch Version]]></title>
-    <link href="http://sushihangover.github.io/blog/git-overlay-a-directory-with-a-different-branch-version/"/>
+    <link href="http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version/"/>
     <updated>2015-05-11T16:10:28-07:00</updated>
-    <id>http://sushihangover.github.io/blog/git-overlay-a-directory-with-a-different-branch-version</id>
+    <id>http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version</id>
     <content type="html"><![CDATA[<p>I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way to do it with just one git command.</p>
 
 <p>So using git ls-files and xargs this is my solution:</p>
@@ -242,9 +242,9 @@ make install
   
   <entry>
     <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
-    <link href="http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
+    <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
     <updated>2014-04-22T18:35:15-07:00</updated>
-    <id>http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements</id>
+    <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
     <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
 
 <p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;-)</p>
@@ -362,9 +362,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[Qemu 2.0.0 Is Released (or Maybe 1.7.9)]]></title>
-    <link href="http://sushihangover.github.io/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
+    <link href="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
     <updated>2014-04-17T23:20:36-07:00</updated>
-    <id>http://sushihangover.github.io/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
+    <id>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
     <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="http://sushihangover.github.io/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
 
 <p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
@@ -395,9 +395,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[$30 60MSPS Logic Analyzer - Logic Pirate]]></title>
-    <link href="http://sushihangover.github.io/blog/0-60msps-logic-analyzer/"/>
+    <link href="http://sushihangover.github.io/0-60msps-logic-analyzer/"/>
     <updated>2014-04-15T20:16:37-07:00</updated>
-    <id>http://sushihangover.github.io/blog/0-60msps-logic-analyzer</id>
+    <id>http://sushihangover.github.io/0-60msps-logic-analyzer</id>
     <content type="html"><![CDATA[<p><a href="http://http://dangerousprototypes.com"><img class="left" src="http://sushihangover.github.io/images/dangerous_logo.png" title="&#34;Dangerous Prototypes&#34;" alt="&#34;Dangerous Prototypes&#34;"></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! - overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
 
 <p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
@@ -416,9 +416,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[LLVM 3.4.1]]></title>
-    <link href="http://sushihangover.github.io/blog/llvm-3-dot-4-1/"/>
+    <link href="http://sushihangover.github.io/llvm-3-dot-4-1/"/>
     <updated>2014-04-12T06:05:07-07:00</updated>
-    <id>http://sushihangover.github.io/blog/llvm-3-dot-4-1</id>
+    <id>http://sushihangover.github.io/llvm-3-dot-4-1</id>
     <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/llvm_logo_small.png" title="&#34;LLVM&#34;" alt="&#34;LLVM&#34;"></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
 
 <p><span class='pullquote-right' data-pullquote='LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.'>
@@ -443,9 +443,9 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   
   <entry>
     <title type="html"><![CDATA[XKCD: Heartbleed Explanation]]></title>
-    <link href="http://sushihangover.github.io/blog/heartbleed-explanation/"/>
+    <link href="http://sushihangover.github.io/heartbleed-explanation/"/>
     <updated>2014-04-11T07:51:37-07:00</updated>
-    <id>http://sushihangover.github.io/blog/heartbleed-explanation</id>
+    <id>http://sushihangover.github.io/heartbleed-explanation</id>
     <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/HeartBleed.png" width="200" height="200" title="&#34;Heartbleed&#34;" alt="&#34;Heartbleed&#34;"></a> If you have not checked and/or patched your OpenSSL deployment, better get to it:
 <a href="http://heartbleed.com">Heartbleed</a></p>
 
@@ -469,9 +469,9 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   
   <entry>
     <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl/"/>
+    <link href="http://sushihangover.github.io/arm-llvm-and-why-no-gpl/"/>
     <updated>2014-04-11T07:28:16-07:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-llvm-and-why-no-gpl</id>
+    <id>http://sushihangover.github.io/arm-llvm-and-why-no-gpl</id>
     <content type="html"><![CDATA[<p>As a follow up to my last post about ARM&rsquo;s annoucement concerning their move to clang/LLVM.</p>
 
 <p>Seems that more of the GPL-only mindset are upset that ARM is another company that is picking up and carrying the LLVM torch for their future development activities.</p>
@@ -484,9 +484,9 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   
   <entry>
     <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-starts-move-to-llvm/"/>
+    <link href="http://sushihangover.github.io/arm-starts-move-to-llvm/"/>
     <updated>2014-04-10T22:03:36-07:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-starts-move-to-llvm</id>
+    <id>http://sushihangover.github.io/arm-starts-move-to-llvm</id>
     <content type="html"><![CDATA[<p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
 
 <blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
@@ -501,9 +501,9 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   
   <entry>
     <title type="html"><![CDATA[Qemu Machine and CPU List]]></title>
-    <link href="http://sushihangover.github.io/blog/qemu-machine-and-cpu-list/"/>
+    <link href="http://sushihangover.github.io/qemu-machine-and-cpu-list/"/>
     <updated>2014-04-05T12:27:42-07:00</updated>
-    <id>http://sushihangover.github.io/blog/qemu-machine-and-cpu-list</id>
+    <id>http://sushihangover.github.io/qemu-machine-and-cpu-list</id>
     <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="http://sushihangover.github.io/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -584,9 +584,9 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   
   <entry>
     <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
-    <link href="http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0/"/>
+    <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/"/>
     <updated>2014-03-26T20:54:58-07:00</updated>
-    <id>http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0</id>
+    <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>
     <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="http://sushihangover.github.io/images/openjtag2_small.jpg" title="&#34;OpenJTAG&#34;" alt="&#34;OpenJTAG&#34;"></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

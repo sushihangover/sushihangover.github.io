@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bare-metal | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/bare-metal/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
-    <link href="http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
+    <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
     <updated>2014-04-22T18:35:15-07:00</updated>
-    <id>http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements</id>
+    <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
     <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
 
 <p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;-)</p>
@@ -119,9 +119,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[Qemu 2.0.0 Is Released (or Maybe 1.7.9)]]></title>
-    <link href="http://sushihangover.github.io/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
+    <link href="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
     <updated>2014-04-17T23:20:36-07:00</updated>
-    <id>http://sushihangover.github.io/blog/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
+    <id>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
     <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&ldquo;QEMU&rdquo;" ></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
 
 <p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
@@ -150,9 +150,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[$30 60MSPS Logic Analyzer - Logic Pirate]]></title>
-    <link href="http://sushihangover.github.io/blog/0-60msps-logic-analyzer/"/>
+    <link href="http://sushihangover.github.io/0-60msps-logic-analyzer/"/>
     <updated>2014-04-15T20:16:37-07:00</updated>
-    <id>http://sushihangover.github.io/blog/0-60msps-logic-analyzer</id>
+    <id>http://sushihangover.github.io/0-60msps-logic-analyzer</id>
     <content type="html"><![CDATA[<p><a href="http://http://dangerousprototypes.com"><img class="left" src="/images/dangerous_logo.png" title="&ldquo;Dangerous Prototypes&rdquo;" ></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! - overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
 
 <p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
@@ -171,9 +171,9 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   
   <entry>
     <title type="html"><![CDATA[Qemu Machine and CPU List]]></title>
-    <link href="http://sushihangover.github.io/blog/qemu-machine-and-cpu-list/"/>
+    <link href="http://sushihangover.github.io/qemu-machine-and-cpu-list/"/>
     <updated>2014-04-05T12:27:42-07:00</updated>
-    <id>http://sushihangover.github.io/blog/qemu-machine-and-cpu-list</id>
+    <id>http://sushihangover.github.io/qemu-machine-and-cpu-list</id>
     <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&ldquo;QEMU&rdquo;" ></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -249,9 +249,9 @@ So now, you will need to include any machine (&ndash;machine help) in order to s
   
   <entry>
     <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
-    <link href="http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0/"/>
+    <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/"/>
     <updated>2014-03-26T20:54:58-07:00</updated>
-    <id>http://sushihangover.github.io/blog/bkpt-service-calls-on-the-cortex-m0</id>
+    <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>
     <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&ldquo;OpenJTAG&rdquo;" ></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
 
 <p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

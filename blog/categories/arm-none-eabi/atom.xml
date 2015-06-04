@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Arm-none_eabi | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm-none-eabi/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
-    <link href="http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
+    <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
     <updated>2014-04-22T18:35:15-07:00</updated>
-    <id>http://sushihangover.github.io/blog/gcc-4-dot-9-is-out-with-arm-enhancements</id>
+    <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
     <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
 
 <p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;-)</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Arm-gcc | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm-gcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ARM Cortex-M Semihosting]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-cortex-m-semihosting-with-qemu/"/>
+    <link href="http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu/"/>
     <updated>2014-02-24T21:02:34-08:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-cortex-m-semihosting-with-qemu</id>
+    <id>http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu</id>
     <content type="html"><![CDATA[<p><a href="/images/ARM_Semihosting_large.png"><img class="left" src="/images/ARM_Semihosting.png" title="&ldquo;ARM Semihosting&rdquo;" ></a> <strong><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471c/Bgbjjgij.html">What is semihosting?</a></strong> <em>&hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this mechanism to enable functions in the C library, such as printf() and scanf(), to use the screen and keyboard of the host instead of having a screen and keyboard on the target system&hellip;</em></p>
 
 <p>So you need to output some debug messages via your host debugging session (via JTAG or such) or working with QEMU to prototype some ARM code? Well semihosting is simple use, but it can come at a large price in memory and overhead if you use stdio to do it&hellip;</p>
@@ -176,9 +176,9 @@ Print this to my jtag debugger
   
   <entry>
     <title type="html"><![CDATA[LLVM and the ARM ELF .ARM.exidx* Section]]></title>
-    <link href="http://sushihangover.github.io/blog/llvm-and-the-arm-elf-arm-dot-exidx-star-section/"/>
+    <link href="http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section/"/>
     <updated>2014-02-23T06:39:45-08:00</updated>
-    <id>http://sushihangover.github.io/blog/llvm-and-the-arm-elf-arm-dot-exidx-star-section</id>
+    <id>http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section</id>
     <content type="html"><![CDATA[<p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
 
 <p>So what is a <em>.ARM.exidx</em> section?</p>
@@ -293,9 +293,9 @@ that any code they throw exceptions through has proper unwinding information.</p
   
   <entry>
     <title type="html"><![CDATA[ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-bare-metal-comparing-llvm-to-arm-gcc/"/>
+    <link href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/"/>
     <updated>2014-02-22T20:43:28-08:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-bare-metal-comparing-llvm-to-arm-gcc</id>
+    <id>http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc</id>
     <content type="html"><![CDATA[<p>With the ever maturing and stable ARM backend of LLVM it is hard to find information using it vs. the well known ARM-GCC release.</p>
 
 <p>So lets start with the most simple HelloWorld example and compare LLVM and <a href="https://launchpad.net/gcc-arm-embedded">ARM-GCC</a>.</p>

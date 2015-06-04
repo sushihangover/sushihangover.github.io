@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Homebrew | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/homebrew/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Homebrew: Git 1.9.0 Release]]></title>
-    <link href="http://sushihangover.github.io/blog/homebrew-git-1-dot-9-0-release/"/>
+    <link href="http://sushihangover.github.io/homebrew-git-1-dot-9-0-release/"/>
     <updated>2014-02-16T10:32:41-08:00</updated>
-    <id>http://sushihangover.github.io/blog/homebrew-git-1-dot-9-0-release</id>
+    <id>http://sushihangover.github.io/homebrew-git-1-dot-9-0-release</id>
     <content type="html"><![CDATA[<blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
 
 <p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>

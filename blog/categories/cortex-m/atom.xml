@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cortex-m | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/cortex-m/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[LLVM, CMSIS DSP and Cortex-M3 &amp; M0]]></title>
-    <link href="http://sushihangover.github.io/blog/llvm-cmsis-dsp-and-cortex-m3-and-m0/"/>
+    <link href="http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0/"/>
     <updated>2014-03-05T22:34:20-08:00</updated>
-    <id>http://sushihangover.github.io/blog/llvm-cmsis-dsp-and-cortex-m3-and-m0</id>
+    <id>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0</id>
     <content type="html"><![CDATA[<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"><img class="left" src="/images/cmsis-version-3-block-diagram.png" title="&ldquo;CMSIS Version 3 Block Diagram (Source: Arm.com)&rdquo;" ></a> I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied.</p>
 
 <p>I borrowed one of the cos/sin examples and added some semihosting <em>printf</em>s using NEWLIB and cleaned up the code a bit.</p>
@@ -271,9 +271,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cortex-M0 vs. M3 : LLVM and LD]]></title>
-    <link href="http://sushihangover.github.io/blog/cortex-m0-vs-m3-llvm-and-ld/"/>
+    <link href="http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld/"/>
     <updated>2014-03-05T06:30:13-08:00</updated>
-    <id>http://sushihangover.github.io/blog/cortex-m0-vs-m3-llvm-and-ld</id>
+    <id>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld</id>
     <content type="html"><![CDATA[<p><a href="/images/ARM_Cortex-M_instruction_set_large.png"><img class="left" src="/images/ARM_Cortex-M_instruction_set_small.png" title="&ldquo;ARM Cortex-M instruction set&rdquo;" ></a> One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld to do your linking.</p>
 
 <p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times to get the options correct (and the <strong>order</strong> of options does matter) as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
@@ -421,9 +421,9 @@ architecture</th>
   
   <entry>
     <title type="html"><![CDATA[Bare Metal Debugging With Affinic Debugger]]></title>
-    <link href="http://sushihangover.github.io/blog/bare-metal-debugging-with-affinic-debugger/"/>
+    <link href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger/"/>
     <updated>2014-02-26T23:19:58-08:00</updated>
-    <id>http://sushihangover.github.io/blog/bare-metal-debugging-with-affinic-debugger</id>
+    <id>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</id>
     <content type="html"><![CDATA[<p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&ldquo;Affinic gdb on OS-X&rdquo;" ></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
 
 <p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;-) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
@@ -477,9 +477,9 @@ Note: This is the same are if you were using gdb on the cmd-line. You can also u
   
   <entry>
     <title type="html"><![CDATA[ARM Cortex-M Semihosting]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-cortex-m-semihosting-with-qemu/"/>
+    <link href="http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu/"/>
     <updated>2014-02-24T21:02:34-08:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-cortex-m-semihosting-with-qemu</id>
+    <id>http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu</id>
     <content type="html"><![CDATA[<p><a href="/images/ARM_Semihosting_large.png"><img class="left" src="/images/ARM_Semihosting.png" title="&ldquo;ARM Semihosting&rdquo;" ></a> <strong><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471c/Bgbjjgij.html">What is semihosting?</a></strong> <em>&hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this mechanism to enable functions in the C library, such as printf() and scanf(), to use the screen and keyboard of the host instead of having a screen and keyboard on the target system&hellip;</em></p>
 
 <p>So you need to output some debug messages via your host debugging session (via JTAG or such) or working with QEMU to prototype some ARM code? Well semihosting is simple use, but it can come at a large price in memory and overhead if you use stdio to do it&hellip;</p>

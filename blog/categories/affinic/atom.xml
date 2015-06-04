@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Affinic | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/affinic/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bare Metal Debugging With Affinic Debugger]]></title>
-    <link href="http://sushihangover.github.io/blog/bare-metal-debugging-with-affinic-debugger/"/>
+    <link href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger/"/>
     <updated>2014-02-26T23:19:58-08:00</updated>
-    <id>http://sushihangover.github.io/blog/bare-metal-debugging-with-affinic-debugger</id>
+    <id>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</id>
     <content type="html"><![CDATA[<p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&ldquo;Affinic gdb on OS-X&rdquo;" ></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
 
 <p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;-) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>

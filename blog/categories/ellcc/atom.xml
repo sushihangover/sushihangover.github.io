@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ellcc | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ellcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ellcc.org Build Fix for OS-X]]></title>
-    <link href="http://sushihangover.github.io/blog/ellcc-dot-org-build-fix-for-os-x/"/>
+    <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/"/>
     <updated>2014-02-12T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/blog/ellcc-dot-org-build-fix-for-os-x</id>
+    <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
     <content type="html"><![CDATA[<p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
 
 <p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>

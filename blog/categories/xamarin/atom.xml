@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MonoMac: Detect When Mac Sleeps or Wakes]]></title>
-    <link href="http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes/"/>
+    <link href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/"/>
     <updated>2014-01-12T20:44:00-08:00</updated>
-    <id>http://sushihangover.github.io/blog/monomac-detect-when-mac-sleeps-or-wakes</id>
+    <id>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes</id>
     <content type="html"><![CDATA[<p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
 
 <p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Newlib | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/newlib/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:51:21-07:00</updated>
+  <updated>2015-06-03T18:01:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ARM Cortex-M3 Bare-metal With NEWLIB]]></title>
-    <link href="http://sushihangover.github.io/blog/arm-cortex-m3-bare-metal-with-newlib/"/>
+    <link href="http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib/"/>
     <updated>2014-03-04T18:18:56-08:00</updated>
-    <id>http://sushihangover.github.io/blog/arm-cortex-m3-bare-metal-with-newlib</id>
+    <id>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib</id>
     <content type="html"><![CDATA[<p>I am working on a custom NEWLIB but first I wanted to make sure that <a href="https://sourceware.org/newlib/">NEWLIB</a> compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal <a href="http://llvm.org">Clang/LLVM</a> build and Qemu.</p>
 
 <p>Lets start with a simple main() that includes printf, puts and malloc. The first test is related to malloc, as if your linker script is not setting up your heap properly and providing the heap &ldquo;end&rdquo; address as defined in NEWLIB then not much else is going to work (i.e. printf uses malloc). If malloc works, then lets so some printfs including one with a random string. After that lets keep increasing the size of our mallocs till we run out of heap space.</p>
