@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-3-dot-2-5001-posted/</loc>
+    <lastmod>2015-06-04T06:12:01-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/playscript-3-dot-2-4001-posted/</loc>
     <lastmod>2015-06-03T20:04:56-07:00</lastmod>
   </url>
@@ -392,17 +396,5 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/syntevo/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/4/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/5/</loc>
   </url>
 </urlset>

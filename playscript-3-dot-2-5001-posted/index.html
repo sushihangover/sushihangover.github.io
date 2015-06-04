@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PlayScript 3.2.2002 Posted - SushiHangover</title>
+  <title>Playscript 3.2.5001 Posted - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler 3.2.5001 to GitHub which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/">
+  <link rel="canonical" href="http://sushihangover.github.io/playscript-3-dot-2-5001-posted/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">PlayScript 3.2.2002 Posted</h1>
+      <h1 class="entry-title">Playscript 3.2.5001 Posted</h1>
     
     
       <p class="meta">
@@ -89,27 +89,18 @@
 
 
 
-<time class='entry-date' datetime='2015-05-31T22:16:23-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 pm</span></time>
+<time class='entry-date' datetime='2015-06-04T06:12:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:12 am</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="/images/PlayscriptLogo.png" alt="" /></p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.5001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into playscript-mono</p>
 
-<p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
+<p>Been knocking these simple minors versions out, dreading the upcoming Mono 4.x changes&hellip;</p>
 
-<p>I will be migrating it to the Mono 4.x compiler in the days and weeks ahead before working on finishing and getting the ActionScript language side stable (feature complete?). Not really looking forwarded to the Mono 4.x migration as the number of internal API changes to the mcs compiler since the 3.2.0 release is quite extensive.</p>
-
-<p>If you want to compile and use the current 3.2.2002 release, just autogen.sh like normal.</p>
-
-<p>Note: Due to dependency updates on OS-X since Mono 3.2 was release, I had to supply &ldquo; <u>&ndash;with-tls</u>&rdquo; option as it was auto-selecting <strong>__thread</strong> instead of <strong>_posix</strong>.</p>
-
-<pre><code>./autogen.sh --with-tls=posix --enable-nls=no --prefix=/Users/administrator/mono-install
-</code></pre>
-
-<p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
+<p>Setting up a GitHub organization for PlayScript, I&rsquo;ll let you know when it is up.</p>
 </div>
 
 
@@ -125,12 +116,12 @@
 
 
 
-<time class='entry-date' datetime='2015-05-31T22:16:23-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 pm</span></time>
+<time class='entry-date' datetime='2015-06-04T06:12:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:12 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
+    <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
   
 </span>
 
@@ -139,7 +130,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/" data-via="" data-counturl="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-3-dot-2-5001-posted/" data-via="" data-counturl="http://sushihangover.github.io/playscript-3-dot-2-5001-posted/" >Tweet</a>
   
   
   
@@ -148,10 +139,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/keeping-a-github-fork-up-to-date-with-origin-repo/" title="Previous Post: Keeping a GitHub fork up to date with origin repo">&laquo; Keeping a GitHub fork up to date with origin repo</a>
+        <a class="basic-alignment left" href="/playscript-3-dot-2-4001-posted/" title="Previous Post: Playscript 3.2.4001 Posted">&laquo; Playscript 3.2.4001 Posted</a>
       
-      
-        <a class="basic-alignment right" href="/playscript-3-dot-2-3001-posted/" title="Next Post: PlayScript 3.2.3001 Posted">PlayScript 3.2.3001 Posted &raquo;</a>
       
     </p>
   </footer>
@@ -246,8 +235,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/playscript-3-dot-2-2002-posted/';
-        var disqus_url = 'http://sushihangover.github.io/playscript-3-dot-2-2002-posted/';
+        var disqus_identifier = 'http://sushihangover.github.io/playscript-3-dot-2-5001-posted/';
+        var disqus_url = 'http://sushihangover.github.io/playscript-3-dot-2-5001-posted/';
         var disqus_script = 'embed.js';
       
     (function () {
