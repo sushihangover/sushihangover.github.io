@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gcc | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/gcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T13:55:05-07:00</updated>
+  <updated>2015-06-03T17:09:06-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -25,66 +25,56 @@
 <p>So what is listed in the man for &ldquo;-mslow-flash-data&rdquo; is:
 <strong>Assume loading data from flash is slower than fetching instruction. Therefore literal load is minimized for better performance. This option is only supported when compiling for ARMv7 M-profile and off by default.</strong></p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>{% pullquote %}
+{&ldquo;Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-data? Only M3 and M4x support? Need to find the commit(s) for this feature.&rdquo;}</p>
+
+<p>Also everyone always loves items like: <strong>A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors</strong>. Free code size reduction is always a great thing when during with those dirt-cheap <a href="http://www.nuvoton.com/NuvotonMOSS/Community/ProductInfo.aspx?tp_GUID=5dbf7d7a-b6df-4fe1-91c9-063449500ce7">Nuvoton NuMicro M0 chips</a>, well, assuming it comes with using &ldquo;-Os&rdquo; and not with a speed impact when throughput matters more&hellip; small is good, but it is not always what everyone needs.</p>
+
+<p>And the &ldquo;<a href="http://en.wikipedia.org/wiki/Register_allocation">Local Register Allocator</a>&rdquo; is turned on for ARM by default:
+<code>The Local Register Allocator, introduced in GCC 4.8.0 for ia32 and x86-64 targets only, is now used also on the Aarch64, ARM, S/390 and ARC targets by default..</code>
+{% endpullquote %}</p>
 
 <p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was:
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>clang: error: unsupported option &lsquo;-static-libgcc&rsquo;</span></code></pre></td></tr></table></div></figure>
+{% codeblock %}
+clang: error: unsupported option &lsquo;-static-libgcc&rsquo;
+{% endcodeblock %}
 Well, duh&hellip;, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build using the same configure options as 4.8.x. Manually hacking on the make files to get passed this and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &ldquo;-static-libgcc&rdquo; issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
 
 <p>So I build a native version on the master branch (4.10.x now):
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./gcc &ndash;version
-</span><span class='line'>gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright &copy; 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></code></pre></td></tr></table></div></figure></p>
+{% codeblock %}
+./gcc &ndash;version
+gcc (GCC) 4.10.0 20140422 (experimental)
+Copyright &copy; 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+{% endcodeblock %}</p>
 
 <p>And then used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;-)
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./arm-none-eabi-gcc &ndash;version
-</span><span class='line'>arm-none-eabi-gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright &copy; 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</span><span class='line'>&hellip;
-</span><span class='line'>  Known ARM architectures (for use with the -march= option):
-</span><span class='line'>    armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te armv6
-</span><span class='line'>    armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7 armv7-a armv7-m
-</span><span class='line'>    armv7-r armv7e-m armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
-</span><span class='line'>&hellip;</span></code></pre></td></tr></table></div></figure></p>
+{% codeblock %}
+./arm-none-eabi-gcc &ndash;version
+arm-none-eabi-gcc (GCC) 4.10.0 20140422 (experimental)
+Copyright &copy; 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&hellip;
+  Known ARM architectures (for use with the -march= option):
+    armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te armv6
+    armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7 armv7-a armv7-m
+    armv7-r armv7e-m armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
+&hellip;
+{% endcodeblock %}</p>
 
 <p>FYI: I&rsquo;m on OS-X 10.9.2:
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Software  OS X 10.9.2 (13C64)
-</span><span class='line'>clang &ndash;version
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>gcc &ndash;version
-</span><span class='line'>Configured with: &ndash;prefix=/Applications/Xcode.app/Contents/Developer/usr &ndash;with-gxx-include-dir=/usr/include/c++/4.2.1
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>Target: x86_64-apple-darwin13.1.0
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure></p>
+{% codeblock %}
+Software  OS X 10.9.2 (13C64)
+clang &ndash;version
+Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
+gcc &ndash;version
+Configured with: &ndash;prefix=/Applications/Xcode.app/Contents/Developer/usr &ndash;with-gxx-include-dir=/usr/include/c++/4.2.1
+Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
+Target: x86_64-apple-darwin13.1.0
+Thread model: posix
+{% endcodeblock %}</p>
 
 <p>ARM enhancements from the change list include:</p>
 
@@ -137,7 +127,7 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
     <link href="http://sushihangover.github.io/blog/arm-compiler-price/"/>
     <updated>2014-03-18T06:30:29-07:00</updated>
     <id>http://sushihangover.github.io/blog/arm-compiler-price</id>
-    <content type="html"><![CDATA[<p><img class="left" src="/images/ARM_DS5.jpg" title="&ldquo;ARM DS-5&rdquo;" > I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
+    <content type="html"><![CDATA[<p>{% img left /images/ARM_DS5.jpg &ldquo;ARM DS-5&rdquo; %} I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
 
 <p>But I was wondering how much <a href="http://ds.arm.com">ARM&rsquo;s DS-5</a> (Keil) IDE and compiler cost and found a couple of places in the &lsquo;net that actually publish the prices (like <a href="http://www.newark.com">Newark / Element14</a>):</p>
 
@@ -149,7 +139,7 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 
 <p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
 
-<p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&ldquo;ARM DSTREAM&rdquo;" >What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
+<p>{% img right /images/ARM_DSTREAM.jpg &ldquo;ARM DSTREAM&rdquo; %}What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
 
 <p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
 ]]></content>

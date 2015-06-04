@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T13:55:05-07:00</updated>
+  <updated>2015-06-03T17:09:06-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Playscript 3.2.4001 Posted]]></title>
+    <link href="http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted/"/>
+    <updated>2015-06-03T20:04:56-07:00</updated>
+    <id>http://sushihangover.github.io/blog/playscript-3-dot-2-4001-posted</id>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}  {% pullquote %}  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
+
+<p>Have fun&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.3003 Posted]]></title>
@@ -80,17 +91,13 @@ make install
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
-</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
-</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+git remote -v
+origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (fetch)
+origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (push)
+upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (fetch)
+upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (push)
+{% endcodeblock %}</p>
 
 <p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
@@ -98,39 +105,18 @@ make install
 
 <p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
 
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
-</span><span class='line'>git fetch upstream
-</span><span class='line'>git merge upstream/master
-</span><span class='line'>git push origin
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash %}
+cd ../PlayScript-master
+git fetch upstream
+git merge upstream/master
+git push origin
+make
+make install
+{% endcodeblock %}</p>
 
 <p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
 
 <p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript :What Happened to the Open Source Version on GitHub]]></title>
-    <link href="http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github/"/>
-    <updated>2013-12-27T19:04:55-08:00</updated>
-    <id>http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github</id>
-    <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
-
-<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
-I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
-
-<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
-
-<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
 ]]></content>
   </entry>
   
