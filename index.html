@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the PlayScript compiler 3.2.3003 to Github which fixes a bunch of build issues, including a clang/ld failure if you are running the &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler 3.2.4001 to GitHub which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,37 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/playscript-3-dot-2-4001-posted/">Playscript 3.2.4001 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T20:04:56-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:04 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
+
+<p>Have fun&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -446,42 +477,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/git-overlay-a-directory-with-a-different-branch-version/">Git - Overlay a Directory With a Different Branch Version</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-11T16:10:28-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:10 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way to do it with just one git command.</p>
-
-<p>So using git ls-files and xargs this is my solution:</p>
-
-<pre><code>git ls-files |xargs -J %  git checkout -f mono-3.2.4 -- %
-</code></pre>
-
-<p>If anyone has a way to do this without using xargs I&rsquo;m all ears&hellip; ;-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -497,6 +492,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/playscript-3-dot-2-4001-posted/">Playscript 3.2.4001 Posted</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a>
       </li>
     
@@ -510,10 +509,6 @@ make install
     
       <li class="post">
         <a href="/blog/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C# | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-03T17:09:06-07:00</updated>
+  <updated>2015-06-03T17:09:54-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,29 +18,46 @@
     <link href="http://sushihangover.github.io/blog/gtksharp-explorer-update-for-irony/"/>
     <updated>2014-02-12T08:14:14-08:00</updated>
     <id>http://sushihangover.github.io/blog/gtksharp-explorer-update-for-irony</id>
-    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png">{% img left images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png  360 240 &lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo; %}</a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
 
 <p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
-{% codeblock lang:bash %}
-git branch &ndash;all
-* master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/gtksharp-explorer
-  remotes/origin/master
-  remotes/origin/xplat-nunit-fix
-git checkout gtksharp-explorer
-  Branch gtksharp-explorer set up to track remote branch gtksharp-explorer from origin.
-  Switched to a new branch &lsquo;gtksharp-explorer&rsquo;</p>
-
-<p>git branch &ndash;all
-* gtksharp-explorer
-  master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/gtksharp-explorer
-  remotes/origin/master
-  remotes/origin/xplat-nunit-fix<br/>
-open Irony_All.MonoDevelop.sln
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>git checkout gtksharp-explorer
+</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
+</span><span class='line'>  Switched to a new branch <span class="p">&amp;</span>lsquo<span class="p">;</span>gtksharp-explorer<span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
+</span><span class='line'>* gtksharp-explorer
+</span><span class='line'>  master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix&lt;br/&gt;
+</span><span class='line'>open Irony_All.MonoDevelop.sln
+</span></code></pre></td></tr></table></div></figure></p>
 
 <hr />
 
@@ -111,108 +128,208 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
 </code></pre>
 
 <p>This is a working example of parsing binary data parsing in Ometa/JS.
-{% codeblock OMeta/JS PNG Parse lang:js <a href="https://gist.github.com/sushihangover/8919188">https://gist.github.com/sushihangover/8919188</a> %}
-ometa BinaryParser &lt;: Parser {
-    // Portable Network Graphics (PNG) Specification (Second Edition)
-    // <a href="http://www.w3.org/TR/PNG/">http://www.w3.org/TR/PNG/</a>
-    // Note: not all chunk are defined, this is just a POC
-    //entire PNG stream
-    START  = [header:h (chunk+):c number*:n] -> [h,c,n],</p>
-
-<pre><code>//chunk definition
-chunk  = int4:len str4:t apply(t,len):d byte4:crc
-    -&gt; [#chunk, [#type, t], [#length, len], [#data, d], [#crc, crc]],
-
-//chunk types
-IHDR :len  = int4:w int4:h byte:dep byte:type byte:comp byte:filter byte:inter
-    -&gt; {type:"IHDR", data:{width:w, height:h, bitdepth:dep, colortype:type, compression:comp, filter:filter, interlace:inter}},
-gAMA :len  = int4:g                  -&gt; {type:"gAMA", value:g},
-pHYs :len  = int4:x int4:y byte:u    -&gt; {type:"pHYs", x:x, y:y, units:u},
-tEXt :len  = repeat('byte',len):d    -&gt; {type:"tEXt", data:toAscii(d)},
-iTXt :len  = repeat('byte',len):d    -&gt; {type:"iTXt", data:toShortAscii(d)},
-tIME :len  = int2:y byte:mo byte:day byte:hr byte:min byte:sec
-    -&gt; {type:"tIME", year:y, month:mo, day:day, hour:hr, minute:min, second:sec},
-IDAT :len  = repeat('byte',len):d    -&gt; {type:"IDAT", data:"omitted"},
-IEND :len  = repeat('byte',len):d    -&gt; {type:"IEND"},
-
-//useful definitions
-byte    = number,
-header  = 137 80 78 71 13 10 26 10    -&gt; "PNG HEADER",        //mandatory header
-int2    = byte:a byte:b               -&gt; byteArrayToInt16([b,a]),  //2 bytes to a 16bit integer
-int4    = byte:a byte:b byte:c byte:d -&gt; byteArrayToInt32([d,c,b,a]), //4 bytes to 32bit integer
-str4    = byte:a byte:b byte:c byte:d -&gt; toChunkType([a,b,c,d]),  //4 byte string
-byte4   = repeat('byte',4):d -&gt; d,
-END
-</code></pre>
-
-<p>}
-BinaryParser.repeat = function(rule, count) {
-  var ret = [];
-  for(var i=0; i&lt;count; i++) {
-     ret.push(this._apply(rule));
-  }
-  return ret;
-}
-toAscii = function(byteArray) {
-  var foo = String.fromCharCode.apply(String, byteArray);
-  console.log (&ldquo;String:&rdquo; + foo + &ldquo; (&hellip;byteArrayOmitted&hellip;)&rdquo;);
-  return foo;
-}
-toShortAscii = function(byteArray) {
-  var embeddedText = String.fromCharCode.apply(String, byteArray);
-  // The iTxt chunk can contain a lot of text/xml, so truncate for proof of concept
-  console.log (&ldquo;String:&rdquo; + embeddedText.slice(1, 51) + &ldquo; (&hellip;only first 50 bytes shown&hellip;)&rdquo;);
-  return embeddedText;
-}
-toChunkType = function(byteArray) {
-  var aChuckType = String.fromCharCode.apply(String, byteArray);
-  console.log (&ldquo;ChunkType :&rdquo; + aChuckType + &ldquo; : &rdquo; + byteArray );
-  return aChuckType;
-}
-byteArrayToInt32  = function(localByteArray) {
-  var uint8array = new Uint8Array(localByteArray);
-  var uint32array = new Uint32Array(
-                    uint8array.buffer,
-                    uint8array.byteOffset + uint8array.byteLength - 4,
-                    1 // 4Bytes long
-                  );
-  var newInt32 = uint32array[0];
-  console.log ( &ldquo;i32 : &rdquo; + newInt32 + &ldquo; &lt;= &rdquo; + localByteArray );
-  return newInt32;
-}
-byteArrayToInt16  = function(byteArray) {
-  var ints = [];
-  alert(byteArray.length);
-  for (var i = 0; i &lt; byteArray.length; i += 2) {
-    //ints.push((byteArray[i] &lt;&lt; 8) | (byteArray[i+1]));
-  }
-  console.log (ints);
-  return ints;
-}
-fetchBinary = function() {
-    var req = new XMLHttpRequest();
-    req.open(&ldquo;GET&rdquo;,&ldquo;<a href="http://sushihangover.azurewebsites.net/Content/Static/IronyLogoSmall.png">http://sushihangover.azurewebsites.net/Content/Static/IronyLogoSmall.png</a>&rdquo;,true);
-    req.responseType = &ldquo;arraybuffer&rdquo;;
-    req.onload = function(e) {
-        console.log(&ldquo;loaded&rdquo;);
-        var buf = req.response;
-        if(buf) {
-            var byteArray = new Uint8Array(buf);
-            console.log(&ldquo;got &rdquo; + byteArray.byteLength + &ldquo; bytes&rdquo;);
-            var arr = [];
-            for(var i=0; i&lt;byteArray.byteLength; i++) {
-                arr.push(byteArray[i]);
-            }
-            // watch out if you uncomment the next line, it can kill your browser w/ large png files
-            // console.log(arr);
-            var parserResults = BinaryParser.match(arr, &ldquo;START&rdquo;);
-            console.log(parserResults);
-        }
-    }
-    req.send(null);
-};
-fetchBinary();
-{% endcodeblock %}</p>
+<figure class='code'><figcaption><span>OMeta/JS PNG Parse <a href="https://gist.github.com/sushihangover/8919188">https://gist.github.com/sushihangover/8919188</a> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">ometa</span> <span class="nx">BinaryParser</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">:</span> <span class="nx">Parser</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Portable Network Graphics (PNG) Specification (Second Edition)</span>
+</span><span class='line'>    <span class="c1">// &lt;a href=&quot;http://www.w3.org/TR/PNG/&quot;&gt;http://www.w3.org/TR/PNG/&lt;/a&gt;</span>
+</span><span class='line'>    <span class="c1">// Note: not all chunk are defined, this is just a POC</span>
+</span><span class='line'>    <span class="c1">//entire PNG stream</span>
+</span><span class='line'>    <span class="nx">START</span>  <span class="o">=</span> <span class="p">[</span><span class="nx">header</span><span class="o">:</span><span class="nx">h</span> <span class="p">(</span><span class="nx">chunk</span><span class="o">+</span><span class="p">)</span><span class="o">:</span><span class="nx">c</span> <span class="nx">number</span><span class="o">*:</span><span class="nx">n</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="nx">h</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">n</span><span class="p">],</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">//chunk definition</span>
+</span><span class='line'><span class="nx">chunk</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">len</span> <span class="nx">str4</span><span class="o">:</span><span class="nx">t</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span> <span class="nx">byte4</span><span class="o">:</span><span class="nx">crc</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">[</span><span class="err">#</span><span class="nx">chunk</span><span class="p">,</span> <span class="p">[</span><span class="err">#</span><span class="nx">type</span><span class="p">,</span> <span class="nx">t</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">length</span><span class="p">,</span> <span class="nx">len</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">data</span><span class="p">,</span> <span class="nx">d</span><span class="p">],</span> <span class="p">[</span><span class="err">#</span><span class="nx">crc</span><span class="p">,</span> <span class="nx">crc</span><span class="p">]],</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//chunk types</span>
+</span><span class='line'><span class="nx">IHDR</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">w</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">h</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">dep</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">type</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">comp</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">filter</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">inter</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IHDR&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="p">{</span><span class="nx">width</span><span class="o">:</span><span class="nx">w</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span><span class="nx">h</span><span class="p">,</span> <span class="nx">bitdepth</span><span class="o">:</span><span class="nx">dep</span><span class="p">,</span> <span class="nx">colortype</span><span class="o">:</span><span class="nx">type</span><span class="p">,</span> <span class="nx">compression</span><span class="o">:</span><span class="nx">comp</span><span class="p">,</span> <span class="nx">filter</span><span class="o">:</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">interlace</span><span class="o">:</span><span class="nx">inter</span><span class="p">}},</span>
+</span><span class='line'><span class="nx">gAMA</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">g</span>                  <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;gAMA&quot;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="nx">g</span><span class="p">},</span>
+</span><span class='line'><span class="nx">pHYs</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">x</span> <span class="nx">int4</span><span class="o">:</span><span class="nx">y</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">u</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;pHYs&quot;</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span><span class="nx">y</span><span class="p">,</span> <span class="nx">units</span><span class="o">:</span><span class="nx">u</span><span class="p">},</span>
+</span><span class='line'><span class="nx">tEXt</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;tEXt&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="nx">toAscii</span><span class="p">(</span><span class="nx">d</span><span class="p">)},</span>
+</span><span class='line'><span class="nx">iTXt</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;iTXt&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="nx">toShortAscii</span><span class="p">(</span><span class="nx">d</span><span class="p">)},</span>
+</span><span class='line'><span class="nx">tIME</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">int2</span><span class="o">:</span><span class="nx">y</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">mo</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">day</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">hr</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">min</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">sec</span>
+</span><span class='line'>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;tIME&quot;</span><span class="p">,</span> <span class="nx">year</span><span class="o">:</span><span class="nx">y</span><span class="p">,</span> <span class="nx">month</span><span class="o">:</span><span class="nx">mo</span><span class="p">,</span> <span class="nx">day</span><span class="o">:</span><span class="nx">day</span><span class="p">,</span> <span class="nx">hour</span><span class="o">:</span><span class="nx">hr</span><span class="p">,</span> <span class="nx">minute</span><span class="o">:</span><span class="nx">min</span><span class="p">,</span> <span class="nx">second</span><span class="o">:</span><span class="nx">sec</span><span class="p">},</span>
+</span><span class='line'><span class="nx">IDAT</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IDAT&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span><span class="s2">&quot;omitted&quot;</span><span class="p">},</span>
+</span><span class='line'><span class="nx">IEND</span> <span class="o">:</span><span class="nx">len</span>  <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="nx">len</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="s2">&quot;IEND&quot;</span><span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//useful definitions</span>
+</span><span class='line'><span class="kr">byte</span>    <span class="o">=</span> <span class="nx">number</span><span class="p">,</span>
+</span><span class='line'><span class="nx">header</span>  <span class="o">=</span> <span class="mi">137</span> <span class="mi">80</span> <span class="mi">78</span> <span class="mi">71</span> <span class="mi">13</span> <span class="mi">10</span> <span class="mi">26</span> <span class="mi">10</span>    <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="s2">&quot;PNG HEADER&quot;</span><span class="p">,</span>        <span class="c1">//mandatory header</span>
+</span><span class='line'><span class="nx">int2</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span>               <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">byteArrayToInt16</span><span class="p">([</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]),</span>  <span class="c1">//2 bytes to a 16bit integer</span>
+</span><span class='line'><span class="nx">int4</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">c</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">byteArrayToInt32</span><span class="p">([</span><span class="nx">d</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]),</span> <span class="c1">//4 bytes to 32bit integer</span>
+</span><span class='line'><span class="nx">str4</span>    <span class="o">=</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">a</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">b</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">c</span> <span class="kr">byte</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">toChunkType</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">]),</span>  <span class="c1">//4 byte string</span>
+</span><span class='line'><span class="nx">byte4</span>   <span class="o">=</span> <span class="nx">repeat</span><span class="p">(</span><span class="s1">&#39;byte&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">:</span><span class="nx">d</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">d</span><span class="p">,</span>
+</span><span class='line'><span class="nx">END</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="nx">BinaryParser</span><span class="p">.</span><span class="nx">repeat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rule</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">count</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">ret</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_apply</span><span class="p">(</span><span class="nx">rule</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toAscii</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nb">String</span><span class="o">:&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">foo</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span><span class="nx">byteArrayOmitted</span><span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;)</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">foo</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toShortAscii</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">embeddedText</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">// The iTxt chunk can contain a lot of text/xml, so truncate for proof of concept</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nb">String</span><span class="o">:&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">embeddedText</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;</span><span class="nx">only</span> <span class="nx">first</span> <span class="mi">50</span> <span class="nx">bytes</span> <span class="nx">shown</span><span class="o">&amp;</span><span class="nx">hellip</span><span class="p">;)</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">embeddedText</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">toChunkType</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">aChuckType</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">String</span><span class="p">,</span> <span class="nx">byteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">ChunkType</span> <span class="o">:&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">aChuckType</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span> <span class="o">:</span> <span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">byteArray</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">aChuckType</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">byteArrayToInt32</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">localByteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">uint8array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">localByteArray</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">uint32array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span>
+</span><span class='line'>                    <span class="nx">uint8array</span><span class="p">.</span><span class="nx">buffer</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">uint8array</span><span class="p">.</span><span class="nx">byteOffset</span> <span class="o">+</span> <span class="nx">uint8array</span><span class="p">.</span><span class="nx">byteLength</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>                    <span class="mi">1</span> <span class="c1">// 4Bytes long</span>
+</span><span class='line'>                  <span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">newInt32</span> <span class="o">=</span> <span class="nx">uint32array</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">i32</span> <span class="o">:</span> <span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">newInt32</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">=</span> <span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">localByteArray</span> <span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">newInt32</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">byteArrayToInt16</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">ints</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">byteArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//ints.push((byteArray[i] &amp;lt;&amp;lt; 8) | (byteArray[i+1]));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="nx">ints</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">ints</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">fetchBinary</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">GET</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;,</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;http://sushihangover.azurewebsites.net/Content/Static/IronyLogoSmall.png&quot;</span><span class="o">&gt;</span><span class="nx">http</span><span class="o">:</span><span class="c1">//sushihangover.azurewebsites.net/Content/Static/IronyLogoSmall.png&lt;/a&gt;&amp;rdquo;,true);</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">arraybuffer</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;;</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">loaded</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">buf</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">response</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">byteArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">buf</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">got</span> <span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">byteArray</span><span class="p">.</span><span class="nx">byteLength</span> <span class="o">+</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span> <span class="nx">bytes</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>            <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">byteArray</span><span class="p">.</span><span class="nx">byteLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">byteArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="c1">// watch out if you uncomment the next line, it can kill your browser w/ large png files</span>
+</span><span class='line'>            <span class="c1">// console.log(arr);</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">parserResults</span> <span class="o">=</span> <span class="nx">BinaryParser</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">START</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parserResults</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">fetchBinary</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   
@@ -227,15 +344,21 @@ fetchBinary();
 
 <p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
 
-<p>{% codeblock C# &ldquo;Wake and Sleep Events&rdquo; %}
-Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
-NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
-);
-NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
-};
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
+</span><span class='line'>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   
@@ -246,7 +369,7 @@ NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArg
     <id>http://sushihangover.github.io/blog/playscript-what-happened-to-the-open-source-version-on-github</id>
     <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
 
-<p>{% img left /images/Playscript404.gif 360 240 &lsquo;PlayScript, Going, going, gone&rsquo; %}
+<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
 I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
 
 <p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core &hellip;">
+  <meta name="description" content="I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. Beyond Compare &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-19T20:56:11-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:56 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;" alt="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;"></a>
+I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
+
+<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
+(cheaper) options that work just as well for personal development.</p>
+
+<p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
+
+<p>So some searching landed me on an old post by <a href="http://twobitlabs.com/2011/08/install-diffmerge-git-mac-os-x/">Todd Huss</a> about using DiffMerge as your visual diff/merge for git and it was actually what I was looking for, well almost ;-) It is missing a few features, but they have a free version and it works really well and has a great OS-X interface&hellip; search is over for now&hellip;</p>
+
+<blockquote><p><a href="http://www.sourcegear.com/diffmerge/">SourceGear</a> has a $19.00 USD version that include file export with HTML formatting and if I could see example HTML code that it produces, I pay for that feature in a heart-beat, but the feature is completely locked out till you actaully register, bummer&hellip;</p></blockquote>
+
+<p>Todd recommends using the DiffMerge installer version vs. the dmg version, I go the other way on that. Download the dmg version, open it and drag/drop the app to your Applications. Then in a term window you can copy the <em>Extras/diffmerge.sh</em> to your <em>/usr/local/bin</em> directory (Execute attrib is already set, so no chmod needed..), but I copied it as just <em>vdiff</em> as that is quicker to type. No admin rights are need to install it that way and that makes me happy&hellip; I can <em>vdiff file1.c file2.c</em> on the cmd line to pop the GUI open and populate it.</p>
+
+<p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
+
+<figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config --global diff.tool diffmerge
+</span><span class='line'>git config --global difftool.diffmerge.cmd <span class="s1">&#39;diffmerge &quot;$LOCAL&quot; &quot;$REMOTE&quot;&#39;</span>
+</span><span class='line'>git config --global merge.tool diffmerge
+</span><span class='line'>git config --global mergetool.diffmerge.cmd <span class="s1">&#39;diffmerge --merge --result=&quot;$MERGED&quot; &quot;$LOCAL&quot; &quot;$(if test -f &quot;$BASE&quot;; then echo &quot;$BASE&quot;; else echo &quot;$LOCAL&quot;; fi)&quot; &quot;$REMOTE&quot;&#39;</span>
+</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># diff the local file.m against the checked-in version</span>
+</span><span class='line'>git difftool file.m
+</span><span class='line'><span class="c"># diff the local file.m against the version in some-feature-branch</span>
+</span><span class='line'>git difftool some-feature-branch file.m
+</span><span class='line'><span class="c"># diff the file.m from the Build-54 tag to the Build-55 tag</span>
+</span><span class='line'>git difftool Build-54..Build-55 file.m
+</span><span class='line'><span class="c">#To resolve merge conflicts, just run git mergetool:</span>
+</span><span class='line'>git mergetool
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -761,134 +842,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/octopress-backing-up-your-source-directory/">Octopress: Backing Up Your Source Directory</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-12T21:00:12-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
-
-<p>My Missing Octopress Items:</p>
-
-<blockquote><ul>
-<li>Image Auto Thumbnailing</li>
-<li>Image Popups from those Thumbnails</li>
-<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
-<li>Auto source directory version control</li>
-</ul>
-</blockquote>
-
-<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
-
-<p>Here is my quick way of doing this using the deployment repo.</p>
-
-<blockquote><ul>
-<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
-<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
-<li>Commit and Push after you do a <em>rake deploy</em></li>
-</ul>
-</blockquote>
-
-<p>So lets add a source branch to your GitHub Page repo:
-        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Get your current repo and place it into a a temp directory</span>
-</span><span class='line'>git clone https://github.com/sushihangover/sushihangover.github.io.git foo.bar
-</span><span class='line'><span class="nb">pushd </span>foo.bar
-</span><span class='line'><span class="c"># Add a new branch to your local copy</span>
-</span><span class='line'>git checkout -b <span class="nb">source</span>
-</span><span class='line'><span class="c"># Delete all the existing context</span>
-</span><span class='line'>rm -Rf *
-</span><span class='line'><span class="c"># Commit all those deletes</span>
-</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial Empty source branch&quot;</span>
-</span><span class='line'><span class="c"># Push that emopty branch back to GitHub</span>
-</span><span class='line'>git push
-</span><span class='line'><span class="nb">popd</span>
-</span><span class='line'><span class="c"># GEt rid of that temp. directory</span>
-</span><span class='line'>rm -Rf foo.bar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Move your existing source directory out of the way for now</span>
-</span><span class='line'>mv <span class="nb">source </span>source.org
-</span><span class='line'><span class="c"># Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</span>
-</span><span class='line'><span class="c"># Note: The &quot;--single-branch -branch source&quot; options are not used by most git users but can make speciallized repo copies quick and fool-proof</span>
-</span><span class='line'>git clone --single-branch -branch <span class="nb">source </span>https://github.com/sushihangover/sushihangover.github.io.git <span class="nb">source</span>
-</span><span class='line'><span class="c"># Now copy your existing source files into this empty repo directory</span>
-</span><span class='line'>cp -R source.org <span class="nb">source</span>
-</span><span class='line'><span class="nb">pushd source</span>
-</span><span class='line'><span class="c"># Commit and Push your sources files to GitHub</span>
-</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial source branch commit&quot;</span>
-</span><span class='line'><span class="c"># Add your commit comment and save</span>
-</span><span class='line'>git push
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
-
-<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pushd source; git commit --all --message="Blog updated"; git push; popd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
-
-<ul>
-<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -906,6 +859,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/playscript-3-dot-2-4001-posted/">Playscript 3.2.4001 Posted</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a>
       </li>
     
@@ -919,10 +876,6 @@ end
     
       <li class="post">
         <a href="/blog/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/keeping-a-github-fork-up-to-date-with-origin-repo/">Keeping a GitHub Fork Up to Date With Origin Repo</a>
       </li>
     
   </ul>
