@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In my last post I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out &hellip;">
+  <meta name="description" content="I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an ARM targeting Clang/LLVM build) since I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,277 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/bare-metal-debugging-with-affinic-debugger/">Bare Metal Debugging With Affinic Debugger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-26T23:19:58-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
+
+<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;-) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
+
+<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
+
+<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
+
+<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
+
+<p><a href="/images/Affinic_preferences_large.png"><img class="right" src="/images/Affinic_preferences_small.png" title="&#34;Affinic gdb location&#34;" alt="&#34;Affinic gdb location&#34;"></a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
+
+<p>Lets debug something!</p>
+
+<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/startup.o -c src/startup.s
+</span><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
+</span><span class='line'>arm-none-eabi-ld -Lobj --gc-sections --print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
+
+<h6>* -s              shorthand for -gdb tcp::1234</h6>
+
+<h6>* -S              freeze CPU at startup</h6>
+
+<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>target remote localhost:1234
+</span><span class='line'>file bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
+
+<p><a href="/images/Affinic_assembly_view_large.png"><img class="left" src="/images/Affinic_assembly_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
+<a href="/images/Affinic_source_view_large.png"><img class="right" src="/images/Affinic_source_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a></p>
+
+<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/arm-cortex-m-semihosting-with-qemu/">ARM Cortex-M Semihosting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-24T21:02:34-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:02 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_Semihosting_large.png"><img class="left" src="/images/ARM_Semihosting.png" title="&#34;ARM Semihosting&#34;" alt="&#34;ARM Semihosting&#34;"></a> <strong><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471c/Bgbjjgij.html">What is semihosting?</a></strong> <em>&hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this mechanism to enable functions in the C library, such as printf() and scanf(), to use the screen and keyboard of the host instead of having a screen and keyboard on the target system&hellip;</em></p>
+
+<p>So you need to output some debug messages via your host debugging session (via JTAG or such) or working with QEMU to prototype some ARM code? Well semihosting is simple use, but it can come at a large price in memory and overhead if you use stdio to do it&hellip;</p>
+
+<p>You can skip the &ldquo;#include &lt;stdio.h>&rdquo; and linking the semihosting newlib library (assuming you have the syscalls inplementated) and just use some simple inline assembly to get the job done.</p>
+
+<p>Lets take a quick look at two of the twenty-some service calls (SVC) that are available, SYS_WRITEC (0x03) and WRITE0 (0x04).</p>
+
+<h5>* SYS_WRITEC outputs a single character, an address pointer to that character is loaded in register R1. Register R0 is loaded with 0x03 and then you can execute a <em>SuperVisor Call</em> (SVC 0x00123456).</h5>
+
+<h5>* SYS_WRITE0 outputs a null-term string, the string&rsquo;s beginning address is stored in R1, R0 is loaded with 0x04 and you execute a supervisor call again.</h5>
+
+<p>If we translate that knowledge into inline assembly:</p>
+
+<figure class='code'><figcaption><span>main.c </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITEC</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITE0</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg0</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r0&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg1</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r1&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;_&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;!&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
+</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0, r0&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITE0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="s">&quot;Print this to my jtag debugger</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h6>Note: This is not pretty inline styling as it is meant to break each step down. Normally you would create a couple of functions (i.e: a &lsquo;PutChar&rsquo; for SYS_WRITEC) and include the R0/R1 clobbers, etc&hellip;</h6>
+
+<p>And the output that we get:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -nographic -monitor null -serial null -semihosting -kernel main.axf 
+</span><span class='line'>!
+</span><span class='line'>Print this to my jtag debugger</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>main.o: file format elf32-littlearm </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='c-objdump'><span class='line'><span class="mh">00000000</span> <span class="p">&lt;</span><span class="nf">main</span><span class="p">&gt;:</span>
+</span><span class='line'>   <span class="mi">0</span><span class="o">:</span>  <span class="n">e52db004</span>     <span class="n">push</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>       <span class="p">;</span> <span class="p">(</span><span class="n">str</span> <span class="n">fp</span><span class="p">,</span> <span class="p">[</span><span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+</span><span class='line'>   <span class="mi">4</span><span class="o">:</span>  <span class="n">e28db000</span>     <span class="n">add</span>  <span class="n">fp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>   <span class="mi">8</span><span class="o">:</span>  <span class="n">e24dd014</span>     <span class="n">sub</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">20</span>
+</span><span class='line'>   <span class="nl">c</span><span class="p">:</span>  <span class="n">e3a03003</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">3</span>
+</span><span class='line'>  <span class="mi">10</span><span class="o">:</span>  <span class="n">e50b3008</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">14</span><span class="o">:</span>  <span class="n">e3a03004</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>  <span class="mi">18</span><span class="o">:</span>  <span class="n">e50b300c</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">1</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e3a0305f</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">95</span>  <span class="p">;</span> <span class="mh">0x5f</span>
+</span><span class='line'>  <span class="mi">20</span><span class="o">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">24</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">28</span><span class="o">:</span>  <span class="n">e3a03021</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">33</span>  <span class="p">;</span> <span class="mh">0x21</span>
+</span><span class='line'>  <span class="mi">2</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">30</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">34</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
+</span><span class='line'>  <span class="mi">38</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">3</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">40</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">44</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">48</span><span class="o">:</span>  <span class="n">e3a0300a</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">10</span>
+</span><span class='line'>  <span class="mi">4</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">50</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
+</span><span class='line'>  <span class="mi">54</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">58</span><span class="o">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">5</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">60</span><span class="o">:</span>  <span class="n">e51b000c</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
+</span><span class='line'>  <span class="mi">64</span><span class="o">:</span>  <span class="n">e59f3010</span>     <span class="n">ldr</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">pc</span><span class="p">,</span> <span class="err">#</span><span class="mi">16</span><span class="p">]</span>    <span class="p">;</span> <span class="mi">7</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mh">0x7c</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="mi">68</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
+</span><span class='line'>  <span class="mi">6</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
+</span><span class='line'>  <span class="mi">70</span><span class="o">:</span>  <span class="n">e28bd000</span>     <span class="n">add</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>  <span class="mi">74</span><span class="o">:</span>  <span class="n">e8bd0800</span>     <span class="n">ldmfd</span>    <span class="n">sp</span><span class="o">!</span><span class="p">,</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>
+</span><span class='line'>  <span class="mi">78</span><span class="o">:</span>  <span class="n">e12fff1e</span>     <span class="n">bx</span>   <span class="n">lr</span>
+</span><span class='line'>  <span class="mi">7</span><span class="nl">c</span><span class="p">:</span>  <span class="mo">00000000</span>    <span class="p">.</span><span class="n">word</span> <span class="mh">0x00000000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS: SYS_TMPNAM and SYS_READC are not implemented in Qemu (up to and including 1.7.0), so consult the &ldquo;qemu/target-arm/arm-semi.c&rdquo; source if you are have questions about how those SVC calls are implemented.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1036,219 +1307,6 @@ Tail chaining > If another exception is pending when an ISR exits, the processor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/homebrew-git-1-dot-9-0-release/">Homebrew: Git 1.9.0 Release</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-16T10:32:41-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:32 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
-
-<p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>
-
-<p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
-
-<div><script src='https://gist.github.com/9036063.js?file=git.rb'></script>
-<noscript><pre><code>require &#39;formula&#39;
-
-class Git &lt; Formula
-  homepage &#39;http://git-scm.com&#39;
-  url &#39;https://git-core.googlecode.com/files/git-1.9.0.tar.gz&#39;
-  sha1 &#39;e60667fc16e5a5f1cde46616b0458cc802707743&#39;
-  head &#39;https://github.com/git/git.git&#39;
-
-  bottle do
-    sha1 &quot;582a276b608de17888da01922648522bf7a9c11a&quot; =&gt; :mavericks
-    sha1 &quot;f308b293aa5664b65c57c3b206b892537397d3b9&quot; =&gt; :mountain_lion
-    sha1 &quot;fa5f896b766bb103804800abde58e25579cf58a7&quot; =&gt; :lion
-  end
-
-  option &#39;with-blk-sha1&#39;, &#39;Compile with the block-optimized SHA1 implementation&#39;
-  option &#39;without-completions&#39;, &#39;Disable bash/zsh completions from &quot;contrib&quot; directory&#39;
-  option &#39;with-brewed-openssl&#39;, &quot;Build with Homebrew OpenSSL instead of the system version&quot;
-  option &#39;with-brewed-curl&#39;, &quot;Use Homebrew&#39;s version of cURL library&quot;
-  option &#39;with-persistent-https&#39;, &#39;Build git-remote-persistent-https from &quot;contrib&quot; directory&#39;
-
-  depends_on &#39;pcre&#39; =&gt; :optional
-  depends_on &#39;gettext&#39; =&gt; :optional
-  depends_on &#39;openssl&#39; if build.with? &#39;brewed-openssl&#39;
-  depends_on &#39;curl&#39; if build.with? &#39;brewed-curl&#39;
-  depends_on &#39;go&#39; =&gt; :build if build.with? &#39;persistent-https&#39;
-
-  resource &#39;man&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-manpages-1.9.0.tar.gz&#39;
-    sha1 &#39;cff590c92b4d1c8a143c078473140b653cc5d56a&#39;
-  end
-
-  resource &#39;html&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-htmldocs-1.9.0.tar.gz&#39;
-    sha1 &#39;65eb3f411f4699695c7081a7c716cabb9ce23d75&#39;
-  end
-
-  def patches
-    if MacOS.version &gt;= :mavericks and not build.head?
-      # Allow using PERLLIB_EXTRA to find Subversion Perl bindings location
-      # in the CLT/Xcode. Should be included in Git 1.8.6.
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=07981d
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=0386dd
-      #[&#39;https://git.kernel.org/cgit/git/git.git/patch/?id=07981d&#39;,
-      # &#39;https://git.kernel.org/cgit/git/git.git/patch/?id=0386dd&#39;]
-    end
-  end
-
-  def install
-    # If these things are installed, tell Git build system to not use them
-    ENV[&#39;NO_FINK&#39;] = &#39;1&#39;
-    ENV[&#39;NO_DARWIN_PORTS&#39;] = &#39;1&#39;
-    ENV[&#39;V&#39;] = &#39;1&#39; # build verbosely
-    ENV[&#39;NO_R_TO_GCC_LINKER&#39;] = &#39;1&#39; # pass arguments to LD correctly
-    ENV[&#39;PYTHON_PATH&#39;] = which &#39;python&#39;
-    ENV[&#39;PERL_PATH&#39;] = which &#39;perl&#39;
-
-    if MacOS.version &gt;= :mavericks and MacOS.dev_tools_prefix
-      ENV[&#39;PERLLIB_EXTRA&#39;] = &quot;#{MacOS.dev_tools_prefix}/Library/Perl/5.16/darwin-thread-multi-2level&quot;
-    end
-
-    unless quiet_system ENV[&#39;PERL_PATH&#39;], &#39;-e&#39;, &#39;use ExtUtils::MakeMaker&#39;
-      ENV[&#39;NO_PERL_MAKEMAKER&#39;] = &#39;1&#39;
-    end
-
-    ENV[&#39;BLK_SHA1&#39;] = &#39;1&#39; if build.with? &#39;blk-sha1&#39;
-
-    if build.with? &#39;pcre&#39;
-      ENV[&#39;USE_LIBPCRE&#39;] = &#39;1&#39;
-      ENV[&#39;LIBPCREDIR&#39;] = Formula.factory(&#39;pcre&#39;).opt_prefix
-    end
-
-    ENV[&#39;NO_GETTEXT&#39;] = &#39;1&#39; unless build.with? &#39;gettext&#39;
-
-    system &quot;make&quot;, &quot;prefix=#{prefix}&quot;,
-                   &quot;sysconfdir=#{etc}&quot;,
-                   &quot;CC=#{ENV.cc}&quot;,
-                   &quot;CFLAGS=#{ENV.cflags}&quot;,
-                   &quot;LDFLAGS=#{ENV.ldflags}&quot;,
-                   &quot;install&quot;
-
-    bin.install Dir[&quot;contrib/remote-helpers/git-remote-{hg,bzr}&quot;]
-
-    # Install the OS X keychain credential helper
-    cd &#39;contrib/credential/osxkeychain&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-credential-osxkeychain&#39;
-      system &quot;make&quot;, &quot;clean&quot;
-    end
-
-    # Install git-subtree
-    cd &#39;contrib/subtree&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-subtree&#39;
-    end
-
-    if build.with? &#39;persistent-https&#39;
-      cd &#39;contrib/persistent-https&#39; do
-        system &quot;make&quot;
-        bin.install &#39;git-remote-persistent-http&#39;,
-                    &#39;git-remote-persistent-https&#39;,
-                    &#39;git-remote-persistent-https--proxy&#39;
-      end
-    end
-
-    unless build.without? &#39;completions&#39;
-      # install the completion script first because it is inside &#39;contrib&#39;
-      bash_completion.install &#39;contrib/completion/git-completion.bash&#39;
-      bash_completion.install &#39;contrib/completion/git-prompt.sh&#39;
-
-      zsh_completion.install &#39;contrib/completion/git-completion.zsh&#39; =&gt; &#39;_git&#39;
-      cp &quot;#{bash_completion}/git-completion.bash&quot;, zsh_completion
-    end
-
-    (share+&#39;git-core&#39;).install &#39;contrib&#39;
-
-    # We could build the manpages ourselves, but the build process depends
-    # on many other packages, and is somewhat crazy, this way is easier.
-    man.install resource(&#39;man&#39;)
-    (share+&#39;doc/git-doc&#39;).install resource(&#39;html&#39;)
-
-    # Make html docs world-readable; check if this is still needed at 1.8.6
-    chmod 0644, Dir[&quot;#{share}/doc/git-doc/**/*.{html,txt}&quot;]
-  end
-
-  def caveats; &lt;&lt;-EOS.undent
-    The OS X keychain credential helper has been installed to:
-      #{HOMEBREW_PREFIX}/bin/git-credential-osxkeychain
-
-    The &#39;contrib&#39; directory has been installed to:
-      #{HOMEBREW_PREFIX}/share/git-core/contrib
-    EOS
-  end
-
-  test do
-    HOMEBREW_REPOSITORY.cd do
-      assert_equal &#39;bin/brew&#39;, `#{bin}/git ls-files -- bin`.strip
-    end
-  end
-end
-</code></pre></noscript></div>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/what-is-bare-metal-arm/">What Is Bare Metal ARM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-16T08:12:02-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:12 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>What is Bare Metal ARM Development?</h2>
-
-<blockquote><p>Bare-Metal ARM Development, also called <a href="http://en.wikipedia.org/wiki/Bare_machine">Bare-Machine</a> is the development of &lsquo;embedded&rsquo; applications, that run without an operating system or other supporting programs, maybe a bootloader, on an ARM processor. The application sits on top of the “bare metal”, runs ARM instructions (including THUMB), directly controls the processor (MCU) to manage power consumption, GPIOs, ADC, DAC, etc&hellip;</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1266,6 +1324,14 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-3-dot-2-6001-posted/">Playscript 3.2.6001 Posted</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-renaming-a-got-tag/">Git - Renaming a Got Tag</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-getting-a-list-of-files-changed-between-branches/">Git - Getting a List of Files Changed Between Branches</a>
       </li>
     
@@ -1275,14 +1341,6 @@ end
     
       <li class="post">
         <a href="/playscript-3-dot-2-4001-posted/">Playscript 3.2.4001 Posted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a>
-      </li>
-    
-      <li class="post">
-        <a href="/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/">SmartGit - the Best Git GUI There Is... And Its Free</a>
       </li>
     
   </ul>

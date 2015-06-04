@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-04T07:17:28-07:00</updated>
+  <updated>2015-06-04T08:10:45-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git - Renaming a Got Tag]]></title>
+    <link href="http://sushihangover.github.io/git-renaming-a-got-tag/"/>
+    <updated>2015-06-04T07:39:49-07:00</updated>
+    <id>http://sushihangover.github.io/git-renaming-a-got-tag</id>
+    <content type="html"><![CDATA[<p>-<img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
+
+<p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
+
+<pre><code>git tag new_tag_name old_tag_name
+git tag -d old_tag_name
+</code></pre>
+
+<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (REMEMBER TO INCLUDE THAT <strong>COLON</strong>):</p>
+
+<pre><code>git push origin :refs/tags/old_tag_name
+</code></pre>
+
+<p>And push the new tag to your remote so everyone else will receive that new tag on a pull:</p>
+
+<pre><code>git push origin --tags
+</code></pre>
+
+<p><strong>Note</strong>: The colon isn&rsquo;t a &ldquo;delete flag&rdquo;. Git push and git pull both accept zero or more refspecs as their final argument(s). Now read about <a href="http://git-scm.com/book/en/v2/Git-Internals-The-Refspec">refspecs</a>, really read it&hellip; . A colon separates source from destination in a refspec. The command git push origin :foo has an empty source and essentially says &ldquo;push nothing to branch foo of origin&rdquo;, or, in other words, &ldquo;make branch foo on origin not exist&rdquo;.</p>
+
+<p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
+
+<p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git - Getting a List of Files Changed Between Branches]]></title>
@@ -133,25 +164,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Add a Local Repo as a Remote to a Different Local Repo]]></title>
-    <link href="http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo/"/>
-    <updated>2015-05-27T19:34:36-07:00</updated>
-    <id>http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo</id>
-    <content type="html"><![CDATA[<p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
-
-<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
-</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   

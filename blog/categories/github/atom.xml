@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-04T07:17:28-07:00</updated>
+  <updated>2015-06-04T08:10:45-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Playscript 3.2.6001 Posted]]></title>
+    <link href="http://sushihangover.github.io/playscript-3-dot-2-6001-posted/"/>
+    <updated>2015-06-04T08:12:01-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-3-dot-2-6001-posted</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.6001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.6-branch&rsquo; into playscript-mono</p>
+
+<p>FYI: I have been using tags on the playscript-mono branch to mark each of these PlayScript merges. It is a clean and lightweight way to capture and identity these version on the timeline:</p>
+
+<pre><code>git tag --list | grep playscript
+playscript-3.2.2002
+playscript-3.2.3001
+playscript-3.2.3003
+playscript-3.2.4001
+playscript-3.2.5001
+playscript-3.2.6001
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.5001 Posted]]></title>
@@ -67,22 +87,6 @@ make install
 <p>I&rsquo;ve used a couple of <a href="http://www.git-scm.com/downloads/guis">other git GUIs</a> and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
 
 <p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for non-commercial use, so just download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
-    <link href="http://sushihangover.github.io/playscript-3-dot-2-3001-posted/"/>
-    <updated>2015-06-03T06:10:59-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-3-dot-2-3001-posted</id>
-    <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
-
-<p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
-
-<pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
-</code></pre>
 ]]></content>
   </entry>
   
