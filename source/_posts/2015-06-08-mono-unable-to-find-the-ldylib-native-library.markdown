@@ -7,8 +7,7 @@ categories:
 - mono
 - os-x
 ---
-{% img left http://sushihangover.github.io/images/mono-logo.png  %}
-Using Mono/.Net libraries that have native binding and you are receiving errors like 
+{% img left http://sushihangover.github.io/images/mono-logo.png  %} Using Mono/.Net libraries that have native binding and you are receiving errors like 
 "**Unable to find the xxxx native library**" or "**DllImport error loading library**". 
 
 You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.
@@ -33,7 +32,7 @@ I am compiling using a 64-bit version of Mono on OS-X and need 64-bit libraries 
     file libmono-curses.dylib 
     libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
-After that, testing the C# ncurses wrapper test went fine... ;-)
+After that, testing the C# ncurses wrapper went fine... ;-)
 
 
 ## [Mac OS X Framework and .dylib Search Path](http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path)
