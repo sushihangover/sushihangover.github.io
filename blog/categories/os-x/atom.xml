@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T11:16:51-07:00</updated>
+  <updated>2015-06-08T11:24:41-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -19,30 +19,30 @@
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" >
-When using .Net libraries that have native binding and you are receiving errors like
+Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
-<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and filtering (MONO_LOG_MASK) the debug to just DLL related messages.</p>
+<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
 
 <pre><code>export MONO_LOG_LEVEL=debug
 export MONO_LOG_MASK=dll
 mono yourprogram.exe
 </code></pre>
 
-<p>I was recently using the mono-curses, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-run the program and yes it was finding the dylib OK but it was complaining about it being the wrong architecture&hellip;</p>
+<p>I was recently using the <a href="https://github.com/mono/mono-curses">mono-curses</a> wrapper, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But the program failed to run so I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-ran the program. Yes it was finding the dylib OK <strong>but</strong> it was complaining about it being the wrong architecture&hellip;</p>
 
 <pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
 Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
 Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
 </code></pre>
 
-<p>Checking with file and yes, it was a 32-bit version of the library</p>
+<p>Checking with <strong>file</strong> and yes, it was a 32-bit version of the library:</p>
 
 <pre><code>file libmono-curses.dylib
 libmono-curses.dylib: Mach-O dynamically linked shared library i386
 </code></pre>
 
-<p>I am compiling using a 64-bit version of Mono on OS-X, so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version.</p>
+<p>I am compiling using a 64-bit version of Mono on OS-X and need 64-bit libraries (and native libs), so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version (I&rsquo;ll fork and fix the <a href="https://github.com/mono/mono-curses">mono-curses</a> project and post it to my GitHub).</p>
 
 <pre><code>file libmono-curses.dylib 
 libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
