@@ -16,7 +16,7 @@ I use [Octopress](http://octopress.org) for this [GitHub](https://github.com/sus
 
 This *lazy* script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-) 
 
-Nothing special, generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.
+Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.
 
     #!/usr/bin/env bash
     echo "Generate and deploying website"
