@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T11:24:41-07:00</updated>
+  <updated>2015-06-08T15:02:26-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,12 +14,98 @@
 
   
   <entry>
+    <title type="html"><![CDATA[OS-X 64-bit Mono : Midnight Commander]]></title>
+    <link href="http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/"/>
+    <updated>2015-06-08T18:43:29-07:00</updated>
+    <id>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander</id>
+    <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/midnightcommander.png" alt="" /></p>
+
+<p>In testing out 64-bit ncurses on OS-X, I grabbed the C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a> to do some manual testing.</p>
+
+<p>After tweaking the Makefile for PE32+ images, I ended up with a 64-bit exe, dll, and dylib:</p>
+
+<pre><code>file *.exe *.dll *.dylib
+mc.exe:               PE32+ executable for MS Windows (console) Mono/.Net assembly
+mono-curses.dll:      PE32+ executable for MS Windows (DLL) (console) Mono/.Net/assembly
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>There are some minor painting issues which I do not know if they are related to the arch type, OS-X or bugs in the actual C# code (mc or the ncurses wrapper, but overall it works very well.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mono-Curses OS-X 64-bit]]></title>
+    <link href="http://sushihangover.github.io/mono-curses-os-x-64-bit/"/>
+    <updated>2015-06-08T17:07:00-07:00</updated>
+    <id>http://sushihangover.github.io/mono-curses-os-x-64-bit</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
+
+<p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
+
+<p>It appears to work ok, but there is a issue with timeouts; tryout the mltest.cs sample code and you will see the inconsistent timeout events&hellip;.</p>
+
+<p>It also is missing mouse support&hellip; not a deal breaker for me, but it would be a nice to-have.</p>
+
+<p>There are some apps such as the out-dated <a href="http://www.mono-project.com/archived/monotorrent/">MonoTorrent</a> and a C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a>.</p>
+
+<p><a href="http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/">http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/</a></p>
+
+<h1>Mono-Curses OS-X 64-bit</h1>
+
+<p>Note: <em>This is a fork of the <a href="http://www.mono-project.com/MonoCurses">mono/mono-curses</a> project</em></p>
+
+<p>Clone the repo and checkout the <strong>osx-64bit</strong> branch</p>
+
+<pre><code>git clone https://github.com/sushihangover/mono-curses.git
+git check osx-64bit 
+</code></pre>
+
+<p>Set our path to your 64-bit version of Mono and set your Mono package config env var to that install, configure and make the project.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>export PATH=$HOME/mono-install/bin
+export PKG_CONFIG_PATH=/$HOME/mono-install/lib/pkgconfig
+#WARNING: by default it installs into /usr/local
+./configure --prefix=/$HOME/mono-install
+make 
+make install
+</code></pre>
+
+<p>That should do it, lets do a quick arch check:</p>
+
+<pre><code>file libmono-curses.dylib 
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+
+file mono-curses.dll
+mono-curses.dll: PE32+ executable for MS Windows (DLL) (console) Mono/.Net assembly
+</code></pre>
+
+<p>FYI: The difference in a <a href="http://en.wikipedia.org/wiki/Portable_Executable">PE 32-bit and 64-bit</a> is show below:</p>
+
+<pre><code>file mono-curses.dll
+mono-curses.dll: **PE32+** executable for MS Windows (DLL) (console) Mono/.Net assembly
+
+file mono-curses-32.dll 
+mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 80386 32-bit **Mono/.Net assembly
+</code></pre>
+
+<h2>There are a couple of tests that are built during the <em>make</em> you can run:</h2>
+
+<pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
+(make gtest) mono gtest.exe (Ctrl-C to exit app)
+(make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[OS-X Mono - Unable to Find the Dylib Native Library]]></title>
     <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" >
-Using Mono/.Net libraries that have native binding and you are receiving errors like
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
 <p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
@@ -48,7 +134,7 @@ libmono-curses.dylib: Mach-O dynamically linked shared library i386
 libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 </code></pre>
 
-<p>After that, testing the C# ncurses wrapper test went fine&hellip; ;-)</p>
+<p>After that, testing the C# ncurses wrapper went fine&hellip; ;-)</p>
 
 <h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
 
@@ -478,159 +564,6 @@ make install
 </code></pre>
 
 <p>If anyone has a way to do this without using xargs I&rsquo;m all ears&hellip; ;-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
-    <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
-    <updated>2014-04-22T18:35:15-07:00</updated>
-    <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
-    <content type="html"><![CDATA[<p>GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their <a href="http://gcc.gnu.org/gcc-4.9/changes.html">change/log list</a>.</p>
-
-<p>One of them is the &ldquo;<strong>-mslow-flash-data</strong>&rdquo;, I&rsquo;m really interested in what they are doing when this option is used. Using QEMU and LLVM I create variable and function usage maps during the last stage of speed optimizations and tag the high use items to be moved to RX to any remaining XRW (RAM) during startup in the reset_handler (would really be nice to burn that routine in the feedback loop of the LLVM profiler, need to create perf records that could be fed to the <a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072138.html">LLVM AutoFDO Converter</a> that Google did and have it spew out &lsquo;linker scriptets&rsquo;&hellip;. too many ideas, not enough time at get them all done ;-)</p>
-
-<p>So what is listed in the man for &ldquo;-mslow-flash-data&rdquo; is:
-<strong>Assume loading data from flash is slower than fetching instruction. Therefore literal load is minimized for better performance. This option is only supported when compiling for ARMv7 M-profile and off by default.</strong></p>
-
-<p><span class='pullquote-right' data-pullquote='Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-data? Only M3 and M4x support? Need to find the commit(s) for this feature.'>
-Is ARMv6 M-profile really excluded in whatever they are doing with mslow-flash-data? Only M3 and M4x support? Need to find the commit(s) for this feature.</p>
-
-<p>Also everyone always loves items like: <strong>A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors</strong>. Free code size reduction is always a great thing when during with those dirt-cheap <a href="http://www.nuvoton.com/NuvotonMOSS/Community/ProductInfo.aspx?tp_GUID=5dbf7d7a-b6df-4fe1-91c9-063449500ce7">Nuvoton NuMicro M0 chips</a>, well, assuming it comes with using &ldquo;-Os&rdquo; and not with a speed impact when throughput matters more&hellip; small is good, but it is not always what everyone needs.</p>
-
-<p>And the &ldquo;<a href="http://en.wikipedia.org/wiki/Register_allocation">Local Register Allocator</a>&rdquo; is turned on for ARM by default:
-<code>The Local Register Allocator, introduced in GCC 4.8.0 for ia32 and x86-64 targets only, is now used also on the Aarch64, ARM, S/390 and ARC targets by default..</code>
-</span></p>
-
-<p>Getting it compiled on OS-X proved to be a pain as I do not have a native build of GCC, just clang acting as gcc, and could not get a  ARM-NONE-EABI 4.9.0 version built using clang. One of the issues that I could not work around was:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>clang: error: unsupported option '-static-libgcc'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Well, duh&hellip;, clang does not support that option, but not clear on why that is showing up under the 4.9.0 build using the same configure options as 4.8.x. Manually hacking on the make files to get passed this and I ended up getting into other issues, so I give up and built an OS-X &lsquo;native&rsquo; gcc that I then used to build the ARM-NONE-EABI cross-compiler to get around the orginal &ldquo;-static-libgcc&rdquo; issue. Never had any problems doing a &ldquo;make all-gcc&rdquo; or &ldquo;make all&rdquo; to build gcc 4.8.x with clang->gcc before.</p>
-
-<p>So I build a native version on the master branch (4.10.x now):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./gcc --version
-</span><span class='line'>gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright (C) 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And then used that to build my arm-none-eabi cross-compiler,  yep, living on the bleeding edge with gcc and LLVM ;-)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./arm-none-eabi-gcc --version
-</span><span class='line'>arm-none-eabi-gcc (GCC) 4.10.0 20140422 (experimental)
-</span><span class='line'>Copyright (C) 2014 Free Software Foundation, Inc.
-</span><span class='line'>This is free software; see the source for copying conditions.  There is NO
-</span><span class='line'>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</span><span class='line'>...
-</span><span class='line'>  Known ARM architectures (for use with the -march= option):
-</span><span class='line'>    armv2 armv2a armv3 armv3m armv4 armv4t armv5 armv5e armv5t armv5te armv6
-</span><span class='line'>    armv6-m armv6j armv6k armv6s-m armv6t2 armv6z armv6zk armv7 armv7-a armv7-m
-</span><span class='line'>    armv7-r armv7e-m armv7ve armv8-a armv8-a+crc iwmmxt iwmmxt2 native
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
-
-<p>FYI: I&rsquo;m on OS-X 10.9.2:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Software  OS X 10.9.2 (13C64)
-</span><span class='line'>clang --version
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>gcc --version
-</span><span class='line'>Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
-</span><span class='line'>Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)
-</span><span class='line'>Target: x86_64-apple-darwin13.1.0
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ARM enhancements from the change list include:</p>
-
-<ul>
-<li><strong>ARM:</strong></li>
-<li>Use of Advanced SIMD (Neon) for 64-bit scalar computations has been disabled by default. This was found to generate better code in only a small number of cases. It can be turned back on with the -mneon-for-64bits option.</li>
-<li>Further support for the ARMv8-A architecture, notably implementing the restriction around IT blocks in the Thumb32 instruction set has been added. The -mrestrict-it option can be used with -march=armv7-a or the -march=armv7ve options to make code generation fully compatible with the deprecated instructions in ARMv8-A.</li>
-<li>Support has now been added for the ARMv7ve variant of the architecture. This can be used by the -march=armv7ve option.</li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics and are available through the -march=armv8-a+crc and mfpu=crypto-neon-fp-armv8 options.</li>
-<li>LRA is now on by default for the ARM target. This can be turned off using the -mno-lra option. This option is purely transitionary command line option and will be removed in a future release. We are interested in any bug reports regarding functional and performance regressions with LRA.</li>
-<li><strong>A new option -mslow-flash-data to improve performance of programs fetching data on slow flash memory has now been introduced for the ARMv7-M profile cores.</strong></li>
-<li>A new option -mpic-data-is-text-relative for targets that allows data segments to be relative to text segments has been added. This is on by default for all targets except VxWorks RTP.</li>
-<li>A number of infrastructural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-<li>GCC now supports Cortex-A12 and the Cortex-R7 through the -mcpu=cortex-a12 and -mcpu=cortex-r7 options.</li>
-<li>GCC now has tuning for the Cortex-A57 and Cortex-A53 through the -mcpu=cortex-a57 and -mcpu=cortex-a53 options.
-Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option. Similar support was added for the combination of Cortex-A15 and Cortex-A7 through the -mcpu=cortex-a15.cortex-a7 option.</li>
-<li>Further performance optimizations for the Cortex-A15 and the Cortex-M4 have been added.</li>
-<li><p><strong> A number of code generation improvements for Thumb2 to reduce code size when compiling for the M-profile processors.</strong></p></li>
-<li><p><strong>AArch64:</strong></p></li>
-<li>The ARMv8-A crypto and CRC instructions are now supported through intrinsics. These are enabled when the architecture supports these and are available through the -march=armv8-a+crc and -march=armv8-a+crypto options.</li>
-<li>Initial support for ILP32 has now been added to the compiler. This is now available through the command line option -mabi=ilp32. + Support for ILP32 is considered experimental as the ABI specification is still beta.</li>
-<li>Coverage of more of the ISA including the SIMD extensions has been added. The Advanced SIMD intrinsics have also been improved.</li>
-<li>The new local register allocator (LRA) is now on by default for the AArch64 backend.</li>
-<li>The REE (Redundant extension elimination) pass has now been enabled by default for the AArch64 backend.</li>
-<li>Tuning for the Cortex-A53 and Cortex-A57 has been improved.</li>
-<li>Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A53 was added through the -mcpu=cortex-a57.cortex-a53 option.</li>
-<li>A number of structural changes have been made to both the ARM and AArch64 backends to facilitate improved code-generation.</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Qemu 2.0.0 Is Released (or Maybe 1.7.9)]]></title>
-    <link href="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
-    <updated>2014-04-17T23:20:36-07:00</updated>
-    <id>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
-    <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="http://sushihangover.github.io/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
-
-<p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
-
-<p>It appears that doing a checkout of tag &lsquo;v2.0.0&rsquo;, build and install will produce a binary that reports version 1.7.9</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status
-</span><span class='line'>HEAD detached at v2.0.0
-</span><span class='line'>nothing to commit, working directory clean
-</span><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 1.7.93, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I did a quick look and they are pulling the version during the ./configure stage so since I am always on the master (bleed-edge) branch, my installed version shows up as 1.7.9. You will need to checkout, <strong>configure</strong>, build and install to produce a binary that has the correct version (<del>QEMUVERSION</del>) assigned:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 2.0.0, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

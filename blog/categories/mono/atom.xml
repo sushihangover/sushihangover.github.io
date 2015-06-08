@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T11:24:41-07:00</updated>
+  <updated>2015-06-08T15:02:26-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,12 +14,98 @@
 
   
   <entry>
+    <title type="html"><![CDATA[OS-X 64-bit Mono : Midnight Commander]]></title>
+    <link href="http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/"/>
+    <updated>2015-06-08T18:43:29-07:00</updated>
+    <id>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander</id>
+    <content type="html"><![CDATA[<p><img src="/images/midnightcommander.png" alt="" /></p>
+
+<p>In testing out 64-bit ncurses on OS-X, I grabbed the C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a> to do some manual testing.</p>
+
+<p>After tweaking the Makefile for PE32+ images, I ended up with a 64-bit exe, dll, and dylib:</p>
+
+<pre><code>file *.exe *.dll *.dylib
+mc.exe:               PE32+ executable for MS Windows (console) Mono/.Net assembly
+mono-curses.dll:      PE32+ executable for MS Windows (DLL) (console) Mono/.Net/assembly
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>There are some minor painting issues which I do not know if they are related to the arch type, OS-X or bugs in the actual C# code (mc or the ncurses wrapper, but overall it works very well.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mono-Curses OS-X 64-bit]]></title>
+    <link href="http://sushihangover.github.io/mono-curses-os-x-64-bit/"/>
+    <updated>2015-06-08T17:07:00-07:00</updated>
+    <id>http://sushihangover.github.io/mono-curses-os-x-64-bit</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
+
+<p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
+
+<p>It appears to work ok, but there is a issue with timeouts; tryout the mltest.cs sample code and you will see the inconsistent timeout events&hellip;.</p>
+
+<p>It also is missing mouse support&hellip; not a deal breaker for me, but it would be a nice to-have.</p>
+
+<p>There are some apps such as the out-dated <a href="http://www.mono-project.com/archived/monotorrent/">MonoTorrent</a> and a C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a>.</p>
+
+<p><a href="http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/">http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/</a></p>
+
+<h1>Mono-Curses OS-X 64-bit</h1>
+
+<p>Note: <em>This is a fork of the <a href="http://www.mono-project.com/MonoCurses">mono/mono-curses</a> project</em></p>
+
+<p>Clone the repo and checkout the <strong>osx-64bit</strong> branch</p>
+
+<pre><code>git clone https://github.com/sushihangover/mono-curses.git
+git check osx-64bit 
+</code></pre>
+
+<p>Set our path to your 64-bit version of Mono and set your Mono package config env var to that install, configure and make the project.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>export PATH=$HOME/mono-install/bin
+export PKG_CONFIG_PATH=/$HOME/mono-install/lib/pkgconfig
+#WARNING: by default it installs into /usr/local
+./configure --prefix=/$HOME/mono-install
+make 
+make install
+</code></pre>
+
+<p>That should do it, lets do a quick arch check:</p>
+
+<pre><code>file libmono-curses.dylib 
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+
+file mono-curses.dll
+mono-curses.dll: PE32+ executable for MS Windows (DLL) (console) Mono/.Net assembly
+</code></pre>
+
+<p>FYI: The difference in a <a href="http://en.wikipedia.org/wiki/Portable_Executable">PE 32-bit and 64-bit</a> is show below:</p>
+
+<pre><code>file mono-curses.dll
+mono-curses.dll: **PE32+** executable for MS Windows (DLL) (console) Mono/.Net assembly
+
+file mono-curses-32.dll 
+mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 80386 32-bit **Mono/.Net assembly
+</code></pre>
+
+<h2>There are a couple of tests that are built during the <em>make</em> you can run:</h2>
+
+<pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
+(make gtest) mono gtest.exe (Ctrl-C to exit app)
+(make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[OS-X Mono - Unable to Find the Dylib Native Library]]></title>
     <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" >
-Using Mono/.Net libraries that have native binding and you are receiving errors like
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
 <p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
@@ -48,7 +134,7 @@ libmono-curses.dylib: Mach-O dynamically linked shared library i386
 libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 </code></pre>
 
-<p>After that, testing the C# ncurses wrapper test went fine&hellip; ;-)</p>
+<p>After that, testing the C# ncurses wrapper went fine&hellip; ;-)</p>
 
 <h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
 
@@ -146,111 +232,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 <p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
 
 <p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GtkSharp-Explorer Update for Irony]]></title>
-    <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony/"/>
-    <updated>2014-02-12T08:14:14-08:00</updated>
-    <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
-    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
-
-<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>git checkout gtksharp-explorer
-</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
-</span><span class='line'>  Switched to a new branch <span class="p">&amp;</span>lsquo<span class="p">;</span>gtksharp-explorer<span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
-</span><span class='line'>* gtksharp-explorer
-</span><span class='line'>  master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix&lt;br/&gt;
-</span><span class='line'>open Irony_All.MonoDevelop.sln
-</span></code></pre></td></tr></table></div></figure></p>
-
-<hr />
-
-<h1>Grammar Explorer based on Gtk#</h1>
-
-<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
-Instructions for building on Mono:</p>
-
-<h2>Via MonoDevelop/Xamarin IDE:</h2>
-
-<ul>
-<li>Release or Debug Targets:
-      Load and build via the Irony_All.MonoDevelop.sln
-Via cmd line:</li>
-</ul>
-
-
-<hr />
-
-<ul>
-<li><p>Release:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
-<li><p>Debug:
-xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
-mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MonoMac: Detect When Mac Sleeps or Wakes]]></title>
-    <link href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/"/>
-    <updated>2014-01-12T20:44:00-08:00</updated>
-    <id>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes</id>
-    <content type="html"><![CDATA[<p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
-
-<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
-
-<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
-
-<p><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
-</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
-</span><span class='line'>);
-</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   

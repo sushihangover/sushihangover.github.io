@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/</loc>
+    <lastmod>2015-06-08T18:43:29-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/mono-curses-os-x-64-bit/</loc>
+    <lastmod>2015-06-08T17:07:00-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/</loc>
     <lastmod>2015-06-08T10:41:32-07:00</lastmod>
   </url>
@@ -425,18 +433,15 @@
     <loc>http://sushihangover.github.io/blog/categories/brew/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/2/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/mono-curses/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/3/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/ncurses/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/4/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/curses/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/5/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/6/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/midnightcommander/</loc>
   </url>
 </urlset>
