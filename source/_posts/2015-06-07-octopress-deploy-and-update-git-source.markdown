@@ -9,6 +9,7 @@ categories:
 - github
 ---
 ![](/images/Octopress_logo.png)
+
 I use [Octopress](http://octopress.org) for this [GitHub](https://github.com/sushihangover) blog and can tend to forget to push the source to Github as it is not part of the 'rake deploy'.
 
 'rake deploy' only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the ''source' branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all. 
