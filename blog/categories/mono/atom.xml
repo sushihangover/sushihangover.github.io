@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T11:14:19-07:00</updated>
+  <updated>2015-06-08T11:14:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono_logo.png">http://sushihangover.github.io/images/mono_logo.png</a>  }
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono_logo.png">http://sushihangover.github.io/images/mono_logo.png</a>" title="" >
 When using .Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
@@ -111,13 +111,17 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
-<p>{% codeblock lang:bash %}
-git remote -v
-origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (fetch)
-origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (push)
-upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (fetch)
-upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (push)
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
+</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
@@ -125,14 +129,19 @@ upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/m
 
 <p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
 
-<p>{% codeblock lang:bash %}
-cd ../PlayScript-master
-git fetch upstream
-git merge upstream/master
-git push origin
-make
-make install
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
+</span><span class='line'>git fetch upstream
+</span><span class='line'>git merge upstream/master
+</span><span class='line'>git push origin
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
 
@@ -145,29 +154,46 @@ make install
     <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony/"/>
     <updated>2014-02-12T08:14:14-08:00</updated>
     <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
-    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png">{% img left images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png  360 240 &lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo; %}</a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
 
 <p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
-{% codeblock lang:bash %}
-git branch &ndash;all
-* master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/gtksharp-explorer
-  remotes/origin/master
-  remotes/origin/xplat-nunit-fix
-git checkout gtksharp-explorer
-  Branch gtksharp-explorer set up to track remote branch gtksharp-explorer from origin.
-  Switched to a new branch &lsquo;gtksharp-explorer&rsquo;</p>
-
-<p>git branch &ndash;all
-* gtksharp-explorer
-  master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/gtksharp-explorer
-  remotes/origin/master
-  remotes/origin/xplat-nunit-fix<br/>
-open Irony_All.MonoDevelop.sln
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>git checkout gtksharp-explorer
+</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
+</span><span class='line'>  Switched to a new branch <span class="p">&amp;</span>lsquo<span class="p">;</span>gtksharp-explorer<span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
+</span><span class='line'>* gtksharp-explorer
+</span><span class='line'>  master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix&lt;br/&gt;
+</span><span class='line'>open Irony_All.MonoDevelop.sln
+</span></code></pre></td></tr></table></div></figure></p>
 
 <hr />
 
@@ -210,15 +236,21 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
 
 <p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
 
-<p>{% codeblock C# &ldquo;Wake and Sleep Events&rdquo; %}
-Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
-NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
-);
-NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
-};
-{% endcodeblock %}</p>
+<p><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
+</span><span class='line'>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   

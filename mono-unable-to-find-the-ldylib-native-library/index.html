@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>FleaFPGA Experimenters Board - SushiHangover</title>
+  <title>OS-X Mono - Unable to Find the Dylib Native Library - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL &hellip;">
+  <meta name="description" content="When using .Net libraries that have native binding and you are receiving errors like
+&ldquo;Unable to find the xxxx native library&rdquo; or &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/fleafpga-experimenters-board/">
+  <link rel="canonical" href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">FleaFPGA Experimenters Board</h1>
+      <h1 class="entry-title">OS-X Mono - Unable to Find the Dylib Native Library</h1>
     
     
       <p class="meta">
@@ -89,21 +90,70 @@
 
 
 
-<time class='entry-date' datetime='2014-02-15T07:14:40-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:14 am</span></time>
+<time class='entry-date' datetime='2015-06-08T10:41:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:41 am</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="/images/Flea_2v4_white2.jpg"><img class="left" src="/images/Flea_2v4_white2.jpg" width="360" height="240" title="OSHW FPGA Flea Dev Board" alt="FPGA Flea"></a></p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono_logo.png" title="" >
+When using .Net libraries that have native binding and you are receiving errors like
+&ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
-<blockquote><p>FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL and Verilog. FleaFPGA is suited for professional and hobbyist uses.</p><footer><strong>"Valentin Angelovski"</strong> <cite><a href='http://www.fleasystems.com/fleaFPGA.html'>www.fleasystems.com/&hellip;</a></cite></footer></blockquote>
+<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and filtering (MONO_LOG_MASK) the debug to just DLL related messages.</p>
+
+<pre><code>export MONO_LOG_LEVEL=debug
+export MONO_LOG_MASK=dll
+mono yourprogram.exe
+</code></pre>
+
+<p>I was recently using the mono-curses, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-run the program and yes it was finding the dylib OK but it was complaining about it being the wrong architecture&hellip;</p>
+
+<pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
+Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
+Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
+</code></pre>
+
+<p>Checking with file and yes, it was a 32-bit version of the library</p>
+
+<pre><code>file libmono-curses.dylib
+libmono-curses.dylib: Mach-O dynamically linked shared library i386
+</code></pre>
+
+<p>I am compiling using a 64-bit version of Mono on OS-X, so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version.</p>
+
+<pre><code>file libmono-curses.dylib 
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>After that, testing the C# ncurses wrapper test went fine&hellip; ;-)</p>
+
+<h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
+
+<h3>The Framework and library search path is:</h3>
+
+<ul>
+<li>A colon-separated list of directories in the user’s DYLD_FRAMEWORK_PATH environment variable.</li>
+<li>A colon-separated list of directories in the user’s DYLD_LIBRARY_PATH environment variable.</li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_FRAMEWORK_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/Library/Frameworks
+  /Library/Frameworks
+  /Network/Library/Frameworks
+  /System/Library/Frameworks
+</code></pre></li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_LIBRARY_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/lib
+  /usr/local/lib
+  /lib
+  /usr/lib
+</code></pre></li>
+</ul>
 
 
-<p>Valentin is looking at producing at limited run of his <a href="http://www.latticesemi.com/Products/FPGAandCPLD.aspx">Lattice</a> MachXO2-based <a href="http://www.fleasystems.com/fleaFPGA.html">FleaFPGA boards</a> that are designed to get beginners up, running and experimentings with FPGA programming quickly. For ~100.00 sounds like a great deal. Head over to his site and <a href="http://www.fleasystems.com/forums/showthread.php?tid=29&amp;pid=127#pid127">pre-order</a> one.</p>
-
-<p><img src="/images/oshw.jpg" alt="image" /></p>
+<p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
 </div>
 
 
@@ -119,12 +169,12 @@
 
 
 
-<time class='entry-date' datetime='2014-02-15T07:14:40-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:14 am</span></time>
+<time class='entry-date' datetime='2015-06-08T10:41:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:41 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/fpga/'>fpga</a>, <a class='category' href='/blog/categories/hardware/'>hardware</a>, <a class='category' href='/blog/categories/oshw/'>oshw</a>
+    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>
   
 </span>
 
@@ -133,7 +183,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/fleafpga-experimenters-board/" data-via="" data-counturl="http://sushihangover.github.io/fleafpga-experimenters-board/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/" data-via="" data-counturl="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/" >Tweet</a>
   
   
   
@@ -142,10 +192,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/embedded-bare-metal-arm-development-part-1/" title="Previous Post: Embedded 'Bare-Metal' ARM Development - Part 1">&laquo; Embedded 'Bare-Metal' ARM Development - Part 1</a>
+        <a class="basic-alignment left" href="/octopress-deploy-and-update-git-source/" title="Previous Post: Octopress - Deploy and update Git source">&laquo; Octopress - Deploy and update Git source</a>
       
-      
-        <a class="basic-alignment right" href="/what-is-bare-metal-arm/" title="Next Post: What is Bare Metal ARM">What is Bare Metal ARM &raquo;</a>
       
     </p>
   </footer>
@@ -240,8 +288,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/fleafpga-experimenters-board/';
-        var disqus_url = 'http://sushihangover.github.io/fleafpga-experimenters-board/';
+        var disqus_identifier = 'http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/';
+        var disqus_url = 'http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/';
         var disqus_script = 'embed.js';
       
     (function () {
