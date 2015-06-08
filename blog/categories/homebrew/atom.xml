@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Homebrew | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/homebrew/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-07T23:29:34-07:00</updated>
+  <updated>2015-06-07T23:34:07-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OS-X Brew : Clean It Up]]></title>
     <link href="http://sushihangover.github.io/os-x-brew-clean-it-up/"/>
-    <updated>2015-06-07T23:10:40-07:00</updated>
+    <updated>2015-06-07T20:10:40-07:00</updated>
     <id>http://sushihangover.github.io/os-x-brew-clean-it-up</id>
     <content type="html"><![CDATA[<p><img src="/images/Homebrew_logo.png" alt="" /></p>
 
@@ -28,9 +28,15 @@
 146 kegs, 171208 files, 8.0G
 </code></pre>
 
-<p>I just surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know, brew does not auto-purge older packages.</p>
+<p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<p><blockquote><p>By default, Homebrew <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">does not uninstall old versions of a formula</a>, so over time you will accumulate old versions.</p></blockquote></p>
+<p><blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p></p><p><p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a></p></blockquote></p>
+
+<p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
+
+<pre><code>brew info 
+146 kegs, 63167 files, 2.7G
+</code></pre>
 
 <p>Clean up everything at once:</p>
 
@@ -45,12 +51,6 @@
 <p>Do a dry run to see what would be cleaned up:</p>
 
 <pre><code>brew cleanup -n
-</code></pre>
-
-<p>I had well over a hundred older versions of various packages that I was not using (not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
-
-<pre><code>brew info 
-146 kegs, 63167 files, 2.7G
 </code></pre>
 ]]></content>
   </entry>

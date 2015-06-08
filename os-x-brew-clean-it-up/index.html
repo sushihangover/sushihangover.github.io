@@ -89,7 +89,7 @@
 
 
 
-<time class='entry-date' datetime='2015-06-07T23:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T20:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:10 pm</span></time>
         
       </p>
     
@@ -106,10 +106,16 @@
 146 kegs, 171208 files, 8.0G
 </code></pre>
 
-<p>I just surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know, brew does not auto-purge older packages.</p>
+<p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<blockquote><p>By default, Homebrew [does not uninstall old versions of a formula](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md<br/>), so over time you will accumulate old versions.</p></blockquote>
+<blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p><p>https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</p></blockquote>
 
+
+<p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
+
+<pre><code>brew info 
+146 kegs, 63167 files, 2.7G
+</code></pre>
 
 <p>Clean up everything at once:</p>
 
@@ -124,12 +130,6 @@
 <p>Do a dry run to see what would be cleaned up:</p>
 
 <pre><code>brew cleanup -n
-</code></pre>
-
-<p>I had well over a hundred older versions of various packages that I was not using (not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
-
-<pre><code>brew info 
-146 kegs, 63167 files, 2.7G
 </code></pre>
 </div>
 
@@ -146,7 +146,7 @@
 
 
 
-<time class='entry-date' datetime='2015-06-07T23:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T20:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:10 pm</span></time>
       
 
 <span class="categories">
