@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T00:02:42-07:00</updated>
+  <updated>2015-06-08T00:03:29-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,8 +18,9 @@
     <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
     <updated>2015-06-08T06:39:42-07:00</updated>
     <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
-    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" />
-I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
+    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" /></p>
+
+<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
 
 <p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
 
