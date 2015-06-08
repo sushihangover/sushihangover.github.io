@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress - Deploy and update Git source"
-date: 2015-06-07 23:39:42 -0700
+date: 2015-06-08 06:39:42 -0700
 comments: true
 categories: 
 - octopress
