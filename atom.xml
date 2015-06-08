@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-04T08:13:51-07:00</updated>
+  <updated>2015-06-07T23:29:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X Brew : Clean It Up]]></title>
+    <link href="http://sushihangover.github.io/os-x-brew-clean-it-up/"/>
+    <updated>2015-06-07T23:10:40-07:00</updated>
+    <id>http://sushihangover.github.io/os-x-brew-clean-it-up</id>
+    <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/Homebrew_logo.png" alt="" /></p>
+
+<p>I&rsquo;m a big fan of <a href="http://brew.sh">Homebrew</a> on OS-X and it normally it works so well that you just do not think about it. That is a very good thing, it just works, does not get in your way and anything is good.</p>
+
+<p>While I was updating/upgrading packages today, I ended up running &lsquo;brew info&rsquo;:</p>
+
+<pre><code>brew info 
+146 kegs, 171208 files, 8.0G
+</code></pre>
+
+<p>I just surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know, brew does not auto-purge older packages.</p>
+
+<blockquote><p>By default, Homebrew [does not uninstall old versions of a formula](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md<br/>), so over time you will accumulate old versions.</p></blockquote>
+
+
+<p>Clean up everything at once:</p>
+
+<pre><code>brew cleanup
+</code></pre>
+
+<p>Clean up just one formula:</p>
+
+<pre><code>brew cleanup {FORMULA}
+</code></pre>
+
+<p>Do a dry run to see what would be cleaned up:</p>
+
+<pre><code>brew cleanup -n
+</code></pre>
+
+<p>I had well over a hundred older versions of various packages that I was not using (not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
+
+<pre><code>brew info 
+146 kegs, 63167 files, 2.7G
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.6001 Posted]]></title>
@@ -540,32 +583,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 </span><span class='line'>Target: arm-none--eabi
 </span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[XKCD: Heartbleed Explanation]]></title>
-    <link href="http://sushihangover.github.io/heartbleed-explanation/"/>
-    <updated>2014-04-11T07:51:37-07:00</updated>
-    <id>http://sushihangover.github.io/heartbleed-explanation</id>
-    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/HeartBleed.png" width="200" height="200" title="&#34;Heartbleed&#34;" alt="&#34;Heartbleed&#34;"></a> If you have not checked and/or patched your OpenSSL deployment, better get to it:
-<a href="http://heartbleed.com">Heartbleed</a></p>
-
-<p>XKCD does it again and provides the best explanation of how Heartbleed, one of the worst (THE worst?), Internet security flaw, works:</p>
-
-<p><img src="http://imgs.xkcd.com/comics/heartbleed_explanation.png" alt="image" /></p>
-
-<h4>What versions of the OpenSSL are affected?</h4>
-
-<h4>* OpenSSL 1.0.1 through 1.0.1f (inclusive) are vulnerable</h4>
-
-<h4>* OpenSSL 1.0.1g is NOT vulnerable</h4>
-
-<h4>* OpenSSL 1.0.0 branch is NOT vulnerable</h4>
-
-<h4>* OpenSSL 0.9.8 branch is NOT vulnerable</h4>
-
-<h4>* Bug was introduced to OpenSSL in December 2011 and has been out in the wild since OpenSSL release 1.0.1 on 14th of March 2012. OpenSSL 1.0.1g released on 7th of April 2014 fixes the bug.</h4>
 ]]></content>
   </entry>
   

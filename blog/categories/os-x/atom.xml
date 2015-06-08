@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-04T08:13:51-07:00</updated>
+  <updated>2015-06-07T23:29:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X Brew : Clean It Up]]></title>
+    <link href="http://sushihangover.github.io/os-x-brew-clean-it-up/"/>
+    <updated>2015-06-07T23:10:40-07:00</updated>
+    <id>http://sushihangover.github.io/os-x-brew-clean-it-up</id>
+    <content type="html"><![CDATA[<p><img src="/images/Homebrew_logo.png" alt="" /></p>
+
+<p>I&rsquo;m a big fan of <a href="http://brew.sh">Homebrew</a> on OS-X and it normally it works so well that you just do not think about it. That is a very good thing, it just works, does not get in your way and anything is good.</p>
+
+<p>While I was updating/upgrading packages today, I ended up running &lsquo;brew info&rsquo;:</p>
+
+<pre><code>brew info 
+146 kegs, 171208 files, 8.0G
+</code></pre>
+
+<p>I just surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know, brew does not auto-purge older packages.</p>
+
+<p><blockquote><p>By default, Homebrew <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">does not uninstall old versions of a formula</a>, so over time you will accumulate old versions.</p></blockquote></p>
+
+<p>Clean up everything at once:</p>
+
+<pre><code>brew cleanup
+</code></pre>
+
+<p>Clean up just one formula:</p>
+
+<pre><code>brew cleanup {FORMULA}
+</code></pre>
+
+<p>Do a dry run to see what would be cleaned up:</p>
+
+<pre><code>brew cleanup -n
+</code></pre>
+
+<p>I had well over a hundred older versions of various packages that I was not using (not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
+
+<pre><code>brew info 
+146 kegs, 63167 files, 2.7G
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool]]></title>
@@ -362,39 +404,6 @@ mkdir -p $bindir
 make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
 </code></pre></noscript></div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X LLVM / CLANG Build]]></title>
-    <link href="http://sushihangover.github.io/os-x-llvm-slash-clang-build/"/>
-    <updated>2014-02-11T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/os-x-llvm-slash-clang-build</id>
-    <content type="html"><![CDATA[<p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
-
-<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
-
-<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;-)</p>
-
-<p><div><script src='https://gist.github.com/8946898.js'></script>
-<noscript><pre><code>git clone http://llvm.org/git/llvm.git
-pushd llvm/tools
-git clone http://llvm.org/git/clang.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/compiler-rt.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/test-suite.git
-popd
-mkdir llvmbuild
-pushd llvmbuild
-../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
-make
-</code></pre></noscript></div>
-</p>
-
-<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
 ]]></content>
   </entry>
   
