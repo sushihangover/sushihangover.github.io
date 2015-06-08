@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T00:04:58-07:00</updated>
+  <updated>2015-06-08T11:14:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X Mono - Unable to Find the Dylib Native Library]]></title>
+    <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
+    <updated>2015-06-08T10:41:32-07:00</updated>
+    <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono_logo.png">http://sushihangover.github.io/images/mono_logo.png</a>  }
+When using .Net libraries that have native binding and you are receiving errors like
+&ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
+
+<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and filtering (MONO_LOG_MASK) the debug to just DLL related messages.</p>
+
+<pre><code>export MONO_LOG_LEVEL=debug
+export MONO_LOG_MASK=dll
+mono yourprogram.exe
+</code></pre>
+
+<p>I was recently using the mono-curses, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-run the program and yes it was finding the dylib OK but it was complaining about it being the wrong architecture&hellip;</p>
+
+<pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
+Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
+Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
+</code></pre>
+
+<p>Checking with file and yes, it was a 32-bit version of the library</p>
+
+<pre><code>file libmono-curses.dylib
+libmono-curses.dylib: Mach-O dynamically linked shared library i386
+</code></pre>
+
+<p>I am compiling using a 64-bit version of Mono on OS-X, so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version.</p>
+
+<pre><code>file libmono-curses.dylib 
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>After that, testing the C# ncurses wrapper test went fine&hellip; ;-)</p>
+
+<h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
+
+<h3>The Framework and library search path is:</h3>
+
+<ul>
+<li>A colon-separated list of directories in the user’s DYLD_FRAMEWORK_PATH environment variable.</li>
+<li>A colon-separated list of directories in the user’s DYLD_LIBRARY_PATH environment variable.</li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_FRAMEWORK_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/Library/Frameworks
+  /Library/Frameworks
+  /Network/Library/Frameworks
+  /System/Library/Frameworks
+</code></pre></li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_LIBRARY_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/lib
+  /usr/local/lib
+  /lib
+  /usr/lib
+</code></pre></li>
+</ul>
+
+
+<p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS-X Brew : Clean It Up]]></title>
@@ -30,7 +95,12 @@
 
 <p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<p><blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p></p><p><p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a></p></blockquote></p>
+<p>{% blockquote %}
+From  FAQ:
+By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p>
+
+<p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a>
+{% endblockquote %}</p>
 
 <p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
 
@@ -60,7 +130,7 @@
     <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/"/>
     <updated>2014-02-19T20:56:11-08:00</updated>
     <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
-    <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo;" ></a>
+    <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png">{% img right /images/diffmerge_small.png &ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo; %}</a>
 I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
 
 <p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
@@ -76,55 +146,32 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
 <p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
 
-<p><figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global diff.tool diffmerge
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global difftool.diffmerge.cmd <span class="p">&amp;</span>lsquo<span class="p">;</span>diffmerge <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$LOCAL</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$REMOTE</span><span class="p">&amp;</span>rdquo<span class="p">;&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global merge.tool diffmerge
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global mergetool.diffmerge.cmd <span class="p">&amp;</span>lsquo<span class="p">;</span>diffmerge <span class="p">&amp;</span>ndash<span class="p">;</span>merge <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">result</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$MERGED</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$LOCAL</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="k">$(if</span> <span class="nb">test</span> -f <span class="p">&amp;</span>rdquo<span class="p">;</span><span class="nv">$BASE</span><span class="s2">&quot;; then echo &amp;ldquo;$BASE&amp;rdquo;; else echo &amp;ldquo;$LOCAL&amp;rdquo;; fi)&amp;ldquo; &amp;rdquo;$REMOTE&quot;</span><span class="p">&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash Your git setup is: %}
+git config &ndash;global diff.tool diffmerge
+git config &ndash;global difftool.diffmerge.cmd &lsquo;diffmerge &ldquo;$LOCAL&rdquo; &ldquo;$REMOTE&rdquo;&rsquo;
+git config &ndash;global merge.tool diffmerge
+git config &ndash;global mergetool.diffmerge.cmd &lsquo;diffmerge &ndash;merge &ndash;result=&ldquo;$MERGED&rdquo; &ldquo;$LOCAL&rdquo; &ldquo;$(if test -f &rdquo;$BASE"; then echo &ldquo;$BASE&rdquo;; else echo &ldquo;$LOCAL&rdquo;; fi)&ldquo; &rdquo;$REMOTE"&rsquo;
+git config &ndash;global mergetool.diffmerge.trustExitCode true
+{% endcodeblock %}</p>
 
-<p><figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the <span class="nb">local </span>file.m against the checked-in version&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the <span class="nb">local </span>file.m against the version in some-feature-branch&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool some-feature-branch file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the file.m from the Build-54 tag to the Build-55 tag&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool Build-54..Build-55 file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;To resolve merge conflicts, just run git mergetool:&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git mergetool
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash Your git shortcuts are: linenos:false %}</p>
+
+<h1>diff the local file.m against the checked-in version</h1>
+
+<p>git difftool file.m</p>
+
+<h1>diff the local file.m against the version in some-feature-branch</h1>
+
+<p>git difftool some-feature-branch file.m</p>
+
+<h1>diff the file.m from the Build-54 tag to the Build-55 tag</h1>
+
+<p>git difftool Build-54..Build-55 file.m</p>
+
+<h1>To resolve merge conflicts, just run git mergetool:</h1>
+
+<p>git mergetool
+{% endcodeblock %}</p>
 
 <p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
 ]]></content>
@@ -160,46 +207,29 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
     <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony/"/>
     <updated>2014-02-12T08:14:14-08:00</updated>
     <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
-    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="&lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo;" ></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+    <content type="html"><![CDATA[<p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png">{% img left images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png  360 240 &lsquo;Irony.GtkSharp.Explorer&rsquo; &lsquo;Irony GtkSharp Explorer&rsquo; %}</a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
 
 <p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong>
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix
-</span><span class='line'>git checkout gtksharp-explorer
-</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
-</span><span class='line'>  Switched to a new branch <span class="p">&amp;</span>lsquo<span class="p">;</span>gtksharp-explorer<span class="p">&amp;</span>rsquo<span class="p">;</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git branch <span class="p">&amp;</span>ndash<span class="p">;</span>all
-</span><span class='line'>* gtksharp-explorer
-</span><span class='line'>  master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/gtksharp-explorer
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/xplat-nunit-fix&lt;br/&gt;
-</span><span class='line'>open Irony_All.MonoDevelop.sln
-</span></code></pre></td></tr></table></div></figure></p>
+{% codeblock lang:bash %}
+git branch &ndash;all
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/gtksharp-explorer
+  remotes/origin/master
+  remotes/origin/xplat-nunit-fix
+git checkout gtksharp-explorer
+  Branch gtksharp-explorer set up to track remote branch gtksharp-explorer from origin.
+  Switched to a new branch &lsquo;gtksharp-explorer&rsquo;</p>
+
+<p>git branch &ndash;all
+* gtksharp-explorer
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/gtksharp-explorer
+  remotes/origin/master
+  remotes/origin/xplat-nunit-fix<br/>
+open Irony_All.MonoDevelop.sln
+{% endcodeblock %}</p>
 
 <hr />
 
@@ -228,182 +258,6 @@ xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
 mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ellcc.org Build Fix for OS-X]]></title>
-    <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/"/>
-    <updated>2014-02-12T00:00:00-08:00</updated>
-    <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
-    <content type="html"><![CDATA[<p>In my ARM Bare Metal searches for using Clang/LLVM I stumbled across <a href="http://ellcc.org">The ELLCC Embedded Compiler Collection</a> that provides a one-stop build enviroment for all the LLVM tools for cross-platform compiling.</p>
-
-<p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
-
-<p><blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&hellip;</p><footer><strong>Rich <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571</a> What is ELLCC all about</strong></footer></blockquote></p>
-
-<p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
-
-<pre><code>LINK  i386-softmmu/qemu-system-i386
-ld: library not found for -lintl
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make[1]: *** [qemu-system-i386] Error 1
-make: *** [subdir-i386-softmmu] Error 2
-</code></pre>
-
-<p>I do have gettext on my system, but it is in my &ldquo;Cellar&rdquo;&ldquo; as I use <a href="http://brew.sh">HomeBrew</a> as my package manager and try not to install anything to &rdquo;/usr/bin" or other systems places that can muck everything up and thus can run parrallels versions of different applications (i.e. If I have to &lsquo;sudo&rsquo; to an open-source software install, it is not going on my system unless they have a serious reason for it and I trust the code from a security viewpoint).</p>
-
-<p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
-
-<p><blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &ndash;force<br/>Note that doing so can interfere with building software.</p></blockquote></p>
-
-<p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn diff build&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;Index: build&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;<span class="p">&amp;</span>mdash<span class="p">;</span> build   <span class="o">(</span>revision 3780<span class="o">)</span>
-</span><span class='line'>+++ build   <span class="o">(</span>working copy<span class="o">)</span>
-</span><span class='line'>@@ -69,6 +69,10 @@
-</span><span class='line'>     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user<span class="s2">&quot;</span>
-</span><span class='line'><span class="s2"> fi</span>
-</span><span class='line'><span class="s2"> echo Configuring package qemu for $targets</span>
-</span><span class='line'><span class="s2">+if [!  -e &lt;code&gt;which brew&lt;/code&gt; ]; then</span>
-</span><span class='line'><span class="s2">+   ruby -e &amp;ldquo;$(curl -fsSL &lt;a href=&quot;</span>https://raw.github.com/Homebrew/homebrew/go/install<span class="s2">&quot;&gt;https://raw.github.com/Homebrew/homebrew/go/install&lt;/a&gt;)&amp;rdquo;</span>
-</span><span class='line'><span class="s2">+fi</span>
-</span><span class='line'><span class="s2">+brew link gettext &amp;ndash;force</span>
-</span><span class='line'><span class="s2"> qemu_target_list=&lt;code&gt;echo $qemu_target_list | sed -e &quot;</span>s/ /,/g<span class="err">&quot;</span>&lt;/code&gt;
-</span><span class='line'> make <span class="nv">DIR</span><span class="o">=</span>src/qemu <span class="nv">CC</span><span class="o">=</span><span class="nv">$cc</span> <span class="nv">HCC</span><span class="o">=</span><span class="nv">$hcc</span> <span class="nv">AR</span><span class="o">=</span><span class="nv">$ar</span> <span class="nv">TARGET</span><span class="o">=</span><span class="nv">$host</span> <span class="nv">OS</span><span class="o">=</span><span class="nv">$os</span> <span class="se">\</span>
-</span><span class='line'>     <span class="nv">targetlist</span><span class="o">=</span><span class="nv">$qemu_target_list</span> <span class="nv">haslibs</span><span class="o">=</span><span class="nv">$haslibs</span> <span class="se">\</span>
-</span><span class='line'>@@ -76,6 +80,7 @@
-</span><span class='line'>     qemu.configure <span class="o">||</span> <span class="nb">exit </span>1&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt; make -C src/qemu <span class="o">||</span> <span class="nb">exit </span>1
-</span><span class='line'>+brew unlink gettext&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt; <span class="c"># Finally, install into the target specific bin dir.</span>
-</span><span class='line'> mkdir -p <span class="nv">$bindir</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Everything builds fine after that&hellip;</p>
-
-<p>The entire file is here:
-<div><script src='https://gist.github.com/8949755.js'></script>
-<noscript><pre><code>#!/bin/sh
-# ELLCC GNU tools build script.
-
-# Get the staging directory.
-prefix=`cd ..; pwd`
-
-# Figure out the compilers to use.
-. ../build-setup $*
-
-echo Configured to $WHY.
-echo C compiler: $cc $CFLAGS
-echo C++ compiler: $cxx $CXXFLAGS
-echo In: gnu-build$builddir
-
-# Configure for GNU tools.
-mkdir -p gnu-build$builddir
-
-# Configure for binutils.
-# binutils are build to support all targets in the target list.
-echo Configuring package binutils for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    binutils.configure || exit 1
-
-make -C gnu-build$builddir/binutils || exit 1
-
-# Configure for assemblers for all targets.
-for t in $targets; do
-  echo Configuring the assembler for $t
-  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-      target=$t haslibs=$haslibs \
-      bindir=$bindir prefix=$prefix build=$build \
-      gas.configure || exit 1
-
-  make -C gnu-build$builddir/binutils/$t || exit 1
-done
-
-# Configure for GDB.
-# GDB is built to support all GDB targets.
-echo Configuring package gdb for $targets
-make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
-    targetlist=$targetlist haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    gdb.configure || exit 1
-
-make -C gnu-build$builddir/gdb || exit 1
-
-if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
-  # The host system is not the build system.
-  # Build only  binutils, the assemblers, and gdb.
-  # Finally, install into the target specific bin dir.
-  mkdir -p $bindir
-  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
-  exit 0
-fi
-
-# Configure for QEMU.
-# The QEMU system targets.
-qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
-    microblaze-softmmu mips-softmmu mipsel-softmmu \
-    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
-
-if [ `uname` = &quot;Linux&quot; ] ; then
-    # The QEMU Linux user space targets.
-    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
-    x86_64-linux-user arm-linux-user armeb-linux-user \
-    microblaze-linux-user mips-linux-user mipsel-linux-user \
-    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
-fi
-echo Configuring package qemu for $targets
-if [!  -e `which brew` ]; then
-        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
-fi
-brew link gettext --force
-qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
-make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
-    targetlist=$qemu_target_list haslibs=$haslibs \
-    bindir=$bindir prefix=$prefix build=$build \
-    qemu.configure || exit 1
-
-make -C src/qemu || exit 1
-brew unlink gettext
-
-# Finally, install into the target specific bin dir.
-mkdir -p $bindir
-make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
-</code></pre></noscript></div>
-</p>
 ]]></content>
   </entry>
   

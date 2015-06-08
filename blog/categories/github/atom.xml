@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T00:04:58-07:00</updated>
+  <updated>2015-06-08T11:14:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -49,7 +49,7 @@ popd
     <link href="http://sushihangover.github.io/playscript-3-dot-2-6001-posted/"/>
     <updated>2015-06-04T08:12:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-3-dot-2-6001-posted</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.6001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.6-branch&rsquo; into playscript-mono</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}  I posted up the PlayScript compiler 3.2.6001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.6-branch&rsquo; into playscript-mono</p>
 
 <p>FYI: I have been using tags on the playscript-mono branch to mark each of these PlayScript merges. It is a clean and lightweight way to capture and identity these version on the timeline:</p>
 
@@ -69,7 +69,7 @@ playscript-3.2.6001
     <link href="http://sushihangover.github.io/playscript-3-dot-2-5001-posted/"/>
     <updated>2015-06-04T06:12:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-3-dot-2-5001-posted</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.5001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into playscript-mono</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}  I posted up the PlayScript compiler 3.2.5001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into playscript-mono</p>
 
 <p>Been knocking these simple minors versions out, dreading the upcoming Mono 4.x changes&hellip;</p>
 
@@ -82,7 +82,7 @@ playscript-3.2.6001
     <link href="http://sushihangover.github.io/playscript-3-dot-2-4001-posted/"/>
     <updated>2015-06-03T20:04:56-07:00</updated>
     <id>http://sushihangover.github.io/playscript-3-dot-2-4001-posted</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
 
 <p>Have fun&hellip;</p>
 ]]></content>

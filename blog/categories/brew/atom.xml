@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Brew | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/brew/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T00:04:58-07:00</updated>
+  <updated>2015-06-08T11:14:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -30,7 +30,12 @@
 
 <p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<p><blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p></p><p><p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a></p></blockquote></p>
+<p>{% blockquote %}
+From  FAQ:
+By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p>
+
+<p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a>
+{% endblockquote %}</p>
 
 <p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
 
