@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-07T23:34:07-07:00</updated>
+  <updated>2015-06-08T00:01:27-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
+    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
+    <updated>2015-06-07T23:39:42-07:00</updated>
+    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
+    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" />
+I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
+
+<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
+
+<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
+
+<p>Nothing special, generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
+
+<pre><code>#!/usr/bin/env bash
+echo "Generate and deploying website"
+rake generate
+rake deploy
+echo "Commiting and pushing source files"
+git add --all; 
+git commit -m "New posts"; 
+git push 
+git gc
+pushd _deploy
+git gc
+popd
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git - Renaming a Git Tag]]></title>
@@ -143,27 +173,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 <p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
 
 <p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Undo Your Most Recent (Screwed Up) Git Merge]]></title>
-    <link href="http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge/"/>
-    <updated>2015-05-28T18:24:08-07:00</updated>
-    <id>http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge</id>
-    <content type="html"><![CDATA[<p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git reset <span class="p">&amp;</span>ndash<span class="p">;</span>merge ORIG_HEAD
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Or, depending upon your git version, you can also:</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge <span class="p">&amp;</span>ndash<span class="p">;</span>abort
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I am working on a custom NEWLIB but first I wanted to make sure that NEWLIB compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal &hellip;">
+  <meta name="description" content="One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,178 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cortex-m0-vs-m3-llvm-and-ld/">Cortex-M0 vs. M3 : LLVM and LD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-05T06:30:13-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_Cortex-M_instruction_set_large.png"><img class="left" src="/images/ARM_Cortex-M_instruction_set_small.png" title="&#34;ARM Cortex-M instruction set&#34;" alt="&#34;ARM Cortex-M instruction set&#34;"></a> One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld to do your linking.</p>
+
+<p>Directly using <strong>ld</strong> can be a bit nerve wrecking at times to get the options correct (and the <strong>order</strong> of options does matter) as normally you are just let gcc use collect2 and have it internally execute ld to perform your linking.</p>
+
+<p>One of the areas using it directly that can bite you is not linking to the proper libgcc.a for the Cortex-M that you are targeting. Looking into your <em>arm-none-eabi/lib/gcc/arm-none-eabi/X.X.X</em> tool-chain directory and you will find multiple directories. One for each ARM architecture; armv6-m, armv7-ar, armv7-m, thumb, thumb2, etc&hellip;</p>
+
+<p>Add a library include for <em>architecture</em> directory that matches the core that you compiled against and everything will be fine:</p>
+
+<p>Cortex M3 example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m -g   obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cortex M0+ example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M0.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv6-m  --gc-sections --print-gc-sections  obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://en.wikipedia.org/wiki/ARM_Cortex-M#Instruction_sets">ARM Cortex-M instruction sets</a></p>
+
+<table class="wikitable">
+<tbody><tr>
+<th>ARM<br>
+Cortex-M</th>
+<th>Thumb</th>
+<th>Thumb-2</th>
+<th>Hardware<br>
+multiply</th>
+<th>Hardware<br>
+divide</th>
+<th>Saturated<br>
+math</th>
+<th>DSP<br>
+extensions</th>
+<th>Floating-point</th>
+<th>ARM<br>
+architecture</th>
+<th>Core<br>
+architecture</th>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0<sup id="cite_ref-M0-TRM_1-2" class="reference"><a href="#cite_note-M0-TRM-1"><span>[</span>1<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-8" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M0+<sup id="cite_ref-M0.2B-TRM_2-2" class="reference"><a href="#cite_note-M0.2B-TRM-2"><span>[</span>2<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>1 or 32 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-9" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M1<sup id="cite_ref-M1-TRM_3-2" class="reference"><a href="#cite_note-M1-TRM-3"><span>[</span>3<span>]</span></a></sup></center>
+</td>
+<td style="background: cyan">
+<center>Most</center>
+</td>
+<td style="background: cyan">
+<center>Subset</center>
+</td>
+<td style="background: yellow">
+<center>3 or 33 cycle</center>
+</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv6-M<sup id="cite_ref-ARMv6-M-Manual_6-10" class="reference"><a href="#cite_note-ARMv6-M-Manual-6"><span>[</span>6<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Von_Neumann_architecture" title="Von Neumann architecture">Von Neumann</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M3<sup id="cite_ref-M3-TRM_4-2" class="reference"><a href="#cite_note-M3-TRM-4"><span>[</span>4<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td style="background:#ff9090; color:black; vertical-align: middle; text-align: center;" class="table-no">No</td>
+<td>
+<center>ARMv7-M<sup id="cite_ref-ARMv7-M-Manual_7-9" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+<tr>
+<td>
+<center>Cortex-M4<sup id="cite_ref-M4-TRM_5-2" class="reference"><a href="#cite_note-M4-TRM-5"><span>[</span>5<span>]</span></a></sup></center>
+</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Entire</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">1 cycle</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: #90ff90; color: black; vertical-align: middle; text-align: center;" class="table-yes">Yes</td>
+<td style="background: yellow">
+<center>Optional</center>
+</td>
+<td>
+<center>ARMv7E-M<sup id="cite_ref-ARMv7-M-Manual_7-10" class="reference"><a href="#cite_note-ARMv7-M-Manual-7"><span>[</span>7<span>]</span></a></sup></center>
+</td>
+<td><a href="/wiki/Harvard_architecture" title="Harvard architecture">Harvard</a></td>
+</tr>
+</tbody></table>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1603,41 +1775,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/arm-cortex-m0-overview/">ARM Cortex-M0 Overview</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-17T06:02:25-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:02 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ARM Cortex-M0 Overview By: Daniel Widyanto September 2010</p>
-
-<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View ARM Cortex-M0 Overview on Scribd" href="http://www.scribd.com/doc/38226967"  style="text-decoration: underline;" >ARM Cortex-M0 Overview</a></p>
-
-
-<iframe class="scribd_iframe_embed" src="//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1655,6 +1792,10 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/octopress-deploy-and-update-git-source/">Octopress - Deploy and Update Git Source</a>
+      </li>
+    
+      <li class="post">
         <a href="/os-x-brew-clean-it-up/">OS-X Brew : Clean It Up</a>
       </li>
     
@@ -1668,10 +1809,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
     
       <li class="post">
         <a href="/git-getting-a-list-of-files-changed-between-branches/">Git - Getting a List of Files Changed Between Branches</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-3-dot-2-5001-posted/">Playscript 3.2.5001 Posted</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-31T22:16:23-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/PlayscriptLogo.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
+
+<p>I will be migrating it to the Mono 4.x compiler in the days and weeks ahead before working on finishing and getting the ActionScript language side stable (feature complete?). Not really looking forwarded to the Mono 4.x migration as the number of internal API changes to the mcs compiler since the 3.2.0 release is quite extensive.</p>
+
+<p>If you want to compile and use the current 3.2.2002 release, just autogen.sh like normal.</p>
+
+<p>Note: Due to dependency updates on OS-X since Mono 3.2 was release, I had to supply &ldquo; <u>&ndash;with-tls</u>&rdquo; option as it was auto-selecting <strong>__thread</strong> instead of <strong>_posix</strong>.</p>
+
+<pre><code>./autogen.sh --with-tls=posix --enable-nls=no --prefix=/Users/administrator/mono-install
+</code></pre>
+
+<p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -577,53 +619,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/llvm-3-dot-4-1/">LLVM 3.4.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-12T06:05:07-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:05 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://heartbleed.com"><img class="left" src="/images/llvm_logo_small.png" title="&#34;LLVM&#34;" alt="&#34;LLVM&#34;"></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
-
-<p><span class='pullquote-right' data-pullquote='LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.'>
-Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.
-</span></p>
-
-<p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
-
-<p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./clang --version
-</span><span class='line'>clang version 3.5.0 
-</span><span class='line'>Target: arm-none--eabi
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -641,6 +636,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/octopress-deploy-and-update-git-source/">Octopress - Deploy and Update Git Source</a>
+      </li>
+    
+      <li class="post">
         <a href="/os-x-brew-clean-it-up/">OS-X Brew : Clean It Up</a>
       </li>
     
@@ -654,10 +653,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/git-getting-a-list-of-files-changed-between-branches/">Git - Getting a List of Files Changed Between Branches</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-3-dot-2-5001-posted/">Playscript 3.2.5001 Posted</a>
       </li>
     
   </ul>

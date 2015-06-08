@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-07T23:34:07-07:00</updated>
+  <updated>2015-06-08T00:01:27-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
+    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
+    <updated>2015-06-07T23:39:42-07:00</updated>
+    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
+    <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/Octopress_logo.png" alt="" />
+I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
+
+<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
+
+<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
+
+<p>Nothing special, generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
+
+<pre><code>#!/usr/bin/env bash
+echo "Generate and deploying website"
+rake generate
+rake deploy
+echo "Commiting and pushing source files"
+git add --all; 
+git commit -m "New posts"; 
+git push 
+git gc
+pushd _deploy
+git gc
+popd
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS-X Brew : Clean It Up]]></title>
@@ -556,33 +586,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 <p>Available from Seeed @ <a href="http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html">http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html</a></p>
 
 <p>Client Software: <a href="http://www.lxtreme.nl/ols/">Logic Sniffer (An alternative OLS client)</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LLVM 3.4.1]]></title>
-    <link href="http://sushihangover.github.io/llvm-3-dot-4-1/"/>
-    <updated>2014-04-12T06:05:07-07:00</updated>
-    <id>http://sushihangover.github.io/llvm-3-dot-4-1</id>
-    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="http://sushihangover.github.io/images/llvm_logo_small.png" title="&#34;LLVM&#34;" alt="&#34;LLVM&#34;"></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
-
-<p><span class='pullquote-right' data-pullquote='LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.'>
-Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5.
-</span></p>
-
-<p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
-
-<p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./clang --version
-</span><span class='line'>clang version 3.5.0 
-</span><span class='line'>Target: arm-none--eabi
-</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

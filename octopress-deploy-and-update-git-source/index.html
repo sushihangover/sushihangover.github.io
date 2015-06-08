@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>New ARM 'Machines' in QEMU 2.0 - SushiHangover</title>
+  <title>Octopress - Deploy and Update Git Source - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on. While technically speaking QEMU does not have a &ldquo; &hellip;">
+  <meta name="description" content="I use Octopress for this GitHub blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;. &lsquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/">
+  <link rel="canonical" href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">New ARM 'Machines' in QEMU 2.0</h1>
+      <h1 class="entry-title">Octopress - Deploy and Update Git Source</h1>
     
     
       <p class="meta">
@@ -89,46 +89,35 @@
 
 
 
-<time class='entry-date' datetime='2014-03-14T23:32:19-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:32 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T23:39:42-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:39 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="/images/QEMU_new_machine_large.png"><img class="left" src="/images/QEMU_new_machine_small.png" title="&#34;QEMU 2.0 New ARM Machines&#34;" alt="&#34;QEMU 2.0 New ARM Machines&#34;"></a>I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on.</p>
+<div class="entry-content"><p><img src="/images/Octopress_logo.png" alt="" />
+I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
 
-<p>While technically speaking QEMU does not have a &ldquo;Cortex-M0(+)&rdquo; cpu in its feature set, it does have a M3 core and I have used it to create some Cortex-M0+ cpus that model some cores from a couple of ARM vendors, and then added some supporting dev boards (&lsquo;machines&rsquo; per QEMU nomenclature). I&rsquo;ve been waiting till the QEMU 2.0 release to get my new ARM coding sorted out as major versions usually cause large changes in APIs, C headers, usage patterns, etc&hellip; and well, QEMU is tough enough to work through and I did not plan on doing it twice&hellip;</p>
+<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
 
-<p>Well, we are getting close, <a href="http://wiki.qemu.org/ChangeLog/2.0">QEMU 2.0 RC0</a> just released as a tar ball (not in the git repo?), so I did the download, configured and built on OS-X for &ldquo;arm-softmmu&rdquo;. Everything is great so far, ran some of my work through it and have not found anything amiss. Interesting that the version that shows up as <strong>QEMU emulator version 1.7.90</strong> (BTW: the version on the git master branch is 1.7.5?)</p>
+<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -version
-</span><span class='line'>QEMU emulator version 1.7.90, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
+<p>Nothing special, generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
 
-
-<p>There are a few new machines available:
-    * canon-a1100          Canon PowerShot A1100 IS
-    * cubieboard           cubietech cubieboard
-    * virt                 ARM Virtual Machine</p>
-
-<p>The <a href="http://cubieboard.org">cubie</a> board makes sense as you can  use it to test Linux image builds and what-not. I am not sure of the usage pattern for the &ldquo;Canon PowerShot A1100 DIGIC&rdquo;, is the <a href="http://en.wikipedia.org/wiki/DIGIC">DIGIC</a> 4 Image Processor available for purchuse? I&rsquo;ll have to look into this one as it leaves me confused.</p>
-
-<p>The interesting one is the fact that there is now a &lsquo;virt&rsquo; machine for ARM. I&rsquo;m not sure that I will personally have a use for using <a href="http://wiki.libvirt.org/page/Virtio">virtio</a> devices in any embedded ARM dev work, but you never know.</p>
-
-<p>Nothing new in the ARM cpu listing, so I guess I will continue with my ARM core and machine work&hellip;</p>
-
-<p>The change log for ARM shows the following:
-    * Support for &ldquo;-M virt&rdquo;, a board type that only uses virtio devices
-    * Support for &ldquo;-cpu host&rdquo; when running under KVM
-    * Support for new 32-bit mode ARMv8 instructions in TCG
-    * Support for AArch64 disassembling (requires a C++ compiler to be installed on the host)
-    * Support for AArch64 user-mode emulation
-    * Initial support for KVM on AArch64 systems (some features such as migration are not yet implemented)
-    * Support for the Canon PowerShot A1100 DIGIC board using &ldquo;-M canon-a1100&rdquo;
-    * Support for the allwinner-a10-based board &ldquo;-M cubieboard&rdquo;
-    * Support for flow control in the Cadence UART</p>
+<pre><code>#!/usr/bin/env bash
+echo "Generate and deploying website"
+rake generate
+rake deploy
+echo "Commiting and pushing source files"
+git add --all; 
+git commit -m "New posts"; 
+git push 
+git gc
+pushd _deploy
+git gc
+popd
+</code></pre>
 </div>
 
 
@@ -144,12 +133,12 @@
 
 
 
-<time class='entry-date' datetime='2014-03-14T23:32:19-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:32 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T23:39:42-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:39 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>arm-none-eabi</a>, <a class='category' href='/blog/categories/clang/'>clang</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>, <a class='category' href='/blog/categories/qemu/'>qemu</a>
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -158,7 +147,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/" data-via="" data-counturl="http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/octopress-deploy-and-update-git-source/" data-via="" data-counturl="http://sushihangover.github.io/octopress-deploy-and-update-git-source/" >Tweet</a>
   
   
   
@@ -167,10 +156,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/cortex-m-systick-polling-vs-interrupts/" title="Previous Post: Cortex-M0 & M3 SysTick: Polling vs. Interrupt driven">&laquo; Cortex-M0 & M3 SysTick: Polling vs. Interrupt driven</a>
+        <a class="basic-alignment left" href="/os-x-brew-clean-it-up/" title="Previous Post: OS-X Brew : Clean it up">&laquo; OS-X Brew : Clean it up</a>
       
-      
-        <a class="basic-alignment right" href="/arm-compiler-price/" title="Next Post: ARM DS5 Compiler Price">ARM DS5 Compiler Price &raquo;</a>
       
     </p>
   </footer>
@@ -265,8 +252,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/';
-        var disqus_url = 'http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/';
+        var disqus_identifier = 'http://sushihangover.github.io/octopress-deploy-and-update-git-source/';
+        var disqus_url = 'http://sushihangover.github.io/octopress-deploy-and-update-git-source/';
         var disqus_script = 'embed.js';
       
     (function () {

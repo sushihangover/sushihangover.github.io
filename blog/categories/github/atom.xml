@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-07T23:34:07-07:00</updated>
+  <updated>2015-06-08T00:01:27-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
+    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
+    <updated>2015-06-07T23:39:42-07:00</updated>
+    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
+    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" />
+I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
+
+<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
+
+<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
+
+<p>Nothing special, generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
+
+<pre><code>#!/usr/bin/env bash
+echo "Generate and deploying website"
+rake generate
+rake deploy
+echo "Commiting and pushing source files"
+git add --all; 
+git commit -m "New posts"; 
+git push 
+git gc
+pushd _deploy
+git gc
+popd
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.6001 Posted]]></title>
@@ -72,21 +102,6 @@ playscript-3.2.6001
 make
 make install
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SmartGit - the Best Git GUI There Is... And Its Free]]></title>
-    <link href="http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
-    <updated>2015-06-03T15:06:35-07:00</updated>
-    <id>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/smartgit.png">http://sushihangover.github.io/images/smartgit.png</a>">  Surround your pullquote like this {" text to be quoted "}</p>
-
-<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
-
-<p>I&rsquo;ve used a couple of <a href="http://www.git-scm.com/downloads/guis">other git GUIs</a> and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
-
-<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for non-commercial use, so just download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
 ]]></content>
   </entry>
   
