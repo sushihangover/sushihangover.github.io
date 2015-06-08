@@ -21,6 +21,6 @@ After tweaking the Makefile for PE32+ images, I ended up with a 64-bit exe, dll,
     mono-curses.dll:      PE32+ executable for MS Windows (DLL) (console) Mono/.Net/assembly
     libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
-There are some minor painting issues which I do not know if they are related to the arch type, OS-X or bugs in the actual C# code (mc or the ncurses wrapper, but overall it works very well.
+There are some minor painting issues which I do not know if they are related to the arch type, OS-X or bugs in the actual C# code (mc or the ncurses wrapper), but overall it works very well.
 
 
