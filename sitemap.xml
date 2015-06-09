@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/</loc>
-    <lastmod>2015-06-09T06:14:24-07:00</lastmod>
+    <loc>http://sushihangover.github.io/mono-using-llvm/</loc>
+    <lastmod>2015-06-09T07:21:58-07:00</lastmod>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/mono-using-llvm/</loc>
-    <lastmod>2015-06-09T00:00:00-07:00</lastmod>
+    <loc>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/</loc>
+    <lastmod>2015-06-09T06:14:24-07:00</lastmod>
   </url>
   <url>
     <loc>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/</loc>
@@ -451,5 +451,20 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/midnightcommander/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/6/</loc>
   </url>
 </urlset>

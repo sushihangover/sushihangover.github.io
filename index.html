@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Remove a filename prefix from a directory of files When cross-compiling and using the standard autogen/configure &ldquo;-build=&rdquo; option, you &hellip;">
+  <meta name="description" content="When configuring Mono to use llvm, if you receiving the error: configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,41 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T07:21:58-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When configuring Mono to use llvm, if you receiving the error:</p>
+
+<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
+
+<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
+
+<p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a></h1>
     
     
@@ -121,41 +156,6 @@ done
 </code></pre>
 
 <p>I seem to be stripping &ldquo;i386-apple-darwin14.3.0-&rdquo; lately so that is the default if no prefix is passed as an argument&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono Using Llvm</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T00:00:00-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When configuring Mono to use llvm, if you receiving the error:</p>
-
-<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
-
-<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
-
-<p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
 </div>
   
   
@@ -652,11 +652,11 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a>
+        <a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a>
       </li>
     
       <li class="post">
-        <a href="/mono-using-llvm/">Mono Using Llvm</a>
+        <a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a>
       </li>
     
       <li class="post">
