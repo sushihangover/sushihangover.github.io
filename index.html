@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I wanted to compare CPU Arch Build Type LLVM Score (MFlops) Notes: x86 Debug 371.42 x86 Debug Yes 465.45 1.2 times faster using LLVM x86 Release 295. &hellip;">
+  <meta name="description" content="I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,7 +99,9 @@
   </header>
 
 
-  <div class="entry-content"><p>I wanted to compare</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
+
+<p>Get the repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a></p>
 
 <div>
 <style type="text/css">
@@ -268,7 +270,7 @@
   </header>
 
 
-  <div class="entry-content"><p>If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
 
 <p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
 
@@ -301,7 +303,7 @@
   </header>
 
 
-  <div class="entry-content"><p>When configuring Mono to use llvm, if you receive the error:</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -513,7 +515,7 @@ mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 8
   </header>
 
 
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > Using Mono/.Net libraries that have native binding and you are receiving errors like
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
 <p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>

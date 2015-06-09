@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:33:20-07:00</updated>
+  <updated>2015-06-09T15:44:13-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,9 @@
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
     <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
-    <content type="html"><![CDATA[<p>I wanted to compare</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
+
+<p>Get the repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a></p>
 
 <div>
 <style type="text/css">
@@ -147,7 +149,7 @@
     <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
     <updated>2015-06-09T07:42:41-07:00</updated>
     <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
-    <content type="html"><![CDATA[<p>If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
 
 <p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
 
@@ -160,7 +162,7 @@
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receive the error:</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 

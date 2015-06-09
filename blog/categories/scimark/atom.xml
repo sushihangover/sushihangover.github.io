@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scimark | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/scimark/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:33:20-07:00</updated>
+  <updated>2015-06-09T15:44:13-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,9 @@
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
     <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
-    <content type="html"><![CDATA[<p>I wanted to compare</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
+
+<p>Get the repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a></p>
 
 <div>
 <style type="text/css">

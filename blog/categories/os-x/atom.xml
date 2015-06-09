@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:33:20-07:00</updated>
+  <updated>2015-06-09T15:44:13-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -51,7 +51,7 @@
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receive the error:</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -87,7 +87,7 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
     <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > Using Mono/.Net libraries that have native binding and you are receiving errors like
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
 <p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
