@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "Mono - 64-bit vs. 32-bit benchmark using SciMark"
-date: 2015-06-09 14:42:27 -0700
+date: 2015-06-09 19:42:27 -0700
 comments: true
 categories: 
 - mono
 - scimark
 - benchmark
 ---
+
+I wanted to compare
 
 <div>
 <style type="text/css">
