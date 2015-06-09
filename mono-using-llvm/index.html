@@ -1,0 +1,7 @@
+<p>When configuring Mono to use llvm, if you receiving the error:</p>
+
+<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
+
+<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
+
+<p><strong>llvm-config &ndash;host-target</strong> should help you out.</p>

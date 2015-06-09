@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T08:50:51-07:00</updated>
+  <updated>2015-06-09T09:15:08-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -40,6 +40,21 @@ done
 </code></pre>
 
 <p>I seem to be stripping &ldquo;i386-apple-darwin14.3.0-&rdquo; lately so that is the default if no prefix is passed as an argument&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mono Using Llvm]]></title>
+    <link href="http://sushihangover.github.io/mono-using-llvm/"/>
+    <updated>2015-06-09T00:00:00-07:00</updated>
+    <id>http://sushihangover.github.io/mono-using-llvm</id>
+    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receiving the error:</p>
+
+<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
+
+<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
+
+<p><strong>llvm-config &ndash;host-target</strong> should help you out.</p>
 ]]></content>
   </entry>
   
@@ -564,20 +579,6 @@ make install
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Commit Only Specific Staged Files]]></title>
-    <link href="http://sushihangover.github.io/git-commit-only-specific-staged-files/"/>
-    <updated>2015-05-14T17:34:13-07:00</updated>
-    <id>http://sushihangover.github.io/git-commit-only-specific-staged-files</id>
-    <content type="html"><![CDATA[<p>I needed to commit a limited number of changes that were already staged.</p>
-
-<p>In the early days of git, I remember having to stash all the changes and pop only the changes that I need to commit and push. I&rsquo;m not sure when the &lsquo;&ndash;only&rsquo; option was added to commit, but it sure saves a bunch of extra steps:</p>
-
-<pre><code>git commit --only configure.in
-</code></pre>
 ]]></content>
   </entry>
   
