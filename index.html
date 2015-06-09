@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error. This is libtool 2.4.6, but the definition of this &hellip;">
+  <meta name="description" content="I wanted to compare CPU Arch Build Type LLVM Score (MFlops) Notes: x86 Debug 371.42 x86 Debug Yes 465.45 1.2 times faster using LLVM x86 Release 295. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,59 +83,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
-
-<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
-
-<pre><code> ....   
-    make[4]: Nothing to be done for `all-am'.
-    Making all in doc
-    make[3]: Nothing to be done for `all'.
-      CC       pthread_support.lo
-    libtool: Version mismatch error.  This is libtool 2.4.6, but the
-    libtool: definition of this LT_INIT comes from libtool 2.4.2.
-    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
-    libtool: and run autoconf again.
-    make[3]: *** [pthread_support.lo] Error 63
-    make[2]: *** [all-recursive] Error 1
-    make[1]: *** [all-recursive] Error 1
-    make: *** [all] Error 2
-</code></pre>
-
-<p>Remove that file:</p>
-
-<pre><code>rm libgc/aclocal.m4 
-</code></pre>
-
-<p>And re-run the make and it will be recreated correctly.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></h1>
     
     
@@ -145,14 +92,16 @@
 
 
 
-<time class='entry-date' datetime='2015-06-09T14:42:27-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:42 pm</span></time>
+<time class='entry-date' datetime='2015-06-09T19:42:27-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:42 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><div>
+  <div class="entry-content"><p>I wanted to compare</p>
+
+<div>
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
@@ -238,6 +187,59 @@
 
 
 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+
+<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
+
+<pre><code> ....   
+    make[4]: Nothing to be done for `all-am'.
+    Making all in doc
+    make[3]: Nothing to be done for `all'.
+      CC       pthread_support.lo
+    libtool: Version mismatch error.  This is libtool 2.4.6, but the
+    libtool: definition of this LT_INIT comes from libtool 2.4.2.
+    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
+    libtool: and run autoconf again.
+    make[3]: *** [pthread_support.lo] Error 63
+    make[2]: *** [all-recursive] Error 1
+    make[1]: *** [all-recursive] Error 1
+    make: *** [all] Error 2
+</code></pre>
+
+<p>Remove that file:</p>
+
+<pre><code>rm libgc/aclocal.m4 
+</code></pre>
+
+<p>And re-run the make and it will be recreated correctly.</p>
 </div>
   
   
@@ -703,11 +705,11 @@ popd
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a>
+        <a href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a>
       </li>
     
       <li class="post">
-        <a href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a>
+        <a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a>
       </li>
     
       <li class="post">

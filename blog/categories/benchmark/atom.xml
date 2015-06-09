@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Benchmark | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/benchmark/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:18:57-07:00</updated>
+  <updated>2015-06-09T15:33:20-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -16,9 +16,11 @@
   <entry>
     <title type="html"><![CDATA[Mono - 64-bit vs. 32-bit Benchmark Using SciMark]]></title>
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
-    <updated>2015-06-09T14:42:27-07:00</updated>
+    <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
-    <content type="html"><![CDATA[<div>
+    <content type="html"><![CDATA[<p>I wanted to compare</p>
+
+<div>
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
