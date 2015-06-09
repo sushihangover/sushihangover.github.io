@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff &hellip;">
+  <meta name="description" content="Everyone screws up, and that comes to finger flops when typing that new tag name. If the tag is only local, it is two step process, create a new tag &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-renaming-a-got-tag/">Git - Renaming a Git Tag</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-04T07:39:49-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
+
+<p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
+
+<pre><code>git tag new_tag_name old_tag_name
+git tag -d old_tag_name
+</code></pre>
+
+<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (<u>REMEMBER TO INCLUDE THAT <strong>COLON</strong></u>):</p>
+
+<pre><code>git push origin :refs/tags/old_tag_name
+</code></pre>
+
+<p>And push the new tag to your remote so everyone else will receive that new tag on a pull:</p>
+
+<pre><code>git push origin --tags
+</code></pre>
+
+<p><strong>Note</strong>: The colon isn&rsquo;t a &ldquo;delete flag&rdquo;. Git push and git pull both accept zero or more refspecs as their final argument(s). Now read about <a href="http://git-scm.com/book/en/v2/Git-Internals-The-Refspec">refspecs</a>, really read it&hellip; . A colon separates source from destination in a refspec. The command git push origin :foo has an empty source and essentially says &ldquo;push nothing to branch foo of origin&rdquo;, or, in other words, &ldquo;make branch foo on origin not exist&rdquo;.</p>
+
+<p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
+
+<p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -465,49 +516,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a Local Repo as a Remote to a Different Local Repo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-27T19:34:36-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:34 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
-
-<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -525,6 +533,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a>
       </li>
     
@@ -538,10 +550,6 @@ make install
     
       <li class="post">
         <a href="/os-x-64-bit-mono-midnight-commander/">OS-X 64-bit Mono : Midnight Commander</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-curses-os-x-64-bit/">Mono-Curses OS-X 64-bit</a>
       </li>
     
   </ul>

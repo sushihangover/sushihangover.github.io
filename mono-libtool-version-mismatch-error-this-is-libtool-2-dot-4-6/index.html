@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Qemu 2.0.0 Is Released (or Maybe 1.7.9) - SushiHangover</title>
+  <title>Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6 - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="QEMU 2.0.0 is now released. The full list of changes are available at: http://wiki.qemu.org/ChangeLog/2.0 It appears that doing a checkout of tag & &hellip;">
+  <meta name="description" content="If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error. This is libtool 2.4.6, but the definition of this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">
+  <link rel="canonical" href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Qemu 2.0.0 Is Released (or Maybe 1.7.9)</h1>
+      <h1 class="entry-title">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</h1>
     
     
       <p class="meta">
@@ -89,38 +89,38 @@
 
 
 
-<time class='entry-date' datetime='2014-04-17T23:20:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:20 pm</span></time>
+<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
 
-<p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
+<p>I have find that the &ldquo;ibgc/aclocal.m4&rdquo; has been my main problem:</p>
 
-<p>It appears that doing a checkout of tag &lsquo;v2.0.0&rsquo;, build and install will produce a binary that reports version 1.7.9</p>
+<pre><code> ....   
+    make[4]: Nothing to be done for `all-am'.
+    Making all in doc
+    make[3]: Nothing to be done for `all'.
+      CC       pthread_support.lo
+    libtool: Version mismatch error.  This is libtool 2.4.6, but the
+    libtool: definition of this LT_INIT comes from libtool 2.4.2.
+    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
+    libtool: and run autoconf again.
+    make[3]: *** [pthread_support.lo] Error 63
+    make[2]: *** [all-recursive] Error 1
+    make[1]: *** [all-recursive] Error 1
+    make: *** [all] Error 2
+</code></pre>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status
-</span><span class='line'>HEAD detached at v2.0.0
-</span><span class='line'>nothing to commit, working directory clean
-</span><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 1.7.93, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
+<p>Remove that file:</p>
 
+<pre><code>rm libgc/aclocal.m4 
+</code></pre>
 
-<p>I did a quick look and they are pulling the version during the ./configure stage so since I am always on the master (bleed-edge) branch, my installed version shows up as 1.7.9. You will need to checkout, <strong>configure</strong>, build and install to produce a binary that has the correct version (<del>QEMUVERSION</del>) assigned:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 2.0.0, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
+<p>And re-run the make and it will be recreated correctly.</p>
 </div>
 
 
@@ -136,12 +136,12 @@
 
 
 
-<time class='entry-date' datetime='2014-04-17T23:20:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:20 pm</span></time>
+<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>arm-none-eabi</a>, <a class='category' href='/blog/categories/bare-metal/'>bare-metal</a>, <a class='category' href='/blog/categories/qemu/'>qemu</a>, <a class='category' href='/blog/categories/semi-hosting/'>semi-hosting</a>
+    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>
   
 </span>
 
@@ -150,7 +150,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/" data-via="" data-counturl="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/" data-via="" data-counturl="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/" >Tweet</a>
   
   
   
@@ -159,10 +159,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/0-60msps-logic-analyzer/" title="Previous Post: $30 60MSPS logic analyzer - Logic Pirate">&laquo; $30 60MSPS logic analyzer - Logic Pirate</a>
+        <a class="basic-alignment left" href="/mono-speeding-up-your-llvm-compile/" title="Previous Post: Mono - Speeding up your llvm compile">&laquo; Mono - Speeding up your llvm compile</a>
       
-      
-        <a class="basic-alignment right" href="/gcc-4-dot-9-is-out-with-arm-enhancements/" title="Next Post: GCC 4.9 is out with ARM enhancements">GCC 4.9 is out with ARM enhancements &raquo;</a>
       
     </p>
   </footer>
@@ -257,8 +255,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/';
-        var disqus_url = 'http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/';
+        var disqus_identifier = 'http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/';
+        var disqus_url = 'http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/';
         var disqus_script = 'embed.js';
       
     (function () {
