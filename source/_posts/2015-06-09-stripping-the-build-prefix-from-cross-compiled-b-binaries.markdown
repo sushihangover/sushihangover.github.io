@@ -18,7 +18,7 @@ Here is a simple script to strip those prefixes:
     #!/bin/bash
     if [ -z "$1" ]
     then
-      prefix="i386-apple-darwin10.10.0-"
+      prefix="i386-apple-darwin14.3.0-"
     else
       prefix=$1
     fi
@@ -29,5 +29,5 @@ Here is a simple script to strip those prefixes:
        mv $filename $newfilename
     done
 
-I seem to be stripping "i386-apple-darwin10.10.0-" lately so that is the default if no prefix is passed as an argument... 
+I seem to be stripping "i386-apple-darwin14.3.0-" lately so that is the default if no prefix is passed as an argument... 
 
