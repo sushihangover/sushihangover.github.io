@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mono - Using llvm? make sure your targets match
+title: "Mono - Using llvm? Make sure your targets match"
 date: 2015-06-09 07:21:58 -0700
 comments: true
 categories: 
