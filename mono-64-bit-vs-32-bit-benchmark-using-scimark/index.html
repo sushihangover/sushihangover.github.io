@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mono - 64-bit vs. 32-bit Benchmark Using SciMark - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="CPU Arch Build Type LLVM Score (MFlops) Notes: x86 Debug 371.42 x86 Debug Yes 465.45 1.2 times faster using LLVM x86 Release 295.11 x86 Release Yes &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T14:42:27-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:42 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-s6z2{text-align:center}
+.tg .tg-5hgy{background-color:#D2E4FC;text-align:center}
+.tg .tg-2xdq{background-color:#D2E4FC;font-weight:bold;color:#009901;text-align:center}
+.tg .tg-y9vz{color:#036400}
+</style>
+</div>
+
+
+
+
+<div class="tg-wrap"><table id="tg-sAgiW" class="tg">
+  <tr>
+    <th class="tg-s6z2">CPU Arch</th>
+    <th class="tg-s6z2">Build Type</th>
+    <th class="tg-s6z2">LLVM</th>
+    <th class="tg-s6z2">Score (MFlops)</th>
+    <th class="tg-031e">Notes:</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x86</td>
+    <td class="tg-5hgy">Debug</td>
+    <td class="tg-s6z2"></td>
+    <td class="tg-5hgy">371.42</td>
+    <td class="tg-031e"><br></td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x86</td>
+    <td class="tg-5hgy">Debug</td>
+    <td class="tg-s6z2">Yes</td>
+    <td class="tg-5hgy">465.45</td>
+    <td class="tg-031e">1.2 times faster using LLVM</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x86</td>
+    <td class="tg-5hgy">Release</td>
+    <td class="tg-s6z2"></td>
+    <td class="tg-5hgy">295.11</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x86</td>
+    <td class="tg-5hgy">Release</td>
+    <td class="tg-s6z2">Yes</td>
+    <td class="tg-5hgy">448.92</td>
+    <td class="tg-031e">1.5 times faster using LLVM over not <br>using it in Release mode</td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x64</td>
+    <td class="tg-5hgy">Debug</td>
+    <td class="tg-s6z2"></td>
+    <td class="tg-5hgy">367.22</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x64</td>
+    <td class="tg-5hgy">Debug</td>
+    <td class="tg-s6z2">Yes</td>
+    <td class="tg-5hgy">559.28</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x64</td>
+    <td class="tg-5hgy">Release</td>
+    <td class="tg-s6z2"></td>
+    <td class="tg-5hgy">370.79</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">x64</td>
+    <td class="tg-5hgy">Release</td>
+    <td class="tg-s6z2">Yes</td>
+    <td class="tg-2xdq">569.46</td>
+    <td class="tg-y9vz">1.2 times faster than x86 using LLVM<br>1.5 times faster than x64 without LLVM</td>
+  </tr>
+</table></div>
+
+
+<script type="text/javascript" charset="utf-8">var TgTableSort=window.TgTableSort||function(n,t){"use strict";function r(n,t){for(var e=[],o=n.childNodes,i=0;i<o.length;++i){var u=o[i];if("."==t.substring(0,1)){var a=t.substring(1);f(u,a)&&e.push(u)}else u.nodeName.toLowerCase()==t&&e.push(u);var c=r(u,t);e=e.concat(c)}return e}function e(n,t){var e=[],o=r(n,"tr");return o.forEach(function(n){var o=r(n,"td");t>=0&&t<o.length&&e.push(o[t])}),e}function o(n){return n.textContent||n.innerText||""}function i(n){return n.innerHTML||""}function u(n,t){var r=e(n,t);return r.map(o)}function a(n,t){var r=e(n,t);return r.map(i)}function c(n){var t=n.className||"";return t.match(/\S+/g)||[]}function f(n,t){return-1!=c(n).indexOf(t)}function s(n,t){f(n,t)||(n.className+=" "+t)}function d(n,t){if(f(n,t)){var r=c(n),e=r.indexOf(t);r.splice(e,1),n.className=r.join(" ")}}function v(n){d(n,L),d(n,E)}function l(n,t,e){r(n,"."+E).map(v),r(n,"."+L).map(v),e==T?s(t,E):s(t,L)}function g(n){return function(t,r){var e=n*t.str.localeCompare(r.str);return 0==e&&(e=t.index-r.index),e}}function h(n){return function(t,r){var e=+t.str,o=+r.str;return e==o?t.index-r.index:n*(e-o)}}function m(n,t,r){var e=u(n,t),o=e.map(function(n,t){return{str:n,index:t}}),i=e&&-1==e.map(isNaN).indexOf(!0),a=i?h(r):g(r);return o.sort(a),o.map(function(n){return n.index})}function p(n,t,r,o){for(var i=f(o,E)?N:T,u=m(n,r,i),c=0;t>c;++c){var s=e(n,c),d=a(n,c);s.forEach(function(n,t){n.innerHTML=d[u[t]]})}l(n,o,i)}function x(n,t){var r=t.length;t.forEach(function(t,e){t.addEventListener("click",function(){p(n,r,e,t)}),s(t,"tg-sort-header")})}var T=1,N=-1,E="tg-sort-asc",L="tg-sort-desc";return function(t){var e=n.getElementById(t),o=r(e,"tr"),i=o.length>0?r(o[0],"td"):[];0==i.length&&(i=r(o[0],"th"));for(var u=1;u<o.length;++u){var a=r(o[u],"td");if(a.length!=i.length)return}x(e,i)}}(document);document.addEventListener("DOMContentLoaded",function(n){TgTableSort("tg-sAgiW")});</script>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T14:42:27-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:42 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/benchmark/'>benchmark</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/scimark/'>scimark</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/" data-via="" data-counturl="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/mono-speeding-up-your-llvm-compile/" title="Previous Post: Mono - Speeding up your llvm compile">&laquo; Mono - Speeding up your llvm compile</a>
+      
+      
+        <a class="basic-alignment right" href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/" title="Next Post: Mono - libtool: Version mismatch error.  This is libtool 2.4.6">Mono - libtool: Version mismatch error.  This is libtool 2.4.6 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a>
+      </li>
+    
+      <li class="post">
+        <a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a>
+      </li>
+    
+      <li class="post">
+        <a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a>
+      </li>
+    
+      <li class="post">
+        <a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/';
+        var disqus_url = 'http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

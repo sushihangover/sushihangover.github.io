@@ -98,7 +98,7 @@
 
 <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
 
-<p>I have find that the &ldquo;ibgc/aclocal.m4&rdquo; has been my main problem:</p>
+<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
 
 <pre><code> ....   
     make[4]: Nothing to be done for `all-am'.
@@ -159,7 +159,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/mono-speeding-up-your-llvm-compile/" title="Previous Post: Mono - Speeding up your llvm compile">&laquo; Mono - Speeding up your llvm compile</a>
+        <a class="basic-alignment left" href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/" title="Previous Post: Mono - 64-bit vs. 32-bit benchmark using SciMark">&laquo; Mono - 64-bit vs. 32-bit benchmark using SciMark</a>
       
       
     </p>
@@ -185,6 +185,10 @@
       </li>
     
       <li class="post">
+        <a href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a>
       </li>
     
@@ -194,10 +198,6 @@
     
       <li class="post">
         <a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a>
-      </li>
-    
-      <li class="post">
-        <a href="/os-x-64-bit-mono-midnight-commander/">OS-X 64-bit Mono : Midnight Commander</a>
       </li>
     
   </ul>
