@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Merge | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/merge/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:44:13-07:00</updated>
+  <updated>2015-06-09T16:04:33-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/"/>
     <updated>2014-02-19T20:56:11-08:00</updated>
     <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>
-    <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo;" ></a>
+    <content type="html"><![CDATA[<p><a href="/images/diffmerge_large.png">{% img right /images/diffmerge_small.png &ldquo;LLVM vs. GCC code generation for Bare Metal ARM development&rdquo; %}</a>
 I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
 
 <p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
@@ -34,55 +34,32 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
 <p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
 
-<p><figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global diff.tool diffmerge
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global difftool.diffmerge.cmd <span class="p">&amp;</span>lsquo<span class="p">;</span>diffmerge <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$LOCAL</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$REMOTE</span><span class="p">&amp;</span>rdquo<span class="p">;&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global merge.tool diffmerge
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global mergetool.diffmerge.cmd <span class="p">&amp;</span>lsquo<span class="p">;</span>diffmerge <span class="p">&amp;</span>ndash<span class="p">;</span>merge <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">result</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$MERGED</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="nv">$LOCAL</span><span class="p">&amp;</span>rdquo<span class="p">;</span> <span class="p">&amp;</span>ldquo<span class="p">;</span><span class="k">$(if</span> <span class="nb">test</span> -f <span class="p">&amp;</span>rdquo<span class="p">;</span><span class="nv">$BASE</span><span class="s2">&quot;; then echo &amp;ldquo;$BASE&amp;rdquo;; else echo &amp;ldquo;$LOCAL&amp;rdquo;; fi)&amp;ldquo; &amp;rdquo;$REMOTE&quot;</span><span class="p">&amp;</span>rsquo<span class="p">;</span>
-</span><span class='line'>git config <span class="p">&amp;</span>ndash<span class="p">;</span>global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash Your git setup is: %}
+git config &ndash;global diff.tool diffmerge
+git config &ndash;global difftool.diffmerge.cmd &lsquo;diffmerge &ldquo;$LOCAL&rdquo; &ldquo;$REMOTE&rdquo;&rsquo;
+git config &ndash;global merge.tool diffmerge
+git config &ndash;global mergetool.diffmerge.cmd &lsquo;diffmerge &ndash;merge &ndash;result=&ldquo;$MERGED&rdquo; &ldquo;$LOCAL&rdquo; &ldquo;$(if test -f &rdquo;$BASE"; then echo &ldquo;$BASE&rdquo;; else echo &ldquo;$LOCAL&rdquo;; fi)&ldquo; &rdquo;$REMOTE"&rsquo;
+git config &ndash;global mergetool.diffmerge.trustExitCode true
+{% endcodeblock %}</p>
 
-<p><figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the <span class="nb">local </span>file.m against the checked-in version&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the <span class="nb">local </span>file.m against the version in some-feature-branch&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool some-feature-branch file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;diff the file.m from the Build-54 tag to the Build-55 tag&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git difftool Build-54..Build-55 file.m&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h1&gt;To resolve merge conflicts, just run git mergetool:&lt;/h1&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git mergetool
-</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock lang:bash Your git shortcuts are: linenos:false %}</p>
+
+<h1>diff the local file.m against the checked-in version</h1>
+
+<p>git difftool file.m</p>
+
+<h1>diff the local file.m against the version in some-feature-branch</h1>
+
+<p>git difftool some-feature-branch file.m</p>
+
+<h1>diff the file.m from the Build-54 tag to the Build-55 tag</h1>
+
+<p>git difftool Build-54..Build-55 file.m</p>
+
+<h1>To resolve merge conflicts, just run git mergetool:</h1>
+
+<p>git mergetool
+{% endcodeblock %}</p>
 
 <p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
 ]]></content>
