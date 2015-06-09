@@ -9,7 +9,7 @@ categories:
 - os-x
 ---
 
-When configuring Mono to use llvm, if you receiving the error:
+When configuring Mono to use llvm, if you receive the error:
 
 **configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0**
 
