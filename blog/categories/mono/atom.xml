@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:14:32-07:00</updated>
+  <updated>2015-06-09T16:20:28-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -22,17 +22,17 @@
 
 <p><blockquote><p>This is the C# port of the Scimark benchmark. The original C and Java sources can be found at <a href="http://math.nist.gov/scimark2/.">http://math.nist.gov/scimark2/.</a> The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project.</p><footer><strong><a href="https://code.google.com/p/scimark-csharp">https://code.google.com/p/scimark-csharp</a></strong></footer></blockquote></p>
 
-<p>Running an Apples to Apples comparision across platforms and different mono builds using different llvm versions jitting is not really valid test-case. So the following benchmark matrix is based on the <strong>same</strong> clang/llvm version compiling the <strong>same</strong> mono version in x64 (PE32+) and i386 (PE32) archs.</p>
+<p>Running an Apples to Apples comparision across platforms and different mono builds using different llvm versions jitting is not really a valid test-case. So the following benchmark matrix is based on the <strong>same</strong> clang/llvm version compiling the <strong>same</strong> mono version in x64 (PE32+) and i386 (PE32) archs on just one platform (my &lsquo;old&rsquo; &lsquo;MacBookPro).</p>
 
-<p>Compile:</p>
+<h2>Compile four different CIL (exe) images:</h2>
 
 <ul>
-<li>x64 and x86 Mono Debug versions (Debug Full, no optimize)</li>
-<li>x64 and x86 Mono Release (No Debug, Optimized)</li>
+<li>x64 and x86 Mono Debug  (<em>Debug Full, no optimize</em>)</li>
+<li>x64 and x86 Mono Release (<em>No Debug, Optimized</em>)</li>
 </ul>
 
 
-<p>Execute 32-bit Mono and 62-bit Mono loading the respective CIL (exe) images:</p>
+<h2>Execute 32-bit Mono and 62-bit Mono versions loading the respective CIL (exe) images:</h2>
 
 <ul>
 <li><strong>LLVM turned off</strong></li>
