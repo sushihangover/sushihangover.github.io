@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T09:34:16-07:00</updated>
+  <updated>2015-06-09T09:49:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,11 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mono - Speeding Up Your Llvm Compile]]></title>
+    <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
+    <updated>2015-06-09T07:42:41-07:00</updated>
+    <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
+    <content type="html"><![CDATA[<p>If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+
+<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
+
+<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mono - Using Llvm? Make Sure Your Targets Match]]></title>
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receiving the error:</p>
+    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -560,24 +573,6 @@ make install
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Accept Another Branch's Changes Without Generated Conflicts]]></title>
-    <link href="http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts/"/>
-    <updated>2015-05-24T17:54:37-07:00</updated>
-    <id>http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts</id>
-    <content type="html"><![CDATA[<p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
-
-<p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge -Xtheirs contentpipeline/version123
-</span></code></pre></td></tr></table></div></figure>
-
-
 
 ]]></content>
   </entry>

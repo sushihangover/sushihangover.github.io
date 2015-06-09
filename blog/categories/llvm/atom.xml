@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Llvm | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T09:34:16-07:00</updated>
+  <updated>2015-06-09T09:49:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,11 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mono - Speeding Up Your Llvm Compile]]></title>
+    <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
+    <updated>2015-06-09T07:42:41-07:00</updated>
+    <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
+    <content type="html"><![CDATA[<p>If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+
+<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
+
+<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mono - Using Llvm? Make Sure Your Targets Match]]></title>
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receiving the error:</p>
+    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -94,23 +107,6 @@ done
 <p>My take on it is it is a good thing, something they could not do with GCC without violating the GPL license that they would have to follow.  Clang/LLVM is licensed with a BSD-style license and not wanting to get in to a religious war over open source licensing, their LLVM selection and thus license choice allows them to keep things proprietary while working on new designs and code and releasing that to development partners like they currently do with their in-house ARM/Keli development environment. Then there is the problem of linking and including non-open code in end-user projects if they would have chosen GCC, this is a non-trivial problem for private and public companies dealing with IP that has extreme competition.</p>
 
 <p>As ARM&rsquo;s new designs become public, they can then push LLVM changes to the public branch and, we as end-users, then get to enjoy the benefits of what they can release. Will there be code components that they alway keep private and/or charge for in their commerical &lsquo;ulitmate&rsquo; compiler version, maybe, but the code that does make it to the git repo will be vetted by the company that actually produces the MCU designs. Good enough for me, GPL be damned in this case&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
-    <link href="http://sushihangover.github.io/arm-starts-move-to-llvm/"/>
-    <updated>2014-04-10T22:03:36-07:00</updated>
-    <id>http://sushihangover.github.io/arm-starts-move-to-llvm</id>
-    <content type="html"><![CDATA[<p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
-
-<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
-
-<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
-
-<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
-
-<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :-)</p>
 ]]></content>
   </entry>
   

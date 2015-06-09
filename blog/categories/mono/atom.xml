@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T09:34:16-07:00</updated>
+  <updated>2015-06-09T09:49:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,11 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mono - Speeding Up Your Llvm Compile]]></title>
+    <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
+    <updated>2015-06-09T07:42:41-07:00</updated>
+    <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
+    <content type="html"><![CDATA[<p>If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+
+<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
+
+<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mono - Using Llvm? Make Sure Your Targets Match]]></title>
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receiving the error:</p>
+    <content type="html"><![CDATA[<p>When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -142,70 +155,6 @@ mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 8
 (make gtest) mono gtest.exe (Ctrl-C to exit app)
 (make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X Mono - Unable to Find the Dylib Native Library]]></title>
-    <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
-    <updated>2015-06-08T10:41:32-07:00</updated>
-    <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > Using Mono/.Net libraries that have native binding and you are receiving errors like
-&ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
-
-<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
-
-<pre><code>export MONO_LOG_LEVEL=debug
-export MONO_LOG_MASK=dll
-mono yourprogram.exe
-</code></pre>
-
-<p>I was recently using the <a href="https://github.com/mono/mono-curses">mono-curses</a> wrapper, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But the program failed to run so I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-ran the program. Yes it was finding the dylib OK <strong>but</strong> it was complaining about it being the wrong architecture&hellip;</p>
-
-<pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
-Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
-Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
-</code></pre>
-
-<p>Checking with <strong>file</strong> and yes, it was a 32-bit version of the library:</p>
-
-<pre><code>file libmono-curses.dylib
-libmono-curses.dylib: Mach-O dynamically linked shared library i386
-</code></pre>
-
-<p>I am compiling using a 64-bit version of Mono on OS-X and need 64-bit libraries (and native libs), so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version (I&rsquo;ll fork and fix the <a href="https://github.com/mono/mono-curses">mono-curses</a> project and post it to my GitHub).</p>
-
-<pre><code>file libmono-curses.dylib 
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-</code></pre>
-
-<p>After that, testing the C# ncurses wrapper went fine&hellip; ;-)</p>
-
-<h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
-
-<h3>The Framework and library search path is:</h3>
-
-<ul>
-<li>A colon-separated list of directories in the user’s DYLD_FRAMEWORK_PATH environment variable.</li>
-<li>A colon-separated list of directories in the user’s DYLD_LIBRARY_PATH environment variable.</li>
-<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_FRAMEWORK_PATH environment variable, which defaults to the directories:</p>
-
-<pre><code>  ~/Library/Frameworks
-  /Library/Frameworks
-  /Network/Library/Frameworks
-  /System/Library/Frameworks
-</code></pre></li>
-<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_LIBRARY_PATH environment variable, which defaults to the directories:</p>
-
-<pre><code>  ~/lib
-  /usr/local/lib
-  /lib
-  /usr/lib
-</code></pre></li>
-</ul>
-
-
-<p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I needed to commit a limited number of changes that were already staged. In the early days of git, I remember having to stash all the changes and pop &hellip;">
+  <meta name="description" content="I not sure when exactly -Xtheirs was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-accept-another-branchs-changes-without-generated-conflicts/">Git - Accept Another Branch's Changes Without Generated Conflicts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-24T17:54:37-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I not sure when exactly <strong>-Xtheirs</strong> was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from one branch on top of another one without doing an interactive accept of each and every file, or doing a forced merge, etc&hellip; Great for document, multi-media files and other content that gets processed/accepted via a different <strong>pipeline</strong> and in a different branch and needs moved into a production/release branch.</p>
+
+<p>Assuming you are already sitting in the branch that you wish to merge/replace those files <em>into</em>, you can do a <strong>git merge</strong> with the  <strong>-Xtheirs</strong> option and supply the <strong>remote/branch</strong> that the files are <em>coming from</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge -Xtheirs contentpipeline/version123
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -547,109 +585,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/qemu-machine-and-cpu-list/">Qemu Machine and CPU List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-05T12:27:42-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:27 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -cpu help
-</span><span class='line'>No machine specified, and there is no default.
-</span><span class='line'>Use -machine help to list supported machines!</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So now, you will need to include any machine (&ndash;machine help) in order to see the cpu listing, using the ARM Cortex-M0+ dev board that I am putting together (<em>sushi-m0plus-board</em>), you can get the cpu listing.</p>
-
-<blockquote><p>The cores; cortex-m0, cortex-m0+ and machine; sushi-m0plus-board, are my additions and not apart of the QEMU main-line code.</p></blockquote>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --machine sushi-m0plus-board -cpu help
-</span><span class='line'>Available CPUs:
-</span><span class='line'>  arm1026
-</span><span class='line'>  arm1136
-</span><span class='line'>  arm1136-r2
-</span><span class='line'>  arm1176
-</span><span class='line'>  arm11mpcore
-</span><span class='line'>  arm926
-</span><span class='line'>  arm946
-</span><span class='line'>  cortex-a15
-</span><span class='line'>  cortex-a8
-</span><span class='line'>  cortex-a9
-</span><span class='line'>  cortex-m0
-</span><span class='line'>  cortex-m0plus
-</span><span class='line'>  cortex-m3
-</span><span class='line'>  pxa250
-</span><span class='line'>  pxa255
-</span><span class='line'>  pxa260
-</span><span class='line'>  pxa261
-</span><span class='line'>  pxa262
-</span><span class='line'>  pxa270-a0
-</span><span class='line'>  pxa270-a1
-</span><span class='line'>  pxa270
-</span><span class='line'>  pxa270-b0
-</span><span class='line'>  pxa270-b1
-</span><span class='line'>  pxa270-c0
-</span><span class='line'>  pxa270-c5
-</span><span class='line'>  sa1100
-</span><span class='line'>  sa1110
-</span><span class='line'>  ti925t</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -667,6 +602,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a>
       </li>
     
@@ -680,10 +619,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/mono-curses-os-x-64-bit/">Mono-Curses OS-X 64-bit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-unable-to-find-the-ldylib-native-library/">OS-X Mono - Unable to Find the Dylib Native Library</a>
       </li>
     
   </ul>
