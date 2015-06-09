@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="GCC 4.9 is out with in the wild now with a long list of ARM enhancements. I&rsquo;m hoping to look at into a few of the items on their change/log &hellip;">
+  <meta name="description" content="I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-overlay-a-directory-with-a-different-branch-version/">Git - Overlay a Directory With a Different Branch Version</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-11T16:10:28-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way to do it with just one git command.</p>
+
+<p>So using git ls-files and xargs this is my solution:</p>
+
+<pre><code>git ls-files |xargs -J %  git checkout -f mono-3.2.4 -- %
+</code></pre>
+
+<p>If anyone has a way to do this without using xargs I&rsquo;m all ears&hellip; ;-</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -733,49 +769,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/arm-compiler-price/">ARM DS5 Compiler Price</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-18T06:30:29-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/ARM_DS5.jpg" title="&#34;ARM DS-5&#34;" alt="&#34;ARM DS-5&#34;"> I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
-
-<p>But I was wondering how much <a href="http://ds.arm.com">ARM&rsquo;s DS-5</a> (Keil) IDE and compiler cost and found a couple of places in the &lsquo;net that actually publish the prices (like <a href="http://www.newark.com">Newark / Element14</a>):</p>
-
-<h5>ARM DS-5 PROFESSIONAL:</h5>
-
-<h5>Floating license price: $10,750.00 (USD)</h5>
-
-<h5>Node locked price: $6,600.00 (USD)</h5>
-
-<p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
-
-<p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;">What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
-
-<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -793,6 +786,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a>
+      </li>
+    
+      <li class="post">
         <a href="/os-x-64-bit-mono-midnight-commander/">OS-X 64-bit Mono : Midnight Commander</a>
       </li>
     
@@ -806,10 +803,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/octopress-deploy-and-update-git-source/">Octopress - Deploy and Update Git Source</a>
-      </li>
-    
-      <li class="post">
-        <a href="/os-x-brew-clean-it-up/">OS-X Brew : Clean It Up</a>
       </li>
     
   </ul>

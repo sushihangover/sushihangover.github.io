@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-08T15:04:30-07:00</updated>
+  <updated>2015-06-09T08:46:47-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Stripping the Build Prefix From Cross-compiled Binaries]]></title>
+    <link href="http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/"/>
+    <updated>2015-06-09T06:14:24-07:00</updated>
+    <id>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries</id>
+    <content type="html"><![CDATA[<h2>Remove a filename prefix from a directory of files</h2>
+
+<p>When cross-compiling and using the standard autogen/configure &ldquo;-build=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
+
+<p>Here is a simple script to strip those prefixes:</p>
+
+<pre><code>#!/bin/bash
+if [ -z "$1" ]
+then
+  prefix="i386-apple-darwin10.10.0-"
+else
+  prefix=$1
+fi
+for filename in `ls $prefix*`
+do
+   newfilename=${filename:${#prefix}}
+   echo $filename $newfilename
+   mv $filename $newfilename
+done
+</code></pre>
+
+<p>I seem to be stripping &ldquo;i386-apple-darwin10.10.0-&rdquo; lately so that is the default if no prefix is passed as an argument&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS-X 64-bit Mono : Midnight Commander]]></title>
@@ -548,22 +578,6 @@ make install
 
 <pre><code>git commit --only configure.in
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Overlay a Directory With a Different Branch Version]]></title>
-    <link href="http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version/"/>
-    <updated>2015-05-11T16:10:28-07:00</updated>
-    <id>http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version</id>
-    <content type="html"><![CDATA[<p>I was trying to overlay just one directory within one git branch with the files from another branch (actually a tag in my case)) and could find a way to do it with just one git command.</p>
-
-<p>So using git ls-files and xargs this is my solution:</p>
-
-<pre><code>git ls-files |xargs -J %  git checkout -f mono-3.2.4 -- %
-</code></pre>
-
-<p>If anyone has a way to do this without using xargs I&rsquo;m all ears&hellip; ;-</p>
 ]]></content>
   </entry>
   
