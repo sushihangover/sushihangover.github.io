@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Llvm | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:04:33-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
     <updated>2015-06-09T07:42:41-07:00</updated>
     <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
 
 <p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
 
@@ -31,7 +31,7 @@
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} When configuring Mono to use llvm, if you receive the error:</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -76,22 +76,22 @@ done
     <link href="http://sushihangover.github.io/llvm-3-dot-4-1/"/>
     <updated>2014-04-12T06:05:07-07:00</updated>
     <id>http://sushihangover.github.io/llvm-3-dot-4-1</id>
-    <content type="html"><![CDATA[<p><a href="http://heartbleed.com">{% img left /images/llvm_logo_small.png &ldquo;LLVM&rdquo; %}</a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
+    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="/images/llvm_logo_small.png" title="&ldquo;LLVM&rdquo;" ></a>Point releases are coming to the <a href="http://www.llvm.org">LLVM</a> compiler infrastructure with the LLVM 3.4.1 release just a few days away.</p>
 
-<p>{% pullquote %}
-Doing point releases have been talked a lot about in the past but they&rsquo;ve never materialized up to now with this open-source compiler infrastructure seeing major releases once every six months. Fortunately, in covering the time until LLVM 3.5 in three months, LLVM 3.4.1 will finally be made. Tom Stellard at AMD who has been working a lot on the AMD LLVM GPU back-end and other open-source Radeon OpenCL code, has been organizing this point release management. The LLVM 3.4.1 release plans were originally shared last month. {&ldquo; LLVM 3.4.1 just incorporates stable bug-fixes while all major feature development is focused on landing for LLVM 3.5. &rdquo;}
-{% endpullquote %}</p>
+<p>Surround your pullquote like this {" text to be quoted "}</p>
 
 <p>The official LLVM 3.4.1 release is planned for 4-18 assuming that all of the testing goes well. Details for testing can be found via the<a href="http://lists.cs.uiuc.edu/pipermail/llvmdev/2014-April/072066.html"> LLVM mailing list</a>.</p>
 
 <p>I am staying on the bleeding-edge for my bare metal ARM work, so I will continue to stay on the master branch (3.5.0):</p>
 
-<p>{% codeblock %}
-./clang &ndash;version
-clang version 3.5.0
-Target: arm-none&ndash;eabi
-Thread model: posix
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./clang &ndash;version
+</span><span class='line'>clang version 3.5.0
+</span><span class='line'>Target: arm-none&ndash;eabi
+</span><span class='line'>Thread model: posix</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   

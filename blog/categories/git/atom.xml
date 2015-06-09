@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:04:33-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -49,7 +49,7 @@ popd
     <link href="http://sushihangover.github.io/git-renaming-a-got-tag/"/>
     <updated>2015-06-04T07:39:49-07:00</updated>
     <id>http://sushihangover.github.io/git-renaming-a-got-tag</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %}  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
 
 <p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
 
@@ -118,7 +118,7 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
     <link href="http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/"/>
     <updated>2015-06-03T15:06:35-07:00</updated>
     <id>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/smartgit.png">http://sushihangover.github.io/images/smartgit.png</a> %}  {% pullquote %}  <a href="http://www.syntevo.com">Syntevo&rsquo;s</a> <a href="http://www.syntevo.com/smartgit/">SmartGit</a> is a Git client with Mercurial and Subversion support, and while I can not comment on its mg or svn support, its git and GitHub support is amazing. And the best thing is {&ldquo; SmartGit is free for non-commercial use and runs on Mac OS X, Windows and Linux &rdquo;}. Commercial licenses seem to be very reasonable and on par with other commercial git products. {% endpullquote %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/smartgit.png">http://sushihangover.github.io/images/smartgit.png</a>">  Surround your pullquote like this {" text to be quoted "}</p>
 
 <p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
 
@@ -139,13 +139,17 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 
 <p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
 
-<p>{% codeblock lang:bash %}
-git remote -v
-origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (fetch)
-origin  <a href="https://github.com/sushihangover/PlayScript.git">https://github.com/sushihangover/PlayScript.git</a> (push)
-upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (fetch)
-upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/mono.git</a> (push)
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
+</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
 
@@ -153,14 +157,19 @@ upstream    <a href="https://github.com/mono/mono.git">https://github.com/mono/m
 
 <p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
 
-<p>{% codeblock lang:bash %}
-cd ../PlayScript-master
-git fetch upstream
-git merge upstream/master
-git push origin
-make
-make install
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
+</span><span class='line'>git fetch upstream
+</span><span class='line'>git merge upstream/master
+</span><span class='line'>git push origin
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
 

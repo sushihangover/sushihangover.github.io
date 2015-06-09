@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T15:44:13-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,7 +20,32 @@
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
 
-<p>Get the repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a></p>
+<blockquote><p>This is the C# port of the Scimark benchmark. The original C and Java sources can be found at http://math.nist.gov/scimark2/. The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project.</p><footer><strong>https://code.google.com/p/scimark-csharp</strong></footer></blockquote>
+
+
+<p>Running an Apples to Apples comparision across platforms and different mono builds using different llvm versions jitting is not really valid test-case. So the following benchmark matrix is based on the <strong>same</strong> clang/llvm version compiling the <strong>same</strong> mono version in x64 (PE32+) and i386 (PE32) archs.</p>
+
+<p>Compile:</p>
+
+<ul>
+<li>x64 and x86 Mono Debug versions (Debug Full, no optimize)</li>
+<li>x64 and x86 Mono Release (No Debug, Optimized)</li>
+</ul>
+
+
+<p>Execute 32-bit Mono and 62-bit Mono loading the respective CIL (exe) images:</p>
+
+<ul>
+<li><strong>LLVM turned off</strong></li>
+<li><strong>LLVM turned on</strong> (&ndash;llvm)</li>
+</ul>
+
+
+<p><span class='pullquote-right' data-pullquote='x86 and x64 versions of mono/llvm builds, mono enabled LLVM produces code that is 1.5x faster'>
+The results are not really that surprising in regards to is 64-bit number crunching faster than 32-bit, yes, 64-bit it faster, about 1.2x faster. The surprise for me is the LLVM results, both in  x86 and x64 versions of mono/llvm builds, mono enabled LLVM produces code that is 1.5x faster under SciMark. This speed difference is well worth the slightly longer startup times that jitting with LLVM causes.
+</span></p>
+
+<p>Get the SciMark repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a> and run it on your platform.</p>
 
 <div>
 <style type="text/css">

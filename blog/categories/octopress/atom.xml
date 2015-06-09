@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:04:33-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -75,62 +75,113 @@ popd
 <p>So lets add a source branch to your GitHub Page repo:
         Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
 
-<p>{% codeblock lang:bash %}</p>
-
-<h1>Get your current repo and place it into a a temp directory</h1>
-
-<p>git clone <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> foo.bar
-pushd foo.bar</p>
-
-<h1>Add a new branch to your local copy</h1>
-
-<p>git checkout -b source</p>
-
-<h1>Delete all the existing context</h1>
-
-<p>rm -Rf *</p>
-
-<h1>Commit all those deletes</h1>
-
-<p>git commit &ndash;all &ndash;message=&ldquo;Initial Empty source branch&rdquo;</p>
-
-<h1>Push that emopty branch back to GitHub</h1>
-
-<p>git push
-popd</p>
-
-<h1>GEt rid of that temp. directory</h1>
-
-<p>rm -Rf foo.bar
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Get your current repo and place it into a a temp directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git clone &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; foo.bar
+</span><span class='line'><span class="nb">pushd </span>foo.bar&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Add a new branch to your <span class="nb">local </span>copy&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git checkout -b <span class="nb">source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Delete all the existing context&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rm -Rf *&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Commit all those deletes&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial Empty <span class="nb">source </span>branch<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Push that emopty branch back to GitHub&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git push
+</span><span class='line'><span class="nb">popd</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;GEt rid of that temp. directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;rm -Rf foo.bar
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
 
-<p>{% codeblock lang:bash %}</p>
-
-<h1>Move your existing source directory out of the way for now</h1>
-
-<p>mv source source.org</p>
-
-<h1>Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</h1>
-
-<h1>Note: The &ldquo;&ndash;single-branch -branch source&rdquo; options are not used by most git users but can make speciallized repo copies quick and fool-proof</h1>
-
-<p>git clone &ndash;single-branch -branch source <a href="https://github.com/sushihangover/sushihangover.github.io.git">https://github.com/sushihangover/sushihangover.github.io.git</a> source</p>
-
-<h1>Now copy your existing source files into this empty repo directory</h1>
-
-<p>cp -R source.org source
-pushd source</p>
-
-<h1>Commit and Push your sources files to GitHub</h1>
-
-<p>git commit &ndash;all &ndash;message=&ldquo;Initial source branch commit&rdquo;</p>
-
-<h1>Add your commit comment and save</h1>
-
-<p>git push
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Move your existing <span class="nb">source </span>directory out of the way <span class="k">for</span> now&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;mv <span class="nb">source </span>source.org&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Clone your GitHub Page repo BUT only a single branch of it, only the <span class="nb">source </span>branch and into a directory named <span class="nb">source</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Note: The <span class="p">&amp;</span>ldquo<span class="p">;&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span><span class="p">&amp;</span>rdquo<span class="p">;</span> options are not used by most git users but can make speciallized repo copies quick and fool-proof&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git clone <span class="p">&amp;</span>ndash<span class="p">;</span>single-branch -branch <span class="nb">source</span> &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/sushihangover.github.io.git&quot;</span>&gt;https://github.com/sushihangover/sushihangover.github.io.git&lt;/a&gt; <span class="nb">source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Now copy your existing <span class="nb">source </span>files into this empty repo directory&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;cp -R source.org <span class="nb">source</span>
+</span><span class='line'><span class="nb">pushd source</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Commit and Push your sources files to GitHub&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git commit <span class="p">&amp;</span>ndash<span class="p">;</span>all <span class="p">&amp;</span>ndash<span class="p">;</span><span class="nv">message</span><span class="o">=</span><span class="p">&amp;</span>ldquo<span class="p">;</span>Initial <span class="nb">source </span>branch commit<span class="p">&amp;</span>rdquo<span class="p">;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Add your commit comment and save&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git push
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
 

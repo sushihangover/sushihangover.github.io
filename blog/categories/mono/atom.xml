@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:04:33-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,9 +18,9 @@
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
     <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
 
-<p>{}% blockquote <a href="https://code.google.com/p/scimark-csharp">https://code.google.com/p/scimark-csharp</a> %} This is the C# port of the Scimark benchmark. The original C and Java sources can be found at <a href="http://math.nist.gov/scimark2/.">http://math.nist.gov/scimark2/.</a> The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project. {% endblockquote %}</p>
+<p><blockquote><p>This is the C# port of the Scimark benchmark. The original C and Java sources can be found at <a href="http://math.nist.gov/scimark2/.">http://math.nist.gov/scimark2/.</a> The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project.</p><footer><strong><a href="https://code.google.com/p/scimark-csharp">https://code.google.com/p/scimark-csharp</a></strong></footer></blockquote></p>
 
 <p>Running an Apples to Apples comparision across platforms and different mono builds using different llvm versions jitting is not really valid test-case. So the following benchmark matrix is based on the <strong>same</strong> clang/llvm version compiling the <strong>same</strong> mono version in x64 (PE32+) and i386 (PE32) archs.</p>
 
@@ -40,9 +40,7 @@
 </ul>
 
 
-<p>{% pullquote %}
-The results are not really that surprising in regards to is 64-bit number crunching faster than 32-bit, yes, 64-bit it faster, about 1.2x faster. The surprise for me is the LLVM results, both in  {% x86 and x64 versions of mono/llvm builds, mono enabled LLVM produces code that is 1.5x faster %} under SciMark. This speed difference is well worth the slightly longer startup times that jitting with LLVM causes.
-{% endpullquote %}</p>
+<p>Surround your pullquote like this {" text to be quoted "}</p>
 
 <p>Get the SciMark repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a> and run it on your platform.</p>
 
@@ -140,7 +138,7 @@ The results are not really that surprising in regards to is 64-bit number crunch
     <link href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/"/>
     <updated>2015-06-09T17:20:35-07:00</updated>
     <id>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>  %} If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
 
 <p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
 
@@ -173,7 +171,7 @@ The results are not really that surprising in regards to is 64-bit number crunch
     <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
     <updated>2015-06-09T07:42:41-07:00</updated>
     <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
 
 <p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
 
@@ -186,7 +184,7 @@ The results are not really that surprising in regards to is 64-bit number crunch
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} When configuring Mono to use llvm, if you receive the error:</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:04:33-07:00</updated>
+  <updated>2015-06-09T16:14:32-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/"/>
     <updated>2015-06-09T17:20:35-07:00</updated>
     <id>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>  %} If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
 
 <p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
 
@@ -51,7 +51,7 @@
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} When configuring Mono to use llvm, if you receive the error:</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> When configuring Mono to use llvm, if you receive the error:</p>
 
 <p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
 
@@ -87,7 +87,7 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
     <link href="http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/"/>
     <updated>2015-06-08T10:41:32-07:00</updated>
     <id>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} Using Mono/.Net libraries that have native binding and you are receiving errors like
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> Using Mono/.Net libraries that have native binding and you are receiving errors like
 &ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
 
 <p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
@@ -163,12 +163,7 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
 <p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<p>{% blockquote %}
-From  FAQ:
-By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p>
-
-<p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a>
-{% endblockquote %}</p>
+<p><blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p></p><p><p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a></p></blockquote></p>
 
 <p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
 
