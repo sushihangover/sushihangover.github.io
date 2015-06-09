@@ -9,7 +9,7 @@ categories:
 ---
 {% img left http://sushihangover.github.io/images/mono-logo.png  %} If you are receiving the following error when compiling mono 4.x "Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.", then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).
 
-I have find that the "ibgc/aclocal.m4" has been my main problem:
+I have find that the "libgc/aclocal.m4" has been my main problem:
 
      ....   
         make[4]: Nothing to be done for `all-am'.
