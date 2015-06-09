@@ -8,8 +8,9 @@ categories:
 - scimark
 - benchmark
 ---
+{% img left http://sushihangover.github.io/images/mono-logo.png %} I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.
 
-I wanted to compare
+Get the repo on my [GitHub]( https://github.com/sushihangover/scimark-csharp)
 
 <div>
 <style type="text/css">

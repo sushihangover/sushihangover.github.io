@@ -8,8 +8,7 @@ categories:
 - llvm
 - os-x
 ---
-
-When configuring Mono to use llvm, if you receive the error:
+{% img left http://sushihangover.github.io/images/mono-logo.png %} When configuring Mono to use llvm, if you receive the error:
 
 **configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0**
 
