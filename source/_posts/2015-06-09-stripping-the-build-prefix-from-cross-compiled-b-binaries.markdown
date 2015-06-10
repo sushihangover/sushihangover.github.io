@@ -11,7 +11,7 @@ categories:
 
 ## Remove a filename prefix from a directory of files
 
-When cross-compiling and using the standard autogen/configure "-build=" option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.
+When cross-compiling and using the standard autogen/configure "-target=" option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.
 
 Here is a simple script to strip those prefixes:
 

@@ -10,6 +10,7 @@ categories:
 - aot
 - benchmark
 ---
+{% img left http://sushihangover.github.io/images/mono-logo.png %} 
 
 [Ahead of Time Compilation (AOT)](http://www.mono-project.com/docs/advanced/runtime/docs/aot/)
 
