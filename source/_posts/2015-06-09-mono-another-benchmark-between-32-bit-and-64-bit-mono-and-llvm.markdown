@@ -8,7 +8,7 @@ categories:
 - llvm
 - benchmark
 ---
-{% img left http://sushihangover.github.io/images/mono-logo.png %} While I was still in the benchmark [mood](http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.
+{% img left http://sushihangover.github.io/images/mono-logo.png %} While I was still in the []benchmark mood](http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.
 
 Per the [Mono LLVM web page](http://www.mono-project.com/docs/advanced/mono-llvm/), LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).
 
@@ -44,13 +44,14 @@ Next up: [How much does AOT'ing your CIL exe/dll images help...or not.](http://s
 * [Mono - 64-bit vs. 32-bit Benchmark Using SciMark](http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/
 )
 
+## Sample output:
 
-	$which mono
+    $which mono
     /Users/administrator/mono/mono-llvm-64/bin/mono
     
     $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
     
-	$mono perftest-64-release.exe 
+    $mono perftest-64-release.exe 
     ArrayList strings test.............408 ms
     StringBuilder test.................499 ms
     Integer & Floating ADD.............3616 ms
@@ -64,10 +65,10 @@ Next up: [How much does AOT'ing your CIL exe/dll images help...or not.](http://s
     Exception test.....................407 ms
     Reflection and recursion...........2790 ms
     
-	$which mono
-	/Users/administrator/mono/mono-llvm-32/bin/mono
-	
-	$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
+    $which mono
+    /Users/administrator/mono/mono-llvm-32/bin/mono
+    
+    $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
     
     $mono perftest-32-release.exe 
     ArrayList strings test.............777 ms
@@ -83,5 +84,5 @@ Next up: [How much does AOT'ing your CIL exe/dll images help...or not.](http://s
     Exception test.....................617 ms
     Reflection and recursion...........4441 ms
     
-
-
+    
+    
