@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T18:21:26-07:00</updated>
+  <updated>2015-06-09T18:32:45-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,15 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono and LLVM]]></title>
+    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono / LLVM]]></title>
     <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
     <updated>2015-06-09T20:24:45-07:00</updated>
     <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
-    <content type="html"><![CDATA[<p>Methods with Exceptions: No Help at all (more info below)</p>
+    <content type="html"><![CDATA[<p>While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
-<p>While I was still in the benchmark mood <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a> I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
-
-<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (methods that contain try/catch clauses or methods that do interface calls).</p>
+<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
 
 <p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
 
@@ -32,6 +30,18 @@
 <p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
 
 <p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
+
+<p>Enabling LLVM in Mono:</p>
+
+<ul>
+<li>Methods with Exceptions: No Help at all</li>
+<li>Numerics: Still rule</li>
+<li>String functions: No much help using LLVM, but 64-bit Mono kicks its 32-bit brother in the butt.</li>
+<li>Refection: Not much help either, as expected, but again 64-bit rules.</li>
+</ul>
+
+
+<p>Net Results:</p>
 
 <p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
 
