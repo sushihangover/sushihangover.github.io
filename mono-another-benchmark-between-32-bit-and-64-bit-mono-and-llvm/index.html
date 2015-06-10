@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="While I was still in the benchmark mood, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but &hellip;">
+  <meta name="description" content="While I was still in the []benchmark mood](http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/), I thought I would run a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,7 +96,7 @@
   </header>
 
 
-<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
 <p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
 
@@ -135,47 +135,50 @@
 <ul>
 <li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
 <li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
-<li><p><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></p>
-
-<p>  $which mono
-  /Users/administrator/mono/mono-llvm-64/bin/mono</p>
-
-<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe</p>
-
-<p>  $mono perftest-64-release.exe
-  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.408 ms
-  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..499 ms
-  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3616 ms
-  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;375 ms
-  Reflection and recursion&hellip;&hellip;&hellip;..2730 ms</p>
-
-<p>  $ mono &ndash;llvm perftest-64-release.exe
-  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.497 ms
-  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..505 ms
-  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1620 ms
-  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;407 ms
-  Reflection and recursion&hellip;&hellip;&hellip;..2790 ms</p>
-
-<p>  $which mono
-  /Users/administrator/mono/mono-llvm-32/bin/mono</p>
-
-<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe</p>
-
-<p>  $mono perftest-32-release.exe
-  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.777 ms
-  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..958 ms
-  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3610 ms
-  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;589 ms
-  Reflection and recursion&hellip;&hellip;&hellip;..4557 ms</p>
-
-<p>  mono &ndash;llvm perftest-32-release.exe
-  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.830 ms
-  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..873 ms
-  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1731 ms
-  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;617 ms
-  Reflection and recursion&hellip;&hellip;&hellip;..4441 ms</p></li>
+<li><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></li>
 </ul>
 
+
+<h2>Sample output:</h2>
+
+<pre><code>$which mono
+/Users/administrator/mono/mono-llvm-64/bin/mono
+
+$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
+
+$mono perftest-64-release.exe 
+ArrayList strings test.............408 ms
+StringBuilder test.................499 ms
+Integer &amp; Floating ADD.............3616 ms
+Exception test.....................375 ms
+Reflection and recursion...........2730 ms
+
+$ mono --llvm perftest-64-release.exe 
+ArrayList strings test.............497 ms
+StringBuilder test.................505 ms
+Integer &amp; Floating ADD.............1620 ms
+Exception test.....................407 ms
+Reflection and recursion...........2790 ms
+
+$which mono
+/Users/administrator/mono/mono-llvm-32/bin/mono
+
+$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
+
+$mono perftest-32-release.exe 
+ArrayList strings test.............777 ms
+StringBuilder test.................958 ms
+Integer &amp; Floating ADD.............3610 ms
+Exception test.....................589 ms
+Reflection and recursion...........4557 ms
+
+mono --llvm perftest-32-release.exe 
+ArrayList strings test.............830 ms
+StringBuilder test.................873 ms
+Integer &amp; Floating ADD.............1731 ms
+Exception test.....................617 ms
+Reflection and recursion...........4441 ms
+</code></pre>
 </div>
 
 
