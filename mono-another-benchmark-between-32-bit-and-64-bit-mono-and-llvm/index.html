@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6 - SushiHangover</title>
+  <title>Mono - Another Benchmark Between 32-bit and 64-bit Mono and LLVM - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error. This is libtool 2.4.6, but the definition of this &hellip;">
+  <meta name="description" content="Methods with Exceptions: No Help at all (more info below) While I was still in the benchmark mood http://sushihangover.github.io/mono-64-bit-vs-32- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">
+  <link rel="canonical" href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</h1>
+      <h1 class="entry-title">Mono - Another Benchmark Between 32-bit and 64-bit Mono and LLVM</h1>
     
     
       <p class="meta">
@@ -89,38 +89,78 @@
 
 
 
-<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
+<time class='entry-date' datetime='2015-06-09T20:24:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:24 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+<div class="entry-content"><p>Methods with Exceptions: No Help at all (more info below)</p>
 
-<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
+<p>While I was still in the benchmark mood <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a> I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
-<pre><code> ....   
-    make[4]: Nothing to be done for `all-am'.
-    Making all in doc
-    make[3]: Nothing to be done for `all'.
-      CC       pthread_support.lo
-    libtool: Version mismatch error.  This is libtool 2.4.6, but the
-    libtool: definition of this LT_INIT comes from libtool 2.4.2.
-    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
-    libtool: and run autoconf again.
-    make[3]: *** [pthread_support.lo] Error 63
-    make[2]: *** [all-recursive] Error 1
-    make[1]: *** [all-recursive] Error 1
-    make: *** [all] Error 2
+<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (methods that contain try/catch clauses or methods that do interface calls).</p>
+
+<p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
+
+<pre><code>    Note: The Mono web pages are notorious for begin out of date or lacking of details, even the 'new' ones, so I usually like confirmation. 
 </code></pre>
 
-<p>Remove that file:</p>
+<p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
 
-<pre><code>rm libgc/aclocal.m4 
-</code></pre>
+<p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
 
-<p>And re-run the make and it will be recreated correctly.</p>
+<p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
+
+<p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
+
+<h2>Additional Reading:</h2>
+
+<ul>
+<li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
+<li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
+<li><p><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></p>
+
+<p>  $which mono
+  /Users/administrator/mono/mono-llvm-64/bin/mono</p>
+
+<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe</p>
+
+<p>  $mono perftest-64-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.408 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..499 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3616 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;375 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..2730 ms</p>
+
+<p>  $ mono &ndash;llvm perftest-64-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.497 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..505 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1620 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;407 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..2790 ms</p>
+
+<p>  $which mono
+  /Users/administrator/mono/mono-llvm-32/bin/mono</p>
+
+<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe</p>
+
+<p>  $mono perftest-32-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.777 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..958 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3610 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;589 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..4557 ms</p>
+
+<p>  mono &ndash;llvm perftest-32-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.830 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..873 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1731 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;617 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..4441 ms</p></li>
+</ul>
+
 </div>
 
 
@@ -136,12 +176,12 @@
 
 
 
-<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
+<time class='entry-date' datetime='2015-06-09T20:24:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:24 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>
+    <a class='category' href='/blog/categories/benchmark/'>benchmark</a>, <a class='category' href='/blog/categories/llvm/'>llvm</a>, <a class='category' href='/blog/categories/mono/'>mono</a>
   
 </span>
 
@@ -150,7 +190,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/" data-via="" data-counturl="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/" data-via="" data-counturl="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/" >Tweet</a>
   
   
   
@@ -159,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/mono-speeding-up-your-llvm-compile/" title="Previous Post: Mono - Speeding up your llvm compile">&laquo; Mono - Speeding up your llvm compile</a>
+        <a class="basic-alignment left" href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/" title="Previous Post: Mono - 64-bit vs. 32-bit benchmark using SciMark">&laquo; Mono - 64-bit vs. 32-bit benchmark using SciMark</a>
       
-      
-        <a class="basic-alignment right" href="/mono-64-bit-vs-32-bit-benchmark-using-scimark/" title="Next Post: Mono - 64-bit vs. 32-bit benchmark using SciMark">Mono - 64-bit vs. 32-bit benchmark using SciMark &raquo;</a>
       
     </p>
   </footer>
@@ -257,8 +295,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/';
-        var disqus_url = 'http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/';
+        var disqus_identifier = 'http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/';
+        var disqus_url = 'http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/';
         var disqus_script = 'embed.js';
       
     (function () {

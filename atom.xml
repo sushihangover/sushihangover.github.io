@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T16:20:28-07:00</updated>
+  <updated>2015-06-09T18:21:26-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono and LLVM]]></title>
+    <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
+    <updated>2015-06-09T20:24:45-07:00</updated>
+    <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
+    <content type="html"><![CDATA[<p>Methods with Exceptions: No Help at all (more info below)</p>
+
+<p>While I was still in the benchmark mood <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a> I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
+
+<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (methods that contain try/catch clauses or methods that do interface calls).</p>
+
+<p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
+
+<pre><code>    Note: The Mono web pages are notorious for begin out of date or lacking of details, even the 'new' ones, so I usually like confirmation. 
+</code></pre>
+
+<p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
+
+<p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
+
+<p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
+
+<p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
+
+<h2>Additional Reading:</h2>
+
+<ul>
+<li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
+<li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
+<li><p><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></p>
+
+<p>  $which mono
+  /Users/administrator/mono/mono-llvm-64/bin/mono</p>
+
+<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe</p>
+
+<p>  $mono perftest-64-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.408 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..499 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3616 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;375 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..2730 ms</p>
+
+<p>  $ mono &ndash;llvm perftest-64-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.497 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..505 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1620 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;407 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..2790 ms</p>
+
+<p>  $which mono
+  /Users/administrator/mono/mono-llvm-32/bin/mono</p>
+
+<p>  $mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe</p>
+
+<p>  $mono perftest-32-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.777 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..958 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.3610 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;589 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..4557 ms</p>
+
+<p>  mono &ndash;llvm perftest-32-release.exe
+  ArrayList strings test&hellip;&hellip;&hellip;&hellip;.830 ms
+  StringBuilder test&hellip;&hellip;&hellip;&hellip;&hellip;..873 ms
+  Integer &amp; Floating ADD&hellip;&hellip;&hellip;&hellip;.1731 ms
+  Exception test&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;617 ms
+  Reflection and recursion&hellip;&hellip;&hellip;..4441 ms</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono - 64-bit vs. 32-bit Benchmark Using SciMark]]></title>
@@ -633,57 +706,6 @@ make install
 </code></pre>
 
 <p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Keeping a GitHub Fork Up to Date With Origin Repo]]></title>
-    <link href="http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
-    <updated>2015-05-29T17:22:05-07:00</updated>
-    <id>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo</id>
-    <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
-
-<p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
-
-<p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
-</span><span class='line'>origin    https://github.com/sushihangover/PlayScript.git <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>origin    https://github.com/sushihangover/PlayScript.git <span class="o">(</span>push<span class="o">)</span>
-</span><span class='line'>upstream  https://github.com/mono/mono.git <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>upstream  https://github.com/mono/mono.git <span class="o">(</span>push<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
-
-<p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
-
-<p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
-</span><span class='line'>git fetch upstream
-</span><span class='line'>git merge upstream/master
-</span><span class='line'>git push origin
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
-
-<p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
 ]]></content>
   </entry>
   
