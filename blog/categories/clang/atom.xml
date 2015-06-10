@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clang | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/clang/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T18:32:45-07:00</updated>
+  <updated>2015-06-10T00:34:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,7 +20,7 @@
     <id>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries</id>
     <content type="html"><![CDATA[<h2>Remove a filename prefix from a directory of files</h2>
 
-<p>When cross-compiling and using the standard autogen/configure &ldquo;-build=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
+<p>When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
 
 <p>Here is a simple script to strip those prefixes:</p>
 

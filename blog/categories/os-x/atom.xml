@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T18:32:45-07:00</updated>
+  <updated>2015-06-10T00:34:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -47,7 +47,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono - Using Llvm? Make Sure Your Targets Match]]></title>
+    <title type="html"><![CDATA[Mono - Using LLVM? Make Sure Your Targets Match]]></title>
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>

@@ -99,7 +99,7 @@
   </header>
 
 
-  <div class="entry-content"><p>While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
 <p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
 
@@ -125,6 +125,11 @@
 <p>Net Results:</p>
 
 <p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
+
+<p>Try it yourself: <a href="https://gist.github.com/sushihangover/3d4d9d53770c501bf054">Gist</a></p>
+
+<pre><code>mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
+</code></pre>
 
 <p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
 
@@ -415,7 +420,7 @@ The results are not really that surprising in regards to is 64-bit number crunch
       
   <header>
     
-      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a></h1>
+      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono - Using LLVM? Make Sure Your Targets Match</a></h1>
     
     
       <p class="meta">
@@ -468,7 +473,7 @@ The results are not really that surprising in regards to is 64-bit number crunch
 
   <div class="entry-content"><h2>Remove a filename prefix from a directory of files</h2>
 
-<p>When cross-compiling and using the standard autogen/configure &ldquo;-build=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
+<p>When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
 
 <p>Here is a simple script to strip those prefixes:</p>
 
@@ -788,7 +793,7 @@ popd
       </li>
     
       <li class="post">
-        <a href="/mono-using-llvm/">Mono - Using Llvm? Make Sure Your Targets Match</a>
+        <a href="/mono-using-llvm/">Mono - Using LLVM? Make Sure Your Targets Match</a>
       </li>
     
   </ul>

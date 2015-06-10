@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Llvm | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/llvm/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-09T18:32:45-07:00</updated>
+  <updated>2015-06-10T00:34:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
     <updated>2015-06-09T20:24:45-07:00</updated>
     <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
-    <content type="html"><![CDATA[<p>While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> While I was still in the benchmark <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">mood</a>, I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
 <p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
 
@@ -44,6 +44,11 @@
 <p>Net Results:</p>
 
 <p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
+
+<p>Try it yourself: <a href="https://gist.github.com/sushihangover/3d4d9d53770c501bf054">Gist</a></p>
+
+<pre><code>mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
+</code></pre>
 
 <p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
 
@@ -110,7 +115,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono - Using Llvm? Make Sure Your Targets Match]]></title>
+    <title type="html"><![CDATA[Mono - Using LLVM? Make Sure Your Targets Match]]></title>
     <link href="http://sushihangover.github.io/mono-using-llvm/"/>
     <updated>2015-06-09T07:21:58-07:00</updated>
     <id>http://sushihangover.github.io/mono-using-llvm</id>
@@ -131,7 +136,7 @@
     <id>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries</id>
     <content type="html"><![CDATA[<h2>Remove a filename prefix from a directory of files</h2>
 
-<p>When cross-compiling and using the standard autogen/configure &ldquo;-build=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
+<p>When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
 
 <p>Here is a simple script to strip those prefixes:</p>
 
