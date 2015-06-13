@@ -83,6 +83,3 @@ Next up: [How much does AOT'ing your CIL exe/dll images help...or not.](http://s
     Integer & Floating ADD.............1731 ms
     Exception test.....................617 ms
     Reflection and recursion...........4441 ms
-    
-    
-    
