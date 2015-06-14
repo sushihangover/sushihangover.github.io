@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T08:31:19-07:00</updated>
+  <updated>2015-06-14T08:32:52-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -71,7 +71,7 @@ and the repository exists.
     <id>http://sushihangover.github.io/playscript-moved-it-a-github-organization</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I transfered my PlayScript repo to an Github organization to help maintain the structure of the project.</p>
 
-<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and say forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
+<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
 
 <p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
 ]]></content>
