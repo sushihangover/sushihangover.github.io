@@ -42,7 +42,7 @@ My [xplat version of CorFlags](https://github.com/sushihangover/corflags) shows 
 
 The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag.... so who is right? 
 
-Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), or that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat [CorFlags](https://github.com/sushihangover/corflags/issues/new) project (Thanks).
+Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), is that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat [CorFlags](https://github.com/sushihangover/corflags/issues/new) project (Thanks).
 
 ## Misc:
 
