@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-13T11:31:03-07:00</updated>
+  <updated>2015-06-14T06:39:35-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What Is Code]]></title>
+    <link href="http://sushihangover.github.io/what-is-code/"/>
+    <updated>2015-06-14T06:32:37-07:00</updated>
+    <id>http://sushihangover.github.io/what-is-code</id>
+    <content type="html"><![CDATA[<p>No matter what the <a href="http://www.slate.com/blogs/future_tense/2015/06/11/bloomberg_businessweek_s_38_000_word_piece_on_code_just_try_coding_yourself.html">Slate</a> says, Paul Ford&rsquo;s &ldquo;<a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">What is Code</a>&rdquo; desires to be read, if not by every programmer, then surely by every person that has to deal with programmers.</p>
+
+<p>The best thing, if you find any issues with the article, you can post a <a href="https://github.com/BloombergMedia/whatiscode/issues/new">Github issue</a>, I did. ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono / LLVM]]></title>
@@ -702,28 +713,6 @@ make install
 
 <pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript 3.2.2002 Posted]]></title>
-    <link href="http://sushihangover.github.io/playscript-3-dot-2-2002-posted/"/>
-    <updated>2015-05-31T22:16:23-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-3-dot-2-2002-posted</id>
-    <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/PlayscriptLogo.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
-
-<p>I will be migrating it to the Mono 4.x compiler in the days and weeks ahead before working on finishing and getting the ActionScript language side stable (feature complete?). Not really looking forwarded to the Mono 4.x migration as the number of internal API changes to the mcs compiler since the 3.2.0 release is quite extensive.</p>
-
-<p>If you want to compile and use the current 3.2.2002 release, just autogen.sh like normal.</p>
-
-<p>Note: Due to dependency updates on OS-X since Mono 3.2 was release, I had to supply &ldquo; <u>&ndash;with-tls</u>&rdquo; option as it was auto-selecting <strong>__thread</strong> instead of <strong>_posix</strong>.</p>
-
-<pre><code>./autogen.sh --with-tls=posix --enable-nls=no --prefix=/Users/administrator/mono-install
-</code></pre>
-
-<p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
 ]]></content>
   </entry>
   
