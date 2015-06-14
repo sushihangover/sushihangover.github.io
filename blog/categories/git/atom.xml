@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T06:39:35-07:00</updated>
+  <updated>2015-06-14T08:18:05-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git: Set Up a Fetch-only Remote | Disabling Push]]></title>
+    <link href="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/"/>
+    <updated>2015-06-14T14:57:37-07:00</updated>
+    <id>http://sushihangover.github.io/git-set-up-a-fetch-only-remote</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> The PlayScript repo on the PlayScriptRedux Github organization I maintain is a down-stream fork of Mono so I can fetch the changes to their master branch. I also have my own fork of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the Redux based repo from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
+
+<p>So after adding my additional remotes my local repo, it looks like this:</p>
+
+<pre><code>git remote -v
+origin  https://github.com/sushihangover/playscript.git (fetch)
+origin  https://github.com/sushihangover/playscript.git (push)
+redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
+redux   https://github.com/PlayScriptRedux/playscript.git (push)
+upstream    https://github.com/mono/mono.git (fetch)
+upstream    https://github.com/mono/mono.git (push)
+</code></pre>
+
+<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
+
+<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
+
+<pre><code> git remote set-url --push upstream DISABLE
+ git remote set-url --push redux DISABLE
+</code></pre>
+
+<p>And to see what that looks like now:</p>
+
+<pre><code>git remote -v
+origin  https://github.com/sushihangover/playscript.git (fetch)
+origin  https://github.com/sushihangover/playscript.git (push)
+redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
+redux   DISABLE (push)
+upstream    https://github.com/mono/mono.git (fetch)
+upstream    DISABLE (push)
+</code></pre>
+
+<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
+
+<pre><code>git push redux
+fatal: 'DISABLE' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
@@ -125,55 +176,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 <p>I&rsquo;ve used a couple of <a href="http://www.git-scm.com/downloads/guis">other git GUIs</a> and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
 
 <p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for non-commercial use, so just download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Keeping a GitHub Fork Up to Date With Origin Repo]]></title>
-    <link href="http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/"/>
-    <updated>2015-05-29T17:22:05-07:00</updated>
-    <id>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo</id>
-    <content type="html"><![CDATA[<p>In the PlayScript work that I am doing on the Mono mcs compiler, keeping the PlayScript compiler in-sync with Mono&rsquo;s mcs can be a pain due to the large number of changes that occur on that repo.</p>
-
-<p>While I have different &lsquo;tricks&rsquo; to try to help merging, the first thing is you have to keep one branch of your fork in-sync with the original repo that your forked, mono/mono.git in my case.</p>
-
-<p>I created two local clones of my GitHub forked repo and added an &lsquo;upstream&rsquo; remote to the original mono repo.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote -v
-</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>origin  &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/sushihangover/PlayScript.git&quot;</span>&gt;https://github.com/sushihangover/PlayScript.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
-</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>fetch<span class="o">)</span>
-</span><span class='line'>upstream    &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/mono/mono.git&quot;</span>&gt;https://github.com/mono/mono.git&lt;/a&gt; <span class="o">(</span>push<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p>One local clone is named <strong>PlayScript-master</strong> and the other is <strong>PlayScript</strong>.</p>
-
-<p>The <strong>PlayScript-master</strong> is used to keep in-sync with the upstream repo, build the bleed-edge mono framework and compiler and run the mono unit-tests. This is so I always know what the current mono master looks like and how the unit tests are running so I can review the changes I am making in the local <strong>PlayScript</strong> repo and make sure that I am not injecting regression failures in the C# side of the compiler. (I&rsquo;ll blog about that later). While the <strong>PlayScript-master repo</strong> will always Fast-forward on a &ldquo;<em>git merge upstream/master</em>&rdquo;, the PlayScript repo will not, I only merge one branch/tag mono release at a time to <em>master branch</em> and then merge/rebase <em>playscript branch</em> in order to maintain my sanity (some of the internal API changes on even Mono minor releases can drive a person to drink).</p>
-
-<p>So to quickly update my master mono as it will always fast-forward, I have a script in the root repo called <strong>mono-master-update-install.sh</strong>.</p>
-
-<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../PlayScript-master
-</span><span class='line'>git fetch upstream
-</span><span class='line'>git merge upstream/master
-</span><span class='line'>git push origin
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure></p>
-
-<p><strong>Note</strong>: You can add the mono unit tests to the end of that script if you wish.</p>
-
-<p><strong>Note</strong>:: I have the <strong>PlayScript-master</strong> <em>master branch</em> installing into a prefix of <u>~/mono-install</u> and the <strong>PlayScript</strong> <em>playscript branch</em> installing into the <u>~/playscript-install</u>. That way I can always switch quickly between the installed &lsquo;released&rsquo; Mono framework, the pure bleeding-edge mono build and the PlayScript build with a simple path change.</p>
 ]]></content>
   </entry>
   

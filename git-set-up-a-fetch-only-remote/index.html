@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>OS-X Brew : Clean It Up - SushiHangover</title>
+  <title>Git: Set Up a Fetch-only Remote | Disabling Push - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I&rsquo;m a big fan of Homebrew on OS-X and it normally it works so well that you just do not think about it. That is a very good thing, it just &hellip;">
+  <meta name="description" content="The PlayScript repo on the PlayScriptRedux Github organization I maintain is a down-stream fork of Mono so I can fetch the changes to their master &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/os-x-brew-clean-it-up/">
+  <link rel="canonical" href="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">OS-X Brew : Clean It Up</h1>
+      <h1 class="entry-title">Git: Set Up a Fetch-only Remote | Disabling Push</h1>
     
     
       <p class="meta">
@@ -89,48 +89,56 @@
 
 
 
-<time class='entry-date' datetime='2015-06-07T20:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:10 pm</span></time>
+<time class='entry-date' datetime='2015-06-14T14:57:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:57 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="/images/Homebrew_logo.png" alt="" /></p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> The PlayScript repo on the PlayScriptRedux Github organization I maintain is a down-stream fork of Mono so I can fetch the changes to their master branch. I also have my own fork of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the Redux based repo from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
 
-<p>I&rsquo;m a big fan of <a href="http://brew.sh">Homebrew</a> on OS-X and it normally it works so well that you just do not think about it. That is a very good thing, it just works, does not get in your way and anything is good.</p>
+<p>So after adding my additional remotes my local repo, it looks like this:</p>
 
-<p>While I was updating/upgrading packages today, I ended up running &lsquo;brew info&rsquo;:</p>
-
-<pre><code>brew info 
-146 kegs, 171208 files, 8.0G
+<pre><code>git remote -v
+origin  https://github.com/sushihangover/playscript.git (fetch)
+origin  https://github.com/sushihangover/playscript.git (push)
+redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
+redux   https://github.com/PlayScriptRedux/playscript.git (push)
+upstream    https://github.com/mono/mono.git (fetch)
+upstream    https://github.com/mono/mono.git (push)
 </code></pre>
 
-<p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
+<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
 
-<blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p><p>https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</p></blockquote>
+<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
 
-
-<p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
-
-<pre><code>brew info 
-146 kegs, 63167 files, 2.7G
+<pre><code> git remote set-url --push upstream DISABLE
+ git remote set-url --push redux DISABLE
 </code></pre>
 
-<p>Clean up everything at once:</p>
+<p>And to see what that looks like now:</p>
 
-<pre><code>brew cleanup
+<pre><code>git remote -v
+origin  https://github.com/sushihangover/playscript.git (fetch)
+origin  https://github.com/sushihangover/playscript.git (push)
+redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
+redux   DISABLE (push)
+upstream    https://github.com/mono/mono.git (fetch)
+upstream    DISABLE (push)
 </code></pre>
 
-<p>Clean up just one formula:</p>
+<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
 
-<pre><code>brew cleanup {FORMULA}
+<pre><code>git push redux
+fatal: 'DISABLE' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
 </code></pre>
 
-<p>Do a dry run to see what would be cleaned up:</p>
-
-<pre><code>brew cleanup -n
-</code></pre>
+<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
 </div>
 
 
@@ -146,12 +154,12 @@
 
 
 
-<time class='entry-date' datetime='2015-06-07T20:10:40-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:10 pm</span></time>
+<time class='entry-date' datetime='2015-06-14T14:57:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:57 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/brew/'>brew</a>, <a class='category' href='/blog/categories/homebrew/'>homebrew</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/github/'>github</a>
   
 </span>
 
@@ -160,7 +168,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/os-x-brew-clean-it-up/" data-via="" data-counturl="http://sushihangover.github.io/os-x-brew-clean-it-up/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/" data-via="" data-counturl="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/" >Tweet</a>
   
   
   
@@ -169,10 +177,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/playscript-3-dot-2-6001-posted/" title="Previous Post: Playscript 3.2.6001 Posted">&laquo; Playscript 3.2.6001 Posted</a>
+        <a class="basic-alignment left" href="/what-is-code/" title="Previous Post: What is Code">&laquo; What is Code</a>
       
-      
-        <a class="basic-alignment right" href="/octopress-deploy-and-update-git-source/" title="Next Post: Octopress - Deploy and update Git source">Octopress - Deploy and update Git source &raquo;</a>
       
     </p>
   </footer>
@@ -267,8 +273,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/os-x-brew-clean-it-up/';
-        var disqus_url = 'http://sushihangover.github.io/os-x-brew-clean-it-up/';
+        var disqus_identifier = 'http://sushihangover.github.io/git-set-up-a-fetch-only-remote/';
+        var disqus_url = 'http://sushihangover.github.io/git-set-up-a-fetch-only-remote/';
         var disqus_script = 'embed.js';
       
     (function () {
