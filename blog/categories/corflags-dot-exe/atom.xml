@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: corflags.exe | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/corflags-dot-exe/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-06-14T11:07:57-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MS CorFlags - Showing Incorrect Flags]]></title>
+    <link href="http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/"/>
+    <updated>2015-06-14T10:40:23-07:00</updated>
+    <id>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags</id>
+    <content type="html"><![CDATA[<p>In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged CIL PE image, it does not show that the COMIMAGE_FLAGS_32BITREQUIRED as being set.</p>
+
+<p>In the case of this output:</p>
+
+<pre><code>Version   : v4.0.30319
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 0x20003
+ILONLY    : 1
+32BITREQ  : 0
+32BITPREF : 1
+Signed    : 0
+</code></pre>
+
+<p>The 0x20003 flags breaks down into:</p>
+
+<ul>
+<li>32BITPREFERRED (0x20000)</li>
+<li>32BITREQUIRED (0x00002)</li>
+<li>ILONLY (0x00001)</li>
+</ul>
+
+
+<p>So why is <strong>32BITREQ</strong> not shown as selected?</p>
+
+<p>My <a href="https://github.com/sushihangover/corflags">xplat version of CorFlags</a> shows the following:</p>
+
+<pre><code>Version   : v4.0.30319
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 0x20003
+ILONLY    : 1
+32BITREQ  : 1
+32BITPREF : 1
+Signed    : 0
+</code></pre>
+
+<p>The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag&hellip;. so who is right?</p>
+
+<p>Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), or that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat <a href="https://github.com/sushihangover/corflags/issues/new">CorFlags</a> project (Thanks).</p>
+
+<h2>Misc:</h2>
+
+<p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
+
+<p><blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5&hellip;)</p></blockquote></p>
+
+<p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
+
+<pre><code>COMIMAGE_FLAGS_ILONLY               =0x00000001,
+COMIMAGE_FLAGS_32BITREQUIRED        =0x00000002,
+COMIMAGE_FLAGS_IL_LIBRARY           =0x00000004,
+COMIMAGE_FLAGS_STRONGNAMESIGNED     =0x00000008,
+COMIMAGE_FLAGS_NATIVE_ENTRYPOINT    =0x00000010,
+COMIMAGE_FLAGS_TRACKDEBUGDATA       =0x00010000,
+COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
