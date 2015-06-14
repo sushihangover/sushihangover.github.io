@@ -7,7 +7,7 @@ categories:
 - git
 - github
 ---
-{% img left http://sushihangover.github.io/images/gitlogo.png %} The PlayScript repo on the PlayScriptRedux Github organization I maintain is a down-stream fork of Mono so I can fetch the changes to their master branch. I also have my own fork of the PlayScript repo so I can code, issue pull-requests and review other people's pull-requests. But I do not want to screw up and push directly to the Redux based repo from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.
+{% img left http://sushihangover.github.io/images/gitlogo.png %} The PlayScript repo on the [PlayScriptRedux](https://github.com/PlayScriptRedux) Github organization I maintain is a down-stream fork of [Mono](https://github.com/mono/mono) so I can fetch the changes to their master branch. I also have my own [fork](https://github.com/sushihangover/playscript) of the PlayScript repo so I can code, issue pull-requests and review other people's pull-requests. But I do not want to screw up and push directly to the [Redux based repo](https://github.com/PlayScriptRedux/playscript) from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.
 
 So after adding my additional remotes my local repo, it looks like this:
 
