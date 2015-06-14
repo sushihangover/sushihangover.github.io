@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T08:21:41-07:00</updated>
+  <updated>2015-06-14T08:31:19-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript - Moved It a Github Organization]]></title>
+    <link href="http://sushihangover.github.io/playscript-moved-it-a-github-organization/"/>
+    <updated>2015-06-14T08:24:28-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-moved-it-a-github-organization</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I transfered my PlayScript repo to an Github organization to help maintain the structure of the project.</p>
+
+<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and say forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
+
+<p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Playscript 3.2.6001 Posted]]></title>
@@ -71,22 +84,6 @@ playscript-3.2.6001
 <pre><code>./autogen.sh --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=$HOME/playscript-install
 make
 make install
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript 3.2.3001 Posted]]></title>
-    <link href="http://sushihangover.github.io/playscript-3-dot-2-3001-posted/"/>
-    <updated>2015-06-03T06:10:59-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-3-dot-2-3001-posted</id>
-    <content type="html"><![CDATA[<p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
-
-<p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
-
-<pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
 </code></pre>
 ]]></content>
   </entry>

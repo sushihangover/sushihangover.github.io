@@ -5,6 +5,10 @@
     <lastmod>2015-06-14T14:57:37-07:00</lastmod>
   </url>
   <url>
+    <loc>http://sushihangover.github.io/playscript-moved-it-a-github-organization/</loc>
+    <lastmod>2015-06-14T08:24:28-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/what-is-code/</loc>
     <lastmod>2015-06-14T06:32:37-07:00</lastmod>
   </url>
@@ -481,5 +485,8 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/benchmark/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/playscriptredux/</loc>
   </url>
 </urlset>
