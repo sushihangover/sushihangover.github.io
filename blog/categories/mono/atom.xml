@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-15T15:45:15-07:00</updated>
+  <updated>2015-06-15T15:52:13-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Mono - Code Coverage Using the New Coverage Filter]]></title>
     <link href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/"/>
-    <updated>2015-06-15T15:33:29-07:00</updated>
+    <updated>2015-06-15T21:33:29-07:00</updated>
     <id>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter</id>
     <content type="html"><![CDATA[<h2>New code coverage filter:</h2>
 
@@ -59,10 +59,9 @@ commit e91693fbb87f687a2fdb5a495c945c1872b3066c
 Author: iain holmes &lt;iain@xamarin.com&gt;
 Date:   Fri Feb 27 10:13:54 2015 +0000
         [cov] Install a coverage filter
-If you are still using Mono 3.x, then my original reply would work:
 </code></pre>
 
-<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work.</p>
+<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work:</p>
 
 <ul>
 <li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
