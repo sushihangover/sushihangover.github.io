@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as &hellip;">
+  <meta name="description" content="If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error. This is libtool 2.4.6, but the definition of this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+
+<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
+
+<pre><code> ....   
+    make[4]: Nothing to be done for `all-am'.
+    Making all in doc
+    make[3]: Nothing to be done for `all'.
+      CC       pthread_support.lo
+    libtool: Version mismatch error.  This is libtool 2.4.6, but the
+    libtool: definition of this LT_INIT comes from libtool 2.4.2.
+    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
+    libtool: and run autoconf again.
+    make[3]: *** [pthread_support.lo] Error 63
+    make[2]: *** [all-recursive] Error 1
+    make[1]: *** [all-recursive] Error 1
+    make: *** [all] Error 2
+</code></pre>
+
+<p>Remove that file:</p>
+
+<pre><code>rm libgc/aclocal.m4 
+</code></pre>
+
+<p>And re-run the make and it will be recreated correctly.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -561,57 +614,6 @@ playscript-3.2.6001
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-renaming-a-got-tag/">Git - Renaming a Git Tag</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-04T07:39:49-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:39 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
-
-<p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
-
-<pre><code>git tag new_tag_name old_tag_name
-git tag -d old_tag_name
-</code></pre>
-
-<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (<u>REMEMBER TO INCLUDE THAT <strong>COLON</strong></u>):</p>
-
-<pre><code>git push origin :refs/tags/old_tag_name
-</code></pre>
-
-<p>And push the new tag to your remote so everyone else will receive that new tag on a pull:</p>
-
-<pre><code>git push origin --tags
-</code></pre>
-
-<p><strong>Note</strong>: The colon isn&rsquo;t a &ldquo;delete flag&rdquo;. Git push and git pull both accept zero or more refspecs as their final argument(s). Now read about <a href="http://git-scm.com/book/en/v2/Git-Internals-The-Refspec">refspecs</a>, really read it&hellip; . A colon separates source from destination in a refspec. The command git push origin :foo has an empty source and essentially says &ldquo;push nothing to branch foo of origin&rdquo;, or, in other words, &ldquo;make branch foo on origin not exist&rdquo;.</p>
-
-<p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
-
-<p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -629,6 +631,10 @@ git tag -d old_tag_name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
+      </li>
+    
+      <li class="post">
         <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a>
       </li>
     
@@ -642,10 +648,6 @@ git tag -d old_tag_name
     
       <li class="post">
         <a href="/corflags-cross-platform-release-on-github/">CorFlags Conversion Tool - Cross-platform Release on Github</a>
-      </li>
-    
-      <li class="post">
-        <a href="/ms-corflags-showing-incorrect-flags/">MS CorFlags - Showing Incorrect Flags</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T20:27:07-07:00</updated>
+  <updated>2015-06-15T12:30:26-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoCov - Building on OS-X]]></title>
+    <link href="http://sushihangover.github.io/monocov-building-on-os-x/"/>
+    <updated>2015-06-15T10:52:29-07:00</updated>
+    <id>http://sushihangover.github.io/monocov-building-on-os-x</id>
+    <content type="html"><![CDATA[<p>My <a href="http://stackoverflow.com/questions/20757444/how-to-compile-c-sharp-code-to-64-bit-in-xamarin-studio-on-os-x/30714801#30714801">answer</a> from Stackoverflow on compiling MonoCov on OS-X and Mono 4.0.x</p>
+
+<h1>Clone the MonoCov repo</h1>
+
+<p>git clone <a href="https://github.com/mono/monocov.git">https://github.com/mono/monocov.git</a> MonoCov
+cd MonoCov</p>
+
+<h1>A really old version of cecil and it not available as a nuget</h1>
+
+<p>curl <a href="http://go-mono.com/archive/cecil/cecil-0.6-bin.zip">http://go-mono.com/archive/cecil/cecil-0.6-bin.zip</a> -o cecil-0.6-bin.zip
+unzip cecil-0.6-bin.zip</p>
+
+<h1>Make sure configure can find the Mono.Option source file</h1>
+
+<p>export PKG_CONFIG_PATH=/Library/Frameworks/Mono.framework/Versions/4.0.1/lib:/Library/Frameworks/Mono.framework/Versions/4.0.1/lib/pkgconfig:$PKG_CONFIG_PATH
+export</p>
+
+<h1>Config to install to users home dir</h1>
+
+<p>/configure &ndash;cecil=$PWD/monocov/cecil-0.6/Mono.Cecil.dll &ndash;prefix $HOME/monocov</p>
+
+<h1>Fix Makefile, gmcs no longer exists under Mono 4.x and Makefile is hard coded</h1>
+
+<p>sed -i.bak s/gmcs/mcs/g Makefile</p>
+
+<h1>Pass -m32 to make since OS-X Mono framework is still 32-bit</h1>
+
+<p>CC=&ldquo;cc -m32&rdquo; make</p>
+
+<h1>Install does not properly create bin dir, do it before the first install</h1>
+
+<p>mkdir $HOME/monocov/bin</p>
+
+<h1>Install..</h1>
+
+<p>make install</p>
+
+<h2>Compile a test app and test MonoCov:</h2>
+
+<p>// Save this to a file named Program.cs
+using System;
+namespace Foobar
+{
+    class MainClass
+    {
+        public static void Main (string[] args)
+        {
+            Console.WriteLine (&ldquo;Hello MonoCov&rdquo;);
+        }
+    }
+}</p>
+
+<h1>Compile a sample app</h1>
+
+<p>mcs Program.cs</p>
+
+<h1>Update path to include MonoCov so mono can load it as a profiler</h1>
+
+<p>export PATH=$HOME/monocov:$PATH
+mono &ndash;debug &ndash;profile=monocov Program.exe</p>
+
+<h1>GUI Framework DllNotFoundException fix (if needed)</h1>
+
+<p>export DYLD_FALLBACK_LIBRARY_PATH=&ldquo;/Library/Frameworks/Mono.framework/Versions/Current/lib:/usr/local/lib:/usr/lib&rdquo;</p>
+
+<h1>Update path to include MonoCov</h1>
+
+<p>export PATH=$HOME/monocov/bin:$PATH</p>
+
+<p><a href="http://www.mono-project.com/docs/debug+profile/profile/code-coverage/">Mono Code Coverage Profiler : MonoCov</a></p>
+
+<p><a href="http://evain.net/blog/articles/2007/10/05/mono-cecil-0-6">Mono.Cecil 0.6 05 Oct 2007</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
@@ -884,37 +964,6 @@ playscript-3.2.4001
 playscript-3.2.5001
 playscript-3.2.6001
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Renaming a Git Tag]]></title>
-    <link href="http://sushihangover.github.io/git-renaming-a-got-tag/"/>
-    <updated>2015-06-04T07:39:49-07:00</updated>
-    <id>http://sushihangover.github.io/git-renaming-a-got-tag</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png">  Everyone screws up, and that comes to finger flops when typing that new tag name.</p>
-
-<p>If the tag is only local, it is two step process, create a new tag from the old tag and delete the old tag:</p>
-
-<pre><code>git tag new_tag_name old_tag_name
-git tag -d old_tag_name
-</code></pre>
-
-<p>But if you have pushed that bad tag name to a remote, then you have another two steps. Deleting that remote tag makes use of the refspec reference and only using a destination with an &lsquo;'empty&rsquo; source. Assuming your remote is named origin (git remote -v), than this what you need to do (<u>REMEMBER TO INCLUDE THAT <strong>COLON</strong></u>):</p>
-
-<pre><code>git push origin :refs/tags/old_tag_name
-</code></pre>
-
-<p>And push the new tag to your remote so everyone else will receive that new tag on a pull:</p>
-
-<pre><code>git push origin --tags
-</code></pre>
-
-<p><strong>Note</strong>: The colon isn&rsquo;t a &ldquo;delete flag&rdquo;. Git push and git pull both accept zero or more refspecs as their final argument(s). Now read about <a href="http://git-scm.com/book/en/v2/Git-Internals-The-Refspec">refspecs</a>, really read it&hellip; . A colon separates source from destination in a refspec. The command git push origin :foo has an empty source and essentially says &ldquo;push nothing to branch foo of origin&rdquo;, or, in other words, &ldquo;make branch foo on origin not exist&rdquo;.</p>
-
-<p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
-
-<p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
 ]]></content>
   </entry>
   
