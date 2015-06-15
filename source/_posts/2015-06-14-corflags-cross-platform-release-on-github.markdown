@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CorFlags Conversion tool - Cross-platform release on Github"
-date: 2015-06-14 19:24:42 -0700
+date: 2015-06-14 11:24:42 -0700
 comments: true
 categories: 
 - corflags
