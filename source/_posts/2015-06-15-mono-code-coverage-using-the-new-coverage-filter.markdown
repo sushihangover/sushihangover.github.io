@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mono - Code Coverage using the new coverage filter"
-date: 2015-06-15 15:33:29 -0700
+date: 2015-06-15 21:33:29 -0700
 comments: true
 categories: 
 - mono
@@ -51,9 +51,9 @@ Git log info on cov removal and log coverage filter addition:
     Author: iain holmes <iain@xamarin.com>
     Date:   Fri Feb 27 10:13:54 2015 +0000
             [cov] Install a coverage filter
-    If you are still using Mono 3.x, then my original reply would work:
+    
 
-If you are still using Mono 3.x, then my other MonoCov post as it would still work.
+If you are still using Mono 3.x, then my other MonoCov post as it would still work:
 
 * [http://sushihangover.github.io/monocov-building-on-os-x/](http://sushihangover.github.io/monocov-building-on-os-x/)
 * [http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374](http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374)
