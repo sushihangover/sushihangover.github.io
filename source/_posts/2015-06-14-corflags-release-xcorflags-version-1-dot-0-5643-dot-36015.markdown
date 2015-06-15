@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Corflags - Release xCorFlags Version 1.0.5643.36015"
+date: 2015-06-15 06:09:45 -0700
+comments: true
+categories: 
+- corflags
+- corflags.exe
+- xcorflags.exe
+- github
+---
+# [xCorFlags Version 1.0.5643.36015](https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.36015)
+
+Maintenance release of the cross-platform CorFlags Conversion Tool is up on  [Github](https://github.com/sushihangover/corflags).
+
+    git log v1.0.5643.30429..v1.0.5643.36015
+    commit 0125dffeda467b70e869b898d05203aba3669e88
+    Author: SushiHangover <sushihangover@outlook.com>
+    Date:   Sun Jun 14 20:06:00 2015 -0700
+    
+    Fix absolute paths to the assemblies that are passed in
+
+This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via [ILRepack](https://github.com/gluck/il-repack)) that runs on:
+
+* Windows (xCorFlags)
+* OS-X (mono ./xCorFlags.exe)
+* Linux (mono ./xCorFlags.exe)
+
+For additional information:
+
+* [https://github.com/sushihangover/corflags]()
+* [https://github.com/sushihangover/CorFlags/blob/master/README.md]()
+* [http://sushihangover.github.io/blog/categories/corflags/]()
+* [https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396]()
+
+
