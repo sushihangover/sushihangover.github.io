@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://sushihangover.github.io/corflags-cross-platform-release-on-github/</loc>
-    <lastmod>2015-06-14T19:24:42-07:00</lastmod>
-  </url>
-  <url>
     <loc>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/</loc>
-    <lastmod>2015-06-14T17:09:45-07:00</lastmod>
+    <lastmod>2015-06-14T19:09:45-07:00</lastmod>
   </url>
   <url>
     <loc>http://sushihangover.github.io/git-set-up-a-fetch-only-remote/</loc>
     <lastmod>2015-06-14T14:57:37-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/corflags-cross-platform-release-on-github/</loc>
+    <lastmod>2015-06-14T11:24:42-07:00</lastmod>
   </url>
   <url>
     <loc>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/</loc>

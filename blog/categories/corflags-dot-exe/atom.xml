@@ -4,7 +4,7 @@
   <title><![CDATA[Category: corflags.exe | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/corflags-dot-exe/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T17:15:28-07:00</updated>
+  <updated>2015-06-14T17:17:50-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,9 +14,39 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
+    <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/"/>
+    <updated>2015-06-14T19:09:45-07:00</updated>
+    <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429</id>
+    <content type="html"><![CDATA[<h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.30429">xCorFlags Version 1.0.5643.30429</a></h1>
+
+<p>The first full release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
+
+<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
+
+<ul>
+<li>Windows (xCorFlags)</li>
+<li>OS-X (mono ./xCorFlags.exe)</li>
+<li>Linux (mono ./xCorFlags.exe)</li>
+</ul>
+
+
+<p>For additional information:</p>
+
+<ul>
+<li><a href="">https://github.com/sushihangover/corflags</a></li>
+<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
+<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
+<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[CorFlags Conversion Tool - Cross-platform Release on Github]]></title>
     <link href="http://sushihangover.github.io/corflags-cross-platform-release-on-github/"/>
-    <updated>2015-06-14T19:24:42-07:00</updated>
+    <updated>2015-06-14T11:24:42-07:00</updated>
     <id>http://sushihangover.github.io/corflags-cross-platform-release-on-github</id>
     <content type="html"><![CDATA[<p>I posted the first (alpha) release of a cross-platform version of Microsoft&rsquo;s CorFlags Conversion tool to<a href="https://github.com/sushihangover/CorFlags"> Github</a>.</p>
 
@@ -123,36 +153,6 @@ Signed    : 0
 <li>Windows</li>
 <li>OS-X</li>
 <li>Linux</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
-    <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/"/>
-    <updated>2015-06-14T17:09:45-07:00</updated>
-    <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429</id>
-    <content type="html"><![CDATA[<h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.30429">xCorFlags Version 1.0.5643.30429</a></h1>
-
-<p>The first full release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
-
-<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
-
-<ul>
-<li>Windows (xCorFlags)</li>
-<li>OS-X (mono ./xCorFlags.exe)</li>
-<li>Linux (mono ./xCorFlags.exe)</li>
-</ul>
-
-
-<p>For additional information:</p>
-
-<ul>
-<li><a href="">https://github.com/sushihangover/corflags</a></li>
-<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
-<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
-<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
 </ul>
 
 ]]></content>
