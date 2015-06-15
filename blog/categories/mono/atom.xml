@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-15T12:48:34-07:00</updated>
+  <updated>2015-06-15T15:45:15-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mono - Code Coverage Using the New Coverage Filter]]></title>
+    <link href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/"/>
+    <updated>2015-06-15T15:33:29-07:00</updated>
+    <id>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter</id>
+    <content type="html"><![CDATA[<h2>New code coverage filter:</h2>
+
+<p>Using the new coverage filter on the mono log profiler, you can get output like this:</p>
+
+<pre><code>Coverage Summary:
+    xCorFlags (/Users/administrator/monocov/lib/xCorFlags.exe) 26% covered (42 methods - 11 covered)
+        &lt;Module&gt; ?% covered (0 methods - 1 covered)
+        CorFlags.CorFlagsSettings 25% covered (4 methods - 1 covered)
+        CorFlags.MainClass 50% covered (2 methods - 1 covered)
+        CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
+</code></pre>
+
+<p><blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote></p>
+
+<h2>Background:</h2>
+
+<p>Well, it appears that Xamarin has removed the &lsquo;internal&rsquo; cov profiler and monocov will not produce any output (besides mono actually loading the shared library, no functions are called) as the api has changed.</p>
+
+<p>They have added a code coverage filter (Apr 7 2015) to the core log profilers and while I could not find any published documentation(?). It is easy enough to enable.</p>
+
+<pre><code>--profile=log:coverage
+
+coverage             enable collection of code coverage data
+covfilter=ASSEMBLY   add an assembly to the code coverage filters
+                     add a + to include the assembly or a - to exclude it
+                     filter=-mscorlib
+covfilter-file=FILE  use FILE to generate the list of assemblies to be filtered
+</code></pre>
+
+<p>Git log info on cov removal and log coverage filter addition:</p>
+
+<pre><code>commit 16570265149730ec6a4760cc0fa34decc1a9d981
+Author: Alex Rønne Petersen &lt;alexrp@xamarin.com&gt;
+Date:   Tue Apr 7 14:51:27 2015 +0200
+        [profiler] Remove old mono-cov profiler.
+        We're replacing this with coverage support in the log profiler.
+
+commit e91693fbb87f687a2fdb5a495c945c1872b3066c
+Author: iain holmes &lt;iain@xamarin.com&gt;
+Date:   Fri Feb 27 10:13:54 2015 +0000
+        [cov] Install a coverage filter
+If you are still using Mono 3.x, then my original reply would work:
+</code></pre>
+
+<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work.</p>
+
+<ul>
+<li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
+<li><a href="http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374">http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoCov - Building on OS-X]]></title>
@@ -404,39 +463,6 @@ Reflection and recursion...........4441 ms
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Libtool: Version Mismatch Error. This Is Libtool 2.4.6]]></title>
-    <link href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/"/>
-    <updated>2015-06-09T17:20:35-07:00</updated>
-    <id>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
-
-<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
-
-<pre><code> ....   
-    make[4]: Nothing to be done for `all-am'.
-    Making all in doc
-    make[3]: Nothing to be done for `all'.
-      CC       pthread_support.lo
-    libtool: Version mismatch error.  This is libtool 2.4.6, but the
-    libtool: definition of this LT_INIT comes from libtool 2.4.2.
-    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
-    libtool: and run autoconf again.
-    make[3]: *** [pthread_support.lo] Error 63
-    make[2]: *** [all-recursive] Error 1
-    make[1]: *** [all-recursive] Error 1
-    make: *** [all] Error 2
-</code></pre>
-
-<p>Remove that file:</p>
-
-<pre><code>rm libgc/aclocal.m4 
-</code></pre>
-
-<p>And re-run the make and it will be recreated correctly.</p>
 ]]></content>
   </entry>
   

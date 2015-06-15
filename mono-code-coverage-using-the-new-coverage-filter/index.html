@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mono - Code Coverage Using the New Coverage Filter - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="New code coverage filter: Using the new coverage filter on the mono log profiler, you can get output like this: Coverage Summary: xCorFlags (/Users/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mono - Code Coverage Using the New Coverage Filter</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-15T15:33:29-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:33 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>New code coverage filter:</h2>
+
+<p>Using the new coverage filter on the mono log profiler, you can get output like this:</p>
+
+<pre><code>Coverage Summary:
+    xCorFlags (/Users/administrator/monocov/lib/xCorFlags.exe) 26% covered (42 methods - 11 covered)
+        &lt;Module&gt; ?% covered (0 methods - 1 covered)
+        CorFlags.CorFlagsSettings 25% covered (4 methods - 1 covered)
+        CorFlags.MainClass 50% covered (2 methods - 1 covered)
+        CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
+</code></pre>
+
+<blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote>
+
+
+<h2>Background:</h2>
+
+<p>Well, it appears that Xamarin has removed the &lsquo;internal&rsquo; cov profiler and monocov will not produce any output (besides mono actually loading the shared library, no functions are called) as the api has changed.</p>
+
+<p>They have added a code coverage filter (Apr 7 2015) to the core log profilers and while I could not find any published documentation(?). It is easy enough to enable.</p>
+
+<pre><code>--profile=log:coverage
+
+coverage             enable collection of code coverage data
+covfilter=ASSEMBLY   add an assembly to the code coverage filters
+                     add a + to include the assembly or a - to exclude it
+                     filter=-mscorlib
+covfilter-file=FILE  use FILE to generate the list of assemblies to be filtered
+</code></pre>
+
+<p>Git log info on cov removal and log coverage filter addition:</p>
+
+<pre><code>commit 16570265149730ec6a4760cc0fa34decc1a9d981
+Author: Alex Rønne Petersen &lt;alexrp@xamarin.com&gt;
+Date:   Tue Apr 7 14:51:27 2015 +0200
+        [profiler] Remove old mono-cov profiler.
+        We're replacing this with coverage support in the log profiler.
+
+commit e91693fbb87f687a2fdb5a495c945c1872b3066c
+Author: iain holmes &lt;iain@xamarin.com&gt;
+Date:   Fri Feb 27 10:13:54 2015 +0000
+        [cov] Install a coverage filter
+If you are still using Mono 3.x, then my original reply would work:
+</code></pre>
+
+<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work.</p>
+
+<ul>
+<li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
+<li><a href="http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374">http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-15T15:33:29-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:33 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codecoverage/'>codecoverage</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/profile/'>profile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/" data-via="" data-counturl="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/monocov-building-on-os-x/" title="Previous Post: MonoCov - Building on OS-X">&laquo; MonoCov - Building on OS-X</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
+      </li>
+    
+      <li class="post">
+        <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-set-up-a-fetch-only-remote/">Git: Set Up a Fetch-only Remote | Disabling Push</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/';
+        var disqus_url = 'http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
