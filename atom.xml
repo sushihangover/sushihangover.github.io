@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T17:17:50-07:00</updated>
+  <updated>2015-06-14T20:27:07-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
+    <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/"/>
+    <updated>2015-06-15T06:09:45-07:00</updated>
+    <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015</id>
+    <content type="html"><![CDATA[<h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.36015">xCorFlags Version 1.0.5643.36015</a></h1>
+
+<p>Maintenance release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
+
+<pre><code>git log v1.0.5643.30429..v1.0.5643.36015
+commit 0125dffeda467b70e869b898d05203aba3669e88
+Author: SushiHangover &lt;sushihangover@outlook.com&gt;
+Date:   Sun Jun 14 20:06:00 2015 -0700
+
+Fix absolute paths to the assemblies that are passed in
+</code></pre>
+
+<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
+
+<ul>
+<li>Windows (xCorFlags)</li>
+<li>OS-X (mono ./xCorFlags.exe)</li>
+<li>Linux (mono ./xCorFlags.exe)</li>
+</ul>
+
+
+<p>For additional information:</p>
+
+<ul>
+<li><a href="">https://github.com/sushihangover/corflags</a></li>
+<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
+<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
+<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
@@ -877,44 +915,6 @@ git tag -d old_tag_name
 <p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
 
 <p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Getting a List of Files Changed Between Branches]]></title>
-    <link href="http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/"/>
-    <updated>2015-06-04T07:01:32-07:00</updated>
-    <id>http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches</id>
-    <content type="html"><![CDATA[<p>Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff option:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6
-
-configure.in
-mcs/class/Facades/Makefile
-mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Makefile
-...
-</code></pre>
-
-<p>A quickie to get the number of files changed:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6|wc -l
-      28
-</code></pre>
-
-<p>And using the &lsquo;&ndash;name-status&rsquo; option can get you a nice two column output with the change type attribute with each file name, makes it easy to pipe to those maintenace scripts.</p>
-
-<pre><code>git diff --name-status mono-3.2.5 mono-3.2.6
-M       configure.in
-M       mcs/class/Facades/Makefile
-M       mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-</code></pre>
-
-<p><strong>Note</strong>: You can feed the &lsquo;&ndash;no-color&rsquo; option to make sure that none of those ansi escape codes get send down-stream in your pipe.</p>
-
-<p><strong>Note</strong>: &lsquo;&ndash;'porcelain&rsquo; works within the diff mode sub-option but not as a primary option.</p>
 ]]></content>
   </entry>
   

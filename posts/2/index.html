@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="When configuring Mono to use llvm, if you receive the error: configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0 &hellip;">
+  <meta name="description" content="If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,39 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T07:42:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
+
+<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
+
+<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -579,64 +612,6 @@ git tag -d old_tag_name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-getting-a-list-of-files-changed-between-branches/">Git - Getting a List of Files Changed Between Branches</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-04T07:01:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:01 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff option:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6
-
-configure.in
-mcs/class/Facades/Makefile
-mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Makefile
-...
-</code></pre>
-
-<p>A quickie to get the number of files changed:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6|wc -l
-      28
-</code></pre>
-
-<p>And using the &lsquo;&ndash;name-status&rsquo; option can get you a nice two column output with the change type attribute with each file name, makes it easy to pipe to those maintenace scripts.</p>
-
-<pre><code>git diff --name-status mono-3.2.5 mono-3.2.6
-M       configure.in
-M       mcs/class/Facades/Makefile
-M       mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-</code></pre>
-
-<p><strong>Note</strong>: You can feed the &lsquo;&ndash;no-color&rsquo; option to make sure that none of those ansi escape codes get send down-stream in your pipe.</p>
-
-<p><strong>Note</strong>: &lsquo;&ndash;'porcelain&rsquo; works within the diff mode sub-option but not as a primary option.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -654,6 +629,10 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a>
+      </li>
+    
+      <li class="post">
         <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a>
       </li>
     
@@ -667,10 +646,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
     
       <li class="post">
         <a href="/ms-corflags-showing-incorrect-flags/">MS CorFlags - Showing Incorrect Flags</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-moved-it-a-github-organization/">PlayScript - Moved It a Github Organization</a>
       </li>
     
   </ul>

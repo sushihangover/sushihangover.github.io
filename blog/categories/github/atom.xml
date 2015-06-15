@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-14T17:17:50-07:00</updated>
+  <updated>2015-06-14T20:27:07-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
+    <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/"/>
+    <updated>2015-06-15T06:09:45-07:00</updated>
+    <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015</id>
+    <content type="html"><![CDATA[<h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.36015">xCorFlags Version 1.0.5643.36015</a></h1>
+
+<p>Maintenance release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
+
+<pre><code>git log v1.0.5643.30429..v1.0.5643.36015
+commit 0125dffeda467b70e869b898d05203aba3669e88
+Author: SushiHangover &lt;sushihangover@outlook.com&gt;
+Date:   Sun Jun 14 20:06:00 2015 -0700
+
+Fix absolute paths to the assemblies that are passed in
+</code></pre>
+
+<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
+
+<ul>
+<li>Windows (xCorFlags)</li>
+<li>OS-X (mono ./xCorFlags.exe)</li>
+<li>Linux (mono ./xCorFlags.exe)</li>
+</ul>
+
+
+<p>For additional information:</p>
+
+<ul>
+<li><a href="">https://github.com/sushihangover/corflags</a></li>
+<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
+<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
+<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
@@ -169,37 +207,6 @@ mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 8
 <pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
 (make gtest) mono gtest.exe (Ctrl-C to exit app)
 (make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
-    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
-    <updated>2015-06-08T06:39:42-07:00</updated>
-    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
-    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" /></p>
-
-<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
-
-<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
-
-<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
-
-<p>Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
-
-<pre><code>#!/usr/bin/env bash
-echo "Generate and deploying website"
-rake generate
-rake deploy
-echo "Commiting and pushing source files"
-git add --all; 
-git commit -m "New posts"; 
-git push 
-git gc
-pushd _deploy
-git gc
-popd
 </code></pre>
 ]]></content>
   </entry>
