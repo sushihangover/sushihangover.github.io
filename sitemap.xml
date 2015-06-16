@@ -5,6 +5,10 @@
     <lastmod>2015-06-15T21:33:29-07:00</lastmod>
   </url>
   <url>
+    <loc>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/</loc>
+    <lastmod>2015-06-15T21:07:53-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/monocov-building-on-os-x/</loc>
     <lastmod>2015-06-15T10:52:29-07:00</lastmod>
   </url>
@@ -253,6 +257,10 @@
     <lastmod>2014-02-15T07:14:40-08:00</lastmod>
   </url>
   <url>
+    <loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/</loc>
+    <lastmod>2014-02-14T10:12:07-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1/</loc>
     <lastmod>2014-02-14T06:01:48-08:00</lastmod>
   </url>
@@ -368,6 +376,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/arm-beginners/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/compiler/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/oshw/</loc>
@@ -526,30 +537,15 @@
     <loc>http://sushihangover.github.io/blog/categories/monocov/</loc>
   </url>
   <url>
+    <loc>http://sushihangover.github.io/blog/categories/cursessharp/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/64-bit/</loc>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/blog/categories/profile/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/codecoverage/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/4/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/5/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/6/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/7/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/8/</loc>
   </url>
 </urlset>

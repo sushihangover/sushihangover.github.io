@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-15T15:52:13-07:00</updated>
+  <updated>2015-06-15T21:22:44-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
+    <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
+    <updated>2015-06-15T21:07:53-07:00</updated>
+    <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a>">CursesSharp is a C# wrapper for curses library.</p>
+
+<ul>
+<li>The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.</li>
+<li>The original version can be found at the <a href="http://sourceforge.net/projects/curses-sharp/">SourceForge.net project page</a>.</li>
+</ul>
+
+
+<p>I updated this to work for &lsquo;modern&rsquo; autotools so allow autoreconf and configure to actual run without throwing errors and then I updated the Makefile.am&rsquo;s files to allow compiling under OS-X and with Mono 4.0.x. Linux and Windows should still work, but I have not at this time tested those other flavors.</p>
+
+<p>Let me know via Github <a href="https://github.com/sushihangover/CursesSharp/issues/new">issues</a> if you have any problems. ;-)</p>
+
+<h2>Installing CursesSharp on OS-X</h2>
+
+<p>These are the instructions for building CursesSharp on OS-X. The build <img class="right <a" src="href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a>">CursesSharp is a C# wrapper for curses library.
+process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0.1 64-bit build.</p>
+
+<h3>0. Prerequisites</h3>
+
+<ol>
+<li>Subversion - if you intend to build CursesSharp from SVN repository. If you use the source code package, you don&rsquo;t need Subversion.</li>
+<li>autoconf/automake/libtool - only if you are building from SVN. You don&rsquo;t need these tools if you use the source code package.</li>
+<li>Standard development tools - a C compiler (e.g. GCC) and GNU make (gmake).</li>
+<li>Ncurses library and headers (development files) - typically this package is called ncurses-dev.</li>
+<li>Mono - the .NET runtime and development framework</li>
+<li>pkg-config - typically required by Mono, but make sure it&rsquo;s installed</li>
+</ol>
+
+
+<h3>1. Getting CursesSharp</h3>
+
+<p>You will have to obtain CursesSharp sources. You clone it from the following repository:</p>
+
+<pre><code>https://github.com/sushihangover/CursesSharp.git
+</code></pre>
+
+<p>Original SVN Repo:</p>
+
+<pre><code>https://curses-sharp.svn.sourceforge.net/svnroot/curses-sharp/trunk
+</code></pre>
+
+<p>The following section describes the former case. If you downloaded the source code package, extract it and you may skip to step 4.</p>
+
+<p><img class="left <a" src="href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a>"></p>
+
+<h3>2. Git clone</h3>
+
+<p>Execute the following command:</p>
+
+<pre><code>git clone https://github.com/sushihangover/CursesSharp.git cursessharp
+</code></pre>
+
+<p><em>You may substitute the final cursessharp for any other directory of your liking.</em></p>
+
+<h3>3. Bootstrapping</h3>
+
+<p>In order to proceed with the build, you will have to create the configure script. Cd into the directory containing CursesSharp sources and execute the following command:</p>
+
+<p>brew link gettext &ndash;force  <br/>
+autoreconf -if</p>
+
+<h3>4. Configure</h3>
+
+<p>In the top source directory execute the command:</p>
+
+<pre><code>LIBS="-lncurses -liconv -lpanel" ./configure
+</code></pre>
+
+<p>By default CursesSharp is installed in /usr/local. To change the target directory,<strong> which you really should do,</strong> you can use the &ldquo;&ndash;prefix=&rdquo; option:</p>
+
+<pre><code># Following all on one line:    
+LIBS="-lncurses -liconv -lpanel" ./configure --prefix=$HOME/cursessharp
+</code></pre>
+
+<p>You can also use other options. For a complete list execute:</p>
+
+<pre><code>./configure --help
+</code></pre>
+
+<h4>5. Make</h4>
+
+<p>After you executed configure, run (in the same directory):</p>
+
+<pre><code>#I am using a locally built/installed 64-bit version of mono, so I add it to the path
+export PATH=/Users/administrator/mono/mono-llvm-64/bin:$PATH
+make
+# remove brew's version of gettext 
+brew unlink gettext
+</code></pre>
+
+<p>To compile the source code.</p>
+
+<h3>6. Installation</h3>
+
+<p>Execute the command:</p>
+
+<pre><code>make install
+</code></pre>
+
+<p>This will install CursesSharp. Make sure you have appropriate privileges.</p>
+
+<h3>7. Testing</h3>
+
+<p>By default CursesSharp will install a few demonstration programs. At this time, these are: FireworkDemo and RainDemo. You can try running the demos to check if CursesSharp works.</p>
+
+<p>Running the demos:</p>
+
+<p>Add your cursessharp&rsquo;s bin install location to your path, i.e.</p>
+
+<pre><code>export PATH=$HOME/cursessharp/bin:$PATH
+</code></pre>
+
+<p>And you can run them from anywhere:</p>
+
+<pre><code>RainDemo
+FireworksDemo
+UnicodeDemo
+</code></pre>
+
+<p>Have fun ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
@@ -142,72 +270,6 @@ and the repository exists.
 <p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
 
 <p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono-Curses OS-X 64-bit]]></title>
-    <link href="http://sushihangover.github.io/mono-curses-os-x-64-bit/"/>
-    <updated>2015-06-08T17:07:00-07:00</updated>
-    <id>http://sushihangover.github.io/mono-curses-os-x-64-bit</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
-
-<p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
-
-<p>It appears to work ok, but there is a issue with timeouts; tryout the mltest.cs sample code and you will see the inconsistent timeout events&hellip;.</p>
-
-<p>It also is missing mouse support&hellip; not a deal breaker for me, but it would be a nice to-have.</p>
-
-<p>There are some apps such as the out-dated <a href="http://www.mono-project.com/archived/monotorrent/">MonoTorrent</a> and a C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a>.</p>
-
-<p><a href="http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/">http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/</a></p>
-
-<h1>Mono-Curses OS-X 64-bit</h1>
-
-<p>Note: <em>This is a fork of the <a href="http://www.mono-project.com/MonoCurses">mono/mono-curses</a> project</em></p>
-
-<p>Clone the repo and checkout the <strong>osx-64bit</strong> branch</p>
-
-<pre><code>git clone https://github.com/sushihangover/mono-curses.git
-git check osx-64bit 
-</code></pre>
-
-<p>Set our path to your 64-bit version of Mono and set your Mono package config env var to that install, configure and make the project.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre><code>export PATH=$HOME/mono-install/bin
-export PKG_CONFIG_PATH=/$HOME/mono-install/lib/pkgconfig
-#WARNING: by default it installs into /usr/local
-./configure --prefix=/$HOME/mono-install
-make 
-make install
-</code></pre>
-
-<p>That should do it, lets do a quick arch check:</p>
-
-<pre><code>file libmono-curses.dylib 
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-
-file mono-curses.dll
-mono-curses.dll: PE32+ executable for MS Windows (DLL) (console) Mono/.Net assembly
-</code></pre>
-
-<p>FYI: The difference in a <a href="http://en.wikipedia.org/wiki/Portable_Executable">PE 32-bit and 64-bit</a> is show below:</p>
-
-<pre><code>file mono-curses.dll
-mono-curses.dll: **PE32+** executable for MS Windows (DLL) (console) Mono/.Net assembly
-
-file mono-curses-32.dll 
-mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 80386 32-bit **Mono/.Net assembly
-</code></pre>
-
-<h2>There are a couple of tests that are built during the <em>make</em> you can run:</h2>
-
-<pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
-(make gtest) mono gtest.exe (Ctrl-C to exit app)
-(make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
-</code></pre>
 ]]></content>
   </entry>
   

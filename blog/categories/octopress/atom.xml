@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-15T15:52:13-07:00</updated>
+  <updated>2015-06-15T21:22:44-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -54,14 +54,14 @@ popd
 <p>My Missing Octopress Items:</p>
 
 <blockquote><ul>
-<li>Image Auto Thumbnailing</li>
+<li>Image Auto Thumb-nailing</li>
 <li>Image Popups from those Thumbnails</li>
 <li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
 <li>Auto source directory version control</li>
 </ul>
 </blockquote>
 
-<p>That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
+<p>That last one was my highest priority. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
 
 <p>Here is my quick way of doing this using the deployment repo.</p>
 
@@ -126,7 +126,7 @@ popd
 </span><span class='line'>&lt;p&gt;git push
 </span><span class='line'><span class="nb">popd</span>&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;h1&gt;GEt rid of that temp. directory&lt;/h1&gt;
+</span><span class='line'>&lt;h1&gt;Get rid of that temp. directory&lt;/h1&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;rm -Rf foo.bar
 </span></code></pre></td></tr></table></div></figure></p>

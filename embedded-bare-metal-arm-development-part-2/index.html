@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Embedded 'Bare Metal' ARM Development - Part 2 - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="Part 2 of my dive into &lsquo;Bare Metal&rsquo; ARM Development, Part 1 is here So the compiler shortlist at this point: GNU C Compiler
+IAR ARM C &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Embedded 'Bare Metal' ARM Development - Part 2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T10:12:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Part 2 of my dive into &lsquo;Bare Metal&rsquo; ARM Development, Part 1 is <a href="/embedded-bare-metal-arm-development-part-1/">here</a></p>
+
+<p>So the compiler shortlist at this point:</p>
+
+<ul>
+<li><a href="https://launchpad.net/gcc-arm-embedded">GNU C Compiler</a></li>
+<li><a href="http://www.iar.com">IAR</a> ARM C Compiler</li>
+<li><a href="https://www.imagecraft.com">ImageCraft</a> C Compiler Tools</li>
+<li><a href="http://www.keil.com">[ARM](http://ds.arm.com/)/Kiel</a> ARM C/C++ Compiler</li>
+<li><a href="http://clang.llvm.org">Clang</a>/<a href="http://llvm.org">LLVM</a> ARM Compiler</li>
+</ul>
+
+
+<p>Note: That list is in no particular order at all&hellip;</p>
+
+<p>And just to be clear, I am talking about bare-metal C/C++ cross compilers, and all of these world be considered <a href="http://en.wikipedia.org/wiki/Cross_compiler">cross compilers</a> since there is NO operating system on your bare-metal ARM core to actually host a native compiler.</p>
+
+<p>There are complete OSs that run on ARM <a href="http://en.wikipedia.org/wiki/System_on_a_chip">SoC</a>. You can look at hobbyist/entry level boards like <a href="http://en.wikipedia.org/wiki/BeagleBoard">BeagleBoard</a> or <a href="http://en.wikipedia.org/wiki/Raspberry_Pi">Raspberry Pi</a> as just a couple of the many boards that can run a Linux kernel on ARM. <a href="http://en.wikipedia.org/wiki/Windows_CE">Window CE</a>, now called Windows Embedded Compact 2013, is available for ARM (among other cpus) as a real-time operating system with a  licensed shared source code based kernel from Microsoft and there are other no n-Linux/Microsoft OSs (free or not) that are &lsquo;hostable&rsquo; on ARM, but we are looking at bare-metal only, so cross-compiling is we have to do here.</p>
+
+<p>Out of the five on the list, there are two &lsquo;free&rsquo; compilers with no type of restrictions on the binaries that are produced are GCC and LLVM. In terms of OSS support/acceptance, GCC for ARM is the most well known and community supported.</p>
+
+<p>ARM Embedded GCC via <a href="https://launchpad.net/gcc-arm-embedded">launchpad</a> has binary and source downloads. Binaries are available for Windows, OS-X and Linux along with build instructions. My experience so far is most in the embedded hobbyist community will point you to GCC and never tell you about another option. I think this is true mainly do to the fact those people are &lsquo;hobbyist&rsquo; and not professional embedded hardware|software people. The pro will tell you about the market options, plus some will point out that compilers such as from IAR and Kiel will produce faster and/or smaller ARM code then GCC. Efficent code generation and optimization is an art in and off itself but for free, GCC-ARM works &lsquo;well enough&rsquo;.</p>
+
+<p>Note: A while back I was involved in upgrading a existing GCC-AVR based software/hardware project involving an AVR 8-bit and got stuck towards the end of the projects as we had exceeded the chip&rsquo;s 32k of flash. Upscaling the chip at the time with not possible, first BOM cost and new board development and second there was existing field-deployed hardware to deal with). We&rsquo;re looking at removing features some feature to get it &lsquo;out the door&rsquo; but one of the &lsquo;hardware engineers&rsquo; that we were working with (we were all contractors) had a license of IAR-AVR and its code optimizer squeezed our bin by almost 5% with zero source code changes. Thus our customer bought that compiler to produce the firmware for final field deployment&hellip;</p>
+
+<p>But that does not mean you should not try the others on the list, but more on that later.</p>
+
+<p>Clang/LLVM is the newest kid on the block for ARM bare-metal work.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T10:12:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:12 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-beginners/'>arm-beginners</a>, <a class='category' href='/blog/categories/bare-metal/'>bare-metal</a>, <a class='category' href='/blog/categories/compiler/'>compiler</a>, <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/" data-via="" data-counturl="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/embedded-bare-metal-arm-development-part-1/" title="Previous Post: Embedded 'Bare-Metal' ARM Development - Part 1">&laquo; Embedded 'Bare-Metal' ARM Development - Part 1</a>
+      
+      
+        <a class="basic-alignment right" href="/fleafpga-experimenters-board/" title="Next Post: FleaFPGA Experimenters Board">FleaFPGA Experimenters Board &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
+      </li>
+    
+      <li class="post">
+        <a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a>
+      </li>
+    
+      <li class="post">
+        <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
+      </li>
+    
+      <li class="post">
+        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a>
+      </li>
+    
+      <li class="post">
+        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/';
+        var disqus_url = 'http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
