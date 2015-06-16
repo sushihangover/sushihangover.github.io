@@ -1,5 +1,4 @@
 ---
-published: true
 layout: post
 title: "Octopress: Backing up your source directory"
 date: 2014-02-12 21:00:12 -0800
@@ -12,12 +11,12 @@ categories:
 It has only been a couple of days using [Octopress](http://octopress.org) and [Pow*](http://pow.cx) but I am already sold. For offline blogging, [GitHub Pages](http://pages.github.com) support, a great set of standard Markdown-ish driven Plugins, etc... the workflow is great. There are a few things that I am missing like:
 
 My Missing Octopress Items:
-> * Image Auto Thumbnailing
+> * Image Auto Thumb-nailing
 > * Image Popups from those Thumbnails
 > * Post Staging (The 'published: false' yaml front matter is a start but....)
 > * Auto source directory version control
 
-That last one was my highest proirity. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the 'source' directory.
+That last one was my highest priority. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the 'source' directory.
 
 Here is my quick way of doing this using the deployment repo.
 
@@ -41,7 +40,7 @@ git commit --all --message="Initial Empty source branch"
 # Push that emopty branch back to GitHub
 git push 
 popd
-# GEt rid of that temp. directory
+# Get rid of that temp. directory
 rm -Rf foo.bar
 {% endcodeblock %}
 

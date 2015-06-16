@@ -1,5 +1,4 @@
 ---
-published: false
 layout: post
 title: "Embedded 'Bare Metal' ARM Development - Part 2"
 date: 2014-02-14 10:12:07 -0800
