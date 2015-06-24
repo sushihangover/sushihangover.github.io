@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Git : Your Github's fork pull request is rejected, kind-of, now what?"
+title: "Git : Your Github based fork's pull request is rejected, kind-of, now what?"
 date: 2015-06-24 07:46:41 -0700
 comments: true
 categories: 
@@ -47,4 +47,8 @@ If you want to keep (backup) that new branch to Github than use the following in
 
 	git push --all --force
 
-Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you 'changed' history... That is a git fixup story for another day.
+**Note:** You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you 'changed' history... That is a git fixup story for another day.
+
+###Moral of the story: 
+
+Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.
