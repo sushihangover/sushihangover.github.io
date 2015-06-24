@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I use Octopress for this GitHub blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;. &lsquo; &hellip;">
+  <meta name="description" content="Using Mono/.Net libraries that have native binding and you are receiving errors like
+&ldquo;Unable to find the xxxx native library&rdquo; or &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-unable-to-find-the-ldylib-native-library/">OS-X Mono - Unable to Find the Dylib Native Library</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-08T10:41:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> Using Mono/.Net libraries that have native binding and you are receiving errors like
+&ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
+
+<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
+
+<pre><code>export MONO_LOG_LEVEL=debug
+export MONO_LOG_MASK=dll
+mono yourprogram.exe
+</code></pre>
+
+<p>I was recently using the <a href="https://github.com/mono/mono-curses">mono-curses</a> wrapper, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But the program failed to run so I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-ran the program. Yes it was finding the dylib OK <strong>but</strong> it was complaining about it being the wrong architecture&hellip;</p>
+
+<pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
+Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
+Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
+</code></pre>
+
+<p>Checking with <strong>file</strong> and yes, it was a 32-bit version of the library:</p>
+
+<pre><code>file libmono-curses.dylib
+libmono-curses.dylib: Mach-O dynamically linked shared library i386
+</code></pre>
+
+<p>I am compiling using a 64-bit version of Mono on OS-X and need 64-bit libraries (and native libs), so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version (I&rsquo;ll fork and fix the <a href="https://github.com/mono/mono-curses">mono-curses</a> project and post it to my GitHub).</p>
+
+<pre><code>file libmono-curses.dylib 
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>After that, testing the C# ncurses wrapper went fine&hellip; ;-)</p>
+
+<h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
+
+<h3>The Framework and library search path is:</h3>
+
+<ul>
+<li>A colon-separated list of directories in the user’s DYLD_FRAMEWORK_PATH environment variable.</li>
+<li>A colon-separated list of directories in the user’s DYLD_LIBRARY_PATH environment variable.</li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_FRAMEWORK_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/Library/Frameworks
+  /Library/Frameworks
+  /Network/Library/Frameworks
+  /System/Library/Frameworks
+</code></pre></li>
+<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_LIBRARY_PATH environment variable, which defaults to the directories:</p>
+
+<pre><code>  ~/lib
+  /usr/local/lib
+  /lib
+  /usr/lib
+</code></pre></li>
+</ul>
+
+
+<p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,42 +563,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-3-dot-2-3001-posted/">PlayScript 3.2.3001 Posted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-03T06:10:59-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:10 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
-
-<p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
-
-<pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -531,6 +580,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?</a>
+      </li>
+    
+      <li class="post">
         <a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a>
       </li>
     
@@ -544,10 +597,6 @@ make install
     
       <li class="post">
         <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a>
       </li>
     
   </ul>

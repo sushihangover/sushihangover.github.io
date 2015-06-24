@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/</loc>
+    <lastmod>2015-06-24T07:46:41-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/c-number-native-interop-helloworld/</loc>
     <lastmod>2015-06-23T18:40:28-07:00</lastmod>
   </url>
@@ -554,6 +558,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/interop/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/pull-request/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/posts/2/</loc>

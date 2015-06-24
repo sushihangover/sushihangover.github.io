@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What? - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T07:46:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right" src="http://sushihangover.github.io/images/github_logo.png"></p>
+
+<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
+
+<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
+
+<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
+
+<h3>Move last commit to a new branch</h3>
+
+<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD~1 # Go back 1 commit or use SHA
+git checkout newbranch
+</code></pre>
+
+<h3>Re-sync your Github fork</h3>
+
+<p>Now, lets get everything re-sync&rsquo;d.</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>Since you already push this branch to your Github fork, you will see the message:</p>
+
+<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
+</code></pre>
+
+<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
+
+<pre><code>git fetch upstream
+git merge upstream/master
+</code></pre>
+
+<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
+
+<pre><code>git push --force
+</code></pre>
+
+<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
+
+<pre><code>git push --all --force
+</code></pre>
+
+<p>Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T07:46:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:46 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/pull-request/'>pull request</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/" data-via="" data-counturl="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/c-number-native-interop-helloworld/" title="Previous Post: C# - Native Interop Helloworld">&laquo; C# - Native Interop Helloworld</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a>
+      </li>
+    
+      <li class="post">
+        <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
+      </li>
+    
+      <li class="post">
+        <a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a>
+      </li>
+    
+      <li class="post">
+        <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/';
+        var disqus_url = 'http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-23T19:28:36-07:00</updated>
+  <updated>2015-06-24T08:01:50-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?]]></title>
+    <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
+    <updated>2015-06-24T07:46:41-07:00</updated>
+    <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right <a" src="href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a>"></p>
+
+<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
+
+<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
+
+<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
+
+<h3>Move last commit to a new branch</h3>
+
+<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD~1 # Go back 1 commit or use SHA
+git checkout newbranch
+</code></pre>
+
+<h3>Re-sync your Github fork</h3>
+
+<p>Now, lets get everything re-sync&rsquo;d.</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>Since you already push this branch to your Github fork, you will see the message:</p>
+
+<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
+</code></pre>
+
+<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
+
+<pre><code>git fetch upstream
+git merge upstream/master
+</code></pre>
+
+<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
+
+<pre><code>git push --force
+</code></pre>
+
+<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
+
+<pre><code>git push --all --force
+</code></pre>
+
+<p>Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git: Set Up a Fetch-only Remote | Disabling Push]]></title>
@@ -136,44 +190,6 @@ git tag -d old_tag_name
 <p><strong>Sub-Note</strong>: This is NOT the same as pushing an <strong>empty</strong> branch or tag, you really are pushing &lsquo;nothing&rsquo; and thus with nothing to reference that tag vanishes (Well I&rsquo;m assuming it exists somewhere till <a href="https://www.kernel.org/pub/software/scm/git/docs/git-gc.html">garbage collection</a> is run)</p>
 
 <p><strong>Sub-Sub-Note</strong>: ;-) Yes, I agree with a lot of others that instead of using an empty source in the ref spec it would be <em>waaaayyyyy</em> more initiative to allow a remote parameter to be passed to the existing branch and tag delete options to do this type of deletion.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Getting a List of Files Changed Between Branches]]></title>
-    <link href="http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/"/>
-    <updated>2015-06-04T07:01:32-07:00</updated>
-    <id>http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches</id>
-    <content type="html"><![CDATA[<p>Getting a list of changed files between to different branches or tags could not be any easier when using the &lsquo;&ndash;name-only&rsquo; diff option:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6
-
-configure.in
-mcs/class/Facades/Makefile
-mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Makefile
-...
-</code></pre>
-
-<p>A quickie to get the number of files changed:</p>
-
-<pre><code>git diff --name-only mono-3.2.5 mono-3.2.6|wc -l
-      28
-</code></pre>
-
-<p>And using the &lsquo;&ndash;name-status&rsquo; option can get you a nice two column output with the change type attribute with each file name, makes it easy to pipe to those maintenace scripts.</p>
-
-<pre><code>git diff --name-status mono-3.2.5 mono-3.2.6
-M       configure.in
-M       mcs/class/Facades/Makefile
-M       mcs/class/Facades/System.Dynamic.Runtime/TypeForwarders.cs
-A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/AssemblyInfo.cs
-</code></pre>
-
-<p><strong>Note</strong>: You can feed the &lsquo;&ndash;no-color&rsquo; option to make sure that none of those ansi escape codes get send down-stream in your pipe.</p>
-
-<p><strong>Note</strong>: &lsquo;&ndash;'porcelain&rsquo; works within the diff mode sub-option but not as a primary option.</p>
 ]]></content>
   </entry>
   
