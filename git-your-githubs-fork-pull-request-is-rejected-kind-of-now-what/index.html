@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What? - SushiHangover</title>
+  <title>Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What? - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?</h1>
+      <h1 class="entry-title">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</h1>
     
     
       <p class="meta">
@@ -141,7 +141,11 @@ git merge upstream/master
 <pre><code>git push --all --force
 </code></pre>
 
-<p>Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+
+<h3>Moral of the story:</h3>
+
+<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
 </div>
 
 
@@ -183,6 +187,8 @@ git merge upstream/master
         <a class="basic-alignment left" href="/c-number-native-interop-helloworld/" title="Previous Post: C# - Native Interop Helloworld">&laquo; C# - Native Interop Helloworld</a>
       
       
+        <a class="basic-alignment right" href="/git-review-a-merge-before-committing/" title="Next Post: Git - Review a Merge before committing">Git - Review a Merge before committing &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -202,7 +208,11 @@ git merge upstream/master
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?</a>
+        <a href="/git-review-a-merge-before-committing/">Git - Review a Merge Before Committing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</a>
       </li>
     
       <li class="post">
@@ -215,10 +225,6 @@ git merge upstream/master
     
       <li class="post">
         <a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a>
-      </li>
-    
-      <li class="post">
-        <a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a>
       </li>
     
   </ul>

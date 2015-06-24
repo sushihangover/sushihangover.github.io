@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T08:01:50-07:00</updated>
+  <updated>2015-06-24T09:58:06-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,39 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?]]></title>
+    <title type="html"><![CDATA[Git - Review a Merge Before Committing]]></title>
+    <link href="http://sushihangover.github.io/git-review-a-merge-before-committing/"/>
+    <updated>2015-06-24T09:44:07-07:00</updated>
+    <id>http://sushihangover.github.io/git-review-a-merge-before-committing</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
+
+<p>Can can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
+
+<pre><code>git merge --no-commit --no-ff branchname
+</code></pre>
+
+<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
+
+<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
+
+<pre><code>review = merge --no-ff --no-commit
+</code></pre>
+
+<p>So in looking at upstream changes:</p>
+
+<p>git fetch upstream
+git review upstream/master
+git status</p>
+
+<p>If you wish to back those changes, jsut reset that merge:</p>
+
+<pre><code>git reset --merge
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?]]></title>
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
@@ -63,7 +95,11 @@ git merge upstream/master
 <pre><code>git push --all --force
 </code></pre>
 
-<p>Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+
+<h3>Moral of the story:</h3>
+
+<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
 ]]></content>
   </entry>
   
@@ -1039,72 +1075,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 </code></pre>
 
 <p>There are some minor painting issues which I do not know if they are related to the arch type, OS-X terminal or bugs in the actual C# code (mc or the ncurses wrapper), but overall it works very well.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono-Curses OS-X 64-bit]]></title>
-    <link href="http://sushihangover.github.io/mono-curses-os-x-64-bit/"/>
-    <updated>2015-06-08T17:07:00-07:00</updated>
-    <id>http://sushihangover.github.io/mono-curses-os-x-64-bit</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
-
-<p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
-
-<p>It appears to work ok, but there is a issue with timeouts; tryout the mltest.cs sample code and you will see the inconsistent timeout events&hellip;.</p>
-
-<p>It also is missing mouse support&hellip; not a deal breaker for me, but it would be a nice to-have.</p>
-
-<p>There are some apps such as the out-dated <a href="http://www.mono-project.com/archived/monotorrent/">MonoTorrent</a> and a C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a>.</p>
-
-<p><a href="http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/">http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/</a></p>
-
-<h1>Mono-Curses OS-X 64-bit</h1>
-
-<p>Note: <em>This is a fork of the <a href="http://www.mono-project.com/MonoCurses">mono/mono-curses</a> project</em></p>
-
-<p>Clone the repo and checkout the <strong>osx-64bit</strong> branch</p>
-
-<pre><code>git clone https://github.com/sushihangover/mono-curses.git
-git check osx-64bit 
-</code></pre>
-
-<p>Set our path to your 64-bit version of Mono and set your Mono package config env var to that install, configure and make the project.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre><code>export PATH=$HOME/mono-install/bin
-export PKG_CONFIG_PATH=/$HOME/mono-install/lib/pkgconfig
-#WARNING: by default it installs into /usr/local
-./configure --prefix=/$HOME/mono-install
-make 
-make install
-</code></pre>
-
-<p>That should do it, lets do a quick arch check:</p>
-
-<pre><code>file libmono-curses.dylib 
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-
-file mono-curses.dll
-mono-curses.dll: PE32+ executable for MS Windows (DLL) (console) Mono/.Net assembly
-</code></pre>
-
-<p>FYI: The difference in a <a href="http://en.wikipedia.org/wiki/Portable_Executable">PE 32-bit and 64-bit</a> is show below:</p>
-
-<pre><code>file mono-curses.dll
-mono-curses.dll: **PE32+** executable for MS Windows (DLL) (console) Mono/.Net assembly
-
-file mono-curses-32.dll 
-mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 80386 32-bit **Mono/.Net assembly
-</code></pre>
-
-<h2>There are a couple of tests that are built during the <em>make</em> you can run:</h2>
-
-<pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
-(make gtest) mono gtest.exe (Ctrl-C to exit app)
-(make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
-</code></pre>
 ]]></content>
   </entry>
   

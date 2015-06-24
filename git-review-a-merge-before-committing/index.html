@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Midnightcommander - SushiHangover</title>
+  <title>Git - Review a Merge Before Committing - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: midnightcommander">
+  <meta name="description" content="After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them. Can can not do a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/midnightcommander/">
+  <link rel="canonical" href="http://sushihangover.github.io/git-review-a-merge-before-committing/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -76,36 +76,100 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Midnightcommander</h1>
+    
+      <h1 class="entry-title">Git - Review a Merge Before Committing</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T09:44:07-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:44 am</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
 
-  
-  <h2>2015</h2>
+<p>Can can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
 
-<article>
-  
-<h1><a href="/os-x-64-bit-mono-midnight-commander/">OS-X 64-bit Mono : Midnight Commander</a></h1>
-<time datetime="2015-06-08T18:43:29-07:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2015</span></time>
+<pre><code>git merge --no-commit --no-ff branchname
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/curses/'>curses</a>, <a class='category' href='/blog/categories/midnightcommander/'>midnightcommander</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/ncurses/'>ncurses</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a></span>
-</footer>
+<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
 
+<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
 
-</article>
+<pre><code>review = merge --no-ff --no-commit
+</code></pre>
 
+<p>So in looking at upstream changes:</p>
+
+<p>git fetch upstream
+git review upstream/master
+git status</p>
+
+<p>If you wish to back those changes, jsut reset that merge:</p>
+
+<pre><code>git reset --merge
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T09:44:07-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:44 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/merge/'>merge</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-review-a-merge-before-committing/" data-via="" data-counturl="http://sushihangover.github.io/git-review-a-merge-before-committing/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/" title="Previous Post: Git : Your Github based fork's pull request is rejected, kind-of, now what?">&laquo; Git : Your Github based fork's pull request is rejected, kind-of, now what?</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -189,7 +253,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/git-review-a-merge-before-committing/';
+        var disqus_url = 'http://sushihangover.github.io/git-review-a-merge-before-committing/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T08:01:50-07:00</updated>
+  <updated>2015-06-24T09:58:06-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git : Your Github's Fork Pull Request Is Rejected, Kind-of, Now What?]]></title>
+    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?]]></title>
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
@@ -63,7 +63,11 @@ git merge upstream/master
 <pre><code>git push --all --force
 </code></pre>
 
-<p>Note: You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+
+<h3>Moral of the story:</h3>
+
+<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
 ]]></content>
   </entry>
   
