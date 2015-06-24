@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-find . |grep markdown
+find . |grep markdown|sort 
