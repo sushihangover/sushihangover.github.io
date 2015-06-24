@@ -21,9 +21,9 @@ Setup an alias in your ~/.gitconfig for a simple shortcut
 
 So in looking at upstream changes:
 
-git fetch upstream
-git review upstream/master
-git status
+	git fetch upstream
+	git review upstream/master
+	git status
 
 If you wish to back those changes, just reset that merge:
 
