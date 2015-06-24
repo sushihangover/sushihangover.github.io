@@ -18,6 +18,8 @@ categories:
 	  return num++;
 	}
 
+**Compile your shared library:**
+
 * Linux:
 `gcc -g -shared -fPIC countbyone.cpp -o libcountbyone.so`
 * OS-X:
@@ -31,8 +33,8 @@ categories:
 	{
 	    class MainClass
 	    {
-	            [DllImport("countbyone")]
-	            private static extern int SomeMethod(int num);
+	        [DllImport("countbyone")]
+	        private static extern int SomeMethod(int num);
 
 	        public static void Main (string[] args)
 	        {
@@ -42,16 +44,16 @@ categories:
 	    }
 	}
 
-Compile it:
+**Compile your .Net/Mono app:**
 
 `>mcs interop.cs`
 
-Run it:
+**Run it:**
 
 	>mono interop.exe
 	1
 
-Output should be 1 and no errors...
+**Output should be 1 and no errors...**
 
 #### If the shared (native) library is not found, you receive:
 
