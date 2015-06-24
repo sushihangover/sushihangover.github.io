@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-23T19:15:23-07:00</updated>
+  <updated>2015-06-23T19:28:36-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -27,6 +27,8 @@
 }
 </code></pre>
 
+<p><strong>Compile your shared library:</strong></p>
+
 <ul>
 <li>Linux:
 <code>gcc -g -shared -fPIC countbyone.cpp -o libcountbyone.so</code></li>
@@ -43,8 +45,8 @@ namespace InteropDemo
 {
     class MainClass
     {
-            [DllImport("countbyone")]
-            private static extern int SomeMethod(int num);
+        [DllImport("countbyone")]
+        private static extern int SomeMethod(int num);
 
         public static void Main (string[] args)
         {
@@ -55,17 +57,17 @@ namespace InteropDemo
 }
 </code></pre>
 
-<p>Compile it:</p>
+<p><strong>Compile your .Net/Mono app:</strong></p>
 
 <p><code>&gt;mcs interop.cs</code></p>
 
-<p>Run it:</p>
+<p><strong>Run it:</strong></p>
 
 <pre><code>&gt;mono interop.exe
 1
 </code></pre>
 
-<p>Output should be 1 and no errors&hellip;</p>
+<p><strong>Output should be 1 and no errors&hellip;</strong></p>
 
 <h4>If the shared (native) library is not found, you receive:</h4>
 
