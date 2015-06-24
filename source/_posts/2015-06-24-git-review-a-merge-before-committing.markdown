@@ -9,7 +9,7 @@ categories:
 ---
 {% img left http://sushihangover.github.io/images/gitlogo.png %} After you perform a fetch on an upstream or someone's forked repo, you want to review the changes before committing them.
 
-Can can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do do the merge and review it, BUT, do not let it commit or fast forward during the merge.
+You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.
 
 	git merge --no-commit --no-ff branchname
 
@@ -25,8 +25,9 @@ git fetch upstream
 git review upstream/master
 git status
 
-If you wish to back those changes, jsut reset that merge:
+If you wish to back those changes, just reset that merge:
 
 	git reset --merge
+
 
 
