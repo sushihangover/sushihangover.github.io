@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-15T21:32:56-07:00</updated>
+  <updated>2015-06-23T18:49:51-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C# - Native Interop Helloworld]]></title>
+    <link href="http://sushihangover.github.io/c-number-native-interop-helloworld/"/>
+    <updated>2015-06-23T18:40:28-07:00</updated>
+    <id>http://sushihangover.github.io/c-number-native-interop-helloworld</id>
+    <content type="html"><![CDATA[<h4>The simplest Interop case HelloWorld I can create, give it a try and see what happens:</h4>
+
+<p><code>&gt;cat countbyone.cpp</code></p>
+
+<pre><code>extern "C" int SomeMethod(int num) {
+  return num++;
+}
+</code></pre>
+
+<ul>
+<li>Linux:
+<code>gcc -g -shared -fPIC countbyone.cpp -o libcountbyone.so</code></li>
+<li>OS-X:
+<code>clang -dynamiclib countbyone.cpp -o libcoutbyone.dylib</code></li>
+</ul>
+
+
+<p><code>&gt;cat interop.cs</code></p>
+
+<pre><code>using System;
+using System.Runtime.InteropServices;
+namespace InteropDemo
+{
+    class MainClass
+    {
+            [DllImport("countbyone")]
+            private static extern int SomeMethod(int num);
+
+        public static void Main (string[] args)
+        {
+            var x = SomeMethod(0);
+            Console.WriteLine(x);
+        }
+    }
+}
+</code></pre>
+
+<p>Compile it:</p>
+
+<p><code>&gt;mcs interop.cs</code></p>
+
+<p>Run it:</p>
+
+<pre><code>&gt;mono interop.exe
+1
+</code></pre>
+
+<p>Output should be 1 and no errors&hellip;</p>
+
+<h4>If the shared (native) library is not found, you receive:</h4>
+
+<p><code>XXXXX failed to initialize, the exception is: System.DllNotFoundException
+</code></p>
+
+<h4>If you have a entry point mismatch you would receive a:</h4>
+
+<p><code>XXXXX failed to initialize, the exception is: System.EntryPointNotFoundException
+</code></p>
+
+<p>From my answer on <a href="http://stackoverflow.com/questions/31013147/check-if-p-invoke-was-successful/31015964#31015964">Stackoverflow</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono - Code Coverage Using the New Coverage Filter]]></title>
@@ -1045,37 +1113,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
 
 <p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
-    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
-    <updated>2015-06-08T06:39:42-07:00</updated>
-    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
-    <content type="html"><![CDATA[<p><img src="http://sushihangover.github.io/images/Octopress_logo.png" alt="" /></p>
-
-<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
-
-<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
-
-<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
-
-<p>Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
-
-<pre><code>#!/usr/bin/env bash
-echo "Generate and deploying website"
-rake generate
-rake deploy
-echo "Commiting and pushing source files"
-git add --all; 
-git commit -m "New posts"; 
-git push 
-git gc
-pushd _deploy
-git gc
-popd
-</code></pre>
 ]]></content>
   </entry>
   
