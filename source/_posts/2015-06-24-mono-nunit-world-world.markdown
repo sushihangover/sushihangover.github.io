@@ -11,7 +11,7 @@ categories:
 - cmdline
 ---
 
-From my Answer for "[Run NUnit test on Ubuntu from command line](Run NUnit test on Ubuntu from command line)" on [Stackoverflow](http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709):
+From my Answer for "[Run NUnit test on Ubuntu from command line](http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709)" on [Stackoverflow](http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709):
 
 Lets start from the beginning:
 
