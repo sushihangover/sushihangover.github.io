@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T11:43:49-07:00</updated>
+  <updated>2015-06-24T22:17:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mono - NUnit World World]]></title>
+    <link href="http://sushihangover.github.io/mono-nunit-world-world/"/>
+    <updated>2015-06-24T22:11:16-07:00</updated>
+    <id>http://sushihangover.github.io/mono-nunit-world-world</id>
+    <content type="html"><![CDATA[<p>From my Answer for &ldquo;<a href="Run%20NUnit%20test%20on%20Ubuntu%20from%20command%20line">Run NUnit test on Ubuntu from command line</a>&rdquo; on <a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Stackoverflow</a>:</p>
+
+<p>Lets start from the beginning:</p>
+
+<p>Get the latest and greatest NUnit <strong>AND</strong> it&rsquo;s Runner tools</p>
+
+<pre><code>curl https://api.nuget.org/downloads/nuget.exe -o nuget.exe
+mono nuget.exe install NUnit
+mono nuget.exe install NUnit.Runners
+</code></pre>
+
+<p>Make sure the mono is finding those assemblies <strong>first</strong> (vs the GAC)</p>
+
+<pre><code>export MONO_PATH=$(PWD)/NUnit.Runners.2.6.4/tools;$(PWD)/NUnit.2.6.4/lib
+</code></pre>
+
+<p>Create your test example (save it to vi OnlyTest.cs):</p>
+
+<pre><code>using System;
+using System.Text;
+using System.Collections.Generic;
+using NUnit.Framework;
+
+[TestFixture]
+public class OnlyTest
+{
+    [Test]
+    public void MyTest() 
+    {
+        int a = 10;
+        Assert.AreEqual(10, a);
+    }
+}
+</code></pre>
+
+<p> Compile it:</p>
+
+<pre><code>  mcs OnlyTest.cs -target:library -r:NUnit.2.6.4/lib/nunit.framework.dll -out:OnlyTest.dll
+</code></pre>
+
+<p>Run it:</p>
+
+<pre><code>mono ./NUnit.Runners.2.6.4/tools/nunit-console.exe OnlyTest.dll -noresult
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Using default runtime: v4.0.30319
+NUnit-Console version 2.6.4.14350
+Copyright (C) 2002-2012 Charlie Poole.
+Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
+Copyright (C) 2000-2002 Philip Craig.
+All Rights Reserved.
+
+Runtime Environment -
+   OS Version: Unix 14.3.0.0
+  CLR Version: 4.0.30319.17020 ( Mono 4.0 ( 4.3.0 (master/b044a27 Thu Jun 18 15:17:08 PDT 2015) ) )
+
+ProcessModel: Default    DomainUsage: Single
+Execution Runtime: mono-4.0
+.
+Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
+  Not run: 0, Invalid: 0, Ignored: 0, Skipped: 0
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C# - Native Interop Helloworld]]></title>
@@ -321,97 +393,6 @@ Signed    : 0
 <li>Linux</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono / LLVM]]></title>
-    <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
-    <updated>2015-06-09T20:24:45-07:00</updated>
-    <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
-
-<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
-
-<p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
-
-<pre><code>    Note: The Mono web pages are notorious for begin out of date or lacking of details, even the 'new' ones, so I usually like confirmation. 
-</code></pre>
-
-<p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
-
-<p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
-
-<p>Enabling LLVM in Mono:</p>
-
-<ul>
-<li>Methods with Exceptions: No Help at all</li>
-<li>Numerics: Still rule</li>
-<li>String functions: No much help using LLVM, but 64-bit Mono kicks its 32-bit brother in the butt.</li>
-<li>Refection: Not much help either, as expected, but again 64-bit rules.</li>
-</ul>
-
-
-<p>Net Results:</p>
-
-<p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
-
-<p>Try it yourself: <a href="https://gist.github.com/sushihangover/3d4d9d53770c501bf054">Gist</a></p>
-
-<pre><code>mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-</code></pre>
-
-<p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
-
-<h2>Additional Reading:</h2>
-
-<ul>
-<li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
-<li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
-<li><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></li>
-</ul>
-
-
-<h2>Sample output:</h2>
-
-<pre><code>$which mono
-/Users/administrator/mono/mono-llvm-64/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-
-$mono perftest-64-release.exe 
-ArrayList strings test.............408 ms
-StringBuilder test.................499 ms
-Integer &amp; Floating ADD.............3616 ms
-Exception test.....................375 ms
-Reflection and recursion...........2730 ms
-
-$ mono --llvm perftest-64-release.exe 
-ArrayList strings test.............497 ms
-StringBuilder test.................505 ms
-Integer &amp; Floating ADD.............1620 ms
-Exception test.....................407 ms
-Reflection and recursion...........2790 ms
-
-$which mono
-/Users/administrator/mono/mono-llvm-32/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
-
-$mono perftest-32-release.exe 
-ArrayList strings test.............777 ms
-StringBuilder test.................958 ms
-Integer &amp; Floating ADD.............3610 ms
-Exception test.....................589 ms
-Reflection and recursion...........4557 ms
-
-mono --llvm perftest-32-release.exe 
-ArrayList strings test.............830 ms
-StringBuilder test.................873 ms
-Integer &amp; Floating ADD.............1731 ms
-Exception test.....................617 ms
-Reflection and recursion...........4441 ms
-</code></pre>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T11:43:49-07:00</updated>
+  <updated>2015-06-24T22:17:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mono - NUnit World World]]></title>
+    <link href="http://sushihangover.github.io/mono-nunit-world-world/"/>
+    <updated>2015-06-24T22:11:16-07:00</updated>
+    <id>http://sushihangover.github.io/mono-nunit-world-world</id>
+    <content type="html"><![CDATA[<p>From my Answer for &ldquo;<a href="Run%20NUnit%20test%20on%20Ubuntu%20from%20command%20line">Run NUnit test on Ubuntu from command line</a>&rdquo; on <a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Stackoverflow</a>:</p>
+
+<p>Lets start from the beginning:</p>
+
+<p>Get the latest and greatest NUnit <strong>AND</strong> it&rsquo;s Runner tools</p>
+
+<pre><code>curl https://api.nuget.org/downloads/nuget.exe -o nuget.exe
+mono nuget.exe install NUnit
+mono nuget.exe install NUnit.Runners
+</code></pre>
+
+<p>Make sure the mono is finding those assemblies <strong>first</strong> (vs the GAC)</p>
+
+<pre><code>export MONO_PATH=$(PWD)/NUnit.Runners.2.6.4/tools;$(PWD)/NUnit.2.6.4/lib
+</code></pre>
+
+<p>Create your test example (save it to vi OnlyTest.cs):</p>
+
+<pre><code>using System;
+using System.Text;
+using System.Collections.Generic;
+using NUnit.Framework;
+
+[TestFixture]
+public class OnlyTest
+{
+    [Test]
+    public void MyTest() 
+    {
+        int a = 10;
+        Assert.AreEqual(10, a);
+    }
+}
+</code></pre>
+
+<p> Compile it:</p>
+
+<pre><code>  mcs OnlyTest.cs -target:library -r:NUnit.2.6.4/lib/nunit.framework.dll -out:OnlyTest.dll
+</code></pre>
+
+<p>Run it:</p>
+
+<pre><code>mono ./NUnit.Runners.2.6.4/tools/nunit-console.exe OnlyTest.dll -noresult
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Using default runtime: v4.0.30319
+NUnit-Console version 2.6.4.14350
+Copyright (C) 2002-2012 Charlie Poole.
+Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
+Copyright (C) 2000-2002 Philip Craig.
+All Rights Reserved.
+
+Runtime Environment -
+   OS Version: Unix 14.3.0.0
+  CLR Version: 4.0.30319.17020 ( Mono 4.0 ( 4.3.0 (master/b044a27 Thu Jun 18 15:17:08 PDT 2015) ) )
+
+ProcessModel: Default    DomainUsage: Single
+Execution Runtime: mono-4.0
+.
+Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
+  Not run: 0, Invalid: 0, Ignored: 0, Skipped: 0
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
@@ -254,27 +326,6 @@ monocov
 <p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
 
 <p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X 64-bit Mono : Midnight Commander]]></title>
-    <link href="http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/"/>
-    <updated>2015-06-08T18:43:29-07:00</updated>
-    <id>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander</id>
-    <content type="html"><![CDATA[<p><img src="/images/midnightcommander.png" alt="" /></p>
-
-<p>In testing out 64-bit ncurses on OS-X, I grabbed the C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a> to do some manual testing.</p>
-
-<p>After tweaking the Makefile for PE32+ images and changing my path to include a 64-bit mono, I ended up with the needed project&rsquo;s exe, dll, and dylib:</p>
-
-<pre><code>file *.exe *.dll *.dylib
-mc.exe:               PE32+ executable for MS Windows (console) Mono/.Net assembly
-mono-curses.dll:      PE32+ executable for MS Windows (DLL) (console) Mono/.Net/assembly
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-</code></pre>
-
-<p>There are some minor painting issues which I do not know if they are related to the arch type, OS-X terminal or bugs in the actual C# code (mc or the ncurses wrapper), but overall it works very well.</p>
 ]]></content>
   </entry>
   

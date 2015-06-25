@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I was working on a Irony/C# based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only &hellip;">
+  <meta name="description" content="It has only been a couple of days using Octopress and Pow* but I am already sold. For offline blogging, GitHub Pages support, a great set of standard &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,134 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/octopress-backing-up-your-source-directory/">Octopress: Backing Up Your Source Directory</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12T21:00:12-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:00 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
+
+<p>My Missing Octopress Items:</p>
+
+<blockquote><ul>
+<li>Image Auto Thumb-nailing</li>
+<li>Image Popups from those Thumbnails</li>
+<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
+<li>Auto source directory version control</li>
+</ul>
+</blockquote>
+
+<p>That last one was my highest priority. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
+
+<p>Here is my quick way of doing this using the deployment repo.</p>
+
+<blockquote><ul>
+<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
+<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
+<li>Commit and Push after you do a <em>rake deploy</em></li>
+</ul>
+</blockquote>
+
+<p>So lets add a source branch to your GitHub Page repo:
+        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Get your current repo and place it into a a temp directory</span>
+</span><span class='line'>git clone https://github.com/sushihangover/sushihangover.github.io.git foo.bar
+</span><span class='line'><span class="nb">pushd </span>foo.bar
+</span><span class='line'><span class="c"># Add a new branch to your local copy</span>
+</span><span class='line'>git checkout -b <span class="nb">source</span>
+</span><span class='line'><span class="c"># Delete all the existing context</span>
+</span><span class='line'>rm -Rf *
+</span><span class='line'><span class="c"># Commit all those deletes</span>
+</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial Empty source branch&quot;</span>
+</span><span class='line'><span class="c"># Push that emopty branch back to GitHub</span>
+</span><span class='line'>git push
+</span><span class='line'><span class="nb">popd</span>
+</span><span class='line'><span class="c"># Get rid of that temp. directory</span>
+</span><span class='line'>rm -Rf foo.bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Move your existing source directory out of the way for now</span>
+</span><span class='line'>mv <span class="nb">source </span>source.org
+</span><span class='line'><span class="c"># Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</span>
+</span><span class='line'><span class="c"># Note: The &quot;--single-branch -branch source&quot; options are not used by most git users but can make speciallized repo copies quick and fool-proof</span>
+</span><span class='line'>git clone --single-branch -branch <span class="nb">source </span>https://github.com/sushihangover/sushihangover.github.io.git <span class="nb">source</span>
+</span><span class='line'><span class="c"># Now copy your existing source files into this empty repo directory</span>
+</span><span class='line'>cp -R source.org <span class="nb">source</span>
+</span><span class='line'><span class="nb">pushd source</span>
+</span><span class='line'><span class="c"># Commit and Push your sources files to GitHub</span>
+</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial source branch commit&quot;</span>
+</span><span class='line'><span class="c"># Add your commit comment and save</span>
+</span><span class='line'>git push
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
+
+<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pushd source; git commit --all --message="Blog updated"; git push; popd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
+
+<ul>
+<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -852,6 +980,10 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/mono-nunit-world-world/">Mono - NUnit World World</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-review-a-merge-before-committing/">Git - Review a Merge Before Committing</a>
       </li>
     
@@ -865,10 +997,6 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
     
       <li class="post">
         <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
-      </li>
-    
-      <li class="post">
-        <a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a>
       </li>
     
   </ul>
