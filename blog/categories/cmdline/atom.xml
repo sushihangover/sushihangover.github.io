@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cmdline | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/cmdline/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T22:23:00-07:00</updated>
+  <updated>2015-06-24T22:25:20-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-nunit-world-world/"/>
     <updated>2015-06-24T22:11:16-07:00</updated>
     <id>http://sushihangover.github.io/mono-nunit-world-world</id>
-    <content type="html"><![CDATA[<p>From my Answer for &ldquo;<a href="Run%20NUnit%20test%20on%20Ubuntu%20from%20command%20line">Run NUnit test on Ubuntu from command line</a>&rdquo; on <a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Stackoverflow</a>:</p>
+    <content type="html"><![CDATA[<p>From my Answer for &ldquo;<a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Run NUnit test on Ubuntu from command line</a>&rdquo; on <a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Stackoverflow</a>:</p>
 
 <p>Lets start from the beginning:</p>
 
