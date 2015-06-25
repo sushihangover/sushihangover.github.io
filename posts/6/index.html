@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I been using QEMU a lot recently to model some Cortex-M0+ software that I am working on. While technically speaking QEMU does not have a &ldquo; &hellip;">
+  <meta name="description" content="I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm. But I was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/arm-compiler-price/">ARM DS5 Compiler Price</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-18T06:30:29-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/ARM_DS5.jpg" title="&#34;ARM DS-5&#34;" alt="&#34;ARM DS-5&#34;"> I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm.</p>
+
+<p>But I was wondering how much <a href="http://ds.arm.com">ARM&rsquo;s DS-5</a> (Keil) IDE and compiler cost and found a couple of places in the &lsquo;net that actually publish the prices (like <a href="http://www.newark.com">Newark / Element14</a>):</p>
+
+<h5>ARM DS-5 PROFESSIONAL:</h5>
+
+<h5>Floating license price: $10,750.00 (USD)</h5>
+
+<h5>Node locked price: $6,600.00 (USD)</h5>
+
+<p>Ouch! I used their eval offer and if I was doing ARM coding full-time, yes, 10 grand for what they offer would be a no-brainer.</p>
+
+<p><img class="right" src="/images/ARM_DSTREAM.jpg" title="&#34;ARM DSTREAM&#34;" alt="&#34;ARM DSTREAM&#34;">What I really would like to have is the ARM/Keil <a href="http://ds.arm.com/ds-5/debug/dstream/">DStream</a> (debug &amp; trace unit) at <em>only</em> $3,500 USD (<a href="http://www.digikey.com/product-detail/en/DSTRM-KT-0181A/DSTRM-KT-0181A-ND/2522245">DigiKey</a>)&hellip;. damn is it nice, 4GB of trace buffer, 60 Mhz JTAG, etc&hellip;  But again like so many other embedded vendors they only offer Windows and Linux support. Never understood the standpoint of supporting Linux and not OS-X. Windows <strong>only</strong> support I actually understand from a marketshare point of view and optimizing drivers and software is a lot of work, but if you are going to support Linux, you might as well add another 5% to your dev budget and support OS-X.</p>
+
+<p>Mfg Part No: <a href="http://www.newark.com/arm/dstrm-kt-0181a/debugtrace-unit-linux-for-arm/dp/75T9199">DSTRM-KT-0181A </a>: Price: $3500</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1935,87 +1978,6 @@ that any code they throw exceptions through has proper unwinding information.</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-19T20:56:11-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:56 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/images/diffmerge_large.png"><img class="right" src="/images/diffmerge_small.png" title="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;" alt="&#34;LLVM vs. GCC code generation for Bare Metal ARM development&#34;"></a>
-I tend to stay on the cmd line as much as possible, but for visual diffs, an ncurses console diff tool just does not cut it for me. <a href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare Pro</a> by <a href="http://www.scootersoftware.com/index.php">Scooter</a> on Windows is one of best that I have ever used and with licenses at work I never had to worry about not having it on a work desktop or laptop.</p>
-
-<p>But on OS-X at home, Beyond Compare was not available. There is a 4.0 release in the works (beta now), but $50.00 USD for a personal-use copy on OS-X and not having feature parity with Windows Pro features(?), I just can not pull the trigger on that purchuse when there are other
-(cheaper) options that work just as well for personal development.</p>
-
-<p>So, normally for a <strong>free</strong> visual diff, you can not beat <a href="http://meldmerge.org">meld</a>, it is a great open-source tool, but on OS-X it fires up X (Quartz for me) and it getting long in the tooth in terms of the GUI&rsquo;s human factors (feature set is still great). If there was a Qt version of this, the search would be over&hellip; free or not!</p>
-
-<p>So some searching landed me on an old post by <a href="http://twobitlabs.com/2011/08/install-diffmerge-git-mac-os-x/">Todd Huss</a> about using DiffMerge as your visual diff/merge for git and it was actually what I was looking for, well almost ;-) It is missing a few features, but they have a free version and it works really well and has a great OS-X interface&hellip; search is over for now&hellip;</p>
-
-<blockquote><p><a href="http://www.sourcegear.com/diffmerge/">SourceGear</a> has a $19.00 USD version that include file export with HTML formatting and if I could see example HTML code that it produces, I pay for that feature in a heart-beat, but the feature is completely locked out till you actaully register, bummer&hellip;</p></blockquote>
-
-<p>Todd recommends using the DiffMerge installer version vs. the dmg version, I go the other way on that. Download the dmg version, open it and drag/drop the app to your Applications. Then in a term window you can copy the <em>Extras/diffmerge.sh</em> to your <em>/usr/local/bin</em> directory (Execute attrib is already set, so no chmod needed..), but I copied it as just <em>vdiff</em> as that is quicker to type. No admin rights are need to install it that way and that makes me happy&hellip; I can <em>vdiff file1.c file2.c</em> on the cmd line to pop the GUI open and populate it.</p>
-
-<p>I then used the git setup he has listed and everything is working great so far. Click on the image above to it comparing the disassembly of <a href="/images/diffmerge_large.png">LLVM vs. GCC code generation for bare metal ARM</a> development.</p>
-
-<figure class='code'><figcaption><span>Your git setup is: </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git config --global diff.tool diffmerge
-</span><span class='line'>git config --global difftool.diffmerge.cmd <span class="s1">&#39;diffmerge &quot;$LOCAL&quot; &quot;$REMOTE&quot;&#39;</span>
-</span><span class='line'>git config --global merge.tool diffmerge
-</span><span class='line'>git config --global mergetool.diffmerge.cmd <span class="s1">&#39;diffmerge --merge --result=&quot;$MERGED&quot; &quot;$LOCAL&quot; &quot;$(if test -f &quot;$BASE&quot;; then echo &quot;$BASE&quot;; else echo &quot;$LOCAL&quot;; fi)&quot; &quot;$REMOTE&quot;&#39;</span>
-</span><span class='line'>git config --global mergetool.diffmerge.trustExitCode <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Your git shortcuts are: linenos:false </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># diff the local file.m against the checked-in version</span>
-</span><span class='line'>git difftool file.m
-</span><span class='line'><span class="c"># diff the local file.m against the version in some-feature-branch</span>
-</span><span class='line'>git difftool some-feature-branch file.m
-</span><span class='line'><span class="c"># diff the file.m from the Build-54 tag to the Build-55 tag</span>
-</span><span class='line'>git difftool Build-54..Build-55 file.m
-</span><span class='line'><span class="c">#To resolve merge conflicts, just run git mergetool:</span>
-</span><span class='line'>git mergetool
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Thanks <a href="http://twobitlabs.com">Todd</a>, works great.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -2033,6 +1995,10 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-nunit-world-world/">Mono - NUnit Hello World</a>
       </li>
     
@@ -2046,10 +2012,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
     
       <li class="post">
         <a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
       </li>
     
   </ul>

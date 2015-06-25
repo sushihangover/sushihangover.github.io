@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/</loc>
+    <lastmod>2015-06-25T06:20:17-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/mono-nunit-world-world/</loc>
     <lastmod>2015-06-24T22:11:16-07:00</lastmod>
   </url>
@@ -578,6 +582,15 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/cmdline/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/microsoft/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/rosyln/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/codeformatter/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/posts/2/</loc>

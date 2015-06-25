@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In testing out 64-bit ncurses on OS-X, I grabbed the C# version of Midnight Commander to do some manual testing. After tweaking the Makefile for &hellip;">
+  <meta name="description" content="Remove a filename prefix from a directory of files When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/stripping-the-build-prefix-from-cross-compiled-b-binaries/">Stripping the Build Prefix From Cross-compiled Binaries</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T06:14:24-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Remove a filename prefix from a directory of files</h2>
+
+<p>When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
+
+<p>Here is a simple script to strip those prefixes:</p>
+
+<pre><code>#!/bin/bash
+if [ -z "$1" ]
+then
+  prefix="i386-apple-darwin14.3.0-"
+else
+  prefix=$1
+fi
+for filename in `ls $prefix*`
+do
+   newfilename=${filename:${#prefix}}
+   echo $filename $newfilename
+   mv $filename $newfilename
+done
+</code></pre>
+
+<p>I seem to be stripping &ldquo;i386-apple-darwin14.3.0-&rdquo; lately so that is the default if no prefix is passed as an argument&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -585,37 +635,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-3-dot-2-4001-posted/">Playscript 3.2.4001 Posted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-03T20:04:56-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:04 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
-
-<p>Have fun&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -633,6 +652,10 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-nunit-world-world/">Mono - NUnit Hello World</a>
       </li>
     
@@ -646,10 +669,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
     
       <li class="post">
         <a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a>
       </li>
     
   </ul>

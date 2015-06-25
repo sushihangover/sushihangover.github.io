@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T22:25:20-07:00</updated>
+  <updated>2015-06-24T23:32:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X + Mono + Rosyln + CodeFormatter]]></title>
+    <link href="http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/"/>
+    <updated>2015-06-25T06:20:17-07:00</updated>
+    <id>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter</id>
+    <content type="html"><![CDATA[<p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
+
+<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
+
+<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
+
+<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
+
+<p>But those projects are not needed to get the main program working&hellip;</p>
+
+<h3>mono ./CodeFormatter.exe</h3>
+
+<pre><code>Must specify at least one project / solution / rsp to format
+CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
+    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
+    [/rule(+|-):rule1,rule2,...]  [/verbose]
+    &lt;project, solution or response file&gt;
+
+    /file        - Only apply changes to files with specified name
+    /lang        - Specifies the language to use when a responsefile is
+                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
+    /c           - Additional preprocessor configurations the formatter
+                   should run under.
+    /copyright   - Specifies file containing copyright header.
+                   Use ConvertTests to convert MSTest tests to xUnit.
+    /nocopyright - Do not update the copyright message.
+    /tables      - Let tables opt out of formatting by defining
+                   DOTNET_FORMATTER
+    /nounicode   - Do not convert unicode strings to escape sequences
+    /rule(+|-)   - Enable (default) or disable the specified rule
+    /rules       - List the available rules
+    /verbose     - Verbose output
+</code></pre>
+
+<h3>mono ./CodeFormatter.exe /rules</h3>
+
+<pre><code>Name                 Description
+==============================================
+BraceNewLine         :Ensure all braces occur on a new line
+Copyright            :Insert the copyright header into every file
+NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
+CustomCopyright      :Remove any custom copyright header from the file
+UsingLocation        :Place using directives outside namespace declarations
+UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
+ExplicitVisibility   :Ensure all members have an explicit visibility modifier
+IllegalHeaders       :Remove illegal headers from files
+FormatDocument       :Run the language specific formatter on every document
+ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
+ReadonlyFields       :Mark fields which can be readonly as readonly
+FieldNames           :Prefix private fields with _ and statics with s_
+</code></pre>
+
+<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono - NUnit Hello World]]></title>
@@ -1097,36 +1158,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 <p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
 
 <p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Stripping the Build Prefix From Cross-compiled Binaries]]></title>
-    <link href="http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/"/>
-    <updated>2015-06-09T06:14:24-07:00</updated>
-    <id>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries</id>
-    <content type="html"><![CDATA[<h2>Remove a filename prefix from a directory of files</h2>
-
-<p>When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you end up with binaries that have the arch prefix on your binaries. While this makes sense in order to distinguish that the binaries are different, there are times you do not want to deal with the issue of using these prefixes all the time.</p>
-
-<p>Here is a simple script to strip those prefixes:</p>
-
-<pre><code>#!/bin/bash
-if [ -z "$1" ]
-then
-  prefix="i386-apple-darwin14.3.0-"
-else
-  prefix=$1
-fi
-for filename in `ls $prefix*`
-do
-   newfilename=${filename:${#prefix}}
-   echo $filename $newfilename
-   mv $filename $newfilename
-done
-</code></pre>
-
-<p>I seem to be stripping &ldquo;i386-apple-darwin14.3.0-&rdquo; lately so that is the default if no prefix is passed as an argument&hellip;</p>
 ]]></content>
   </entry>
   
