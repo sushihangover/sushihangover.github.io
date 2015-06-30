@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC &hellip;">
+  <meta name="description" content="I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,109 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/qemu-machine-and-cpu-list/">Qemu Machine and CPU List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-05T12:27:42-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:27 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -cpu help
+</span><span class='line'>No machine specified, and there is no default.
+</span><span class='line'>Use -machine help to list supported machines!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now, you will need to include any machine (&ndash;machine help) in order to see the cpu listing, using the ARM Cortex-M0+ dev board that I am putting together (<em>sushi-m0plus-board</em>), you can get the cpu listing.</p>
+
+<blockquote><p>The cores; cortex-m0, cortex-m0+ and machine; sushi-m0plus-board, are my additions and not apart of the QEMU main-line code.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --machine sushi-m0plus-board -cpu help
+</span><span class='line'>Available CPUs:
+</span><span class='line'>  arm1026
+</span><span class='line'>  arm1136
+</span><span class='line'>  arm1136-r2
+</span><span class='line'>  arm1176
+</span><span class='line'>  arm11mpcore
+</span><span class='line'>  arm926
+</span><span class='line'>  arm946
+</span><span class='line'>  cortex-a15
+</span><span class='line'>  cortex-a8
+</span><span class='line'>  cortex-a9
+</span><span class='line'>  cortex-m0
+</span><span class='line'>  cortex-m0plus
+</span><span class='line'>  cortex-m3
+</span><span class='line'>  pxa250
+</span><span class='line'>  pxa255
+</span><span class='line'>  pxa260
+</span><span class='line'>  pxa261
+</span><span class='line'>  pxa262
+</span><span class='line'>  pxa270-a0
+</span><span class='line'>  pxa270-a1
+</span><span class='line'>  pxa270
+</span><span class='line'>  pxa270-b0
+</span><span class='line'>  pxa270-b1
+</span><span class='line'>  pxa270-c0
+</span><span class='line'>  pxa270-c5
+</span><span class='line'>  sa1100
+</span><span class='line'>  sa1110
+</span><span class='line'>  ti925t</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1634,153 +1737,6 @@ architecture</th>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section/">LLVM and the ARM ELF .ARM.exidx* Section</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-23T06:39:45-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:39 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my last <a href="http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/">post</a> I did a very basic comparsion of ARM code generation between LLVM and GCC compilers and testing the AXF in Qemu. The stand out difference was LLVM produced a *.ARM.exidx** section in the AXF/ELF while arm-gcc did not. The code is very simple, one .s and one .c file, no .cpp/.h involved.</p>
-
-<p>So what is a <em>.ARM.exidx</em> section?</p>
-
-<p>ARM ELF manual show this under the special sections chapter:</p>
-
-<p>| Name |￼Type |￼Attributes |
-| - | - | - |
-| ARM.exidx |￼ SHT_ARM_EXIDX | SHF_ALLOC + SHF_LINK_ORDER |
-_</p>
-
-<blockquote><p>Names beginning .ARM.exidx name sections containing index entries for section unwinding. Names beginning .ARM.extab name sections containing exception unwinding information. See [EHABI] for details.</p></blockquote>
-
-<p>Table 4_4 from that manual shows the Processor specific section types and our attribute is:</p>
-
-<p>| Name | Value | Comment |
-| - | - | - |
-| &ldquo;SHT_ARM_EXIDX&rdquo; | 0x70000001 | |
-_</p>
-
-<p>So the question remains, what is in the section and what is being created? Lets dump HelloWorldSimple.o and only look at that section:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x580 contains 2 entries:
-</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
-</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
-</span><span class='line'>0x0 &lt;print_uart0>: 0x1 [cantunwind]
-</span><span class='line'>0x54 &lt;c_entry>: 0x1 [cantunwind]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So it added both function calls to the table, but are marked <em>cantunwind</em>, which makes sense, but since nothing in the section can be unwound, why include the section? Using gc-sections during linking does not remove it as it has references to functions that are being used&hellip;</p>
-
-<p><span class='pullquote-right' data-pullquote='Research is on-going on this one&#8230;'>
-Let do a quick test and add <em>-funwind-tables</em>, recompile and yes we get a fully populated unwind table and using <em>-fno-unwind-tables</em> produces the results from above, so that is the default one that is being use. Research is on-going on this one&hellip;
-</span></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Relocation section '.rel.ARM.exidx' at offset 0x5a4 contains 4 entries:
-</span><span class='line'> Offset     Info    Type            Sym.Value  Sym. Name
-</span><span class='line'>00000000  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000000  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
-</span><span class='line'>00000008  00000b2a R_ARM_PREL31      00000000   .text
-</span><span class='line'>00000008  00001600 R_ARM_NONE        00000000   __aeabi_unwind_cpp_pr0
-</span><span class='line'>Unwind table index '.ARM.exidx' at offset 0xcc contains 2 entries:
-</span><span class='line'>0x0 &lt;print_uart0>: 0x8001b0b0
-</span><span class='line'>  Compact model index: 0
-</span><span class='line'>  0x01      vsp = vsp + 8
-</span><span class='line'>  0xb0      finish
-</span><span class='line'>  0xb0      finish
-</span><span class='line'>0x54 &lt;c_entry>: 0x809b8480
-</span><span class='line'>  Compact model index: 0
-</span><span class='line'>  0x9b      vsp = r11
-</span><span class='line'>  0x84 0x80 pop {r11, r14}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Additional Reading: <a href="https://sourceware.org/ml/binutils/2009-05/msg00048.html">ARM unwind table linker processing</a>; this concerns a patch to bintutils/ld:</p>
-
-<blockquote><p>The patch below implements linker processing of ARM unwinding tables
-(SHT_ARM_EXIDX).</p>
-
-<p>ARM exception index tables only define the start address of each region. This
-means that code with no unwinding information is effectively covered by the
-preceding unwinding table entry.</p>
-
-<p>For normal exceptions that doesn&rsquo;t matter so much - the user should ensure
-that any code they throw exceptions through has proper unwinding information.</p></blockquote>
-
-<p>Just as a quick check, I grep&rsquo;d some source and the *.ARM.exidx** section is generated by the ARMELFStreamer:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/ARMELFStreamer_8cpp_source.html
-</span><span class='line'>00274 inline void ARMELFStreamer::SwitchToExIdxSection(const MCSymbol &FnStart) {
-</span><span class='line'>00275   SwitchToEHSection(".ARM.exidx",
-</span><span class='line'>00276                     ELF::SHT_ARM_EXIDX,
-</span><span class='line'>00277                     ELF::SHF_ALLOC | ELF::SHF_LINK_ORDER,
-</span><span class='line'>00278                     SectionKind::getDataRel(),
-</span><span class='line'>00279                     FnStart);
-</span><span class='line'>00280 }</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>http://llvm.org/docs/doxygen/html/Support_2ELF_8h_source.html01145   // Fixme: All this is duplicated in MCSectionELF. Why??
-</span><span class='line'>01146   // Exception Index table
-</span><span class='line'>01147   SHT_ARM_EXIDX           = 0x70000001U,</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1798,6 +1754,10 @@ that any code they throw exceptions through has proper unwinding information.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-turn-multiple-commits-into-a-single-commit/">Git - Turn Multiple Commits Into a Single Commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a New Branch With Non-commited Changes</a>
       </li>
     
@@ -1811,10 +1771,6 @@ that any code they throw exceptions through has proper unwinding information.</p
     
       <li class="post">
         <a href="/git-review-a-merge-before-committing/">Git - Review a Merge Before Committing</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</a>
       </li>
     
   </ul>

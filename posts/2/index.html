@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="xCorFlags Version 1.0.5643.30429 The first full release of the cross-platform CorFlags Conversion Tool is up on Github. This is a cross-platform &hellip;">
+  <meta name="description" content="xCorFlags Version 1.0.5643.36015 Maintenance release of the cross-platform CorFlags Conversion Tool is up on Github. git log v1.0.5643.30429..v1.0. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-15T06:09:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:09 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.36015">xCorFlags Version 1.0.5643.36015</a></h1>
+
+<p>Maintenance release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
+
+<pre><code>git log v1.0.5643.30429..v1.0.5643.36015
+commit 0125dffeda467b70e869b898d05203aba3669e88
+Author: SushiHangover &lt;sushihangover@outlook.com&gt;
+Date:   Sun Jun 14 20:06:00 2015 -0700
+
+Fix absolute paths to the assemblies that are passed in
+</code></pre>
+
+<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
+
+<ul>
+<li>Windows (xCorFlags)</li>
+<li>OS-X (mono ./xCorFlags.exe)</li>
+<li>Linux (mono ./xCorFlags.exe)</li>
+</ul>
+
+
+<p>For additional information:</p>
+
+<ul>
+<li><a href="">https://github.com/sushihangover/corflags</a></li>
+<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
+<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
+<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -791,39 +849,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-speeding-up-your-llvm-compile/">Mono - Speeding Up Your Llvm Compile</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T07:42:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:42 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
-
-<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
-
-<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -841,6 +866,10 @@ The results are not really that surprising in regards to is 64-bit number crunch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-turn-multiple-commits-into-a-single-commit/">Git - Turn Multiple Commits Into a Single Commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a New Branch With Non-commited Changes</a>
       </li>
     
@@ -854,10 +883,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
     
       <li class="post">
         <a href="/git-review-a-merge-before-committing/">Git - Review a Merge Before Committing</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</a>
       </li>
     
   </ul>

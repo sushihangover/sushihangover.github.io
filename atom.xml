@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-29T23:05:40-07:00</updated>
+  <updated>2015-06-30T11:21:23-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git - Turn Multiple Commits Into a Single Commit]]></title>
+    <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
+    <updated>2015-06-30T18:10:36-07:00</updated>
+    <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
+
+<h3>Switch to the upstream/master branch and make sure you are up to date.</h3>
+
+<pre><code>git checkout master
+git fetch upstream/master   
+git merge master
+</code></pre>
+
+<h3>Create a new feature/topic branch:</h3>
+
+<pre><code>git checkout -b MyPullRequest
+git merge MyMultiCommitBranch
+</code></pre>
+
+<h3>Reset the branch to origin&rsquo;s state.</h3>
+
+<pre><code>git reset origin/MyPullRequest
+git status
+</code></pre>
+
+<p><strong>Note: Git now considers all changes as unstaged changes.</strong></p>
+
+<h3>We can add these changes as one commit.</h3>
+
+<pre><code>git add --all
+git commit
+</code></pre>
+
+<p>You can push those changes to your remote repo and then issue that pull request to the upstream that you forked from.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git - Create a New Branch With Non-commited Changes]]></title>
@@ -1146,19 +1184,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 </code></pre>
 
 <p>And re-run the make and it will be recreated correctly.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Speeding Up Your Llvm Compile]]></title>
-    <link href="http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/"/>
-    <updated>2015-06-09T07:42:41-07:00</updated>
-    <id>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> If you are building llvm so you can then configure and build mono to use it, then you can speed up the compile by removing the tests as they take as long, if not longer, then the llvm runtime binaries.</p>
-
-<p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
-
-<p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
 ]]></content>
   </entry>
   
