@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: M0 - SushiHangover</title>
+  <title>Git - Create a New Branch With Non-commited Changes - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: m0">
+  <meta name="description" content="Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/m0/">
+  <link rel="canonical" href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -76,50 +76,84 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: M0</h1>
+    
+      <h1 class="entry-title">Git - Create a New Branch With Non-commited Changes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-29T05:28:05-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:28 am</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
 
-  
-  <h2>2014</h2>
+<pre><code>git branch newbranch
+git reset --hard HEAD
+git checkout newbranch
+</code></pre>
 
-<article>
-  
-<h1><a href="/arm-cortex-m0-overview/">ARM Cortex-M0 Overview</a></h1>
-<time datetime="2014-02-17T06:02:25-08:00" pubdate><span class='month'>Feb</span> <span class='day'>17</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>arm-none-eabi</a>, <a class='category' href='/blog/categories/cortex/'>cortex</a>, <a class='category' href='/blog/categories/m0/'>m0</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/bare-metal-arm-terminology/">Bare Metal ARM Terminology</a></h1>
-<time datetime="2014-02-16T21:35:45-08:00" pubdate><span class='month'>Feb</span> <span class='day'>16</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/arm/'>arm</a>, <a class='category' href='/blog/categories/arm-none-eabi/'>arm-none-eabi</a>, <a class='category' href='/blog/categories/bare-metal/'>bare-metal</a>, <a class='category' href='/blog/categories/cortex/'>cortex</a>, <a class='category' href='/blog/categories/m0/'>m0</a></span>
-</footer>
-
-
-</article>
-
+<p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-06-29T05:28:05-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:28 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/" data-via="" data-counturl="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/mono-plus-rosyln-plus-codeformatter/" title="Previous Post: OS-X + Mono + Rosyln + CodeFormatter">&laquo; OS-X + Mono + Rosyln + CodeFormatter</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -203,7 +237,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/';
+        var disqus_url = 'http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

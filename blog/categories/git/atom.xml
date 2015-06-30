@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T23:32:58-07:00</updated>
+  <updated>2015-06-29T23:05:40-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git - Create a New Branch With Non-commited Changes]]></title>
+    <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
+    <updated>2015-06-29T05:28:05-07:00</updated>
+    <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD
+git checkout newbranch
+</code></pre>
+
+<p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git - Review a Merge Before Committing]]></title>
@@ -165,37 +181,6 @@ and the repository exists.
 <p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
 
 <p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress - Deploy and Update Git Source]]></title>
-    <link href="http://sushihangover.github.io/octopress-deploy-and-update-git-source/"/>
-    <updated>2015-06-08T06:39:42-07:00</updated>
-    <id>http://sushihangover.github.io/octopress-deploy-and-update-git-source</id>
-    <content type="html"><![CDATA[<p><img src="/images/Octopress_logo.png" alt="" /></p>
-
-<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
-
-<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
-
-<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
-
-<p>Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
-
-<pre><code>#!/usr/bin/env bash
-echo "Generate and deploying website"
-rake generate
-rake deploy
-echo "Commiting and pushing source files"
-git add --all; 
-git commit -m "New posts"; 
-git push 
-git gc
-pushd _deploy
-git gc
-popd
-</code></pre>
 ]]></content>
   </entry>
   

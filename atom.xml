@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-06-24T23:32:58-07:00</updated>
+  <updated>2015-06-29T23:05:40-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git - Create a New Branch With Non-commited Changes]]></title>
+    <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
+    <updated>2015-06-29T05:28:05-07:00</updated>
+    <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD
+git checkout newbranch
+</code></pre>
+
+<p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OS-X + Mono + Rosyln + CodeFormatter]]></title>
@@ -1143,21 +1159,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 <p>I could not find a llvm configure option to skip the <strong>test</strong> directory, but you you just delete it (or move it out of the llvm directory) before you configure/compile llvm, then you will receive a warning that it was not find, but the compile will proceed normally.</p>
 
 <p>Note: You could also mod the llvm configuration (configure/Makefile) to skip the tests.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Using LLVM? Make Sure Your Targets Match]]></title>
-    <link href="http://sushihangover.github.io/mono-using-llvm/"/>
-    <updated>2015-06-09T07:21:58-07:00</updated>
-    <id>http://sushihangover.github.io/mono-using-llvm</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> When configuring Mono to use llvm, if you receive the error:</p>
-
-<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
-
-<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
-
-<p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
 ]]></content>
   </entry>
   

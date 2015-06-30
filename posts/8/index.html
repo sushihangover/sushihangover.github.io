@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="This is a start of a series of posts related to getting into ARM-based Cortex core programming. So I started on a quest to checkout ARM Embedded & &hellip;">
+  <meta name="description" content="Part 2 of my dive into &lsquo;Bare Metal&rsquo; ARM Development, Part 1 is here So the compiler shortlist at this point: GNU C Compiler
+IAR ARM C &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/embedded-bare-metal-arm-development-part-2/">Embedded 'Bare Metal' ARM Development - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-14T10:12:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Part 2 of my dive into &lsquo;Bare Metal&rsquo; ARM Development, Part 1 is <a href="/embedded-bare-metal-arm-development-part-1/">here</a></p>
+
+<p>So the compiler shortlist at this point:</p>
+
+<ul>
+<li><a href="https://launchpad.net/gcc-arm-embedded">GNU C Compiler</a></li>
+<li><a href="http://www.iar.com">IAR</a> ARM C Compiler</li>
+<li><a href="https://www.imagecraft.com">ImageCraft</a> C Compiler Tools</li>
+<li><a href="http://www.keil.com">[ARM](http://ds.arm.com/)/Kiel</a> ARM C/C++ Compiler</li>
+<li><a href="http://clang.llvm.org">Clang</a>/<a href="http://llvm.org">LLVM</a> ARM Compiler</li>
+</ul>
+
+
+<p>Note: That list is in no particular order at all&hellip;</p>
+
+<p>And just to be clear, I am talking about bare-metal C/C++ cross compilers, and all of these world be considered <a href="http://en.wikipedia.org/wiki/Cross_compiler">cross compilers</a> since there is NO operating system on your bare-metal ARM core to actually host a native compiler.</p>
+
+<p>There are complete OSs that run on ARM <a href="http://en.wikipedia.org/wiki/System_on_a_chip">SoC</a>. You can look at hobbyist/entry level boards like <a href="http://en.wikipedia.org/wiki/BeagleBoard">BeagleBoard</a> or <a href="http://en.wikipedia.org/wiki/Raspberry_Pi">Raspberry Pi</a> as just a couple of the many boards that can run a Linux kernel on ARM. <a href="http://en.wikipedia.org/wiki/Windows_CE">Window CE</a>, now called Windows Embedded Compact 2013, is available for ARM (among other cpus) as a real-time operating system with a  licensed shared source code based kernel from Microsoft and there are other no n-Linux/Microsoft OSs (free or not) that are &lsquo;hostable&rsquo; on ARM, but we are looking at bare-metal only, so cross-compiling is we have to do here.</p>
+
+<p>Out of the five on the list, there are two &lsquo;free&rsquo; compilers with no type of restrictions on the binaries that are produced are GCC and LLVM. In terms of OSS support/acceptance, GCC for ARM is the most well known and community supported.</p>
+
+<p>ARM Embedded GCC via <a href="https://launchpad.net/gcc-arm-embedded">launchpad</a> has binary and source downloads. Binaries are available for Windows, OS-X and Linux along with build instructions. My experience so far is most in the embedded hobbyist community will point you to GCC and never tell you about another option. I think this is true mainly do to the fact those people are &lsquo;hobbyist&rsquo; and not professional embedded hardware|software people. The pro will tell you about the market options, plus some will point out that compilers such as from IAR and Kiel will produce faster and/or smaller ARM code then GCC. Efficent code generation and optimization is an art in and off itself but for free, GCC-ARM works &lsquo;well enough&rsquo;.</p>
+
+<p>Note: A while back I was involved in upgrading a existing GCC-AVR based software/hardware project involving an AVR 8-bit and got stuck towards the end of the projects as we had exceeded the chip&rsquo;s 32k of flash. Upscaling the chip at the time with not possible, first BOM cost and new board development and second there was existing field-deployed hardware to deal with). We&rsquo;re looking at removing features some feature to get it &lsquo;out the door&rsquo; but one of the &lsquo;hardware engineers&rsquo; that we were working with (we were all contractors) had a license of IAR-AVR and its code optimizer squeezed our bin by almost 5% with zero source code changes. Thus our customer bought that compiler to produce the firmware for final field deployment&hellip;</p>
+
+<p>But that does not mean you should not try the others on the list, but more on that later.</p>
+
+<p>Clang/LLVM is the newest kid on the block for ARM bare-metal work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1046,6 +1103,10 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a New Branch With Non-commited Changes</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a>
       </li>
     
@@ -1059,10 +1120,6 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
     
       <li class="post">
         <a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a>
       </li>
     
   </ul>
