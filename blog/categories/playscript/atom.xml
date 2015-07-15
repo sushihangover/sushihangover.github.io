@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-14T15:09:46-07:00</updated>
+  <updated>2015-07-14T23:49:45-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
+    <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
+    <updated>2015-07-15T06:35:49-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
+    <content type="html"><![CDATA[<p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
+
+<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
+
+<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
+
+<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
+  - For use with Tamarin Redux test; they use Asset scripts with a test package
+  - Very alpha at this point
+  - Need to add PlayScript style 'import'
+* Added PsOnlyMode to compiler setting
+  - Whether to enable PlayScript compiler only mode. Defaults to false.
+* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
+  - Added tools/csharp and tools/playshell
+* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
+  - Mono.PlayScript.csproj (and .sln)
+  - Mono.CSharp.csproj (and .sln)
+  - tools/charp.csproj (and .sln)
+  - tools/playshell.csproj (and .sln)
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript Redux - Make2CSProjUpdater]]></title>
@@ -153,17 +181,6 @@ playscript-3.2.6001
 <p>Been knocking these simple minors versions out, dreading the upcoming Mono 4.x changes&hellip;</p>
 
 <p>Setting up a GitHub organization for PlayScript, I&rsquo;ll let you know when it is up.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Playscript 3.2.4001 Posted]]></title>
-    <link href="http://sushihangover.github.io/playscript-3-dot-2-4001-posted/"/>
-    <updated>2015-06-03T20:04:56-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-3-dot-2-4001-posted</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.4001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.4-branch&rsquo; into playscript-mono</p>
-
-<p>Have fun&hellip;</p>
 ]]></content>
   </entry>
   

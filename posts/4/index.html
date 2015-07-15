@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Everyone screws up, and that comes to finger flops when typing that new tag name. If the tag is only local, it is two step process, create a new tag &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler 3.2.6001 to GitHub which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.6-branch&rsquo; into &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-3-dot-2-6001-posted/">Playscript 3.2.6001 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-04T08:12:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:12 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.6001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.6-branch&rsquo; into playscript-mono</p>
+
+<p>FYI: I have been using tags on the playscript-mono branch to mark each of these PlayScript merges. It is a clean and lightweight way to capture and identity these version on the timeline:</p>
+
+<pre><code>git tag --list | grep playscript
+playscript-3.2.2002
+playscript-3.2.3001
+playscript-3.2.3003
+playscript-3.2.4001
+playscript-3.2.5001
+playscript-3.2.6001
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -473,49 +513,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/undo-your-most-recent-screwed-up-git-merge/">Undo Your Most Recent (Screwed Up) Git Merge</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-28T18:24:08-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:24 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ok, you just have a major brain-fart and you did a merge from a remote that has more conflicts than the Sahel region&hellip; before you do ANYTHING to your local repo, just do a:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git reset --merge ORIG_HEAD
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or, depending upon your git version, you can also:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git merge --abort
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The merge is gone and that list of 1000+ file conflicts that scrolled endlessly when you hit the return key will not haunt your dreams tonight.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -533,6 +530,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now Has a REPL (Playshell)</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a>
       </li>
     
@@ -546,10 +547,6 @@ make install
     
       <li class="post">
         <a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-nunit-world-world/">Mono - NUnit Hello World</a>
       </li>
     
   </ul>

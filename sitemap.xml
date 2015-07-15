@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-now-has-a-repl-playshell/</loc>
+    <lastmod>2015-07-15T06:35:49-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/playscript-redux-make2csprojupdater/</loc>
     <lastmod>2015-07-14T15:06:01-07:00</lastmod>
   </url>
@@ -606,5 +610,38 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/redux/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/playshell/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/repl/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/csharp/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/6/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/7/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/8/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/9/</loc>
   </url>
 </urlset>

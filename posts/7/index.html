@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="What is semihosting? &hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this &hellip;">
+  <meta name="description" content="I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an ARM targeting Clang/LLVM build) since I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/bare-metal-debugging-with-affinic-debugger/">Bare Metal Debugging With Affinic Debugger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-26T23:19:58-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:19 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/Affinic_gui_large.png"><img class="left" src="/images/Affinic_gui_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an <a href="https://github.com/sushihangover/llvm_baremetal">ARM targeting Clang/LLVM build</a>) since I am compiling to LLVM <strong>bitcode</strong>, piping to <strong>opts</strong> and than handing the resulting object files directly to <strong>arm-none-eabi-ld</strong>. Makefile creation is the only way to get this build pipeline working as no IDE on any OS is natively supporting using LLVM as a cross-compiler for bare metal ARM (yet!).</p>
+
+<p>Thus that leaves me in a term window a lot, not that I mind, but gdb (arm-none-eabi-gdb) based debugging can be a pain when you are used to working with a fully intergated IDE (<em>I dream of Visual Studio style bare metal debugging</em> ;-) . The &lsquo;layout asm&rsquo; and &lsquo;layout src&rsquo; text-based <em>gui</em>  of gdb does help a lot but till you learn all the commands and setup custom command-sets, productivity tends to suffer&hellip;</p>
+
+<p>There are several GUI-based interfaces that can ease the pain of using gdb. <strong>Eclipse</strong> has the CDT debug perspective that provides a complete wrapper to <a href="http://www.ibm.com/developerworks/library/os-eclipse-cdt-debug2/index.html">gdb MI commands</a> and <strong>ddd</strong> (<a href="http://www.gnu.org/software/ddd/">Data Display Debugger</a>) provides a frontend to many session based cmd-line debuggers, including gdb. But I figured I would give <a href="http://www.affinic.com">Affinic Debugger</a> a quick try to see how it work.</p>
+
+<p>Using Affinic Debugger for GDB does not completely shield you from gdb and you also have access to the gdb terminal so as you  learn gdb commands you can type them vs. clicking your way throught the GUI.</p>
+
+<blockquote><p>You can use it as a gdb learning tool, as all the gui actions that involve gdb cmds are echo&rsquo;d in the intergated terminal.</p></blockquote>
+
+<p><a href="/images/Affinic_preferences_large.png"><img class="right" src="/images/Affinic_preferences_small.png" title="&#34;Affinic gdb location&#34;" alt="&#34;Affinic gdb location&#34;"></a>After you download and install it, you will need to set which gdb you are using to debug your target. I am using a version of arm-none-eabi-gdb that I built, so start the app and open the Preferences and change the &ldquo;Set Debugger Path&rdquo; entry to the gdb that you are using. Affinic Debugger will need to restart after that change.</p>
+
+<p>Lets debug something!</p>
+
+<p>Using the HelloWorld example from last time, let re-compile it with Clang/LLVM using &ldquo;-g -O0&rdquo; so we get the debug symbols (-g) and remove any code optimizations (-O0) so the generated assembly is easy to follow and allow breakpoints to be set with the source code (depending upon optimization level, your breakpoints might be limited in the source view):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/startup.o -c src/startup.s
+</span><span class='line'>clang -g -O0 -target arm-none-eabi -mcpu<span class="o">=</span>arm926ej-s -mfloat-abi<span class="o">=</span>soft -o obj/HelloWorldSimple.o -c src/HelloWorldSimple.c
+</span><span class='line'>arm-none-eabi-ld -Lobj --gc-sections --print-gc-sections  -T src/HelloWorldSimple.ld obj/startup.o obj/HelloWorldSimple.o -o bin/HelloWorldSimple.axf
+</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets startup QEMU as we will use it as our remote gdb debugging  target.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel  bin/HelloWorldSimple.axf -s -S
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: We are using the two following additional options in order to remotely debug our HelloWorldSimple.axf program:</p>
+
+<h6>* -s              shorthand for -gdb tcp::1234</h6>
+
+<h6>* -S              freeze CPU at startup</h6>
+
+<p>Now start Affinic and connect to the QEMU gdb remote debugging server that is running. Enter the following into the &ldquo;Command:&rdquo; text field:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>target remote localhost:1234
+</span><span class='line'>file bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: This is the same are if you were using gdb on the cmd-line. You can also use the Affinic menus to do this (Remote and File menus)</p>
+
+<p><a href="/images/Affinic_assembly_view_large.png"><img class="left" src="/images/Affinic_assembly_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a> You will see the assembly and source tabs filed. At this point you can set breakpoints, step through your source/assembly code, view register values, etc&hellip;
+<a href="/images/Affinic_source_view_large.png"><img class="right" src="/images/Affinic_source_view_small.png" title="&#34;Affinic gdb on OS-X&#34;" alt="&#34;Affinic gdb on OS-X&#34;"></a></p>
+
+<p>So far I like the Affinic Debugger interface, but I guess time will tell if I buy the full version after the 30 day trail, use the limited light/free version or setup ddd and/or Eclipse on my MacBookPro&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1225,188 +1307,6 @@ Tail chaining > If another exception is pending when an ISR exits, the processor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/homebrew-git-1-dot-9-0-release/">Homebrew: Git 1.9.0 Release</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-16T10:32:41-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:32 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>Update: Someone else has done a pull-request for homebrew git that is awaiting cool down on the new 1.9.0 release before it gets mainlined. As the formula is the basically the same as mine you can grab it via the <a href="https://github.com/Homebrew/homebrew/pull/26734">pull-request</a> on github and post 1.9.0 issues/comments in that thread.</p></blockquote>
-
-<p><a href="https://code.google.com/p/git-core/">Git</a> just released <a href="https://code.google.com/p/git-core/downloads/detail?name=git-1.9.0.tar.gz">1.9.0</a> (Feb-14-2014) but <a href="http://brew.sh">Homebrew</a> does not have this update quite yet so I updated the tar ball references, sha1 tags and commented out the patch that is no longer required (this needs cleaned up as there are older patches commented out also&hellip;). As for the complete release notes, click <a href="http://anzwix.com/a/Git/Git190">here</a>.</p>
-
-<p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
-
-<div><script src='https://gist.github.com/9036063.js?file=git.rb'></script>
-<noscript><pre><code>require &#39;formula&#39;
-
-class Git &lt; Formula
-  homepage &#39;http://git-scm.com&#39;
-  url &#39;https://git-core.googlecode.com/files/git-1.9.0.tar.gz&#39;
-  sha1 &#39;e60667fc16e5a5f1cde46616b0458cc802707743&#39;
-  head &#39;https://github.com/git/git.git&#39;
-
-  bottle do
-    sha1 &quot;582a276b608de17888da01922648522bf7a9c11a&quot; =&gt; :mavericks
-    sha1 &quot;f308b293aa5664b65c57c3b206b892537397d3b9&quot; =&gt; :mountain_lion
-    sha1 &quot;fa5f896b766bb103804800abde58e25579cf58a7&quot; =&gt; :lion
-  end
-
-  option &#39;with-blk-sha1&#39;, &#39;Compile with the block-optimized SHA1 implementation&#39;
-  option &#39;without-completions&#39;, &#39;Disable bash/zsh completions from &quot;contrib&quot; directory&#39;
-  option &#39;with-brewed-openssl&#39;, &quot;Build with Homebrew OpenSSL instead of the system version&quot;
-  option &#39;with-brewed-curl&#39;, &quot;Use Homebrew&#39;s version of cURL library&quot;
-  option &#39;with-persistent-https&#39;, &#39;Build git-remote-persistent-https from &quot;contrib&quot; directory&#39;
-
-  depends_on &#39;pcre&#39; =&gt; :optional
-  depends_on &#39;gettext&#39; =&gt; :optional
-  depends_on &#39;openssl&#39; if build.with? &#39;brewed-openssl&#39;
-  depends_on &#39;curl&#39; if build.with? &#39;brewed-curl&#39;
-  depends_on &#39;go&#39; =&gt; :build if build.with? &#39;persistent-https&#39;
-
-  resource &#39;man&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-manpages-1.9.0.tar.gz&#39;
-    sha1 &#39;cff590c92b4d1c8a143c078473140b653cc5d56a&#39;
-  end
-
-  resource &#39;html&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-htmldocs-1.9.0.tar.gz&#39;
-    sha1 &#39;65eb3f411f4699695c7081a7c716cabb9ce23d75&#39;
-  end
-
-  def patches
-    if MacOS.version &gt;= :mavericks and not build.head?
-      # Allow using PERLLIB_EXTRA to find Subversion Perl bindings location
-      # in the CLT/Xcode. Should be included in Git 1.8.6.
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=07981d
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=0386dd
-      #[&#39;https://git.kernel.org/cgit/git/git.git/patch/?id=07981d&#39;,
-      # &#39;https://git.kernel.org/cgit/git/git.git/patch/?id=0386dd&#39;]
-    end
-  end
-
-  def install
-    # If these things are installed, tell Git build system to not use them
-    ENV[&#39;NO_FINK&#39;] = &#39;1&#39;
-    ENV[&#39;NO_DARWIN_PORTS&#39;] = &#39;1&#39;
-    ENV[&#39;V&#39;] = &#39;1&#39; # build verbosely
-    ENV[&#39;NO_R_TO_GCC_LINKER&#39;] = &#39;1&#39; # pass arguments to LD correctly
-    ENV[&#39;PYTHON_PATH&#39;] = which &#39;python&#39;
-    ENV[&#39;PERL_PATH&#39;] = which &#39;perl&#39;
-
-    if MacOS.version &gt;= :mavericks and MacOS.dev_tools_prefix
-      ENV[&#39;PERLLIB_EXTRA&#39;] = &quot;#{MacOS.dev_tools_prefix}/Library/Perl/5.16/darwin-thread-multi-2level&quot;
-    end
-
-    unless quiet_system ENV[&#39;PERL_PATH&#39;], &#39;-e&#39;, &#39;use ExtUtils::MakeMaker&#39;
-      ENV[&#39;NO_PERL_MAKEMAKER&#39;] = &#39;1&#39;
-    end
-
-    ENV[&#39;BLK_SHA1&#39;] = &#39;1&#39; if build.with? &#39;blk-sha1&#39;
-
-    if build.with? &#39;pcre&#39;
-      ENV[&#39;USE_LIBPCRE&#39;] = &#39;1&#39;
-      ENV[&#39;LIBPCREDIR&#39;] = Formula.factory(&#39;pcre&#39;).opt_prefix
-    end
-
-    ENV[&#39;NO_GETTEXT&#39;] = &#39;1&#39; unless build.with? &#39;gettext&#39;
-
-    system &quot;make&quot;, &quot;prefix=#{prefix}&quot;,
-                   &quot;sysconfdir=#{etc}&quot;,
-                   &quot;CC=#{ENV.cc}&quot;,
-                   &quot;CFLAGS=#{ENV.cflags}&quot;,
-                   &quot;LDFLAGS=#{ENV.ldflags}&quot;,
-                   &quot;install&quot;
-
-    bin.install Dir[&quot;contrib/remote-helpers/git-remote-{hg,bzr}&quot;]
-
-    # Install the OS X keychain credential helper
-    cd &#39;contrib/credential/osxkeychain&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-credential-osxkeychain&#39;
-      system &quot;make&quot;, &quot;clean&quot;
-    end
-
-    # Install git-subtree
-    cd &#39;contrib/subtree&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-subtree&#39;
-    end
-
-    if build.with? &#39;persistent-https&#39;
-      cd &#39;contrib/persistent-https&#39; do
-        system &quot;make&quot;
-        bin.install &#39;git-remote-persistent-http&#39;,
-                    &#39;git-remote-persistent-https&#39;,
-                    &#39;git-remote-persistent-https--proxy&#39;
-      end
-    end
-
-    unless build.without? &#39;completions&#39;
-      # install the completion script first because it is inside &#39;contrib&#39;
-      bash_completion.install &#39;contrib/completion/git-completion.bash&#39;
-      bash_completion.install &#39;contrib/completion/git-prompt.sh&#39;
-
-      zsh_completion.install &#39;contrib/completion/git-completion.zsh&#39; =&gt; &#39;_git&#39;
-      cp &quot;#{bash_completion}/git-completion.bash&quot;, zsh_completion
-    end
-
-    (share+&#39;git-core&#39;).install &#39;contrib&#39;
-
-    # We could build the manpages ourselves, but the build process depends
-    # on many other packages, and is somewhat crazy, this way is easier.
-    man.install resource(&#39;man&#39;)
-    (share+&#39;doc/git-doc&#39;).install resource(&#39;html&#39;)
-
-    # Make html docs world-readable; check if this is still needed at 1.8.6
-    chmod 0644, Dir[&quot;#{share}/doc/git-doc/**/*.{html,txt}&quot;]
-  end
-
-  def caveats; &lt;&lt;-EOS.undent
-    The OS X keychain credential helper has been installed to:
-      #{HOMEBREW_PREFIX}/bin/git-credential-osxkeychain
-
-    The &#39;contrib&#39; directory has been installed to:
-      #{HOMEBREW_PREFIX}/share/git-core/contrib
-    EOS
-  end
-
-  test do
-    HOMEBREW_REPOSITORY.cd do
-      assert_equal &#39;bin/brew&#39;, `#{bin}/git ls-files -- bin`.strip
-    end
-  end
-end
-</code></pre></noscript></div>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1424,6 +1324,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now Has a REPL (Playshell)</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a>
       </li>
     
@@ -1437,10 +1341,6 @@ end
     
       <li class="post">
         <a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-nunit-world-world/">Mono - NUnit Hello World</a>
       </li>
     
   </ul>

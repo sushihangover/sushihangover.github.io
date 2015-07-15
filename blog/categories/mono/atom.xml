@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-14T15:09:46-07:00</updated>
+  <updated>2015-07-14T23:49:45-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
+    <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
+    <updated>2015-07-15T06:35:49-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
+    <content type="html"><![CDATA[<p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
+
+<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
+
+<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
+
+<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
+  - For use with Tamarin Redux test; they use Asset scripts with a test package
+  - Very alpha at this point
+  - Need to add PlayScript style 'import'
+* Added PsOnlyMode to compiler setting
+  - Whether to enable PlayScript compiler only mode. Defaults to false.
+* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
+  - Added tools/csharp and tools/playshell
+* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
+  - Mono.PlayScript.csproj (and .sln)
+  - Mono.CSharp.csproj (and .sln)
+  - tools/charp.csproj (and .sln)
+  - tools/playshell.csproj (and .sln)
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript Redux - Make2CSProjUpdater]]></title>
@@ -310,64 +338,6 @@ namespace InteropDemo
 </code></p>
 
 <p>From my answer on <a href="http://stackoverflow.com/questions/31013147/check-if-p-invoke-was-successful/31015964#31015964">Stackoverflow</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Code Coverage Using the New Coverage Filter]]></title>
-    <link href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/"/>
-    <updated>2015-06-15T21:33:29-07:00</updated>
-    <id>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter</id>
-    <content type="html"><![CDATA[<h2>New code coverage filter:</h2>
-
-<p>Using the new coverage filter on the mono log profiler, you can get output like this:</p>
-
-<pre><code>Coverage Summary:
-    xCorFlags (/Users/administrator/monocov/lib/xCorFlags.exe) 26% covered (42 methods - 11 covered)
-        &lt;Module&gt; ?% covered (0 methods - 1 covered)
-        CorFlags.CorFlagsSettings 25% covered (4 methods - 1 covered)
-        CorFlags.MainClass 50% covered (2 methods - 1 covered)
-        CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
-</code></pre>
-
-<p><blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote></p>
-
-<h2>Background:</h2>
-
-<p>Well, it appears that Xamarin has removed the &lsquo;internal&rsquo; cov profiler and monocov will not produce any output (besides mono actually loading the shared library, no functions are called) as the api has changed.</p>
-
-<p>They have added a code coverage filter (Apr 7 2015) to the core log profilers and while I could not find any published documentation(?). It is easy enough to enable.</p>
-
-<pre><code>--profile=log:coverage
-
-coverage             enable collection of code coverage data
-covfilter=ASSEMBLY   add an assembly to the code coverage filters
-                     add a + to include the assembly or a - to exclude it
-                     filter=-mscorlib
-covfilter-file=FILE  use FILE to generate the list of assemblies to be filtered
-</code></pre>
-
-<p>Git log info on cov removal and log coverage filter addition:</p>
-
-<pre><code>commit 16570265149730ec6a4760cc0fa34decc1a9d981
-Author: Alex Rønne Petersen &lt;alexrp@xamarin.com&gt;
-Date:   Tue Apr 7 14:51:27 2015 +0200
-        [profiler] Remove old mono-cov profiler.
-        We're replacing this with coverage support in the log profiler.
-
-commit e91693fbb87f687a2fdb5a495c945c1872b3066c
-Author: iain holmes &lt;iain@xamarin.com&gt;
-Date:   Fri Feb 27 10:13:54 2015 +0000
-        [cov] Install a coverage filter
-</code></pre>
-
-<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work:</p>
-
-<ul>
-<li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
-<li><a href="http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374">http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
