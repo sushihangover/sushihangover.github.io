@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playc-tester | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playc-tester/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-16T20:20:16-07:00</updated>
+  <updated>2015-07-16T20:24:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,7 +20,7 @@
     <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
     <content type="html"><![CDATA[<p>I <a href="https://github.com/PlayScriptRedux/playscript/pull/8">moved all the .play and .as tests</a> under the play_test directory. They are in two separtate dirs now, <strong>play</strong> for the extended PlayScript language/format and <strong>as</strong> for the standard ActionScript tests.</p>
 
-<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up coping the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch.</p>
+<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up copying the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch. This tool will have very little commit activity compared to the mcs.exe/playc.exe compilers.</p>
 
 <h3>Playc-tester.exe</h3>
 
