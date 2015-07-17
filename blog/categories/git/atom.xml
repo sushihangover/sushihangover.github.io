@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-16T20:24:21-07:00</updated>
+  <updated>2015-07-17T10:56:36-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git - Squash Last X Commits Into One]]></title>
+    <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
+    <updated>2015-07-17T10:35:06-07:00</updated>
+    <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+
+<p>Use git rebase -i <after> and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described in the Git <a href="http://git-scm.com/docs/git-rebase#_interactive_mode">manual</a>.</p>
+
+<p><after> is the commit after the last one that you wish squash together, i.e. parent of the oldest commit you want to squash.</p>
+
+<p>Example:</p>
+
+<p>You want to squash the last three commits into one, so lets look at the log to make sure that you want you want and to grab the commit SHA:</p>
+
+<blockquote><p>git log -n 4 &ndash;pretty=oneline</p></blockquote>
+
+<pre><code>f57f7f9c28646d5049aa6b90f33de23e1e53ad2e More test cleanups
+07074c8058ed69224670987860c9db47858dab6e PlayScript compiler tests using a variant of compiler-tester
+3b80dc06b990553042b4b0cde486e36522f4171b Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
+db6506ca17e49f0829ca9859a7994ddf840dbff4 * Tamarin-Redux Test Cleanup * Remove old Tamarin tests, the redux versions are the last released version
+</code></pre>
+
+<p>I want to squash the first three commits, so grab the forth SHA and:</p>
+
+<blockquote><p>git rebase -i db6506ca17e49f0829ca9859a7994ddf840dbff4</p></blockquote>
+
+<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
+pick 07074c8 PlayScript compiler tests using a variant of compiler-tester
+pick f57f7f9 More test cleanups
+
+# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
+</code></pre>
+
+<p>Following the directions in the commentted text. In this example: change the second and third items to squash:</p>
+
+<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
+squash 07074c8 PlayScript compiler tests using a variant of compiler-tester
+squash f57f7f9 More test cleanups
+
+# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
+</code></pre>
+
+<p>Save those changes and exit the editor and the rebase will execute</p>
+
+<pre><code>[detached HEAD ~~~
+~~~
+Successfully rebased and updated refs/heads/play-tests.
+</code></pre>
+
+<p>Confirm via:</p>
+
+<blockquote><p>git log -n 2</p></blockquote>
+
+<p>FYI: This is something you should do to your feature branch before pushing to your fork to make that <a href="http://github.com/playscriptredux/playscript">PlayScript</a> pull request. ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git - Turn Multiple Commits Into a Single Commit]]></title>
@@ -155,57 +213,6 @@ git merge upstream/master
 <h3>Moral of the story:</h3>
 
 <p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git: Set Up a Fetch-only Remote | Disabling Push]]></title>
-    <link href="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/"/>
-    <updated>2015-06-14T14:57:37-07:00</updated>
-    <id>http://sushihangover.github.io/git-set-up-a-fetch-only-remote</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> The PlayScript repo on the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> Github organization I maintain is a down-stream fork of <a href="https://github.com/mono/mono">Mono</a> so I can fetch the changes to their master branch. I also have my own <a href="https://github.com/sushihangover/playscript">fork</a> of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the <a href="https://github.com/PlayScriptRedux/playscript">Redux based repo</a> from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
-
-<p>So after adding my additional remotes my local repo, it looks like this:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   https://github.com/PlayScriptRedux/playscript.git (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    https://github.com/mono/mono.git (push)
-</code></pre>
-
-<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
-
-<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
-
-<pre><code> git remote set-url --push upstream DISABLE
- git remote set-url --push redux DISABLE
-</code></pre>
-
-<p>And to see what that looks like now:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   DISABLE (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    DISABLE (push)
-</code></pre>
-
-<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
-
-<pre><code>git push redux
-fatal: 'DISABLE' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-</code></pre>
-
-<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I&rsquo;m a big fan of Homebrew on OS-X and it normally it works so well that you just do not think about it. That is a very good thing, it just &hellip;">
+  <meta name="description" content="I use Octopress for this GitHub blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;. &lsquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/octopress-deploy-and-update-git-source/">Octopress - Deploy and Update Git Source</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-08T06:39:42-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/Octopress_logo.png" alt="" /></p>
+
+<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
+
+<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
+
+<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
+
+<p>Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
+
+<pre><code>#!/usr/bin/env bash
+echo "Generate and deploying website"
+rake generate
+rake deploy
+echo "Commiting and pushing source files"
+git add --all; 
+git commit -m "New posts"; 
+git push 
+git gc
+pushd _deploy
+git gc
+popd
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -463,48 +514,6 @@ make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-3-dot-2-2002-posted/">PlayScript 3.2.2002 Posted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-31T22:16:23-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>10:16 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/PlayscriptLogo.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it from public domain.</p>
-
-<p>I will be migrating it to the Mono 4.x compiler in the days and weeks ahead before working on finishing and getting the ActionScript language side stable (feature complete?). Not really looking forwarded to the Mono 4.x migration as the number of internal API changes to the mcs compiler since the 3.2.0 release is quite extensive.</p>
-
-<p>If you want to compile and use the current 3.2.2002 release, just autogen.sh like normal.</p>
-
-<p>Note: Due to dependency updates on OS-X since Mono 3.2 was release, I had to supply &ldquo; <u>&ndash;with-tls</u>&rdquo; option as it was auto-selecting <strong>__thread</strong> instead of <strong>_posix</strong>.</p>
-
-<pre><code>./autogen.sh --with-tls=posix --enable-nls=no --prefix=/Users/administrator/mono-install
-</code></pre>
-
-<p>Note: Since this is mono 3.x, to build you will need gmcs during the bootstrap process. If you only have Mono 4.x installed, you will need a 3.x mono install to proceed. I just did a separate mono checkout of 3.2 and built it with a different install prefix location. When doing an initial/full compile and install, you can add this 3.2 install location to the front of your PATH and the default mono bootstrap will work cleanly.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -522,6 +531,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-squash-last-x-commits-into-one/">Git - Squash Last X Commits Into One</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests Are Now Structured Like Mono's</a>
       </li>
     
@@ -535,10 +548,6 @@ make install
     
       <li class="post">
         <a href="/git-turn-multiple-commits-into-a-single-commit/">Git - Turn Multiple Commits Into a Single Commit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a New Branch With Non-commited Changes</a>
       </li>
     
   </ul>

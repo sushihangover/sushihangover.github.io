@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="CMSIS : ARM® Cortex™ Microcontroller Software Interface Standard Thread mode : Used to execute application software. The processor enters Thread mode &hellip;">
+  <meta name="description" content="ARM Cortex-M0 Overview By: Daniel Widyanto September 2010 ARM Cortex-M0 Overview ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,41 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/arm-cortex-m0-overview/">ARM Cortex-M0 Overview</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-17T06:02:25-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:02 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ARM Cortex-M0 Overview By: Daniel Widyanto September 2010</p>
+
+<p  style=" margin: 12px auto 6px auto; font-family: Helvetica,Arial,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none; display: block;">   <a title="View ARM Cortex-M0 Overview on Scribd" href="http://www.scribd.com/doc/38226967"  style="text-decoration: underline;" >ARM Cortex-M0 Overview</a></p>
+
+
+<iframe class="scribd_iframe_embed" src="//www.scribd.com/embeds/38226967/content?start_page=1&view_mode=scroll&show_recommendations=true" data-auto-height="false" data-aspect-ratio="undefined" scrolling="no" id="doc_32615" width="100%" height="600" frameborder="0"></iframe>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -936,59 +971,6 @@ make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/os-x-llvm-slash-clang-build/">OS-X LLVM / CLANG Build</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-11'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
-
-<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
-
-<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;-)</p>
-
-<div><script src='https://gist.github.com/8946898.js'></script>
-<noscript><pre><code>git clone http://llvm.org/git/llvm.git
-pushd llvm/tools
-git clone http://llvm.org/git/clang.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/compiler-rt.git
-popd
-pushd llvm/projects
-git clone http://llvm.org/git/test-suite.git
-popd
-mkdir llvmbuild
-pushd llvmbuild
-../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
-make
-</code></pre></noscript></div>
-
-
-<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -1006,6 +988,10 @@ make
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-squash-last-x-commits-into-one/">Git - Squash Last X Commits Into One</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests Are Now Structured Like Mono's</a>
       </li>
     
@@ -1019,10 +1005,6 @@ make
     
       <li class="post">
         <a href="/git-turn-multiple-commits-into-a-single-commit/">Git - Turn Multiple Commits Into a Single Commit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a New Branch With Non-commited Changes</a>
       </li>
     
   </ul>
