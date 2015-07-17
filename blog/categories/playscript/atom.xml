@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-14T23:49:45-07:00</updated>
+  <updated>2015-07-16T20:20:16-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript : Tests Are Now Structured Like Mono's]]></title>
+    <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
+    <updated>2015-07-16T20:08:45-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
+    <content type="html"><![CDATA[<p>I <a href="https://github.com/PlayScriptRedux/playscript/pull/8">moved all the .play and .as tests</a> under the play_test directory. They are in two separtate dirs now, <strong>play</strong> for the extended PlayScript language/format and <strong>as</strong> for the standard ActionScript tests.</p>
+
+<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up coping the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch.</p>
+
+<h3>Playc-tester.exe</h3>
+
+<pre><code>mono playc-tester.exe
+PlayScript compiler tester, (C) 2009 Novell, Inc. (C) SushiHangover/RobertN
+playc-tester -mode:[pos|neg] -compiler:FILE -files:file-list [options]
+
+   -compiler:FILE   The file which will be used to compiler tests
+   -compiler-options:OPTIONS  Add global compiler options
+   -il:IL-FILE      XML file with expected IL details for each test
+   -issues:FILE     The list of expected failures
+   -log:FILE        Writes any output also to the file
+   -help            Lists all options
+   -mode:[pos|neg]  Specifies compiler test mode
+   -safe-execution  Runs compiled executables in separate app-domain
+   -update-il       Updates IL-FILE to match compiler output
+   -update-ref      Updates the debug xml to match debug compiler mdb output
+   -verbose         Prints more details during testing
+</code></pre>
+
+<p>Example test run of the current as tests:</p>
+
+<pre><code>make astest
+~~~
+./as/test-debug-015.as...   NOT TESTED
+./as/test-debug-AllowDynamics.as... KNOWN ISSUE (Execution error)
+./as/test-debug-DivideByZeroTest.as...      KNOWN ISSUE (Compilation error)
+./as/test-debug-UntypedVariableTest.as...   KNOWN ISSUE (Compilation error)
+Done
+
+40 test cases passed (93.02%)
+1 test(s) ignored
+3 known issue(s)
+</code></pre>
+
+<p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
+
+<p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
@@ -168,19 +217,6 @@ playscript-3.2.4001
 playscript-3.2.5001
 playscript-3.2.6001
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Playscript 3.2.5001 Posted]]></title>
-    <link href="http://sushihangover.github.io/playscript-3-dot-2-5001-posted/"/>
-    <updated>2015-06-04T06:12:01-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-3-dot-2-5001-posted</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I posted up the PlayScript compiler 3.2.5001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into playscript-mono</p>
-
-<p>Been knocking these simple minors versions out, dreading the upcoming Mono 4.x changes&hellip;</p>
-
-<p>Setting up a GitHub organization for PlayScript, I&rsquo;ll let you know when it is up.</p>
 ]]></content>
   </entry>
   

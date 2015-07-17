@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-14T23:49:45-07:00</updated>
+  <updated>2015-07-16T20:20:16-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript : Tests Are Now Structured Like Mono's]]></title>
+    <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
+    <updated>2015-07-16T20:08:45-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
+    <content type="html"><![CDATA[<p>I <a href="https://github.com/PlayScriptRedux/playscript/pull/8">moved all the .play and .as tests</a> under the play_test directory. They are in two separtate dirs now, <strong>play</strong> for the extended PlayScript language/format and <strong>as</strong> for the standard ActionScript tests.</p>
+
+<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up coping the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch.</p>
+
+<h3>Playc-tester.exe</h3>
+
+<pre><code>mono playc-tester.exe
+PlayScript compiler tester, (C) 2009 Novell, Inc. (C) SushiHangover/RobertN
+playc-tester -mode:[pos|neg] -compiler:FILE -files:file-list [options]
+
+   -compiler:FILE   The file which will be used to compiler tests
+   -compiler-options:OPTIONS  Add global compiler options
+   -il:IL-FILE      XML file with expected IL details for each test
+   -issues:FILE     The list of expected failures
+   -log:FILE        Writes any output also to the file
+   -help            Lists all options
+   -mode:[pos|neg]  Specifies compiler test mode
+   -safe-execution  Runs compiled executables in separate app-domain
+   -update-il       Updates IL-FILE to match compiler output
+   -update-ref      Updates the debug xml to match debug compiler mdb output
+   -verbose         Prints more details during testing
+</code></pre>
+
+<p>Example test run of the current as tests:</p>
+
+<pre><code>make astest
+~~~
+./as/test-debug-015.as...   NOT TESTED
+./as/test-debug-AllowDynamics.as... KNOWN ISSUE (Execution error)
+./as/test-debug-DivideByZeroTest.as...      KNOWN ISSUE (Compilation error)
+./as/test-debug-UntypedVariableTest.as...   KNOWN ISSUE (Compilation error)
+Done
+
+40 test cases passed (93.02%)
+1 test(s) ignored
+3 known issue(s)
+</code></pre>
+
+<p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
+
+<p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
@@ -1062,97 +1111,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
     <content type="html"><![CDATA[<p>No matter what the <a href="http://www.slate.com/blogs/future_tense/2015/06/11/bloomberg_businessweek_s_38_000_word_piece_on_code_just_try_coding_yourself.html">Slate</a> says, Paul Ford&rsquo;s &ldquo;<a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">What is Code</a>&rdquo; desires to be read, if not by every programmer, then surely by every person that has to deal with programmers.</p>
 
 <p>The best thing, if you find any issues with the article, you can post a <a href="https://github.com/BloombergMedia/whatiscode/issues/new">Github issue</a>, I did. ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono / LLVM]]></title>
-    <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
-    <updated>2015-06-09T20:24:45-07:00</updated>
-    <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
-
-<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
-
-<p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
-
-<pre><code>    Note: The Mono web pages are notorious for begin out of date or lacking of details, even the 'new' ones, so I usually like confirmation. 
-</code></pre>
-
-<p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
-
-<p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
-
-<p>Enabling LLVM in Mono:</p>
-
-<ul>
-<li>Methods with Exceptions: No Help at all</li>
-<li>Numerics: Still rule</li>
-<li>String functions: No much help using LLVM, but 64-bit Mono kicks its 32-bit brother in the butt.</li>
-<li>Refection: Not much help either, as expected, but again 64-bit rules.</li>
-</ul>
-
-
-<p>Net Results:</p>
-
-<p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
-
-<p>Try it yourself: <a href="https://gist.github.com/sushihangover/3d4d9d53770c501bf054">Gist</a></p>
-
-<pre><code>mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-</code></pre>
-
-<p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
-
-<h2>Additional Reading:</h2>
-
-<ul>
-<li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
-<li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
-<li><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></li>
-</ul>
-
-
-<h2>Sample output:</h2>
-
-<pre><code>$which mono
-/Users/administrator/mono/mono-llvm-64/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-
-$mono perftest-64-release.exe 
-ArrayList strings test.............408 ms
-StringBuilder test.................499 ms
-Integer &amp; Floating ADD.............3616 ms
-Exception test.....................375 ms
-Reflection and recursion...........2730 ms
-
-$ mono --llvm perftest-64-release.exe 
-ArrayList strings test.............497 ms
-StringBuilder test.................505 ms
-Integer &amp; Floating ADD.............1620 ms
-Exception test.....................407 ms
-Reflection and recursion...........2790 ms
-
-$which mono
-/Users/administrator/mono/mono-llvm-32/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
-
-$mono perftest-32-release.exe 
-ArrayList strings test.............777 ms
-StringBuilder test.................958 ms
-Integer &amp; Floating ADD.............3610 ms
-Exception test.....................589 ms
-Reflection and recursion...........4557 ms
-
-mono --llvm perftest-32-release.exe 
-ArrayList strings test.............830 ms
-StringBuilder test.................873 ms
-Integer &amp; Floating ADD.............1731 ms
-Exception test.....................617 ms
-Reflection and recursion...........4441 ms
-</code></pre>
 ]]></content>
   </entry>
   
