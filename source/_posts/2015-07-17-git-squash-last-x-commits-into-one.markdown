@@ -14,7 +14,7 @@ Use git rebase -i <after> and replace "pick" on the second and subsequent commit
 
 Example:
 
-You want to squash the last three commits into one, so lets look at the log to make sure that you want you want and to grab the commit SHA:
+You want to squash the last three commits into one, so lets look at the log to make sure that is want you want and to grab the commit SHA:
 
 >git log -n 4 --pretty=oneline
 
