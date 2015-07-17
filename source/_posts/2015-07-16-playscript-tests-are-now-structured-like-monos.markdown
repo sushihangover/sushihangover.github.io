@@ -11,7 +11,7 @@ categories:
 ---
 I [moved all the .play and .as tests](https://github.com/PlayScriptRedux/playscript/pull/8) under the play_test directory. They are in two separtate dirs now, **play** for the extended PlayScript language/format and **as** for the standard ActionScript tests.
 
-In doing this and making them conform to how Mono's compiler tests are written and run, I ended up coping the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono's version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch.
+In doing this and making them conform to how Mono's compiler tests are written and run, I ended up copying the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono's version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch. This tool will have very little commit activity compared to the mcs.exe/playc.exe compilers.
 
 ### Playc-tester.exe
 
