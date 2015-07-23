@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-17T11:01:12-07:00</updated>
+  <updated>2015-07-23T11:28:20-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure]]></title>
+    <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
+    <updated>2015-07-23T11:21:41-07:00</updated>
+    <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
+    <content type="html"><![CDATA[<p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
+
+<p>If you are also getting it build failure, please add your findings to:</p>
+
+<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
+
+<p>It appears not to be OS dependent either:</p>
+
+<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac: Detect When Mac Sleeps or Wakes]]></title>
