@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-24T09:51:25-07:00</updated>
+  <updated>2015-07-24T14:13:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
+    <updated>2015-07-24T14:01:50-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
+    <content type="html"><![CDATA[<p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+-  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
+-   http://youtube.com/user/MuLexic</div>
+</div>
+
+</p>
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d World Global Example]]></title>
@@ -255,19 +288,6 @@ Make changes? [y/n]:y
 # Adding:   Assembly/AssemblyInfo.cs
 # Saving project:   Sample/Mono.CSharp.csproj
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script   Moved It A Github Organization]]></title>
-    <link href="http://sushihangover.github.io/playscript-moved-it-a-github-organization/"/>
-    <updated>2015-06-14T08:24:28-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-moved-it-a-github-organization</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>">  I transfered my PlayScript repo to an Github organization to help maintain the structure of the project.</p>
-
-<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
-
-<p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
 ]]></content>
   </entry>
   

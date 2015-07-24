@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-24T09:51:25-07:00</updated>
+  <updated>2015-07-24T14:13:57-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
+    <updated>2015-07-24T14:01:50-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
+    <content type="html"><![CDATA[<p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+-  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
+-   http://youtube.com/user/MuLexic</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin | A Company With A Cool Dev Sense]]></title>
@@ -1074,57 +1105,6 @@ Fix absolute paths to the assemblies that are passed in
 <li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git: Set Up A Fetch Only Remote | Disabling Push]]></title>
-    <link href="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/"/>
-    <updated>2015-06-14T14:57:37-07:00</updated>
-    <id>http://sushihangover.github.io/git-set-up-a-fetch-only-remote</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> The PlayScript repo on the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> Github organization I maintain is a down-stream fork of <a href="https://github.com/mono/mono">Mono</a> so I can fetch the changes to their master branch. I also have my own <a href="https://github.com/sushihangover/playscript">fork</a> of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the <a href="https://github.com/PlayScriptRedux/playscript">Redux based repo</a> from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
-
-<p>So after adding my additional remotes my local repo, it looks like this:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   https://github.com/PlayScriptRedux/playscript.git (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    https://github.com/mono/mono.git (push)
-</code></pre>
-
-<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
-
-<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
-
-<pre><code> git remote set-url --push upstream DISABLE
- git remote set-url --push redux DISABLE
-</code></pre>
-
-<p>And to see what that looks like now:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   DISABLE (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    DISABLE (push)
-</code></pre>
-
-<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
-
-<pre><code>git push redux
-fatal: 'DISABLE' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-</code></pre>
-
-<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
 ]]></content>
   </entry>
   
