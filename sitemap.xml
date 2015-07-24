@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-away3d-world-global-example/</loc>
+    <lastmod>2015-07-23T18:17:12-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/</loc>
     <lastmod>2015-07-23T11:21:41-07:00</lastmod>
   </url>
@@ -643,6 +647,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/xamarinstudio/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/away3d/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/posts/2/</loc>

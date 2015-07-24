@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gcc | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/gcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[GCC 4.9 Is Out With ARM Enhancements]]></title>
+    <title type="html"><![CDATA[Gcc 4.9 Is Out With Arm Enhancements]]></title>
     <link href="http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/"/>
     <updated>2014-04-22T18:35:15-07:00</updated>
     <id>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements</id>
@@ -118,7 +118,7 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
+    <title type="html"><![CDATA[Arm: Llvm And Why No Gpl]]></title>
     <link href="http://sushihangover.github.io/arm-llvm-and-why-no-gpl/"/>
     <updated>2014-04-11T07:28:16-07:00</updated>
     <id>http://sushihangover.github.io/arm-llvm-and-why-no-gpl</id>
@@ -133,7 +133,7 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ARM DS5 Compiler Price]]></title>
+    <title type="html"><![CDATA[Arm Ds5 Compiler Price]]></title>
     <link href="http://sushihangover.github.io/arm-compiler-price/"/>
     <updated>2014-03-18T06:30:29-07:00</updated>
     <id>http://sushihangover.github.io/arm-compiler-price</id>

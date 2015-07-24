@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Newlib | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/newlib/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ARM Cortex-M3 Bare-metal With NEWLIB]]></title>
+    <title type="html"><![CDATA[Arm Cortex M3 Bare Metal With Newlib]]></title>
     <link href="http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib/"/>
     <updated>2014-03-04T18:18:56-08:00</updated>
     <id>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib</id>

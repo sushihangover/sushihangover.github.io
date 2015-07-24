@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Play Script Away3d World Global Example - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I finally got all the bits together to get the OS-X OpenGL version of the PlayScript flash stage running the Away3d 3D engine. 500 ActionScript files &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/playscript-away3d-world-global-example/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Play Script Away3d World Global Example</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-23T18:17:12-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
+
+<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;cloc away3d-core-fp11
+</span><span class='line'>     464 text files.
+</span><span class='line'>     464 unique files.
+</span><span class='line'>      16 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                   443          12601          12443          54059
+</span><span class='line'>MSBuild script                   3              0              0           1551
+</span><span class='line'>C#                               3             39             11            111
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                           449          12640          12454          55721
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>&gt;cloc away3d-examples-fp11
+</span><span class='line'>     110 text files.
+</span><span class='line'>     109 unique files.
+</span><span class='line'>      60 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                    36           1936           2592           8073
+</span><span class='line'>Javascript                       2            121            148           1186
+</span><span class='line'>MSBuild script                   3              0              0            808
+</span><span class='line'>C#                               7            414             99            740
+</span><span class='line'>XML                              2             19             10            105
+</span><span class='line'>HTML                             2              7             29            102
+</span><span class='line'>CSS                              1              1              1              4
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                            53           2498           2879          11018
+</span><span class='line'>-------------------------------------------------------------------------------</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
+
+<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-07-23T18:17:12-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:17 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/actionscript/'>actionscript</a>, <a class='category' href='/blog/categories/away3d/'>away3d</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-away3d-world-global-example/" data-via="" data-counturl="http://sushihangover.github.io/playscript-away3d-world-global-example/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/" title="Previous Post: Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure">&laquo; Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/playscript-away3d-world-global-example/">Play Script Away3d World Global Example</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-squash-last-x-commits-into-one/">Git   Squash Last X Commits Into One</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-tests-are-now-structured-like-monos/">Play Script : Tests Are Now Structured Like Mono's</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-now-has-a-repl-playshell/">Play Script   Now Has A Repl (Playshell)</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/playscript-away3d-world-global-example/';
+        var disqus_url = 'http://sushihangover.github.io/playscript-away3d-world-global-example/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In my ARM Bare Metal searches for using Clang/LLVM I stumbled across The ELLCC Embedded Compiler Collection that provides a one-stop build enviroment &hellip;">
+  <meta name="description" content="I was working on a Irony/C# based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +83,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/ellcc-dot-org-build-fix-for-os-x/">Ellcc.org Build Fix for OS-X</a></h1>
+      <h1 class="entry-title"><a href="/gtksharp-explorer-update-for-irony/">Gtk Sharp Explorer Update For Irony</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,107 @@
 
 
 
-<time class='entry-date' datetime='2014-02-12'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2014-02-12T08:14:14-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:14 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png"><img class="left" src="images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png" width="360" height="240" title="Irony.GtkSharp.Explorer" alt="Irony GtkSharp Explorer"></a> I was working on a <a href="https://irony.codeplex.com">Irony/C#</a> based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin&rsquo;s Stetic Designer, not sure how those naming conflicts were not a compile time error&hellip;).</p>
+
+<p>Updated source for my Gtk# addition to Irony is on GitHub now. <strong>Remember that my additions are on the &ldquo;gtksharp-explorer&rdquo; branch.</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git branch --all
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>git checkout gtksharp-explorer
+</span><span class='line'>  Branch gtksharp-explorer <span class="nb">set </span>up to track remote branch gtksharp-explorer from origin.
+</span><span class='line'>  Switched to a new branch <span class="s1">&#39;gtksharp-explorer&#39;</span>
+</span><span class='line'>
+</span><span class='line'>git branch --all
+</span><span class='line'>* gtksharp-explorer
+</span><span class='line'>  master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/gtksharp-explorer
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/xplat-nunit-fix
+</span><span class='line'>open Irony_All.MonoDevelop.sln
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<hr />
+
+<h1>Grammar Explorer based on Gtk#</h1>
+
+<p><em>For cross-platform Irony work in Mono 3.2.X and MonoDevelop/Xamarin 4.1.X/4.2.X</em>
+Instructions for building on Mono:</p>
+
+<h2>Via MonoDevelop/Xamarin IDE:</h2>
+
+<ul>
+<li>Release or Debug Targets:
+      Load and build via the Irony_All.MonoDevelop.sln
+Via cmd line:</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li><p>Release:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Release/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+<li><p>Debug:
+xbuild /p:Configuration=Release Irony_All.MonoDevelop.sln
+mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ellcc-dot-org-build-fix-for-os-x/">Ellcc.Org Build Fix For Os X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-12T00:00:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
@@ -103,7 +203,7 @@
 
 <p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
 
-<blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC...</p><footer><strong>Rich</strong> <cite><a href='http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571'>What Is ELLCC All About</a></cite></footer></blockquote>
+<blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC...</p><footer><strong>Rich</strong> <cite><a href='http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571'>What Is Ellcc All About</a></cite></footer></blockquote>
 
 
 <p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
@@ -288,7 +388,7 @@ make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
       
   <header>
     
-      <h1 class="entry-title"><a href="/os-x-llvm-slash-clang-build/">OS-X LLVM / CLANG Build</a></h1>
+      <h1 class="entry-title"><a href="/os-x-llvm-slash-clang-build/">Os X Llvm / Clang Build</a></h1>
     
     
       <p class="meta">
@@ -297,7 +397,7 @@ make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
 
 
 
-<time class='entry-date' datetime='2014-02-11'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2014-02-11T00:00:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
@@ -341,7 +441,7 @@ make
       
   <header>
     
-      <h1 class="entry-title"><a href="/ometa-binary-data-parsing/">OMeta Binary Data Parsing</a></h1>
+      <h1 class="entry-title"><a href="/ometa-binary-data-parsing/">O Meta Binary Data Parsing</a></h1>
     
     
       <p class="meta">
@@ -350,7 +450,7 @@ make
 
 
 
-<time class='entry-date' datetime='2014-02-10'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2014-02-10T00:00:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
@@ -621,7 +721,7 @@ make
       
   <header>
     
-      <h1 class="entry-title"><a href="/moving-to-github-pages/">Moving to GitHub Pages</a></h1>
+      <h1 class="entry-title"><a href="/moving-to-github-pages/">Moving To Git Hub Pages</a></h1>
     
     
       <p class="meta">
@@ -656,7 +756,7 @@ make
       
   <header>
     
-      <h1 class="entry-title"><a href="/monomac-detect-when-mac-sleeps-or-wakes/">MonoMac: Detect When Mac Sleeps or Wakes</a></h1>
+      <h1 class="entry-title"><a href="/monomac-detect-when-mac-sleeps-or-wakes/">Mono Mac: Detect When Mac Sleeps Or Wakes</a></h1>
     
     
       <p class="meta">
@@ -706,7 +806,7 @@ make
       
   <header>
     
-      <h1 class="entry-title"><a href="/playscript-what-happened-to-the-open-source-version-on-github/">PlayScript :What Happened to the Open Source Version on GitHub</a></h1>
+      <h1 class="entry-title"><a href="/playscript-what-happened-to-the-open-source-version-on-github/">Play Script :What Happened To The Open Source Version On Git Hub</a></h1>
     
     
       <p class="meta">
@@ -752,23 +852,23 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure</a>
+        <a href="/playscript-away3d-world-global-example/">Play Script Away3d World Global Example</a>
       </li>
     
       <li class="post">
-        <a href="/git-squash-last-x-commits-into-one/">Git - Squash Last X Commits Into One</a>
+        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests Are Now Structured Like Mono's</a>
+        <a href="/git-squash-last-x-commits-into-one/">Git   Squash Last X Commits Into One</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now Has a REPL (Playshell)</a>
+        <a href="/playscript-tests-are-now-structured-like-monos/">Play Script : Tests Are Now Structured Like Mono's</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a>
+        <a href="/playscript-now-has-a-repl-playshell/">Play Script   Now Has A Repl (Playshell)</a>
       </li>
     
   </ul>

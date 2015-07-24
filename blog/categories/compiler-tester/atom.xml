@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Compiler-tester | SushiHangover]]></title>
+  <title><![CDATA[Category: Compiler Tester | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/compiler-tester/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[PlayScript : Tests Are Now Structured Like Mono's]]></title>
+    <title type="html"><![CDATA[Play Script : Tests Are Now Structured Like Mono's]]></title>
     <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
     <updated>2015-07-16T20:08:45-07:00</updated>
     <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>

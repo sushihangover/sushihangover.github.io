@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. &hellip;">
+  <meta name="description" content="After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them. You can not do a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +83,60 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?</a></h1>
+      <h1 class="entry-title"><a href="/git-review-a-merge-before-committing/">Git   Review A Merge Before Committing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T09:44:07-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:44 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
+
+<p>You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
+
+<pre><code>git merge --no-commit --no-ff branchname
+</code></pre>
+
+<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
+
+<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
+
+<pre><code>review = merge --no-ff --no-commit
+</code></pre>
+
+<p>So in looking at upstream changes:</p>
+
+<pre><code>git fetch upstream
+git review upstream/master
+git status
+</code></pre>
+
+<p>If you wish to back those changes, just reset that merge:</p>
+
+<pre><code>git reset --merge
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?</a></h1>
     
     
       <p class="meta">
@@ -161,7 +214,7 @@ git merge upstream/master
       
   <header>
     
-      <h1 class="entry-title"><a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a></h1>
+      <h1 class="entry-title"><a href="/c-number-native-interop-helloworld/">C#   Native Interop Helloworld</a></h1>
     
     
       <p class="meta">
@@ -251,7 +304,7 @@ namespace InteropDemo
       
   <header>
     
-      <h1 class="entry-title"><a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage Using the New Coverage Filter</a></h1>
+      <h1 class="entry-title"><a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono   Code Coverage Using The New Coverage Filter</a></h1>
     
     
       <p class="meta">
@@ -330,7 +383,7 @@ Date:   Fri Feb 27 10:13:54 2015 +0000
       
   <header>
     
-      <h1 class="entry-title"><a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a></h1>
+      <h1 class="entry-title"><a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">Curses Sharp   64 Bit N Curses On Os X And Mono</a></h1>
     
     
       <p class="meta">
@@ -478,7 +531,7 @@ UnicodeDemo
       
   <header>
     
-      <h1 class="entry-title"><a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a></h1>
+      <h1 class="entry-title"><a href="/monocov-building-on-os-x/">Mono Cov   Building On Os X</a></h1>
     
     
       <p class="meta">
@@ -566,7 +619,7 @@ monocov
       
   <header>
     
-      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a></h1>
+      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags   Release X Cor Flags Version 1.0.5643.36015</a></h1>
     
     
       <p class="meta">
@@ -624,7 +677,7 @@ Fix absolute paths to the assemblies that are passed in
       
   <header>
     
-      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a></h1>
+      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags   Release X Cor Flags Version 1.0.5643.30429</a></h1>
     
     
       <p class="meta">
@@ -674,7 +727,7 @@ Fix absolute paths to the assemblies that are passed in
       
   <header>
     
-      <h1 class="entry-title"><a href="/git-set-up-a-fetch-only-remote/">Git: Set Up a Fetch-only Remote | Disabling Push</a></h1>
+      <h1 class="entry-title"><a href="/git-set-up-a-fetch-only-remote/">Git: Set Up A Fetch Only Remote | Disabling Push</a></h1>
     
     
       <p class="meta">
@@ -745,7 +798,7 @@ and the repository exists.
       
   <header>
     
-      <h1 class="entry-title"><a href="/corflags-cross-platform-release-on-github/">CorFlags Conversion Tool - Cross-platform Release on Github</a></h1>
+      <h1 class="entry-title"><a href="/corflags-cross-platform-release-on-github/">Cor Flags Conversion Tool   Cross Platform Release On Github</a></h1>
     
     
       <p class="meta">
@@ -875,92 +928,6 @@ Signed    : 0
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/ms-corflags-showing-incorrect-flags/">MS CorFlags - Showing Incorrect Flags</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T10:40:23-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:40 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged CIL PE image, it does not show that the COMIMAGE_FLAGS_32BITREQUIRED as being set.</p>
-
-<p>In the case of this output:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 0
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 0x20003 flags breaks down into:</p>
-
-<ul>
-<li>32BITPREFERRED (0x20000)</li>
-<li>32BITREQUIRED (0x00002)</li>
-<li>ILONLY (0x00001)</li>
-</ul>
-
-
-<p>So why is <strong>32BITREQ</strong> not shown as selected?</p>
-
-<p>My <a href="https://github.com/sushihangover/corflags">xplat version of CorFlags</a> shows the following:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 1
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag&hellip;. so who is right?</p>
-
-<p>Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), is that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat <a href="https://github.com/sushihangover/corflags/issues/new">CorFlags</a> project (Thanks).</p>
-
-<h2>Misc:</h2>
-
-<p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
-
-<blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5...)</p></blockquote>
-
-
-<p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
-
-<pre><code>COMIMAGE_FLAGS_ILONLY               =0x00000001,
-COMIMAGE_FLAGS_32BITREQUIRED        =0x00000002,
-COMIMAGE_FLAGS_IL_LIBRARY           =0x00000004,
-COMIMAGE_FLAGS_STRONGNAMESIGNED     =0x00000008,
-COMIMAGE_FLAGS_NATIVE_ENTRYPOINT    =0x00000010,
-COMIMAGE_FLAGS_TRACKDEBUGDATA       =0x00010000,
-COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -978,23 +945,23 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure</a>
+        <a href="/playscript-away3d-world-global-example/">Play Script Away3d World Global Example</a>
       </li>
     
       <li class="post">
-        <a href="/git-squash-last-x-commits-into-one/">Git - Squash Last X Commits Into One</a>
+        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests Are Now Structured Like Mono's</a>
+        <a href="/git-squash-last-x-commits-into-one/">Git   Squash Last X Commits Into One</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now Has a REPL (Playshell)</a>
+        <a href="/playscript-tests-are-now-structured-like-monos/">Play Script : Tests Are Now Structured Like Mono's</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a>
+        <a href="/playscript-now-has-a-repl-playshell/">Play Script   Now Has A Repl (Playshell)</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git - Squash Last X Commits Into One]]></title>
+    <title type="html"><![CDATA[Git   Squash Last X Commits Into One]]></title>
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
@@ -72,7 +72,7 @@ Successfully rebased and updated refs/heads/play-tests.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Turn Multiple Commits Into a Single Commit]]></title>
+    <title type="html"><![CDATA[Git   Turn Multiple Commits Into A Single Commit]]></title>
     <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
     <updated>2015-06-30T18:10:36-07:00</updated>
     <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
@@ -110,7 +110,7 @@ git commit
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Create a New Branch With Non-commited Changes]]></title>
+    <title type="html"><![CDATA[Git   Create A New Branch With Non Commited Changes]]></title>
     <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
     <updated>2015-06-29T05:28:05-07:00</updated>
     <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
@@ -126,7 +126,7 @@ git checkout newbranch
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Review a Merge Before Committing]]></title>
+    <title type="html"><![CDATA[Git   Review A Merge Before Committing]]></title>
     <link href="http://sushihangover.github.io/git-review-a-merge-before-committing/"/>
     <updated>2015-06-24T09:44:07-07:00</updated>
     <id>http://sushihangover.github.io/git-review-a-merge-before-committing</id>
@@ -159,7 +159,7 @@ git status
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?]]></title>
+    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?]]></title>
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>

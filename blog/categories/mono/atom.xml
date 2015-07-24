@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,78 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure]]></title>
+    <title type="html"><![CDATA[Play Script Away3d World Global Example]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-world-global-example/"/>
+    <updated>2015-07-23T18:17:12-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-world-global-example</id>
+    <content type="html"><![CDATA[<p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
+
+<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
+
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
+</div>
+
+</p>
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
+
+<pre><code>&gt;cloc away3d-core-fp11
+     464 text files.
+     464 unique files.
+      16 files ignored.
+
+http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+ActionScript                   443          12601          12443          54059
+MSBuild script                   3              0              0           1551
+C#                               3             39             11            111
+-------------------------------------------------------------------------------
+SUM:                           449          12640          12454          55721
+-------------------------------------------------------------------------------
+&gt;cloc away3d-examples-fp11
+     110 text files.
+     109 unique files.
+      60 files ignored.
+
+http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+ActionScript                    36           1936           2592           8073
+Javascript                       2            121            148           1186
+MSBuild script                   3              0              0            808
+C#                               7            414             99            740
+XML                              2             19             10            105
+HTML                             2              7             29            102
+CSS                              1              1              1              4
+-------------------------------------------------------------------------------
+SUM:                            53           2498           2879          11018
+-------------------------------------------------------------------------------
+</code></pre>
+
+<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
+
+<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure]]></title>
     <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
     <updated>2015-07-23T11:21:41-07:00</updated>
     <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
@@ -31,7 +102,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript : Tests Are Now Structured Like Mono's]]></title>
+    <title type="html"><![CDATA[Play Script : Tests Are Now Structured Like Mono's]]></title>
     <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
     <updated>2015-07-16T20:08:45-07:00</updated>
     <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
@@ -80,7 +151,7 @@ Done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
+    <title type="html"><![CDATA[Play Script   Now Has A Repl (Playshell)]]></title>
     <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
     <updated>2015-07-15T06:35:49-07:00</updated>
     <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
@@ -108,7 +179,7 @@ Done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript Redux - Make2CSProjUpdater]]></title>
+    <title type="html"><![CDATA[Play Script Redux   Make2 Cs Proj Updater]]></title>
     <link href="http://sushihangover.github.io/playscript-redux-make2csprojupdater/"/>
     <updated>2015-07-14T15:06:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-redux-make2csprojupdater</id>
@@ -201,67 +272,6 @@ Make changes? [y/n]:y
 # Adding:   Assembly/AssemblyInfo.cs
 # Saving project:   Sample/Mono.CSharp.csproj
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X + Mono + Rosyln + CodeFormatter]]></title>
-    <link href="http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/"/>
-    <updated>2015-06-25T06:20:17-07:00</updated>
-    <id>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter</id>
-    <content type="html"><![CDATA[<p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
-
-<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
-
-<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
-
-<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
-
-<p>But those projects are not needed to get the main program working&hellip;</p>
-
-<h3>mono ./CodeFormatter.exe</h3>
-
-<pre><code>Must specify at least one project / solution / rsp to format
-CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
-    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
-    [/rule(+|-):rule1,rule2,...]  [/verbose]
-    &lt;project, solution or response file&gt;
-
-    /file        - Only apply changes to files with specified name
-    /lang        - Specifies the language to use when a responsefile is
-                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
-    /c           - Additional preprocessor configurations the formatter
-                   should run under.
-    /copyright   - Specifies file containing copyright header.
-                   Use ConvertTests to convert MSTest tests to xUnit.
-    /nocopyright - Do not update the copyright message.
-    /tables      - Let tables opt out of formatting by defining
-                   DOTNET_FORMATTER
-    /nounicode   - Do not convert unicode strings to escape sequences
-    /rule(+|-)   - Enable (default) or disable the specified rule
-    /rules       - List the available rules
-    /verbose     - Verbose output
-</code></pre>
-
-<h3>mono ./CodeFormatter.exe /rules</h3>
-
-<pre><code>Name                 Description
-==============================================
-BraceNewLine         :Ensure all braces occur on a new line
-Copyright            :Insert the copyright header into every file
-NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
-CustomCopyright      :Remove any custom copyright header from the file
-UsingLocation        :Place using directives outside namespace declarations
-UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
-ExplicitVisibility   :Ensure all members have an explicit visibility modifier
-IllegalHeaders       :Remove illegal headers from files
-FormatDocument       :Run the language specific formatter on every document
-ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
-ReadonlyFields       :Mark fields which can be readonly as readonly
-FieldNames           :Prefix private fields with _ and statics with s_
-</code></pre>
-
-<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
 ]]></content>
   </entry>
   

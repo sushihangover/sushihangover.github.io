@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,110 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure]]></title>
+    <title type="html"><![CDATA[Play Script Away3d World Global Example]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-world-global-example/"/>
+    <updated>2015-07-23T18:17:12-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-world-global-example</id>
+    <content type="html"><![CDATA[<p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
+
+<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;cloc away3d-core-fp11
+</span><span class='line'>     464 text files.
+</span><span class='line'>     464 unique files.
+</span><span class='line'>      16 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                   443          12601          12443          54059
+</span><span class='line'>MSBuild script                   3              0              0           1551
+</span><span class='line'>C#                               3             39             11            111
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                           449          12640          12454          55721
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>&gt;cloc away3d-examples-fp11
+</span><span class='line'>     110 text files.
+</span><span class='line'>     109 unique files.
+</span><span class='line'>      60 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                    36           1936           2592           8073
+</span><span class='line'>Javascript                       2            121            148           1186
+</span><span class='line'>MSBuild script                   3              0              0            808
+</span><span class='line'>C#                               7            414             99            740
+</span><span class='line'>XML                              2             19             10            105
+</span><span class='line'>HTML                             2              7             29            102
+</span><span class='line'>CSS                              1              1              1              4
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                            53           2498           2879          11018
+</span><span class='line'>-------------------------------------------------------------------------------</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
+
+<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure]]></title>
     <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
     <updated>2015-07-23T11:21:41-07:00</updated>
     <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
@@ -31,7 +134,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Squash Last X Commits Into One]]></title>
+    <title type="html"><![CDATA[Git   Squash Last X Commits Into One]]></title>
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
@@ -89,7 +192,7 @@ Successfully rebased and updated refs/heads/play-tests.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript : Tests Are Now Structured Like Mono's]]></title>
+    <title type="html"><![CDATA[Play Script : Tests Are Now Structured Like Mono's]]></title>
     <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
     <updated>2015-07-16T20:08:45-07:00</updated>
     <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
@@ -138,7 +241,7 @@ Done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript - Now Has a REPL (Playshell)]]></title>
+    <title type="html"><![CDATA[Play Script   Now Has A Repl (Playshell)]]></title>
     <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
     <updated>2015-07-15T06:35:49-07:00</updated>
     <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
@@ -166,7 +269,7 @@ Done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PlayScript Redux - Make2CSProjUpdater]]></title>
+    <title type="html"><![CDATA[Play Script Redux   Make2 Cs Proj Updater]]></title>
     <link href="http://sushihangover.github.io/playscript-redux-make2csprojupdater/"/>
     <updated>2015-07-14T15:06:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-redux-make2csprojupdater</id>
@@ -263,7 +366,7 @@ Make changes? [y/n]:y
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Turn Multiple Commits Into a Single Commit]]></title>
+    <title type="html"><![CDATA[Git   Turn Multiple Commits Into A Single Commit]]></title>
     <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
     <updated>2015-06-30T18:10:36-07:00</updated>
     <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
@@ -301,7 +404,7 @@ git commit
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Create a New Branch With Non-commited Changes]]></title>
+    <title type="html"><![CDATA[Git   Create A New Branch With Non Commited Changes]]></title>
     <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
     <updated>2015-06-29T05:28:05-07:00</updated>
     <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
@@ -317,7 +420,7 @@ git checkout newbranch
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[OS-X + Mono + Rosyln + CodeFormatter]]></title>
+    <title type="html"><![CDATA[Os X + Mono + Rosyln + Code Formatter]]></title>
     <link href="http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/"/>
     <updated>2015-06-25T06:20:17-07:00</updated>
     <id>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter</id>
@@ -378,7 +481,7 @@ FieldNames           :Prefix private fields with _ and statics with s_
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono - NUnit Hello World]]></title>
+    <title type="html"><![CDATA[Mono   N Unit Hello World]]></title>
     <link href="http://sushihangover.github.io/mono-nunit-world-world/"/>
     <updated>2015-06-24T22:11:16-07:00</updated>
     <id>http://sushihangover.github.io/mono-nunit-world-world</id>
@@ -450,7 +553,7 @@ Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git - Review a Merge Before Committing]]></title>
+    <title type="html"><![CDATA[Git   Review A Merge Before Committing]]></title>
     <link href="http://sushihangover.github.io/git-review-a-merge-before-committing/"/>
     <updated>2015-06-24T09:44:07-07:00</updated>
     <id>http://sushihangover.github.io/git-review-a-merge-before-committing</id>
@@ -483,7 +586,7 @@ git status
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind-of, Now What?]]></title>
+    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?]]></title>
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
@@ -541,7 +644,7 @@ git merge upstream/master
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[C# - Native Interop Helloworld]]></title>
+    <title type="html"><![CDATA[C#   Native Interop Helloworld]]></title>
     <link href="http://sushihangover.github.io/c-number-native-interop-helloworld/"/>
     <updated>2015-06-23T18:40:28-07:00</updated>
     <id>http://sushihangover.github.io/c-number-native-interop-helloworld</id>
@@ -611,7 +714,7 @@ namespace InteropDemo
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono - Code Coverage Using the New Coverage Filter]]></title>
+    <title type="html"><![CDATA[Mono   Code Coverage Using The New Coverage Filter]]></title>
     <link href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/"/>
     <updated>2015-06-15T21:33:29-07:00</updated>
     <id>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter</id>
@@ -670,7 +773,7 @@ Date:   Fri Feb 27 10:13:54 2015 +0000
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
+    <title type="html"><![CDATA[Curses Sharp   64 Bit N Curses On Os X And Mono]]></title>
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
@@ -798,7 +901,7 @@ UnicodeDemo
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[MonoCov - Building on OS-X]]></title>
+    <title type="html"><![CDATA[Mono Cov   Building On Os X]]></title>
     <link href="http://sushihangover.github.io/monocov-building-on-os-x/"/>
     <updated>2015-06-15T10:52:29-07:00</updated>
     <id>http://sushihangover.github.io/monocov-building-on-os-x</id>
@@ -866,7 +969,7 @@ monocov
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
+    <title type="html"><![CDATA[Corflags   Release X Cor Flags Version 1.0.5643.36015]]></title>
     <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/"/>
     <updated>2015-06-15T06:09:45-07:00</updated>
     <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015</id>
@@ -904,7 +1007,7 @@ Fix absolute paths to the assemblies that are passed in
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
+    <title type="html"><![CDATA[Corflags   Release X Cor Flags Version 1.0.5643.30429]]></title>
     <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/"/>
     <updated>2015-06-14T19:09:45-07:00</updated>
     <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429</id>
@@ -934,7 +1037,7 @@ Fix absolute paths to the assemblies that are passed in
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git: Set Up a Fetch-only Remote | Disabling Push]]></title>
+    <title type="html"><![CDATA[Git: Set Up A Fetch Only Remote | Disabling Push]]></title>
     <link href="http://sushihangover.github.io/git-set-up-a-fetch-only-remote/"/>
     <updated>2015-06-14T14:57:37-07:00</updated>
     <id>http://sushihangover.github.io/git-set-up-a-fetch-only-remote</id>
@@ -985,7 +1088,7 @@ and the repository exists.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[CorFlags Conversion Tool - Cross-platform Release on Github]]></title>
+    <title type="html"><![CDATA[Cor Flags Conversion Tool   Cross Platform Release On Github]]></title>
     <link href="http://sushihangover.github.io/corflags-cross-platform-release-on-github/"/>
     <updated>2015-06-14T11:24:42-07:00</updated>
     <id>http://sushihangover.github.io/corflags-cross-platform-release-on-github</id>
@@ -1096,72 +1199,6 @@ Signed    : 0
 <li>Linux</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MS CorFlags - Showing Incorrect Flags]]></title>
-    <link href="http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/"/>
-    <updated>2015-06-14T10:40:23-07:00</updated>
-    <id>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags</id>
-    <content type="html"><![CDATA[<p>In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged CIL PE image, it does not show that the COMIMAGE_FLAGS_32BITREQUIRED as being set.</p>
-
-<p>In the case of this output:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 0
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 0x20003 flags breaks down into:</p>
-
-<ul>
-<li>32BITPREFERRED (0x20000)</li>
-<li>32BITREQUIRED (0x00002)</li>
-<li>ILONLY (0x00001)</li>
-</ul>
-
-
-<p>So why is <strong>32BITREQ</strong> not shown as selected?</p>
-
-<p>My <a href="https://github.com/sushihangover/corflags">xplat version of CorFlags</a> shows the following:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 1
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag&hellip;. so who is right?</p>
-
-<p>Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), is that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat <a href="https://github.com/sushihangover/corflags/issues/new">CorFlags</a> project (Thanks).</p>
-
-<h2>Misc:</h2>
-
-<p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
-
-<blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5...)</p></blockquote>
-
-
-<p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
-
-<pre><code>COMIMAGE_FLAGS_ILONLY               =0x00000001,
-COMIMAGE_FLAGS_32BITREQUIRED        =0x00000002,
-COMIMAGE_FLAGS_IL_LIBRARY           =0x00000004,
-COMIMAGE_FLAGS_STRONGNAMESIGNED     =0x00000008,
-COMIMAGE_FLAGS_NATIVE_ENTRYPOINT    =0x00000010,
-COMIMAGE_FLAGS_TRACKDEBUGDATA       =0x00010000,
-COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
-</code></pre>
 ]]></content>
   </entry>
   

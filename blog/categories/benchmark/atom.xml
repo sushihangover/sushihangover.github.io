@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Benchmark | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/benchmark/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Mono - Another Benchmark Between 32-bit and 64-bit Mono / LLVM]]></title>
+    <title type="html"><![CDATA[Mono   Another Benchmark Between 32 Bit And 64 Bit Mono / Llvm]]></title>
     <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
     <updated>2015-06-09T20:24:45-07:00</updated>
     <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
@@ -105,7 +105,7 @@ Reflection and recursion...........4441 ms
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono - 64-bit vs. 32-bit Benchmark Using SciMark]]></title>
+    <title type="html"><![CDATA[Mono   64 Bit Vs. 32 Bit Benchmark Using Sci Mark]]></title>
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
     <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>

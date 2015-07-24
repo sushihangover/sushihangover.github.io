@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied. I borrowed one of the cos &hellip;">
+  <meta name="description" content="This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral. This peripheral can be used to provide the core timer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +83,209 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/llvm-cmsis-dsp-and-cortex-m3-and-m0/">LLVM, CMSIS DSP and Cortex-M3 &amp; M0</a></h1>
+      <h1 class="entry-title"><a href="/cortex-m-systick-polling-vs-interrupts/">Cortex M0 & M3 Sys Tick: Polling Vs. Interrupt Driven</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-09T19:24:34-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:24 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="/images/ARM_CortexM_CMSIS_small.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
+
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
+
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
+
+<p>The semihosting output of this app (via QEMU):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+</span><span class='line'>SysTick should not be active yet...
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>Enable SysTick and lets poll it...
+</span><span class='line'>...Current value: 6913
+</span><span class='line'>...Current value: 2825
+</span><span class='line'>...Current value: 2450
+</span><span class='line'>...Current value: 2138
+</span><span class='line'>...Current value: 1825
+</span><span class='line'>...Current value: 1525
+</span><span class='line'>...Current value: 1225
+</span><span class='line'>...Current value: 913
+</span><span class='line'>...Current value: 613
+</span><span class='line'>...Current value: 313
+</span><span class='line'>Enable SysTick Interrupts and watch <span class="nb">local </span>var get incremented...
+</span><span class='line'>...myTicks <span class="o">=</span> 1<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 0
+</span><span class='line'>...myTicks <span class="o">=</span> 2<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3425
+</span><span class='line'>...myTicks <span class="o">=</span> 3<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8725
+</span><span class='line'>...myTicks <span class="o">=</span> 4<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 5<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8113
+</span><span class='line'>...myTicks <span class="o">=</span> 6<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2550
+</span><span class='line'>...myTicks <span class="o">=</span> 7<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 7725
+</span><span class='line'>...myTicks <span class="o">=</span> 8<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 9<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8125
+</span><span class='line'>...myTicks <span class="o">=</span> 10<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2563
+</span><span class='line'>...myTicks <span class="o">=</span> 11<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8100
+</span><span class='line'>...myTicks <span class="o">=</span> 12<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3038
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;CortexM3_xx.h&quot;</span>
+</span><span class='line'><span class="cp">#include &lt;core_cm3.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdint.h&gt; </span>
+</span><span class='line'><span class="cp">#include &quot;svc.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">myTicks</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">SysTick_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">myTicks</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...myTicks = %lu; SysTick-&gt;VAL = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">myTicks</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;SysTick should not be active yet...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick and lets poll it...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">clock</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">LOAD</span> <span class="o">=</span> <span class="n">clock</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_CLKSOURCE_Msk : Use core&#39;s clock</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_ENABLE_Msk    : Enable SysTick</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_ENABLE_Msk</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick Interrupts and watch local var get incremented...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">myTicks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span>  <span class="n">SysTick_CTRL_ENABLE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_TICKINT_Msk</span><span class="p">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">myTicks</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">asm</span><span class="p">(</span><span class="s">&quot;nop&quot;</span><span class="p">);</span> <span class="c1">// Do nothing till SysTick_Handler been been called at least 10 times</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/llvm-cmsis-dsp-and-cortex-m3-and-m0/">Llvm, Cmsis Dsp And Cortex M3 &Amp; M0</a></h1>
     
     
       <p class="meta">
@@ -352,7 +554,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/cortex-m0-vs-m3-llvm-and-ld/">Cortex-M0 vs. M3 : LLVM and LD</a></h1>
+      <h1 class="entry-title"><a href="/cortex-m0-vs-m3-llvm-and-ld/">Cortex M0 Vs. M3 : Llvm And Ld</a></h1>
     
     
       <p class="meta">
@@ -524,7 +726,7 @@ architecture</th>
       
   <header>
     
-      <h1 class="entry-title"><a href="/arm-cortex-m3-bare-metal-with-newlib/">ARM Cortex-M3 Bare-metal With NEWLIB</a></h1>
+      <h1 class="entry-title"><a href="/arm-cortex-m3-bare-metal-with-newlib/">Arm Cortex M3 Bare Metal With Newlib</a></h1>
     
     
       <p class="meta">
@@ -991,7 +1193,7 @@ architecture</th>
       
   <header>
     
-      <h1 class="entry-title"><a href="/arm-cortex-m-semihosting-with-qemu/">ARM Cortex-M Semihosting</a></h1>
+      <h1 class="entry-title"><a href="/arm-cortex-m-semihosting-with-qemu/">Arm Cortex M Semihosting</a></h1>
     
     
       <p class="meta">
@@ -1180,7 +1382,7 @@ architecture</th>
       
   <header>
     
-      <h1 class="entry-title"><a href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section/">LLVM and the ARM ELF .ARM.exidx* Section</a></h1>
+      <h1 class="entry-title"><a href="/llvm-and-the-arm-elf-arm-dot-exidx-star-section/">Llvm And The Arm Elf .Arm.Exidx* Section</a></h1>
     
     
       <p class="meta">
@@ -1327,7 +1529,7 @@ that any code they throw exceptions through has proper unwinding information.</p
       
   <header>
     
-      <h1 class="entry-title"><a href="/arm-bare-metal-comparing-llvm-to-arm-gcc/">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a></h1>
+      <h1 class="entry-title"><a href="/arm-bare-metal-comparing-llvm-to-arm-gcc/">Arm Bare Metal Hello World: Comparing Llvm & Arm Gcc</a></h1>
     
     
       <p class="meta">
@@ -1677,7 +1879,7 @@ that any code they throw exceptions through has proper unwinding information.</p
       
   <header>
     
-      <h1 class="entry-title"><a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">OS-X : Using DiffMerge as Your Git Visual Merge and Diff Tool</a></h1>
+      <h1 class="entry-title"><a href="/using-diffmerge-as-your-git-visual-merge-and-diff-tool/">Os X : Using Diff Merge As Your Git Visual Merge And Diff Tool</a></h1>
     
     
       <p class="meta">
@@ -1758,7 +1960,7 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
       
   <header>
     
-      <h1 class="entry-title"><a href="/llvm-arm-triple-cpu-targets/">LLVM ARM Triple CPU Targets</a></h1>
+      <h1 class="entry-title"><a href="/llvm-arm-triple-cpu-targets/">Llvm Arm Triple Cpu Targets</a></h1>
     
     
       <p class="meta">
@@ -1900,55 +2102,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/building-lldb-on-mac-os-x/">BUILDING LLDB on MAC OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-18T08:21:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:21 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/llvm/tools/lldb/tools/debugserver/source/MacOSX/dbgnub-mig.defs:13:10: fatal error: 'DNBConfig.h' file not found
-</span><span class='line'>#include "DNBConfig.h"
-</span><span class='line'>         ^
-</span><span class='line'>1 error generated.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I was trying to build LLDB &lsquo;out-of-source&rsquo; at the same time as LLVM, Polly, cloog, libcxx, etc&hellip; using ninja and got the error above. Missing source from a LLVM sub-project? I really doubted that and was right&hellip;</p>
-
-<blockquote><p>DNBConfig.h is autogenerated by a perl script that is run as a build script in XCode. XCode is responsible for calling the script and setting the include paths correctly to locate it. The file will exist in the derived sources directory in the build folder.</p></blockquote>
-
-<p>Well, the <a href="http://lldb.llvm.org/build.html">LLDB build instructions</a> are <em>clear</em> in that you need to build lldb from Xcode when on OS-X but I &lsquo;assumed&rsquo; that the <em>make</em> would call &ldquo;"xcodebuild -workspace lldb.xcworkspace -configuration Release -scheme LLVB clean build&rdquo; or some like that to build it&hellip; but I assumed wrong :-( &hellip; thus your ninja/make build will always fail&hellip;</p>
-
-<p>I also can not find a disable option for LLDB when running llvm&rsquo;s &lsquo;configure&rsquo;, so if you have the lldb source in llvm/tools your configure will always include it and thus your build will always fail..?&hellip;</p>
-
-<p>Why is this? Is this due to Apple preventing an <strong><em>un-codesigned</em></strong> version to be built/run on OS-X? Really confused by the whole thing. If someone knows, ping me&hellip; thanks&hellip;</p>
-
-<p>Note: This is only on OS-X, building LLDB that has been included under llvm/tools under Linux/FreeBSD works as expected&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1966,23 +2119,23 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / MonoDevelop - 'Unexpected Binary Element: 0' Build Failure</a>
+        <a href="/playscript-away3d-world-global-example/">Play Script Away3d World Global Example</a>
       </li>
     
       <li class="post">
-        <a href="/git-squash-last-x-commits-into-one/">Git - Squash Last X Commits Into One</a>
+        <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests Are Now Structured Like Mono's</a>
+        <a href="/git-squash-last-x-commits-into-one/">Git   Squash Last X Commits Into One</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now Has a REPL (Playshell)</a>
+        <a href="/playscript-tests-are-now-structured-like-monos/">Play Script : Tests Are Now Structured Like Mono's</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a>
+        <a href="/playscript-now-has-a-repl-playshell/">Play Script   Now Has A Repl (Playshell)</a>
       </li>
     
   </ul>

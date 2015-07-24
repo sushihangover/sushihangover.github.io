@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clang | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/clang/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Stripping the Build Prefix From Cross-compiled Binaries]]></title>
+    <title type="html"><![CDATA[Stripping The Build Prefix From Cross Compiled Binaries]]></title>
     <link href="http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/"/>
     <updated>2015-06-09T06:14:24-07:00</updated>
     <id>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries</id>
@@ -44,7 +44,7 @@ done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[LLVM 3.4.1]]></title>
+    <title type="html"><![CDATA[Llvm 3.4.1]]></title>
     <link href="http://sushihangover.github.io/llvm-3-dot-4-1/"/>
     <updated>2014-04-12T06:05:07-07:00</updated>
     <id>http://sushihangover.github.io/llvm-3-dot-4-1</id>
@@ -68,7 +68,7 @@ done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ARM: LLVM and Why No GPL]]></title>
+    <title type="html"><![CDATA[Arm: Llvm And Why No Gpl]]></title>
     <link href="http://sushihangover.github.io/arm-llvm-and-why-no-gpl/"/>
     <updated>2014-04-11T07:28:16-07:00</updated>
     <id>http://sushihangover.github.io/arm-llvm-and-why-no-gpl</id>
@@ -83,7 +83,7 @@ done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
+    <title type="html"><![CDATA[Arm Starts Move To Llvm]]></title>
     <link href="http://sushihangover.github.io/arm-starts-move-to-llvm/"/>
     <updated>2014-04-10T22:03:36-07:00</updated>
     <id>http://sushihangover.github.io/arm-starts-move-to-llvm</id>
@@ -100,7 +100,7 @@ done
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[BKPT: Printf Service Calls on the Cortex-M0]]></title>
+    <title type="html"><![CDATA[Bkpt: Printf Service Calls On The Cortex M0]]></title>
     <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/"/>
     <updated>2014-03-26T20:54:58-07:00</updated>
     <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>

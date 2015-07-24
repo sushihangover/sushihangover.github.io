@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cortex | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/cortex/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-23T11:28:20-07:00</updated>
+  <updated>2015-07-23T19:31:31-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ARM Starts Move to LLVM]]></title>
+    <title type="html"><![CDATA[Arm Starts Move To Llvm]]></title>
     <link href="http://sushihangover.github.io/arm-starts-move-to-llvm/"/>
     <updated>2014-04-10T22:03:36-07:00</updated>
     <id>http://sushihangover.github.io/arm-starts-move-to-llvm</id>
@@ -31,7 +31,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ARM Cortex-M0 Overview]]></title>
+    <title type="html"><![CDATA[Arm Cortex M0 Overview]]></title>
     <link href="http://sushihangover.github.io/arm-cortex-m0-overview/"/>
     <updated>2014-02-17T06:02:25-08:00</updated>
     <id>http://sushihangover.github.io/arm-cortex-m0-overview</id>
@@ -46,7 +46,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Bare Metal ARM Terminology]]></title>
+    <title type="html"><![CDATA[Bare Metal Arm Terminology]]></title>
     <link href="http://sushihangover.github.io/bare-metal-arm-terminology/"/>
     <updated>2014-02-16T21:35:45-08:00</updated>
     <id>http://sushihangover.github.io/bare-metal-arm-terminology</id>
