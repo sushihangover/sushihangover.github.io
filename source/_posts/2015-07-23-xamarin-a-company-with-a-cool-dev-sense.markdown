@@ -7,7 +7,7 @@ categories:
 - xamarin
 ---
 
-Any [company](http://xamarin.com/) that has a little fun with comments buried in their html on their corporate web site to promote their job openings is all right by me :)
+Any [company](http://xamarin.com/) that has a little fun with comments buried in html on their corporate web site to promote their job openings is all right by me :)
 
 
         <!--
