@@ -99,3 +99,8 @@ google_analytics_tracking_id: UA-28024782-2
 
 # Facebook Like
 facebook_like: false
+
+youtube:
+  api_key: AIzaSyAw9Ak8xbtOAGL3CZACocS081AMJhcfdfs
+
+
