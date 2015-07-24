@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PlayScript Away3d World Global Example"
+title: "PlayScript | Away3d World Global Example"
 date: 2015-07-23 18:17:12 -0700
 comments: true
 categories: 

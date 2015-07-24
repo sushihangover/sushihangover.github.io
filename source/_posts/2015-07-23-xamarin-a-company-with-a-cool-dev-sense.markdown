@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Xamarin - A company with a cool dev sense"
+title: "Xamarin | A company with a cool dev sense"
 date: 2015-07-23 21:49:16 -0700
 comments: true
 categories: 
