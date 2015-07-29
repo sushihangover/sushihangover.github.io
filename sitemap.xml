@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-away3d-intermediate-playscript/</loc>
+    <lastmod>2015-07-29T17:05:50-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/</loc>
     <lastmod>2015-07-24T14:01:50-07:00</lastmod>
   </url>
@@ -666,5 +670,9 @@
   <url>
     <loc>http://sushihangover.github.io/play/playscript-away3d-Intermediate-ParticleExplosions-demo.html</loc>
     <lastmod>2015-07-24T15:44:20-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/play/playscript-away3d-PlayscriptLogoParticles.html</loc>
+    <lastmod>2015-07-29T10:29:37-07:00</lastmod>
   </url>
 </urlset>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Remove a filename prefix from a directory of files When cross-compiling and using the standard autogen/configure &ldquo;-target=&rdquo; option, you &hellip;">
+  <meta name="description" content="When configuring Mono to use llvm, if you receive the error: configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,41 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono   Using Llvm? Make Sure Your Targets Match</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-09T07:21:58-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> When configuring Mono to use llvm, if you receive the error:</p>
+
+<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
+
+<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
+
+<p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -602,39 +637,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-3-dot-2-5001-posted/">Playscript 3.2.5001 Posted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-04T06:12:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:12 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I posted up the PlayScript compiler 3.2.5001 to <a href="https://github.com/sushihangover/playscript">GitHub</a> which is a merge of the remote-tracking branch &lsquo;upstream/mono-3.2.5-branch&rsquo; into playscript-mono</p>
-
-<p>Been knocking these simple minors versions out, dreading the upcoming Mono 4.x changes&hellip;</p>
-
-<p>Setting up a GitHub organization for PlayScript, I&rsquo;ll let you know when it is up.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -652,6 +654,10 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-away3d-intermediate-playscript/">Play Script | Away3d Particles With Play Script Logo</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d Intermediate Particle Explosions</a>
       </li>
     
@@ -665,10 +671,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
     
       <li class="post">
         <a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-squash-last-x-commits-into-one/">Git   Squash Last X Commits Into One</a>
       </li>
     
   </ul>

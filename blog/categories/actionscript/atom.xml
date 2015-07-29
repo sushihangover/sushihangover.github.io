@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Actionscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/actionscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-24T15:45:09-07:00</updated>
+  <updated>2015-07-29T11:17:11-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-playscript/"/>
+    <updated>2015-07-29T17:05:50-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>
+    <content type="html"><![CDATA[<p>This demo uses the the Away3d Intermediate Particle Explosions example as a base, but I reworked it slightly to use the PlayScript logo. It is running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('uhjTZjlo5YA');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/uhjTZjlo5YA?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/uhjTZjlo5YA/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=uhjTZjlo5YA" id="uhjTZjlo5YA" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Particle Explosions using the PlayScript logo</div>
+</a>
+<div class="video-info" >Using PlayScript 3.2.3001, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_PlayScriptParticleExplosion­s within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Fog Rays" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+</p>
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d World Global Example</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
