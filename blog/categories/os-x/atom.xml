@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Os X | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -151,7 +151,7 @@ Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a>">CursesSharp is a C# wrapper for curses library.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.</p>
 
 <ul>
 <li>The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.</li>
@@ -165,7 +165,7 @@ Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
 
 <h2>Installing CursesSharp on OS-X</h2>
 
-<p>These are the instructions for building CursesSharp on OS-X. The build <img class="right <a" src="href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a>">CursesSharp is a C# wrapper for curses library.
+<p>These are the instructions for building CursesSharp on OS-X. The build {% img right <a href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.
 process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0.1 64-bit build.</p>
 
 <h3>0. Prerequisites</h3>
@@ -194,7 +194,7 @@ process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0
 
 <p>The following section describes the former case. If you downloaded the source code package, extract it and you may skip to step 4.</p>
 
-<p><img class="left <a" src="href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a>"></p>
+<p>{% img left <a href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a> %}</p>
 
 <h3>2. Git clone</h3>
 
@@ -347,7 +347,7 @@ monocov
     <link href="http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/"/>
     <updated>2015-06-09T17:20:35-07:00</updated>
     <id>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>  %} If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
 
 <p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
 

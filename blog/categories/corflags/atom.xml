@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Corflags | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/corflags/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -246,7 +246,9 @@ Signed    : 0
 
 <p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
 
-<p><blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5&hellip;)</p></blockquote></p>
+<p>{% blockquote %}
+anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5&hellip;)
+{% endblockquote %}</p>
 
 <p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
 

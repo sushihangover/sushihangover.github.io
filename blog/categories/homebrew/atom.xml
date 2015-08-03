@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Homebrew | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/homebrew/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -30,7 +30,12 @@
 
 <p>I was surprised that I had 8 GBs of hard drive space consumed by brew packages. If you did not know it, brew does not auto-purge older packages.</p>
 
-<p><blockquote><p>From  FAQ:<br/>By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p></p><p><p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a></p></blockquote></p>
+<p>{% blockquote %}
+From  FAQ:
+By default, Homebrew does not uninstall old versions of a formula, so over time you will accumulate old versions.</p>
+
+<p><a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md</a>
+{% endblockquote %}</p>
 
 <p>It had been a long time since I did a cleanup in brew and I had well over a hundred older versions of various packages that I was not using (i.e. one that were not pinned; <em>brew pin {FORMULA</em>), so I ran the cleanup and freed up 7.3 GB of drive space.</p>
 
@@ -66,152 +71,7 @@
 
 <p>I do not have time right now to do a pull-request, so here is a <a href="https://gist.github.com">gist</a> of it so you can update your Git version. Do a &ldquo;brew edit git&rdquo; and replace the contents with this and you can update to 1.9.0.</p>
 
-<p><div><script src='https://gist.github.com/9036063.js?file=git.rb'></script>
-<noscript><pre><code>require &#39;formula&#39;
-
-class Git &lt; Formula
-  homepage &#39;http://git-scm.com&#39;
-  url &#39;https://git-core.googlecode.com/files/git-1.9.0.tar.gz&#39;
-  sha1 &#39;e60667fc16e5a5f1cde46616b0458cc802707743&#39;
-  head &#39;https://github.com/git/git.git&#39;
-
-  bottle do
-    sha1 &quot;582a276b608de17888da01922648522bf7a9c11a&quot; =&gt; :mavericks
-    sha1 &quot;f308b293aa5664b65c57c3b206b892537397d3b9&quot; =&gt; :mountain_lion
-    sha1 &quot;fa5f896b766bb103804800abde58e25579cf58a7&quot; =&gt; :lion
-  end
-
-  option &#39;with-blk-sha1&#39;, &#39;Compile with the block-optimized SHA1 implementation&#39;
-  option &#39;without-completions&#39;, &#39;Disable bash/zsh completions from &quot;contrib&quot; directory&#39;
-  option &#39;with-brewed-openssl&#39;, &quot;Build with Homebrew OpenSSL instead of the system version&quot;
-  option &#39;with-brewed-curl&#39;, &quot;Use Homebrew&#39;s version of cURL library&quot;
-  option &#39;with-persistent-https&#39;, &#39;Build git-remote-persistent-https from &quot;contrib&quot; directory&#39;
-
-  depends_on &#39;pcre&#39; =&gt; :optional
-  depends_on &#39;gettext&#39; =&gt; :optional
-  depends_on &#39;openssl&#39; if build.with? &#39;brewed-openssl&#39;
-  depends_on &#39;curl&#39; if build.with? &#39;brewed-curl&#39;
-  depends_on &#39;go&#39; =&gt; :build if build.with? &#39;persistent-https&#39;
-
-  resource &#39;man&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-manpages-1.9.0.tar.gz&#39;
-    sha1 &#39;cff590c92b4d1c8a143c078473140b653cc5d56a&#39;
-  end
-
-  resource &#39;html&#39; do
-    url &#39;http://git-core.googlecode.com/files/git-htmldocs-1.9.0.tar.gz&#39;
-    sha1 &#39;65eb3f411f4699695c7081a7c716cabb9ce23d75&#39;
-  end
-
-  def patches
-    if MacOS.version &gt;= :mavericks and not build.head?
-      # Allow using PERLLIB_EXTRA to find Subversion Perl bindings location
-      # in the CLT/Xcode. Should be included in Git 1.8.6.
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=07981d
-      # https://git.kernel.org/cgit/git/git.git/commit/?h=next&amp;id=0386dd
-      #[&#39;https://git.kernel.org/cgit/git/git.git/patch/?id=07981d&#39;,
-      # &#39;https://git.kernel.org/cgit/git/git.git/patch/?id=0386dd&#39;]
-    end
-  end
-
-  def install
-    # If these things are installed, tell Git build system to not use them
-    ENV[&#39;NO_FINK&#39;] = &#39;1&#39;
-    ENV[&#39;NO_DARWIN_PORTS&#39;] = &#39;1&#39;
-    ENV[&#39;V&#39;] = &#39;1&#39; # build verbosely
-    ENV[&#39;NO_R_TO_GCC_LINKER&#39;] = &#39;1&#39; # pass arguments to LD correctly
-    ENV[&#39;PYTHON_PATH&#39;] = which &#39;python&#39;
-    ENV[&#39;PERL_PATH&#39;] = which &#39;perl&#39;
-
-    if MacOS.version &gt;= :mavericks and MacOS.dev_tools_prefix
-      ENV[&#39;PERLLIB_EXTRA&#39;] = &quot;#{MacOS.dev_tools_prefix}/Library/Perl/5.16/darwin-thread-multi-2level&quot;
-    end
-
-    unless quiet_system ENV[&#39;PERL_PATH&#39;], &#39;-e&#39;, &#39;use ExtUtils::MakeMaker&#39;
-      ENV[&#39;NO_PERL_MAKEMAKER&#39;] = &#39;1&#39;
-    end
-
-    ENV[&#39;BLK_SHA1&#39;] = &#39;1&#39; if build.with? &#39;blk-sha1&#39;
-
-    if build.with? &#39;pcre&#39;
-      ENV[&#39;USE_LIBPCRE&#39;] = &#39;1&#39;
-      ENV[&#39;LIBPCREDIR&#39;] = Formula.factory(&#39;pcre&#39;).opt_prefix
-    end
-
-    ENV[&#39;NO_GETTEXT&#39;] = &#39;1&#39; unless build.with? &#39;gettext&#39;
-
-    system &quot;make&quot;, &quot;prefix=#{prefix}&quot;,
-                   &quot;sysconfdir=#{etc}&quot;,
-                   &quot;CC=#{ENV.cc}&quot;,
-                   &quot;CFLAGS=#{ENV.cflags}&quot;,
-                   &quot;LDFLAGS=#{ENV.ldflags}&quot;,
-                   &quot;install&quot;
-
-    bin.install Dir[&quot;contrib/remote-helpers/git-remote-{hg,bzr}&quot;]
-
-    # Install the OS X keychain credential helper
-    cd &#39;contrib/credential/osxkeychain&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-credential-osxkeychain&#39;
-      system &quot;make&quot;, &quot;clean&quot;
-    end
-
-    # Install git-subtree
-    cd &#39;contrib/subtree&#39; do
-      system &quot;make&quot;, &quot;CC=#{ENV.cc}&quot;,
-                     &quot;CFLAGS=#{ENV.cflags}&quot;,
-                     &quot;LDFLAGS=#{ENV.ldflags}&quot;
-      bin.install &#39;git-subtree&#39;
-    end
-
-    if build.with? &#39;persistent-https&#39;
-      cd &#39;contrib/persistent-https&#39; do
-        system &quot;make&quot;
-        bin.install &#39;git-remote-persistent-http&#39;,
-                    &#39;git-remote-persistent-https&#39;,
-                    &#39;git-remote-persistent-https--proxy&#39;
-      end
-    end
-
-    unless build.without? &#39;completions&#39;
-      # install the completion script first because it is inside &#39;contrib&#39;
-      bash_completion.install &#39;contrib/completion/git-completion.bash&#39;
-      bash_completion.install &#39;contrib/completion/git-prompt.sh&#39;
-
-      zsh_completion.install &#39;contrib/completion/git-completion.zsh&#39; =&gt; &#39;_git&#39;
-      cp &quot;#{bash_completion}/git-completion.bash&quot;, zsh_completion
-    end
-
-    (share+&#39;git-core&#39;).install &#39;contrib&#39;
-
-    # We could build the manpages ourselves, but the build process depends
-    # on many other packages, and is somewhat crazy, this way is easier.
-    man.install resource(&#39;man&#39;)
-    (share+&#39;doc/git-doc&#39;).install resource(&#39;html&#39;)
-
-    # Make html docs world-readable; check if this is still needed at 1.8.6
-    chmod 0644, Dir[&quot;#{share}/doc/git-doc/**/*.{html,txt}&quot;]
-  end
-
-  def caveats; &lt;&lt;-EOS.undent
-    The OS X keychain credential helper has been installed to:
-      #{HOMEBREW_PREFIX}/bin/git-credential-osxkeychain
-
-    The &#39;contrib&#39; directory has been installed to:
-      #{HOMEBREW_PREFIX}/share/git-core/contrib
-    EOS
-  end
-
-  test do
-    HOMEBREW_REPOSITORY.cd do
-      assert_equal &#39;bin/brew&#39;, `#{bin}/git ls-files -- bin`.strip
-    end
-  end
-end
-</code></pre></noscript></div>
-</p>
+<p>{% gist 9036063 git.rb %}</p>
 ]]></content>
   </entry>
   

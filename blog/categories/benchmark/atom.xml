@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Benchmark | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/benchmark/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/"/>
     <updated>2015-06-09T20:24:45-07:00</updated>
     <id>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
 
 <p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
 
@@ -109,9 +109,9 @@ Reflection and recursion...........4441 ms
     <link href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/"/>
     <updated>2015-06-09T19:42:27-07:00</updated>
     <id>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>"> I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a> %} I wanted to compare 64-bit and 32-bit mono versions and PE32 vs PE32+ CIL images and see if 64-bit really is faster, at least on the number crunching side of things.</p>
 
-<p><blockquote><p>This is the C# port of the Scimark benchmark. The original C and Java sources can be found at <a href="http://math.nist.gov/scimark2/.">http://math.nist.gov/scimark2/.</a> The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project.</p><footer><strong><a href="https://code.google.com/p/scimark-csharp">https://code.google.com/p/scimark-csharp</a></strong></footer></blockquote></p>
+<p>{% blockquote <a href="https://code.google.com/p/scimark-csharp">https://code.google.com/p/scimark-csharp</a> %} This is the C# port of the Scimark benchmark. The original C and Java sources can be found at <a href="http://math.nist.gov/scimark2/.">http://math.nist.gov/scimark2/.</a> The original work to port the benchmark to C# was done by Chris Re and Wener Vogels of the Rotor project. {% endblockquote %}</p>
 
 <p>Running an Apples to Apples comparision across platforms and different mono builds using different llvm versions jitting is not really a valid test-case. So the following benchmark matrix is based on the <strong>same</strong> clang/llvm version compiling the <strong>same</strong> mono version in x64 (PE32+) and i386 (PE32) archs on just one platform (my &lsquo;old&rsquo; &lsquo;MacBookPro).</p>
 
@@ -131,7 +131,9 @@ Reflection and recursion...........4441 ms
 </ul>
 
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>{% pullquote %}
+The results are not really that surprising in regards to is 64-bit number crunching faster than 32-bit, yes, 64-bit it faster, about 1.2x faster. The surprise for me is the LLVM results, both  {&ldquo; in x86 and x64 versions of mono/llvm builds, mono enabled LLVM produces code that is 1.5x faster &rdquo;} under SciMark. This speed difference is well worth the slightly longer startup times that jitting with LLVM causes.
+{% endpullquote %}</p>
 
 <p>Get the SciMark repo on my <a href="https://github.com/sushihangover/scimark-csharp">GitHub</a> and run it on your platform.</p>
 

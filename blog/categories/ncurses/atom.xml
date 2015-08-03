@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ncurses | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ncurses/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a>">CursesSharp is a C# wrapper for curses library.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.</p>
 
 <ul>
 <li>The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.</li>
@@ -32,7 +32,7 @@
 
 <h2>Installing CursesSharp on OS-X</h2>
 
-<p>These are the instructions for building CursesSharp on OS-X. The build <img class="right <a" src="href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a>">CursesSharp is a C# wrapper for curses library.
+<p>These are the instructions for building CursesSharp on OS-X. The build {% img right <a href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.
 process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0.1 64-bit build.</p>
 
 <h3>0. Prerequisites</h3>
@@ -61,7 +61,7 @@ process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0
 
 <p>The following section describes the former case. If you downloaded the source code package, extract it and you may skip to step 4.</p>
 
-<p><img class="left <a" src="href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a>"></p>
+<p>{% img left <a href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a> %}</p>
 
 <h3>2. Git clone</h3>
 
@@ -167,7 +167,7 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
     <link href="http://sushihangover.github.io/mono-curses-os-x-64-bit/"/>
     <updated>2015-06-08T17:07:00-07:00</updated>
     <id>http://sushihangover.github.io/mono-curses-os-x-64-bit</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/mono-logo.png">http://sushihangover.github.io/images/mono-logo.png</a>  %} I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
 
 <p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
 

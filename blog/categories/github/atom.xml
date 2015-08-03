@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:15:21-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/playscript-redux-make2csprojupdater/"/>
     <updated>2015-07-14T15:06:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-redux-make2csprojupdater</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I just posted a new tool project on <a href="https://github.com/PlayScriptRedux/Make2CSProjUpdater">Github</a> that I am using with Mono and PlayScript to make things easier with Xamarin Studio / MonoDevelop.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %} I just posted a new tool project on <a href="https://github.com/PlayScriptRedux/Make2CSProjUpdater">Github</a> that I am using with Mono and PlayScript to make things easier with Xamarin Studio / MonoDevelop.</p>
 
 <h2>Make2CSProjUpdater</h2>
 
@@ -115,7 +115,7 @@ Make changes? [y/n]:y
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right <a" src="href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. {% img right <a href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a> %}</p>
 
 <p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
 
@@ -173,7 +173,7 @@ git merge upstream/master
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a>">CursesSharp is a C# wrapper for curses library.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/FireworksDemo.gif">http://sushihangover.github.io/images/FireworksDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.</p>
 
 <ul>
 <li>The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.</li>
@@ -187,7 +187,7 @@ git merge upstream/master
 
 <h2>Installing CursesSharp on OS-X</h2>
 
-<p>These are the instructions for building CursesSharp on OS-X. The build <img class="right <a" src="href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a>">CursesSharp is a C# wrapper for curses library.
+<p>These are the instructions for building CursesSharp on OS-X. The build {% img right <a href="http://sushihangover.github.io/images/RainDemo.gif">http://sushihangover.github.io/images/RainDemo.gif</a> %}CursesSharp is a C# wrapper for curses library.
 process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0.1 64-bit build.</p>
 
 <h3>0. Prerequisites</h3>
@@ -216,7 +216,7 @@ process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0
 
 <p>The following section describes the former case. If you downloaded the source code package, extract it and you may skip to step 4.</p>
 
-<p><img class="left <a" src="href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a>"></p>
+<p>{% img left <a href="http://sushihangover.github.io/images/UnicodeDemo.gif">http://sushihangover.github.io/images/UnicodeDemo.gif</a> %}</p>
 
 <h3>2. Git clone</h3>
 
