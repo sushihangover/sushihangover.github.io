@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine& &hellip;">
+  <meta name="description" content="Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/arm-starts-move-to-llvm/">Arm Starts Move To Llvm</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-10T22:03:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:03 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
+
+<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
+
+<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
+
+<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
+
+<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1548,195 +1585,6 @@ architecture</th>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/arm-cortex-m-semihosting-with-qemu/">Arm Cortex M Semihosting</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-24T21:02:34-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:02 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/images/ARM_Semihosting_large.png"><img class="left" src="/images/ARM_Semihosting.png" title="&#34;ARM Semihosting&#34;" alt="&#34;ARM Semihosting&#34;"></a> <strong><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471c/Bgbjjgij.html">What is semihosting?</a></strong> <em>&hellip;Examples of these facilities include keyboard input, screen output, and disk I/O. For example, you can use this mechanism to enable functions in the C library, such as printf() and scanf(), to use the screen and keyboard of the host instead of having a screen and keyboard on the target system&hellip;</em></p>
-
-<p>So you need to output some debug messages via your host debugging session (via JTAG or such) or working with QEMU to prototype some ARM code? Well semihosting is simple use, but it can come at a large price in memory and overhead if you use stdio to do it&hellip;</p>
-
-<p>You can skip the &ldquo;#include &lt;stdio.h>&rdquo; and linking the semihosting newlib library (assuming you have the syscalls inplementated) and just use some simple inline assembly to get the job done.</p>
-
-<p>Lets take a quick look at two of the twenty-some service calls (SVC) that are available, SYS_WRITEC (0x03) and WRITE0 (0x04).</p>
-
-<h5>* SYS_WRITEC outputs a single character, an address pointer to that character is loaded in register R1. Register R0 is loaded with 0x03 and then you can execute a <em>SuperVisor Call</em> (SVC 0x00123456).</h5>
-
-<h5>* SYS_WRITE0 outputs a null-term string, the string&rsquo;s beginning address is stored in R1, R0 is loaded with 0x04 and you execute a supervisor call again.</h5>
-
-<p>If we translate that knowledge into inline assembly:</p>
-
-<figure class='code'><figcaption><span>main.c </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITEC</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">;</span>
-</span><span class='line'>  <span class="kt">int</span> <span class="n">SYS_WRITE0</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg0</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r0&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">register</span> <span class="kt">int</span> <span class="n">reg1</span> <span class="k">asm</span><span class="p">(</span><span class="s">&quot;r1&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="kt">char</span> <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;_&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
-</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;!&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
-</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0,r0&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITEC</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">outchar</span> <span class="o">=</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">outchar</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// A &#39;NOP&#39; so we can &#39;see&#39; the start of the folllowing svc call</span>
-</span><span class='line'>  <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov r0, r0&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">reg0</span> <span class="o">=</span> <span class="n">SYS_WRITE0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">reg1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="s">&quot;Print this to my jtag debugger</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">asm</span><span class="p">(</span><span class="s">&quot;svc 0x00123456&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h6>Note: This is not pretty inline styling as it is meant to break each step down. Normally you would create a couple of functions (i.e: a &lsquo;PutChar&rsquo; for SYS_WRITEC) and include the R0/R1 clobbers, etc&hellip;</h6>
-
-<p>And the output that we get:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -nographic -monitor null -serial null -semihosting -kernel main.axf 
-</span><span class='line'>!
-</span><span class='line'>Print this to my jtag debugger</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>main.o: file format elf32-littlearm </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='c-objdump'><span class='line'><span class="mh">00000000</span> <span class="p">&lt;</span><span class="nf">main</span><span class="p">&gt;:</span>
-</span><span class='line'>   <span class="mi">0</span><span class="o">:</span>  <span class="n">e52db004</span>     <span class="n">push</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>       <span class="p">;</span> <span class="p">(</span><span class="n">str</span> <span class="n">fp</span><span class="p">,</span> <span class="p">[</span><span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
-</span><span class='line'>   <span class="mi">4</span><span class="o">:</span>  <span class="n">e28db000</span>     <span class="n">add</span>  <span class="n">fp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
-</span><span class='line'>   <span class="mi">8</span><span class="o">:</span>  <span class="n">e24dd014</span>     <span class="n">sub</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">20</span>
-</span><span class='line'>   <span class="nl">c</span><span class="p">:</span>  <span class="n">e3a03003</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">3</span>
-</span><span class='line'>  <span class="mi">10</span><span class="o">:</span>  <span class="n">e50b3008</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">14</span><span class="o">:</span>  <span class="n">e3a03004</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
-</span><span class='line'>  <span class="mi">18</span><span class="o">:</span>  <span class="n">e50b300c</span>     <span class="n">str</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">1</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e3a0305f</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">95</span>  <span class="p">;</span> <span class="mh">0x5f</span>
-</span><span class='line'>  <span class="mi">20</span><span class="o">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">24</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
-</span><span class='line'>  <span class="mi">28</span><span class="o">:</span>  <span class="n">e3a03021</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">33</span>  <span class="p">;</span> <span class="mh">0x21</span>
-</span><span class='line'>  <span class="mi">2</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">30</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">34</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
-</span><span class='line'>  <span class="mi">38</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
-</span><span class='line'>  <span class="mi">3</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
-</span><span class='line'>  <span class="mi">40</span><span class="o">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
-</span><span class='line'>  <span class="mi">44</span><span class="o">:</span>  <span class="n">e51b0008</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">48</span><span class="o">:</span>  <span class="n">e3a0300a</span>     <span class="n">mov</span>  <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">10</span>
-</span><span class='line'>  <span class="mi">4</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e54b300d</span>     <span class="n">strb</span> <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">13</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">50</span><span class="o">:</span>  <span class="n">e24b300d</span>     <span class="n">sub</span>  <span class="n">r3</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">13</span>
-</span><span class='line'>  <span class="mi">54</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
-</span><span class='line'>  <span class="mi">58</span><span class="o">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
-</span><span class='line'>  <span class="mi">5</span><span class="nl">c</span><span class="p">:</span>  <span class="n">e1a00000</span>     <span class="n">nop</span>          <span class="p">;</span> <span class="p">(</span><span class="n">mov</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span>
-</span><span class='line'>  <span class="mi">60</span><span class="o">:</span>  <span class="n">e51b000c</span>     <span class="n">ldr</span>  <span class="n">r0</span><span class="p">,</span> <span class="p">[</span><span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="o">-</span><span class="mi">12</span><span class="p">]</span>
-</span><span class='line'>  <span class="mi">64</span><span class="o">:</span>  <span class="n">e59f3010</span>     <span class="n">ldr</span>  <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">pc</span><span class="p">,</span> <span class="err">#</span><span class="mi">16</span><span class="p">]</span>    <span class="p">;</span> <span class="mi">7</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">+</span><span class="mh">0x7c</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="mi">68</span><span class="o">:</span>  <span class="n">e1a01003</span>     <span class="n">mov</span>  <span class="n">r1</span><span class="p">,</span> <span class="n">r3</span>
-</span><span class='line'>  <span class="mi">6</span><span class="nl">c</span><span class="p">:</span>  <span class="n">ef123456</span>     <span class="n">svc</span>  <span class="mh">0x00123456</span>
-</span><span class='line'>  <span class="mi">70</span><span class="o">:</span>  <span class="n">e28bd000</span>     <span class="n">add</span>  <span class="n">sp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
-</span><span class='line'>  <span class="mi">74</span><span class="o">:</span>  <span class="n">e8bd0800</span>     <span class="n">ldmfd</span>    <span class="n">sp</span><span class="o">!</span><span class="p">,</span> <span class="p">{</span><span class="n">fp</span><span class="p">}</span>
-</span><span class='line'>  <span class="mi">78</span><span class="o">:</span>  <span class="n">e12fff1e</span>     <span class="n">bx</span>   <span class="n">lr</span>
-</span><span class='line'>  <span class="mi">7</span><span class="nl">c</span><span class="p">:</span>  <span class="mo">00000000</span>    <span class="p">.</span><span class="n">word</span> <span class="mh">0x00000000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>PS: SYS_TMPNAM and SYS_READC are not implemented in Qemu (up to and including 1.7.0), so consult the &ldquo;qemu/target-arm/arm-semi.c&rdquo; source if you are have questions about how those SVC calls are implemented.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -1754,6 +1602,10 @@ architecture</th>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-away3d-firedemowithscout/">Play Script | Away3d Fire Demo With Scout</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-travis-ci-enabled-for-repo/">Play Script   Travis Ci Enabled For Repo</a>
       </li>
     
@@ -1767,10 +1619,6 @@ architecture</th>
     
       <li class="post">
         <a href="/xamarin-a-company-with-a-cool-dev-sense/">Xamarin | A Company With A Cool Dev Sense</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a>
       </li>
     
   </ul>

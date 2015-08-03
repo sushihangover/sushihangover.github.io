@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:02:58-07:00</updated>
+  <updated>2015-08-03T13:33:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
+    <updated>2015-08-03T16:12:50-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
+    <content type="html"><![CDATA[<p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
+</a>
+<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Fog Rays" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script   Travis Ci Enabled For Repo]]></title>
@@ -1029,74 +1059,6 @@ UnicodeDemo
 </code></pre>
 
 <p>Have fun ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono Cov   Building On Os X]]></title>
-    <link href="http://sushihangover.github.io/monocov-building-on-os-x/"/>
-    <updated>2015-06-15T10:52:29-07:00</updated>
-    <id>http://sushihangover.github.io/monocov-building-on-os-x</id>
-    <content type="html"><![CDATA[<p>My <a href="http://stackoverflow.com/questions/20757444/how-to-compile-c-sharp-code-to-64-bit-in-xamarin-studio-on-os-x/30714801#30714801">answer</a> from Stackoverflow on compiling MonoCov on OS-X and Mono 4.0.x</p>
-
-<pre><code># Clone the MonoCov repo
-git clone https://github.com/mono/monocov.git MonoCov
-cd MonoCov
-# A really old version of cecil and it not available as a nuget
-curl http://go-mono.com/archive/cecil/cecil-0.6-bin.zip -o cecil-0.6-bin.zip
-unzip cecil-0.6-bin.zip
-# Make sure configure can find the Mono.Option source file
-export PKG_CONFIG_PATH=/Library/Frameworks/Mono.framework/Versions/4.0.1/lib:/Library/Frameworks/Mono.framework/Versions/4.0.1/lib/pkgconfig:$PKG_CONFIG_PATH
-export 
-# Config to install to users home dir
-./configure --cecil=$PWD/monocov/cecil-0.6/Mono.Cecil.dll --prefix $HOME/monocov
-# Fix Makefile, gmcs no longer exists under Mono 4.x and Makefile is hard coded
-sed -i.bak s/gmcs/mcs/g Makefile
-# Pass -m32 to make since OS-X Mono framework is still 32-bit
-CC="cc -m32" make
-# Install does not properly create bin dir, do it before the first install
-mkdir $HOME/monocov/bin
-# Install..
-make install
-</code></pre>
-
-<h2>Compile a test app and test MonoCov:</h2>
-
-<pre><code>// Save this to a file named Program.cs
-using System;
-namespace Foobar
-{
-    class MainClass
-    {
-        public static void Main (string[] args)
-        {
-            Console.WriteLine ("Hello MonoCov");
-        }
-    }
-}
-</code></pre>
-
-<h2>Profile a Mono (.Net) application</h2>
-
-<pre><code># Compile a sample app
-mcs Program.cs
-# Update path to include MonoCov so mono can load it as a profiler
-export PATH=$HOME/monocov:$PATH
-mono --debug --profile=monocov Program.exe
-</code></pre>
-
-<h2>Launch the MonoCov GUI</h2>
-
-<pre><code># GUI Framework DllNotFoundException fix (if needed)
-export DYLD_FALLBACK_LIBRARY_PATH="/Library/Frameworks/Mono.framework/Versions/Current/lib:/usr/local/lib:/usr/lib"
-# Update path to include MonoCov
-export PATH=$HOME/monocov/bin:$PATH
-monocov
-</code></pre>
-
-<p><a href="http://www.mono-project.com/docs/debug+profile/profile/code-coverage/">Mono Code Coverage Profiler : MonoCov</a></p>
-
-<p><a href="http://evain.net/blog/articles/2007/10/05/mono-cecil-0-6">Mono.Cecil 0.6 05 Oct 2007</a></p>
 ]]></content>
   </entry>
   

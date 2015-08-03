@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Semi Hosting | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/semi-hosting/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:18:44-07:00</updated>
+  <updated>2015-08-03T13:33:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,26 +18,29 @@
     <link href="http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/"/>
     <updated>2014-04-17T23:20:36-07:00</updated>
     <id>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9</id>
-    <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page">{% img left /images/QEMU_logo.png &ldquo;QEMU&rdquo; %}</a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
+    <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&ldquo;QEMU&rdquo;" ></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
 
 <p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
 
 <p>It appears that doing a checkout of tag &lsquo;v2.0.0&rsquo;, build and install will produce a binary that reports version 1.7.9</p>
 
-<p>{% codeblock %}
-git status
-HEAD detached at v2.0.0
-nothing to commit, working directory clean
-qemu-system-arm &ndash;version
-QEMU emulator version 1.7.93, Copyright &copy; 2003-2008 Fabrice Bellard
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git status
+</span><span class='line'>HEAD detached at v2.0.0
+</span><span class='line'>nothing to commit, working directory clean
+</span><span class='line'>qemu-system-arm &ndash;version
+</span><span class='line'>QEMU emulator version 1.7.93, Copyright &copy; 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure></p>
 
 <p>I did a quick look and they are pulling the version during the ./configure stage so since I am always on the master (bleed-edge) branch, my installed version shows up as 1.7.9. You will need to checkout, <strong>configure</strong>, build and install to produce a binary that has the correct version (<del>QEMUVERSION</del>) assigned:</p>
 
-<p>{% codeblock %}
-qemu-system-arm &ndash;version
-QEMU emulator version 2.0.0, Copyright &copy; 2003-2008 Fabrice Bellard
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm &ndash;version
+</span><span class='line'>QEMU emulator version 2.0.0, Copyright &copy; 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   
@@ -46,47 +49,76 @@ QEMU emulator version 2.0.0, Copyright &copy; 2003-2008 Fabrice Bellard
     <link href="http://sushihangover.github.io/qemu-machine-and-cpu-list/"/>
     <updated>2014-04-05T12:27:42-07:00</updated>
     <id>http://sushihangover.github.io/qemu-machine-and-cpu-list</id>
-    <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page">{% img left /images/QEMU_logo.png &ldquo;QEMU&rdquo; %}</a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:
-{% codeblock %}
-qemu-system-arm -cpu help
-No machine specified, and there is no default.
-Use -machine help to list supported machines!
-{% endcodeblock %}
+    <content type="html"><![CDATA[<p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&ldquo;QEMU&rdquo;" ></a>I merged the latest changes from QEMU 2.0 RC master into the changes that I am making and noticed that since there is no default ARM &lsquo;machine&rsquo; any more, you can not get a cpu listing without giving it a machine:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -cpu help
+</span><span class='line'>No machine specified, and there is no default.
+</span><span class='line'>Use -machine help to list supported machines!</span></code></pre></td></tr></table></div></figure>
 So now, you will need to include any machine (&ndash;machine help) in order to see the cpu listing, using the ARM Cortex-M0+ dev board that I am putting together (<em>sushi-m0plus-board</em>), you can get the cpu listing.</p>
 
 <blockquote><p>The cores; cortex-m0, cortex-m0+ and machine; sushi-m0plus-board, are my additions and not apart of the QEMU main-line code.
-{% codeblock %}
-qemu-system-arm &ndash;machine sushi-m0plus-board -cpu help
-Available CPUs:
-  arm1026
-  arm1136
-  arm1136-r2
-  arm1176
-  arm11mpcore
-  arm926
-  arm946
-  cortex-a15
-  cortex-a8
-  cortex-a9
-  cortex-m0
-  cortex-m0plus
-  cortex-m3
-  pxa250
-  pxa255
-  pxa260
-  pxa261
-  pxa262
-  pxa270-a0
-  pxa270-a1
-  pxa270
-  pxa270-b0
-  pxa270-b1
-  pxa270-c0
-  pxa270-c5
-  sa1100
-  sa1110
-  ti925t
-{% endcodeblock %}</p></blockquote>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm &ndash;machine sushi-m0plus-board -cpu help
+</span><span class='line'>Available CPUs:
+</span><span class='line'>  arm1026
+</span><span class='line'>  arm1136
+</span><span class='line'>  arm1136-r2
+</span><span class='line'>  arm1176
+</span><span class='line'>  arm11mpcore
+</span><span class='line'>  arm926
+</span><span class='line'>  arm946
+</span><span class='line'>  cortex-a15
+</span><span class='line'>  cortex-a8
+</span><span class='line'>  cortex-a9
+</span><span class='line'>  cortex-m0
+</span><span class='line'>  cortex-m0plus
+</span><span class='line'>  cortex-m3
+</span><span class='line'>  pxa250
+</span><span class='line'>  pxa255
+</span><span class='line'>  pxa260
+</span><span class='line'>  pxa261
+</span><span class='line'>  pxa262
+</span><span class='line'>  pxa270-a0
+</span><span class='line'>  pxa270-a1
+</span><span class='line'>  pxa270
+</span><span class='line'>  pxa270-b0
+</span><span class='line'>  pxa270-b1
+</span><span class='line'>  pxa270-c0
+</span><span class='line'>  pxa270-c5
+</span><span class='line'>  sa1100
+</span><span class='line'>  sa1110
+</span><span class='line'>  ti925t</span></code></pre></td></tr></table></div></figure></p></blockquote>
 ]]></content>
   </entry>
   
@@ -95,85 +127,126 @@ Available CPUs:
     <link href="http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/"/>
     <updated>2014-03-26T20:54:58-07:00</updated>
     <id>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0</id>
-    <content type="html"><![CDATA[<p><a href="http://www.openjtag.org">{% img left /images/openjtag2_small.jpg &ldquo;OpenJTAG&rdquo; %}</a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
+    <content type="html"><![CDATA[<p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&ldquo;OpenJTAG&rdquo;" ></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
 
-<p>{% codeblock %}
-MEMORY
-{
-  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /<em> 8K </em>/
-  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /<em> 2K </em>/
-}
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
+</span><span class='line'>{
+</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /&lt;em> 8K &lt;/em>/
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /&lt;em> 2K &lt;/em>/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></p>
 
 <p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
 
 <p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.
-{% codeblock %}</p>
-
-<h1>include &lt;stdio.h></h1>
-
-<h1>include &ldquo;printf_svc.h&rdquo;</h1>
-
-<p>int main (void)
-{
-    printf(&ldquo;BKPT Hello World\n&rdquo;);
-    printf(&ldquo;How small is this?\n&rdquo;);</p>
-
-<pre><code>svcExit(); // QEMU system exit
-
-while (1) { };
-</code></pre>
-
-<p>}
-{% endcodeblock %}
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &lt;stdio.h>&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{
+</span><span class='line'>    printf(&ldquo;BKPT Hello World\n&rdquo;);
+</span><span class='line'>    printf(&ldquo;How small is this?\n&rdquo;);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure>
 The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!
-{% codeblock %}
-   text    data     bss     dec     hex filename
-  33160    2304    1256   36720    8f70 bin/main.axf
-{% endcodeblock %}
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure>
 So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:
-{% codeblock %}</p>
-
-<h1>include &ldquo;printf.h&rdquo;</h1>
-
-<h1>include &ldquo;printf_svc.h&rdquo;</h1>
-
-<p>void putc (void* p, char c)
-{
-    svcPutChar(&amp;c);
-}</p>
-
-<p>int main (void)
-{
-    set_putc(putc);
-    printf(&ldquo;BKPT Hello World\n&rdquo;);
-    printf(&ldquo;How small is this?\n&rdquo;);</p>
-
-<pre><code>svcExit(); // QEMU system exit
-
-while (1) { };
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>include &ldquo;printf_svc.h&rdquo;&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>void putc (void* p, char c)
+</span><span class='line'>{
+</span><span class='line'>    svcPutChar(&amp;c);
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>int main (void)
+</span><span class='line'>{
+</span><span class='line'>    set_putc(putc);
+</span><span class='line'>    printf(&ldquo;BKPT Hello World\n&rdquo;);
+</span><span class='line'>    printf(&ldquo;How small is this?\n&rdquo;);&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>svcExit(); // QEMU system exit
+</span><span class='line'>
+</span><span class='line'>while (1) { };
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:
-{% codeblock %}
-   text    data     bss     dec     hex filename
-   2102      64      10    2176     880 bin/main.axf
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
 
 <p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:
-{% codeblock %}
-   text    data     bss     dec     hex filename
-   1106      64      10    1180     49c bin/main.axf
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.
-{% codeblock %}
-   text    data     bss     dec     hex filename
-   1316      64       8    1388     56c bin/main.axf
-{% endcodeblock %}</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure></p>
 
 <p>A quick break down of elf size:</p>
 

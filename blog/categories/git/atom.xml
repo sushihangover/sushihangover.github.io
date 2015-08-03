@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:18:44-07:00</updated>
+  <updated>2015-08-03T13:33:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
 
 <p>Use git rebase -i <after> and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described in the Git <a href="http://git-scm.com/docs/git-rebase#_interactive_mode">manual</a>.</p>
 
@@ -76,7 +76,7 @@ Successfully rebased and updated refs/heads/play-tests.
     <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
     <updated>2015-06-30T18:10:36-07:00</updated>
     <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
 
 <h3>Switch to the upstream/master branch and make sure you are up to date.</h3>
 
@@ -114,7 +114,7 @@ git commit
     <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
     <updated>2015-06-29T05:28:05-07:00</updated>
     <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
 
 <pre><code>git branch newbranch
 git reset --hard HEAD
@@ -130,7 +130,7 @@ git checkout newbranch
     <link href="http://sushihangover.github.io/git-review-a-merge-before-committing/"/>
     <updated>2015-06-24T09:44:07-07:00</updated>
     <id>http://sushihangover.github.io/git-review-a-merge-before-committing</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
 
 <p>You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
 
@@ -163,7 +163,7 @@ git status
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. {% img right <a href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right <a" src="href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a>"></p>
 
 <p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
 
