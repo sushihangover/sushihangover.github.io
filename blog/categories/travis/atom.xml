@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Travis | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/travis/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-08-03T13:02:58-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script   Travis Ci Enabled For Repo]]></title>
+    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
+    <updated>2015-08-03T12:54:06-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
+
+<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
+
+<p>The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> Git Branch </th>
+<th style="text-align:center;">  Mac OS-X / Linux </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> <strong>playscript</strong> </td>
+<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+</feed>

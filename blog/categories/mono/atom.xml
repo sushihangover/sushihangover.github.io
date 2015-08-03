@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-29T11:17:11-07:00</updated>
+  <updated>2015-08-03T13:02:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script   Travis Ci Enabled For Repo]]></title>
+    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
+    <updated>2015-08-03T12:54:06-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
+
+<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
+
+<p>The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> Git Branch </th>
+<th style="text-align:center;">  Mac OS-X / Linux </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> <strong>playscript</strong> </td>
+<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
@@ -164,55 +193,6 @@ SUM:                            53           2498           2879          11018
 <p>It appears not to be OS dependent either:</p>
 
 <p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script : Tests Are Now Structured Like Mono's]]></title>
-    <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
-    <updated>2015-07-16T20:08:45-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>
-    <content type="html"><![CDATA[<p>I <a href="https://github.com/PlayScriptRedux/playscript/pull/8">moved all the .play and .as tests</a> under the play_test directory. They are in two separtate dirs now, <strong>play</strong> for the extended PlayScript language/format and <strong>as</strong> for the standard ActionScript tests.</p>
-
-<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up copying the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch. This tool will have very little commit activity compared to the mcs.exe/playc.exe compilers.</p>
-
-<h3>Playc-tester.exe</h3>
-
-<pre><code>mono playc-tester.exe
-PlayScript compiler tester, (C) 2009 Novell, Inc. (C) SushiHangover/RobertN
-playc-tester -mode:[pos|neg] -compiler:FILE -files:file-list [options]
-
-   -compiler:FILE   The file which will be used to compiler tests
-   -compiler-options:OPTIONS  Add global compiler options
-   -il:IL-FILE      XML file with expected IL details for each test
-   -issues:FILE     The list of expected failures
-   -log:FILE        Writes any output also to the file
-   -help            Lists all options
-   -mode:[pos|neg]  Specifies compiler test mode
-   -safe-execution  Runs compiled executables in separate app-domain
-   -update-il       Updates IL-FILE to match compiler output
-   -update-ref      Updates the debug xml to match debug compiler mdb output
-   -verbose         Prints more details during testing
-</code></pre>
-
-<p>Example test run of the current as tests:</p>
-
-<pre><code>make astest
-~~~
-./as/test-debug-015.as...   NOT TESTED
-./as/test-debug-AllowDynamics.as... KNOWN ISSUE (Execution error)
-./as/test-debug-DivideByZeroTest.as...      KNOWN ISSUE (Compilation error)
-./as/test-debug-UntypedVariableTest.as...   KNOWN ISSUE (Compilation error)
-Done
-
-40 test cases passed (93.02%)
-1 test(s) ignored
-3 known issue(s)
-</code></pre>
-
-<p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
-
-<p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
 ]]></content>
   </entry>
   

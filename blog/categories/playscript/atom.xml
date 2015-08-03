@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-07-29T11:17:11-07:00</updated>
+  <updated>2015-08-03T13:02:58-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script   Travis Ci Enabled For Repo]]></title>
+    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
+    <updated>2015-08-03T12:54:06-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
+
+<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
+
+<p>The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> Git Branch </th>
+<th style="text-align:center;">  Mac OS-X / Linux </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> <strong>playscript</strong> </td>
+<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
@@ -196,34 +225,6 @@ Done
 <p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
 
 <p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script   Now Has A Repl (Playshell)]]></title>
-    <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
-    <updated>2015-07-15T06:35:49-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
-    <content type="html"><![CDATA[<p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
-
-<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
-
-<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
-
-<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
-  - For use with Tamarin Redux test; they use Asset scripts with a test package
-  - Very alpha at this point
-  - Need to add PlayScript style 'import'
-* Added PsOnlyMode to compiler setting
-  - Whether to enable PlayScript compiler only mode. Defaults to false.
-* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
-  - Added tools/csharp and tools/playshell
-* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
-  - Mono.PlayScript.csproj (and .sln)
-  - Mono.CSharp.csproj (and .sln)
-  - tools/charp.csproj (and .sln)
-  - tools/playshell.csproj (and .sln)
-</code></pre>
 ]]></content>
   </entry>
   
