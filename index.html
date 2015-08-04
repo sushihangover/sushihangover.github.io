@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="This is the Away3d Fire example running via Mono and Xamarin Studio using the PlayScript compiler and using Adobe&rsquo;s Scout to profile it. Fork &hellip;">
+  <meta name="description" content="I have cleaned up issues for the Linux builds and they are now working properly. See the Travis CI files in the CI directory and the .travis.yml &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -48,10 +48,23 @@
 
 <body   >
   <header role="banner"><hgroup>
+ 
+<table style="width:100%">
+  <tr>
+    <td>
   <h1><a href="/">SushiHangover</a></h1>
   
     <h2>PowerShell, Learn it or Perish ;-)</h2>
   
+</td>
+<td>
+<img class="left" src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript">
+</td>
+    <td>
+<img class="right" src="/images/PlayscriptLogo_small.png">
+</td>
+  </tr>
+</table>
 </hgroup>
 
 </header>
@@ -77,6 +90,37 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-linux-based-builds-now-avaiable/">Play Script | Linux Based Builds Now Avaiable</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-04T06:06:28-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:06 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
+
+<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -133,7 +177,7 @@ Royalty Free Background Music:
       
   <header>
     
-      <h1 class="entry-title"><a href="/playscript-travis-ci-enabled-for-repo/">Play Script   Travis Ci Enabled For Repo</a></h1>
+      <h1 class="entry-title"><a href="/playscript-travis-ci-enabled-for-repo/">Play Script | Travis Ci Enabled For Repo</a></h1>
     
     
       <p class="meta">
@@ -164,7 +208,7 @@ Royalty Free Background Music:
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;"> <strong>playscript</strong> </td>
+<td style="text-align:left;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
 <td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
 </tr>
 </tbody>
@@ -647,54 +691,6 @@ Done
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-now-has-a-repl-playshell/">Play Script   Now Has A Repl (Playshell)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-15T06:35:49-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:35 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
-
-<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
-
-<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
-
-<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
-  - For use with Tamarin Redux test; they use Asset scripts with a test package
-  - Very alpha at this point
-  - Need to add PlayScript style 'import'
-* Added PsOnlyMode to compiler setting
-  - Whether to enable PlayScript compiler only mode. Defaults to false.
-* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
-  - Added tools/csharp and tools/playshell
-* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
-  - Mono.PlayScript.csproj (and .sln)
-  - Mono.CSharp.csproj (and .sln)
-  - tools/charp.csproj (and .sln)
-  - tools/playshell.csproj (and .sln)
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -710,11 +706,15 @@ Done
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-linux-based-builds-now-avaiable/">Play Script | Linux Based Builds Now Avaiable</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-away3d-firedemowithscout/">Play Script | Away3d Fire Demo With Scout</a>
       </li>
     
       <li class="post">
-        <a href="/playscript-travis-ci-enabled-for-repo/">Play Script   Travis Ci Enabled For Repo</a>
+        <a href="/playscript-travis-ci-enabled-for-repo/">Play Script | Travis Ci Enabled For Repo</a>
       </li>
     
       <li class="post">
@@ -723,10 +723,6 @@ Done
     
       <li class="post">
         <a href="/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d Intermediate Particle Explosions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-a-company-with-a-cool-dev-sense/">Xamarin | A Company With A Cool Dev Sense</a>
       </li>
     
   </ul>

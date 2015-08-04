@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-08-04T00:37:28-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Linux Based Builds Now Avaiable]]></title>
+    <link href="http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/"/>
+    <updated>2015-08-04T06:06:28-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
+
+<p><img class="right <a" src="href="http://blog.travis-ci.com/images/travis-mascot-200px.png">http://blog.travis-ci.com/images/travis-mascot-200px.png</a>"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

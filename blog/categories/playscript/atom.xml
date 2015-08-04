@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-03T13:40:14-07:00</updated>
+  <updated>2015-08-04T00:37:28-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Linux Based Builds Now Avaiable]]></title>
+    <link href="http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/"/>
+    <updated>2015-08-04T06:06:28-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
+
+<p><img class="right <a" src="href="http://blog.travis-ci.com/images/travis-mascot-200px.png">http://blog.travis-ci.com/images/travis-mascot-200px.png</a>"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
@@ -46,7 +57,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script   Travis Ci Enabled For Repo]]></title>
+    <title type="html"><![CDATA[Play Script | Travis Ci Enabled For Repo]]></title>
     <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
     <updated>2015-08-03T12:54:06-07:00</updated>
     <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
@@ -65,7 +76,7 @@ Royalty Free Background Music:
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;"> <strong>playscript</strong> </td>
+<td style="text-align:left;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
 <td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
 </tr>
 </tbody>
@@ -137,77 +148,6 @@ Royalty Free Background Music:
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
 
 <p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Away3d World Global Example]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-world-global-example/"/>
-    <updated>2015-07-23T18:17:12-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-world-global-example</id>
-    <content type="html"><![CDATA[<p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
-
-<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
-
-<p>
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
-</a>
-<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
-</div>
-
-</p>
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
-
-<pre><code>&gt;cloc away3d-core-fp11
-     464 text files.
-     464 unique files.
-      16 files ignored.
-
-http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-ActionScript                   443          12601          12443          54059
-MSBuild script                   3              0              0           1551
-C#                               3             39             11            111
--------------------------------------------------------------------------------
-SUM:                           449          12640          12454          55721
--------------------------------------------------------------------------------
-&gt;cloc away3d-examples-fp11
-     110 text files.
-     109 unique files.
-      60 files ignored.
-
-http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-ActionScript                    36           1936           2592           8073
-Javascript                       2            121            148           1186
-MSBuild script                   3              0              0            808
-C#                               7            414             99            740
-XML                              2             19             10            105
-HTML                             2              7             29            102
-CSS                              1              1              1              4
--------------------------------------------------------------------------------
-SUM:                            53           2498           2879          11018
--------------------------------------------------------------------------------
-</code></pre>
-
-<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
-
-<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
 ]]></content>
   </entry>
   

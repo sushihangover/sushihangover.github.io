@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/</loc>
+    <lastmod>2015-08-04T06:06:28-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/playscript-away3d-firedemowithscout/</loc>
     <lastmod>2015-08-03T16:12:50-07:00</lastmod>
   </url>
@@ -673,6 +677,36 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/travis/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/linux/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/2/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/3/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/4/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/5/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/6/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/7/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/8/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/9/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/posts/10/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>
