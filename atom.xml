@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-05T08:54:33-07:00</updated>
+  <updated>2015-08-05T11:32:59-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
+    <updated>2015-08-05T05:10:20-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/%0Aplayscript">Fork</a> me on github.</p>
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Shading.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Using PlayScript Compiler 3.2.6002:</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('ym2w6rbYcAI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/ym2w6rbYcAI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/ym2w6rbYcAI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=ym2w6rbYcAI" id="ym2w6rbYcAI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript - Away3d Basic Shading Demo</div>
+</a>
+<div class="video-info" >Xamarin Studio running the Away3d Basic Shading Demo using the PlayScript compiler
+
+Using PlayScript v3.2.6002 
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blog @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Across The Land" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Linux Based Builds Now Available]]></title>
@@ -63,18 +99,20 @@ Royalty Free Background Music:
 
 <p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
 
-<p>The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
+<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
+
+<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"></p>
 
 <table>
 <thead>
 <tr>
-<th style="text-align:left;"> Git Branch </th>
-<th style="text-align:center;">  Mac OS-X / Linux </th>
+<th style="text-align:center;">  Git Branch  </th>
+<th style="text-align:center;">   Mac OS-X / Linux  </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
+<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
 <td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
 </tr>
 </tbody>
@@ -883,65 +921,6 @@ namespace InteropDemo
 </code></p>
 
 <p>From my answer on <a href="http://stackoverflow.com/questions/31013147/check-if-p-invoke-was-successful/31015964#31015964">Stackoverflow</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono   Code Coverage Using The New Coverage Filter]]></title>
-    <link href="http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/"/>
-    <updated>2015-06-15T21:33:29-07:00</updated>
-    <id>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter</id>
-    <content type="html"><![CDATA[<h2>New code coverage filter:</h2>
-
-<p>Using the new coverage filter on the mono log profiler, you can get output like this:</p>
-
-<pre><code>Coverage Summary:
-    xCorFlags (/Users/administrator/monocov/lib/xCorFlags.exe) 26% covered (42 methods - 11 covered)
-        &lt;Module&gt; ?% covered (0 methods - 1 covered)
-        CorFlags.CorFlagsSettings 25% covered (4 methods - 1 covered)
-        CorFlags.MainClass 50% covered (2 methods - 1 covered)
-        CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
-</code></pre>
-
-<blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote>
-
-
-<h2>Background:</h2>
-
-<p>Well, it appears that Xamarin has removed the &lsquo;internal&rsquo; cov profiler and monocov will not produce any output (besides mono actually loading the shared library, no functions are called) as the api has changed.</p>
-
-<p>They have added a code coverage filter (Apr 7 2015) to the core log profilers and while I could not find any published documentation(?). It is easy enough to enable.</p>
-
-<pre><code>--profile=log:coverage
-
-coverage             enable collection of code coverage data
-covfilter=ASSEMBLY   add an assembly to the code coverage filters
-                     add a + to include the assembly or a - to exclude it
-                     filter=-mscorlib
-covfilter-file=FILE  use FILE to generate the list of assemblies to be filtered
-</code></pre>
-
-<p>Git log info on cov removal and log coverage filter addition:</p>
-
-<pre><code>commit 16570265149730ec6a4760cc0fa34decc1a9d981
-Author: Alex Rønne Petersen &lt;alexrp@xamarin.com&gt;
-Date:   Tue Apr 7 14:51:27 2015 +0200
-        [profiler] Remove old mono-cov profiler.
-        We're replacing this with coverage support in the log profiler.
-
-commit e91693fbb87f687a2fdb5a495c945c1872b3066c
-Author: iain holmes &lt;iain@xamarin.com&gt;
-Date:   Fri Feb 27 10:13:54 2015 +0000
-        [cov] Install a coverage filter
-</code></pre>
-
-<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work:</p>
-
-<ul>
-<li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
-<li><a href="http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374">http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
