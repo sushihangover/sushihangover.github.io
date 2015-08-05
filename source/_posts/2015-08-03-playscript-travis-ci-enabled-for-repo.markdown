@@ -14,11 +14,12 @@ categories:
 
 FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.
 
+ The CI builds are generously hosted and run on [Travis][travis]
 
-The CI builds are generously hosted and run on [Travis][travis]
+{% img right http://blog.travis-ci.com/images/travis-mascot-200px.png %}
 
-| Git Branch |  Mac OS-X / Linux |
-| :------ | :------: | :------: |
+|  Git Branch  |   Mac OS-X / Linux  |
+| :----------: | :-----------------: | 
 | **[playscript](https://github.com/PlayScriptRedux/playscript)** | [![master nix][master-nix-badge]][master-nix] |
 
 
