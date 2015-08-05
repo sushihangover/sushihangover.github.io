@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PlayScript | Linux based builds now avaiable"
+title: "PlayScript | Linux based builds now available"
 date: 2015-08-04 06:06:28 -0700
 comments: true
 categories: 
