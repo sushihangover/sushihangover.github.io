@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Nunit Console - SushiHangover</title>
+  <title>Git   Resetting A File Back To Its Conflicted State - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: nunit-console">
+  <meta name="description" content="For some reason everytime I need to do this I forget the option. Maybe it is because the help for git checkout &ndash;help does not actually provide &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/nunit-console/">
+  <link rel="canonical" href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -89,36 +89,84 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Nunit Console</h1>
+    
+      <h1 class="entry-title">Git   Resetting A File Back To Its Conflicted State</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-06T17:29:21-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:29 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
 
-  
-  <h2>2015</h2>
+<p><code>git checkout -m &lt;filename&gt;
+</code></p>
 
-<article>
-  
-<h1><a href="/mono-nunit-world-world/">Mono   N Unit Hello World</a></h1>
-<time datetime="2015-06-24T22:11:16-07:00" pubdate><span class='month'>Jun</span> <span class='day'>24</span> <span class='year'>2015</span></time>
+<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cmdline/'>cmdline</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/nunit/'>nunit</a>, <a class='category' href='/blog/categories/nunit-console/'>nunit-console</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a></span>
-</footer>
-
-
-</article>
-
+<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-08-06T17:29:21-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:29 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/" data-via="" data-counturl="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/playscript-away3d-basic-shader/" title="Previous Post: PlayScript | Away3d Fire Demo with Scout">&laquo; PlayScript | Away3d Fire Demo with Scout</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +250,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/';
+        var disqus_url = 'http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

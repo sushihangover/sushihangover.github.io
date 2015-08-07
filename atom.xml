@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-05T11:32:59-07:00</updated>
+  <updated>2015-08-06T17:38:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git   Resetting A File Back To Its Conflicted State]]></title>
+    <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
+    <updated>2015-08-06T17:29:21-07:00</updated>
+    <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
+
+<p><code>git checkout -m &lt;filename&gt;
+</code></p>
+
+<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
+
+<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
@@ -851,76 +867,6 @@ git merge upstream/master
 <h3>Moral of the story:</h3>
 
 <p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[C#   Native Interop Helloworld]]></title>
-    <link href="http://sushihangover.github.io/c-number-native-interop-helloworld/"/>
-    <updated>2015-06-23T18:40:28-07:00</updated>
-    <id>http://sushihangover.github.io/c-number-native-interop-helloworld</id>
-    <content type="html"><![CDATA[<h4>The simplest Interop case HelloWorld I can create, give it a try and see what happens:</h4>
-
-<p><code>&gt;cat countbyone.cpp</code></p>
-
-<pre><code>extern "C" int SomeMethod(int num) {
-  return num++;
-}
-</code></pre>
-
-<p><strong>Compile your shared library:</strong></p>
-
-<ul>
-<li>Linux:
-<code>gcc -g -shared -fPIC countbyone.cpp -o libcountbyone.so</code></li>
-<li>OS-X:
-<code>clang -dynamiclib countbyone.cpp -o libcoutbyone.dylib</code></li>
-</ul>
-
-
-<p><code>&gt;cat interop.cs</code></p>
-
-<pre><code>using System;
-using System.Runtime.InteropServices;
-namespace InteropDemo
-{
-    class MainClass
-    {
-        [DllImport("countbyone")]
-        private static extern int SomeMethod(int num);
-
-        public static void Main (string[] args)
-        {
-            var x = SomeMethod(0);
-            Console.WriteLine(x);
-        }
-    }
-}
-</code></pre>
-
-<p><strong>Compile your .Net/Mono app:</strong></p>
-
-<p><code>&gt;mcs interop.cs</code></p>
-
-<p><strong>Run it:</strong></p>
-
-<pre><code>&gt;mono interop.exe
-1
-</code></pre>
-
-<p><strong>Output should be 1 and no errors&hellip;</strong></p>
-
-<h4>If the shared (native) library is not found, you receive:</h4>
-
-<p><code>XXXXX failed to initialize, the exception is: System.DllNotFoundException
-</code></p>
-
-<h4>If you have a entry point mismatch you would receive a:</h4>
-
-<p><code>XXXXX failed to initialize, the exception is: System.EntryPointNotFoundException
-</code></p>
-
-<p>From my answer on <a href="http://stackoverflow.com/questions/31013147/check-if-p-invoke-was-successful/31015964#31015964">Stackoverflow</a></p>
 ]]></content>
   </entry>
   

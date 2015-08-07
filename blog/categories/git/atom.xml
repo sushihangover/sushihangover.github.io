@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-05T11:32:59-07:00</updated>
+  <updated>2015-08-06T17:38:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git   Resetting A File Back To Its Conflicted State]]></title>
+    <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
+    <updated>2015-08-06T17:29:21-07:00</updated>
+    <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
+
+<p><code>git checkout -m &lt;filename&gt;
+</code></p>
+
+<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
+
+<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git   Squash Last X Commits Into One]]></title>
@@ -155,64 +171,6 @@ git status
 
 <pre><code>git reset --merge
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?]]></title>
-    <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
-    <updated>2015-06-24T07:46:41-07:00</updated>
-    <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right <a" src="href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a>"></p>
-
-<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
-
-<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
-
-<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
-
-<h3>Move last commit to a new branch</h3>
-
-<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
-
-<pre><code>git branch newbranch
-git reset --hard HEAD~1 # Go back 1 commit or use SHA
-git checkout newbranch
-</code></pre>
-
-<h3>Re-sync your Github fork</h3>
-
-<p>Now, lets get everything re-sync&rsquo;d.</p>
-
-<pre><code>git checkout master
-</code></pre>
-
-<p>Since you already push this branch to your Github fork, you will see the message:</p>
-
-<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
-</code></pre>
-
-<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
-
-<pre><code>git fetch upstream
-git merge upstream/master
-</code></pre>
-
-<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
-
-<pre><code>git push --force
-</code></pre>
-
-<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
-
-<pre><code>git push --all --force
-</code></pre>
-
-<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
-
-<h3>Moral of the story:</h3>
-
-<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
 ]]></content>
   </entry>
   

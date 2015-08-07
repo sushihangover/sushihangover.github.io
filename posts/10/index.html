@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Josh Marinacci has a blog post concerning using OMeta to parse binary data and while there was not a complete cut/paste of all the Javascript code &hellip;">
+  <meta name="description" content="I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/os-x-llvm-slash-clang-build/">Os X Llvm / Clang Build</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-11T00:00:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wanted to test out some C code that I am writting for a ARM Bare Metal (Embedded) project in QEMU (qemu-system-arm) and normally would just use the <a href="https://launchpad.net/gcc-arm-embedded">GNU Tools for ARM Embedded Processors</a> but I was wondering what the current state of LLVM is for cross-compiling to bare-metal ARM.</p>
+
+<p>Since this is a new area for me and I am having a <strong>dang hard time</strong> finding what is and isn&rsquo;t supported in CLang/LLVM for embedded ARM development, I figured I would compile the latest version and see the difference in code that gets produced between the gcc and Clang compilers.</p>
+
+<p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;-)</p>
+
+<div><script src='https://gist.github.com/8946898.js'></script>
+<noscript><pre><code>git clone http://llvm.org/git/llvm.git
+pushd llvm/tools
+git clone http://llvm.org/git/clang.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/compiler-rt.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/test-suite.git
+popd
+mkdir llvmbuild
+pushd llvmbuild
+../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
+make
+</code></pre></noscript></div>
+
+
+<p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -507,6 +560,10 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git   Resetting A File Back To Its Conflicted State</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-away3d-basic-shader/">Play Script | Away3d Fire Demo With Scout</a>
       </li>
     
@@ -520,10 +577,6 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
     
       <li class="post">
         <a href="/playscript-travis-ci-enabled-for-repo/">Play Script | Travis Ci Enabled For Repo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-away3d-intermediate-playscript/">Play Script | Away3d Particles With Play Script Logo</a>
       </li>
     
   </ul>
