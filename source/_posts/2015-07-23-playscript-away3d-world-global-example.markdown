@@ -15,7 +15,6 @@ I finally got all the bits together to get the OS-X OpenGL version of the [PlayS
 
 500 ActionScript files with over 20000 lines of actual code from [away3d-core-fp11](https://github.com/PlayScriptRedux/away3d-core-fp11) and [away3d-examples-fp11](https://github.com/PlayScriptRedux/away3d-examples-fp11) compiled to [CIL](https://en.wikipedia.org/wiki/Common_Intermediate_Language) using the PlayScript mcs compiler. :-)
 
-
 {% youtube XlC93cXRlgI %}
 
 [Away3d example source code that is running in the demo](https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as)
