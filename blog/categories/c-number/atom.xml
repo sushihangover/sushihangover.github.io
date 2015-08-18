@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C# | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-06T17:38:34-07:00</updated>
+  <updated>2015-08-17T18:59:37-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Exception Filters]]></title>
+    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
+    <updated>2015-08-17T18:34:18-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-exception-filters</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
+
+<p>These are actually really cool and nice addition to ActionScript.</p>
+
+<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
+
+<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
+
+<pre><code>try { … } 
+catch (MyException e) if (myfilter(e)) 
+{ 
+     … 
+}
+</code></pre>
+
+<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
+
+<p>And here is what they look like in PlayScript:</p>
+
+<h3>play/test-ps-ex-filter-01.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            throw new Error("Throw");
+        } catch (e:Error) if (x &gt; 0) {
+            trace("Catch");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<h3>play/test-ps-ex-filter-02.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            x = 5;
+            throw new Error("Throw");
+        } catch (e:Error) if (x &lt; 5) {
+            trace("No Catch Please");
+            return 0;
+        } catch (myError:Error) {
+            trace("Catch Here");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C#   Native Interop Helloworld]]></title>
@@ -429,22 +497,6 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
 </span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
 </span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
 </span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script :What Happened To The Open Source Version On Git Hub]]></title>
-    <link href="http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github/"/>
-    <updated>2013-12-27T19:04:55-08:00</updated>
-    <id>http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github</id>
-    <content type="html"><![CDATA[<p>Poof: An open source project disappears: <a href="https://github.com/playscript/playscript-mono.git">https://github.com/playscript/playscript-mono.git</a></p>
-
-<p><img class="left" src="/images/Playscript404.gif" width="360" height="240" title="&lsquo;PlayScript, Going, going, gone&rsquo;" >
-I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the project is either becoming a commercial offering from Xamarin (or Zynga) and future releases will have a license change?</p>
-
-<p>I am assuming there will be some big reveal in the future when Xamarin (and Zynga?) announces Playscript is in Beta for licensed users of Studio, Xamarin.iOS and Xamarin.Andriod, &hellip;. Or Not&hellip;..</p>
-
-<blockquote><p>The really important note here is if someone pulls a GitHub repo, you will <strong>LOSE</strong> your GitHub forks! Gone, Poof, No <em>Mas</em>, No warning, No chance to make a backup&hellip; I sure hope you had a complete local backup of your work cause it is now gone from GitHub</p></blockquote>
 ]]></content>
   </entry>
   

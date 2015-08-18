@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Heartbleed - SushiHangover</title>
+  <title>Play Script | Exception Filters - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Category: heartbleed">
+  <meta name="description" content="PlayScript (.play) now has Exception Filters like C# 6.0. These are actually really cool and nice addition to ActionScript. From the C# Frequently &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/blog/categories/heartbleed/">
+  <link rel="canonical" href="http://sushihangover.github.io/playscript-exception-filters/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -89,36 +89,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Heartbleed</h1>
+    
+      <h1 class="entry-title">Play Script | Exception Filters</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
 
-  
-  <h2>2014</h2>
+<p>These are actually really cool and nice addition to ActionScript.</p>
 
-<article>
-  
-<h1><a href="/heartbleed-explanation/">Xkcd: Heartbleed Explanation</a></h1>
-<time datetime="2014-04-11T07:51:37-07:00" pubdate><span class='month'>Apr</span> <span class='day'>11</span> <span class='year'>2014</span></time>
+<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/heartbleed/'>heartbleed</a>, <a class='category' href='/blog/categories/openssl/'>openssl</a>, <a class='category' href='/blog/categories/xkcd/'>xkcd</a></span>
-</footer>
+<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
 
+<pre><code>try { … } 
+catch (MyException e) if (myfilter(e)) 
+{ 
+     … 
+}
+</code></pre>
 
-</article>
+<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
 
+<p>And here is what they look like in PlayScript:</p>
+
+<h3>play/test-ps-ex-filter-01.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            throw new Error("Throw");
+        } catch (e:Error) if (x &gt; 0) {
+            trace("Catch");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<h3>play/test-ps-ex-filter-02.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            x = 5;
+            throw new Error("Throw");
+        } catch (e:Error) if (x &lt; 5) {
+            trace("No Catch Please");
+            return 0;
+        } catch (myError:Error) {
+            trace("Catch Here");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-exception-filters/" data-via="" data-counturl="http://sushihangover.github.io/playscript-exception-filters/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/git-resetting-a-file-back-to-its-conflicted-state/" title="Previous Post: Git - Resetting a file back to its conflicted state">&laquo; Git - Resetting a file back to its conflicted state</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +302,10 @@
       var disqus_shortname = 'sushihangover';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/playscript-exception-filters/';
+        var disqus_url = 'http://sushihangover.github.io/playscript-exception-filters/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

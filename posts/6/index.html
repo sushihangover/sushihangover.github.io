@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the PlayScript compiler (3.2.2002). This is the last posted release of the Apache licensed open-source version before Zynga pulled it &hellip;">
+  <meta name="description" content="I posted up the PlayScript compiler 3.2.3001 to Github which is a merge of the mono-3.2.3 tag into the playscript-mono branch. To speed up testing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-3-dot-2-3001-posted/">Play Script 3.2.3001 Posted</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T06:10:59-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:10 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
+
+<p>I posted up the PlayScript compiler 3.2.3001 to <a href="https://github.com/sushihangover/playscript">Github</a> which is a merge of the mono-3.2.3 tag into the playscript-mono branch.</p>
+
+<p>To speed up testing the merge, I am disabling a number of options in the build. Please log any issues via <a href="https://github.com/sushihangover/playscript/issues">Github</a></p>
+
+<pre><code>./configure --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=/Users/administrator/playscript-install
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -591,47 +627,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/0-60msps-logic-analyzer/">$30 60 Msps Logic Analyzer   Logic Pirate</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-15T20:16:37-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:16 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://http://dangerousprototypes.com"><img class="left" src="/images/dangerous_logo.png" title="&#34;Dangerous Prototypes&#34;" alt="&#34;Dangerous Prototypes&#34;"></a> I do not do a lot of product promotions, but this Logic Analyser from Dangerous Prototypes is so sweet! It is such a simple hardware design, pulled together with some great programming and serial ram overclocking. For $30USD you get an 8 channel, 256k sample, 60 Mhz(!!! - overclocked) logic analyser that supports the SUMP logic analyzer protocol and thus can use the Logic Sniffer (An alternative OLS client), another great open source product.</p>
-
-<p>This item is on my list now for future debugging of my bare-metal ARM designs.</p>
-
-<p>So check it out yourself:</p>
-
-<p>DP Blog post: <a href="http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/">http://dangerousprototypes.com/2014/04/15/new-prototype-logic-pirate-8-channel-256k-sample-60msps-logic-analyzer/</a></p>
-
-<p>Product page: <a href="http://dangerousprototypes.com/docs/Logic_Pirate">http://dangerousprototypes.com/docs/Logic_Pirate</a></p>
-
-<p>Available from Seeed @ <a href="http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html">http://www.seeedstudio.com/depot/Logic-Pirate-p-1750.html</a></p>
-
-<p>Client Software: <a href="http://www.lxtreme.nl/ols/">Logic Sniffer (An alternative OLS client)</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -649,6 +644,10 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-exception-filters/">Play Script | Exception Filters</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git   Resetting A File Back To Its Conflicted State</a>
       </li>
     
@@ -662,10 +661,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
     
       <li class="post">
         <a href="/playscript-away3d-firedemowithscout/">Play Script | Away3d Fire Demo With Scout</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-travis-ci-enabled-for-repo/">Play Script | Travis Ci Enabled For Repo</a>
       </li>
     
   </ul>

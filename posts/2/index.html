@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Use git rebase -i and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described &hellip;">
+  <meta name="description" content="Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-23T11:21:41-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
+
+<p>If you are also getting it build failure, please add your findings to:</p>
+
+<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
+
+<p>It appears not to be OS dependent either:</p>
+
+<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -723,84 +760,6 @@ git status
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-24T07:46:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right" src="http://sushihangover.github.io/images/github_logo.png"></p>
-
-<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
-
-<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
-
-<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
-
-<h3>Move last commit to a new branch</h3>
-
-<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
-
-<pre><code>git branch newbranch
-git reset --hard HEAD~1 # Go back 1 commit or use SHA
-git checkout newbranch
-</code></pre>
-
-<h3>Re-sync your Github fork</h3>
-
-<p>Now, lets get everything re-sync&rsquo;d.</p>
-
-<pre><code>git checkout master
-</code></pre>
-
-<p>Since you already push this branch to your Github fork, you will see the message:</p>
-
-<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
-</code></pre>
-
-<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
-
-<pre><code>git fetch upstream
-git merge upstream/master
-</code></pre>
-
-<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
-
-<pre><code>git push --force
-</code></pre>
-
-<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
-
-<pre><code>git push --all --force
-</code></pre>
-
-<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
-
-<h3>Moral of the story:</h3>
-
-<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -818,6 +777,10 @@ git merge upstream/master
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-exception-filters/">Play Script | Exception Filters</a>
+      </li>
+    
+      <li class="post">
         <a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git   Resetting A File Back To Its Conflicted State</a>
       </li>
     
@@ -831,10 +794,6 @@ git merge upstream/master
     
       <li class="post">
         <a href="/playscript-away3d-firedemowithscout/">Play Script | Away3d Fire Demo With Scout</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-travis-ci-enabled-for-repo/">Play Script | Travis Ci Enabled For Repo</a>
       </li>
     
   </ul>
