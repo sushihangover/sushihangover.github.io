@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-17T18:59:37-07:00</updated>
+  <updated>2015-09-02T22:15:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git Tags And Play Script]]></title>
+    <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
+    <updated>2015-09-02T21:47:36-07:00</updated>
+    <id>http://sushihangover.github.io/git-tags-and-playscript</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
+
+<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
+
+<pre><code>git show-ref --tags --dereference | grep play
+9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
+e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
+cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
+b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
+</code></pre>
+
+<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
+
+<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
+
+<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
+
+<p>First pull the latest changes, all done through pull-requests:</p>
+
+<pre><code>git pull origin playscript
+</code></pre>
+
+<p>Now I can add the new tag:</p>
+
+<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
+</code></pre>
+
+<p>And finally push it to the repo:</p>
+
+<pre><code>git push origin play-3.10.0001
+
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/PlayScriptRedux/playscript.git
+ * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
+</code></pre>
+
+<p>I still want to know if this is available through pull-requests somehow.</p>
+
+<p><img class="right <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git   Resetting A File Back To Its Conflicted State]]></title>
@@ -138,39 +187,6 @@ git checkout newbranch
 </code></pre>
 
 <p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git   Review A Merge Before Committing]]></title>
-    <link href="http://sushihangover.github.io/git-review-a-merge-before-committing/"/>
-    <updated>2015-06-24T09:44:07-07:00</updated>
-    <id>http://sushihangover.github.io/git-review-a-merge-before-committing</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
-
-<p>You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
-
-<pre><code>git merge --no-commit --no-ff branchname
-</code></pre>
-
-<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
-
-<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
-
-<pre><code>review = merge --no-ff --no-commit
-</code></pre>
-
-<p>So in looking at upstream changes:</p>
-
-<pre><code>git fetch upstream
-git review upstream/master
-git status
-</code></pre>
-
-<p>If you wish to back those changes, just reset that merge:</p>
-
-<pre><code>git reset --merge
-</code></pre>
 ]]></content>
   </entry>
   

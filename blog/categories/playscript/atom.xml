@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-08-17T18:59:37-07:00</updated>
+  <updated>2015-09-02T22:15:03-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git Tags And Play Script]]></title>
+    <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
+    <updated>2015-09-02T21:47:36-07:00</updated>
+    <id>http://sushihangover.github.io/git-tags-and-playscript</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
+
+<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
+
+<pre><code>git show-ref --tags --dereference | grep play
+9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
+e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
+cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
+b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
+</code></pre>
+
+<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
+
+<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
+
+<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
+
+<p>First pull the latest changes, all done through pull-requests:</p>
+
+<pre><code>git pull origin playscript
+</code></pre>
+
+<p>Now I can add the new tag:</p>
+
+<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
+</code></pre>
+
+<p>And finally push it to the repo:</p>
+
+<pre><code>git push origin play-3.10.0001
+
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/PlayScriptRedux/playscript.git
+ * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
+</code></pre>
+
+<p>I still want to know if this is available through pull-requests somehow.</p>
+
+<p><img class="right <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Exception Filters]]></title>
@@ -157,37 +206,6 @@ Royalty Free Background Music:
 </p>
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Travis Ci Enabled For Repo]]></title>
-    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
-    <updated>2015-08-03T12:54:06-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
-
-<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
-
-<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
-
-<p><img class="right <a" src="href="http://blog.travis-ci.com/images/travis-mascot-200px.png">http://blog.travis-ci.com/images/travis-mascot-200px.png</a>"></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:center;">  Git Branch  </th>
-<th style="text-align:center;">   Mac OS-X / Linux  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
-<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
-</tr>
-</tbody>
-</table>
-
 ]]></content>
   </entry>
   
