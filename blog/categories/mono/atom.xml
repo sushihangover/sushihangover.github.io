@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-09-26T21:13:33-07:00</updated>
+  <updated>2015-10-14T05:54:48-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Osx 10.11 El Capitan, Which Mono Version?]]></title>
+    <link href="http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/"/>
+    <updated>2015-10-14T05:49:56-07:00</updated>
+    <id>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version</id>
+    <content type="html"><![CDATA[<p>Moving to El Capitan? Then you need <a href="http://www.mono-project.com/download/">Mono</a> version 4.2.x or 4.0.4.4.</p>
+
+<p>From the Mono mailing list:</p>
+
+<blockquote><p>What is the difference between the latest Mono 4.0.4.4 package for Mac and the 4.2.1 El Capitan Preview?
+The changelog of 4.0.4.4 includes &ldquo;33585: El Capitan System Integrity
+Protection support.&rdquo; so i suppose that the 4.0.4.4 also works on El
+Capitan?.</p></blockquote>
+
+<p>Reply from Miguel de Icaza:</p>
+
+<blockquote><p>One is based on Mono 4.0 series, with minimal changes just to enable the support on El Capitan;   The 4.2 has the same changes, on top of the latest Mono 4.2, available on Alpha and the release candidate.</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Exception Filters]]></title>
@@ -157,37 +177,6 @@ Royalty Free Background Music:
 </p>
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Travis Ci Enabled For Repo]]></title>
-    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
-    <updated>2015-08-03T12:54:06-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
-
-<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
-
-<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
-
-<p><img class="right <a" src="href="http://blog.travis-ci.com/images/travis-mascot-200px.png">http://blog.travis-ci.com/images/travis-mascot-200px.png</a>"></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:center;">  Git Branch  </th>
-<th style="text-align:center;">   Mac OS-X / Linux  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
-<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
-</tr>
-</tbody>
-</table>
-
 ]]></content>
   </entry>
   
