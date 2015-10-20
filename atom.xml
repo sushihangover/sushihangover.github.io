@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-10-14T05:54:48-07:00</updated>
+  <updated>2015-10-19T20:43:27-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Star Wars: The Force Awakens Trailer | Official Hd]]></title>
+    <link href="http://sushihangover.github.io/starswarsFA/"/>
+    <updated>2015-10-19T16:12:50-07:00</updated>
+    <id>http://sushihangover.github.io/starswarsFA</id>
+    <content type="html"><![CDATA[
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('gYA3WNdO4Bw');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/gYA3WNdO4Bw?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/gYA3WNdO4Bw/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=gYA3WNdO4Bw" id="gYA3WNdO4Bw" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Star Wars: The Force Awakens Trailer | Official HD</div>
+</a>
+<div class="video-info" >Get your first look at the new Star Wars: The Force Awakens trailer!
+
+Lucasfilm and visionary director J.J. Abrams join forces to take you back again to a galaxy far, far away as “Star Wars” returns to the big screen with “Star Wars: The Force Awakens.” 
+
+Episode VII in the Star Wars Saga, Star Wars: The Force Awakens, opens in cinemas December 17, 2015.
+
+Official Site: http://starwarsunitedkingdom.co.uk 
+
+Subscribe to Star Wars on YouTube for more videos: https://www.youtube.com/StarWarsUK 
+Like Star Wars on Facebook: https://www.facebook.com/StarWars.UK
+Follow @StarWars on Twitter: @StarWarsUK
+Follow @StarWars on Instagram: http://instagram.com/starwars
+Follow Star Wars on Tumblr: http://starwars.tumblr.com/
+
+Star Wars: The Force Awakens, directed by J.J. Abrams from a screenplay by Lawrence Kasdan & Abrams, features a cast including actors John Boyega, Daisy Ridley, Adam Driver, Oscar Isaac, Andy Serkis, Academy Award winner Lupita Nyong’o, Gwendoline Christie, Crystal Clarke, Pip Andersen, Domhnall Gleeson, and Max von Sydow. They will join the original stars of the saga, Harrison Ford, Carrie Fisher, Mark Hamill, Anthony Daniels, Peter Mayhew, and Kenny Baker.
+
+The film is being produced by Kathleen Kennedy, J.J. Abrams, and Bryan Burk, and John Williams returns as the composer.</div>
+</div>
+
+
+<p><strong>Get your first look at the new Star Wars: The Force Awakens trailer!
+</strong></p>
+
+<p>Lucasfilm and visionary director J.J. Abrams join forces to take you back again to a galaxy far, far away as “Star Wars” returns to the big screen with “Star Wars: The Force Awakens.”</p>
+
+<p>Episode VII in the Star Wars Saga, Star Wars: The Force Awakens, opens in cinemas December 17, 2015.</p>
+
+<p>Official Site: <a href="http://starwarsunitedkingdom.co.uk">http://starwarsunitedkingdom.co.uk</a></p>
+
+<p>Subscribe to Star Wars on YouTube for more videos: <a href="https://www.youtube.com/StarWarsUK">https://www.youtube.com/StarWarsUK</a>
+Like Star Wars on Facebook: <a href="https://www.facebook.com/StarWars.UK">https://www.facebook.com/StarWars.UK</a>
+Follow @StarWars on Twitter: @StarWarsUK
+Follow @StarWars on Instagram: <a href="http://instagram.com/starwars">http://instagram.com/starwars</a>
+Follow Star Wars on Tumblr: <a href="http://starwars.tumblr.com/">http://starwars.tumblr.com/</a></p>
+
+<p>Star Wars: The Force Awakens, directed by J.J. Abrams from a screenplay by Lawrence Kasdan &amp; Abrams, features a cast including actors John Boyega, Daisy Ridley, Adam Driver, Oscar Isaac, Andy Serkis, Academy Award winner Lupita Nyong’o, Gwendoline Christie, Crystal Clarke, Pip Andersen, Domhnall Gleeson, and Max von Sydow. They will join the original stars of the saga, Harrison Ford, Carrie Fisher, Mark Hamill, Anthony Daniels, Peter Mayhew, and Kenny Baker.</p>
+
+<p>The film is being produced by Kathleen Kennedy, J.J. Abrams, and Bryan Burk, and John Williams returns as the composer.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Osx 10.11 El Capitan, Which Mono Version?]]></title>
@@ -780,67 +833,6 @@ git checkout newbranch
 </code></pre>
 
 <p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Os X + Mono + Rosyln + Code Formatter]]></title>
-    <link href="http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/"/>
-    <updated>2015-06-25T06:20:17-07:00</updated>
-    <id>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter</id>
-    <content type="html"><![CDATA[<p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
-
-<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
-
-<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
-
-<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
-
-<p>But those projects are not needed to get the main program working&hellip;</p>
-
-<h3>mono ./CodeFormatter.exe</h3>
-
-<pre><code>Must specify at least one project / solution / rsp to format
-CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
-    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
-    [/rule(+|-):rule1,rule2,...]  [/verbose]
-    &lt;project, solution or response file&gt;
-
-    /file        - Only apply changes to files with specified name
-    /lang        - Specifies the language to use when a responsefile is
-                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
-    /c           - Additional preprocessor configurations the formatter
-                   should run under.
-    /copyright   - Specifies file containing copyright header.
-                   Use ConvertTests to convert MSTest tests to xUnit.
-    /nocopyright - Do not update the copyright message.
-    /tables      - Let tables opt out of formatting by defining
-                   DOTNET_FORMATTER
-    /nounicode   - Do not convert unicode strings to escape sequences
-    /rule(+|-)   - Enable (default) or disable the specified rule
-    /rules       - List the available rules
-    /verbose     - Verbose output
-</code></pre>
-
-<h3>mono ./CodeFormatter.exe /rules</h3>
-
-<pre><code>Name                 Description
-==============================================
-BraceNewLine         :Ensure all braces occur on a new line
-Copyright            :Insert the copyright header into every file
-NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
-CustomCopyright      :Remove any custom copyright header from the file
-UsingLocation        :Place using directives outside namespace declarations
-UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
-ExplicitVisibility   :Ensure all members have an explicit visibility modifier
-IllegalHeaders       :Remove illegal headers from files
-FormatDocument       :Run the language specific formatter on every document
-ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
-ReadonlyFields       :Mark fields which can be readonly as readonly
-FieldNames           :Prefix private fields with _ and statics with s_
-</code></pre>
-
-<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
 ]]></content>
   </entry>
   
