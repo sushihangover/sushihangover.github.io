@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Star Wars: The Force Awakens Trailer | Official HD Get your first look at the new Star Wars: The Force Awakens trailer! Lucasfilm and visionary &hellip;">
+  <meta name="description" content="Great news, the new pluggable TLS provider is available for security review. Mono’s new TLS provider Hello, As described by Miguel in the “State of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/monos-new-tls-provider/">Mono's New Tls Provider</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-26T23:10:57-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Great news, the new pluggable TLS provider is available for security review.</p>
+
+<p><a href="http://mono.1490590.n4.nabble.com/Mono-s-new-TLS-provider-tt4666825.html">Mono’s new TLS provider</a></p>
+
+<blockquote><p> Hello,</p>
+
+<p>As described by Miguel in the “State of Tls in Mono” [1] we have been working on a new TLS implementation for Mono, one that would upgrade our TLS stack, and one that would allow us to reuse some of the higher level pieces from Microsoft’s networking stack, read that post for more details on the scope of the project.</p>
+
+<p>Mono’s master branch now has the ability to load alternative TLS implementations.   We added this code so we can start testing our new TLS implementation side-by-side the code that is in use today, and also so that we can provide both platform-specific backends or allow developers to choose a different TLS implementation (like BoringSSL, OpenSSL or Amazon’s s2n).</p>
+
+<p>This is achieved by making our SSL transport pluggable, this allows HttpWebRequest and other classes to use the new TLS stack.</p>
+
+<p>Today, a regular Mono checkout will default to the existing Mono SSL/TLS implementation which supports a number of ciphers and TLS levels up to 1.0, so nothing has changed and we have one alternative implementation available: mono-tls.</p>
+
+<p>mono-tls is a purely managed implementation of TLS 1.0, 1.1 and 1.2 (filling the gap that we had).   To use it, you need to build the mono-tls [2] module, once this is build, you will have to reference the following libraries: Mono.Security.NewTls, Mono.Security.NewTls.Interface, Mono.Security.Providers.NewTls.</p>
+
+<p>Once you have these, you should add this code to your main program:</p>
+
+<pre><code>  MonoTlsProviderFactory.InstallProvider (new NewTlsProvider ());
+</code></pre>
+
+<p>Then uses of HttpWebRequest, FtpWebRequest and the Smtp client will all use the new TLS stack.</p>
+
+<p>More details are available in the architecture document [3].</p>
+
+<p>TLS State
+While we have added an extensive test suite to this new TLS implementation and tested this against a wide variety of TLS servers and configurations, we have not completed a security audit of its implementation.   While we have taken every step to ensure that we follow all the best practices when implementing a security stack, we want to get this code reviewed by third parties, and we want to complete a comprehensive security audit of the code before we would even consider transitioning this as the default.</p>
+
+<p>Future Work - Pluggability/SslStream
+We are going to be making the SslStream the proxy endpoint, for two reasons: (a) it would make SslStream usable with the new provider interface and (b) it would simplify some of the special code that lives in different places in the class libraries to use the new TLS implementation.</p>
+
+<p>We will also likely introduce a MONO_TLS_PROVIDER environment variable that controls the implementation, so that we make it easier to test the implementations during the testing phase.</p>
+
+<p>Future Work - Other Providers
+We are currently developing a provider for Apple platforms that will use Apple’s unmanaged SSL implementation, and we will be adding an implementation that use Google’s BoringSSL.   The idea being that on Apple, you get to use the system provided implementation, and on other platforms, we use the Google maintained one.</p>
+
+<p>Please let me know if you have any questions, comments, feedback.   In particular, we would like to get you to find security holes in the implementation.  We can offer a Xamarin shirt or a Xamarin monkey as a prize for finding holes in the new implementation.</p>
+
+<p>References
+[1] <a href="http://tirania.org/blog/archive/2015/Aug-27.html">http://tirania.org/blog/archive/2015/Aug-27.html</a>
+[2] <a href="http://github.com/mono/mono-tls">http://github.com/mono/mono-tls</a>
+[3] <a href="https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md">https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md</a></p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -585,57 +655,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-away3d-intermediate-playscript/">Play Script | Away3d Particles With Play Script Logo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-29T17:05:50-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:05 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This demo uses the the Away3d Intermediate Particle Explosions example as a base, but I reworked it slightly to use the PlayScript logo. It is running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('uhjTZjlo5YA');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/uhjTZjlo5YA?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/uhjTZjlo5YA/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=uhjTZjlo5YA" id="uhjTZjlo5YA" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions using the PlayScript logo</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.3001, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_PlayScriptParticleExplosion­s within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d World Global Example</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -651,6 +670,10 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monos-new-tls-provider/">Mono's New Tls Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/starswarsFA/">Star Wars: The Force Awakens Trailer | Official Hd</a>
       </li>
     
@@ -664,10 +687,6 @@ Royalty Free Background Music:
     
       <li class="post">
         <a href="/playscript-exception-filters/">Play Script | Exception Filters</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git   Resetting A File Back To Its Conflicted State</a>
       </li>
     
   </ul>
