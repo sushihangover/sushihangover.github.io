@@ -1,0 +1,51 @@
+---
+layout: post
+title: "Mono's new TLS Provider"
+date: 2015-10-26 23:10:57 -0700
+comments: true
+categories: 
+- mono
+- tls
+---
+Great news, the new pluggable TLS provider is available for security review.
+
+[Mono’s new TLS provider](http://mono.1490590.n4.nabble.com/Mono-s-new-TLS-provider-tt4666825.html)
+
+>  Hello,
+
+> As described by Miguel in the “State of Tls in Mono” [1] we have been working on a new TLS implementation for Mono, one that would upgrade our TLS stack, and one that would allow us to reuse some of the higher level pieces from Microsoft’s networking stack, read that post for more details on the scope of the project.
+
+> Mono’s master branch now has the ability to load alternative TLS implementations.   We added this code so we can start testing our new TLS implementation side-by-side the code that is in use today, and also so that we can provide both platform-specific backends or allow developers to choose a different TLS implementation (like BoringSSL, OpenSSL or Amazon’s s2n).
+
+> This is achieved by making our SSL transport pluggable, this allows HttpWebRequest and other classes to use the new TLS stack.
+
+> Today, a regular Mono checkout will default to the existing Mono SSL/TLS implementation which supports a number of ciphers and TLS levels up to 1.0, so nothing has changed and we have one alternative implementation available: mono-tls.
+
+> mono-tls is a purely managed implementation of TLS 1.0, 1.1 and 1.2 (filling the gap that we had).   To use it, you need to build the mono-tls [2] module, once this is build, you will have to reference the following libraries: Mono.Security.NewTls, Mono.Security.NewTls.Interface, Mono.Security.Providers.NewTls.
+
+> Once you have these, you should add this code to your main program:
+
+>       MonoTlsProviderFactory.InstallProvider (new NewTlsProvider ());
+
+> Then uses of HttpWebRequest, FtpWebRequest and the Smtp client will all use the new TLS stack. 
+
+> More details are available in the architecture document [3].
+
+> TLS State
+> While we have added an extensive test suite to this new TLS implementation and tested this against a wide variety of TLS servers and configurations, we have not completed a security audit of its implementation.   While we have taken every step to ensure that we follow all the best practices when implementing a security stack, we want to get this code reviewed by third parties, and we want to complete a comprehensive security audit of the code before we would even consider transitioning this as the default.
+
+> Future Work - Pluggability/SslStream
+> We are going to be making the SslStream the proxy endpoint, for two reasons: (a) it would make SslStream usable with the new provider interface and (b) it would simplify some of the special code that lives in different places in the class libraries to use the new TLS implementation.
+
+> We will also likely introduce a MONO_TLS_PROVIDER environment variable that controls the implementation, so that we make it easier to test the implementations during the testing phase.
+
+> Future Work - Other Providers
+> We are currently developing a provider for Apple platforms that will use Apple’s unmanaged SSL implementation, and we will be adding an implementation that use Google’s BoringSSL.   The idea being that on Apple, you get to use the system provided implementation, and on other platforms, we use the Google maintained one.
+
+> Please let me know if you have any questions, comments, feedback.   In particular, we would like to get you to find security holes in the implementation.  We can offer a Xamarin shirt or a Xamarin monkey as a prize for finding holes in the new implementation.
+
+> References
+> [1] http://tirania.org/blog/archive/2015/Aug-27.html
+> [2] http://github.com/mono/mono-tls
+> [3] https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md
+
