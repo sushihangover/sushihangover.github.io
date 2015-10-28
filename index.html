@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Great news, the new pluggable TLS provider is available for security review. Mono’s new TLS provider Hello, As described by Miguel in the “State of &hellip;">
+  <meta name="description" content="Eric Lippert has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-exception-filters/">Play Script | Optimizing Psc/Mcs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
+
+<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
+<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
+</span></p>
+
+<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
+
+<p>He also has a great series on Nullable micro-optimizations that start here:</p>
+
+<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
+
+<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -348,94 +395,6 @@ To https://github.com/PlayScriptRedux/playscript.git
       
   <header>
     
-      <h1 class="entry-title"><a href="/playscript-exception-filters/">Play Script | Exception Filters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
-
-<p>These are actually really cool and nice addition to ActionScript.</p>
-
-<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
-
-<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
-
-<pre><code>try { … } 
-catch (MyException e) if (myfilter(e)) 
-{ 
-     … 
-}
-</code></pre>
-
-<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
-
-<p>And here is what they look like in PlayScript:</p>
-
-<h3>play/test-ps-ex-filter-01.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            throw new Error("Throw");
-        } catch (e:Error) if (x &gt; 0) {
-            trace("Catch");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<h3>play/test-ps-ex-filter-02.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            x = 5;
-            throw new Error("Throw");
-        } catch (e:Error) if (x &lt; 5) {
-            trace("No Catch Please");
-            return 0;
-        } catch (myError:Error) {
-            trace("Catch Here");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git   Resetting A File Back To Its Conflicted State</a></h1>
     
     
@@ -670,6 +629,10 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-exception-filters/">Play Script | Optimizing Psc/Mcs</a>
+      </li>
+    
+      <li class="post">
         <a href="/monos-new-tls-provider/">Mono's New Tls Provider</a>
       </li>
     
@@ -683,10 +646,6 @@ Royalty Free Background Music:
     
       <li class="post">
         <a href="/git-tags-and-playscript/">Git Tags And Play Script</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-exception-filters/">Play Script | Exception Filters</a>
       </li>
     
   </ul>

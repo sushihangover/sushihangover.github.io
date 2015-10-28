@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Play Script | Exception Filters - SushiHangover</title>
+  <title>Play Script | Optimizing Psc/Mcs - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="PlayScript (.play) now has Exception Filters like C# 6.0. These are actually really cool and nice addition to ActionScript. From the C# Frequently &hellip;">
+  <meta name="description" content="Eric Lippert has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,7 +93,7 @@
   
   <header>
     
-      <h1 class="entry-title">Play Script | Exception Filters</h1>
+      <h1 class="entry-title">Play Script | Optimizing Psc/Mcs</h1>
     
     
       <p class="meta">
@@ -102,73 +102,32 @@
 
 
 
-<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
+<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
 
-<p>These are actually really cool and nice addition to ActionScript.</p>
+<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
 
-<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
+<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
+<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
+</span></p>
 
-<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
+<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
 
-<pre><code>try { … } 
-catch (MyException e) if (myfilter(e)) 
-{ 
-     … 
-}
-</code></pre>
+<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
 
-<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
+<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
 
-<p>And here is what they look like in PlayScript:</p>
+<p>He also has a great series on Nullable micro-optimizations that start here:</p>
 
-<h3>play/test-ps-ex-filter-01.play</h3>
+<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
 
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            throw new Error("Throw");
-        } catch (e:Error) if (x &gt; 0) {
-            trace("Catch");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<h3>play/test-ps-ex-filter-02.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            x = 5;
-            throw new Error("Throw");
-        } catch (e:Error) if (x &lt; 5) {
-            trace("No Catch Please");
-            return 0;
-        } catch (myError:Error) {
-            trace("Catch Here");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
+<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
 </div>
 
 
@@ -184,12 +143,12 @@ catch (MyException e) if (myfilter(e))
 
 
 
-<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
+<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
+    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/eric-lippert/'>eric lippert</a>, <a class='category' href='/blog/categories/mcs/'>mcs</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
   
 </span>
 
@@ -207,10 +166,8 @@ catch (MyException e) if (myfilter(e))
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/git-resetting-a-file-back-to-its-conflicted-state/" title="Previous Post: Git - Resetting a file back to its conflicted state">&laquo; Git - Resetting a file back to its conflicted state</a>
+        <a class="basic-alignment left" href="/monos-new-tls-provider/" title="Previous Post: Mono's new TLS Provider">&laquo; Mono's new TLS Provider</a>
       
-      
-        <a class="basic-alignment right" href="/git-tags-and-playscript/" title="Next Post: Git tags and PlayScript">Git tags and PlayScript &raquo;</a>
       
     </p>
   </footer>
@@ -231,6 +188,10 @@ catch (MyException e) if (myfilter(e))
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-exception-filters/">Play Script | Optimizing Psc/Mcs</a>
+      </li>
+    
+      <li class="post">
         <a href="/monos-new-tls-provider/">Mono's New Tls Provider</a>
       </li>
     
@@ -244,10 +205,6 @@ catch (MyException e) if (myfilter(e))
     
       <li class="post">
         <a href="/git-tags-and-playscript/">Git Tags And Play Script</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-exception-filters/">Play Script | Exception Filters</a>
       </li>
     
   </ul>

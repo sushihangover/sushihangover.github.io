@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-10-27T02:38:57-07:00</updated>
+  <updated>2015-10-28T00:11:34-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Play Script | Optimizing Psc/Mcs]]></title>
+    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
+    <updated>2015-10-27T22:20:18-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-exception-filters</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+
+<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
+
+<p>He also has a great series on Nullable micro-optimizations that start here:</p>
+
+<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
+
+<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono's New Tls Provider]]></title>
@@ -80,74 +105,6 @@ Capitan?.</p></blockquote>
 <p>Reply from Miguel de Icaza:</p>
 
 <blockquote><p>One is based on Mono 4.0 series, with minimal changes just to enable the support on El Capitan;   The 4.2 has the same changes, on top of the latest Mono 4.2, available on Alpha and the release candidate.</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Exception Filters]]></title>
-    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
-    <updated>2015-08-17T18:34:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-exception-filters</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
-
-<p>These are actually really cool and nice addition to ActionScript.</p>
-
-<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
-
-<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
-
-<pre><code>try { … } 
-catch (MyException e) if (myfilter(e)) 
-{ 
-     … 
-}
-</code></pre>
-
-<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
-
-<p>And here is what they look like in PlayScript:</p>
-
-<h3>play/test-ps-ex-filter-01.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            throw new Error("Throw");
-        } catch (e:Error) if (x &gt; 0) {
-            trace("Catch");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<h3>play/test-ps-ex-filter-02.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            x = 5;
-            throw new Error("Throw");
-        } catch (e:Error) if (x &lt; 5) {
-            trace("No Catch Please");
-            return 0;
-        } catch (myError:Error) {
-            trace("Catch Here");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
 ]]></content>
   </entry>
   
