@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to &hellip;">
+  <meta name="description" content="When you need a file or package and can&rsquo;t find it: Use apt-file First, install apt-file and update it. sudo apt-get install apt-file
+sudo apt- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +97,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/apt-file-finding-packages-by-search-fing-headers/">Apt File | Finding Packages By Search Fing Headers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-31T06:30:29-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>When you need a file or package and can&rsquo;t find it:</h3>
+
+<h4>Use apt-file</h4>
+
+<p>First, install apt-file and update it.</p>
+
+<pre><code>sudo apt-get install apt-file
+sudo apt-file update
+</code></pre>
+
+<p>You can search with apt-file needed files or packages.</p>
+
+<pre><code>apt-file search curses.h
+apt-file search panel.h
+apt-file search iconv.h
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a></h1>
     
     
@@ -120,7 +165,7 @@
 
 <h3>So the errors:</h3>
 
-<pre><code>sudo apt-get install momo-devel
+<pre><code>sudo apt-get install mono-devel
 </code></pre>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -138,35 +183,7 @@
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>E: Unable to locate package momo-devel
-</span><span class='line'>parallels@ubuntu:~$ sudo apt-get install mono-devel
-</span><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>Some packages could not be installed. This may mean that you have
-</span><span class='line'>requested an impossible situation or if you are using the unstable
-</span><span class='line'>distribution that some required packages have not yet been created
-</span><span class='line'>or been moved out of Incoming.
-</span><span class='line'>The following information may help to resolve the situation:
-</span><span class='line'>
-</span><span class='line'>The following packages have unmet dependencies:
+</pre></td><td class='code'><pre><code class=''><span class='line'>The following packages have unmet dependencies:
 </span><span class='line'> mono-devel : Depends: libgdiplus (&gt;= 2.6.7) but it is not going to be installed
 </span><span class='line'>              Depends: libmono-system-design4.0-cil (&gt;= 1.0) but it is not going to be installed
 </span><span class='line'>              Depends: libmono-system-drawing4.0-cil (&gt;= 3.0.6) but it is not going to be installed
@@ -252,7 +269,7 @@
 sudo apt-get -f install
 </code></pre>
 
-<h4>Finally, install <code>mono</code> from package:</h4>
+<h4>Finally, install <code>mono</code> (and <code>monodevelop</code>) from package:</h4>
 
 <pre><code>sudo apt-get install mono-devel
 sudo apt-get isntall monodevelop
@@ -720,56 +737,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-away3d-firedemowithscout/">Play Script | Away3d Fire Demo With Scout</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-03T16:12:50-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:12 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
-
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -785,6 +752,10 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/apt-file-finding-packages-by-search-fing-headers/">Apt File | Finding Packages By Search Fing Headers</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a>
       </li>
     
@@ -798,10 +769,6 @@ Royalty Free Background Music:
     
       <li class="post">
         <a href="/starswarsFA/">Star Wars: The Force Awakens Trailer | Official Hd</a>
-      </li>
-    
-      <li class="post">
-        <a href="/osx-10-dot-11-el-capitan-which-mono-version/">Osx 10.11 El Capitan, Which Mono Version?</a>
       </li>
     
   </ul>

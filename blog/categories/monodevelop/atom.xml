@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Monodevelop | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monodevelop/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-10-30T23:03:26-07:00</updated>
+  <updated>2015-10-31T02:10:17-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -26,24 +26,10 @@
 
 <h3>So the errors:</h3>
 
-<pre><code>sudo apt-get install momo-devel
+<pre><code>sudo apt-get install mono-devel
 </code></pre>
 
-<pre><code>Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-E: Unable to locate package momo-devel
-parallels@ubuntu:~$ sudo apt-get install mono-devel
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-Some packages could not be installed. This may mean that you have
-requested an impossible situation or if you are using the unstable
-distribution that some required packages have not yet been created
-or been moved out of Incoming.
-The following information may help to resolve the situation:
-
-The following packages have unmet dependencies:
+<pre><code>The following packages have unmet dependencies:
  mono-devel : Depends: libgdiplus (&gt;= 2.6.7) but it is not going to be installed
               Depends: libmono-system-design4.0-cil (&gt;= 1.0) but it is not going to be installed
               Depends: libmono-system-drawing4.0-cil (&gt;= 3.0.6) but it is not going to be installed
@@ -113,7 +99,7 @@ Package 'libjpeg62-turbo' has no installation candidate
 sudo apt-get -f install
 </code></pre>
 
-<h4>Finally, install <code>mono</code> from package:</h4>
+<h4>Finally, install <code>mono</code> (and <code>monodevelop</code>) from package:</h4>
 
 <pre><code>sudo apt-get install mono-devel
 sudo apt-get isntall monodevelop

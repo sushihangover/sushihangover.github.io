@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Apt Get | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/apt-get/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-10-31T02:10:17-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Apt File | Finding Packages By Search Fing Headers]]></title>
+    <link href="http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers/"/>
+    <updated>2015-10-31T06:30:29-07:00</updated>
+    <id>http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers</id>
+    <content type="html"><![CDATA[<h3>When you need a file or package and can&rsquo;t find it:</h3>
+
+<h4>Use apt-file</h4>
+
+<p>First, install apt-file and update it.</p>
+
+<pre><code>sudo apt-get install apt-file
+sudo apt-file update
+</code></pre>
+
+<p>You can search with apt-file needed files or packages.</p>
+
+<pre><code>apt-file search curses.h
+apt-file search panel.h
+apt-file search iconv.h
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

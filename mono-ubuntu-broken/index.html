@@ -117,7 +117,7 @@
 
 <h3>So the errors:</h3>
 
-<pre><code>sudo apt-get install momo-devel
+<pre><code>sudo apt-get install mono-devel
 </code></pre>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -135,35 +135,7 @@
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>E: Unable to locate package momo-devel
-</span><span class='line'>parallels@ubuntu:~$ sudo apt-get install mono-devel
-</span><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>Some packages could not be installed. This may mean that you have
-</span><span class='line'>requested an impossible situation or if you are using the unstable
-</span><span class='line'>distribution that some required packages have not yet been created
-</span><span class='line'>or been moved out of Incoming.
-</span><span class='line'>The following information may help to resolve the situation:
-</span><span class='line'>
-</span><span class='line'>The following packages have unmet dependencies:
+</pre></td><td class='code'><pre><code class=''><span class='line'>The following packages have unmet dependencies:
 </span><span class='line'> mono-devel : Depends: libgdiplus (&gt;= 2.6.7) but it is not going to be installed
 </span><span class='line'>              Depends: libmono-system-design4.0-cil (&gt;= 1.0) but it is not going to be installed
 </span><span class='line'>              Depends: libmono-system-drawing4.0-cil (&gt;= 3.0.6) but it is not going to be installed
@@ -249,7 +221,7 @@
 sudo apt-get -f install
 </code></pre>
 
-<h4>Finally, install <code>mono</code> from package:</h4>
+<h4>Finally, install <code>mono</code> (and <code>monodevelop</code>) from package:</h4>
 
 <pre><code>sudo apt-get install mono-devel
 sudo apt-get isntall monodevelop
@@ -329,6 +301,8 @@ sudo apt-get isntall monodevelop
         <a class="basic-alignment left" href="/playscript-exception-filters/" title="Previous Post: PlayScript | Optimizing psc/mcs">&laquo; PlayScript | Optimizing psc/mcs</a>
       
       
+        <a class="basic-alignment right" href="/apt-file-finding-packages-by-search-fing-headers/" title="Next Post: apt-file | Finding packages by search fing headers">apt-file | Finding packages by search fing headers &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -348,6 +322,10 @@ sudo apt-get isntall monodevelop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/apt-file-finding-packages-by-search-fing-headers/">Apt File | Finding Packages By Search Fing Headers</a>
+      </li>
+    
+      <li class="post">
         <a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a>
       </li>
     
@@ -361,10 +339,6 @@ sudo apt-get isntall monodevelop
     
       <li class="post">
         <a href="/starswarsFA/">Star Wars: The Force Awakens Trailer | Official Hd</a>
-      </li>
-    
-      <li class="post">
-        <a href="/osx-10-dot-11-el-capitan-which-mono-version/">Osx 10.11 El Capitan, Which Mono Version?</a>
       </li>
     
   </ul>
