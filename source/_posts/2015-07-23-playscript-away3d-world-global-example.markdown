@@ -10,6 +10,7 @@ categories:
 - actionscript
 - xamarin
 ---
+{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}
 
 I finally got all the bits together to get the OS-X OpenGL version of the [PlayScript](http://playscriptredux.github.io) flash stage running the [Away3d](http://away3d.com) 3D engine.
 
