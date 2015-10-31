@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubunutu | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/ubunutu/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-10-30T23:03:26-07:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mono | Ubuntu Broken Packages]]></title>
+    <link href="http://sushihangover.github.io/mono-ubuntu-broken/"/>
+    <updated>2015-10-30T21:55:07-07:00</updated>
+    <id>http://sushihangover.github.io/mono-ubuntu-broken</id>
+    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
+
+<p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
+
+<p>Broken packages always seem to be a problem when dealing with pre-built Linux software and I usually build from source so I do not see them, but installing the <code>mono-devel</code> package fails due to <code>libjpeg62-turbo</code> and <code>libjpeg62</code> not being avialable in the normal Ubuntu repos. They have been replaced by bundle <code>8</code> of libraries but <code>libgdiplus</code> that Mono references is pinned to <code>libjpeg6*</code> packages&hellip;</p>
+
+<h3>So the errors:</h3>
+
+<pre><code>sudo apt-get install momo-devel
+</code></pre>
+
+<pre><code>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package momo-devel
+parallels@ubuntu:~$ sudo apt-get install mono-devel
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ mono-devel : Depends: libgdiplus (&gt;= 2.6.7) but it is not going to be installed
+              Depends: libmono-system-design4.0-cil (&gt;= 1.0) but it is not going to be installed
+              Depends: libmono-system-drawing4.0-cil (&gt;= 3.0.6) but it is not going to be installed
+              Depends: libmono-system-messaging4.0-cil (&gt;= 2.10.1) but it is not going to be installed
+              Depends: libmono-system-runtime4.0-cil (&gt;= 2.10.1) but it is not going to be installed
+              Depends: libmono-system-servicemodel-activation4.0-cil (&gt;= 1.0) but it is not going to be installed
+              Depends: libmono-system-servicemodel-web4.0-cil (&gt;= 3.2.1) but it is not going to be installed
+              Depends: libmono-system-servicemodel4.0a-cil (&gt;= 3.2.3) but it is not going to be installed
+              Depends: libmono-system-web-extensions4.0-cil (&gt;= 2.10.3) but it is not going to be installed
+              Depends: libmono-system-web-services4.0-cil (&gt;= 1.0) but it is not going to be installed
+              Depends: libmono-system-web4.0-cil (&gt;= 2.10.3) but it is not going to be installed
+              Depends: libmono-system-windows-forms4.0-cil (&gt;= 1.0) but it is not going to be installed
+              Depends: libmono-cil-dev (= 4.2.1.91-0xamarin1) but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.
+</code></pre>
+
+<pre><code>sudo apt-get install libgdiplus
+</code></pre>
+
+<pre><code>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Some packages could not be installed. This may mean that you have requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+The following packages have unmet dependencies:
+libgdiplus : Depends: libjpeg62-turbo (&gt;= 1.3.1) but it is not installable
+E: Unable to correct problems, you have held broken packages.
+</code></pre>
+
+<pre><code>sudo apt-get install libjpeg62-turbo
+</code></pre>
+
+<pre><code>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package libjpeg62-turbo is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or is only available from another source E: 
+Package 'libjpeg62-turbo' has no installation candidate
+</code></pre>
+
+<h3>The Fix:</h3>
+
+<h4>Get the older <code>libjpeg62-turbo</code> package:</h4>
+
+<p><a href="http://pkgs.org/debian-sid/debian-main-amd64/libjpeg62-turbo_1.4.1-2_amd64.deb.html">libjpeg62-turbo - libjpeg-turbo JPEG runtime library</a></p>
+
+<pre><code> wget http://ftp.br.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_1.4.1-2_amd64.deb
+</code></pre>
+
+<h4>Get the older <code>libjpeg62</code> package:</h4>
+
+<p><a href="http://pkgs.org/debian-sid/debian-main-amd64/libjpeg62_6b2-2_amd64.deb.html">libjpeg62 - Independent JPEG Group&rsquo;s JPEG runtime library (version 6.2)</a></p>
+
+<pre><code> wget http://ftp.br.debian.org/debian/pool/main/libj/libjpeg6b/libjpeg62_6b2-2_amd64.deb
+</code></pre>
+
+<h4><a href="http://www.cyberciti.biz/faq/ubuntu-linux-how-do-i-install-deb-packages/">Install</a> the deb packages:</h4>
+
+<pre><code>sudo dpkg --install --recursive --auto-deconfigure libjpeg62-turbo_1.4.1-2_amd64.deb 
+</code></pre>
+
+<h4>Update and fix the &lsquo;now broken&rsquo; dependencies:</h4>
+
+<pre><code>apt-get update
+sudo apt-get -f install
+</code></pre>
+
+<h4>Finally, install <code>mono</code> from package:</h4>
+
+<pre><code>sudo apt-get install mono-devel
+sudo apt-get isntall monodevelop
+</code></pre>
+
+<h4>Ahhh, <code>mono 4.2.1</code> is now installed:</h4>
+
+<pre><code>mono --version
+Mono JIT compiler version 4.2.1 (Stable 4.2.1.91/8862921 Fri Oct 30 17:04:13 UTC 2015)
+Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-project.com
+    TLS:           __thread
+    SIGSEGV:       altstack
+    Notifications: epoll
+    Architecture:  amd64
+    Disabled:      none
+    Misc:          softdebug 
+    LLVM:          supported, not enabled.
+    GC:            sgen
+</code></pre>
+
+<p>Almost would be easier to install from source ;-)</p>
+
+<p>Have fun.</p>
+
+<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
+
+<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
+]]></content>
+  </entry>
+  
+</feed>
