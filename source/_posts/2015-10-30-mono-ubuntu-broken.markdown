@@ -16,23 +16,9 @@ Broken packages always seem to be a problem when dealing with pre-built Linux so
 
 ###So the errors:
 
-	sudo apt-get install momo-devel
+	sudo apt-get install mono-devel
 
 ```
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-E: Unable to locate package momo-devel
-parallels@ubuntu:~$ sudo apt-get install mono-devel
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-Some packages could not be installed. This may mean that you have
-requested an impossible situation or if you are using the unstable
-distribution that some required packages have not yet been created
-or been moved out of Incoming.
-The following information may help to resolve the situation:
-
 The following packages have unmet dependencies:
  mono-devel : Depends: libgdiplus (>= 2.6.7) but it is not going to be installed
               Depends: libmono-system-design4.0-cil (>= 1.0) but it is not going to be installed
@@ -103,7 +89,7 @@ Package 'libjpeg62-turbo' has no installation candidate
 	apt-get update
 	sudo apt-get -f install
 
-#### Finally, install `mono` from package:
+#### Finally, install `mono` (and `monodevelop`) from package:
 
 	sudo apt-get install mono-devel
 	sudo apt-get isntall monodevelop
