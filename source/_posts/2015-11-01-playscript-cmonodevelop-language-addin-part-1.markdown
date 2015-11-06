@@ -9,12 +9,13 @@ categories:
 - monodevelop
 - Xamarin
 - Xamarin Studio
+- addin
 ---
 {% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}
 
 ##Goal:
 
-In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file.
+In this first part we are going to create an [Addin](https://github.com/PlayScriptRedux/PlayScript.Addin) that does the most basic language syntax highlighing using a SyntaxMode xml file.
 
 ##Prerequisites
 

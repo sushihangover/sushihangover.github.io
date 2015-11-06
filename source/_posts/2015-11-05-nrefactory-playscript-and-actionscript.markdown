@@ -8,6 +8,7 @@ categories:
 - actionscript
 - mono
 - nrefactory
+- addin
 ---
 {% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}
 
