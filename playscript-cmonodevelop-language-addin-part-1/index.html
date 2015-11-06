@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Playscript | Xamarin / Monodevelop Language Addin (Part 1) - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="Goal: In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+ 
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+<img class="left" src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript">
+</td>
+    <td>
+<img class="right" src="/images/PlayscriptLogo_small.png">
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-01T01:22:10-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>1:22 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<h2>Goal:</h2>
+
+<p>In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
+
+<h2>Prerequisites</h2>
+
+<p>You have the <a href="https://github.com/mono/mono-addins">MonoDevelop.AddinMaker</a> installed and enabled within Xamarin Studio/MonoDevelop (XS/MD).</p>
+
+<h2>Create the Solution/Project</h2>
+
+<p>With XS/MD, create a new solution/project. In this example we are using version 1.21 of the Addin Maker.</p>
+
+<p><img src="images/XamarinStudioAddin.png" alt="" /></p>
+
+<h2>Add the Syntax files</h2>
+
+<p>Language syntax files are XML documents that describe how the visual representation of language will appear within the editor.</p>
+
+<p>i.e.</p>
+
+<pre><code>&lt;Keywords color = "Keyword(Jump)"&gt;
+    &lt;Word&gt;break&lt;/Word&gt;
+    &lt;Word&gt;continue&lt;/Word&gt;
+    &lt;Word&gt;return&lt;/Word&gt;
+&lt;/Keywords&gt;
+</code></pre>
+
+<p>Note: A definition of the contents of these XML files is out of scope for this posting. The best reference is the files themself. There are quite a number of them in the MonoDevelop <code>./main/src/core/Mono.Texteditor/SyntaxModes</code> directory, you should start the C# <a href="https://github.com/mono/monodevelop/blob/bc908c9e791b0ee6f4951fb65495f82735bc95b7/main/src/core/Mono.Texteditor/SyntaxModes/CSharpSyntaxMode.xml">one</a>.</p>
+
+<p>In our case we are adding two syntax mode files, one for ActionScript and one for PlayScript.</p>
+
+<p>Each file contains also has an mime-type attribute that will be used within our addin to provide a reference of the sourcefile extension to its mime type.</p>
+
+<p>i.e.</p>
+
+<pre><code>&lt;SyntaxMode name = "ActionScript" mimeTypes="text/x-actionscript"&gt;
+
+&lt;SyntaxMode name = "PlayScript" mimeTypes="text/x-playscript"&gt;
+</code></pre>
+
+<p><strong>Note</strong>: Make sure you flag these files as <code>EmbeddedResources</code> so that they are included in the addin assembly.</p>
+
+<h2>Mime-type to file ext. linkage</h2>
+
+<pre><code>&lt;Extension path = "/MonoDevelop/Core/MimeTypes"&gt;
+    &lt;MimeType id="text/x-actionscript" _description="ActionScript source code" icon="md-actionscript-file" isText="true"&gt;
+        &lt;File pattern="*.as" /&gt;
+    &lt;/MimeType&gt;     
+    &lt;MimeType id="text/x-playscript" _description="PlayScript source code" icon="md-playscript-file" isText="true"&gt;
+        &lt;File pattern="*.play" /&gt;
+    &lt;/MimeType&gt;     
+&lt;/Extension&gt;
+</code></pre>
+
+<h2>Add the File Filter Extension</h2>
+
+<p>This will allow the IDE to provide filter options to the various file dialogs.</p>
+
+<pre><code>&lt;Extension path = "/MonoDevelop/Ide/FileFilters"&gt;
+    &lt;FileFilter id = "ActionScript"
+                insertbefore = "Assemblies"
+                _label = "ActionScript Files"
+                extensions = "*.as"/&gt;
+    &lt;FileFilter id = "PlayScript"
+                insertbefore = "Assemblies"
+                _label = "PlayScript Files"
+                extensions = "*.play"/&gt;                                     
+&lt;/Extension&gt;
+</code></pre>
+
+<p>If you debug the project you will now find the ActionScript and PlayScript file filters are available:</p>
+
+<p><img src="images/MD-Addin-FileFilter.png" alt="" /></p>
+
+<h2>Add the Syntaxmode Extension</h2>
+
+<p>Add the extension templates to the <code>Manifest.addin.xml</code> file.</p>
+
+<pre><code>&lt;Extension path = "/MonoDevelop/SourceEditor2/SyntaxModes"&gt;
+    &lt;Templates resource="ActionScriptSyntaxMode.xml" /&gt;
+    &lt;Templates resource="PlayScriptSyntaxMode.xml" /&gt;
+&lt;/Extension&gt;
+</code></pre>
+
+<h2>Add the mime-type resolver extension</h2>
+
+<p>Add the resolver extension class to the  <code>Manifest.addin.xml</code> file.</p>
+
+<pre><code>&lt;Extension path = "/MonoDevelop/Ide/TextEditorResolver"&gt;
+    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-actionscript" /&gt;
+    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-playscript" /&gt;
+&lt;/Extension&gt;
+</code></pre>
+
+<h2>ProjectParameters Class</h2>
+
+<p>Add a new class called <code>PlayScriptProjectParameters</code>, this class will inherit from <code>MonoDevelop.Projects.ProjectParameters</code> and for now will be completely empty. We will be adding code to it in a future posting, but right now we just need to be able to create the class object.</p>
+
+<h2>ActionScriptLanguageBinding Class</h2>
+
+<p>This class inherits from IDotNetLanguageBinding and other then stubbing out some methods and assigning the file extension that this class is related to (<code>.as</code>), the other thing that we need to do it call the static method <code>SyntaxModeService.LoadStylesAndModes</code> in the constructor in other for the Editor to load and parse the embedded xml file that contains our language&rsquo;s syntax:</p>
+
+<pre><code>    public ActionScriptLanguageBinding() {
+        SyntaxModeService.LoadStylesAndModes (Assembly.GetExecutingAssembly ());
+    }
+
+    public string Language {
+        get {
+            return "ActionScript";
+        }
+    }
+
+    public string ProjectStockIcon {
+        get { 
+            return "md-project";
+        }
+    }
+
+    public FilePath GetFileName (FilePath baseName)
+    {
+        return baseName + ".as";
+    }
+
+    public bool IsSourceCodeFile (FilePath fileName)
+    {
+        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".as");
+    }
+</code></pre>
+
+<h2>PlayScriptScriptLanguageBinding Class</h2>
+
+<p>This is a repeat of the ActionScriptLanguageBinding class, but updated for the PlayScript <code>.play</code> extension.</p>
+
+<pre><code>    public string Language {
+        get {
+            return "PlayScript";
+        }
+    }
+
+    public string ProjectStockIcon {
+        get { 
+            return "md-project";
+        }
+    }
+
+    public FilePath GetFileName (FilePath baseName)
+    {
+        return baseName + ".play";
+    }
+
+    public bool IsSourceCodeFile (FilePath fileName)
+    {
+        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".play");
+    }
+</code></pre>
+
+<p>Running this and you will have very basic language highlighting in any <code>.as</code> and <code>.play</code> that you add to Xamarin Studio or MonoDevelop.</p>
+
+<p><img src="images/ActionScript-highlighting.png" alt="" /></p>
+
+<h3>Addition Required Reading:</h3>
+
+<h4>Michael Hutchinson&rsquo;s MonoDevelop.AddinMaker References:</h4>
+
+<p><a href="http://www.monodevelop.com/developers/articles/creating-a-simple-add-in/">Creating a Simple Add-in</a></p>
+
+<p><a href="https://mhut.ch/addinmaker/1.2">MonoDevelop.AddinMaker 1.2</a></p>
+
+<p><a href="https://mhut.ch/addinmaker/1.2.1">MonoDevelop.AddinMaker 1.2.1</a></p>
+
+<p><a href="https://mhut.ch/journal/2015/03/12/monodevelopaddinmaker_12">MonoDevelop.AddinMaker 1.2</a></p>
+
+<p>Source : <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a></p>
+
+<h4>Mono.Addin References:</h4>
+
+<p>Documentation : <a href="http://monoaddins.codeplex.com/">Mono.Addins</a></p>
+
+<p>Source : <a href="https://github.com/mono/mono-addins">mono/mono-addins</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-11-01T01:22:10-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>1:22 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/monodevelop/'>monodevelop</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>, <a class='category' href='/blog/categories/xamarin/'>xamarin</a>, <a class='category' href='/blog/categories/xamarin-studio/'>xamarin studio</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/" data-via="" data-counturl="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/apt-file-finding-packages-by-search-fing-headers/" title="Previous Post: apt~file | Finding packages by searching headers">&laquo; apt~file | Finding packages by searching headers</a>
+      
+      
+        <a class="basic-alignment right" href="/nrefactory-playscript-and-actionscript/" title="Next Post: NRefactory | PlayScript & ActionScript">NRefactory | PlayScript & ActionScript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/nrefactory-playscript-and-actionscript/">NRefactory | PlayScript & ActionScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-cmonodevelop-language-addin-part-1/">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-exception-filters/">PlayScript | Optimizing psc/mcs</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/';
+        var disqus_url = 'http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
