@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ellcc | SushiHangover]]></title>
+  <title><![CDATA[Category: ellcc | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ellcc/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ellcc.Org Build Fix For Os X]]></title>
+    <title type="html"><![CDATA[Ellcc.org build fix for OS-X]]></title>
     <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/"/>
     <updated>2014-02-12T00:00:00-08:00</updated>
     <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>

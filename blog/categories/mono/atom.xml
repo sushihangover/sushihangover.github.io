@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Mono | SushiHangover]]></title>
+  <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,13 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
-<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+<p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
 <p><img class="right <a" src="href="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png">http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png</a>"></p>
 
@@ -146,7 +146,7 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Optimizing Psc/Mcs]]></title>
+    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
     <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-exception-filters</id>
@@ -171,7 +171,7 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono's New Tls Provider]]></title>
+    <title type="html"><![CDATA[Mono's new TLS Provider]]></title>
     <link href="http://sushihangover.github.io/monos-new-tls-provider/"/>
     <updated>2015-10-26T23:10:57-07:00</updated>
     <id>http://sushihangover.github.io/monos-new-tls-provider</id>
@@ -221,7 +221,7 @@ We are currently developing a provider for Apple platforms that will use Appleâ€
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Osx 10.11 El Capitan, Which Mono Version?]]></title>
+    <title type="html"><![CDATA[OSX 10.11 El Capitan, Which Mono version?]]></title>
     <link href="http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/"/>
     <updated>2015-10-14T05:49:56-07:00</updated>
     <id>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version</id>

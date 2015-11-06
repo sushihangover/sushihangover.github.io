@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Github | SushiHangover]]></title>
+  <title><![CDATA[Category: github | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git Tags And Play Script]]></title>
+    <title type="html"><![CDATA[Git tags and PlayScript]]></title>
     <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
     <updated>2015-09-02T21:47:36-07:00</updated>
     <id>http://sushihangover.github.io/git-tags-and-playscript</id>
@@ -63,7 +63,7 @@ To https://github.com/PlayScriptRedux/playscript.git
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script Redux   Make2 Cs Proj Updater]]></title>
+    <title type="html"><![CDATA[PlayScript Redux - Make2CSProjUpdater]]></title>
     <link href="http://sushihangover.github.io/playscript-redux-make2csprojupdater/"/>
     <updated>2015-07-14T15:06:01-07:00</updated>
     <id>http://sushihangover.github.io/playscript-redux-make2csprojupdater</id>
@@ -160,7 +160,7 @@ Make changes? [y/n]:y
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git : Your Github Based Fork's Pull Request Is Rejected, Kind Of, Now What?]]></title>
+    <title type="html"><![CDATA[Git : Your Github based fork's pull request is rejected, kind-of, now what?]]></title>
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
@@ -218,7 +218,7 @@ git merge upstream/master
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Curses Sharp   64 Bit N Curses On Os X And Mono]]></title>
+    <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
@@ -346,7 +346,7 @@ UnicodeDemo
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Corflags   Release X Cor Flags Version 1.0.5643.36015]]></title>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
     <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/"/>
     <updated>2015-06-15T06:09:45-07:00</updated>
     <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015</id>

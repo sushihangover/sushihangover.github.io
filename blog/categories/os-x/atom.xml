@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Os X | SushiHangover]]></title>
+  <title><![CDATA[Category: os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Osx 10.11 El Capitan, Which Mono Version?]]></title>
+    <title type="html"><![CDATA[OSX 10.11 El Capitan, Which Mono version?]]></title>
     <link href="http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/"/>
     <updated>2015-10-14T05:49:56-07:00</updated>
     <id>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version</id>
@@ -34,7 +34,7 @@ Capitan?.</p></blockquote>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Os X + Mono + Rosyln + Code Formatter]]></title>
+    <title type="html"><![CDATA[OS-X + Mono + Rosyln + CodeFormatter]]></title>
     <link href="http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/"/>
     <updated>2015-06-25T06:20:17-07:00</updated>
     <id>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter</id>
@@ -95,7 +95,7 @@ FieldNames           :Prefix private fields with _ and statics with s_
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono   N Unit Hello World]]></title>
+    <title type="html"><![CDATA[Mono - NUnit Hello World]]></title>
     <link href="http://sushihangover.github.io/mono-nunit-world-world/"/>
     <updated>2015-06-24T22:11:16-07:00</updated>
     <id>http://sushihangover.github.io/mono-nunit-world-world</id>
@@ -167,7 +167,7 @@ Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Curses Sharp   64 Bit N Curses On Os X And Mono]]></title>
+    <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>
@@ -295,7 +295,7 @@ UnicodeDemo
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono Cov   Building On Os X]]></title>
+    <title type="html"><![CDATA[MonoCov - Building on OS-X]]></title>
     <link href="http://sushihangover.github.io/monocov-building-on-os-x/"/>
     <updated>2015-06-15T10:52:29-07:00</updated>
     <id>http://sushihangover.github.io/monocov-building-on-os-x</id>

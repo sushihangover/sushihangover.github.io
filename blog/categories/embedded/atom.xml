@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Embedded | SushiHangover]]></title>
+  <title><![CDATA[Category: embedded | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[What Is Bare Metal Arm]]></title>
+    <title type="html"><![CDATA[What is Bare Metal ARM]]></title>
     <link href="http://sushihangover.github.io/what-is-bare-metal-arm/"/>
     <updated>2014-02-16T08:12:02-08:00</updated>
     <id>http://sushihangover.github.io/what-is-bare-metal-arm</id>
@@ -25,7 +25,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Embedded 'bare Metal' Arm Development   Part 2]]></title>
+    <title type="html"><![CDATA[Embedded 'Bare Metal' ARM Development - Part 2]]></title>
     <link href="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/"/>
     <updated>2014-02-14T10:12:07-08:00</updated>
     <id>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2</id>
@@ -61,7 +61,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Embedded 'bare Metal' Arm Development   Part 1]]></title>
+    <title type="html"><![CDATA[Embedded 'Bare-Metal' ARM Development - Part 1]]></title>
     <link href="http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1/"/>
     <updated>2014-02-14T06:01:48-08:00</updated>
     <id>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1</id>
@@ -106,7 +106,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ellcc.Org Build Fix For Os X]]></title>
+    <title type="html"><![CDATA[Ellcc.org build fix for OS-X]]></title>
     <link href="http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/"/>
     <updated>2014-02-12T00:00:00-08:00</updated>
     <id>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x</id>
@@ -282,7 +282,7 @@ make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Os X Llvm / Clang Build]]></title>
+    <title type="html"><![CDATA[OS-X LLVM / CLANG Build]]></title>
     <link href="http://sushihangover.github.io/os-x-llvm-slash-clang-build/"/>
     <updated>2014-02-11T00:00:00-08:00</updated>
     <id>http://sushihangover.github.io/os-x-llvm-slash-clang-build</id>

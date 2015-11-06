@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Git | SushiHangover]]></title>
+  <title><![CDATA[Category: git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git Tags And Play Script]]></title>
+    <title type="html"><![CDATA[Git tags and PlayScript]]></title>
     <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
     <updated>2015-09-02T21:47:36-07:00</updated>
     <id>http://sushihangover.github.io/git-tags-and-playscript</id>
@@ -63,7 +63,7 @@ To https://github.com/PlayScriptRedux/playscript.git
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Resetting A File Back To Its Conflicted State]]></title>
+    <title type="html"><![CDATA[Git - Resetting a file back to its conflicted state]]></title>
     <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
     <updated>2015-08-06T17:29:21-07:00</updated>
     <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
@@ -79,7 +79,7 @@ To https://github.com/PlayScriptRedux/playscript.git
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Squash Last X Commits Into One]]></title>
+    <title type="html"><![CDATA[Git - Squash last X commits into one]]></title>
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
@@ -137,7 +137,7 @@ Successfully rebased and updated refs/heads/play-tests.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Turn Multiple Commits Into A Single Commit]]></title>
+    <title type="html"><![CDATA[Git - Turn multiple commits into a single commit]]></title>
     <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
     <updated>2015-06-30T18:10:36-07:00</updated>
     <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
@@ -175,7 +175,7 @@ git commit
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Create A New Branch With Non Commited Changes]]></title>
+    <title type="html"><![CDATA[Git - Create a new branch with non-commited changes]]></title>
     <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
     <updated>2015-06-29T05:28:05-07:00</updated>
     <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>

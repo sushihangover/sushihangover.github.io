@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,13 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
 
-<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+<p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
 <p><img class="right" src="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png"></p>
 
@@ -29,7 +29,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Apt~File | Finding Packages By Searching Headers]]></title>
+    <title type="html"><![CDATA[apt~file | Finding packages by searching headers]]></title>
     <link href="http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers/"/>
     <updated>2015-10-31T06:30:29-07:00</updated>
     <id>http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers</id>
@@ -212,7 +212,7 @@ sudo apt-get isntall monodevelop
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Optimizing Psc/Mcs]]></title>
+    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
     <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-exception-filters</id>
@@ -239,7 +239,7 @@ sudo apt-get isntall monodevelop
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono's New Tls Provider]]></title>
+    <title type="html"><![CDATA[Mono's new TLS Provider]]></title>
     <link href="http://sushihangover.github.io/monos-new-tls-provider/"/>
     <updated>2015-10-26T23:10:57-07:00</updated>
     <id>http://sushihangover.github.io/monos-new-tls-provider</id>
@@ -289,7 +289,7 @@ We are currently developing a provider for Apple platforms that will use Appleâ€
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Star Wars: The Force Awakens Trailer | Official Hd]]></title>
+    <title type="html"><![CDATA[Star Wars: The Force Awakens Trailer | Official HD]]></title>
     <link href="http://sushihangover.github.io/starswarsFA/"/>
     <updated>2015-10-19T16:12:50-07:00</updated>
     <id>http://sushihangover.github.io/starswarsFA</id>
@@ -342,7 +342,7 @@ Follow Star Wars on Tumblr: <a href="http://starwars.tumblr.com/">http://starwar
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Osx 10.11 El Capitan, Which Mono Version?]]></title>
+    <title type="html"><![CDATA[OSX 10.11 El Capitan, Which Mono version?]]></title>
     <link href="http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/"/>
     <updated>2015-10-14T05:49:56-07:00</updated>
     <id>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version</id>
@@ -362,7 +362,7 @@ Capitan?.</p></blockquote>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git Tags And Play Script]]></title>
+    <title type="html"><![CDATA[Git tags and PlayScript]]></title>
     <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
     <updated>2015-09-02T21:47:36-07:00</updated>
     <id>http://sushihangover.github.io/git-tags-and-playscript</id>
@@ -411,7 +411,7 @@ To https://github.com/PlayScriptRedux/playscript.git
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Resetting A File Back To Its Conflicted State]]></title>
+    <title type="html"><![CDATA[Git - Resetting a file back to its conflicted state]]></title>
     <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
     <updated>2015-08-06T17:29:21-07:00</updated>
     <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
@@ -427,7 +427,7 @@ To https://github.com/PlayScriptRedux/playscript.git
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
     <updated>2015-08-05T05:10:20-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
@@ -463,7 +463,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Linux Based Builds Now Available]]></title>
+    <title type="html"><![CDATA[PlayScript | Linux based builds now available]]></title>
     <link href="http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/"/>
     <updated>2015-08-04T06:06:28-07:00</updated>
     <id>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable</id>
@@ -474,7 +474,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
     <updated>2015-08-03T16:12:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
@@ -504,7 +504,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Travis Ci Enabled For Repo]]></title>
+    <title type="html"><![CDATA[PlayScript | Travis CI enabled for repo]]></title>
     <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
     <updated>2015-08-03T12:54:06-07:00</updated>
     <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
@@ -535,7 +535,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Particles with PlayScript logo]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-intermediate-playscript/"/>
     <updated>2015-07-29T17:05:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>
@@ -566,7 +566,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Intermediate Particle Explosions]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
     <updated>2015-07-24T14:01:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
@@ -597,7 +597,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Xamarin | A Company With A Cool Dev Sense]]></title>
+    <title type="html"><![CDATA[Xamarin | A company with a cool dev sense]]></title>
     <link href="http://sushihangover.github.io/xamarin-a-company-with-a-cool-dev-sense/"/>
     <updated>2015-07-23T21:49:16-07:00</updated>
     <id>http://sushihangover.github.io/xamarin-a-company-with-a-cool-dev-sense</id>
@@ -638,7 +638,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d World Global Example]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d World Global Example]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-world-global-example/"/>
     <updated>2015-07-23T18:17:12-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-world-global-example</id>
@@ -743,7 +743,7 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Xamarin Studio / Mono Develop   'unexpected Binary Element: 0' Build Failure]]></title>
+    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure]]></title>
     <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
     <updated>2015-07-23T11:21:41-07:00</updated>
     <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
@@ -760,7 +760,7 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Git   Squash Last X Commits Into One]]></title>
+    <title type="html"><![CDATA[Git - Squash last X commits into one]]></title>
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
@@ -818,7 +818,7 @@ Successfully rebased and updated refs/heads/play-tests.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script : Tests Are Now Structured Like Mono's]]></title>
+    <title type="html"><![CDATA[PlayScript : Tests are now structured like Mono's]]></title>
     <link href="http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/"/>
     <updated>2015-07-16T20:08:45-07:00</updated>
     <id>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos</id>

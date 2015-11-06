@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Away3d | SushiHangover]]></title>
+  <title><![CDATA[Category: away3d | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/away3d/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
     <updated>2015-08-05T05:10:20-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
@@ -50,7 +50,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
     <updated>2015-08-03T16:12:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
@@ -82,7 +82,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Particles with PlayScript logo]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-intermediate-playscript/"/>
     <updated>2015-07-29T17:05:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>
@@ -115,7 +115,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Intermediate Particle Explosions]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
     <updated>2015-07-24T14:01:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
@@ -148,7 +148,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d World Global Example]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d World Global Example]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-world-global-example/"/>
     <updated>2015-07-23T18:17:12-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-world-global-example</id>

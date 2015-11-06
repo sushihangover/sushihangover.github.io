@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 64 Bit | SushiHangover]]></title>
+  <title><![CDATA[Category: 64-bit | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/64-bit/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Curses Sharp   64 Bit N Curses On Os X And Mono]]></title>
+    <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
     <link href="http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/"/>
     <updated>2015-06-15T21:07:53-07:00</updated>
     <id>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono</id>

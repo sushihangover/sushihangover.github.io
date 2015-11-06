@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Actionscript | SushiHangover]]></title>
+  <title><![CDATA[Category: actionscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/actionscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,13 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
-<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+<p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
 <p><img class="right <a" src="href="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png">http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png</a>"></p>
 
@@ -29,7 +29,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
     <updated>2015-08-05T05:10:20-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
@@ -65,7 +65,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
     <updated>2015-08-03T16:12:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
@@ -97,7 +97,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Travis Ci Enabled For Repo]]></title>
+    <title type="html"><![CDATA[PlayScript | Travis CI enabled for repo]]></title>
     <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
     <updated>2015-08-03T12:54:06-07:00</updated>
     <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
@@ -128,7 +128,7 @@ Royalty Free Background Music:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Particles With Play Script Logo]]></title>
+    <title type="html"><![CDATA[PlayScript | Away3d Particles with PlayScript logo]]></title>
     <link href="http://sushihangover.github.io/playscript-away3d-intermediate-playscript/"/>
     <updated>2015-07-29T17:05:50-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>

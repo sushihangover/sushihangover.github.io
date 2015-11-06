@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Oshw | SushiHangover]]></title>
+  <title><![CDATA[Category: oshw | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/oshw/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Flea Fpga Experimenters Board]]></title>
+    <title type="html"><![CDATA[FleaFPGA Experimenters Board]]></title>
     <link href="http://sushihangover.github.io/fleafpga-experimenters-board/"/>
     <updated>2014-02-15T07:14:40-08:00</updated>
     <id>http://sushihangover.github.io/fleafpga-experimenters-board</id>

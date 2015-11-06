@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Cortex M | SushiHangover]]></title>
+  <title><![CDATA[Category: cortex-m | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/cortex-m/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Llvm, Cmsis Dsp And Cortex M3 &Amp; M0]]></title>
+    <title type="html"><![CDATA[LLVM, CMSIS DSP and Cortex-M3 &amp; M0]]></title>
     <link href="http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0/"/>
     <updated>2014-03-05T22:34:20-08:00</updated>
     <id>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0</id>
@@ -270,7 +270,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Cortex M0 Vs. M3 : Llvm And Ld]]></title>
+    <title type="html"><![CDATA[Cortex-M0 vs. M3 : LLVM and LD]]></title>
     <link href="http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld/"/>
     <updated>2014-03-05T06:30:13-08:00</updated>
     <id>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld</id>
@@ -420,7 +420,7 @@ architecture</th>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Bare Metal Debugging With Affinic Debugger]]></title>
+    <title type="html"><![CDATA[Bare metal debugging with Affinic Debugger]]></title>
     <link href="http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger/"/>
     <updated>2014-02-26T23:19:58-08:00</updated>
     <id>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger</id>
@@ -476,7 +476,7 @@ Note: This is the same are if you were using gdb on the cmd-line. You can also u
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Arm Cortex M Semihosting]]></title>
+    <title type="html"><![CDATA[ARM Cortex-M Semihosting]]></title>
     <link href="http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu/"/>
     <updated>2014-02-24T21:02:34-08:00</updated>
     <id>http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu</id>

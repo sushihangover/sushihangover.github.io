@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Diff | SushiHangover]]></title>
+  <title><![CDATA[Category: diff | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/diff/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Os X : Using Diff Merge As Your Git Visual Merge And Diff Tool]]></title>
+    <title type="html"><![CDATA[OS-X : Using DiffMerge as your Git visual merge and diff tool]]></title>
     <link href="http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/"/>
     <updated>2014-02-19T20:56:11-08:00</updated>
     <id>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool</id>

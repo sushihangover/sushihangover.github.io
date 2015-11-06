@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Xcorflags.Exe | SushiHangover]]></title>
+  <title><![CDATA[Category: xcorflags.exe | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xcorflags-dot-exe/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Corflags   Release X Cor Flags Version 1.0.5643.36015]]></title>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.36015]]></title>
     <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/"/>
     <updated>2015-06-15T06:09:45-07:00</updated>
     <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015</id>
@@ -52,7 +52,7 @@ Fix absolute paths to the assemblies that are passed in
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Corflags   Release X Cor Flags Version 1.0.5643.30429]]></title>
+    <title type="html"><![CDATA[Corflags - Release xCorFlags Version 1.0.5643.30429]]></title>
     <link href="http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/"/>
     <updated>2015-06-14T19:09:45-07:00</updated>
     <id>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429</id>
@@ -82,7 +82,7 @@ Fix absolute paths to the assemblies that are passed in
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Cor Flags Conversion Tool   Cross Platform Release On Github]]></title>
+    <title type="html"><![CDATA[CorFlags Conversion tool - Cross-platform release on Github]]></title>
     <link href="http://sushihangover.github.io/corflags-cross-platform-release-on-github/"/>
     <updated>2015-06-14T11:24:42-07:00</updated>
     <id>http://sushihangover.github.io/corflags-cross-platform-release-on-github</id>
@@ -197,7 +197,7 @@ Signed    : 0
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ms Cor Flags   Showing Incorrect Flags]]></title>
+    <title type="html"><![CDATA[MS CorFlags - Showing incorrect flags]]></title>
     <link href="http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/"/>
     <updated>2015-06-14T10:40:23-07:00</updated>
     <id>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags</id>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: C# | SushiHangover]]></title>
+  <title><![CDATA[Category: c# | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T17:03:15-08:00</updated>
+  <updated>2015-11-05T17:27:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Play Script | Optimizing Psc/Mcs]]></title>
+    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
     <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-exception-filters</id>
@@ -39,7 +39,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[C#   Native Interop Helloworld]]></title>
+    <title type="html"><![CDATA[C# - Native Interop Helloworld]]></title>
     <link href="http://sushihangover.github.io/c-number-native-interop-helloworld/"/>
     <updated>2015-06-23T18:40:28-07:00</updated>
     <id>http://sushihangover.github.io/c-number-native-interop-helloworld</id>
@@ -109,7 +109,7 @@ namespace InteropDemo
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Gtk Sharp Explorer Update For Irony]]></title>
+    <title type="html"><![CDATA[GtkSharp-Explorer update for Irony]]></title>
     <link href="http://sushihangover.github.io/gtksharp-explorer-update-for-irony/"/>
     <updated>2014-02-12T08:14:14-08:00</updated>
     <id>http://sushihangover.github.io/gtksharp-explorer-update-for-irony</id>
@@ -185,7 +185,7 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[O Meta Binary Data Parsing]]></title>
+    <title type="html"><![CDATA[OMeta Binary data parsing]]></title>
     <link href="http://sushihangover.github.io/ometa-binary-data-parsing/"/>
     <updated>2014-02-10T00:00:00-08:00</updated>
     <id>http://sushihangover.github.io/ometa-binary-data-parsing</id>
@@ -429,7 +429,7 @@ mono Irony.GrammarExplorer.GtkSharp/bin/Debug/Irony.GrammarExplorer.GtkSharp.exe
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mono Mac: Detect When Mac Sleeps Or Wakes]]></title>
+    <title type="html"><![CDATA[MonoMac: Detect when Mac sleeps or wakes]]></title>
     <link href="http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/"/>
     <updated>2014-01-12T20:44:00-08:00</updated>
     <id>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes</id>
