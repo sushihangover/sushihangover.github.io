@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T05:44:32-08:00</updated>
+  <updated>2015-11-05T17:00:41-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
+    <updated>2015-11-05T16:51:17-08:00</updated>
+    <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+
+<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+
+<p><img class="right <a" src="href="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png">http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png</a>"></p>
+
+<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mono | Ubuntu Broken Packages]]></title>
@@ -222,42 +237,6 @@ Capitan?.</p></blockquote>
 <p>Reply from Miguel de Icaza:</p>
 
 <blockquote><p>One is based on Mono 4.0 series, with minimal changes just to enable the support on El Capitan;   The 4.2 has the same changes, on top of the latest Mono 4.2, available on Alpha and the release candidate.</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
-    <updated>2015-08-05T05:10:20-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/%0Aplayscript">Fork</a> me on github.</p>
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Shading.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Using PlayScript Compiler 3.2.6002:</p>
-
-<p>
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('ym2w6rbYcAI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/ym2w6rbYcAI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/ym2w6rbYcAI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=ym2w6rbYcAI" id="ym2w6rbYcAI" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">PlayScript - Away3d Basic Shading Demo</div>
-</a>
-<div class="video-info" >Xamarin Studio running the Away3d Basic Shading Demo using the PlayScript compiler
-
-Using PlayScript v3.2.6002 
-
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blog @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Across The Land" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-</p>
 ]]></content>
   </entry>
   

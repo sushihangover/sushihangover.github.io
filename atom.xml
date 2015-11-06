@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T05:44:32-08:00</updated>
+  <updated>2015-11-05T17:00:41-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
+    <updated>2015-11-05T16:51:17-08:00</updated>
+    <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+
+<p><img class="right" src="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png"></p>
+
+<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Apt~File | Finding Packages By Searching Headers]]></title>
@@ -848,34 +863,6 @@ Done
 <p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
 
 <p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script   Now Has A Repl (Playshell)]]></title>
-    <link href="http://sushihangover.github.io/playscript-now-has-a-repl-playshell/"/>
-    <updated>2015-07-15T06:35:49-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-now-has-a-repl-playshell</id>
-    <content type="html"><![CDATA[<p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
-
-<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
-
-<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
-
-<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
-  - For use with Tamarin Redux test; they use Asset scripts with a test package
-  - Very alpha at this point
-  - Need to add PlayScript style 'import'
-* Added PsOnlyMode to compiler setting
-  - Whether to enable PlayScript compiler only mode. Defaults to false.
-* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
-  - Added tools/csharp and tools/playshell
-* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
-  - Mono.PlayScript.csproj (and .sln)
-  - Mono.CSharp.csproj (and .sln)
-  - tools/charp.csproj (and .sln)
-  - tools/playshell.csproj (and .sln)
-</code></pre>
 ]]></content>
   </entry>
   

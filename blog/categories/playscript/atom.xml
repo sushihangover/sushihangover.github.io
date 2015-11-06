@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T05:44:32-08:00</updated>
+  <updated>2015-11-05T17:00:41-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
+    <updated>2015-11-05T16:51:17-08:00</updated>
+    <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+
+<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+
+<p><img class="right <a" src="href="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png">http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png</a>"></p>
+
+<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Optimizing Psc/Mcs]]></title>
@@ -131,38 +146,6 @@ Royalty Free Background Music:
     <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
 
 <p><img class="right <a" src="href="http://blog.travis-ci.com/images/travis-mascot-200px.png">http://blog.travis-ci.com/images/travis-mascot-200px.png</a>"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
-    <updated>2015-08-03T16:12:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
-    <content type="html"><![CDATA[<p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<p>
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
-
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-</p>
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
 ]]></content>
   </entry>
   

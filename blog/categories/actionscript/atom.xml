@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Actionscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/actionscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-05T05:44:32-08:00</updated>
+  <updated>2015-11-05T17:00:41-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nrefactory | Playscript & Actionscript]]></title>
+    <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
+    <updated>2015-11-05T16:51:17-08:00</updated>
+    <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+
+<p>I posted up the initial fork of <a href="https://github.com/icsharpcode/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+
+<p><img class="right <a" src="href="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png">http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png</a>"></p>
+
+<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Play Script | Away3d Fire Demo With Scout]]></title>
@@ -142,39 +157,6 @@ Royalty Free Background Music:
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
 
 <p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d World Global Example</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Play Script | Away3d Intermediate Particle Explosions]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
-    <updated>2015-07-24T14:01:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
-    <content type="html"><![CDATA[<p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<p>
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
-</a>
-<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
--  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
--   http://youtube.com/user/MuLexic</div>
-</div>
-
-</p>
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
 ]]></content>
   </entry>
   
