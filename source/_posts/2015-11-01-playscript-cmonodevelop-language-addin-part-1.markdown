@@ -3,7 +3,6 @@ layout: post
 title: "Playscript | Xamarin / Monodevelop Language Addin (Part 1)"
 date: 2015-11-01 01:22:10 -0800
 comments: true
-published: false
 categories: 
 - mono
 - playscript
