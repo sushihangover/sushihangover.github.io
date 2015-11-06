@@ -17,7 +17,7 @@
     <lastmod>2015-10-30T21:55:07-07:00</lastmod>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/playscript-exception-filters/</loc>
+    <loc>http://sushihangover.github.io/playscript-compiler-optim/</loc>
     <lastmod>2015-10-27T22:20:18-07:00</lastmod>
   </url>
   <url>
@@ -35,6 +35,10 @@
   <url>
     <loc>http://sushihangover.github.io/git-tags-and-playscript/</loc>
     <lastmod>2015-09-02T21:47:36-07:00</lastmod>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/playscript-exception-filters/</loc>
+    <lastmod>2015-08-17T18:34:18-07:00</lastmod>
   </url>
   <url>
     <loc>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/</loc>
@@ -748,6 +752,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/xamarin-studio/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/addin/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/nrefactory/</loc>

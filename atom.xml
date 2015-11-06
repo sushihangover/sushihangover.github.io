@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-06T07:31:47-08:00</updated>
+  <updated>2015-11-06T10:15:40-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -36,7 +36,7 @@
 
 <h2>Goal:</h2>
 
-<p>In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
+<p>In this first part we are going to create an <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Addin</a> that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
 
 <h2>Prerequisites</h2>
 
@@ -401,9 +401,9 @@ sudo apt-get isntall monodevelop
   
   <entry>
     <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
-    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
+    <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-exception-filters</id>
+    <id>http://sushihangover.github.io/playscript-compiler-optim</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
 
 <p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
@@ -595,6 +595,74 @@ To https://github.com/PlayScriptRedux/playscript.git
 <p>I still want to know if this is available through pull-requests somehow.</p>
 
 <p><img class="right" src="http://sushihangover.github.io/images/gitlogo.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript | Exception Filters]]></title>
+    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
+    <updated>2015-08-17T18:34:18-07:00</updated>
+    <id>http://sushihangover.github.io/playscript-exception-filters</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
+
+<p>These are actually really cool and nice addition to ActionScript.</p>
+
+<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
+
+<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
+
+<pre><code>try { … } 
+catch (MyException e) if (myfilter(e)) 
+{ 
+     … 
+}
+</code></pre>
+
+<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
+
+<p>And here is what they look like in PlayScript:</p>
+
+<h3>play/test-ps-ex-filter-01.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            throw new Error("Throw");
+        } catch (e:Error) if (x &gt; 0) {
+            trace("Catch");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<h3>play/test-ps-ex-filter-02.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            x = 5;
+            throw new Error("Throw");
+        } catch (e:Error) if (x &lt; 5) {
+            trace("No Catch Please");
+            return 0;
+        } catch (myError:Error) {
+            trace("Catch Here");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
 ]]></content>
   </entry>
   
@@ -944,64 +1012,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
 <p>It appears not to be OS dependent either:</p>
 
 <p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Squash last X commits into one]]></title>
-    <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
-    <updated>2015-07-17T10:35:06-07:00</updated>
-    <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"></p>
-
-<p>Use git rebase -i <after> and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described in the Git <a href="http://git-scm.com/docs/git-rebase#_interactive_mode">manual</a>.</p>
-
-<p><after> is the commit after the last one that you wish squash together, i.e. parent of the oldest commit you want to squash.</p>
-
-<p>Example:</p>
-
-<p>You want to squash the last three commits into one, so lets look at the log to make sure that is want you want and to grab the commit SHA:</p>
-
-<blockquote><p>git log -n 4 &ndash;pretty=oneline</p></blockquote>
-
-<pre><code>f57f7f9c28646d5049aa6b90f33de23e1e53ad2e More test cleanups
-07074c8058ed69224670987860c9db47858dab6e PlayScript compiler tests using a variant of compiler-tester
-3b80dc06b990553042b4b0cde486e36522f4171b Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-db6506ca17e49f0829ca9859a7994ddf840dbff4 * Tamarin-Redux Test Cleanup * Remove old Tamarin tests, the redux versions are the last released version
-</code></pre>
-
-<p>I want to squash the first three commits, so grab the forth SHA and:</p>
-
-<blockquote><p>git rebase -i db6506ca17e49f0829ca9859a7994ddf840dbff4</p></blockquote>
-
-<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-pick 07074c8 PlayScript compiler tests using a variant of compiler-tester
-pick f57f7f9 More test cleanups
-
-# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
-</code></pre>
-
-<p>Following the directions in the commentted text. In this example: change the second and third items to squash:</p>
-
-<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-squash 07074c8 PlayScript compiler tests using a variant of compiler-tester
-squash f57f7f9 More test cleanups
-
-# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
-</code></pre>
-
-<p>Save those changes and exit the editor and the rebase will execute</p>
-
-<pre><code>[detached HEAD ~~~
-~~~
-Successfully rebased and updated refs/heads/play-tests.
-</code></pre>
-
-<p>Confirm via:</p>
-
-<blockquote><p>git log -n 2</p></blockquote>
-
-<p>FYI: This is something you should do to your feature branch before pushing to your fork to make that <a href="http://github.com/playscriptredux/playscript">PlayScript</a> pull request. ;-)</p>
 ]]></content>
   </entry>
   

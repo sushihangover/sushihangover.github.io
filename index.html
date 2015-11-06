@@ -150,7 +150,7 @@
 
 <h2>Goal:</h2>
 
-<p>In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
+<p>In this first part we are going to create an <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Addin</a> that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
 
 <h2>Prerequisites</h2>
 
@@ -562,7 +562,7 @@ sudo apt-get isntall monodevelop
       
   <header>
     
-      <h1 class="entry-title"><a href="/playscript-exception-filters/">PlayScript | Optimizing psc/mcs</a></h1>
+      <h1 class="entry-title"><a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a></h1>
     
     
       <p class="meta">
@@ -861,7 +861,7 @@ To https://github.com/PlayScriptRedux/playscript.git
       
   <header>
     
-      <h1 class="entry-title"><a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git - Resetting a file back to its conflicted state</a></h1>
+      <h1 class="entry-title"><a href="/playscript-exception-filters/">PlayScript | Exception Filters</a></h1>
     
     
       <p class="meta">
@@ -870,21 +870,73 @@ To https://github.com/PlayScriptRedux/playscript.git
 
 
 
-<time class='entry-date' datetime='2015-08-06T17:29:21-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:29 pm</span></time>
+<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
 
-<p><code>git checkout -m &lt;filename&gt;
-</code></p>
+<p>These are actually really cool and nice addition to ActionScript.</p>
 
-<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
+<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
 
-<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
+<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
+
+<pre><code>try { … } 
+catch (MyException e) if (myfilter(e)) 
+{ 
+     … 
+}
+</code></pre>
+
+<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
+
+<p>And here is what they look like in PlayScript:</p>
+
+<h3>play/test-ps-ex-filter-01.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            throw new Error("Throw");
+        } catch (e:Error) if (x &gt; 0) {
+            trace("Catch");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<h3>play/test-ps-ex-filter-02.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            x = 5;
+            throw new Error("Throw");
+        } catch (e:Error) if (x &lt; 5) {
+            trace("No Catch Please");
+            return 0;
+        } catch (myError:Error) {
+            trace("Catch Here");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
 </div>
   
   
@@ -923,7 +975,7 @@ To https://github.com/PlayScriptRedux/playscript.git
       </li>
     
       <li class="post">
-        <a href="/playscript-exception-filters/">PlayScript | Optimizing psc/mcs</a>
+        <a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a>
       </li>
     
   </ul>

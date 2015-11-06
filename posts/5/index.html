@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="While I was still in the []benchmark mood](http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/), I thought I would run a &hellip;">
+  <meta name="description" content="No matter what the Slate says, Paul Ford&rsquo;s &ldquo;What is Code&rdquo; desires to be read, if not by every programmer, then surely by every &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,37 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/what-is-code/">What is Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T06:32:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:32 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No matter what the <a href="http://www.slate.com/blogs/future_tense/2015/06/11/bloomberg_businessweek_s_38_000_word_piece_on_code_just_try_coding_yourself.html">Slate</a> says, Paul Ford&rsquo;s &ldquo;<a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">What is Code</a>&rdquo; desires to be read, if not by every programmer, then surely by every person that has to deal with programmers.</p>
+
+<p>The best thing, if you find any issues with the article, you can post a <a href="https://github.com/BloombergMedia/whatiscode/issues/new">Github issue</a>, I did. ;-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -727,57 +758,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/octopress-deploy-and-update-git-source/">Octopress - Deploy and update Git source</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-08T06:39:42-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:39 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/Octopress_logo.png" alt="" /></p>
-
-<p>I use <a href="http://octopress.org">Octopress</a> for this <a href="https://github.com/sushihangover">GitHub</a> blog and can tend to forget to push the source to Github as it is not part of the &lsquo;rake deploy&rsquo;.</p>
-
-<p>&lsquo;rake deploy&rsquo; only updates the master branch on Github on order to publish the website and instead of hack'ing the deploy function to handle pushing the &lsquo;'source&rsquo; branch also (waiting on the Octopress 3.0 release for that), I wrote a script to handle it all.</p>
-
-<p>This <em>lazy</em> script that does all the steps that I would have to do manually but tend to never do. And it is in my root Octopress directory so it included in my source revisions ;-)</p>
-
-<p>Nothing special: just generates, deploys, adds all on the source branch along with a commit and push. For good measure it then garbage collects the repo to keep everything clean.</p>
-
-<pre><code>#!/usr/bin/env bash
-echo "Generate and deploying website"
-rake generate
-rake deploy
-echo "Commiting and pushing source files"
-git add --all; 
-git commit -m "New posts"; 
-git push 
-git gc
-pushd _deploy
-git gc
-popd
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -811,7 +791,7 @@ popd
       </li>
     
       <li class="post">
-        <a href="/playscript-exception-filters/">PlayScript | Optimizing psc/mcs</a>
+        <a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a>
       </li>
     
   </ul>
