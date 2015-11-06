@@ -11,6 +11,7 @@ categories:
 - Xamarin
 - Xamarin Studio
 ---
+{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}
 
 ##Goal:
 
