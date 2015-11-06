@@ -13,6 +13,6 @@ categories:
 
 I posted up the initial fork of [NRefactory](https://github.com/PlayScriptRedux/NRefactory) that replaces the parser with the [PlayScript](https://github.com/PlayScriptRedux/playscript) mcs compiler to allow PlayScript & ActionScript parsing. This will be used within the [Xamarin Studio / MonoDevelop PlayScript Language Addin](https://github.com/PlayScriptRedux/PlayScript.Addin).
 
-{% img right http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png %}
-
 Fork and clone it and give the `ICSharpCode.NRefactory.GtkDemo` project a try.
+![](/images/ICSharpCode.NRefactory.GtkDemo.png)
+
