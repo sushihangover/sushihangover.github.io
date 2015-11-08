@@ -56,6 +56,9 @@ There are 8 **types** (that I could find):
 * shared
 * web
 
+Overlays are used like this:
+
+	<StockIcon stockid="md-project-library" icon="md-project|md-library-overlay" size="Dnd" />
 
 
 #StockIcons Extension
