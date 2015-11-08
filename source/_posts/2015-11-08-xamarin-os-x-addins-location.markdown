@@ -8,10 +8,12 @@ categories:
 - xamarin
 - xamarin studio
 - monodevelop
+- playscript
 ---
 In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?
 
 Within the `~/Library/Application Support` directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:
+
 
 * `MonoDevelop-4.0`
 * `MonoDevelop-5.0`
@@ -20,7 +22,7 @@ Within the `~/Library/Application Support` directory you will find one based on 
 * `XamarinStudio-5.0`
 * `XamarinStudio-6.0`
 
-With that directory you will find:
+Within one of those directories you will find:
 
 * `LocalInstall/Addins`
 
@@ -28,5 +30,4 @@ So for me, that ended up being:
 
 `~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 `
-&
 `~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins`
