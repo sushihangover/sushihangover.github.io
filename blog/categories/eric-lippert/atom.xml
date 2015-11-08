@@ -4,7 +4,7 @@
   <title><![CDATA[Category: eric lippert | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/eric-lippert/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,11 +18,13 @@
     <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>{% pullquote %}
+<strong>Great</strong> reading for any C#/CLR devs, {&ldquo; including PowerShell DevOps &rdquo;} that are bundling their custom C# written assemblies to speed up their PS modules.
+{% endpullquote %}</p>
 
 <p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
 

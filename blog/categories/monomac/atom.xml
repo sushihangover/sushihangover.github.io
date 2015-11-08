@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monomac | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monomac/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -24,21 +24,15 @@
 
 <p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
 
-<p><figure class='code'><figcaption><span>C# &ldquo;Wake and Sleep Events&rdquo; </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
-</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
-</span><span class='line'>);
-</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
-</span><span class='line'>    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure></p>
+<p>{% codeblock C# &ldquo;Wake and Sleep Events&rdquo; %}
+Console.WriteLine (&ldquo;Add the sleep/wake observers&rdquo;);
+NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+    Console.Write (&ldquo;Your Mac is getting sleepy\n&rdquo;);
+);
+NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+    Console.Write (&ldquo;Time to go to work again\n&rdquo;);
+};
+{% endcodeblock %}</p>
 ]]></content>
   </entry>
   

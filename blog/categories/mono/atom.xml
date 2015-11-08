@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -14,11 +14,46 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Xamarin OS-X Addins Location]]></title>
+    <link href="http://sushihangover.github.io/xamarin-os-x-addins-location/"/>
+    <updated>2015-11-08T09:59:55-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-os-x-addins-location</id>
+    <content type="html"><![CDATA[<p>In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?</p>
+
+<p>Within the <code>~/Library/Application Support</code> directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:</p>
+
+<ul>
+<li><code>MonoDevelop-4.0</code></li>
+<li><code>MonoDevelop-5.0</code></li>
+<li><code>MonoDevelop-6.0</code></li>
+<li><code>XamarinStudio-4.0</code></li>
+<li><code>XamarinStudio-5.0</code></li>
+<li><code>XamarinStudio-6.0</code></li>
+</ul>
+
+
+<p>With that directory you will find:</p>
+
+<ul>
+<li><code>LocalInstall/Addins</code></li>
+</ul>
+
+
+<p>So for me, that ended up being:</p>
+
+<p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
+</code>
+&amp;
+<code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
@@ -32,7 +67,7 @@
     <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
     <updated>2015-11-01T01:22:10-08:00</updated>
     <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <h2>Goal:</h2>
 
@@ -221,7 +256,7 @@
     <link href="http://sushihangover.github.io/mono-ubuntu-broken/"/>
     <updated>2015-10-30T21:55:07-07:00</updated>
     <id>http://sushihangover.github.io/mono-ubuntu-broken</id>
-    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
+    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com">{% img left http://sushihangover.github.io/images/mono-logo.png %}</a></p>
 
 <p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
 
@@ -327,9 +362,9 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 
 <p>Have fun.</p>
 
-<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
+<p><a href="http://www.monodevelop.com">{% img http://sushihangover.github.io/images/monodevelop.png %}</a></p>
 
-<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
+<p><a href="https://github.com/PlayScriptRedux/playscript">{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}</a></p>
 ]]></content>
   </entry>
   
@@ -338,11 +373,13 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
     <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>{% pullquote %}
+<strong>Great</strong> reading for any C#/CLR devs, {&ldquo; including PowerShell DevOps &rdquo;} that are bundling their custom C# written assemblies to speed up their PS modules.
+{% endpullquote %}</p>
 
 <p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
 
@@ -355,56 +392,6 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 <p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
 
 <p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mono's new TLS Provider]]></title>
-    <link href="http://sushihangover.github.io/monos-new-tls-provider/"/>
-    <updated>2015-10-26T23:10:57-07:00</updated>
-    <id>http://sushihangover.github.io/monos-new-tls-provider</id>
-    <content type="html"><![CDATA[<p>Great news, the new pluggable TLS provider is available for security review.</p>
-
-<p><a href="http://mono.1490590.n4.nabble.com/Mono-s-new-TLS-provider-tt4666825.html">Mono’s new TLS provider</a></p>
-
-<blockquote><p> Hello,</p>
-
-<p>As described by Miguel in the “State of Tls in Mono” [1] we have been working on a new TLS implementation for Mono, one that would upgrade our TLS stack, and one that would allow us to reuse some of the higher level pieces from Microsoft’s networking stack, read that post for more details on the scope of the project.</p>
-
-<p>Mono’s master branch now has the ability to load alternative TLS implementations.   We added this code so we can start testing our new TLS implementation side-by-side the code that is in use today, and also so that we can provide both platform-specific backends or allow developers to choose a different TLS implementation (like BoringSSL, OpenSSL or Amazon’s s2n).</p>
-
-<p>This is achieved by making our SSL transport pluggable, this allows HttpWebRequest and other classes to use the new TLS stack.</p>
-
-<p>Today, a regular Mono checkout will default to the existing Mono SSL/TLS implementation which supports a number of ciphers and TLS levels up to 1.0, so nothing has changed and we have one alternative implementation available: mono-tls.</p>
-
-<p>mono-tls is a purely managed implementation of TLS 1.0, 1.1 and 1.2 (filling the gap that we had).   To use it, you need to build the mono-tls [2] module, once this is build, you will have to reference the following libraries: Mono.Security.NewTls, Mono.Security.NewTls.Interface, Mono.Security.Providers.NewTls.</p>
-
-<p>Once you have these, you should add this code to your main program:</p>
-
-<pre><code>  MonoTlsProviderFactory.InstallProvider (new NewTlsProvider ());
-</code></pre>
-
-<p>Then uses of HttpWebRequest, FtpWebRequest and the Smtp client will all use the new TLS stack.</p>
-
-<p>More details are available in the architecture document [3].</p>
-
-<p>TLS State
-While we have added an extensive test suite to this new TLS implementation and tested this against a wide variety of TLS servers and configurations, we have not completed a security audit of its implementation.   While we have taken every step to ensure that we follow all the best practices when implementing a security stack, we want to get this code reviewed by third parties, and we want to complete a comprehensive security audit of the code before we would even consider transitioning this as the default.</p>
-
-<p>Future Work - Pluggability/SslStream
-We are going to be making the SslStream the proxy endpoint, for two reasons: (a) it would make SslStream usable with the new provider interface and (b) it would simplify some of the special code that lives in different places in the class libraries to use the new TLS implementation.</p>
-
-<p>We will also likely introduce a MONO_TLS_PROVIDER environment variable that controls the implementation, so that we make it easier to test the implementations during the testing phase.</p>
-
-<p>Future Work - Other Providers
-We are currently developing a provider for Apple platforms that will use Apple’s unmanaged SSL implementation, and we will be adding an implementation that use Google’s BoringSSL.   The idea being that on Apple, you get to use the system provided implementation, and on other platforms, we use the Google maintained one.</p>
-
-<p>Please let me know if you have any questions, comments, feedback.   In particular, we would like to get you to find security holes in the implementation.  We can offer a Xamarin shirt or a Xamarin monkey as a prize for finding holes in the new implementation.</p>
-
-<p>References
-[1] <a href="http://tirania.org/blog/archive/2015/Aug-27.html">http://tirania.org/blog/archive/2015/Aug-27.html</a>
-[2] <a href="http://github.com/mono/mono-tls">http://github.com/mono/mono-tls</a>
-[3] <a href="https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md">https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md</a></p></blockquote>
 ]]></content>
   </entry>
   

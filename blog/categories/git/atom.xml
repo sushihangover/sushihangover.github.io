@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -33,7 +33,7 @@
     <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
     <updated>2015-09-02T21:47:36-07:00</updated>
     <id>http://sushihangover.github.io/git-tags-and-playscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %} Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
 
 <p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
 
@@ -73,7 +73,7 @@ To https://github.com/PlayScriptRedux/playscript.git
 
 <p>I still want to know if this is available through pull-requests somehow.</p>
 
-<p><img class="right <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+<p>{% img right <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %}</p>
 ]]></content>
   </entry>
   
@@ -82,7 +82,7 @@ To https://github.com/PlayScriptRedux/playscript.git
     <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
     <updated>2015-08-06T17:29:21-07:00</updated>
     <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
 
 <p><code>git checkout -m &lt;filename&gt;
 </code></p>
@@ -98,7 +98,7 @@ To https://github.com/PlayScriptRedux/playscript.git
     <link href="http://sushihangover.github.io/git-squash-last-x-commits-into-one/"/>
     <updated>2015-07-17T10:35:06-07:00</updated>
     <id>http://sushihangover.github.io/git-squash-last-x-commits-into-one</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %}</p>
 
 <p>Use git rebase -i <after> and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described in the Git <a href="http://git-scm.com/docs/git-rebase#_interactive_mode">manual</a>.</p>
 
@@ -156,7 +156,7 @@ Successfully rebased and updated refs/heads/play-tests.
     <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
     <updated>2015-06-30T18:10:36-07:00</updated>
     <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
 
 <h3>Switch to the upstream/master branch and make sure you are up to date.</h3>
 

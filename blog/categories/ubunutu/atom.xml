@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubunutu | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ubunutu/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/mono-ubuntu-broken/"/>
     <updated>2015-10-30T21:55:07-07:00</updated>
     <id>http://sushihangover.github.io/mono-ubuntu-broken</id>
-    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
+    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com">{% img left http://sushihangover.github.io/images/mono-logo.png %}</a></p>
 
 <p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
 
@@ -124,9 +124,9 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 
 <p>Have fun.</p>
 
-<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
+<p><a href="http://www.monodevelop.com">{% img http://sushihangover.github.io/images/monodevelop.png %}</a></p>
 
-<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
+<p><a href="https://github.com/PlayScriptRedux/playscript">{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}</a></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T08:49:09-08:00</updated>
+  <updated>2015-11-08T10:10:03-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
@@ -32,7 +32,7 @@
     <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
     <updated>2015-11-01T01:22:10-08:00</updated>
     <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <h2>Goal:</h2>
 
@@ -221,11 +221,13 @@
     <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
 
 <p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
 
-<p>Surround your pullquote like this {" text to be quoted "}</p>
+<p>{% pullquote %}
+<strong>Great</strong> reading for any C#/CLR devs, {&ldquo; including PowerShell DevOps &rdquo;} that are bundling their custom C# written assemblies to speed up their PS modules.
+{% endpullquote %}</p>
 
 <p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
 
@@ -246,7 +248,7 @@
     <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
     <updated>2015-09-02T21:47:36-07:00</updated>
     <id>http://sushihangover.github.io/git-tags-and-playscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %} Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
 
 <p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
 
@@ -286,7 +288,7 @@ To https://github.com/PlayScriptRedux/playscript.git
 
 <p>I still want to know if this is available through pull-requests somehow.</p>
 
-<p><img class="right <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
+<p>{% img right <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %}</p>
 ]]></content>
   </entry>
   
@@ -295,7 +297,7 @@ To https://github.com/PlayScriptRedux/playscript.git
     <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
     <updated>2015-08-17T18:34:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-exception-filters</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
+    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %} <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
 
 <p>These are actually really cool and nice addition to ActionScript.</p>
 
