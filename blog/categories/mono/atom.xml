@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -32,7 +32,7 @@
 </ul>
 
 
-<p>With that directory you will find:</p>
+<p>Within one of those directories you will find:</p>
 
 <ul>
 <li><code>LocalInstall/Addins</code></li>
@@ -43,7 +43,6 @@
 
 <p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 </code>
-&amp;
 <code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
 ]]></content>
   </entry>
@@ -53,7 +52,7 @@
     <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
     <updated>2015-11-05T16:51:17-08:00</updated>
     <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
 <p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
 
@@ -67,7 +66,7 @@
     <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
     <updated>2015-11-01T01:22:10-08:00</updated>
     <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
 <h2>Goal:</h2>
 
@@ -256,7 +255,7 @@
     <link href="http://sushihangover.github.io/mono-ubuntu-broken/"/>
     <updated>2015-10-30T21:55:07-07:00</updated>
     <id>http://sushihangover.github.io/mono-ubuntu-broken</id>
-    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com">{% img left http://sushihangover.github.io/images/mono-logo.png %}</a></p>
+    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
 
 <p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
 
@@ -362,9 +361,9 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 
 <p>Have fun.</p>
 
-<p><a href="http://www.monodevelop.com">{% img http://sushihangover.github.io/images/monodevelop.png %}</a></p>
+<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
 
-<p><a href="https://github.com/PlayScriptRedux/playscript">{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}</a></p>
+<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
 ]]></content>
   </entry>
   
@@ -373,13 +372,11 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
     <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
     <updated>2015-10-27T22:20:18-07:00</updated>
     <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
 <p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
 
-<p>{% pullquote %}
-<strong>Great</strong> reading for any C#/CLR devs, {&ldquo; including PowerShell DevOps &rdquo;} that are bundling their custom C# written assemblies to speed up their PS modules.
-{% endpullquote %}</p>
+<p>Surround your pullquote like this {" text to be quoted "}</p>
 
 <p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
 

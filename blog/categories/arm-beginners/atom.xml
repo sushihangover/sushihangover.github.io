@@ -4,7 +4,7 @@
   <title><![CDATA[Category: arm-beginners | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/arm-beginners/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -78,9 +78,7 @@
 
 <h6>* 1: Technically the launchpad link is the &lsquo;output&rsquo; of an ARM version of GCC and binutils but is the best starting point for info on the ARM version as it is the offical distro end-point ;-)</h6>
 
-<p>{% blockquote %}
-ARM employees are maintaining this project. Contributing to this project should be via GCC trunk <a href="http://gcc.gnu.org">http://gcc.gnu.org</a> and binutils trunk <a href="http://www.gnu.org/software/binutils/.">http://www.gnu.org/software/binutils/.</a> This launchpad project is for communication and downloading. No code change is done in lp project.
-{% endblockquote %}</p>
+<p><blockquote><p>ARM employees are maintaining this project. Contributing to this project should be via GCC trunk <a href="http://gcc.gnu.org">http://gcc.gnu.org</a> and binutils trunk <a href="http://www.gnu.org/software/binutils/.">http://www.gnu.org/software/binutils/.</a> This launchpad project is for communication and downloading. No code change is done in lp project.</p></blockquote></p>
 
 <h6>* 2: The &lsquo;Freescale Kinetis Compiler&rsquo; is in maintance mode. The GNU compiler is the &lsquo;active&rsquo; mainline of ARM compiler within CodeWarror now and thus I am not looking at this one at all as it fails my future proofing rules. For existing &lsquo;legacy&rsquo; embedded projects based on it, <a href="http://en.wikipedia.org/wiki/CodeWarrior">MetroWorks</a> was acquired by Motorola which was then included in the Freescale spinoff, so go to Freescale if you need a version&hellip;</h6>
 

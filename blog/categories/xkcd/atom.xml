@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xkcd | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xkcd/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,7 +20,7 @@
     <id>http://sushihangover.github.io/xkcd-does-git</id>
     <content type="html"><![CDATA[<h3>Using Git:</h3>
 
-<p><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></p>
+<p><a href="http://www.xkcd.com/1597/"><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></a></p>
 
 <h3>Git Commit:</h3>
 
@@ -33,7 +33,7 @@
     <link href="http://sushihangover.github.io/heartbleed-explanation/"/>
     <updated>2014-04-11T07:51:37-07:00</updated>
     <id>http://sushihangover.github.io/heartbleed-explanation</id>
-    <content type="html"><![CDATA[<p><a href="http://heartbleed.com">{% img left /images/HeartBleed.png 200 200 &ldquo;Heartbleed&rdquo; %}</a> If you have not checked and/or patched your OpenSSL deployment, better get to it:
+    <content type="html"><![CDATA[<p><a href="http://heartbleed.com"><img class="left" src="/images/HeartBleed.png" width="200" height="200" title="&ldquo;Heartbleed&rdquo;" ></a> If you have not checked and/or patched your OpenSSL deployment, better get to it:
 <a href="http://heartbleed.com">Heartbleed</a></p>
 
 <p>XKCD does it again and provides the best explanation of how Heartbleed, one of the worst (THE worst?), Internet security flaw, works:</p>

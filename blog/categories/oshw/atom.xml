@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oshw | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/oshw/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,11 +18,9 @@
     <link href="http://sushihangover.github.io/fleafpga-experimenters-board/"/>
     <updated>2014-02-15T07:14:40-08:00</updated>
     <id>http://sushihangover.github.io/fleafpga-experimenters-board</id>
-    <content type="html"><![CDATA[<p><a href="/images/Flea_2v4_white2.jpg">{% img left /images/Flea_2v4_white2.jpg 360 240 &lsquo;OSHW FPGA Flea Dev Board&rsquo; &lsquo;FPGA Flea&rsquo; %}</a></p>
+    <content type="html"><![CDATA[<p><a href="/images/Flea_2v4_white2.jpg"><img class="left" src="/images/Flea_2v4_white2.jpg" width="360" height="240" title="&lsquo;OSHW FPGA Flea Dev Board&rsquo; &lsquo;FPGA Flea&rsquo;" ></a></p>
 
-<p>{% blockquote &ldquo;Valentin Angelovski&rdquo; <a href="http://www.fleasystems.com/fleaFPGA.html">http://www.fleasystems.com/fleaFPGA.html</a> %}
-FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL and Verilog. FleaFPGA is suited for professional and hobbyist uses.
-{% endblockquote %}</p>
+<p><blockquote><p>FleaFPGA provides a low-cost development platfrom for users to explore the wonders of programmable logic and hardware-oriented languages i.e. VHDL and Verilog. FleaFPGA is suited for professional and hobbyist uses.</p><footer><strong>&ldquo;Valentin Angelovski&rdquo; <a href="http://www.fleasystems.com/fleaFPGA.html">http://www.fleasystems.com/fleaFPGA.html</a></strong></footer></blockquote></p>
 
 <p>Valentin is looking at producing at limited run of his <a href="http://www.latticesemi.com/Products/FPGAandCPLD.aspx">Lattice</a> MachXO2-based <a href="http://www.fleasystems.com/fleaFPGA.html">FleaFPGA boards</a> that are designed to get beginners up, running and experimentings with FPGA programming quickly. For ~100.00 sounds like a great deal. Head over to his site and <a href="http://www.fleasystems.com/forums/showthread.php?tid=29&amp;pid=127#pid127">pre-order</a> one.</p>
 

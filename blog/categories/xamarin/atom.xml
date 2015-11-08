@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -32,7 +32,7 @@
 </ul>
 
 
-<p>With that directory you will find:</p>
+<p>Within one of those directories you will find:</p>
 
 <ul>
 <li><code>LocalInstall/Addins</code></li>
@@ -43,7 +43,6 @@
 
 <p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 </code>
-&amp;
 <code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
 ]]></content>
   </entry>
@@ -53,7 +52,7 @@
     <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
     <updated>2015-11-01T01:22:10-08:00</updated>
     <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
 <h2>Goal:</h2>
 
@@ -242,13 +241,34 @@
     <link href="http://sushihangover.github.io/playscript-away3d-basic-shader/"/>
     <updated>2015-08-05T05:10:20-07:00</updated>
     <id>http://sushihangover.github.io/playscript-away3d-basic-shader</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %} This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/%0Aplayscript">Fork</a> me on github.</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/%0Aplayscript">Fork</a> me on github.</p>
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Shading.as">Away3d example source code that is running in the demo</a></p>
 
 <p>Using PlayScript Compiler 3.2.6002:</p>
 
-<p>{% youtube ym2w6rbYcAI %}</p>
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('ym2w6rbYcAI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/ym2w6rbYcAI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/ym2w6rbYcAI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=ym2w6rbYcAI" id="ym2w6rbYcAI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript - Away3d Basic Shading Demo</div>
+</a>
+<div class="video-info" >Xamarin Studio running the Away3d Basic Shading Demo using the PlayScript compiler
+
+Using PlayScript v3.2.6002 
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blog @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Across The Land" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+</p>
 ]]></content>
   </entry>
   
@@ -259,7 +279,26 @@
     <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
     <content type="html"><![CDATA[<p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
 
-<p>{% youtube -dVeQpB9BPo %}</p>
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
+</a>
+<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Fog Rays" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+</p>
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
 ]]></content>
@@ -272,7 +311,25 @@
     <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>
     <content type="html"><![CDATA[<p>This demo uses the the Away3d Intermediate Particle Explosions example as a base, but I reworked it slightly to use the PlayScript logo. It is running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
 
-<p>{% youtube uhjTZjlo5YA %}</p>
+<p>
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('uhjTZjlo5YA');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/uhjTZjlo5YA?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/uhjTZjlo5YA/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=uhjTZjlo5YA" id="uhjTZjlo5YA" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Particle Explosions using the PlayScript logo</div>
+</a>
+<div class="video-info" >Using PlayScript 3.2.3001, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_PlayScriptParticleExplosion­s within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Fog Rays" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+</p>
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
 

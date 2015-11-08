@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pull request | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/pull-request/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -18,7 +18,7 @@
     <link href="http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/"/>
     <updated>2015-06-24T07:46:41-07:00</updated>
     <id>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a> %} So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. {% img right <a href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right <a" src="href="http://sushihangover.github.io/images/github_logo.png">http://sushihangover.github.io/images/github_logo.png</a>"></p>
 
 <p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
 

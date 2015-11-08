@@ -4,7 +4,7 @@
   <title><![CDATA[Category: profile | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/profile/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -30,9 +30,7 @@
         CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
 </code></pre>
 
-<p>{% blockquote %}
-Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.
-{% endblockquote %}</p>
+<p><blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote></p>
 
 <h2>Background:</h2>
 

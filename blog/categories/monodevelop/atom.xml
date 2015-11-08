@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monodevelop | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monodevelop/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -32,7 +32,7 @@
 </ul>
 
 
-<p>With that directory you will find:</p>
+<p>Within one of those directories you will find:</p>
 
 <ul>
 <li><code>LocalInstall/Addins</code></li>
@@ -43,7 +43,6 @@
 
 <p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 </code>
-&amp;
 <code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
 ]]></content>
   </entry>
@@ -53,7 +52,7 @@
     <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
     <updated>2015-11-01T01:22:10-08:00</updated>
     <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p>{% img left <a href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a> %}</p>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
 
 <h2>Goal:</h2>
 
@@ -242,7 +241,7 @@
     <link href="http://sushihangover.github.io/mono-ubuntu-broken/"/>
     <updated>2015-10-30T21:55:07-07:00</updated>
     <id>http://sushihangover.github.io/mono-ubuntu-broken</id>
-    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com">{% img left http://sushihangover.github.io/images/mono-logo.png %}</a></p>
+    <content type="html"><![CDATA[<p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
 
 <p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
 
@@ -348,9 +347,9 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 
 <p>Have fun.</p>
 
-<p><a href="http://www.monodevelop.com">{% img http://sushihangover.github.io/images/monodevelop.png %}</a></p>
+<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
 
-<p><a href="https://github.com/PlayScriptRedux/playscript">{% img left http://sushihangover.github.io/images/PlayscriptLogo_small.png %}</a></p>
+<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
 ]]></content>
   </entry>
   

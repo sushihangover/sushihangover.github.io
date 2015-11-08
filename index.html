@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Using Git: Git Commit: ">
+  <meta name="description" content="In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +96,60 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-08T09:59:55-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:59 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?</p>
+
+<p>Within the <code>~/Library/Application Support</code> directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:</p>
+
+<ul>
+<li><code>MonoDevelop-4.0</code></li>
+<li><code>MonoDevelop-5.0</code></li>
+<li><code>MonoDevelop-6.0</code></li>
+<li><code>XamarinStudio-4.0</code></li>
+<li><code>XamarinStudio-5.0</code></li>
+<li><code>XamarinStudio-6.0</code></li>
+</ul>
+
+
+<p>Within one of those directories you will find:</p>
+
+<ul>
+<li><code>LocalInstall/Addins</code></li>
+</ul>
+
+
+<p>So for me, that ended up being:</p>
+
+<p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
+</code>
+<code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/xkcd-does-git/">xkcd does git ;-)</a></h1>
     
     
@@ -114,7 +168,7 @@
 
   <div class="entry-content"><h3>Using Git:</h3>
 
-<p><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></p>
+<p><a href="http://www.xkcd.com/1597/"><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></a></p>
 
 <h3>Git Commit:</h3>
 
@@ -822,75 +876,6 @@ Capitan?.</p></blockquote>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-tags-and-playscript/">Git tags and PlayScript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-09-02T21:47:36-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
-
-<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
-
-<pre><code>git show-ref --tags --dereference | grep play
-9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
-e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
-cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
-b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
-</code></pre>
-
-<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
-
-<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
-
-<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
-
-<p>First pull the latest changes, all done through pull-requests:</p>
-
-<pre><code>git pull origin playscript
-</code></pre>
-
-<p>Now I can add the new tag:</p>
-
-<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
-</code></pre>
-
-<p>And finally push it to the repo:</p>
-
-<pre><code>git push origin play-3.10.0001
-
-Total 0 (delta 0), reused 0 (delta 0)
-To https://github.com/PlayScriptRedux/playscript.git
- * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
-</code></pre>
-
-<p>I still want to know if this is available through pull-requests somehow.</p>
-
-<p><img class="right" src="http://sushihangover.github.io/images/gitlogo.png"></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -906,6 +891,10 @@ To https://github.com/PlayScriptRedux/playscript.git
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
+      </li>
+    
+      <li class="post">
         <a href="/xkcd-does-git/">xkcd does git ;-)</a>
       </li>
     
@@ -919,10 +908,6 @@ To https://github.com/PlayScriptRedux/playscript.git
     
       <li class="post">
         <a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a>
       </li>
     
   </ul>

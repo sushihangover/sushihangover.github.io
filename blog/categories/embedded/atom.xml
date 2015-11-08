@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:10:03-08:00</updated>
+  <updated>2015-11-08T10:44:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -89,9 +89,7 @@
 
 <h6>* 1: Technically the launchpad link is the &lsquo;output&rsquo; of an ARM version of GCC and binutils but is the best starting point for info on the ARM version as it is the offical distro end-point ;-)</h6>
 
-<p>{% blockquote %}
-ARM employees are maintaining this project. Contributing to this project should be via GCC trunk <a href="http://gcc.gnu.org">http://gcc.gnu.org</a> and binutils trunk <a href="http://www.gnu.org/software/binutils/.">http://www.gnu.org/software/binutils/.</a> This launchpad project is for communication and downloading. No code change is done in lp project.
-{% endblockquote %}</p>
+<p><blockquote><p>ARM employees are maintaining this project. Contributing to this project should be via GCC trunk <a href="http://gcc.gnu.org">http://gcc.gnu.org</a> and binutils trunk <a href="http://www.gnu.org/software/binutils/.">http://www.gnu.org/software/binutils/.</a> This launchpad project is for communication and downloading. No code change is done in lp project.</p></blockquote></p>
 
 <h6>* 2: The &lsquo;Freescale Kinetis Compiler&rsquo; is in maintance mode. The GNU compiler is the &lsquo;active&rsquo; mainline of ARM compiler within CodeWarror now and thus I am not looking at this one at all as it fails my future proofing rules. For existing &lsquo;legacy&rsquo; embedded projects based on it, <a href="http://en.wikipedia.org/wiki/CodeWarrior">MetroWorks</a> was acquired by Motorola which was then included in the Freescale spinoff, so go to Freescale if you need a version&hellip;</h6>
 
@@ -116,10 +114,7 @@ ARM employees are maintaining this project. Contributing to this project should 
 
 <p>I&rsquo;m not sure if they are trying to be a <a href="http://yagarto.org">YAGARTO</a> for LLVM vs. GCC. I waiting for a reply to post on their forum to understand the actual code changes to Clang/LLVM that they include (if any). <del>I will update when I hear back.</del> <strong>(Update: Read Rich&rsquo;s <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">full reply</a>, it cleared everything up for me)</strong></p>
 
-<p>{% blockquote Rich <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571</a> What is ELLCC all about %}
-ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.
-1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&hellip;
-{% endblockquote %}</p>
+<p><blockquote><p>ELLCC is really just a weekly repackaging of clang/LLVM with two minor additions.<br/>1. The triples of the form -ellcc- (where OS is linux for now, but will include others eventually) control how include files and libraries are found. You might notice for example that the #include path for ELLCC&hellip;</p><footer><strong>Rich <a href="http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571">http://ellcc.org/blog/?topic=ellcc-vs-clangllvm-trunk/#post-1571</a> What is ELLCC all about</strong></footer></blockquote></p>
 
 <p>But in the mean time I figured I give it a build and include it in my GCC/ARM vs. Clang/LLVM-ARM testing but hit a build error on OS-X. On the linking of QEMU, libintl (GNU&rsquo;s gettext) is not found:</p>
 
@@ -134,46 +129,155 @@ make: *** [subdir-i386-softmmu] Error 2
 
 <p>FYI: Brew does not &lsquo;hard&rsquo; link gettext as compiling software outside of the HomeBrew can cause problems:</p>
 
-<p>{% blockquote %}
-brew link gettext
-Warning: gettext is keg-only and must be linked with &ndash;force
-Note that doing so can interfere with building software.
-{% endblockquote %}</p>
+<p><blockquote><p>brew link gettext<br/>Warning: gettext is keg-only and must be linked with &ndash;force<br/>Note that doing so can interfere with building software.</p></blockquote></p>
 
 <p>So I mod&rsquo;d the &ldquo;ellcc/gnu/build&rdquo; to force brew to link gettext before compiling/linking qemu and unlink it after.</p>
 
-<p>{% codeblock lang:bash %}
-svn diff build</p>
-
-<h1>Index: build</h1>
-
-<p>&mdash; build   (revision 3780)
-+++ build   (working copy)
-@@ -69,6 +69,10 @@
-     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user"
- fi
- echo Configuring package qemu for $targets
-+if [!  -e <code>which brew</code> ]; then
-+   ruby -e &ldquo;$(curl -fsSL <a href="https://raw.github.com/Homebrew/homebrew/go/install">https://raw.github.com/Homebrew/homebrew/go/install</a>)&rdquo;
-+fi
-+brew link gettext &ndash;force
- qemu_target_list=<code>echo $qemu_target_list | sed -e "s/ /,/g"</code>
- make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
-     targetlist=$qemu_target_list haslibs=$haslibs \
-@@ -76,6 +80,7 @@
-     qemu.configure || exit 1</p>
-
-<p> make -C src/qemu || exit 1
-+brew unlink gettext</p>
-
-<p> # Finally, install into the target specific bin dir.
- mkdir -p $bindir
-{% endcodeblock %}</p>
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>svn diff build&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Index: build&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="p">&amp;</span>mdash<span class="p">;</span> build   <span class="o">(</span>revision 3780<span class="o">)</span>
+</span><span class='line'>+++ build   <span class="o">(</span>working copy<span class="o">)</span>
+</span><span class='line'>@@ -69,6 +69,10 @@
+</span><span class='line'>     ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user<span class="s2">&quot;</span>
+</span><span class='line'><span class="s2"> fi</span>
+</span><span class='line'><span class="s2"> echo Configuring package qemu for $targets</span>
+</span><span class='line'><span class="s2">+if [!  -e &lt;code&gt;which brew&lt;/code&gt; ]; then</span>
+</span><span class='line'><span class="s2">+   ruby -e &amp;ldquo;$(curl -fsSL &lt;a href=&quot;</span>https://raw.github.com/Homebrew/homebrew/go/install<span class="s2">&quot;&gt;https://raw.github.com/Homebrew/homebrew/go/install&lt;/a&gt;)&amp;rdquo;</span>
+</span><span class='line'><span class="s2">+fi</span>
+</span><span class='line'><span class="s2">+brew link gettext &amp;ndash;force</span>
+</span><span class='line'><span class="s2"> qemu_target_list=&lt;code&gt;echo $qemu_target_list | sed -e &quot;</span>s/ /,/g<span class="err">&quot;</span>&lt;/code&gt;
+</span><span class='line'> make <span class="nv">DIR</span><span class="o">=</span>src/qemu <span class="nv">CC</span><span class="o">=</span><span class="nv">$cc</span> <span class="nv">HCC</span><span class="o">=</span><span class="nv">$hcc</span> <span class="nv">AR</span><span class="o">=</span><span class="nv">$ar</span> <span class="nv">TARGET</span><span class="o">=</span><span class="nv">$host</span> <span class="nv">OS</span><span class="o">=</span><span class="nv">$os</span> <span class="se">\</span>
+</span><span class='line'>     <span class="nv">targetlist</span><span class="o">=</span><span class="nv">$qemu_target_list</span> <span class="nv">haslibs</span><span class="o">=</span><span class="nv">$haslibs</span> <span class="se">\</span>
+</span><span class='line'>@@ -76,6 +80,7 @@
+</span><span class='line'>     qemu.configure <span class="o">||</span> <span class="nb">exit </span>1&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt; make -C src/qemu <span class="o">||</span> <span class="nb">exit </span>1
+</span><span class='line'>+brew unlink gettext&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt; <span class="c"># Finally, install into the target specific bin dir.</span>
+</span><span class='line'> mkdir -p <span class="nv">$bindir</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Everything builds fine after that&hellip;</p>
 
 <p>The entire file is here:
-{% gist 8949755 %}</p>
+<div><script src='https://gist.github.com/8949755.js'></script>
+<noscript><pre><code>#!/bin/sh
+# ELLCC GNU tools build script.
+
+# Get the staging directory.
+prefix=`cd ..; pwd`
+
+# Figure out the compilers to use.
+. ../build-setup $*
+
+echo Configured to $WHY.
+echo C compiler: $cc $CFLAGS
+echo C++ compiler: $cxx $CXXFLAGS
+echo In: gnu-build$builddir
+
+# Configure for GNU tools.
+mkdir -p gnu-build$builddir
+
+# Configure for binutils.
+# binutils are build to support all targets in the target list.
+echo Configuring package binutils for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    binutils.configure || exit 1
+
+make -C gnu-build$builddir/binutils || exit 1
+
+# Configure for assemblers for all targets.
+for t in $targets; do
+  echo Configuring the assembler for $t
+  make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+      target=$t haslibs=$haslibs \
+      bindir=$bindir prefix=$prefix build=$build \
+      gas.configure || exit 1
+
+  make -C gnu-build$builddir/binutils/$t || exit 1
+done
+
+# Configure for GDB.
+# GDB is built to support all GDB targets.
+echo Configuring package gdb for $targets
+make DIR=gnu-build$builddir CC=$cc CXX=$cxx AR=$ar TARGET=$host OS=$os \
+    targetlist=$targetlist haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    gdb.configure || exit 1
+
+make -C gnu-build$builddir/gdb || exit 1
+
+if [ &quot;$host&quot; != &quot;$build&quot; ] ; then
+  # The host system is not the build system.
+  # Build only  binutils, the assemblers, and gdb.
+  # Finally, install into the target specific bin dir.
+  mkdir -p $bindir
+  make TARGETDIR=$builddir BINDIR=$bindir installcross || exit 1
+  exit 0
+fi
+
+# Configure for QEMU.
+# The QEMU system targets.
+qemu_target_list=&quot;i386-softmmu x86_64-softmmu arm-softmmu \
+    microblaze-softmmu mips-softmmu mipsel-softmmu \
+    ppc-softmmu ppc64-softmmu sparc-softmmu&quot;
+
+if [ `uname` = &quot;Linux&quot; ] ; then
+    # The QEMU Linux user space targets.
+    qemu_target_list=&quot;$qemu_target_list i386-linux-user \
+    x86_64-linux-user arm-linux-user armeb-linux-user \
+    microblaze-linux-user mips-linux-user mipsel-linux-user \
+    ppc-linux-user ppc64-linux-user ppc64abi32-linux-user sparc-linux-user&quot;
+fi
+echo Configuring package qemu for $targets
+if [!  -e `which brew` ]; then
+        ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
+fi
+brew link gettext --force
+qemu_target_list=`echo $qemu_target_list | sed -e &quot;s/ /,/g&quot;`
+make DIR=src/qemu CC=$cc HCC=$hcc AR=$ar TARGET=$host OS=$os \
+    targetlist=$qemu_target_list haslibs=$haslibs \
+    bindir=$bindir prefix=$prefix build=$build \
+    qemu.configure || exit 1
+
+make -C src/qemu || exit 1
+brew unlink gettext
+
+# Finally, install into the target specific bin dir.
+mkdir -p $bindir
+make TARGETDIR=$builddir BINDIR=$bindir install || exit 1
+</code></pre></noscript></div>
+</p>
 ]]></content>
   </entry>
   
@@ -188,7 +292,23 @@ svn diff build</p>
 
 <p>Thus I needed to latest and greatest Clang/LLVM and did not feel like nurse-maiding a huge git download and long compile session, so I spent a minute and hacked up a really simple script so I could catch up on &ldquo;Game of Thrones&rdquo; ;-)</p>
 
-<p>{% gist 8946898 %}</p>
+<p><div><script src='https://gist.github.com/8946898.js'></script>
+<noscript><pre><code>git clone http://llvm.org/git/llvm.git
+pushd llvm/tools
+git clone http://llvm.org/git/clang.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/compiler-rt.git
+popd
+pushd llvm/projects
+git clone http://llvm.org/git/test-suite.git
+popd
+mkdir llvmbuild
+pushd llvmbuild
+../llvm/configure --enable-optimized --enable-jit --prefix=/Users/administrator/llvm-install 
+make
+</code></pre></noscript></div>
+</p>
 
 <p>FYI: <a href="http://clang.llvm.org/docs/CrossCompilation.html">Cross-compilation using Clang</a></p>
 ]]></content>

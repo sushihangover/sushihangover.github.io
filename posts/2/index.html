@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="PlayScript (.play) now has Exception Filters like C# 6.0. These are actually really cool and nice addition to ActionScript. From the C# Frequently &hellip;">
+  <meta name="description" content="Seems I not found a way to update the &lsquo;upstream&rsquo; master of PlayScript without actually push the tag directly to the repo. So first I de- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-tags-and-playscript/">Git tags and PlayScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-09-02T21:47:36-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:47 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
+
+<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
+
+<pre><code>git show-ref --tags --dereference | grep play
+9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
+a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
+e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
+cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
+b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
+</code></pre>
+
+<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
+
+<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
+
+<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
+
+<p>First pull the latest changes, all done through pull-requests:</p>
+
+<pre><code>git pull origin playscript
+</code></pre>
+
+<p>Now I can add the new tag:</p>
+
+<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
+</code></pre>
+
+<p>And finally push it to the repo:</p>
+
+<pre><code>git push origin play-3.10.0001
+
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/PlayScriptRedux/playscript.git
+ * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
+</code></pre>
+
+<p>I still want to know if this is available through pull-requests somehow.</p>
+
+<p><img class="right" src="http://sushihangover.github.io/images/gitlogo.png"></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -566,131 +635,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-away3d-world-global-example/">PlayScript | Away3d World Global Example</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-23T18:17:12-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:17 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
-
-<p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
-
-<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
-</a>
-<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;cloc away3d-core-fp11
-</span><span class='line'>     464 text files.
-</span><span class='line'>     464 unique files.
-</span><span class='line'>      16 files ignored.
-</span><span class='line'>
-</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>Language                     files          blank        comment           code
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>ActionScript                   443          12601          12443          54059
-</span><span class='line'>MSBuild script                   3              0              0           1551
-</span><span class='line'>C#                               3             39             11            111
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>SUM:                           449          12640          12454          55721
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>&gt;cloc away3d-examples-fp11
-</span><span class='line'>     110 text files.
-</span><span class='line'>     109 unique files.
-</span><span class='line'>      60 files ignored.
-</span><span class='line'>
-</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>Language                     files          blank        comment           code
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>ActionScript                    36           1936           2592           8073
-</span><span class='line'>Javascript                       2            121            148           1186
-</span><span class='line'>MSBuild script                   3              0              0            808
-</span><span class='line'>C#                               7            414             99            740
-</span><span class='line'>XML                              2             19             10            105
-</span><span class='line'>HTML                             2              7             29            102
-</span><span class='line'>CSS                              1              1              1              4
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>SUM:                            53           2498           2879          11018
-</span><span class='line'>-------------------------------------------------------------------------------</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
-
-<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -708,6 +652,10 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
+      </li>
+    
+      <li class="post">
         <a href="/xkcd-does-git/">xkcd does git ;-)</a>
       </li>
     
@@ -721,10 +669,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
     
       <li class="post">
         <a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a>
       </li>
     
   </ul>
