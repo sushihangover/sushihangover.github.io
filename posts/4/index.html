@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them. You can not do a &hellip;">
+  <meta name="description" content="From my Answer for &ldquo;Run NUnit test on Ubuntu from command line&rdquo; on Stackoverflow: Lets start from the beginning: Get the latest and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,98 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-nunit-world-world/">Mono - NUnit Hello World</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T22:11:16-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:11 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From my Answer for &ldquo;<a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Run NUnit test on Ubuntu from command line</a>&rdquo; on <a href="http://stackoverflow.com/questions/31038629/run-nunit-test-on-ubuntu-from-command-line/31041709#31041709">Stackoverflow</a>:</p>
+
+<p>Lets start from the beginning:</p>
+
+<p>Get the latest and greatest NUnit <strong>AND</strong> it&rsquo;s Runner tools</p>
+
+<pre><code>curl https://api.nuget.org/downloads/nuget.exe -o nuget.exe
+mono nuget.exe install NUnit
+mono nuget.exe install NUnit.Runners
+</code></pre>
+
+<p>Make sure the mono is finding those assemblies <strong>first</strong> (vs the GAC)</p>
+
+<pre><code>export MONO_PATH=$(PWD)/NUnit.Runners.2.6.4/tools;$(PWD)/NUnit.2.6.4/lib
+</code></pre>
+
+<p>Create your test example (save it to vi OnlyTest.cs):</p>
+
+<pre><code>using System;
+using System.Text;
+using System.Collections.Generic;
+using NUnit.Framework;
+
+[TestFixture]
+public class OnlyTest
+{
+    [Test]
+    public void MyTest() 
+    {
+        int a = 10;
+        Assert.AreEqual(10, a);
+    }
+}
+</code></pre>
+
+<p> Compile it:</p>
+
+<pre><code>  mcs OnlyTest.cs -target:library -r:NUnit.2.6.4/lib/nunit.framework.dll -out:OnlyTest.dll
+</code></pre>
+
+<p>Run it:</p>
+
+<pre><code>mono ./NUnit.Runners.2.6.4/tools/nunit-console.exe OnlyTest.dll -noresult
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Using default runtime: v4.0.30319
+NUnit-Console version 2.6.4.14350
+Copyright (C) 2002-2012 Charlie Poole.
+Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
+Copyright (C) 2000-2002 Philip Craig.
+All Rights Reserved.
+
+Runtime Environment -
+   OS Version: Unix 14.3.0.0
+  CLR Version: 4.0.30319.17020 ( Mono 4.0 ( 4.3.0 (master/b044a27 Thu Jun 18 15:17:08 PDT 2015) ) )
+
+ProcessModel: Default    DomainUsage: Single
+Execution Runtime: mono-4.0
+.
+Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
+  Not run: 0, Invalid: 0, Ignored: 0, Skipped: 0
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -806,141 +898,6 @@ and the repository exists.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/corflags-cross-platform-release-on-github/">CorFlags Conversion tool - Cross-platform release on Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T11:24:42-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:24 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I posted the first (alpha) release of a cross-platform version of Microsoft&rsquo;s CorFlags Conversion tool to<a href="https://github.com/sushihangover/CorFlags"> Github</a>.</p>
-
-<p>This alpha release is read-only and while accepting argument flags to change the CIL image, you will receive a not implemented exception:</p>
-
-<pre><code>corflags : Error CF0999: Unknown exception: The requested feature is not implemented.
-</code></pre>
-
-<p>The next release will be feature complete as I just needed to get a backup of the current version to Github for now.</p>
-
-<h1><strong>Repo Readme:</strong></h1>
-
-<h1>xCorFlags.exe (CorFlags Conversion Tool)</h1>
-
-<h2>Mono and .NET Framework 4.5</h2>
-
-<h3>The CorFlags Conversion tool allows you to configure the CorFlags section of the header of a portable executable image.</h3>
-
-<p>This is a <strong>cross-platform</strong> version of the <a href="https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396">Microsoft CorFlags</a> tool that is included in the .Net Framework SDK installations.</p>
-
-<ul>
-<li><a href="https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396">MSDN Documentation for CorFlag.exe</a></li>
-</ul>
-
-
-<p>This xplat version strives to be argument option and output compatible (using /nologo) with the Microsoft version.</p>
-
-<p>*Note: Platform independent argument prefixes can be used: <strong>&lsquo;/&rsquo; or &lsquo;-&rsquo;</strong> *</p>
-
-<h2>Usage:</h2>
-
-<pre><code>Mono/.NET Framework CorFlags Conversion Tool.  Version  0.9.5643.21314
-Copyright (c) SushiHangover.  All rights reserved.
-
-Windows Usage: xCorflags.exe Assembly [options]
- X-Plat Usage: mono xcorflags.exe Assembly [options]
-
-If no options are specified, the flags for the given image are displayed.
-
-     Options: (/ or - prefixed
-     /ILONLY+ /ILONLY-       Sets/clears the ILONLY flag
-     /32BITREQ+ /32BITREQ-   Sets/clears the bits indicating 32-bit x86 only
-     /32BITPREF+ /32BITPREF- Sets/clears the bits indicating 32-bit preferred
-     /UpgradeCLRHeader       Upgrade the CLR Header to version 2.5
-     /RevertCLRHeader        Revert the CLR Header to version 2.0
-     /Force                  Force an assembly update even if the image is
-         strong name signed.
-         WARNING: Updating a strong name signed assembly
-         will require the assembly to be resigned before
-         it will execute properly.
-     /nologo                 Prevents corflags from displaying logo
-</code></pre>
-
-<h2>Output:</h2>
-
-<p>When running with the nologo option, the output should be compatible with Microsoft&rsquo;s version, a nice to have for those who already are used the output to CorFlags.exe or those that have existing scripts.</p>
-
-<pre><code>mono ./CorFlags.exe /nologo CorFlags.exe
-Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x3
-ILONLY    : 1
-32BITREQ  : 1
-32BITPREF : 0
-Signed    : 0
-</code></pre>
-
-<h2>Without using the nologo argument:</h2>
-
-<pre><code>mono ./CorFlags.exe CorFlags.exe SudoKnights.exe
-Mono/.NET Framework CorFlags Conversion Tool.  Version  0.9.5643.21314
-Copyright (c) SushiHangover.  All rights reserved.
-
-Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 1
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<h3>versus:</h3>
-
-<pre><code>PS&gt; .\CorFlags.exe .\Test\x64\Release\ExeForTesting.exe
-Microsoft (R) .NET Framework CorFlags Conversion Tool.  Version  4.0.30319.17929
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32+
-CorFlags  : 0x1
-ILONLY    : 1
-32BITREQ  : 0
-32BITPREF : 0
-Signed    : 0
-</code></pre>
-
-<p>Built and tested using Mono 4.0.1 on:</p>
-
-<ul>
-<li>Windows</li>
-<li>OS-X</li>
-<li>Linux</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -958,6 +915,10 @@ Signed    : 0
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
       </li>
     
@@ -971,10 +932,6 @@ Signed    : 0
     
       <li class="post">
         <a href="/playscript-cmonodevelop-language-addin-part-1/">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a>
       </li>
     
   </ul>

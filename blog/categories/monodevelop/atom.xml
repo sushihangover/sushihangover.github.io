@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monodevelop | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monodevelop/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:44:27-08:00</updated>
+  <updated>2015-11-08T12:07:32-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
+    <link href="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/"/>
+    <updated>2015-11-08T11:54:48-08:00</updated>
+    <id>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack</id>
+    <content type="html"><![CDATA[<p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
+
+<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
+
+<h3>Package your Addin to a .mpack file</h3>
+
+<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
+
+<h3>Install your .mpack</h3>
+
+<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
+
+<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin OS-X Addins Location]]></title>

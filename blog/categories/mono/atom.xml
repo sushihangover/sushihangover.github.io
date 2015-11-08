@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T10:44:27-08:00</updated>
+  <updated>2015-11-08T12:07:32-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
+    <link href="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/"/>
+    <updated>2015-11-08T11:54:48-08:00</updated>
+    <id>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack</id>
+    <content type="html"><![CDATA[<p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
+
+<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
+
+<h3>Package your Addin to a .mpack file</h3>
+
+<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
+
+<h3>Install your .mpack</h3>
+
+<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
+
+<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin OS-X Addins Location]]></title>
@@ -364,31 +385,6 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 <p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
 
 <p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
-    <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
-    <updated>2015-10-27T22:20:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
-
-<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
-
-<p>He also has a great series on Nullable micro-optimizations that start here:</p>
-
-<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
-
-<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
 ]]></content>
   </entry>
   

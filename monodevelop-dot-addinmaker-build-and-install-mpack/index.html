@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mono's new TLS Provider - SushiHangover</title>
+  <title>MonoDevelop.AddinMaker - CI Build and Install .mpack - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Great news, the new pluggable TLS provider is available for security review. Mono’s new TLS provider Hello, As described by Miguel in the “State of &hellip;">
+  <meta name="description" content="Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/monos-new-tls-provider/">
+  <link rel="canonical" href="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -93,7 +93,7 @@
   
   <header>
     
-      <h1 class="entry-title">Mono's new TLS Provider</h1>
+      <h1 class="entry-title">MonoDevelop.AddinMaker - CI Build and Install .mpack</h1>
     
     
       <p class="meta">
@@ -102,55 +102,26 @@
 
 
 
-<time class='entry-date' datetime='2015-10-26T23:10:57-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+<time class='entry-date' datetime='2015-11-08T11:54:48-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:54 am</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Great news, the new pluggable TLS provider is available for security review.</p>
+<div class="entry-content"><p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
 
-<p><a href="http://mono.1490590.n4.nabble.com/Mono-s-new-TLS-provider-tt4666825.html">Mono’s new TLS provider</a></p>
+<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
 
-<blockquote><p> Hello,</p>
+<h3>Package your Addin to a .mpack file</h3>
 
-<p>As described by Miguel in the “State of Tls in Mono” [1] we have been working on a new TLS implementation for Mono, one that would upgrade our TLS stack, and one that would allow us to reuse some of the higher level pieces from Microsoft’s networking stack, read that post for more details on the scope of the project.</p>
+<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
 
-<p>Mono’s master branch now has the ability to load alternative TLS implementations.   We added this code so we can start testing our new TLS implementation side-by-side the code that is in use today, and also so that we can provide both platform-specific backends or allow developers to choose a different TLS implementation (like BoringSSL, OpenSSL or Amazon’s s2n).</p>
+<h3>Install your .mpack</h3>
 
-<p>This is achieved by making our SSL transport pluggable, this allows HttpWebRequest and other classes to use the new TLS stack.</p>
+<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
 
-<p>Today, a regular Mono checkout will default to the existing Mono SSL/TLS implementation which supports a number of ciphers and TLS levels up to 1.0, so nothing has changed and we have one alternative implementation available: mono-tls.</p>
-
-<p>mono-tls is a purely managed implementation of TLS 1.0, 1.1 and 1.2 (filling the gap that we had).   To use it, you need to build the mono-tls [2] module, once this is build, you will have to reference the following libraries: Mono.Security.NewTls, Mono.Security.NewTls.Interface, Mono.Security.Providers.NewTls.</p>
-
-<p>Once you have these, you should add this code to your main program:</p>
-
-<pre><code>  MonoTlsProviderFactory.InstallProvider (new NewTlsProvider ());
-</code></pre>
-
-<p>Then uses of HttpWebRequest, FtpWebRequest and the Smtp client will all use the new TLS stack.</p>
-
-<p>More details are available in the architecture document [3].</p>
-
-<p>TLS State
-While we have added an extensive test suite to this new TLS implementation and tested this against a wide variety of TLS servers and configurations, we have not completed a security audit of its implementation.   While we have taken every step to ensure that we follow all the best practices when implementing a security stack, we want to get this code reviewed by third parties, and we want to complete a comprehensive security audit of the code before we would even consider transitioning this as the default.</p>
-
-<p>Future Work - Pluggability/SslStream
-We are going to be making the SslStream the proxy endpoint, for two reasons: (a) it would make SslStream usable with the new provider interface and (b) it would simplify some of the special code that lives in different places in the class libraries to use the new TLS implementation.</p>
-
-<p>We will also likely introduce a MONO_TLS_PROVIDER environment variable that controls the implementation, so that we make it easier to test the implementations during the testing phase.</p>
-
-<p>Future Work - Other Providers
-We are currently developing a provider for Apple platforms that will use Apple’s unmanaged SSL implementation, and we will be adding an implementation that use Google’s BoringSSL.   The idea being that on Apple, you get to use the system provided implementation, and on other platforms, we use the Google maintained one.</p>
-
-<p>Please let me know if you have any questions, comments, feedback.   In particular, we would like to get you to find security holes in the implementation.  We can offer a Xamarin shirt or a Xamarin monkey as a prize for finding holes in the new implementation.</p>
-
-<p>References
-[1] <a href="http://tirania.org/blog/archive/2015/Aug-27.html">http://tirania.org/blog/archive/2015/Aug-27.html</a>
-[2] <a href="http://github.com/mono/mono-tls">http://github.com/mono/mono-tls</a>
-[3] <a href="https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md">https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md</a></p></blockquote>
+<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
 </div>
 
 
@@ -166,12 +137,12 @@ We are currently developing a provider for Apple platforms that will use Apple�
 
 
 
-<time class='entry-date' datetime='2015-10-26T23:10:57-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+<time class='entry-date' datetime='2015-11-08T11:54:48-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:54 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/tls/'>tls</a>
+    <a class='category' href='/blog/categories/addin/'>addin</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/monodevelop/'>monodevelop</a>, <a class='category' href='/blog/categories/xamarin-studio/'>xamarin studio</a>
   
 </span>
 
@@ -180,7 +151,7 @@ We are currently developing a provider for Apple platforms that will use Apple�
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/monos-new-tls-provider/" data-via="" data-counturl="http://sushihangover.github.io/monos-new-tls-provider/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/" data-via="" data-counturl="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/" >Tweet</a>
   
   
   
@@ -189,10 +160,8 @@ We are currently developing a provider for Apple platforms that will use Apple�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/starswarsFA/" title="Previous Post: Star Wars: The Force Awakens Trailer | Official HD">&laquo; Star Wars: The Force Awakens Trailer | Official HD</a>
+        <a class="basic-alignment left" href="/xamarin-os-x-addins-location/" title="Previous Post: Xamarin OS-X Addins Location">&laquo; Xamarin OS-X Addins Location</a>
       
-      
-        <a class="basic-alignment right" href="/playscript-compiler-optim/" title="Next Post: PlayScript | Optimizing psc/mcs">PlayScript | Optimizing psc/mcs &raquo;</a>
       
     </p>
   </footer>
@@ -287,8 +256,8 @@ We are currently developing a provider for Apple platforms that will use Apple�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/monos-new-tls-provider/';
-        var disqus_url = 'http://sushihangover.github.io/monos-new-tls-provider/';
+        var disqus_identifier = 'http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/';
+        var disqus_url = 'http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/';
         var disqus_script = 'embed.js';
       
     (function () {

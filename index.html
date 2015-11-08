@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin &hellip;">
+  <meta name="description" content="Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-08T11:54:48-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:54 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
+
+<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
+
+<h3>Package your Addin to a .mpack file</h3>
+
+<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
+
+<h3>Install your .mpack</h3>
+
+<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
+
+<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -836,46 +877,6 @@ Follow Star Wars on Tumblr: <a href="http://starwars.tumblr.com/">http://starwar
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/osx-10-dot-11-el-capitan-which-mono-version/">OSX 10.11 El Capitan, Which Mono version?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-10-14T05:49:56-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:49 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Moving to El Capitan? Then you need <a href="http://www.mono-project.com/download/">Mono</a> version 4.2.x or 4.0.4.4.</p>
-
-<p>From the Mono mailing list:</p>
-
-<blockquote><p>What is the difference between the latest Mono 4.0.4.4 package for Mac and the 4.2.1 El Capitan Preview?
-The changelog of 4.0.4.4 includes &ldquo;33585: El Capitan System Integrity
-Protection support.&rdquo; so i suppose that the 4.0.4.4 also works on El
-Capitan?.</p></blockquote>
-
-<p>Reply from Miguel de Icaza:</p>
-
-<blockquote><p>One is based on Mono 4.0 series, with minimal changes just to enable the support on El Capitan;   The 4.2 has the same changes, on top of the latest Mono 4.2, available on Alpha and the release candidate.</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -891,6 +892,10 @@ Capitan?.</p></blockquote>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
       </li>
     
@@ -904,10 +909,6 @@ Capitan?.</p></blockquote>
     
       <li class="post">
         <a href="/playscript-cmonodevelop-language-addin-part-1/">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a>
       </li>
     
   </ul>
