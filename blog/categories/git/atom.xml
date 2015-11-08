@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-06T10:15:40-08:00</updated>
+  <updated>2015-11-08T08:49:09-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[xkcd does git ;-)]]></title>
+    <link href="http://sushihangover.github.io/xkcd-does-git/"/>
+    <updated>2015-11-08T08:39:32-08:00</updated>
+    <id>http://sushihangover.github.io/xkcd-does-git</id>
+    <content type="html"><![CDATA[<h3>Using Git:</h3>
+
+<p><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></p>
+
+<h3>Git Commit:</h3>
+
+<p><a href="http://xkcd.com/1296/"><img src="http://imgs.xkcd.com/comics/git_commit.png" alt="Merge branch 'asdfasjkfdlas/alkdjf' into sdkjfls-final" /></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git tags and PlayScript]]></title>
@@ -171,22 +186,6 @@ git commit
 </code></pre>
 
 <p>You can push those changes to your remote repo and then issue that pull request to the upstream that you forked from.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Create a new branch with non-commited changes]]></title>
-    <link href="http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/"/>
-    <updated>2015-06-29T05:28:05-07:00</updated>
-    <id>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
-
-<pre><code>git branch newbranch
-git reset --hard HEAD
-git checkout newbranch
-</code></pre>
-
-<p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
 ]]></content>
   </entry>
   

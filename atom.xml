@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-06T10:15:40-08:00</updated>
+  <updated>2015-11-08T08:49:09-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[xkcd does git ;-)]]></title>
+    <link href="http://sushihangover.github.io/xkcd-does-git/"/>
+    <updated>2015-11-08T08:39:32-08:00</updated>
+    <id>http://sushihangover.github.io/xkcd-does-git</id>
+    <content type="html"><![CDATA[<h3>Using Git:</h3>
+
+<p><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></p>
+
+<h3>Git Commit:</h3>
+
+<p><a href="http://xkcd.com/1296/"><img src="http://imgs.xkcd.com/comics/git_commit.png" alt="Merge branch 'asdfasjkfdlas/alkdjf' into sdkjfls-final" /></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
@@ -995,23 +1010,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
 <p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
 
 <p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure]]></title>
-    <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
-    <updated>2015-07-23T11:21:41-07:00</updated>
-    <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
-    <content type="html"><![CDATA[<p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
-
-<p>If you are also getting it build failure, please add your findings to:</p>
-
-<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
-
-<p>It appears not to be OS dependent either:</p>
-
-<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
 ]]></content>
   </entry>
   
