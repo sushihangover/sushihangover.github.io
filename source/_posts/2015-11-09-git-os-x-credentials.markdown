@@ -9,11 +9,11 @@ categories:
 ---
 Setting up a fresh install of El Capitan...
 
-I instal git via [homebrew](http://brew.sh):
+I installed `git` via [homebrew](http://brew.sh):
 
 `brew git`
 
-And then since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how...
+And since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how... After way to much searching, I figured I'd post this as a reminder for at least myself ;-)
 
 But if you installed git using homebrew, you should already have the osxkeychain helper. You can verify this by trying to run it:
 
