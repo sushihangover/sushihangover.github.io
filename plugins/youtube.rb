@@ -65,6 +65,7 @@ class YouTube < Liquid::Tag
 
     Yt.configure do |config|
       config.api_key = api_key
+      config.log_level = :debug
     end
 
     video = Yt::Video.new id: @id
