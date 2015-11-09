@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!//bin/bash
 echo "Generate and deploying website"
 rake generate
 rake deploy
