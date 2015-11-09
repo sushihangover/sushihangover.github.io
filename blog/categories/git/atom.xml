@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T12:07:32-08:00</updated>
+  <updated>2015-11-09T05:02:44-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git OS-X Credentials]]></title>
+    <link href="http://sushihangover.github.io/git-os-x-credentials/"/>
+    <updated>2015-11-09T03:33:38-08:00</updated>
+    <id>http://sushihangover.github.io/git-os-x-credentials</id>
+    <content type="html"><![CDATA[<p>Setting up a fresh install of El Capitan&hellip;</p>
+
+<p>I installed <code>git</code> via <a href="http://brew.sh">homebrew</a>:</p>
+
+<p><code>brew git</code></p>
+
+<p>And since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how&hellip; After way to much searching, I figured I&rsquo;d post this as a reminder for at least myself ;-)</p>
+
+<p>But if you installed git using homebrew, you should already have the osxkeychain helper. You can verify this by trying to run it:</p>
+
+<p><code>git credential-osxkeychain</code></p>
+
+<p>To tell git to use osxkeychain, simply set the global git config:</p>
+
+<p><code>git config --global credential.helper osxkeychain
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[xkcd does git ;-)]]></title>
@@ -148,44 +172,6 @@ Successfully rebased and updated refs/heads/play-tests.
 <blockquote><p>git log -n 2</p></blockquote>
 
 <p>FYI: This is something you should do to your feature branch before pushing to your fork to make that <a href="http://github.com/playscriptredux/playscript">PlayScript</a> pull request. ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Turn multiple commits into a single commit]]></title>
-    <link href="http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/"/>
-    <updated>2015-06-30T18:10:36-07:00</updated>
-    <id>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"> Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
-
-<h3>Switch to the upstream/master branch and make sure you are up to date.</h3>
-
-<pre><code>git checkout master
-git fetch upstream/master   
-git merge master
-</code></pre>
-
-<h3>Create a new feature/topic branch:</h3>
-
-<pre><code>git checkout -b MyPullRequest
-git merge MyMultiCommitBranch
-</code></pre>
-
-<h3>Reset the branch to origin&rsquo;s state.</h3>
-
-<pre><code>git reset origin/MyPullRequest
-git status
-</code></pre>
-
-<p><strong>Note: Git now considers all changes as unstaged changes.</strong></p>
-
-<h3>We can add these changes as one commit.</h3>
-
-<pre><code>git add --all
-git commit
-</code></pre>
-
-<p>You can push those changes to your remote repo and then issue that pull request to the upstream that you forked from.</p>
 ]]></content>
   </entry>
   

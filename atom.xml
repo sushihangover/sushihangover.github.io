@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-08T12:07:32-08:00</updated>
+  <updated>2015-11-09T05:02:44-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iTerm2 OSX: Jump Word-wise left and right in Navigation]]></title>
+    <link href="http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation/"/>
+    <updated>2015-11-09T04:48:55-08:00</updated>
+    <id>http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation</id>
+    <content type="html"><![CDATA[<p>Jumping word-wise in the iTerm2 (3.0 beta):</p>
+
+<ul>
+<li>Open the Preferences Pane</li>
+<li>Goto Tab Keys</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send Escape Sequence” as the Action and Set “Esc + b”</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + →” and use “Send Escape Sequence” as the Action and Set “Esc + f”</li>
+</ul>
+
+
+<p><img src="http://sushihangover.github.io/images/iterm-jump-words.png" alt="iTerm Jump/Tab Words" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X El Capitan Adobe Air Installer]]></title>
+    <link href="http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/"/>
+    <updated>2015-11-09T04:39:23-08:00</updated>
+    <id>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer</id>
+    <content type="html"><![CDATA[<p>Have problems trying to install Adobe Air on a fresh install of OS-X 10.11? The current version of the installer that linked @ <a href="https://get.adobe.com/air/">https://get.adobe.com/air/</a> will just hang and you will have to <code>force</code> quit it.</p>
+
+<p>Try the latest<a href="http://labs.adobe.com/downloads/air.html"> Adobe Air Beta</a> 20 and your problems will be sovled.</p>
+
+<p>Note: This also solves the issue for older versions of Adobe CS (6 and others) failing to install properly. Install the latest Air version and retry your Adove CS install.</p>
+
+<ul>
+<li><a href="http://download.macromedia.com/pub/labs/flashruntimes/shared/air20_flashplayer20_releasenotes.pdf">Adobe Air 20 Release Notes</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git OS-X Credentials]]></title>
+    <link href="http://sushihangover.github.io/git-os-x-credentials/"/>
+    <updated>2015-11-09T03:33:38-08:00</updated>
+    <id>http://sushihangover.github.io/git-os-x-credentials</id>
+    <content type="html"><![CDATA[<p>Setting up a fresh install of El Capitan&hellip;</p>
+
+<p>I installed <code>git</code> via <a href="http://brew.sh">homebrew</a>:</p>
+
+<p><code>brew git</code></p>
+
+<p>And since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how&hellip; After way to much searching, I figured I&rsquo;d post this as a reminder for at least myself ;-)</p>
+
+<p>But if you installed git using homebrew, you should already have the osxkeychain helper. You can verify this by trying to run it:</p>
+
+<p><code>git credential-osxkeychain</code></p>
+
+<p>To tell git to use osxkeychain, simply set the global git config:</p>
+
+<p><code>git config --global credential.helper osxkeychain
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
@@ -826,99 +887,6 @@ Royalty Free Background Music:
 
 
 <p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Travis CI enabled for repo]]></title>
-    <link href="http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/"/>
-    <updated>2015-08-03T12:54:06-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
-
-<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
-
-<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
-
-<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:center;">  Git Branch  </th>
-<th style="text-align:center;">   Mac OS-X / Linux  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
-<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
-</tr>
-</tbody>
-</table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Away3d Particles with PlayScript logo]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-playscript/"/>
-    <updated>2015-07-29T17:05:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-intermediate-playscript</id>
-    <content type="html"><![CDATA[<p>This demo uses the the Away3d Intermediate Particle Explosions example as a base, but I reworked it slightly to use the PlayScript logo. It is running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('uhjTZjlo5YA');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/uhjTZjlo5YA?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/uhjTZjlo5YA/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=uhjTZjlo5YA" id="uhjTZjlo5YA" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions using the PlayScript logo</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.3001, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_PlayScriptParticleExplosion­s within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d World Global Example</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Away3d Intermediate Particle Explosions]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/"/>
-    <updated>2015-07-24T14:01:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions</id>
-    <content type="html"><![CDATA[<p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
-</a>
-<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
--  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
--   http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
 ]]></content>
   </entry>
   

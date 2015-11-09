@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: osx | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-09T05:02:44-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X El Capitan Adobe Air Installer]]></title>
+    <link href="http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/"/>
+    <updated>2015-11-09T04:39:23-08:00</updated>
+    <id>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer</id>
+    <content type="html"><![CDATA[<p>Have problems trying to install Adobe Air on a fresh install of OS-X 10.11? The current version of the installer that linked @ <a href="https://get.adobe.com/air/">https://get.adobe.com/air/</a> will just hang and you will have to <code>force</code> quit it.</p>
+
+<p>Try the latest<a href="http://labs.adobe.com/downloads/air.html"> Adobe Air Beta</a> 20 and your problems will be sovled.</p>
+
+<p>Note: This also solves the issue for older versions of Adobe CS (6 and others) failing to install properly. Install the latest Air version and retry your Adove CS install.</p>
+
+<ul>
+<li><a href="http://download.macromedia.com/pub/labs/flashruntimes/shared/air20_flashplayer20_releasenotes.pdf">Adobe Air 20 Release Notes</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git OS-X Credentials]]></title>
+    <link href="http://sushihangover.github.io/git-os-x-credentials/"/>
+    <updated>2015-11-09T03:33:38-08:00</updated>
+    <id>http://sushihangover.github.io/git-os-x-credentials</id>
+    <content type="html"><![CDATA[<p>Setting up a fresh install of El Capitan&hellip;</p>
+
+<p>I installed <code>git</code> via <a href="http://brew.sh">homebrew</a>:</p>
+
+<p><code>brew git</code></p>
+
+<p>And since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how&hellip; After way to much searching, I figured I&rsquo;d post this as a reminder for at least myself ;-)</p>
+
+<p>But if you installed git using homebrew, you should already have the osxkeychain helper. You can verify this by trying to run it:</p>
+
+<p><code>git credential-osxkeychain</code></p>
+
+<p>To tell git to use osxkeychain, simply set the global git config:</p>
+
+<p><code>git config --global credential.helper osxkeychain
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

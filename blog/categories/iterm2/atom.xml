@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iterm2 | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/iterm2/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-09T05:02:44-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iTerm2 OSX: Jump Word-wise left and right in Navigation]]></title>
+    <link href="http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation/"/>
+    <updated>2015-11-09T04:48:55-08:00</updated>
+    <id>http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation</id>
+    <content type="html"><![CDATA[<p>Jumping word-wise in the iTerm2 (3.0 beta):</p>
+
+<ul>
+<li>Open the Preferences Pane</li>
+<li>Goto Tab Keys</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send Escape Sequence” as the Action and Set “Esc + b”</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + →” and use “Send Escape Sequence” as the Action and Set “Esc + f”</li>
+</ul>
+
+
+<p><img src="/images/iterm-jump-words.png" alt="iTerm Jump/Tab Words" /></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: elcapitan | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/elcapitan/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-09T05:02:44-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OS-X El Capitan Adobe Air Installer]]></title>
+    <link href="http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/"/>
+    <updated>2015-11-09T04:39:23-08:00</updated>
+    <id>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer</id>
+    <content type="html"><![CDATA[<p>Have problems trying to install Adobe Air on a fresh install of OS-X 10.11? The current version of the installer that linked @ <a href="https://get.adobe.com/air/">https://get.adobe.com/air/</a> will just hang and you will have to <code>force</code> quit it.</p>
+
+<p>Try the latest<a href="http://labs.adobe.com/downloads/air.html"> Adobe Air Beta</a> 20 and your problems will be sovled.</p>
+
+<p>Note: This also solves the issue for older versions of Adobe CS (6 and others) failing to install properly. Install the latest Air version and retry your Adove CS install.</p>
+
+<ul>
+<li><a href="http://download.macromedia.com/pub/labs/flashruntimes/shared/air20_flashplayer20_releasenotes.pdf">Adobe Air 20 Release Notes</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

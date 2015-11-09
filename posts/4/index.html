@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="From my Answer for &ldquo;Run NUnit test on Ubuntu from command line&rdquo; on Stackoverflow: Lets start from the beginning: Get the latest and &hellip;">
+  <meta name="description" content="Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,181 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-turn-multiple-commits-into-a-single-commit/">Git - Turn multiple commits into a single commit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-30T18:10:36-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> Getting ready for an upstream pull request? You really need to turn it into a single commit for a clean request that will result in a fast-forward merge.</p>
+
+<h3>Switch to the upstream/master branch and make sure you are up to date.</h3>
+
+<pre><code>git checkout master
+git fetch upstream/master   
+git merge master
+</code></pre>
+
+<h3>Create a new feature/topic branch:</h3>
+
+<pre><code>git checkout -b MyPullRequest
+git merge MyMultiCommitBranch
+</code></pre>
+
+<h3>Reset the branch to origin&rsquo;s state.</h3>
+
+<pre><code>git reset origin/MyPullRequest
+git status
+</code></pre>
+
+<p><strong>Note: Git now considers all changes as unstaged changes.</strong></p>
+
+<h3>We can add these changes as one commit.</h3>
+
+<pre><code>git add --all
+git commit
+</code></pre>
+
+<p>You can push those changes to your remote repo and then issue that pull request to the upstream that you forked from.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-create-a-new-branch-with-non-commited-changes/">Git - Create a new branch with non-commited changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-29T05:28:05-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:28 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> Have you started making changes and than realize that you should have created a new branch first. Well, there is a slick way to create a new branch and have those changes &lsquo;moved&rsquo; to from master to your topic (the new branch).</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD
+git checkout newbranch
+</code></pre>
+
+<p>This works even if you have made commits to your local branch, just subsititute <strong>HEAD</strong> with the number of commits back you would like to go, i.e. <strong>HEAD~2</strong>, or use the SHA.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-25T06:20:17-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:20 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
+
+<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
+
+<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
+
+<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
+
+<p>But those projects are not needed to get the main program working&hellip;</p>
+
+<h3>mono ./CodeFormatter.exe</h3>
+
+<pre><code>Must specify at least one project / solution / rsp to format
+CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
+    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
+    [/rule(+|-):rule1,rule2,...]  [/verbose]
+    &lt;project, solution or response file&gt;
+
+    /file        - Only apply changes to files with specified name
+    /lang        - Specifies the language to use when a responsefile is
+                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
+    /c           - Additional preprocessor configurations the formatter
+                   should run under.
+    /copyright   - Specifies file containing copyright header.
+                   Use ConvertTests to convert MSTest tests to xUnit.
+    /nocopyright - Do not update the copyright message.
+    /tables      - Let tables opt out of formatting by defining
+                   DOTNET_FORMATTER
+    /nounicode   - Do not convert unicode strings to escape sequences
+    /rule(+|-)   - Enable (default) or disable the specified rule
+    /rules       - List the available rules
+    /verbose     - Verbose output
+</code></pre>
+
+<h3>mono ./CodeFormatter.exe /rules</h3>
+
+<pre><code>Name                 Description
+==============================================
+BraceNewLine         :Ensure all braces occur on a new line
+Copyright            :Insert the copyright header into every file
+NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
+CustomCopyright      :Remove any custom copyright header from the file
+UsingLocation        :Place using directives outside namespace declarations
+UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
+ExplicitVisibility   :Ensure all members have an explicit visibility modifier
+IllegalHeaders       :Remove illegal headers from files
+FormatDocument       :Run the language specific formatter on every document
+ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
+ReadonlyFields       :Mark fields which can be readonly as readonly
+FieldNames           :Prefix private fields with _ and statics with s_
+</code></pre>
+
+<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -719,185 +894,6 @@ monocov
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/">Corflags - Release xCorFlags Version 1.0.5643.36015</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-15T06:09:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:09 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.36015">xCorFlags Version 1.0.5643.36015</a></h1>
-
-<p>Maintenance release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
-
-<pre><code>git log v1.0.5643.30429..v1.0.5643.36015
-commit 0125dffeda467b70e869b898d05203aba3669e88
-Author: SushiHangover &lt;sushihangover@outlook.com&gt;
-Date:   Sun Jun 14 20:06:00 2015 -0700
-
-Fix absolute paths to the assemblies that are passed in
-</code></pre>
-
-<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
-
-<ul>
-<li>Windows (xCorFlags)</li>
-<li>OS-X (mono ./xCorFlags.exe)</li>
-<li>Linux (mono ./xCorFlags.exe)</li>
-</ul>
-
-
-<p>For additional information:</p>
-
-<ul>
-<li><a href="">https://github.com/sushihangover/corflags</a></li>
-<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
-<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
-<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T19:09:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:09 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.30429">xCorFlags Version 1.0.5643.30429</a></h1>
-
-<p>The first full release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
-
-<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
-
-<ul>
-<li>Windows (xCorFlags)</li>
-<li>OS-X (mono ./xCorFlags.exe)</li>
-<li>Linux (mono ./xCorFlags.exe)</li>
-</ul>
-
-
-<p>For additional information:</p>
-
-<ul>
-<li><a href="">https://github.com/sushihangover/corflags</a></li>
-<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
-<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
-<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-set-up-a-fetch-only-remote/">Git: Set up a fetch-only remote | Disabling push</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T14:57:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:57 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> The PlayScript repo on the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> Github organization I maintain is a down-stream fork of <a href="https://github.com/mono/mono">Mono</a> so I can fetch the changes to their master branch. I also have my own <a href="https://github.com/sushihangover/playscript">fork</a> of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the <a href="https://github.com/PlayScriptRedux/playscript">Redux based repo</a> from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
-
-<p>So after adding my additional remotes my local repo, it looks like this:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   https://github.com/PlayScriptRedux/playscript.git (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    https://github.com/mono/mono.git (push)
-</code></pre>
-
-<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
-
-<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
-
-<pre><code> git remote set-url --push upstream DISABLE
- git remote set-url --push redux DISABLE
-</code></pre>
-
-<p>And to see what that looks like now:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   DISABLE (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    DISABLE (push)
-</code></pre>
-
-<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
-
-<pre><code>git push redux
-fatal: 'DISABLE' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-</code></pre>
-
-<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -915,23 +911,23 @@ and the repository exists.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/os-x-el-capitan-adobe-air-installer/">OS-X El Capitan Adobe Air Installer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-os-x-credentials/">Git OS-X Credentials</a>
+      </li>
+    
+      <li class="post">
         <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
       </li>
     
       <li class="post">
         <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xkcd-does-git/">xkcd does git ;-)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nrefactory-playscript-and-actionscript/">NRefactory | PlayScript & ActionScript</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-cmonodevelop-language-addin-part-1/">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</a>
       </li>
     
   </ul>

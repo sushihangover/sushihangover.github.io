@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Moving to El Capitan? Then you need Mono version 4.2.x or 4.0.4.4. From the Mono mailing list: What is the difference between the latest Mono 4.0.4.4 &hellip;">
+  <meta name="description" content="Eric Lippert has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,196 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
+
+<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
+<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
+</span></p>
+
+<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
+
+<p>He also has a great series on Nullable micro-optimizations that start here:</p>
+
+<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
+
+<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/monos-new-tls-provider/">Mono's new TLS Provider</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-26T23:10:57-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Great news, the new pluggable TLS provider is available for security review.</p>
+
+<p><a href="http://mono.1490590.n4.nabble.com/Mono-s-new-TLS-provider-tt4666825.html">Mono’s new TLS provider</a></p>
+
+<blockquote><p> Hello,</p>
+
+<p>As described by Miguel in the “State of Tls in Mono” [1] we have been working on a new TLS implementation for Mono, one that would upgrade our TLS stack, and one that would allow us to reuse some of the higher level pieces from Microsoft’s networking stack, read that post for more details on the scope of the project.</p>
+
+<p>Mono’s master branch now has the ability to load alternative TLS implementations.   We added this code so we can start testing our new TLS implementation side-by-side the code that is in use today, and also so that we can provide both platform-specific backends or allow developers to choose a different TLS implementation (like BoringSSL, OpenSSL or Amazon’s s2n).</p>
+
+<p>This is achieved by making our SSL transport pluggable, this allows HttpWebRequest and other classes to use the new TLS stack.</p>
+
+<p>Today, a regular Mono checkout will default to the existing Mono SSL/TLS implementation which supports a number of ciphers and TLS levels up to 1.0, so nothing has changed and we have one alternative implementation available: mono-tls.</p>
+
+<p>mono-tls is a purely managed implementation of TLS 1.0, 1.1 and 1.2 (filling the gap that we had).   To use it, you need to build the mono-tls [2] module, once this is build, you will have to reference the following libraries: Mono.Security.NewTls, Mono.Security.NewTls.Interface, Mono.Security.Providers.NewTls.</p>
+
+<p>Once you have these, you should add this code to your main program:</p>
+
+<pre><code>  MonoTlsProviderFactory.InstallProvider (new NewTlsProvider ());
+</code></pre>
+
+<p>Then uses of HttpWebRequest, FtpWebRequest and the Smtp client will all use the new TLS stack.</p>
+
+<p>More details are available in the architecture document [3].</p>
+
+<p>TLS State
+While we have added an extensive test suite to this new TLS implementation and tested this against a wide variety of TLS servers and configurations, we have not completed a security audit of its implementation.   While we have taken every step to ensure that we follow all the best practices when implementing a security stack, we want to get this code reviewed by third parties, and we want to complete a comprehensive security audit of the code before we would even consider transitioning this as the default.</p>
+
+<p>Future Work - Pluggability/SslStream
+We are going to be making the SslStream the proxy endpoint, for two reasons: (a) it would make SslStream usable with the new provider interface and (b) it would simplify some of the special code that lives in different places in the class libraries to use the new TLS implementation.</p>
+
+<p>We will also likely introduce a MONO_TLS_PROVIDER environment variable that controls the implementation, so that we make it easier to test the implementations during the testing phase.</p>
+
+<p>Future Work - Other Providers
+We are currently developing a provider for Apple platforms that will use Apple’s unmanaged SSL implementation, and we will be adding an implementation that use Google’s BoringSSL.   The idea being that on Apple, you get to use the system provided implementation, and on other platforms, we use the Google maintained one.</p>
+
+<p>Please let me know if you have any questions, comments, feedback.   In particular, we would like to get you to find security holes in the implementation.  We can offer a Xamarin shirt or a Xamarin monkey as a prize for finding holes in the new implementation.</p>
+
+<p>References
+[1] <a href="http://tirania.org/blog/archive/2015/Aug-27.html">http://tirania.org/blog/archive/2015/Aug-27.html</a>
+[2] <a href="http://github.com/mono/mono-tls">http://github.com/mono/mono-tls</a>
+[3] <a href="https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md">https://github.com/mono/mono-tls/blob/master/ARCHITECTURE.md</a></p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/starswarsFA/">Star Wars: The Force Awakens Trailer | Official HD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-19T16:12:50-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:12 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('gYA3WNdO4Bw');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/gYA3WNdO4Bw?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/gYA3WNdO4Bw/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=gYA3WNdO4Bw" id="gYA3WNdO4Bw" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Star Wars: The Force Awakens Trailer | Official HD</div>
+</a>
+<div class="video-info" >Get your first look at the new Star Wars: The Force Awakens trailer!
+
+Lucasfilm and visionary director J.J. Abrams join forces to take you back again to a galaxy far, far away as “Star Wars” returns to the big screen with “Star Wars: The Force Awakens.” 
+
+Episode VII in the Star Wars Saga, Star Wars: The Force Awakens, opens in cinemas December 17, 2015.
+
+Official Site: http://starwarsunitedkingdom.co.uk 
+
+Subscribe to Star Wars on YouTube for more videos: https://www.youtube.com/StarWarsUK 
+Like Star Wars on Facebook: https://www.facebook.com/StarWars.UK
+Follow @StarWars on Twitter: @StarWarsUK
+Follow @StarWars on Instagram: http://instagram.com/starwars
+Follow Star Wars on Tumblr: http://starwars.tumblr.com/
+
+Star Wars: The Force Awakens, directed by J.J. Abrams from a screenplay by Lawrence Kasdan & Abrams, features a cast including actors John Boyega, Daisy Ridley, Adam Driver, Oscar Isaac, Andy Serkis, Academy Award winner Lupita Nyong’o, Gwendoline Christie, Crystal Clarke, Pip Andersen, Domhnall Gleeson, and Max von Sydow. They will join the original stars of the saga, Harrison Ford, Carrie Fisher, Mark Hamill, Anthony Daniels, Peter Mayhew, and Kenny Baker.
+
+The film is being produced by Kathleen Kennedy, J.J. Abrams, and Bryan Burk, and John Williams returns as the composer.</div>
+</div>
+
+
+<p><strong>Get your first look at the new Star Wars: The Force Awakens trailer!
+</strong></p>
+
+<p>Lucasfilm and visionary director J.J. Abrams join forces to take you back again to a galaxy far, far away as “Star Wars” returns to the big screen with “Star Wars: The Force Awakens.”</p>
+
+<p>Episode VII in the Star Wars Saga, Star Wars: The Force Awakens, opens in cinemas December 17, 2015.</p>
+
+<p>Official Site: <a href="http://starwarsunitedkingdom.co.uk">http://starwarsunitedkingdom.co.uk</a></p>
+
+<p>Subscribe to Star Wars on YouTube for more videos: <a href="https://www.youtube.com/StarWarsUK">https://www.youtube.com/StarWarsUK</a>
+Like Star Wars on Facebook: <a href="https://www.facebook.com/StarWars.UK">https://www.facebook.com/StarWars.UK</a>
+Follow @StarWars on Twitter: @StarWarsUK
+Follow @StarWars on Instagram: <a href="http://instagram.com/starwars">http://instagram.com/starwars</a>
+Follow Star Wars on Tumblr: <a href="http://starwars.tumblr.com/">http://starwars.tumblr.com/</a></p>
+
+<p>Star Wars: The Force Awakens, directed by J.J. Abrams from a screenplay by Lawrence Kasdan &amp; Abrams, features a cast including actors John Boyega, Daisy Ridley, Adam Driver, Oscar Isaac, Andy Serkis, Academy Award winner Lupita Nyong’o, Gwendoline Christie, Crystal Clarke, Pip Andersen, Domhnall Gleeson, and Max von Sydow. They will join the original stars of the saga, Harrison Ford, Carrie Fisher, Mark Hamill, Anthony Daniels, Peter Mayhew, and Kenny Baker.</p>
+
+<p>The film is being produced by Kathleen Kennedy, J.J. Abrams, and Bryan Burk, and John Williams returns as the composer.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -461,159 +651,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-travis-ci-enabled-for-repo/">PlayScript | Travis CI enabled for repo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-03T12:54:06-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
-
-<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
-
-<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
-
-<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:center;">  Git Branch  </th>
-<th style="text-align:center;">   Mac OS-X / Linux  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
-<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
-</tr>
-</tbody>
-</table>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-away3d-intermediate-playscript/">PlayScript | Away3d Particles with PlayScript logo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-29T17:05:50-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:05 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This demo uses the the Away3d Intermediate Particle Explosions example as a base, but I reworked it slightly to use the PlayScript logo. It is running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('uhjTZjlo5YA');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/uhjTZjlo5YA?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/uhjTZjlo5YA/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=uhjTZjlo5YA" id="uhjTZjlo5YA" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions using the PlayScript logo</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.3001, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_PlayScriptParticleExplosion­s within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_PlayScriptParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/">Play Script | Away3d World Global Example</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-away3d-intermediate-iparticle-explosions/">PlayScript | Away3d Intermediate Particle Explosions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-24T14:01:50-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:01 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
-</a>
-<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
--  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
--   http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
-
-<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -631,23 +668,23 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/os-x-el-capitan-adobe-air-installer/">OS-X El Capitan Adobe Air Installer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/git-os-x-credentials/">Git OS-X Credentials</a>
+      </li>
+    
+      <li class="post">
         <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
       </li>
     
       <li class="post">
         <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xkcd-does-git/">xkcd does git ;-)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nrefactory-playscript-and-actionscript/">NRefactory | PlayScript & ActionScript</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-cmonodevelop-language-addin-part-1/">Playscript | Xamarin / Monodevelop Language Addin (Part 1)</a>
       </li>
     
   </ul>
