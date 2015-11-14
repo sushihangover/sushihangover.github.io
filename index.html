@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re- &hellip;">
+  <meta name="description" content="I was trying to track down am issue on a fresh Window 10 install with a older application that was starting but faulting on a dependancy but was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-14T03:40:21-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was trying to track down am issue on a fresh Window 10 install with a older application that was starting but faulting on a dependancy but was getting the std DLL missing message&hellip;</p>
+
+<p>Running the <code>.exe</code> under Visual Studio was getting me no where fast and then I remembered a really <em>old</em> program called &ldquo;Dependency Walker&rdquo;.</p>
+
+<p>What do you know, it is still avaiable and being kept up to date. Solved my problem in less then a minute&hellip;</p>
+
+<pre><code>Error: At least one required implicit or forwarded dependency was not found.    Error: At least one module has an unresolved import due to a missing export function in an implicitly dependent module.     Warning: At least one delay-load dependency module was not found.   Warning: At least one module has an unresolved import due to a missing export function in a delay-load dependent module.
+</code></pre>
+
+<p><a href="http://www.dependencywalker.com">Dependency Walker</a></p>
+
+<blockquote><p>Dependency Walker is a free utility that scans any 32-bit or 64-bit Windows module (exe, dll, ocx, sys, etc.) and builds a hierarchical tree diagram of all dependent modules. For each module found, it lists all the functions that are exported by that module, and which of those functions are actually being called by other modules. Another view displays the minimum set of required files, along with detailed information about each file including a full path to the file, base address, version numbers, machine type, debug information, and more.</p></blockquote>
+
+<p>FYI: I remember using that program on Window&rsquo;s ARCH types long forgotten&hellip; and the site still has versions available (unsupported of course) for Alpha, AXP64, MIPS, and PowerPC architectures&hellip;. wow, remember when Windows ran on those ;-)</p>
+
+<p><img src="http://www.dependencywalker.com/snapshot.png" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -716,50 +760,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-10-31T06:30:29-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>When you need a file or package and can&rsquo;t find it:</h2>
-
-<h3>Use apt-file</h3>
-
-<p>First, install <code>apt-file</code> and update it.</p>
-
-<pre><code>sudo apt-get install apt-file
-sudo apt-file update
-</code></pre>
-
-<p>You can search with <code>apt-file</code> needed files or packages.</p>
-
-<pre><code>apt-file search curses.h
-apt-file search panel.h
-apt-file search iconv.h
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -775,6 +775,10 @@ apt-file search iconv.h
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
+      </li>
+    
+      <li class="post">
         <a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a>
       </li>
     
@@ -788,10 +792,6 @@ apt-file search iconv.h
     
       <li class="post">
         <a href="/git-os-x-credentials/">Git OS-X Credentials</a>
-      </li>
-    
-      <li class="post">
-        <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
       </li>
     
   </ul>

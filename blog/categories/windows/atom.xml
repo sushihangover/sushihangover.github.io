@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-14T03:56:16-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Windows Dependency Walker for debugging missing  DLLs]]></title>
+    <link href="http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/"/>
+    <updated>2015-11-14T03:40:21-08:00</updated>
+    <id>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls</id>
+    <content type="html"><![CDATA[<p>I was trying to track down am issue on a fresh Window 10 install with a older application that was starting but faulting on a dependancy but was getting the std DLL missing message&hellip;</p>
+
+<p>Running the <code>.exe</code> under Visual Studio was getting me no where fast and then I remembered a really <em>old</em> program called &ldquo;Dependency Walker&rdquo;.</p>
+
+<p>What do you know, it is still avaiable and being kept up to date. Solved my problem in less then a minute&hellip;</p>
+
+<pre><code>Error: At least one required implicit or forwarded dependency was not found.    Error: At least one module has an unresolved import due to a missing export function in an implicitly dependent module.     Warning: At least one delay-load dependency module was not found.   Warning: At least one module has an unresolved import due to a missing export function in a delay-load dependent module.
+</code></pre>
+
+<p><a href="http://www.dependencywalker.com">Dependency Walker</a></p>
+
+<blockquote><p>Dependency Walker is a free utility that scans any 32-bit or 64-bit Windows module (exe, dll, ocx, sys, etc.) and builds a hierarchical tree diagram of all dependent modules. For each module found, it lists all the functions that are exported by that module, and which of those functions are actually being called by other modules. Another view displays the minimum set of required files, along with detailed information about each file including a full path to the file, base address, version numbers, machine type, debug information, and more.</p></blockquote>
+
+<p>FYI: I remember using that program on Window&rsquo;s ARCH types long forgotten&hellip; and the site still has versions available (unsupported of course) for Alpha, AXP64, MIPS, and PowerPC architectures&hellip;. wow, remember when Windows ran on those ;-)</p>
+
+<p><img src="http://www.dependencywalker.com/snapshot.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>

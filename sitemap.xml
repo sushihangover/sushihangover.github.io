@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/</loc>
+    <lastmod>2015-11-14T03:40:21-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/</loc>
     <lastmod>2015-11-14T03:08:38-08:00</lastmod>
   </url>
@@ -807,6 +811,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/android/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/windows/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I just posted a new tool project on Github that I am using with Mono and PlayScript to make things easier with Xamarin Studio / MonoDevelop. &hellip;">
+  <meta name="description" content="PlayScript now has a REPL for ActionScript scripting. This is very alpha right now and needs a lot of love. It will be used for running the Tamarin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-now-has-a-repl-playshell/">PlayScript - Now has a REPL (playshell)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-15T06:35:49-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:35 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PlayScript now has a REPL for ActionScript scripting. This is very <strong>alpha</strong> right now and needs a lot of love. It will be used for running the <a href="http://hg.mozilla.org/tamarin-redux">Tamarin Redux</a> <a href="https://www.mozilla.org/projects/tamarin/">acceptance tests</a> so it will be evolving as those regression tests come online.</p>
+
+<p>It is available in the <a href="https://github.com/PlayScriptRedux/playscript">master branch</a> : 17aac5473528370b96e3349751bd2a8a017e6779</p>
+
+<p>Check it out and post any <a href="https://github.com/PlayScriptRedux/playscript/issues/new">issues</a> that you find.</p>
+
+<pre><code>* Added playshell : This is a PlayScript REPL (aka: like csharp REPL)
+  - For use with Tamarin Redux test; they use Asset scripts with a test package
+  - Very alpha at this point
+  - Need to add PlayScript style 'import'
+* Added PsOnlyMode to compiler setting
+  - Whether to enable PlayScript compiler only mode. Defaults to false.
+* mcs.master.mdw : XS/MD Workspace that will hold Solutions for all mcs
+  - Added tools/csharp and tools/playshell
+* CSProj files updated via Make2CSProjUpdater to allow use in XS/MD:
+  - Mono.PlayScript.csproj (and .sln)
+  - Mono.CSharp.csproj (and .sln)
+  - tools/charp.csproj (and .sln)
+  - tools/playshell.csproj (and .sln)
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -775,154 +823,6 @@ Date:   Fri Feb 27 10:13:54 2015 +0000
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/cursessharp-64-bit-ncurses-on-os-x-and-mono/">CursesSharp - 64-bit NCurses on OS-X and Mono</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-15T21:07:53-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:07 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/FireworksDemo.gif">CursesSharp is a C# wrapper for curses library.</p>
-
-<ul>
-<li>The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.</li>
-<li>The original version can be found at the <a href="http://sourceforge.net/projects/curses-sharp/">SourceForge.net project page</a>.</li>
-</ul>
-
-
-<p>I updated this to work for &lsquo;modern&rsquo; autotools so allow autoreconf and configure to actual run without throwing errors and then I updated the Makefile.am&rsquo;s files to allow compiling under OS-X and with Mono 4.0.x. Linux and Windows should still work, but I have not at this time tested those other flavors.</p>
-
-<p>Let me know via Github <a href="https://github.com/sushihangover/CursesSharp/issues/new">issues</a> if you have any problems. ;-)</p>
-
-<h2>Installing CursesSharp on OS-X</h2>
-
-<p>These are the instructions for building CursesSharp on OS-X. The build <img class="right" src="http://sushihangover.github.io/images/RainDemo.gif">CursesSharp is a C# wrapper for curses library.
-process has been tested on 10.10.3 using Apple LLVM version 6.1.0 and a Mono 4.0.1 64-bit build.</p>
-
-<h3>0. Prerequisites</h3>
-
-<ol>
-<li>Subversion - if you intend to build CursesSharp from SVN repository. If you use the source code package, you don&rsquo;t need Subversion.</li>
-<li>autoconf/automake/libtool - only if you are building from SVN. You don&rsquo;t need these tools if you use the source code package.</li>
-<li>Standard development tools - a C compiler (e.g. GCC) and GNU make (gmake).</li>
-<li>Ncurses library and headers (development files) - typically this package is called ncurses-dev.</li>
-<li>Mono - the .NET runtime and development framework</li>
-<li>pkg-config - typically required by Mono, but make sure it&rsquo;s installed</li>
-</ol>
-
-
-<h3>1. Getting CursesSharp</h3>
-
-<p>You will have to obtain CursesSharp sources. You clone it from the following repository:</p>
-
-<pre><code>https://github.com/sushihangover/CursesSharp.git
-</code></pre>
-
-<p>Original SVN Repo:</p>
-
-<pre><code>https://curses-sharp.svn.sourceforge.net/svnroot/curses-sharp/trunk
-</code></pre>
-
-<p>The following section describes the former case. If you downloaded the source code package, extract it and you may skip to step 4.</p>
-
-<p><img class="left" src="http://sushihangover.github.io/images/UnicodeDemo.gif"></p>
-
-<h3>2. Git clone</h3>
-
-<p>Execute the following command:</p>
-
-<pre><code>git clone https://github.com/sushihangover/CursesSharp.git cursessharp
-</code></pre>
-
-<p><em>You may substitute the final cursessharp for any other directory of your liking.</em></p>
-
-<h3>3. Bootstrapping</h3>
-
-<p>In order to proceed with the build, you will have to create the configure script. Cd into the directory containing CursesSharp sources and execute the following command:</p>
-
-<p>brew link gettext &ndash;force  <br/>
-autoreconf -if</p>
-
-<h3>4. Configure</h3>
-
-<p>In the top source directory execute the command:</p>
-
-<pre><code>LIBS="-lncurses -liconv -lpanel" ./configure
-</code></pre>
-
-<p>By default CursesSharp is installed in /usr/local. To change the target directory,<strong> which you really should do,</strong> you can use the &ldquo;&ndash;prefix=&rdquo; option:</p>
-
-<pre><code># Following all on one line:    
-LIBS="-lncurses -liconv -lpanel" ./configure --prefix=$HOME/cursessharp
-</code></pre>
-
-<p>You can also use other options. For a complete list execute:</p>
-
-<pre><code>./configure --help
-</code></pre>
-
-<h4>5. Make</h4>
-
-<p>After you executed configure, run (in the same directory):</p>
-
-<pre><code>#I am using a locally built/installed 64-bit version of mono, so I add it to the path
-export PATH=/Users/administrator/mono/mono-llvm-64/bin:$PATH
-make
-# remove brew's version of gettext 
-brew unlink gettext
-</code></pre>
-
-<p>To compile the source code.</p>
-
-<h3>6. Installation</h3>
-
-<p>Execute the command:</p>
-
-<pre><code>make install
-</code></pre>
-
-<p>This will install CursesSharp. Make sure you have appropriate privileges.</p>
-
-<h3>7. Testing</h3>
-
-<p>By default CursesSharp will install a few demonstration programs. At this time, these are: FireworkDemo and RainDemo. You can try running the demos to check if CursesSharp works.</p>
-
-<p>Running the demos:</p>
-
-<p>Add your cursessharp&rsquo;s bin install location to your path, i.e.</p>
-
-<pre><code>export PATH=$HOME/cursessharp/bin:$PATH
-</code></pre>
-
-<p>And you can run them from anywhere:</p>
-
-<pre><code>RainDemo
-FireworksDemo
-UnicodeDemo
-</code></pre>
-
-<p>Have fun ;-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -940,6 +840,10 @@ UnicodeDemo
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
+      </li>
+    
+      <li class="post">
         <a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a>
       </li>
     
@@ -953,10 +857,6 @@ UnicodeDemo
     
       <li class="post">
         <a href="/git-os-x-credentials/">Git OS-X Credentials</a>
-      </li>
-    
-      <li class="post">
-        <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
       </li>
     
   </ul>

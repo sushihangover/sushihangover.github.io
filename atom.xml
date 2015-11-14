@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-14T03:13:51-08:00</updated>
+  <updated>2015-11-14T03:56:16-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Windows Dependency Walker for debugging missing  DLLs]]></title>
+    <link href="http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/"/>
+    <updated>2015-11-14T03:40:21-08:00</updated>
+    <id>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls</id>
+    <content type="html"><![CDATA[<p>I was trying to track down am issue on a fresh Window 10 install with a older application that was starting but faulting on a dependancy but was getting the std DLL missing message&hellip;</p>
+
+<p>Running the <code>.exe</code> under Visual Studio was getting me no where fast and then I remembered a really <em>old</em> program called &ldquo;Dependency Walker&rdquo;.</p>
+
+<p>What do you know, it is still avaiable and being kept up to date. Solved my problem in less then a minute&hellip;</p>
+
+<pre><code>Error: At least one required implicit or forwarded dependency was not found.    Error: At least one module has an unresolved import due to a missing export function in an implicitly dependent module.     Warning: At least one delay-load dependency module was not found.   Warning: At least one module has an unresolved import due to a missing export function in a delay-load dependent module.
+</code></pre>
+
+<p><a href="http://www.dependencywalker.com">Dependency Walker</a></p>
+
+<blockquote><p>Dependency Walker is a free utility that scans any 32-bit or 64-bit Windows module (exe, dll, ocx, sys, etc.) and builds a hierarchical tree diagram of all dependent modules. For each module found, it lists all the functions that are exported by that module, and which of those functions are actually being called by other modules. Another view displays the minimum set of required files, along with detailed information about each file including a full path to the file, base address, version numbers, machine type, debug information, and more.</p></blockquote>
+
+<p>FYI: I remember using that program on Window&rsquo;s ARCH types long forgotten&hellip; and the site still has versions available (unsupported of course) for Alpha, AXP64, MIPS, and PowerPC architectures&hellip;. wow, remember when Windows ran on those ;-)</p>
+
+<p><img src="http://www.dependencywalker.com/snapshot.png" alt="" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
@@ -957,17 +981,6 @@ Royalty Free Background Music:
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Linux based builds now available]]></title>
-    <link href="http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/"/>
-    <updated>2015-08-04T06:06:28-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
-
-<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
 ]]></content>
   </entry>
   
