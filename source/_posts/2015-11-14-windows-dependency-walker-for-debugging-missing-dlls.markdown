@@ -21,3 +21,4 @@ What do you know, it is still avaiable and being kept up to date. Solved my prob
 
 FYI: I remember using that program on Window's ARCH types long forgotten... and the site still has versions available (unsupported of course) for Alpha, AXP64, MIPS, and PowerPC architectures.... wow, remember when Windows ran on those ;-)
 
+![](http://www.dependencywalker.com/snapshot.png)
