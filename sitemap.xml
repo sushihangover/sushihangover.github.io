@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/</loc>
+    <lastmod>2015-11-14T03:08:38-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation/</loc>
     <lastmod>2015-11-09T04:48:55-08:00</lastmod>
   </url>
@@ -802,37 +806,7 @@
     <loc>http://sushihangover.github.io/blog/categories/iterm/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/4/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/5/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/6/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/7/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/8/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/9/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/10/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/11/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/12/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/android/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>

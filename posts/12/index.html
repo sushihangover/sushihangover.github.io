@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Poof: An open source project disappears: https://github.com/playscript/playscript-mono.git I am assuming with removal of PlayScript&rsquo;s public &hellip;">
+  <meta name="description" content="Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +96,56 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/monomac-detect-when-mac-sleeps-or-wakes/">MonoMac: Detect when Mac sleeps or wakes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-12T20:44:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Saw a question on the Xwt.Mac group concerning getting Sleep and Wake events from MonoMac/C# on OS-X. Normally I would look for those event on the NSApplication default notification center, but a quick look at the Apple developer site quickly directed me to the those events being on the NSWorkspace&rsquo;s notification center, so another quick look in MonoMac and lucky those are already exposed so you do not have to do the AddObserver work yourself, but finding them in the &lsquo;online MonoMac API&rsquo; did not return any direct results(?)&hellip; So here is my answer from that group in case anyone else google/bing this in the future:</p>
+
+<p>Sleep and Wake are available on the NSWorkspace&rsquo;s notification center and MonoMac exposes those so so you do not have to write the AddObserver code yourself:</p>
+
+<p>Apple Dev info on <a href="https://developer.apple.com/library/mac/qa/qa1340/_index.html">NSWorkspaceWillSleepNotification &amp;NSWorkspaceDidWakeNotification</a></p>
+
+<figure class='code'><figcaption><span>C# "Wake and Sleep Events" </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Console.WriteLine ("Add the sleep/wake observers");
+</span><span class='line'>NSWorkspace.Notifications.ObserveWillSleep ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write ("Your Mac is getting sleepy\n");
+</span><span class='line'>);
+</span><span class='line'>NSWorkspace.Notifications.ObserveDidWake ((object sender, NSNotificationEventArgs e) => {
+</span><span class='line'>    Console.Write ("Time to go to work again\n");
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/playscript-what-happened-to-the-open-source-version-on-github/">PlayScript :What happened to the open source version on GitHub</a></h1>
     
     
@@ -142,6 +192,10 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a>
+      </li>
+    
+      <li class="post">
         <a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a>
       </li>
     
@@ -155,10 +209,6 @@ I am assuming with removal of PlayScript&rsquo;s public repo on GitHub that the 
     
       <li class="post">
         <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
       </li>
     
   </ul>

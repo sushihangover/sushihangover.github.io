@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-14T03:13:51-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
+    <link href="http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/"/>
+    <updated>2015-11-14T03:08:38-08:00</updated>
+    <id>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number</id>
+    <content type="html"><![CDATA[<p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
+
+<h1>Question</h1>
+
+<p>How can you write an Android FileObserver in C#?</p>
+
+<p>i.e. Native Java example:</p>
+
+<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
+    public String basePath;
+
+    @Override
+    public void onEvent(int event, String path) {
+        String fullPath = basePath;
+        if(path != null) {
+            fullPath += path;
+        }
+        Log.d(TAG, "FILE: "+fullPath);
+    }
+};
+observer.basePath = imageUri.getPath();
+observer.startWatching();
+</code></pre>
+
+<h1>Answer</h1>
+
+<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
+
+<p><strong>Quick Notes:</strong></p>
+
+<ul>
+<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
+<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
+<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
+</ul>
+
+
+<p><strong>C# FileObserver Class:</strong></p>
+
+<pre><code>using System;
+using Android.OS;
+using Android.Util;
+
+namespace MyFileObserver
+{
+    public class MyPathObserver : Android.OS.FileObserver
+    {
+        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
+        const string tag = "StackoverFlow";
+
+        public MyPathObserver (String rootPath) : base(rootPath, _Events)
+        {
+            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
+        }
+
+        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
+        {
+            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
+        }
+
+        public override void OnEvent(FileObserverEvents e, String path)
+        {
+            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Example Usage:</strong></p>
+
+<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
+myFileObserver = new MyPathObserver (pathToWatch);
+myFileObserver.StartWatching (); // and StopWatching () when you are done...
+var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
+button.Click += delegate {
+    if (File.Exists (document)) {
+        button.Text = "Delete File";
+        File.Delete (document);
+    } else {
+        button.Text = "Create File";
+        File.WriteAllText (document, "Foobar");
+    }
+};
+</code></pre>
+
+<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
+
+<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

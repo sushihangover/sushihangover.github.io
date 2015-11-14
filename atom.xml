@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-09T05:02:44-08:00</updated>
+  <updated>2015-11-14T03:13:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
+    <link href="http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/"/>
+    <updated>2015-11-14T03:08:38-08:00</updated>
+    <id>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number</id>
+    <content type="html"><![CDATA[<p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
+
+<h1>Question</h1>
+
+<p>How can you write an Android FileObserver in C#?</p>
+
+<p>i.e. Native Java example:</p>
+
+<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
+    public String basePath;
+
+    @Override
+    public void onEvent(int event, String path) {
+        String fullPath = basePath;
+        if(path != null) {
+            fullPath += path;
+        }
+        Log.d(TAG, "FILE: "+fullPath);
+    }
+};
+observer.basePath = imageUri.getPath();
+observer.startWatching();
+</code></pre>
+
+<h1>Answer</h1>
+
+<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
+
+<p><strong>Quick Notes:</strong></p>
+
+<ul>
+<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
+<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
+<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
+</ul>
+
+
+<p><strong>C# FileObserver Class:</strong></p>
+
+<pre><code>using System;
+using Android.OS;
+using Android.Util;
+
+namespace MyFileObserver
+{
+    public class MyPathObserver : Android.OS.FileObserver
+    {
+        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
+        const string tag = "StackoverFlow";
+
+        public MyPathObserver (String rootPath) : base(rootPath, _Events)
+        {
+            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
+        }
+
+        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
+        {
+            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
+        }
+
+        public override void OnEvent(FileObserverEvents e, String path)
+        {
+            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Example Usage:</strong></p>
+
+<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
+myFileObserver = new MyPathObserver (pathToWatch);
+myFileObserver.StartWatching (); // and StopWatching () when you are done...
+var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
+button.Click += delegate {
+    if (File.Exists (document)) {
+        button.Text = "Delete File";
+        File.Delete (document);
+    } else {
+        button.Text = "Create File";
+        File.WriteAllText (document, "Foobar");
+    }
+};
+</code></pre>
+
+<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
+
+<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iTerm2 OSX: Jump Word-wise left and right in Navigation]]></title>
@@ -857,36 +968,6 @@ Royalty Free Background Music:
     <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
 
 <p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
-    <updated>2015-08-03T16:12:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
-    <content type="html"><![CDATA[<p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
-
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
 ]]></content>
   </entry>
   

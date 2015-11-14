@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I have enabled Travis CI on the PlayScript repo. FYI: While the OS-X build is running fine, the linux build is failing as it has never really been &hellip;">
+  <meta name="description" content="This is the Away3d Fire example running via Mono and Xamarin Studio using the PlayScript compiler and using Adobe&rsquo;s Scout to profile it. Fork &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-away3d-firedemowithscout/">PlayScript | Away3d Fire Demo with Scout</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-03T16:12:50-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:12 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
+</a>
+<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Fog Rays" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -662,123 +712,6 @@ Done
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-redux-make2csprojupdater/">PlayScript Redux - Make2CSProjUpdater</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-14T15:06:01-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I just posted a new tool project on <a href="https://github.com/PlayScriptRedux/Make2CSProjUpdater">Github</a> that I am using with Mono and PlayScript to make things easier with Xamarin Studio / MonoDevelop.</p>
-
-<h2>Make2CSProjUpdater</h2>
-
-<h4>Update the .csproj ItemGroup/Compile elements from a sourcefile list.</h4>
-
-<p>This project takes a source list of file, usually from an external Makefile source (i.e. Mono.CSharp.dll.sources) and a C# (.csproj) project file and will update/sync the source list into the project file.</p>
-
-<p>As an author of the <a href="http://github.com/playscriptredux/playscript">PlayScript Redux</a> project, there are a large number of Mono .csproj files that are not keep up to date with the Makefile source lists. The Makefile source lists are a known good source as they are used to build Mono and the project files are not used in that capicity. But in development and debugging of the Mono Compiler (mcs.exe) and PlayScript Compiler (playc.exe), the use of Xamarian Studio / MonoDevelop IDE makes life so much easier and thus the need for up to date project (.csproj) files. :-)</p>
-
-<p>Note: This project is generic, just a text file containing a list of filenames and a .csproj file.</p>
-
-<p>Note: Found another use; dumping a list of files via find/ls/etc. to a file and updating a blank project file with that source. This provided a quick jumpstart for a few projects that did not include project files or were so outdated that the project files had to be recreated.</p>
-
-<h3>Usage:</h3>
-
-<pre><code>make2csprojupdater.exe -h
-Make2CSProjectUpdate / ©SushiHangover 2015
-Update the .csproj ItemGroup/Compile elements from a sourcefile list.
-
-Options:
-  -p, --proj=VALUE           The project filename (.csproj) to update.
-  -s, --sources=VALUE        The filename of the Makefile source list.
-  -i, --interactive          Confirmation prompt to update/save the project
-                               file.
-  -v, --verbose              Increase message verbosity.
-  -h, --help                 Show this message and exit
-</code></pre>
-
-<p>Sample Usage:</p>
-
-<pre><code>  mono make2csprojupdater.exe -p Sample/Mono.CSharp.csproj -s Sample/Mono.CSharp.dll.sources -v -i
-# Make source files : 68
-# Project source files  : 58
-
-# Project needs the following changes    : Sample/Mono.CSharp.csproj
-# Delete:   ..\..\mcs\doc-bootstrap.cs
-# Delete:   cs-parser.cs
-# Delete:   ..\corlib\Mono.Security.Cryptography\CryptoConvert.cs
-# Delete:   ..\Mono.CompilerServices.SymbolWriter\MonoSymbolFile.cs
-# Delete:   ..\Mono.CompilerServices.SymbolWriter\MonoSymbolTable.cs
-# Delete:   ..\Mono.CompilerServices.SymbolWriter\MonoSymbolWriter.cs
-# Delete:   ..\Mono.CompilerServices.SymbolWriter\SourceMethodBuilder.cs
-# Add:  ../../mcs/ps-lang.cs
-# Add:  ../../mcs/ps-tokenizer.cs
-# Add:  ../../mcs/ps-codegen.cs
-# Add:  ../../mcs/cxx-emit.cs
-# Add:  ../../mcs/cxx-target.cs
-# Add:  ../../mcs/inliner.cs
-# Add:  ../../mcs/intrinsics.cs
-# Add:  ../../mcs/js-emit.cs
-# Add:  ../../mcs/js-target.cs
-# Add:  ../../class/Mono.CompilerServices.SymbolWriter/MonoSymbolFile.cs
-# Add:  ../../class/Mono.CompilerServices.SymbolWriter/MonoSymbolTable.cs
-# Add:  ../../class/Mono.CompilerServices.SymbolWriter/SourceMethodBuilder.cs
-# Add:  ../../class/Mono.Security/Mono.Security.Cryptography/CryptoConvert.cs
-# Add:  ../../build/common/Consts.cs
-# Add:  ../../mcs/cs-parser.cs
-# Add:  ../../mcs/ps-parser.cs
-# Add:  Assembly/AssemblyInfo.cs
-
-Make changes? [y/n]:y
-# Saving backup:    Sample/Mono.CSharp.csproj.bak
-# Deleting: ..\..\mcs\doc-bootstrap.cs
-# Deleting: cs-parser.cs
-# Deleting: ..\corlib\Mono.Security.Cryptography\CryptoConvert.cs
-# Deleting: ..\Mono.CompilerServices.SymbolWriter\MonoSymbolFile.cs
-# Deleting: ..\Mono.CompilerServices.SymbolWriter\MonoSymbolTable.cs
-# Deleting: ..\Mono.CompilerServices.SymbolWriter\MonoSymbolWriter.cs
-# Deleting: ..\Mono.CompilerServices.SymbolWriter\SourceMethodBuilder.cs
-# Adding:   ../../mcs/ps-lang.cs
-# Adding:   ../../mcs/ps-tokenizer.cs
-# Adding:   ../../mcs/ps-codegen.cs
-# Adding:   ../../mcs/cxx-emit.cs
-# Adding:   ../../mcs/cxx-target.cs
-# Adding:   ../../mcs/inliner.cs
-# Adding:   ../../mcs/intrinsics.cs
-# Adding:   ../../mcs/js-emit.cs
-# Adding:   ../../mcs/js-target.cs
-# Adding:   ../../class/Mono.CompilerServices.SymbolWriter/MonoSymbolFile.cs
-# Adding:   ../../class/Mono.CompilerServices.SymbolWriter/MonoSymbolTable.cs
-# Adding:   ../../class/Mono.CompilerServices.SymbolWriter/SourceMethodBuilder.cs
-# Adding:   ../../class/Mono.Security/Mono.Security.Cryptography/CryptoConvert.cs
-# Adding:   ../../build/common/Consts.cs
-# Adding:   ../../mcs/cs-parser.cs
-# Adding:   ../../mcs/ps-parser.cs
-# Adding:   Assembly/AssemblyInfo.cs
-# Saving project:   Sample/Mono.CSharp.csproj
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -796,6 +729,10 @@ Make changes? [y/n]:y
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a>
+      </li>
+    
+      <li class="post">
         <a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a>
       </li>
     
@@ -809,10 +746,6 @@ Make changes? [y/n]:y
     
       <li class="post">
         <a href="/monodevelop-dot-addinmaker-build-and-install-mpack/">MonoDevelop.AddinMaker - CI Build and Install .mpack</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a>
       </li>
     
   </ul>
