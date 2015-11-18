@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="While I do not directly recommend this technique, it seems using the PreferenceManager GetDefaultSharedPreferences is really popular in saving values &hellip;">
+  <meta name="description" content="While I do not directly recommend this technique, it seems using the PreferenceManager.GetDefaultSharedPreferences is really popular in saving values &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,9 +112,9 @@
   </header>
 
 
-  <div class="entry-content"><p>While I do not directly recommend this technique, it seems using the <code>PreferenceManager</code> <code>GetDefaultSharedPreferences</code> is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.</p>
+  <div class="entry-content"><p>While I do not directly recommend this technique, it seems using the <code>PreferenceManager.GetDefaultSharedPreferences</code> is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.</p>
 
-<p>Instead of using <code>GetDefaultSharedPreferences</code>, just create multiple <code>GetSharedPreferences</code> with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique for anything more than some simple UI perference settings, see notes at bootom of post)</p>
+<p>Instead of using <code>GetDefaultSharedPreferences</code>, create multiple <code>GetSharedPreferences</code> with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique either for anything more than some simple UI preference settings, see notes at bootom of post)</p>
 
 <p>i.e.</p>
 
@@ -155,7 +155,7 @@
 
 <p><strong>Notes:</strong></p>
 
-<p>Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc&hellip;, my head starts to pound in a <em>bad way</em>. At that time you should really start looking at an <strong>asynchronous</strong>, <strong>persistent</strong> key-value store, like <a href="https://github.com/akavache/Akavache">Akavache</a>.</p>
+<p>Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc&hellip;, my head starts to pound in a <em>bad way</em>. At that time you should really start looking for an <strong>asynchronous</strong>, persistent key-value store, like <a href="https://github.com/akavache/Akavache">Akavache</a>.</p>
 </div>
   
   
