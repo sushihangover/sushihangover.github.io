@@ -8,9 +8,9 @@ categories:
 - sharedperferences
 - android
 ---
-While I do not directly recommend this technique, it seems using the `PreferenceManager` `GetDefaultSharedPreferences` is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.
+While I do not directly recommend this technique, it seems using the `PreferenceManager.GetDefaultSharedPreferences` is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.
 
-Instead of using `GetDefaultSharedPreferences`, just create multiple `GetSharedPreferences` with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique for anything more than some simple UI perference settings, see notes at bootom of post)
+Instead of using `GetDefaultSharedPreferences`, create multiple `GetSharedPreferences` with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique either for anything more than some simple UI preference settings, see notes at bootom of post)
 
 i.e.
 
@@ -49,4 +49,4 @@ i.e.
 
 **Notes:**
 
-Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc..., my head starts to pound in a *bad way*. At that time you should really start looking at an **asynchronous**, **persistent** key-value store, like [Akavache](https://github.com/akavache/Akavache).
+Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc..., my head starts to pound in a *bad way*. At that time you should really start looking for an **asynchronous**, persistent key-value store, like [Akavache](https://github.com/akavache/Akavache).
