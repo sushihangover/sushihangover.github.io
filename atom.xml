@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-18T14:30:30-08:00</updated>
+  <updated>2015-11-18T15:41:07-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Android Player / Genymotion - Foobar 101]]></title>
+    <link href="http://sushihangover.github.io/xamarin-android-player-delete/"/>
+    <updated>2015-11-18T15:16:42-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-android-player-delete</id>
+    <content type="html"><![CDATA[<p>I was really happy with Xamarin&rsquo;s Android Player (XAP) on OS-X 10.11 (and 10.10.x before I upgraded). It is much better the Google&rsquo;s plain-jane Android emulator, way way faster, easier setup as the images are pre-packaged Nexus images, etc&hellip; But you can not create custom images and that ends up being a problem as you need to test different configurations.</p>
+
+<p>Someone recommended Genymotion and everything seemed fine, I could create custom Genymotion images and still use XAP for the basic testing&hellip;</p>
+
+<p>BUT after a reboot of OS-X, <strong>everything went to @#$@#$@#</strong>. Android sessions in either player would take 10 minutes or more to start up and get to the lock screen and when I say &lsquo;more&rsquo;, I mean up to 20 minutes&hellip;or MORE. Even then, services would die, the VirtualBox instance would hang, Xamarin Studio would not connect, XAP would report that the OpenGL server is not available, Genymotion would report no IP address could be retrieved&hellip;</p>
+
+<p>Removing Genymotion did not help. Deleting and re-install XAP did not help. Installing the latest VirtualBox did not help. Uninstall VirtualBox via their installer, deleting the XAP app and restarting from stratch did not help&hellip;. Removing all the original XAP Andriod images and re-downloading them did not help (I thought maybe the new VirtualBox updated them and caused a XAP issue, but no to that idea)&hellip;</p>
+
+<p>Seems that I am not alone, if you started with Genymotion and later installed XAP, you could be in the same boot&hellip; after you reboot the first time. Seems Geny users call it <strong>&ldquo;surviving the reboot&rdquo;</strong>, if you make it past a reboot and everything is still working you should be golden, if not, your system is @#$#@$#.</p>
+
+<p>I&rsquo;m still looking for a solution other then <strong>re-installing the OS as some people have resorted to</strong>&hellip; I just do not have time do a fresh OS-X install so right now I can only test via actual physical devices :-(</p>
+
+<p><strong>AHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!</strong></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin Android Shared Preferences]]></title>
@@ -981,22 +1002,6 @@ catch (MyException e) if (myfilter(e))
 </code></pre>
 
 <p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git - Resetting a file back to its conflicted state]]></title>
-    <link href="http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/"/>
-    <updated>2015-08-06T17:29:21-07:00</updated>
-    <id>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
-
-<p><code>git checkout -m &lt;filename&gt;
-</code></p>
-
-<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
-
-<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="New code coverage filter: Using the new coverage filter on the mono log profiler, you can get output like this: Coverage Summary: xCorFlags (/Users/ &hellip;">
+  <meta name="description" content="The simplest Interop case HelloWorld I can create, give it a try and see what happens: &gt;cat countbyone.cpp extern "C" int SomeMethod(int num) { &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/c-number-native-interop-helloworld/">C# - Native Interop Helloworld</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T18:40:28-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:40 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>The simplest Interop case HelloWorld I can create, give it a try and see what happens:</h4>
+
+<p><code>&gt;cat countbyone.cpp</code></p>
+
+<pre><code>extern "C" int SomeMethod(int num) {
+  return num++;
+}
+</code></pre>
+
+<p><strong>Compile your shared library:</strong></p>
+
+<ul>
+<li>Linux:
+<code>gcc -g -shared -fPIC countbyone.cpp -o libcountbyone.so</code></li>
+<li>OS-X:
+<code>clang -dynamiclib countbyone.cpp -o libcoutbyone.dylib</code></li>
+</ul>
+
+
+<p><code>&gt;cat interop.cs</code></p>
+
+<pre><code>using System;
+using System.Runtime.InteropServices;
+namespace InteropDemo
+{
+    class MainClass
+    {
+        [DllImport("countbyone")]
+        private static extern int SomeMethod(int num);
+
+        public static void Main (string[] args)
+        {
+            var x = SomeMethod(0);
+            Console.WriteLine(x);
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Compile your .Net/Mono app:</strong></p>
+
+<p><code>&gt;mcs interop.cs</code></p>
+
+<p><strong>Run it:</strong></p>
+
+<pre><code>&gt;mono interop.exe
+1
+</code></pre>
+
+<p><strong>Output should be 1 and no errors&hellip;</strong></p>
+
+<h4>If the shared (native) library is not found, you receive:</h4>
+
+<p><code>XXXXX failed to initialize, the exception is: System.DllNotFoundException
+</code></p>
+
+<h4>If you have a entry point mismatch you would receive a:</h4>
+
+<p><code>XXXXX failed to initialize, the exception is: System.EntryPointNotFoundException
+</code></p>
+
+<p>From my answer on <a href="http://stackoverflow.com/questions/31013147/check-if-p-invoke-was-successful/31015964#31015964">Stackoverflow</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -839,37 +929,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/what-is-code/">What is Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T06:32:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:32 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>No matter what the <a href="http://www.slate.com/blogs/future_tense/2015/06/11/bloomberg_businessweek_s_38_000_word_piece_on_code_just_try_coding_yourself.html">Slate</a> says, Paul Ford&rsquo;s &ldquo;<a href="http://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">What is Code</a>&rdquo; desires to be read, if not by every programmer, then surely by every person that has to deal with programmers.</p>
-
-<p>The best thing, if you find any issues with the article, you can post a <a href="https://github.com/BloombergMedia/whatiscode/issues/new">Github issue</a>, I did. ;-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -887,6 +946,10 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
       </li>
     
@@ -900,10 +963,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
     
       <li class="post">
         <a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/os-x-el-capitan-adobe-air-installer/">OS-X El Capitan Adobe Air Installer</a>
       </li>
     
   </ul>
