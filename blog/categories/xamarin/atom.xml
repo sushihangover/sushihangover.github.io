@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-14T04:34:21-08:00</updated>
+  <updated>2015-11-18T14:14:50-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Android Shared Preferences]]></title>
+    <link href="http://sushihangover.github.io/xamarin-android-shared-preferences/"/>
+    <updated>2015-11-18T13:56:58-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-android-shared-preferences</id>
+    <content type="html"><![CDATA[<p>While I do not directly recommend this technique, it seems using the <code>PreferenceManager</code> <code>GetDefaultSharedPreferences</code> is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.</p>
+
+<p>Instead of using <code>GetDefaultSharedPreferences</code>, just create multiple <code>GetSharedPreferences</code> with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique for anything more than some simple UI perference settings, see notes at bootom of post)</p>
+
+<p>i.e.</p>
+
+<pre><code>        var title = "stack"; float price = 123.34f; long weight = 23; 
+        var editor = GetSharedPreferences ("MyFirstActivity", Android.Content.FileCreationMode.Private);
+        var edit = editor.Edit ();
+        edit.PutString ("title", title);
+        edit.PutFloat ("price", price);
+        edit.PutLong ("weight", weight);
+        edit.Apply ();
+
+        title = "overflow"; price = 99.99f; weight = 99;
+        editor = GetSharedPreferences ("MySecondActivity", Android.Content.FileCreationMode.Private);
+        edit = editor.Edit ();
+        edit.PutString ("title", title);
+        edit.PutFloat ("price", price);
+        edit.PutLong ("weight", weight);
+        edit.Apply ();
+
+        editor = GetSharedPreferences("MyFirstActivity", Android.Content.FileCreationMode.Private);
+        title = editor.GetString("title", "empty");
+        price = editor.GetFloat("price", 0);
+        weight = editor.GetLong("weight", 0);
+        Log.Info("activity1", string.Format("{0}:{1}:{2}", title, price, weight));
+
+        editor = GetSharedPreferences("MySecondActivity", Android.Content.FileCreationMode.Private);
+        title = editor.GetString("title", "empty");
+        price = editor.GetFloat("price", 0);
+        weight = editor.GetLong("weight", 0);
+        Log.Info("activity2", string.Format("{0}:{1}:{2}", title, price, weight));
+</code></pre>
+
+<p><strong>adb logcat output:</strong></p>
+
+<pre><code>[activity1] stack:123.34:23
+[activity2] overflow:99.99:99
+</code></pre>
+
+<p><strong>Notes:</strong></p>
+
+<p>Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc&hellip;, my head starts to pound in a <em>bad way</em>. At that time you should really start looking at an <strong>asynchronous</strong>, <strong>persistent</strong> key-value store, like <a href="https://github.com/akavache/Akavache">Akavache</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
@@ -380,38 +432,6 @@ Royalty Free Background Music:
 </div>
 
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Away3d Fire Demo with Scout]]></title>
-    <link href="http://sushihangover.github.io/playscript-away3d-firedemowithscout/"/>
-    <updated>2015-08-03T16:12:50-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-away3d-firedemowithscout</id>
-    <content type="html"><![CDATA[<p>This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler and using Adobe&rsquo;s <a href="http://www.adobe.com/devnet/scout.html">Scout</a> to profile it. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
-
-<p>
-<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('-dVeQpB9BPo');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/-dVeQpB9BPo?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
-<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/-dVeQpB9BPo/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=-dVeQpB9BPo" id="-dVeQpB9BPo" onclick="return false;">
-<div class="youtube-lazy-link-div"></div>
-<div class="youtube-lazy-link-info">PlayScript running Away3d Fire demo with Adobe Scout</div>
-</a>
-<div class="video-info" >Using PlayScript 3.2.6001, the Actionscript compiler for Mono, to compile and run the Away3d core and Basic_Fire demo within Xamarin Studio 5.9.x. You can see the MonoMac app connecting to Adobe Scout and sending  telemetry to profile the frames, traces, ActionScript events,  etc... More work needs to be done to make using Scout fully featured in profiling a PlayScript app, but this is a good start.
-
-PlayScript @ http://playscriptredux.github.io
-
-PlayScript Source Code @ https://github.com/playscriptredux
-
-Blogging @ http://sushihangover.github.io/
-
-Royalty Free Background Music:
-- “Fog Rays" by MuLexic
-- http://youtube.com/user/MuLexic</div>
-</div>
-
-</p>
-
-<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Fire.as">Away3d example source code that is running in the demo</a></p>
 ]]></content>
   </entry>
   

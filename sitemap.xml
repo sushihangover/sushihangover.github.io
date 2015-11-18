@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/xamarin-android-shared-preferences/</loc>
+    <lastmod>2015-11-18T13:56:58-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/</loc>
     <lastmod>2015-11-14T03:40:21-08:00</lastmod>
   </url>
@@ -816,37 +820,7 @@
     <loc>http://sushihangover.github.io/blog/categories/windows/</loc>
   </url>
   <url>
-    <loc>http://sushihangover.github.io/posts/2/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/3/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/4/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/5/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/6/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/7/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/8/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/9/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/10/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/11/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/posts/12/</loc>
+    <loc>http://sushihangover.github.io/blog/categories/sharedperferences/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>

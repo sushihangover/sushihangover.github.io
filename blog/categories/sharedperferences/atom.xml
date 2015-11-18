@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sharedperferences | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/sharedperferences/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-18T14:14:50-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Android Shared Preferences]]></title>
+    <link href="http://sushihangover.github.io/xamarin-android-shared-preferences/"/>
+    <updated>2015-11-18T13:56:58-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-android-shared-preferences</id>
+    <content type="html"><![CDATA[<p>While I do not directly recommend this technique, it seems using the <code>PreferenceManager</code> <code>GetDefaultSharedPreferences</code> is really popular in saving values between different activities. While you can create multiple names that do not conflict between different activities, it can get messy real fast.</p>
+
+<p>Instead of using <code>GetDefaultSharedPreferences</code>, just create multiple <code>GetSharedPreferences</code> with different names and thus you can store values with the same names without overwriting your values from a different activity. (Again, I am not a big fan of this technique for anything more than some simple UI perference settings, see notes at bootom of post)</p>
+
+<p>i.e.</p>
+
+<pre><code>        var title = "stack"; float price = 123.34f; long weight = 23; 
+        var editor = GetSharedPreferences ("MyFirstActivity", Android.Content.FileCreationMode.Private);
+        var edit = editor.Edit ();
+        edit.PutString ("title", title);
+        edit.PutFloat ("price", price);
+        edit.PutLong ("weight", weight);
+        edit.Apply ();
+
+        title = "overflow"; price = 99.99f; weight = 99;
+        editor = GetSharedPreferences ("MySecondActivity", Android.Content.FileCreationMode.Private);
+        edit = editor.Edit ();
+        edit.PutString ("title", title);
+        edit.PutFloat ("price", price);
+        edit.PutLong ("weight", weight);
+        edit.Apply ();
+
+        editor = GetSharedPreferences("MyFirstActivity", Android.Content.FileCreationMode.Private);
+        title = editor.GetString("title", "empty");
+        price = editor.GetFloat("price", 0);
+        weight = editor.GetLong("weight", 0);
+        Log.Info("activity1", string.Format("{0}:{1}:{2}", title, price, weight));
+
+        editor = GetSharedPreferences("MySecondActivity", Android.Content.FileCreationMode.Private);
+        title = editor.GetString("title", "empty");
+        price = editor.GetFloat("price", 0);
+        weight = editor.GetLong("weight", 0);
+        Log.Info("activity2", string.Format("{0}:{1}:{2}", title, price, weight));
+</code></pre>
+
+<p><strong>adb logcat output:</strong></p>
+
+<pre><code>[activity1] stack:123.34:23
+[activity2] overflow:99.99:99
+</code></pre>
+
+<p><strong>Notes:</strong></p>
+
+<p>Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc&hellip;, my head starts to pound in a <em>bad way</em>. At that time you should really start looking at an <strong>asynchronous</strong>, <strong>persistent</strong> key-value store, like <a href="https://github.com/akavache/Akavache">Akavache</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

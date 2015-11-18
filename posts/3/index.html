@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I have cleaned up issues for the Linux builds and they are now working properly. See the Travis CI files in the CI directory and the .travis.yml &hellip;">
+  <meta name="description" content="This is the Away3d Fire example running via Mono and Xamarin Studio using the PlayScript compiler. Fork me on github. Away3d example source code &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-away3d-basic-shader/">PlayScript | Away3d Fire Demo with Scout</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-05T05:10:20-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:10 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> This is the Away3d Fire example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/%0Aplayscript">Fork</a> me on github.</p>
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Basic_Shading.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Using PlayScript Compiler 3.2.6002:</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('ym2w6rbYcAI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/ym2w6rbYcAI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/ym2w6rbYcAI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=ym2w6rbYcAI" id="ym2w6rbYcAI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">PlayScript - Away3d Basic Shading Demo</div>
+</a>
+<div class="video-info" >Xamarin Studio running the Away3d Basic Shading Demo using the PlayScript compiler
+
+Using PlayScript v3.2.6002 
+
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blog @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+- “Across The Land" by MuLexic
+- http://youtube.com/user/MuLexic</div>
+</div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -626,75 +682,6 @@ Successfully rebased and updated refs/heads/play-tests.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-tests-are-now-structured-like-monos/">PlayScript : Tests are now structured like Mono's</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-16T20:08:45-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:08 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I <a href="https://github.com/PlayScriptRedux/playscript/pull/8">moved all the .play and .as tests</a> under the play_test directory. They are in two separtate dirs now, <strong>play</strong> for the extended PlayScript language/format and <strong>as</strong> for the standard ActionScript tests.</p>
-
-<p>In doing this and making them conform to how Mono&rsquo;s compiler tests are written and run, I ended up copying the tools/compiler-tester to tools/playc-tester. The number of changes I was making to the program seems out of place to keep in within Mono&rsquo;s version and long term this will keep up with trying to keep any changes to the actual Mono code base at a minimun to allow faster and cleaner merging of their master branch. This tool will have very little commit activity compared to the mcs.exe/playc.exe compilers.</p>
-
-<h3>Playc-tester.exe</h3>
-
-<pre><code>mono playc-tester.exe
-PlayScript compiler tester, (C) 2009 Novell, Inc. (C) SushiHangover/RobertN
-playc-tester -mode:[pos|neg] -compiler:FILE -files:file-list [options]
-
-   -compiler:FILE   The file which will be used to compiler tests
-   -compiler-options:OPTIONS  Add global compiler options
-   -il:IL-FILE      XML file with expected IL details for each test
-   -issues:FILE     The list of expected failures
-   -log:FILE        Writes any output also to the file
-   -help            Lists all options
-   -mode:[pos|neg]  Specifies compiler test mode
-   -safe-execution  Runs compiled executables in separate app-domain
-   -update-il       Updates IL-FILE to match compiler output
-   -update-ref      Updates the debug xml to match debug compiler mdb output
-   -verbose         Prints more details during testing
-</code></pre>
-
-<p>Example test run of the current as tests:</p>
-
-<pre><code>make astest
-~~~
-./as/test-debug-015.as...   NOT TESTED
-./as/test-debug-AllowDynamics.as... KNOWN ISSUE (Execution error)
-./as/test-debug-DivideByZeroTest.as...      KNOWN ISSUE (Compilation error)
-./as/test-debug-UntypedVariableTest.as...   KNOWN ISSUE (Compilation error)
-Done
-
-40 test cases passed (93.02%)
-1 test(s) ignored
-3 known issue(s)
-</code></pre>
-
-<p>With these changes and the addition of the playshell REPL in the last set of changes will allow the Tamarin Redux tests to start coming online. Then CI deployment will be the step after that.</p>
-
-<p>As always <a href="https://github.com/PlayScriptRedux/playscript/issues">post</a> any isses that you find. ;-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -712,6 +699,10 @@ Done
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
+      </li>
+    
+      <li class="post">
         <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
       </li>
     
@@ -725,10 +716,6 @@ Done
     
       <li class="post">
         <a href="/os-x-el-capitan-adobe-air-installer/">OS-X El Capitan Adobe Air Installer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/git-os-x-credentials/">Git OS-X Credentials</a>
       </li>
     
   </ul>
