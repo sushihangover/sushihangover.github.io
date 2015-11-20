@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NUnit Console 2.4.8 vs 3.0 using .csproj files"
-date: 2015-11-20 05:14:42 -0800
+date: 2015-11-19 21:14:42 -0800
 comments: true
 categories: 
 - mono
