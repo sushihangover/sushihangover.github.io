@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-18T15:41:07-08:00</updated>
+  <updated>2015-11-20T05:42:34-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,133 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NUnit Console 2.4.8 vs 3.0 using .csproj files]]></title>
+    <link href="http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0/"/>
+    <updated>2015-11-19T21:14:42-08:00</updated>
+    <id>http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0</id>
+    <content type="html"><![CDATA[<p>When using NUnit console 2.4.x and 3.x with <code>.csproj</code> files, it expects a valid and fairly complete MSBuild/xbuild project to determine the assembly name, dir location, and namespace that it will test in the Library-based project (Exe-based projects are possible if you have defined the proper entry point). In this example I used NUnit 2.4.x and 3.x <strong>console</strong> as there are execution differences but the same <code>.csproj</code> is being used so if you are using MonoDevelop/Xamarin Studio the IDE&rsquo;s built-in NUnit 2.4.x test pad will also work.</p>
+
+<p><strong>NUnit 3.0 console (Install via nuget):</strong></p>
+
+<pre><code>mono $(MTOOLS)/nunit3-console.exe  nunit-lib/nunit-lib.csproj --config=Debug
+
+NUnit Console Runner 3.0.5797 
+Copyright (C) 2015 Charlie Poole
+
+Runtime Environment
+   OS Version: MacOSX 15.0.0.0 
+  CLR Version: 4.0.30319.17020
+
+Test Files
+    nunit-lib/nunit-lib.csproj
+
+Errors and Failures
+
+1) Failed : nunitlib.Test.TestCase
+  Expected string length 8 but was 5. Strings differ at index 0.
+  Expected: "Overflow"
+  But was:  "Stack"
+  -----------^
+at nunitlib.Test.TestCase () in &lt;filename unknown&gt;:line 0
+
+Test Run Summary
+    Overall result: Failed
+   Tests run: 1, Passed: 0, Errors: 0, Failures: 1, Inconclusive: 0
+     Not run: 0, Invalid: 0, Ignored: 0, Explicit: 0, Skipped: 0
+  Start time: 2015-11-20 12:36:28Z
+    End time: 2015-11-20 12:36:28Z
+    Duration: 0.132 seconds
+</code></pre>
+
+<p><strong>NUnit 2.4.8 (installed via Mono):</strong></p>
+
+<p><strong>NOTE</strong>: NUnit console 2.4.x is <code>broken</code> due a hard-coded Windows-style Directory Separator when parsing <code>.csproj</code> files and creating the expected CIL/assembly location, use <code>MONO_IOMAP</code> to work around it. This is not a issue in 3.0.</p>
+
+<p><strong>NUnit Console 2.4.x w/o MONO_IOMAP:</strong></p>
+
+<pre><code>nunit-console nunit-lib/nunit-lib.csproj -config=Debug
+~~~~
+Unhandled Exception:
+System.IO.DirectoryNotFoundException: Directory "/Users/sushi/code/XamTests/nunit-lib/nunit-lib/bin\Debug" not found.
+~~~~
+</code></pre>
+
+<p><strong>NUnit Console 2.4.x with MONO_IOMAP:</strong></p>
+
+<pre><code>MONO_IOMAP=all nunit-console nunit-lib/nunit-lib.csproj -config=Debug
+
+NUnit version 2.4.8
+Copyright (C) 2002-2007 Charlie Poole.
+Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
+Copyright (C) 2000-2002 Philip Craig.
+All Rights Reserved.
+
+Runtime Environment - 
+   OS Version: Unix 15.0.0.0
+  CLR Version: 4.0.30319.17020 ( 4.2.1 (explicit/8862921 Thu Oct 29 17:09:16 EDT 2015) )
+
+.F
+Tests run: 1, Failures: 1, Not run: 0, Time: 0.115 seconds
+
+Test Case Failures:
+1) nunitlib.Test.TestCase :   Expected string length 8 but was 5. Strings differ at index 0.
+  Expected: "Overflow"
+  But was:  "Stack"
+  -----------^
+</code></pre>
+
+<p><strong>.csproj example used in for example:</strong></p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;Configuration Condition=" '$(Configuration)' == '' "&gt;Debug&lt;/Configuration&gt;
+    &lt;Platform Condition=" '$(Platform)' == '' "&gt;AnyCPU&lt;/Platform&gt;
+    &lt;ProjectGuid&gt;{944946CD-39B2-4A16-A8A8-9F70F0450506}&lt;/ProjectGuid&gt;
+    &lt;OutputType&gt;Library&lt;/OutputType&gt;
+    &lt;RootNamespace&gt;nunitlib&lt;/RootNamespace&gt;
+    &lt;AssemblyName&gt;nunit-lib&lt;/AssemblyName&gt;
+    &lt;TargetFrameworkVersion&gt;v4.5&lt;/TargetFrameworkVersion&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "&gt;
+    &lt;DebugSymbols&gt;true&lt;/DebugSymbols&gt;
+    &lt;DebugType&gt;full&lt;/DebugType&gt;
+    &lt;Optimize&gt;false&lt;/Optimize&gt;
+    &lt;OutputPath&gt;bin\Debug&lt;/OutputPath&gt;
+    &lt;DefineConstants&gt;DEBUG;&lt;/DefineConstants&gt;
+    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
+    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
+    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "&gt;
+    &lt;DebugType&gt;full&lt;/DebugType&gt;
+    &lt;Optimize&gt;true&lt;/Optimize&gt;
+    &lt;OutputPath&gt;bin\Release&lt;/OutputPath&gt;
+    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
+    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
+    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;Reference Include="System" /&gt;
+    &lt;Reference Include="nunit.framework"&gt;
+      &lt;HintPath&gt;..\packages\NUnit.2.6.4\lib\nunit.framework.dll&lt;/HintPath&gt;
+    &lt;/Reference&gt;
+  &lt;/ItemGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;Compile Include="Test.cs" /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
+  &lt;ItemGroup&gt;
+    &lt;None Include="packages.config" /&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+</code></pre>
+
+<p>Ref: This was my <a href="http://stackoverflow.com/a/33827575/4984832">answer</a> on StackOverflow</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin Android Player / Genymotion - Foobar 101]]></title>
@@ -934,74 +1061,6 @@ To https://github.com/PlayScriptRedux/playscript.git
 <p>I still want to know if this is available through pull-requests somehow.</p>
 
 <p><img class="right" src="http://sushihangover.github.io/images/gitlogo.png"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Exception Filters]]></title>
-    <link href="http://sushihangover.github.io/playscript-exception-filters/"/>
-    <updated>2015-08-17T18:34:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-exception-filters</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
-
-<p>These are actually really cool and nice addition to ActionScript.</p>
-
-<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
-
-<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
-
-<pre><code>try { … } 
-catch (MyException e) if (myfilter(e)) 
-{ 
-     … 
-}
-</code></pre>
-
-<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
-
-<p>And here is what they look like in PlayScript:</p>
-
-<h3>play/test-ps-ex-filter-01.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            throw new Error("Throw");
-        } catch (e:Error) if (x &gt; 0) {
-            trace("Catch");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<h3>play/test-ps-ex-filter-02.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            x = 5;
-            throw new Error("Throw");
-        } catch (e:Error) if (x &lt; 5) {
-            trace("No Catch Please");
-            return 0;
-        } catch (myError:Error) {
-            trace("Catch Here");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
 ]]></content>
   </entry>
   
