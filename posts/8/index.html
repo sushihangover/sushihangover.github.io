@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the PlayScript compiler 3.2.3001 to Github which is a merge of the mono-3.2.3 tag into the playscript-mono branch. To speed up testing &hellip;">
+  <meta name="description" content="Syntevo&rsquo;s SmartGit is a Git client with Mercurial and Subversion support, and while I can not comment on its mg or svn support, its git and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,41 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/">SmartGit - The best git GUI there is... and its free</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-03T15:06:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>3:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/smartgit.png">  <span class='pullquote-right' data-pullquote='SmartGit is free for non-commercial use and runs on Mac OS X, Windows and Linux'>  <a href="http://www.syntevo.com">Syntevo&rsquo;s</a> <a href="http://www.syntevo.com/smartgit/">SmartGit</a> is a Git client with Mercurial and Subversion support, and while I can not comment on its mg or svn support, its git and GitHub support is amazing. And the best thing is SmartGit is free for non-commercial use and runs on Mac OS X, Windows and Linux. Commercial licenses seem to be very reasonable and on par with other commercial git products. </span></p>
+
+<p>When you are merging or rebasing hundreds of changing, doing that by hand from the cmd line is dreadful&hellip; I&rsquo;ve been merging the newer branches of Mono into PlayScript and it can be painful since the Apache open-source version PlayScript was pulled by Zynga from Github two years ago without warning.  When you are looking at hundreds of commits, and in a couple of cases, thousands of changes in between release tags and branches of Mono, doing that via the cmd line is doable, but it will give you nightmares. The SmartGui interface just works; walking the source tree, staging/unstaging, ours/theirs resolver, 3-way visual resolver/merge, markdown support, Github integration,  etc&hellip; is just fast and clean and once you learn a few keystroke shortcuts that merge do done in a heartbeat. ;-)</p>
+
+<p>I&rsquo;ve used a couple of <a href="http://www.git-scm.com/downloads/guis">other git GUIs</a> and merging and rebasing in them just not seem intuitive and the speed of their interfaces when dealing with a repo as large as Mono is killing me and I&rsquo;ve ended up back in the cmd line.</p>
+
+<p>I&rsquo;m not going to do a <a href="http://www.git-scm.com/downloads/guis">full and comparative review</a> as this product is free for non-commercial use, so just download a copy and take it for a test drive yourself. I doubt you would will be disappointed.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -574,59 +609,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/qemu-2-dot-0-0-is-released-as-1-dot-7-9/">Qemu 2.0.0 is released (or maybe 1.7.9)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-17T23:20:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://wiki.qemu.org/Main_Page"><img class="left" src="/images/QEMU_logo.png" title="&#34;QEMU&#34;" alt="&#34;QEMU&#34;"></a> QEMU 2.0.0 is now <a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-04/msg02734.html">released</a>.</p>
-
-<p>The full list of changes are available at: <a href="http://wiki.qemu.org/ChangeLog/2.0">http://wiki.qemu.org/ChangeLog/2.0</a></p>
-
-<p>It appears that doing a checkout of tag &lsquo;v2.0.0&rsquo;, build and install will produce a binary that reports version 1.7.9</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status
-</span><span class='line'>HEAD detached at v2.0.0
-</span><span class='line'>nothing to commit, working directory clean
-</span><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 1.7.93, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I did a quick look and they are pulling the version during the ./configure stage so since I am always on the master (bleed-edge) branch, my installed version shows up as 1.7.9. You will need to checkout, <strong>configure</strong>, build and install to produce a binary that has the correct version (<del>QEMUVERSION</del>) assigned:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm --version
-</span><span class='line'>QEMU emulator version 2.0.0, Copyright (c) 2003-2008 Fabrice Bellard</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -644,6 +626,10 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
+      </li>
+    
+      <li class="post">
         <a href="/nunit-console-2-dot-4-8-vs-3-dot-0/">NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
       </li>
     
@@ -657,10 +643,6 @@ Initial big.LITTLE tuning support for the combination of Cortex-A57 and Cortex-A
     
       <li class="post">
         <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a>
       </li>
     
   </ul>

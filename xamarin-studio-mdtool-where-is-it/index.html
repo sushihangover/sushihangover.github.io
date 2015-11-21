@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Xamarin Studio mdtool - Where is it? - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I&rsquo;m not sure if it is a bug or not, but older versions of Xamarin Studio (and MonoDevelop) on OS-X (prior to El Capitan) installed a mdtool &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+ 
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+<img class="left" src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript">
+</td>
+    <td>
+<img class="right" src="/images/PlayscriptLogo_small.png">
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Xamarin Studio mdtool - Where is it?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-21T08:36:11-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;m not sure if it is a bug or not, but older versions of Xamarin Studio (and MonoDevelop) on OS-X (prior to El Capitan) installed a <code>mdtool</code> shell script in <code>/usr/local/bin</code> but that no longer happens(?).</p>
+
+<p><code>mdtool</code> original/missing shell script:</p>
+
+<pre><code>#!/bin/bash
+MONO_EXEC="exec mono-sgen"
+EXE_PATH="/Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/bin/mdtool.exe"
+$MONO_EXEC $MONO_OPTIONS "$EXE_PATH" "$@"
+</code></pre>
+
+<p>So create the script with the content above and place it into a directory in your path. <code>/usr/local/bin</code> is fine, but I personally install my shell scripts into a <code>$HOME/.scripts</code> directory that is included in my path so I can backup, via a git repo, my personal scripts and distinguish what I have created verus what gets installed in the <code>/usr/local/bin</code> by applications such a <code>brew</code>&hellip;</p>
+
+<p>Note: Make sure that you <code>chmod a+x mdtool</code> in order to make it executable&hellip;</p>
+
+<p>As always, have fun&hellip; ;-)</p>
+
+<pre><code>$mdtool
+
+Xamarin Studio Tool Runner
+
+Usage: mdtool [options] &lt;tool&gt; ... : Runs a tool.
+       mdtool setup ... : Runs the setup utility.
+       mdtool -q : Lists available tools.
+
+Options:
+  --verbose (-v)   Increases log verbosity. Can be used multiple times.
+  --no-reg-update  Skip updating addin registry. Faster but results in
+                   random errors if registry is not up to date.
+
+Available tools:
+- build: Project build tool
+- dbgen: Parser database generation tool
+- project-export: Project conversion tool
+- gsetup: Graphical add-in setup utility
+- archive: Project archiving tool
+- account: Xamarin account tool
+- mac-bundle: Mac application bundle and installer generator.
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-11-21T08:36:11-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:36 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mdtool/'>mdtool</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/monodevelop/'>monodevelop</a>, <a class='category' href='/blog/categories/xamarin-studio/'>xamarin studio</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/" data-via="" data-counturl="http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/nunit-console-2-dot-4-8-vs-3-dot-0/" title="Previous Post: NUnit Console 2.4.8 vs 3.0 using .csproj files">&laquo; NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/nunit-console-2-dot-4-8-vs-3-dot-0/">NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
+      </li>
+    
+      <li class="post">
+        <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/';
+        var disqus_url = 'http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

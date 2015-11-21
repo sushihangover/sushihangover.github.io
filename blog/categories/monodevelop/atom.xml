@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monodevelop | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monodevelop/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-20T05:42:34-08:00</updated>
+  <updated>2015-11-21T09:04:27-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio mdtool - Where is it?]]></title>
+    <link href="http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/"/>
+    <updated>2015-11-21T08:36:11-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m not sure if it is a bug or not, but older versions of Xamarin Studio (and MonoDevelop) on OS-X (prior to El Capitan) installed a <code>mdtool</code> shell script in <code>/usr/local/bin</code> but that no longer happens(?).</p>
+
+<p><code>mdtool</code> original/missing shell script:</p>
+
+<pre><code>#!/bin/bash
+MONO_EXEC="exec mono-sgen"
+EXE_PATH="/Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/bin/mdtool.exe"
+$MONO_EXEC $MONO_OPTIONS "$EXE_PATH" "$@"
+</code></pre>
+
+<p>So create the script with the content above and place it into a directory in your path. <code>/usr/local/bin</code> is fine, but I personally install my shell scripts into a <code>$HOME/.scripts</code> directory that is included in my path so I can backup, via a git repo, my personal scripts and distinguish what I have created verus what gets installed in the <code>/usr/local/bin</code> by applications such a <code>brew</code>&hellip;</p>
+
+<p>Note: Make sure that you <code>chmod a+x mdtool</code> in order to make it executable&hellip;</p>
+
+<p>As always, have fun&hellip; ;-)</p>
+
+<pre><code>$mdtool
+
+Xamarin Studio Tool Runner
+
+Usage: mdtool [options] &lt;tool&gt; ... : Runs a tool.
+       mdtool setup ... : Runs the setup utility.
+       mdtool -q : Lists available tools.
+
+Options:
+  --verbose (-v)   Increases log verbosity. Can be used multiple times.
+  --no-reg-update  Skip updating addin registry. Faster but results in
+                   random errors if registry is not up to date.
+
+Available tools:
+- build: Project build tool
+- dbgen: Parser database generation tool
+- project-export: Project conversion tool
+- gsetup: Graphical add-in setup utility
+- archive: Project archiving tool
+- account: Xamarin account tool
+- mac-bundle: Mac application bundle and installer generator.
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
@@ -371,23 +417,6 @@ Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-proj
 <p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
 
 <p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure]]></title>
-    <link href="http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/"/>
-    <updated>2015-07-23T11:21:41-07:00</updated>
-    <id>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure</id>
-    <content type="html"><![CDATA[<p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
-
-<p>If you are also getting it build failure, please add your findings to:</p>
-
-<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
-
-<p>It appears not to be OS dependent either:</p>
-
-<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
 ]]></content>
   </entry>
   
