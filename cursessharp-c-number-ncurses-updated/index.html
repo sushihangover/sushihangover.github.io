@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CursesSharp (C# NCurses) Updated - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I made some updates to the CursesSharp project, so check out the update README.md for details: CursesSharp INTRODUCTION CursesSharp is a C# wrapper &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+ 
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+<img class="left" src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript">
+</td>
+    <td>
+<img class="right" src="/images/PlayscriptLogo_small.png">
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">CursesSharp (C# NCurses) Updated</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-21T15:10:58-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>3:10 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I made some updates to the CursesSharp project, so check out the update README.md for details:</p>
+
+<h1>CursesSharp</h1>
+
+<p><img src="http://sushihangover.github.io/images/FireworksDemo.gif" alt="" /></p>
+
+<h2>INTRODUCTION</h2>
+
+<p>CursesSharp is a C# wrapper for curses library.
+The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.
+The original version can be found at the <a href="http://sourceforge.net/projects/curses-sharp/">SourceForge.net project page</a>.</p>
+
+<p><img src="http://sushihangover.github.io/images/RainDemo.gif" alt="RainDemo" /></p>
+
+<h2>DOCUMENTATION</h2>
+
+<p>CursesSharp consists of a .NET assembly (CursesSharp.dll) and a native wrapper shared library (DLL) which is linked with PDCurses (in Windows) or ncurses  (in Unix-like systems). This wrapper library is called CursesWrapper.dll  in Windows or libCursesWrapper.so in Unix or libCursesWrapper.dylib in OS-X. CursesSharp provides a bit cleaner
+API to curses than the original one, although function names remain unchanged for the most part.</p>
+
+<p><img src="http://sushihangover.github.io/images/UnicodeDemo.gif" alt="" /></p>
+
+<h3>CursesSharp namespace contains several important classes:</h3>
+
+<ul>
+<li>Defs - contains constants from curses: attribute, color and key definitions
+  as well as some macros (COLOR_PAIR, PAIR_NUMBER)</li>
+<li>Curses - the main interface to curses; contains methods global to the library,
+  a StdScr property that returns the stdscr window, and as a convenience,
+  some window-specific functions that operate on stdscr</li>
+<li>Window - represents a curses window that can be written to, or read from;
+  contains wrappers for most of curses functions with names starting with
+  w<em> or mvw</em></li>
+<li>CursesException - an exception class, thrown when a curses function
+  reports an error</li>
+</ul>
+
+
+<p><em>Documentation is (always) under construction. Help would be much appreciated.</em></p>
+
+<h2>Installing CursesSharp on OS-X</h2>
+
+<p>These are the instructions for building CursesSharp on OS-X.</p>
+
+<p>The build process has been tested on:</p>
+
+<ul>
+<li>OS-X 10.10.5</li>
+<li>Apple LLVM version 7.0.0 (clang-700.1.76)</li>
+<li>Mono JIT compiler version 4.2.1 64-bit build.</li>
+</ul>
+
+
+<h2>0. Prerequisites</h2>
+
+<p>The native library is now built as a &lsquo;fat&rsquo; library so either a Mono 32-bit or 64-bit build can be used.</p>
+
+<p><strong>$> file libCursesWrapper.so</strong></p>
+
+<pre><code>libCursesWrapper.so: Mach-O universal binary with 2 architectures
+libCursesWrapper.so (for architecture i386):    Mach-O dynamically linked shared library i386
+libCursesWrapper.so (for architecture x86_64):  Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<!--A **64-bit build of Mono** as the the native shared library (so/dylib) is of ARCH type x64_86. 
+
+**If you are running the default 32-bit Mono install, you will have to build the native library as ARCH i386. Currently there is not an included build process for this.
+**
+-->
+
+
+<h2>1. Getting CursesSharp</h2>
+
+<p>You can clone it from the following repository:</p>
+
+<pre><code>https://github.com/sushihangover/CursesSharp.git
+</code></pre>
+
+<h2>2. Make the Native Library</h2>
+
+<pre><code>mdtool build CursesSharp.Native.sln --target:Build --configuration:Release
+mdtool build CursesSharp.Native.sln --target:Build --configuration:Debug
+</code></pre>
+
+<h2>3. Make the C# Libraries and Demos</h2>
+
+<pre><code>xbuild CursesSharp.sln /target:Clean
+xbuild CursesSharp.sln /target:Build
+</code></pre>
+
+<p>Note: To run the demos from the CLI, make sure that set the <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/dyld.1.html"><code>DYLD_FALLBACK_LIBRARY_PATH</code></a>. While still in the repo&rsquo;s root directory:</p>
+
+<pre><code>export DYLD_FALLBACK_LIBRARY_PATH=$(PWD)/CursesSharp.Native/bin/Debug:/usr/lib:$DYLD_FALLBACK_LIBRARY_PATH
+</code></pre>
+
+<p>There is also a CI script that can be called via <code>source</code> to setup <code>DYLD_FALLBACK_LIBRARY_PATH</code> and <code>LD_LIBRARY_PATH</code></p>
+
+<pre><code>source CI/libpath-source-me.sh
+</code></pre>
+
+<p>To learn more about <code>dyld</code> check out the <code>man</code> page:</p>
+
+<pre><code>man dyld
+</code></pre>
+
+<h2>Demos:</h2>
+
+<p>There are various demos available to review:</p>
+
+<ul>
+<li>Demo.CursesSharp.Firework</li>
+<li>Demo.CursesSharp.Gui.HelloWorld</li>
+<li>Demo.CursesSharp.HelloWorld</li>
+<li>Demo.CursesSharp.Rain</li>
+<li>Demo.CursesSharp.Unicode</li>
+<li>Demo.Gui.MessageBox</li>
+<li>Demo.Gui.MidnightCommander</li>
+<li>Demo.Gui.Timeout</li>
+<li>Demo.Native.ResizeTerm</li>
+</ul>
+
+
+<h2>Rain Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.CursesSharp.Rain/bin/x64/Debug/
+mono RainDemo.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/RainDemo.gif" alt="RainDemo" /></p>
+
+<h2>FireWorks Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.CursesSharp.Rain/bin/x64/Debug/
+mono FireworkDemo.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/FireworksDemo.gif" alt="" /></p>
+
+<h2>MidnightCommander Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.MidnightCommander.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-Midnight.png" alt="" /></p>
+
+<h2>Installing CursesSharp on Linux</h2>
+
+<h3>0. Prerequisites</h3>
+
+<p>Note: It is assumed you are running 64-bit Linux (ARCH x86_64)</p>
+
+<p>Install some dependencies:</p>
+
+<pre><code>sudo apt-get install lib32ncursesw5-dev
+sudo apt-get install lib32ncurses5-dev
+sudo apt-get install ncurses-doc
+</code></pre>
+
+<h2>1. Getting CursesSharp</h2>
+
+<p>You will have to obtain CursesSharp sources. You clone it from the following repository:</p>
+
+<pre><code>https://github.com/sushihangover/CursesSharp.git
+</code></pre>
+
+<h3>2. Make the Native Library</h3>
+
+<pre><code>mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Release
+mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Debug
+</code></pre>
+
+<h3>3. Make the C# Libraries and Demos</h3>
+
+<pre><code>xbuild CursesSharp.sln /target:Clean /property:configuration=Debug
+xbuild CursesSharp.sln /target:Build /property:configuration=Debug
+</code></pre>
+
+<h1>Demos:</h1>
+
+<p>Note: To run the demos from the CLI, make sure that set the <a href="http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html"><code>LD_LIBRARY_PATH</code></a>. While still in the repo&rsquo;s root directory:</p>
+
+<pre><code>export LD_LIBRARY_PATH=$(PWD)/CursesSharp.Native/bin/Debug:/usr/lib:$LD_LIBRARY_PATH
+</code></pre>
+
+<p>There is also a CI script that can be called via <code>source</code> to setup <code>DYLD_FALLBACK_LIBRARY_PATH</code> and <code>LD_LIBRARY_PATH</code></p>
+
+<pre><code>source CI/libpath-source-me.sh
+</code></pre>
+
+<p>To learn more about <code>ld</code> check out the <code>man</code> page:</p>
+
+<pre><code>man ld
+</code></pre>
+
+<h2>MessageBox Demo:</h2>
+
+<pre><code>cd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.Messagebox.exe
+cd -
+</code></pre>
+
+<h5>(Ubuntu / Konsole)</h5>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-MsgBox-Konsole.png" alt="" /></p>
+
+<h2>MidnightCommander Demo:</h2>
+
+<pre><code>cd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.MidnightCommander.exe
+cd -
+</code></pre>
+
+<h4>(Ubuntu / Konsole)</h4>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-Midnight-Konsole.png" alt="" /></p>
+
+<h2>Installing CursesSharp on Windows</h2>
+
+<p>Refer the original Windows project, source code and instructions are <a href="http://curses-sharp.sourceforge.net/index.php?page=windows">here</a></p>
+
+<h2>CI</h2>
+
+<p>OS-X:</p>
+
+<pre><code>source CI/libpath-source-me.sh
+CI/build.osx.sh
+</code></pre>
+
+<p>Linux:</p>
+
+<pre><code>{TODO}
+</code></pre>
+
+<h2>TODO &amp; Contributors:</h2>
+
+<ul>
+<li>Nuget support</li>
+<li>MS Window support (via PDCurses)</li>
+<li>Documentation</li>
+<li>Bug reporting/fixes</li>
+</ul>
+
+
+<p>Looking for contributors in these areas and/or any other areas that you would help out on.</p>
+
+<p><a href="https://github.com/sushihangover/CursesSharp">Fork and Contribute</a> ;-)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-11-21T15:10:58-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>3:10 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/ncurses/'>ncurses</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/" data-via="" data-counturl="http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/xamarin-studio-mdtool-where-is-it/" title="Previous Post: Xamarin Studio mdtool - Where is it?">&laquo; Xamarin Studio mdtool - Where is it?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/cursessharp-c-number-ncurses-updated/">CursesSharp (C# NCurses) Updated</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/nunit-console-2-dot-4-8-vs-3-dot-0/">NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a>
+      </li>
+    
+      <li class="post">
+        <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/';
+        var disqus_url = 'http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

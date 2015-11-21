@@ -9,13 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="1
-2
-3
-4
-/llvm/tools/lldb/tools/debugserver/source/MacOSX/dbgnub-mig.defs:13:10: fatal error: 'DNBConfig.h' file not found
-#include "DNBConfig.h" ^
-1 &hellip;">
+  <meta name="description" content="I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +90,153 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/llvm-arm-triple-cpu-targets/">LLVM ARM triple CPU targets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-19T06:36:42-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am building a bare-metal ARM Clang/LLVM cross-compiler for my Arm Cortex-M LLVM vs. arm-gcc experiments and was looking for the complete ARM core list available.</p>
+
+<p>LLVM makes it soooo easy to get that information from the LLVM static compiler binary (<a href="http://llvm.org/docs/CommandGuide/llc.html">llc</a>), just pass it a generic ARM triple, here is the lsit from my build:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>llc -mtriple=arm-none-eabi -mcpu=help</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Available CPUs for this target:
+</span><span class='line'>
+</span><span class='line'>  arm1020e      - Select the arm1020e processor.
+</span><span class='line'>  arm1020t      - Select the arm1020t processor.
+</span><span class='line'>  arm1022e      - Select the arm1022e processor.
+</span><span class='line'>  arm10e        - Select the arm10e processor.
+</span><span class='line'>  arm10tdmi     - Select the arm10tdmi processor.
+</span><span class='line'>  arm1136j-s    - Select the arm1136j-s processor.
+</span><span class='line'>  arm1136jf-s   - Select the arm1136jf-s processor.
+</span><span class='line'>  arm1156t2-s   - Select the arm1156t2-s processor.
+</span><span class='line'>  arm1156t2f-s  - Select the arm1156t2f-s processor.
+</span><span class='line'>  arm1176jz-s   - Select the arm1176jz-s processor.
+</span><span class='line'>  arm1176jzf-s  - Select the arm1176jzf-s processor.
+</span><span class='line'>  arm710t       - Select the arm710t processor.
+</span><span class='line'>  arm720t       - Select the arm720t processor.
+</span><span class='line'>  arm7tdmi      - Select the arm7tdmi processor.
+</span><span class='line'>  arm7tdmi-s    - Select the arm7tdmi-s processor.
+</span><span class='line'>  arm8          - Select the arm8 processor.
+</span><span class='line'>  arm810        - Select the arm810 processor.
+</span><span class='line'>  arm9          - Select the arm9 processor.
+</span><span class='line'>  arm920        - Select the arm920 processor.
+</span><span class='line'>  arm920t       - Select the arm920t processor.
+</span><span class='line'>  arm922t       - Select the arm922t processor.
+</span><span class='line'>  arm926ej-s    - Select the arm926ej-s processor.
+</span><span class='line'>  arm940t       - Select the arm940t processor.
+</span><span class='line'>  arm946e-s     - Select the arm946e-s processor.
+</span><span class='line'>  arm966e-s     - Select the arm966e-s processor.
+</span><span class='line'>  arm968e-s     - Select the arm968e-s processor.
+</span><span class='line'>  arm9e         - Select the arm9e processor.
+</span><span class='line'>  arm9tdmi      - Select the arm9tdmi processor.
+</span><span class='line'>  cortex-a12    - Select the cortex-a12 processor.
+</span><span class='line'>  cortex-a15    - Select the cortex-a15 processor.
+</span><span class='line'>  cortex-a5     - Select the cortex-a5 processor.
+</span><span class='line'>  cortex-a53    - Select the cortex-a53 processor.
+</span><span class='line'>  cortex-a57    - Select the cortex-a57 processor.
+</span><span class='line'>  cortex-a7     - Select the cortex-a7 processor.
+</span><span class='line'>  cortex-a8     - Select the cortex-a8 processor.
+</span><span class='line'>  cortex-a9     - Select the cortex-a9 processor.
+</span><span class='line'>  cortex-a9-mp  - Select the cortex-a9-mp processor.
+</span><span class='line'>  cortex-m0     - Select the cortex-m0 processor.
+</span><span class='line'>  cortex-m3     - Select the cortex-m3 processor.
+</span><span class='line'>  cortex-m4     - Select the cortex-m4 processor.
+</span><span class='line'>  cortex-r5     - Select the cortex-r5 processor.
+</span><span class='line'>  ep9312        - Select the ep9312 processor.
+</span><span class='line'>  generic       - Select the generic processor.
+</span><span class='line'>  iwmmxt        - Select the iwmmxt processor.
+</span><span class='line'>  krait         - Select the krait processor.
+</span><span class='line'>  mpcore        - Select the mpcore processor.
+</span><span class='line'>  mpcorenovfp   - Select the mpcorenovfp processor.
+</span><span class='line'>  strongarm     - Select the strongarm processor.
+</span><span class='line'>  strongarm110  - Select the strongarm110 processor.
+</span><span class='line'>  strongarm1100 - Select the strongarm1100 processor.
+</span><span class='line'>  strongarm1110 - Select the strongarm1110 processor.
+</span><span class='line'>  swift         - Select the swift processor.
+</span><span class='line'>  xscale        - Select the xscale processor.</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -701,134 +842,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/octopress-backing-up-your-source-directory/">Octopress: Backing up your source directory</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-12T21:00:12-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:00 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It has only been a couple of days using <a href="http://octopress.org">Octopress</a> and <a href="http://pow.cx">Pow*</a> but I am already sold. For offline blogging, <a href="http://pages.github.com">GitHub Pages</a> support, a great set of standard Markdown-ish driven Plugins, etc&hellip; the workflow is great. There are a few things that I am missing like:</p>
-
-<p>My Missing Octopress Items:</p>
-
-<blockquote><ul>
-<li>Image Auto Thumb-nailing</li>
-<li>Image Popups from those Thumbnails</li>
-<li>Post Staging (The &lsquo;published: false&rsquo; yaml front matter is a start but&hellip;.)</li>
-<li>Auto source directory version control</li>
-</ul>
-</blockquote>
-
-<p>That last one was my highest priority. When you run the Octopress GitHub Pages setup, it configures the deployment repo (XXXXXX.github.io), but you still need to backup and/or version control the &lsquo;source&rsquo; directory.</p>
-
-<p>Here is my quick way of doing this using the deployment repo.</p>
-
-<blockquote><ul>
-<li>Add a <strong>source</strong> branch your your &ldquo;XXXXXX.github.io&rdquo; repo</li>
-<li>Set your local source directory as a <strong>single branch</strong> of that repo</li>
-<li>Commit and Push after you do a <em>rake deploy</em></li>
-</ul>
-</blockquote>
-
-<p>So lets add a source branch to your GitHub Page repo:
-        Note: This is my quick way (ie. hackie) to get an <strong><em>EMPTY</em> new <em>remote</em> branch</strong> into an existing repo. If someone knows a better way, I&rsquo;d love to hear it.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Get your current repo and place it into a a temp directory</span>
-</span><span class='line'>git clone https://github.com/sushihangover/sushihangover.github.io.git foo.bar
-</span><span class='line'><span class="nb">pushd </span>foo.bar
-</span><span class='line'><span class="c"># Add a new branch to your local copy</span>
-</span><span class='line'>git checkout -b <span class="nb">source</span>
-</span><span class='line'><span class="c"># Delete all the existing context</span>
-</span><span class='line'>rm -Rf *
-</span><span class='line'><span class="c"># Commit all those deletes</span>
-</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial Empty source branch&quot;</span>
-</span><span class='line'><span class="c"># Push that emopty branch back to GitHub</span>
-</span><span class='line'>git push
-</span><span class='line'><span class="nb">popd</span>
-</span><span class='line'><span class="c"># Get rid of that temp. directory</span>
-</span><span class='line'>rm -Rf foo.bar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You already have an existing source directory and if you did not change the _config.yaml defaults is under your Octopress directory and those files need to be placed in this new source branch you just created.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Move your existing source directory out of the way for now</span>
-</span><span class='line'>mv <span class="nb">source </span>source.org
-</span><span class='line'><span class="c"># Clone your GitHub Page repo BUT only a single branch of it, only the source branch and into a directory named source</span>
-</span><span class='line'><span class="c"># Note: The &quot;--single-branch -branch source&quot; options are not used by most git users but can make speciallized repo copies quick and fool-proof</span>
-</span><span class='line'>git clone --single-branch -branch <span class="nb">source </span>https://github.com/sushihangover/sushihangover.github.io.git <span class="nb">source</span>
-</span><span class='line'><span class="c"># Now copy your existing source files into this empty repo directory</span>
-</span><span class='line'>cp -R source.org <span class="nb">source</span>
-</span><span class='line'><span class="nb">pushd source</span>
-</span><span class='line'><span class="c"># Commit and Push your sources files to GitHub</span>
-</span><span class='line'>git commit --all --message<span class="o">=</span><span class="s2">&quot;Initial source branch commit&quot;</span>
-</span><span class='line'><span class="c"># Add your commit comment and save</span>
-</span><span class='line'>git push
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you have two branches in your Pages repo. <strong>master</strong> will be your deployed/published blog pages and <strong>source</strong> will be the content Octopress uses to create those pages.</p>
-
-<p>Now, anytime you need to <strong>backup work-in-progress</strong> source changes or after you you do a <strong>rake deploy</strong> you can just do this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pushd source; git commit --all --message="Blog updated"; git push; popd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;ll be including this in the Github Page deploy plugin in the future so everytime I publish (deploy) I will also get a matching commit to the source branch&hellip;. But that and the other items on the Todo list will have to wait till later&hellip; ;-)</p>
-
-<ul>
-<li>Pow is a zero-config Rack server for Mac OS X : <a href="http://get.pow.cx/media/screencast.mov">Watch Me</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/12">&larr; Older</a>
@@ -846,6 +859,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/cursessharp-c-number-ncurses-updated/">CursesSharp (C# NCurses) Updated</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
       </li>
     
@@ -859,10 +876,6 @@ end
     
       <li class="post">
         <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
-      </li>
-    
-      <li class="post">
-        <a href="/windows-dependency-walker-for-debugging-missing-dlls/">Windows Dependency Walker for debugging missing  DLLs</a>
       </li>
     
   </ul>

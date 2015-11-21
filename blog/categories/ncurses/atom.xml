@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ncurses | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/ncurses/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-21T14:12:12-08:00</updated>
+  <updated>2015-11-21T15:12:46-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,263 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CursesSharp (C# NCurses) Updated]]></title>
+    <link href="http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/"/>
+    <updated>2015-11-21T15:10:58-08:00</updated>
+    <id>http://sushihangover.github.io/cursessharp-c-number-ncurses-updated</id>
+    <content type="html"><![CDATA[<p>I made some updates to the CursesSharp project, so check out the update README.md for details:</p>
+
+<h1>CursesSharp</h1>
+
+<p><img src="http://sushihangover.github.io/images/FireworksDemo.gif" alt="" /></p>
+
+<h2>INTRODUCTION</h2>
+
+<p>CursesSharp is a C# wrapper for curses library.
+The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at <a href="https://github.com/sushihangover/CursesSharp">Github</a>.
+The original version can be found at the <a href="http://sourceforge.net/projects/curses-sharp/">SourceForge.net project page</a>.</p>
+
+<p><img src="http://sushihangover.github.io/images/RainDemo.gif" alt="RainDemo" /></p>
+
+<h2>DOCUMENTATION</h2>
+
+<p>CursesSharp consists of a .NET assembly (CursesSharp.dll) and a native wrapper shared library (DLL) which is linked with PDCurses (in Windows) or ncurses  (in Unix-like systems). This wrapper library is called CursesWrapper.dll  in Windows or libCursesWrapper.so in Unix or libCursesWrapper.dylib in OS-X. CursesSharp provides a bit cleaner
+API to curses than the original one, although function names remain unchanged for the most part.</p>
+
+<p><img src="http://sushihangover.github.io/images/UnicodeDemo.gif" alt="" /></p>
+
+<h3>CursesSharp namespace contains several important classes:</h3>
+
+<ul>
+<li>Defs - contains constants from curses: attribute, color and key definitions
+  as well as some macros (COLOR_PAIR, PAIR_NUMBER)</li>
+<li>Curses - the main interface to curses; contains methods global to the library,
+  a StdScr property that returns the stdscr window, and as a convenience,
+  some window-specific functions that operate on stdscr</li>
+<li>Window - represents a curses window that can be written to, or read from;
+  contains wrappers for most of curses functions with names starting with
+  w<em> or mvw</em></li>
+<li>CursesException - an exception class, thrown when a curses function
+  reports an error</li>
+</ul>
+
+
+<p><em>Documentation is (always) under construction. Help would be much appreciated.</em></p>
+
+<h2>Installing CursesSharp on OS-X</h2>
+
+<p>These are the instructions for building CursesSharp on OS-X.</p>
+
+<p>The build process has been tested on:</p>
+
+<ul>
+<li>OS-X 10.10.5</li>
+<li>Apple LLVM version 7.0.0 (clang-700.1.76)</li>
+<li>Mono JIT compiler version 4.2.1 64-bit build.</li>
+</ul>
+
+
+<h2>0. Prerequisites</h2>
+
+<p>The native library is now built as a &lsquo;fat&rsquo; library so either a Mono 32-bit or 64-bit build can be used.</p>
+
+<p><strong>$> file libCursesWrapper.so</strong></p>
+
+<pre><code>libCursesWrapper.so: Mach-O universal binary with 2 architectures
+libCursesWrapper.so (for architecture i386):    Mach-O dynamically linked shared library i386
+libCursesWrapper.so (for architecture x86_64):  Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<!--A **64-bit build of Mono** as the the native shared library (so/dylib) is of ARCH type x64_86. 
+
+**If you are running the default 32-bit Mono install, you will have to build the native library as ARCH i386. Currently there is not an included build process for this.
+**
+-->
+
+
+<h2>1. Getting CursesSharp</h2>
+
+<p>You can clone it from the following repository:</p>
+
+<pre><code>https://github.com/sushihangover/CursesSharp.git
+</code></pre>
+
+<h2>2. Make the Native Library</h2>
+
+<pre><code>mdtool build CursesSharp.Native.sln --target:Build --configuration:Release
+mdtool build CursesSharp.Native.sln --target:Build --configuration:Debug
+</code></pre>
+
+<h2>3. Make the C# Libraries and Demos</h2>
+
+<pre><code>xbuild CursesSharp.sln /target:Clean
+xbuild CursesSharp.sln /target:Build
+</code></pre>
+
+<p>Note: To run the demos from the CLI, make sure that set the <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/dyld.1.html"><code>DYLD_FALLBACK_LIBRARY_PATH</code></a>. While still in the repo&rsquo;s root directory:</p>
+
+<pre><code>export DYLD_FALLBACK_LIBRARY_PATH=$(PWD)/CursesSharp.Native/bin/Debug:/usr/lib:$DYLD_FALLBACK_LIBRARY_PATH
+</code></pre>
+
+<p>There is also a CI script that can be called via <code>source</code> to setup <code>DYLD_FALLBACK_LIBRARY_PATH</code> and <code>LD_LIBRARY_PATH</code></p>
+
+<pre><code>source CI/libpath-source-me.sh
+</code></pre>
+
+<p>To learn more about <code>dyld</code> check out the <code>man</code> page:</p>
+
+<pre><code>man dyld
+</code></pre>
+
+<h2>Demos:</h2>
+
+<p>There are various demos available to review:</p>
+
+<ul>
+<li>Demo.CursesSharp.Firework</li>
+<li>Demo.CursesSharp.Gui.HelloWorld</li>
+<li>Demo.CursesSharp.HelloWorld</li>
+<li>Demo.CursesSharp.Rain</li>
+<li>Demo.CursesSharp.Unicode</li>
+<li>Demo.Gui.MessageBox</li>
+<li>Demo.Gui.MidnightCommander</li>
+<li>Demo.Gui.Timeout</li>
+<li>Demo.Native.ResizeTerm</li>
+</ul>
+
+
+<h2>Rain Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.CursesSharp.Rain/bin/x64/Debug/
+mono RainDemo.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/RainDemo.gif" alt="RainDemo" /></p>
+
+<h2>FireWorks Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.CursesSharp.Rain/bin/x64/Debug/
+mono FireworkDemo.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/FireworksDemo.gif" alt="" /></p>
+
+<h2>MidnightCommander Demo:</h2>
+
+<pre><code>pushd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.MidnightCommander.exe
+popd
+</code></pre>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-Midnight.png" alt="" /></p>
+
+<h2>Installing CursesSharp on Linux</h2>
+
+<h3>0. Prerequisites</h3>
+
+<p>Note: It is assumed you are running 64-bit Linux (ARCH x86_64)</p>
+
+<p>Install some dependencies:</p>
+
+<pre><code>sudo apt-get install lib32ncursesw5-dev
+sudo apt-get install lib32ncurses5-dev
+sudo apt-get install ncurses-doc
+</code></pre>
+
+<h2>1. Getting CursesSharp</h2>
+
+<p>You will have to obtain CursesSharp sources. You clone it from the following repository:</p>
+
+<pre><code>https://github.com/sushihangover/CursesSharp.git
+</code></pre>
+
+<h3>2. Make the Native Library</h3>
+
+<pre><code>mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Release
+mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Debug
+</code></pre>
+
+<h3>3. Make the C# Libraries and Demos</h3>
+
+<pre><code>xbuild CursesSharp.sln /target:Clean /property:configuration=Debug
+xbuild CursesSharp.sln /target:Build /property:configuration=Debug
+</code></pre>
+
+<h1>Demos:</h1>
+
+<p>Note: To run the demos from the CLI, make sure that set the <a href="http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html"><code>LD_LIBRARY_PATH</code></a>. While still in the repo&rsquo;s root directory:</p>
+
+<pre><code>export LD_LIBRARY_PATH=$(PWD)/CursesSharp.Native/bin/Debug:/usr/lib:$LD_LIBRARY_PATH
+</code></pre>
+
+<p>There is also a CI script that can be called via <code>source</code> to setup <code>DYLD_FALLBACK_LIBRARY_PATH</code> and <code>LD_LIBRARY_PATH</code></p>
+
+<pre><code>source CI/libpath-source-me.sh
+</code></pre>
+
+<p>To learn more about <code>ld</code> check out the <code>man</code> page:</p>
+
+<pre><code>man ld
+</code></pre>
+
+<h2>MessageBox Demo:</h2>
+
+<pre><code>cd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.Messagebox.exe
+cd -
+</code></pre>
+
+<h5>(Ubuntu / Konsole)</h5>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-MsgBox-Konsole.png" alt="" /></p>
+
+<h2>MidnightCommander Demo:</h2>
+
+<pre><code>cd CursesSharp.Demo/Demo.Gui.MidnightCommander/bin/x64/Debug/
+mono Demo.Gui.MidnightCommander.exe
+cd -
+</code></pre>
+
+<h4>(Ubuntu / Konsole)</h4>
+
+<p><img src="http://sushihangover.github.io/images/CursesSharp-Midnight-Konsole.png" alt="" /></p>
+
+<h2>Installing CursesSharp on Windows</h2>
+
+<p>Refer the original Windows project, source code and instructions are <a href="http://curses-sharp.sourceforge.net/index.php?page=windows">here</a></p>
+
+<h2>CI</h2>
+
+<p>OS-X:</p>
+
+<pre><code>source CI/libpath-source-me.sh
+CI/build.osx.sh
+</code></pre>
+
+<p>Linux:</p>
+
+<pre><code>{TODO}
+</code></pre>
+
+<h2>TODO &amp; Contributors:</h2>
+
+<ul>
+<li>Nuget support</li>
+<li>MS Window support (via PDCurses)</li>
+<li>Documentation</li>
+<li>Bug reporting/fixes</li>
+</ul>
+
+
+<p>Looking for contributors in these areas and/or any other areas that you would help out on.</p>
+
+<p><a href="https://github.com/sushihangover/CursesSharp">Fork and Contribute</a> ;-)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CursesSharp - 64-bit NCurses on OS-X and Mono]]></title>
