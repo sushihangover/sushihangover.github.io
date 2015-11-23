@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I have been mainly using clang/llvm and GNU binutils for my ARM coding, along with arm-none-eabi-gcc for code comparisions against llvm. But I was &hellip;">
+  <meta name="description" content="I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,159 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/bkpt-service-calls-on-the-cortex-m0/">BKPT: Printf Service Calls on the Cortex-M0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-26T20:54:58-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:54 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.openjtag.org"><img class="left" src="/images/openjtag2_small.jpg" title="&#34;OpenJTAG&#34;" alt="&#34;OpenJTAG&#34;"></a> I tend to use semi-hosting via QEMU simluation and OpenJTAG/OpenOCD a lot; i.e.: for debugging, simulating sensor input and output, setting the RTC on a board for the first time and while the RMI Monitor interface is built-in to newlib stdio functions like printf, using a library like stdio is not really an option when a core only has 8k of ROM and 2k of RAM. So I need a really small printf routine to use on cores like the <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=KL03">Kinetis KL03</a> (MKL03Z32CAF4R)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MEMORY
+</span><span class='line'>{
+</span><span class='line'>  FLASH (rx)      : ORIGIN = 0x00000000, LENGTH = 0x02000 /* 8K */
+</span><span class='line'>  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 0x00800 /* 2K */
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are a lot of embedded printf routines posted with a variety of features and mine is just a collection/combo of various standard practices. The main difference of mine is it normally uses SVC/BKPT routines to perform the &lsquo;print&rsquo; output and I <em>try</em> to make sure that optimizations via LLVM are taken advantage of.</p>
+
+<p>So the question of how small of a routine is it as otherwise it is useless on something like the &lsquo;world&rsquo;s smallest ARM&rsquo; <a href="http://cache.freescale.com/files/microcontrollers/doc/fact_sheet/KINETISKL03CSPFS.pdf?fpsp=1&amp;Parent_nodeId=1390844042446720950044&amp;Parent_pageType=product">KL03</a>? Lets start with a newlib stdio version that uses the default syscalls that have RMI enabled. First you have to some heap as newlib printf using malloc.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h>
+</span><span class='line'>#include "printf_svc.h"
+</span><span class='line'>
+</span><span class='line'>int main (void)
+</span><span class='line'>{
+</span><span class='line'>  printf("BKPT Hello World\n");
+</span><span class='line'>  printf("How small is this?\n");
+</span><span class='line'>  
+</span><span class='line'>  svcExit(); // QEMU system exit
+</span><span class='line'>  
+</span><span class='line'>  while (1) { };
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code size of the complete program above is huge if you are trying to run it on a Cortex-M0+ that only has 8K of ROM and 2k of RAM. Over 32K of ROM and 2+K of RAM just to output two lines of code!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>  33160    2304    1256   36720    8f70 bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So lets use a printf that is self-contained and uses no heap (malloc) and update our test code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "printf.h"
+</span><span class='line'>#include "printf_svc.h"
+</span><span class='line'>
+</span><span class='line'>void putc (void* p, char c)
+</span><span class='line'>{
+</span><span class='line'>  svcPutChar(&c);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main (void)
+</span><span class='line'>{
+</span><span class='line'>  set_putc(putc);
+</span><span class='line'>  printf("BKPT Hello World\n");
+</span><span class='line'>  printf("How small is this?\n");
+</span><span class='line'>  
+</span><span class='line'>  svcExit(); // QEMU system exit
+</span><span class='line'>  
+</span><span class='line'>  while (1) { };
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that is more like it, 2k of ROM and 64 bytes of RAM: Debug code size:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   2102      64      10    2176     880 bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In release configuration it is even better, ~1k of ROM is use, RAM is the same as expected; Release code size, LLVM compiled with -Os, linked with -O4:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1106      64      10    1180     49c bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding 10 more printf statements that each contain a <em>different</em> but static 10 char string only adds 210 bytes to the ROM. Removing the 100 bytes for static string allocation, that breaks down to 10 bytes for the printf call. This can be improved upon a little, but 10 bytes is acceptable for now.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text    data     bss     dec     hex filename
+</span><span class='line'>   1316      64       8    1388     56c bin/main.axf</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>A quick break down of elf size:</p>
+
+<p><strong>text</strong>: your code, vector table plus constants.</p>
+
+<p><strong>data</strong>: Initialized variables, and it counts for RAM and FLASH. The linker allocates data in FLASH which then is <em>copied</em> from ROM to RAM in the startup code (<em>in startup.c via the Reset_Handler function in my case</em>)</p>
+
+<p><strong>bss</strong>: Uninitialized data in RAM which is initialized with zero in the startup code (<em>again see the Reset_Handler function</em>)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1641,356 +1794,6 @@ that any code they throw exceptions through has proper unwinding information.</p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/arm-bare-metal-comparing-llvm-to-arm-gcc/">ARM Bare Metal Hello World: Comparing LLVM & ARM-GCC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-22T20:43:28-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>8:43 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>With the ever maturing and stable ARM backend of LLVM it is hard to find information using it vs. the well known ARM-GCC release.</p>
-
-<p>So lets start with the most simple HelloWorld example and compare LLVM and <a href="https://launchpad.net/gcc-arm-embedded">ARM-GCC</a>.</p>
-
-<p><a href="http://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/">Balau&rsquo;s post</a> is a popular one showing an ARM bare metal Hello World and test using QEMU, so lets start with that one. First, lets reproduce the compile/link steps to make sure it works:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>arm-none-eabi-as -mcpu=arm926ej-s src/startup.s -o obj/startup.o
-</span><span class='line'>arm-none-eabi-gcc -c -mcpu=arm926ej-s -O0 src/HelloWorldSimple.c -o obj/HelloWorldSimple.o
-</span><span class='line'>arm-none-eabi-ld -T src/HelloWorldSimple.ld obj/HelloWorldSimple.o obj/startup.o -o bin/HelloWorldSimple.axf_gcc
-</span><span class='line'>arm-none-eabi-size bin/HelloWorldSimple.axf_gcc
-</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel bin/HelloWorldSimple.axf_gcc
-</span><span class='line'>Hello world!
-</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Works just fine, so lets reproduce that using   my <a href="https://github.com/sushihangover/llvm_baremetal">LLVM bare metal build</a>. All the compiler options are being shown even though some are defaulted in my build of LLVM so you can see everything it is required to get the LLVM bitcode conversion to produce a valid object file for our ARM target (I&rsquo;m using the Clang driver, but you can use LLVM and pipe bitcode through the various tools so you can deeply control the optimization phase):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g startup.s -o startup.o
-</span><span class='line'>clang -c -target arm-none-eabi -mcpu=arm926ej-s -O0 -mfloat-abi=soft -g HelloWorldSimple.c -o main.o
-</span><span class='line'>arm-none-eabi-ld -T HelloWorldSimple.ld main.o startup.o -o main.axf_llvm
-</span><span class='line'>qemu-system-arm -M versatilepb -m 128M -nographic -kernel main.axf_llvm
-</span><span class='line'>Hello world!
-</span><span class='line'>QEMU: Terminated</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>target : Option providing the triple that you are &lsquo;targeting&rsquo;</li>
-<li>mpcu : Option provding the ARM core that will be flashed</li>
-<li>mfloat-abi : Soft or Hard depending upon if your ARM core has an FPU implementation on it. Cores that can support an FPU does not mean your vendor&rsquo;s core has one, comes down to features/price of the core.</li>
-</ul>
-
-
-<h6>Note: In both, I am turning off the optimizers via the compile drivers.</h6>
-
-<p>Lets look at the size of the AXF (ARM Executable Format) produced by:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   text     data     bss     dec     hex filename
-</span><span class='line'>    140         0       0     140      8c bin/HelloWorldSimple.axf_gcc
-</span><span class='line'>    
-</span><span class='line'>   text      data     bss     dec     hex filename
-</span><span class='line'>    150         0       0     150      96 bin/HelloWorldSimple.axf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There is a 10 byte difference, interesting&hellip; lets look at that a little more:</p>
-
-<table>
-<thead>
-<tr>
-<th> llvm </th>
-<th></th>
-<th></th>
-<th> arm-gcc </th>
-<th> </th>
-<th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> section  </td>
-<td> size </td>
-<td> addr</td>
-<td>section </td>
-<td>size</td>
-<td> addr</td>
-</tr>
-<tr>
-<td>.startup  </td>
-<td>16</td>
-<td>   65536</td>
-<td>.startup </td>
-<td> 16 </td>
-<td>65536</td>
-</tr>
-<tr>
-<td>.text </td>
-<td>             108 </td>
-<td>  65552</td>
-<td>.text              </td>
-<td>104   </td>
-<td>65552</td>
-</tr>
-<tr>
-<td>.ARM.exidx</td>
-<td>           8 </td>
-<td>  65660</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>.rodata   </td>
-<td>           4 </td>
-<td>  65668</td>
-<td>.rodata  </td>
-<td>           20  </td>
-<td> 65656</td>
-</tr>
-<tr>
-<td>.rodata.str1.1</td>
-<td>      14 </td>
-<td>  65672</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>.ARM.attributes</td>
-<td>     40 </td>
-<td>      0</td>
-<td>.ARM.attributes </td>
-<td>    46 </td>
-<td>      0</td>
-</tr>
-<tr>
-<td>.comment       </td>
-<td>     19 </td>
-<td>      0</td>
-<td>.comment  </td>
-<td>         112  </td>
-<td>     0</td>
-</tr>
-<tr>
-<td>Total          </td>
-<td>    209</td>
-<td></td>
-<td>Total              </td>
-<td>298</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<h6>Note: I ran strip on the arm-gcc version to remove the empty debug sections that gcc inserts automatically</h6>
-
-<p>The <strong>.startup</strong> are the same size since this code is assembly and no codegen or optimization will happen there.</p>
-
-<p>It is interesting that LLVM inserts a <strong>.ARM.exidx</strong> section even though this is <em>only</em> .c code. I&rsquo;ll have to look at LLVM to see if <em>-funwind-tables</em> and/or <em>-fexceptions</em> are defaulted to on, but I disassemble it below so we can look at that as that is 8 bytes and accounts for the size difference in this really basic example.</p>
-
-<blockquote><p>.ARM.exidx is the section containing information for unwinding the stack</p></blockquote>
-
-<h6>Note: Understanding the <a href="http://infocenter.arm.com/help/topic/com.arm.doc.ihi0044e/IHI0044E_aaelf.pdf">ARM ELF format</a> is not really required to do bare metal programming, but, understanding how your code is allocated and loaded can maek a world of differences when you are writting linker definitions files for different cores, so send a few minutes and read the 46 pages :-)</h6>
-
-<p>First the gcc disassembly so we can compare the LLVM version to it:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf_gcc:     file format elf32-littlearm
-</span><span class='line'>Disassembly of section .startup:
-</span><span class='line'>00010000 &lt;_Reset&gt;:
-</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
-</span><span class='line'>   10004: eb000015    bl  10060 &lt;c_entry&gt;
-</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
-</span><span class='line'>   1000c: 00011090    .word   0x00011090
-</span><span class='line'>Disassembly of section .text:
-</span><span class='line'>00010010 &lt;print_uart0&gt;:
-</span><span class='line'>   10010: e52db004    push    {fp}        ; (str fp, [sp, #-4]!)
-</span><span class='line'>   10014: e28db000    add fp, sp, #0
-</span><span class='line'>   10018: e24dd00c    sub sp, sp, #12
-</span><span class='line'>   1001c: e50b0008    str r0, [fp, #-8]
-</span><span class='line'>   10020: ea000006    b   10040 &lt;print_uart0+0x30&gt;
-</span><span class='line'>   10024: e59f3030    ldr r3, [pc, #48]   ; 1005c &lt;print_uart0+0x4c&gt;
-</span><span class='line'>   10028: e51b2008    ldr r2, [fp, #-8]
-</span><span class='line'>   1002c: e5d22000    ldrb    r2, [r2]
-</span><span class='line'>   10030: e5832000    str r2, [r3]
-</span><span class='line'>   10034: e51b3008    ldr r3, [fp, #-8]
-</span><span class='line'>   10038: e2833001    add r3, r3, #1
-</span><span class='line'>   1003c: e50b3008    str r3, [fp, #-8]
-</span><span class='line'>   10040: e51b3008    ldr r3, [fp, #-8]
-</span><span class='line'>   10044: e5d33000    ldrb    r3, [r3]
-</span><span class='line'>   10048: e3530000    cmp r3, #0
-</span><span class='line'>   1004c: 1afffff4    bne 10024 &lt;print_uart0+0x14&gt;
-</span><span class='line'>   10050: e24bd000    sub sp, fp, #0
-</span><span class='line'>   10054: e49db004    pop {fp}        ; (ldr fp, [sp], #4)
-</span><span class='line'>   10058: e12fff1e    bx  lr
-</span><span class='line'>   1005c: 101f1000    .word   0x101f1000
-</span><span class='line'>00010060 &lt;c_entry&gt;:
-</span><span class='line'>   10060: e92d4800    push    {fp, lr}
-</span><span class='line'>   10064: e28db004    add fp, sp, #4
-</span><span class='line'>   10068: e59f0004    ldr r0, [pc, #4]    ; 10074 &lt;c_entry+0x14&gt;
-</span><span class='line'>   1006c: ebffffe7    bl  10010 &lt;print_uart0&gt;
-</span><span class='line'>   10070: e8bd8800    pop {fp, pc}
-</span><span class='line'>   10074: 0001007c    .word   0x0001007c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the LLVM version:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bin/HelloWorldSimple.axf:     file format elf32-littlearm
-</span><span class='line'>Disassembly of section .startup:
-</span><span class='line'>00010000 &lt;_Reset&gt;:
-</span><span class='line'>   10000: e59fd004    ldr sp, [pc, #4]    ; 1000c &lt;_Reset+0xc&gt;
-</span><span class='line'>   10004: eb000016    bl  10064 &lt;c_entry&gt;
-</span><span class='line'>   10008: eafffffe    b   10008 &lt;_Reset+0x8&gt;
-</span><span class='line'>   1000c: 00011098    .word   0x00011098
-</span><span class='line'>Disassembly of section .text:
-</span><span class='line'>00010010 &lt;print_uart0&gt;:
-</span><span class='line'>   10010: e24dd008    sub sp, sp, #8
-</span><span class='line'>   10014: e1a01000    mov r1, r0
-</span><span class='line'>   10018: e58d0004    str r0, [sp, #4]
-</span><span class='line'>   1001c: e58d1000    str r1, [sp]
-</span><span class='line'>   10020: e59d0004    ldr r0, [sp, #4]
-</span><span class='line'>   10024: e5d00000    ldrb    r0, [r0]
-</span><span class='line'>   10028: e3500000    cmp r0, #0
-</span><span class='line'>   1002c: 0a000009    beq 10058 &lt;print_uart0+0x48&gt;
-</span><span class='line'>   10030: eaffffff    b   10034 &lt;print_uart0+0x24&gt;
-</span><span class='line'>   10034: e59d0004    ldr r0, [sp, #4]
-</span><span class='line'>   10038: e5d00000    ldrb    r0, [r0]
-</span><span class='line'>   1003c: e59f101c    ldr r1, [pc, #28]   ; 10060 &lt;print_uart0+0x50&gt;
-</span><span class='line'>   10040: e5911000    ldr r1, [r1]
-</span><span class='line'>   10044: e5810000    str r0, [r1]
-</span><span class='line'>   10048: e59d0004    ldr r0, [sp, #4]
-</span><span class='line'>   1004c: e2800001    add r0, r0, #1
-</span><span class='line'>   10050: e58d0004    str r0, [sp, #4]
-</span><span class='line'>   10054: eafffff1    b   10020 &lt;print_uart0+0x10&gt;
-</span><span class='line'>   10058: e28dd008    add sp, sp, #8
-</span><span class='line'>   1005c: e12fff1e    bx  lr
-</span><span class='line'>   10060: 00010084    .word   0x00010084
-</span><span class='line'>00010064 &lt;c_entry&gt;:
-</span><span class='line'>   10064: e92d4800    push    {fp, lr}
-</span><span class='line'>   10068: e1a0b00d    mov fp, sp
-</span><span class='line'>   1006c: e59f0004    ldr r0, [pc, #4]    ; 10078 &lt;c_entry+0x14&gt;
-</span><span class='line'>   10070: ebffffe6    bl  10010 &lt;print_uart0&gt;
-</span><span class='line'>   10074: e8bd8800    pop {fp, pc}
-</span><span class='line'>   10078: 00010088    .word   0x00010088</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="/images/llvm-gcc-diff_large.png"><img class="left" src="/images/llvm-gcc-diff_small.png" title="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;" alt="&#34;LLVM vs. GCC Hello World ARM Bare Metal&#34;"></a> We can ignore the _Reset section as that is hand coded assembly and the same for both.</p>
-
-<p>The c_entry is interesting as LLVM uses a move to copy the stack register to fp (r11 = frame pointer) which I what I would do, but arm-gcc does an &ldquo;"add&rdquo;&ldquo; to get fp into the sp and does that by adding fp to register #4(?) This is flagged as general variable for gcc&hellip; I am slightly confused by gcc&rsquo;s choice to do that, now that question is when would #4 not contain zero? The rest of this function is the same between the two compilers.</p>
-
-<p>The print_uart0 function is a hack function as it does not implement FIFO/flow-control to an actual UART, but in this case it points to a memory address where the discontinued ARM Versatile PB dev-board does have a UART and QEMU board simulation echos those writes. I am not going to do a line by line comparision of the generated code as for un-optimized code they are both getting the job done, but in slightly different ways in almost the same number of instructions.</p>
-
-<p>So we are able to produce a working bare metal ARM AXF from LLVM and next time, I will spend a little time on compiler optimizations to see how the two code generators/optimizisers compare&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -2008,6 +1811,10 @@ that any code they throw exceptions through has proper unwinding information.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monomac-samples-updates/">MonoMac - Demo / Samples updated</a>
+      </li>
+    
+      <li class="post">
         <a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is the CAEmitterCell Content propery?</a>
       </li>
     
@@ -2021,10 +1828,6 @@ that any code they throw exceptions through has proper unwinding information.</p
     
       <li class="post">
         <a href="/nunit-console-2-dot-4-8-vs-3-dot-0/">NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a>
       </li>
     
   </ul>

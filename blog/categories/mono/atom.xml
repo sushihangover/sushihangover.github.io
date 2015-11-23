@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-23T09:38:48-08:00</updated>
+  <updated>2015-11-23T10:35:39-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoMac - Demo / Samples updated]]></title>
+    <link href="http://sushihangover.github.io/monomac-samples-updates/"/>
+    <updated>2015-11-23T20:51:39-08:00</updated>
+    <id>http://sushihangover.github.io/monomac-samples-updates</id>
+    <content type="html"><![CDATA[<p>A number of the MonoMac demos were broken in various ways so as I was using some of them in my PlayScript / ActionScript work with Stage3d, Away3d and Starling, I update the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> repo with the corrected versions.</p>
+
+<p><img src="/images/MonoMac-Demos.gif" alt="" /></p>
+
+<pre><code>./AnimatingViews/bin/Debug/AnimatingViews.app
+./attic/Hello/Hello.app
+./ButtonMadness/bin/Debug/ButtonMadness.app
+./CAQuartzComposition/bin/Debug/CAQuartzComposition.app
+./CoreAnimationBook/BackgroundFilteredView/bin/Debug/BackgroundFilteredView.app
+./CoreAnimationBook/CustomAnimationTiming/bin/Debug/CustomAnimationTiming.app
+./CoreAnimationBook/CustomizeAnimation/bin/Debug/CustomizeAnimation.app
+./CoreAnimationBook/CustomizeAnimation2/bin/Debug/CustomizeAnimation.app
+./CoreAnimationBook/FilteredView/bin/Debug/FilteredView.app
+./CoreAnimationBook/GroupAnimation/bin/Debug/GroupAnimation.app
+./CoreAnimationBook/KeyFrameMoveAView/bin/Debug/KeyFrameMoveAView.app
+./CoreAnimationBook/LayerBackedControls/bin/Debug/LayerBackedControls.app
+./CoreAnimationBook/QCBackground/bin/Debug/QCBackground.app
+./CoreAnimationBook/TimedAnimation/bin/Debug/TimedAnimation.app
+./CoreTextArcMonoMac/bin/Debug/CoreTextArcMonoMac.app
+./CoreWLANWirelessManager/bin/Debug/CoreWLANWirelessManager.app
+./DatePicker/bin/Debug/DatePicker.app
+./DockAppIcon/bin/Debug/DockAppIcon.app
+./DocumentSample/bin/Debug/DocumentSample.app
+./DrawerMadness/DrawerMadness/bin/Debug/DrawerMadness.app
+./Fire/bin/Debug/Fire.app
+./GLFullScreen/bin/Debug/GLFullScreen.app
+./GlossyClock/bin/Debug/GlossyClock.app
+./GLSLShader/bin/Debug/GLSLShader.app
+./ImageKitDemoStep1/bin/Debug/ImageKitDemo.app
+./macdoc/bin/Debug/macdoc.app
+./MonoMacGameWindow/bin/Debug/MonoMacGameView.app
+./NSAlert/bin/Debug/NSAlertSample.app
+./NSTableViewBinding/bin/Debug/NSTableViewBinding.app
+./OpenGL-NeHe/NeHeLesson1/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson13/bin/Debug/NeHeLesson13.app
+./OpenGL-NeHe/NeHeLesson17/bin/Debug/NeHeLesson17.app
+./OpenGL-NeHe/NeHeLesson2/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson3/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson4/bin/Debug/NeHeLesson4.app
+./OpenGL-NeHe/NeHeLesson5/bin/Debug/NeHeLesson5.app
+./OpenGL-NeHe/NeHeLesson6/bin/Debug/NeHeLesson6.app
+./OpenGL-NeHe/NeHeLesson7/bin/Debug/NeHeLesson7.app
+./OpenGL-NeHe/NeHeLesson8/bin/Debug/NeHeLesson8.app
+./OpenGL-NeHe/NeHeLesson9/bin/Debug/NeHeLesson9.app
+./OpenGLLayer/bin/Debug/OpenGLLayer.app
+./OpenGLViewSample/OpenGLViewSample/bin/Debug/MMOpenTK.app
+./PopupBindings/bin/Debug/PopupBindings.app
+./PredicateEditorSample/bin/Debug/PredicateEditorSample.app
+./QTRecorder/bin/Debug/QTRecorder.app
+./RoundedTransparentWindow/bin/Debug/RoundedTransparentWindow.app
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac - Where is the CAEmitterCell Content propery?]]></title>
@@ -488,27 +547,6 @@ Test Case Failures:
 </code></pre>
 
 <p>Ref: This was my <a href="http://stackoverflow.com/a/33827575/4984832">answer</a> on StackOverflow</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
-    <link href="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/"/>
-    <updated>2015-11-08T11:54:48-08:00</updated>
-    <id>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack</id>
-    <content type="html"><![CDATA[<p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
-
-<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
-
-<h3>Package your Addin to a .mpack file</h3>
-
-<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
-
-<h3>Install your .mpack</h3>
-
-<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
-
-<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
 ]]></content>
   </entry>
   

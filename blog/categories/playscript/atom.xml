@@ -4,7 +4,7 @@
   <title><![CDATA[Category: playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-23T09:38:48-08:00</updated>
+  <updated>2015-11-23T10:35:39-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoMac - Demo / Samples updated]]></title>
+    <link href="http://sushihangover.github.io/monomac-samples-updates/"/>
+    <updated>2015-11-23T20:51:39-08:00</updated>
+    <id>http://sushihangover.github.io/monomac-samples-updates</id>
+    <content type="html"><![CDATA[<p>A number of the MonoMac demos were broken in various ways so as I was using some of them in my PlayScript / ActionScript work with Stage3d, Away3d and Starling, I update the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> repo with the corrected versions.</p>
+
+<p><img src="/images/MonoMac-Demos.gif" alt="" /></p>
+
+<pre><code>./AnimatingViews/bin/Debug/AnimatingViews.app
+./attic/Hello/Hello.app
+./ButtonMadness/bin/Debug/ButtonMadness.app
+./CAQuartzComposition/bin/Debug/CAQuartzComposition.app
+./CoreAnimationBook/BackgroundFilteredView/bin/Debug/BackgroundFilteredView.app
+./CoreAnimationBook/CustomAnimationTiming/bin/Debug/CustomAnimationTiming.app
+./CoreAnimationBook/CustomizeAnimation/bin/Debug/CustomizeAnimation.app
+./CoreAnimationBook/CustomizeAnimation2/bin/Debug/CustomizeAnimation.app
+./CoreAnimationBook/FilteredView/bin/Debug/FilteredView.app
+./CoreAnimationBook/GroupAnimation/bin/Debug/GroupAnimation.app
+./CoreAnimationBook/KeyFrameMoveAView/bin/Debug/KeyFrameMoveAView.app
+./CoreAnimationBook/LayerBackedControls/bin/Debug/LayerBackedControls.app
+./CoreAnimationBook/QCBackground/bin/Debug/QCBackground.app
+./CoreAnimationBook/TimedAnimation/bin/Debug/TimedAnimation.app
+./CoreTextArcMonoMac/bin/Debug/CoreTextArcMonoMac.app
+./CoreWLANWirelessManager/bin/Debug/CoreWLANWirelessManager.app
+./DatePicker/bin/Debug/DatePicker.app
+./DockAppIcon/bin/Debug/DockAppIcon.app
+./DocumentSample/bin/Debug/DocumentSample.app
+./DrawerMadness/DrawerMadness/bin/Debug/DrawerMadness.app
+./Fire/bin/Debug/Fire.app
+./GLFullScreen/bin/Debug/GLFullScreen.app
+./GlossyClock/bin/Debug/GlossyClock.app
+./GLSLShader/bin/Debug/GLSLShader.app
+./ImageKitDemoStep1/bin/Debug/ImageKitDemo.app
+./macdoc/bin/Debug/macdoc.app
+./MonoMacGameWindow/bin/Debug/MonoMacGameView.app
+./NSAlert/bin/Debug/NSAlertSample.app
+./NSTableViewBinding/bin/Debug/NSTableViewBinding.app
+./OpenGL-NeHe/NeHeLesson1/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson13/bin/Debug/NeHeLesson13.app
+./OpenGL-NeHe/NeHeLesson17/bin/Debug/NeHeLesson17.app
+./OpenGL-NeHe/NeHeLesson2/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson3/bin/Debug/NeHeLesson1.app
+./OpenGL-NeHe/NeHeLesson4/bin/Debug/NeHeLesson4.app
+./OpenGL-NeHe/NeHeLesson5/bin/Debug/NeHeLesson5.app
+./OpenGL-NeHe/NeHeLesson6/bin/Debug/NeHeLesson6.app
+./OpenGL-NeHe/NeHeLesson7/bin/Debug/NeHeLesson7.app
+./OpenGL-NeHe/NeHeLesson8/bin/Debug/NeHeLesson8.app
+./OpenGL-NeHe/NeHeLesson9/bin/Debug/NeHeLesson9.app
+./OpenGLLayer/bin/Debug/OpenGLLayer.app
+./OpenGLViewSample/OpenGLViewSample/bin/Debug/MMOpenTK.app
+./PopupBindings/bin/Debug/PopupBindings.app
+./PredicateEditorSample/bin/Debug/PredicateEditorSample.app
+./QTRecorder/bin/Debug/QTRecorder.app
+./RoundedTransparentWindow/bin/Debug/RoundedTransparentWindow.app
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac - Where is the CAEmitterCell Content propery?]]></title>
@@ -295,31 +354,6 @@ index 986ff28..a84aeae 100644
 <p>Documentation : <a href="http://monoaddins.codeplex.com/">Mono.Addins</a></p>
 
 <p>Source : <a href="https://github.com/mono/mono-addins">mono/mono-addins</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
-    <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
-    <updated>2015-10-27T22:20:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
-
-<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
-
-<p>He also has a great series on Nullable micro-optimizations that start here:</p>
-
-<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
-
-<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
 ]]></content>
   </entry>
   
