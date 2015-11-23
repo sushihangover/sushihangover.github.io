@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MonoMac - Where is ./CAEmitterCell Content propery? - SushiHangover</title>
+  <title>MonoMac - Where is the CAEmitterCell Content propery? - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
@@ -93,7 +93,7 @@
   
   <header>
     
-      <h1 class="entry-title">MonoMac - Where is ./CAEmitterCell Content propery?</h1>
+      <h1 class="entry-title">MonoMac - Where is the CAEmitterCell Content propery?</h1>
     
     
       <p class="meta">
@@ -109,7 +109,8 @@
   </header>
 
 
-<div class="entry-content"><p>I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
+<div class="entry-content"><p><img class="left" src="/images/MonoMac-Fire.gif" title="Fire" >
+I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
 
 <p>The MonoMac project is missing the maccore <code>CoreAnimation/CAEmitterCell.cs</code> in the Make.shared and thus the <code>MonoMac.dll</code> that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.</p>
 
@@ -132,8 +133,6 @@
 </code></pre>
 
 <p>I have updated PlayScript&rsquo;s <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> (forked from <a href="https://github.com/mono/monomac">Mono/MonoMac</a>) to fix this.</p>
-
-<p><img src="/images/MonoMac-Fire.gif" alt="" /></p>
 
 <p><strong>git diff src/Make.shared</strong></p>
 
@@ -170,7 +169,7 @@ index 986ff28..a84aeae 100644
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/monomac/'>monomac</a>
+    <a class='category' href='/blog/categories/actionscript/'>actionscript</a>, <a class='category' href='/blog/categories/away3d/'>away3d</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/monomac/'>monomac</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>
   
 </span>
 
@@ -210,7 +209,7 @@ index 986ff28..a84aeae 100644
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is ./CAEmitterCell Content propery?</a>
+        <a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is the CAEmitterCell Content propery?</a>
       </li>
     
       <li class="post">

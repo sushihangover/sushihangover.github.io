@@ -4,7 +4,7 @@
   <title><![CDATA[Category: playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-23T08:42:52-08:00</updated>
+  <updated>2015-11-23T09:38:48-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoMac - Where is the CAEmitterCell Content propery?]]></title>
+    <link href="http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery/"/>
+    <updated>2015-11-23T06:01:10-08:00</updated>
+    <id>http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/MonoMac-Fire.gif" title="Fire" >
+I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
+
+<p>The MonoMac project is missing the maccore <code>CoreAnimation/CAEmitterCell.cs</code> in the Make.shared and thus the <code>MonoMac.dll</code> that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.</p>
+
+<p>Example:</p>
+
+<pre><code>            // Create the fire emitter cell
+            CAEmitterCell fire = CAEmitterCell.EmitterCell ();
+            fire.EmissionLongitude = (float)Math.PI;
+            fire.BirthRate = 0;
+            fire.Velocity = 80;
+            fire.VelocityRange = 30;
+            fire.EmissionRange = 1.1f;
+            fire.AccelerationY = 200;
+            fire.ScaleSpeed = 0.3f;
+
+            RectangleF rect = RectangleF.Empty;
+            CGColor color = new CGColor (0.8f,0.4f,0.2f,0.10f);
+            fire.Color = color;
+            fire.Contents = NSImage.ImageNamed ("fire.png").AsCGImage (ref rect, null, null);
+</code></pre>
+
+<p>I have updated PlayScript&rsquo;s <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> (forked from <a href="https://github.com/mono/monomac">Mono/MonoMac</a>) to fix this.</p>
+
+<p><strong>git diff src/Make.shared</strong></p>
+
+<pre><code>diff --git a/src/Make.shared b/src/Make.shared
+index 986ff28..a84aeae 100644
+--- a/src/Make.shared
++++ b/src/Make.shared
+@@ -44,6 +44,7 @@ SHARED_SOURCE = \
+        ./CoreAnimation/CALayer.cs                      \
+        ./CoreAnimation/CATextLayer.cs                  \
+        ./CoreAnimation/CAMediaTimingFunction.cs        \
++       ./CoreAnimation/CAEmitterCell.cs                \
+        ./CoreFoundation/CFArray.cs                     \
+        ./CoreFoundation/CFBoolean.cs                   \
+        ./CoreFoundation/CFDictionary.cs                \
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin OS-X Addins Location]]></title>
@@ -272,55 +320,6 @@
 <p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
 
 <p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git tags and PlayScript]]></title>
-    <link href="http://sushihangover.github.io/git-tags-and-playscript/"/>
-    <updated>2015-09-02T21:47:36-07:00</updated>
-    <id>http://sushihangover.github.io/git-tags-and-playscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
-
-<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
-
-<pre><code>git show-ref --tags --dereference | grep play
-9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
-e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
-cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
-b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
-</code></pre>
-
-<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
-
-<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
-
-<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
-
-<p>First pull the latest changes, all done through pull-requests:</p>
-
-<pre><code>git pull origin playscript
-</code></pre>
-
-<p>Now I can add the new tag:</p>
-
-<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
-</code></pre>
-
-<p>And finally push it to the repo:</p>
-
-<pre><code>git push origin play-3.10.0001
-
-Total 0 (delta 0), reused 0 (delta 0)
-To https://github.com/PlayScriptRedux/playscript.git
- * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
-</code></pre>
-
-<p>I still want to know if this is available through pull-requests somehow.</p>
-
-<p><img class="right <a" src="href="http://sushihangover.github.io/images/gitlogo.png">http://sushihangover.github.io/images/gitlogo.png</a>"></p>
 ]]></content>
   </entry>
   
