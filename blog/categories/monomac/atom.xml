@@ -4,7 +4,7 @@
   <title><![CDATA[Category: monomac | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/monomac/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-21T15:12:46-08:00</updated>
+  <updated>2015-11-23T08:42:52-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MonoMac - Where is ./CAEmitterCell Content propery?]]></title>
+    <link href="http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery/"/>
+    <updated>2015-11-23T06:01:10-08:00</updated>
+    <id>http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery</id>
+    <content type="html"><![CDATA[<p>I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
+
+<p>The MonoMac project is missing the maccore <code>CoreAnimation/CAEmitterCell.cs</code> in the Make.shared and thus the <code>MonoMac.dll</code> that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.</p>
+
+<p>Example:</p>
+
+<pre><code>            // Create the fire emitter cell
+            CAEmitterCell fire = CAEmitterCell.EmitterCell ();
+            fire.EmissionLongitude = (float)Math.PI;
+            fire.BirthRate = 0;
+            fire.Velocity = 80;
+            fire.VelocityRange = 30;
+            fire.EmissionRange = 1.1f;
+            fire.AccelerationY = 200;
+            fire.ScaleSpeed = 0.3f;
+
+            RectangleF rect = RectangleF.Empty;
+            CGColor color = new CGColor (0.8f,0.4f,0.2f,0.10f);
+            fire.Color = color;
+            fire.Contents = NSImage.ImageNamed ("fire.png").AsCGImage (ref rect, null, null);
+</code></pre>
+
+<p>I have updated PlayScript&rsquo;s <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> (forked from <a href="https://github.com/mono/monomac">Mono/MonoMac</a>) to fix this.</p>
+
+<p><img src="/images/MonoMac-Fire.gif" alt="" /></p>
+
+<p><strong>git diff src/Make.shared</strong></p>
+
+<pre><code>diff --git a/src/Make.shared b/src/Make.shared
+index 986ff28..a84aeae 100644
+--- a/src/Make.shared
++++ b/src/Make.shared
+@@ -44,6 +44,7 @@ SHARED_SOURCE = \
+        ./CoreAnimation/CALayer.cs                      \
+        ./CoreAnimation/CATextLayer.cs                  \
+        ./CoreAnimation/CAMediaTimingFunction.cs        \
++       ./CoreAnimation/CAEmitterCell.cs                \
+        ./CoreFoundation/CFArray.cs                     \
+        ./CoreFoundation/CFBoolean.cs                   \
+        ./CoreFoundation/CFDictionary.cs                \
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac: Detect when Mac sleeps or wakes]]></title>

@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Any company that has a little fun with comments buried in html on their corporate web site to promote their job openings is all right by me :) &lt &hellip;">
+  <meta name="description" content="This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the PlayScript compiler. Fork me on github. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-away3d-intermediate-iparticle-explosions/">PlayScript | Away3d Intermediate Particle Explosions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-24T14:01:50-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:01 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is the Away3d Intermediate Particle Explosions example running via Mono and Xamarin Studio using the <a href="http://playscriptredux.github.io">PlayScript</a> compiler. <a href="https://github.com/playscriptredux/playscript">Fork</a> me on github.</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('KXi85ajraaM');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/KXi85ajraaM?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/KXi85ajraaM/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=KXi85ajraaM" id="KXi85ajraaM" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Particle Explosions running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_ParticleExplosions within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music:
+-  "MuLexic & Nekihirst - Sapphire Shine" by MuLexic 
+-   http://youtube.com/user/MuLexic</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_ParticleExplosions.as">Away3d example source code that is running in the demo</a></p>
+
+<p>Previous Away3d example: <a href="http://sushihangover.github.io/playscript-away3d-world-global-example/">Play Script | Away3d World Global Example</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -720,87 +771,6 @@ git checkout newbranch
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-25T06:20:17-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:20 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
-
-<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
-
-<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
-
-<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
-
-<p>But those projects are not needed to get the main program working&hellip;</p>
-
-<h3>mono ./CodeFormatter.exe</h3>
-
-<pre><code>Must specify at least one project / solution / rsp to format
-CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
-    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
-    [/rule(+|-):rule1,rule2,...]  [/verbose]
-    &lt;project, solution or response file&gt;
-
-    /file        - Only apply changes to files with specified name
-    /lang        - Specifies the language to use when a responsefile is
-                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
-    /c           - Additional preprocessor configurations the formatter
-                   should run under.
-    /copyright   - Specifies file containing copyright header.
-                   Use ConvertTests to convert MSTest tests to xUnit.
-    /nocopyright - Do not update the copyright message.
-    /tables      - Let tables opt out of formatting by defining
-                   DOTNET_FORMATTER
-    /nounicode   - Do not convert unicode strings to escape sequences
-    /rule(+|-)   - Enable (default) or disable the specified rule
-    /rules       - List the available rules
-    /verbose     - Verbose output
-</code></pre>
-
-<h3>mono ./CodeFormatter.exe /rules</h3>
-
-<pre><code>Name                 Description
-==============================================
-BraceNewLine         :Ensure all braces occur on a new line
-Copyright            :Insert the copyright header into every file
-NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
-CustomCopyright      :Remove any custom copyright header from the file
-UsingLocation        :Place using directives outside namespace declarations
-UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
-ExplicitVisibility   :Ensure all members have an explicit visibility modifier
-IllegalHeaders       :Remove illegal headers from files
-FormatDocument       :Run the language specific formatter on every document
-ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
-ReadonlyFields       :Mark fields which can be readonly as readonly
-FieldNames           :Prefix private fields with _ and statics with s_
-</code></pre>
-
-<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -818,6 +788,10 @@ FieldNames           :Prefix private fields with _ and statics with s_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is ./CAEmitterCell Content propery?</a>
+      </li>
+    
+      <li class="post">
         <a href="/cursessharp-c-number-ncurses-updated/">CursesSharp (C# NCurses) Updated</a>
       </li>
     
@@ -831,10 +805,6 @@ FieldNames           :Prefix private fields with _ and statics with s_
     
       <li class="post">
         <a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-android-shared-preferences/">Xamarin Android Shared Preferences</a>
       </li>
     
   </ul>
