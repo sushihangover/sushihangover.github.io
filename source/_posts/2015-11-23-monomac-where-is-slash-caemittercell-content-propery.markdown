@@ -1,12 +1,16 @@
 ---
 layout: post
-title: "MonoMac - Where is ./CAEmitterCell Content propery?"
+title: "MonoMac - Where is the CAEmitterCell Content propery?"
 date: 2015-11-23 06:01:10 -0800
 comments: true
 categories: 
 - mono
 - monomac
+- playscript
+- actionscript
+- away3d
 ---
+{% img left /images/MonoMac-Fire.gif Fire %}
 I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but...
 
 The MonoMac project is missing the maccore `CoreAnimation/CAEmitterCell.cs` in the Make.shared and thus the `MonoMac.dll` that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.
@@ -31,7 +35,7 @@ Example:
 
 I have updated PlayScript's [MonoMac](https://github.com/PlayScriptRedux/monomac) (forked from [Mono/MonoMac](https://github.com/mono/monomac)) to fix this. 
 
-![](/images/MonoMac-Fire.gif)
+
 
 **git diff src/Make.shared**
 
