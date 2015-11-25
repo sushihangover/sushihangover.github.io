@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Great news, the new pluggable TLS provider is available for security review. Mono’s new TLS provider Hello, As described by Miguel in the “State of &hellip;">
+  <meta name="description" content="Eric Lippert has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
+
+<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
+<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
+</span></p>
+
+<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
+
+<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
+
+<p>He also has a great series on Nullable micro-optimizations that start here:</p>
+
+<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
+
+<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -604,57 +651,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-travis-ci-enabled-for-repo/">PlayScript | Travis CI enabled for repo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-03T12:54:06-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:54 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have enabled Travis CI on the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo.</p>
-
-<p>FYI: While the OS-X build is running fine, the linux build is failing as it has never really been tested (in the original Zngya release or The Redux version). This has been flagged as acceptable in Travis for now.</p>
-
-<p> The CI builds are generously hosted and run on <a href="https://travis-ci.org/">Travis</a></p>
-
-<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:center;">  Git Branch  </th>
-<th style="text-align:center;">   Mac OS-X / Linux  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;"> <strong><a href="https://github.com/PlayScriptRedux/playscript">playscript</a></strong> </td>
-<td style="text-align:center;"> <a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" alt="master nix" /></a> </td>
-</tr>
-</tbody>
-</table>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -672,6 +668,10 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/safari-changing-the-quit-shortcut/">Safari - Changing the Quit Shortcut</a>
+      </li>
+    
+      <li class="post">
         <a href="/monomac-samples-updates/">MonoMac - Demo / Samples updated</a>
       </li>
     
@@ -685,10 +685,6 @@ Royalty Free Background Music:
     
       <li class="post">
         <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nunit-console-2-dot-4-8-vs-3-dot-0/">NUnit Console 2.4.8 vs 3.0 using .csproj files</a>
       </li>
     
   </ul>

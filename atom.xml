@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-23T10:35:39-08:00</updated>
+  <updated>2015-11-25T08:52:47-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Safari - Changing the Quit Shortcut]]></title>
+    <link href="http://sushihangover.github.io/safari-changing-the-quit-shortcut/"/>
+    <updated>2015-11-25T08:44:09-08:00</updated>
+    <id>http://sushihangover.github.io/safari-changing-the-quit-shortcut</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/OS-X-Safari-Quit.png" title="Quit" >I tend to hit the <code>Cmd-Q</code> instead of <code>Cmd-W</code> when I am closing a tab and in my older installs on OS-X I had changed the shortcut for <code>Safari Quit</code> and that is one thing (among others) that I did not migrate to my new OS-X 10.11 install.</p>
+
+<p>So, open up <code>System Perferences</code> and go to <code>KeyBoards</code> and then the <code>Shortcuts</code> pane and <strong>add</strong> an <code>App Shortcuts</code> for Safari only for the menu item called <code>Quit Safari</code>, mine now is <code>Ctrl-CMD-Q</code>:</p>
+
+<p><img src="http://sushihangover.github.io/images/OS-X-Safari-Shortcuts.png" alt="" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac - Demo / Samples updated]]></title>
@@ -1272,33 +1285,6 @@ sudo apt-get isntall monodevelop
 <p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
 
 <p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PlayScript | Optimizing psc/mcs]]></title>
-    <link href="http://sushihangover.github.io/playscript-compiler-optim/"/>
-    <updated>2015-10-27T22:20:18-07:00</updated>
-    <id>http://sushihangover.github.io/playscript-compiler-optim</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
-
-<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
-
-<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
-<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
-</span></p>
-
-<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
-
-<p>He also has a great series on Nullable micro-optimizations that start here:</p>
-
-<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
-
-<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
 ]]></content>
   </entry>
   

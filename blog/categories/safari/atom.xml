@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: safari | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/safari/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-25T08:52:47-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Safari - Changing the Quit Shortcut]]></title>
+    <link href="http://sushihangover.github.io/safari-changing-the-quit-shortcut/"/>
+    <updated>2015-11-25T08:44:09-08:00</updated>
+    <id>http://sushihangover.github.io/safari-changing-the-quit-shortcut</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/OS-X-Safari-Quit.png" title="Quit" >I tend to hit the <code>Cmd-Q</code> instead of <code>Cmd-W</code> when I am closing a tab and in my older installs on OS-X I had changed the shortcut for <code>Safari Quit</code> and that is one thing (among others) that I did not migrate to my new OS-X 10.11 install.</p>
+
+<p>So, open up <code>System Perferences</code> and go to <code>KeyBoards</code> and then the <code>Shortcuts</code> pane and <strong>add</strong> an <code>App Shortcuts</code> for Safari only for the menu item called <code>Quit Safari</code>, mine now is <code>Ctrl-CMD-Q</code>:</p>
+
+<p><img src="/images/OS-X-Safari-Shortcuts.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>
