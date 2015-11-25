@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-25T08:52:47-08:00</updated>
+  <updated>2015-11-25T13:29:12-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin C# UIPickerView]]></title>
+    <link href="http://sushihangover.github.io/xamarin-c-number-uipickerview/"/>
+    <updated>2015-11-25T13:23:13-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-c-number-uipickerview</id>
+    <content type="html"><![CDATA[<p>A real quickie example of a <a href="https://developer.xamarin.com/api/type/MonoTouch.UIKit.UIPickerView/">UIPickerView</a>: (<a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIPickerView_Class/index.html">iOS SDK</a>)</p>
+
+<p><img src="/images/Xamarin-iPhone-Picker.gif" alt="" /></p>
+
+<p>Add a <code>UIPickerView</code> to your xib or Storyboard called <code>slotMachineView</code> and a label (named <code>selectedLbl</code>) to show the currently selected items.</p>
+
+<pre><code>using System;
+using UIKit;
+
+namespace Slots
+{
+    public partial class ViewController : UIViewController
+    {
+        public ViewController (IntPtr handle) : base (handle)
+        {
+        }
+
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
+                slotMachineView.Model = new StackOverflowModel (selectedLbl);
+        }
+
+        public override void DidReceiveMemoryWarning ()
+        {
+            base.DidReceiveMemoryWarning ();
+        }
+    }
+
+    public class StackOverflowModel : UIPickerViewModel
+    {
+        static string[] names = new string [] {
+            "pscorlib.dll",
+            "pscorlib_aot.dll",
+            "Mono.PlayScript.dll",
+            "PlayScript.Dynamic.dll",
+            "PlayScript.Dynamic_aot.dll",
+            "PlayScript.Optimization.dll",
+            "playshell.exe",
+            "psc.exe"
+        };
+
+        UILabel lbl;
+
+        public StackOverflowModel (UILabel lbl)
+        {
+            this.lbl = lbl;
+        }
+
+        public override nint GetComponentCount (UIPickerView v)
+        {
+            return 3;
+        }
+
+        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
+        {
+            return names.Length;
+        }
+
+        public override string GetTitle (UIPickerView picker, nint row, nint component)
+        {
+            switch (component) {
+            case 0:
+                return names [row];
+            case 1:
+                return row.ToString ();
+            case 2:
+                return new string ((char)('A' + row), 1);
+            default:
+                throw new NotImplementedException ();
+            }
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            lbl.Text = String.Format ("{0} : {1} : {2}",
+                names [picker.SelectedRowInComponent (0)],
+                picker.SelectedRowInComponent (1),
+                picker.SelectedRowInComponent (2));
+        }
+
+        public override nfloat GetComponentWidth (UIPickerView picker, nint component)
+        {
+            if (component == 0)
+                return 220f;
+            else
+                return 30f;
+        }
+    }
+}
+</code></pre>
+
+<p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin Android Player / Genymotion - Foobar 101]]></title>
@@ -228,195 +329,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 <p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 </code>
 <code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Playscript | Xamarin / Monodevelop Language Addin (Part 1)]]></title>
-    <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
-    <updated>2015-11-01T01:22:10-08:00</updated>
-    <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
-
-<h2>Goal:</h2>
-
-<p>In this first part we are going to create an <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Addin</a> that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
-
-<h2>Prerequisites</h2>
-
-<p>You have the <a href="https://github.com/mono/mono-addins">MonoDevelop.AddinMaker</a> installed and enabled within Xamarin Studio/MonoDevelop (XS/MD).</p>
-
-<h2>Create the Solution/Project</h2>
-
-<p>With XS/MD, create a new solution/project. In this example we are using version 1.21 of the Addin Maker.</p>
-
-<p><img src="images/XamarinStudioAddin.png" alt="" /></p>
-
-<h2>Add the Syntax files</h2>
-
-<p>Language syntax files are XML documents that describe how the visual representation of language will appear within the editor.</p>
-
-<p>i.e.</p>
-
-<pre><code>&lt;Keywords color = "Keyword(Jump)"&gt;
-    &lt;Word&gt;break&lt;/Word&gt;
-    &lt;Word&gt;continue&lt;/Word&gt;
-    &lt;Word&gt;return&lt;/Word&gt;
-&lt;/Keywords&gt;
-</code></pre>
-
-<p>Note: A definition of the contents of these XML files is out of scope for this posting. The best reference is the files themself. There are quite a number of them in the MonoDevelop <code>./main/src/core/Mono.Texteditor/SyntaxModes</code> directory, you should start the C# <a href="https://github.com/mono/monodevelop/blob/bc908c9e791b0ee6f4951fb65495f82735bc95b7/main/src/core/Mono.Texteditor/SyntaxModes/CSharpSyntaxMode.xml">one</a>.</p>
-
-<p>In our case we are adding two syntax mode files, one for ActionScript and one for PlayScript.</p>
-
-<p>Each file contains also has an mime-type attribute that will be used within our addin to provide a reference of the sourcefile extension to its mime type.</p>
-
-<p>i.e.</p>
-
-<pre><code>&lt;SyntaxMode name = "ActionScript" mimeTypes="text/x-actionscript"&gt;
-
-&lt;SyntaxMode name = "PlayScript" mimeTypes="text/x-playscript"&gt;
-</code></pre>
-
-<p><strong>Note</strong>: Make sure you flag these files as <code>EmbeddedResources</code> so that they are included in the addin assembly.</p>
-
-<h2>Mime-type to file ext. linkage</h2>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Core/MimeTypes"&gt;
-    &lt;MimeType id="text/x-actionscript" _description="ActionScript source code" icon="md-actionscript-file" isText="true"&gt;
-        &lt;File pattern="*.as" /&gt;
-    &lt;/MimeType&gt;     
-    &lt;MimeType id="text/x-playscript" _description="PlayScript source code" icon="md-playscript-file" isText="true"&gt;
-        &lt;File pattern="*.play" /&gt;
-    &lt;/MimeType&gt;     
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>Add the File Filter Extension</h2>
-
-<p>This will allow the IDE to provide filter options to the various file dialogs.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Ide/FileFilters"&gt;
-    &lt;FileFilter id = "ActionScript"
-                insertbefore = "Assemblies"
-                _label = "ActionScript Files"
-                extensions = "*.as"/&gt;
-    &lt;FileFilter id = "PlayScript"
-                insertbefore = "Assemblies"
-                _label = "PlayScript Files"
-                extensions = "*.play"/&gt;                                     
-&lt;/Extension&gt;
-</code></pre>
-
-<p>If you debug the project you will now find the ActionScript and PlayScript file filters are available:</p>
-
-<p><img src="images/MD-Addin-FileFilter.png" alt="" /></p>
-
-<h2>Add the Syntaxmode Extension</h2>
-
-<p>Add the extension templates to the <code>Manifest.addin.xml</code> file.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/SourceEditor2/SyntaxModes"&gt;
-    &lt;Templates resource="ActionScriptSyntaxMode.xml" /&gt;
-    &lt;Templates resource="PlayScriptSyntaxMode.xml" /&gt;
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>Add the mime-type resolver extension</h2>
-
-<p>Add the resolver extension class to the  <code>Manifest.addin.xml</code> file.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Ide/TextEditorResolver"&gt;
-    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-actionscript" /&gt;
-    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-playscript" /&gt;
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>ProjectParameters Class</h2>
-
-<p>Add a new class called <code>PlayScriptProjectParameters</code>, this class will inherit from <code>MonoDevelop.Projects.ProjectParameters</code> and for now will be completely empty. We will be adding code to it in a future posting, but right now we just need to be able to create the class object.</p>
-
-<h2>ActionScriptLanguageBinding Class</h2>
-
-<p>This class inherits from IDotNetLanguageBinding and other then stubbing out some methods and assigning the file extension that this class is related to (<code>.as</code>), the other thing that we need to do it call the static method <code>SyntaxModeService.LoadStylesAndModes</code> in the constructor in other for the Editor to load and parse the embedded xml file that contains our language&rsquo;s syntax:</p>
-
-<pre><code>    public ActionScriptLanguageBinding() {
-        SyntaxModeService.LoadStylesAndModes (Assembly.GetExecutingAssembly ());
-    }
-
-    public string Language {
-        get {
-            return "ActionScript";
-        }
-    }
-
-    public string ProjectStockIcon {
-        get { 
-            return "md-project";
-        }
-    }
-
-    public FilePath GetFileName (FilePath baseName)
-    {
-        return baseName + ".as";
-    }
-
-    public bool IsSourceCodeFile (FilePath fileName)
-    {
-        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".as");
-    }
-</code></pre>
-
-<h2>PlayScriptScriptLanguageBinding Class</h2>
-
-<p>This is a repeat of the ActionScriptLanguageBinding class, but updated for the PlayScript <code>.play</code> extension.</p>
-
-<pre><code>    public string Language {
-        get {
-            return "PlayScript";
-        }
-    }
-
-    public string ProjectStockIcon {
-        get { 
-            return "md-project";
-        }
-    }
-
-    public FilePath GetFileName (FilePath baseName)
-    {
-        return baseName + ".play";
-    }
-
-    public bool IsSourceCodeFile (FilePath fileName)
-    {
-        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".play");
-    }
-</code></pre>
-
-<p>Running this and you will have very basic language highlighting in any <code>.as</code> and <code>.play</code> that you add to Xamarin Studio or MonoDevelop.</p>
-
-<p><img src="images/ActionScript-highlighting.png" alt="" /></p>
-
-<h3>Addition Required Reading:</h3>
-
-<h4>Michael Hutchinson&rsquo;s MonoDevelop.AddinMaker References:</h4>
-
-<p><a href="http://www.monodevelop.com/developers/articles/creating-a-simple-add-in/">Creating a Simple Add-in</a></p>
-
-<p><a href="https://mhut.ch/addinmaker/1.2">MonoDevelop.AddinMaker 1.2</a></p>
-
-<p><a href="https://mhut.ch/addinmaker/1.2.1">MonoDevelop.AddinMaker 1.2.1</a></p>
-
-<p><a href="https://mhut.ch/journal/2015/03/12/monodevelopaddinmaker_12">MonoDevelop.AddinMaker 1.2</a></p>
-
-<p>Source : <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a></p>
-
-<h4>Mono.Addin References:</h4>
-
-<p>Documentation : <a href="http://monoaddins.codeplex.com/">Mono.Addins</a></p>
-
-<p>Source : <a href="https://github.com/mono/mono-addins">mono/mono-addins</a></p>
 ]]></content>
   </entry>
   

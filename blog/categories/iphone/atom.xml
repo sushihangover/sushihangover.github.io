@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iphone | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/iphone/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-25T13:29:12-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin C# UIPickerView]]></title>
+    <link href="http://sushihangover.github.io/xamarin-c-number-uipickerview/"/>
+    <updated>2015-11-25T13:23:13-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-c-number-uipickerview</id>
+    <content type="html"><![CDATA[<p>A real quickie example of a <a href="https://developer.xamarin.com/api/type/MonoTouch.UIKit.UIPickerView/">UIPickerView</a>: (<a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIPickerView_Class/index.html">iOS SDK</a>)</p>
+
+<p><img src="/images/Xamarin-iPhone-Picker.gif" alt="" /></p>
+
+<p>Add a <code>UIPickerView</code> to your xib or Storyboard called <code>slotMachineView</code> and a label (named <code>selectedLbl</code>) to show the currently selected items.</p>
+
+<pre><code>using System;
+using UIKit;
+
+namespace Slots
+{
+    public partial class ViewController : UIViewController
+    {
+        public ViewController (IntPtr handle) : base (handle)
+        {
+        }
+
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
+                slotMachineView.Model = new StackOverflowModel (selectedLbl);
+        }
+
+        public override void DidReceiveMemoryWarning ()
+        {
+            base.DidReceiveMemoryWarning ();
+        }
+    }
+
+    public class StackOverflowModel : UIPickerViewModel
+    {
+        static string[] names = new string [] {
+            "pscorlib.dll",
+            "pscorlib_aot.dll",
+            "Mono.PlayScript.dll",
+            "PlayScript.Dynamic.dll",
+            "PlayScript.Dynamic_aot.dll",
+            "PlayScript.Optimization.dll",
+            "playshell.exe",
+            "psc.exe"
+        };
+
+        UILabel lbl;
+
+        public StackOverflowModel (UILabel lbl)
+        {
+            this.lbl = lbl;
+        }
+
+        public override nint GetComponentCount (UIPickerView v)
+        {
+            return 3;
+        }
+
+        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
+        {
+            return names.Length;
+        }
+
+        public override string GetTitle (UIPickerView picker, nint row, nint component)
+        {
+            switch (component) {
+            case 0:
+                return names [row];
+            case 1:
+                return row.ToString ();
+            case 2:
+                return new string ((char)('A' + row), 1);
+            default:
+                throw new NotImplementedException ();
+            }
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            lbl.Text = String.Format ("{0} : {1} : {2}",
+                names [picker.SelectedRowInComponent (0)],
+                picker.SelectedRowInComponent (1),
+                picker.SelectedRowInComponent (2));
+        }
+
+        public override nfloat GetComponentWidth (UIPickerView picker, nint component)
+        {
+            if (component == 0)
+                return 220f;
+            else
+                return 30f;
+        }
+    }
+}
+</code></pre>
+
+<p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
+]]></content>
+  </entry>
+  
+</feed>

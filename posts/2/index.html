@@ -9,9 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Jumping word-wise in the iTerm2 (3.0 beta): Open the Preferences Pane
-Goto Tab Keys
-Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send &hellip;">
+  <meta name="description" content="This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +90,137 @@ Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send &hell
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-14T03:08:38-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:08 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
+
+<h1>Question</h1>
+
+<p>How can you write an Android FileObserver in C#?</p>
+
+<p>i.e. Native Java example:</p>
+
+<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
+    public String basePath;
+
+    @Override
+    public void onEvent(int event, String path) {
+        String fullPath = basePath;
+        if(path != null) {
+            fullPath += path;
+        }
+        Log.d(TAG, "FILE: "+fullPath);
+    }
+};
+observer.basePath = imageUri.getPath();
+observer.startWatching();
+</code></pre>
+
+<h1>Answer</h1>
+
+<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
+
+<p><strong>Quick Notes:</strong></p>
+
+<ul>
+<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
+<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
+<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
+</ul>
+
+
+<p><strong>C# FileObserver Class:</strong></p>
+
+<pre><code>using System;
+using Android.OS;
+using Android.Util;
+
+namespace MyFileObserver
+{
+    public class MyPathObserver : Android.OS.FileObserver
+    {
+        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
+        const string tag = "StackoverFlow";
+
+        public MyPathObserver (String rootPath) : base(rootPath, _Events)
+        {
+            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
+        }
+
+        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
+        {
+            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
+        }
+
+        public override void OnEvent(FileObserverEvents e, String path)
+        {
+            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Example Usage:</strong></p>
+
+<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
+// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
+myFileObserver = new MyPathObserver (pathToWatch);
+myFileObserver.StartWatching (); // and StopWatching () when you are done...
+var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
+button.Click += delegate {
+    if (File.Exists (document)) {
+        button.Text = "Delete File";
+        File.Delete (document);
+    } else {
+        button.Text = "Create File";
+        File.WriteAllText (document, "Foobar");
+    }
+};
+</code></pre>
+
+<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
+
+<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+I/StackoverFlow( 3596): StackOverFlow.txt:Delete
+I/StackoverFlow( 3596): StackOverFlow.txt:Create
+I/StackoverFlow( 3596): StackOverFlow.txt:Open
+I/StackoverFlow( 3596): StackOverFlow.txt:Modify
+I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -631,185 +760,6 @@ apt-file search iconv.h
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-ubuntu-broken/">Mono | Ubuntu Broken Packages</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-10-30T21:55:07-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:55 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.mono-project.com"><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"></a></p>
-
-<p>I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to get the beta/alpha Mono builds installed&hellip; It turns out to be a <a href="http://www.urbandictionary.com/define.php?term=pita&amp;page=1">P.I.T.A.</a> to do it from packages and not source.</p>
-
-<p>Broken packages always seem to be a problem when dealing with pre-built Linux software and I usually build from source so I do not see them, but installing the <code>mono-devel</code> package fails due to <code>libjpeg62-turbo</code> and <code>libjpeg62</code> not being avialable in the normal Ubuntu repos. They have been replaced by bundle <code>8</code> of libraries but <code>libgdiplus</code> that Mono references is pinned to <code>libjpeg6*</code> packages&hellip;</p>
-
-<h3>So the errors:</h3>
-
-<pre><code>sudo apt-get install mono-devel
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>The following packages have unmet dependencies:
-</span><span class='line'> mono-devel : Depends: libgdiplus (&gt;= 2.6.7) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-design4.0-cil (&gt;= 1.0) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-drawing4.0-cil (&gt;= 3.0.6) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-messaging4.0-cil (&gt;= 2.10.1) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-runtime4.0-cil (&gt;= 2.10.1) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-servicemodel-activation4.0-cil (&gt;= 1.0) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-servicemodel-web4.0-cil (&gt;= 3.2.1) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-servicemodel4.0a-cil (&gt;= 3.2.3) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-web-extensions4.0-cil (&gt;= 2.10.3) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-web-services4.0-cil (&gt;= 1.0) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-web4.0-cil (&gt;= 2.10.3) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-system-windows-forms4.0-cil (&gt;= 1.0) but it is not going to be installed
-</span><span class='line'>              Depends: libmono-cil-dev (= 4.2.1.91-0xamarin1) but it is not going to be installed
-</span><span class='line'>E: Unable to correct problems, you have held broken packages.</span></code></pre></td></tr></table></div></figure>
-
-
-<pre><code>sudo apt-get install libgdiplus
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>Some packages could not be installed. This may mean that you have requested an impossible situation or if you are using the unstable
-</span><span class='line'>distribution that some required packages have not yet been created
-</span><span class='line'>or been moved out of Incoming.
-</span><span class='line'>The following information may help to resolve the situation:
-</span><span class='line'>The following packages have unmet dependencies:
-</span><span class='line'>libgdiplus : Depends: libjpeg62-turbo (&gt;= 1.3.1) but it is not installable
-</span><span class='line'>E: Unable to correct problems, you have held broken packages.</span></code></pre></td></tr></table></div></figure>
-
-
-<pre><code>sudo apt-get install libjpeg62-turbo
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>Package libjpeg62-turbo is not available, but is referred to by another package.
-</span><span class='line'>This may mean that the package is missing, has been obsoleted, or is only available from another source E: 
-</span><span class='line'>Package 'libjpeg62-turbo' has no installation candidate</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>The Fix:</h3>
-
-<h4>Get the older <code>libjpeg62-turbo</code> package:</h4>
-
-<p><a href="http://pkgs.org/debian-sid/debian-main-amd64/libjpeg62-turbo_1.4.1-2_amd64.deb.html">libjpeg62-turbo - libjpeg-turbo JPEG runtime library</a></p>
-
-<pre><code> wget http://ftp.br.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_1.4.1-2_amd64.deb
-</code></pre>
-
-<h4>Get the older <code>libjpeg62</code> package:</h4>
-
-<p><a href="http://pkgs.org/debian-sid/debian-main-amd64/libjpeg62_6b2-2_amd64.deb.html">libjpeg62 - Independent JPEG Group&rsquo;s JPEG runtime library (version 6.2)</a></p>
-
-<pre><code> wget http://ftp.br.debian.org/debian/pool/main/libj/libjpeg6b/libjpeg62_6b2-2_amd64.deb
-</code></pre>
-
-<h4><a href="http://www.cyberciti.biz/faq/ubuntu-linux-how-do-i-install-deb-packages/">Install</a> the deb packages:</h4>
-
-<pre><code>sudo dpkg --install --recursive --auto-deconfigure libjpeg62-turbo_1.4.1-2_amd64.deb 
-</code></pre>
-
-<h4>Update and fix the &lsquo;now broken&rsquo; dependencies:</h4>
-
-<pre><code>apt-get update
-sudo apt-get -f install
-</code></pre>
-
-<h4>Finally, install <code>mono</code> (and <code>monodevelop</code>) from package:</h4>
-
-<pre><code>sudo apt-get install mono-devel
-sudo apt-get isntall monodevelop
-</code></pre>
-
-<h4>Ahhh, <code>mono 4.2.1</code> is now installed:</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mono --version
-</span><span class='line'>Mono JIT compiler version 4.2.1 (Stable 4.2.1.91/8862921 Fri Oct 30 17:04:13 UTC 2015)
-</span><span class='line'>Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-project.com
-</span><span class='line'>  TLS:           __thread
-</span><span class='line'>  SIGSEGV:       altstack
-</span><span class='line'>  Notifications: epoll
-</span><span class='line'>  Architecture:  amd64
-</span><span class='line'>  Disabled:      none
-</span><span class='line'>  Misc:          softdebug 
-</span><span class='line'>  LLVM:          supported, not enabled.
-</span><span class='line'>  GC:            sgen</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Almost would be easier to install from source ;-)</p>
-
-<p>Have fun.</p>
-
-<p><a href="http://www.monodevelop.com"><img src="http://sushihangover.github.io/images/monodevelop.png"></a></p>
-
-<p><a href="https://github.com/PlayScriptRedux/playscript"><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -827,6 +777,10 @@ sudo apt-get isntall monodevelop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
+      </li>
+    
+      <li class="post">
         <a href="/safari-changing-the-quit-shortcut/">Safari - Changing the Quit Shortcut</a>
       </li>
     
@@ -840,10 +794,6 @@ sudo apt-get isntall monodevelop
     
       <li class="post">
         <a href="/cursessharp-c-number-ncurses-updated/">CursesSharp (C# NCurses) Updated</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a>
       </li>
     
   </ul>

@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Xamarin C# UIPickerView - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="A real quickie example of a UIPickerView: (iOS SDK) Add a UIPickerView to your xib or Storyboard called slotMachineView and a label (named &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/xamarin-c-number-uipickerview/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+ 
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+<img class="left" src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript">
+</td>
+    <td>
+<img class="right" src="/images/PlayscriptLogo_small.png">
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Xamarin C# UIPickerView</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-25T13:23:13-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:23 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>A real quickie example of a <a href="https://developer.xamarin.com/api/type/MonoTouch.UIKit.UIPickerView/">UIPickerView</a>: (<a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIPickerView_Class/index.html">iOS SDK</a>)</p>
+
+<p><img src="/images/Xamarin-iPhone-Picker.gif" alt="" /></p>
+
+<p>Add a <code>UIPickerView</code> to your xib or Storyboard called <code>slotMachineView</code> and a label (named <code>selectedLbl</code>) to show the currently selected items.</p>
+
+<pre><code>using System;
+using UIKit;
+
+namespace Slots
+{
+    public partial class ViewController : UIViewController
+    {
+        public ViewController (IntPtr handle) : base (handle)
+        {
+        }
+
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
+                slotMachineView.Model = new StackOverflowModel (selectedLbl);
+        }
+
+        public override void DidReceiveMemoryWarning ()
+        {
+            base.DidReceiveMemoryWarning ();
+        }
+    }
+
+    public class StackOverflowModel : UIPickerViewModel
+    {
+        static string[] names = new string [] {
+            "pscorlib.dll",
+            "pscorlib_aot.dll",
+            "Mono.PlayScript.dll",
+            "PlayScript.Dynamic.dll",
+            "PlayScript.Dynamic_aot.dll",
+            "PlayScript.Optimization.dll",
+            "playshell.exe",
+            "psc.exe"
+        };
+
+        UILabel lbl;
+
+        public StackOverflowModel (UILabel lbl)
+        {
+            this.lbl = lbl;
+        }
+
+        public override nint GetComponentCount (UIPickerView v)
+        {
+            return 3;
+        }
+
+        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
+        {
+            return names.Length;
+        }
+
+        public override string GetTitle (UIPickerView picker, nint row, nint component)
+        {
+            switch (component) {
+            case 0:
+                return names [row];
+            case 1:
+                return row.ToString ();
+            case 2:
+                return new string ((char)('A' + row), 1);
+            default:
+                throw new NotImplementedException ();
+            }
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            lbl.Text = String.Format ("{0} : {1} : {2}",
+                names [picker.SelectedRowInComponent (0)],
+                picker.SelectedRowInComponent (1),
+                picker.SelectedRowInComponent (2));
+        }
+
+        public override nfloat GetComponentWidth (UIPickerView picker, nint component)
+        {
+            if (component == 0)
+                return 220f;
+            else
+                return 30f;
+        }
+    }
+}
+</code></pre>
+
+<p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-11-25T13:23:13-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:23 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/iphone/'>iphone</a>, <a class='category' href='/blog/categories/uipickerview/'>uipickerview</a>, <a class='category' href='/blog/categories/uipickerviewmodel/'>uipickerviewmodel</a>, <a class='category' href='/blog/categories/xamarin/'>xamarin</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/xamarin-c-number-uipickerview/" data-via="" data-counturl="http://sushihangover.github.io/xamarin-c-number-uipickerview/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/safari-changing-the-quit-shortcut/" title="Previous Post: Safari - Changing the Quit Shortcut">&laquo; Safari - Changing the Quit Shortcut</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
+      </li>
+    
+      <li class="post">
+        <a href="/safari-changing-the-quit-shortcut/">Safari - Changing the Quit Shortcut</a>
+      </li>
+    
+      <li class="post">
+        <a href="/monomac-samples-updates/">MonoMac - Demo / Samples updated</a>
+      </li>
+    
+      <li class="post">
+        <a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is the CAEmitterCell Content propery?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/cursessharp-c-number-ncurses-updated/">CursesSharp (C# NCurses) Updated</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/xamarin-c-number-uipickerview/';
+        var disqus_url = 'http://sushihangover.github.io/xamarin-c-number-uipickerview/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
