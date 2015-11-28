@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: redirection | SushiHangover]]></title>
+  <link href="http://sushihangover.github.io/blog/categories/redirection/atom.xml" rel="self"/>
+  <link href="http://sushihangover.github.io/"/>
+  <updated>2015-11-28T06:49:35-08:00</updated>
+  <id>http://sushihangover.github.io/</id>
+  <author>
+    <name><![CDATA[RobertN]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using redirection within xargs]]></title>
+    <link href="http://sushihangover.github.io/using-redirection-within-xargs/"/>
+    <updated>2015-11-28T06:29:15-08:00</updated>
+    <id>http://sushihangover.github.io/using-redirection-within-xargs</id>
+    <content type="html"><![CDATA[<p>I needed to convert a bunch of AppleScript <code>.scpt</code> files to uncompiled <code>.txt</code> files, so a simple <code>find</code> piped to <code>xargs</code> and I&rsquo;ll be done&hellip; well&hellip;</p>
+
+<p>OS-X provides a <code>osadecompile</code> cmd that will read a <code>.scpt</code> file and output the text to <code>stdout</code> (It does not provide a output file option). So a simple redirection and I should be done:</p>
+
+<pre><code># This will not work, you will end up with a file 
+# named {}.txt that includes the test of all the scripts
+find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt' 
+</code></pre>
+
+<p>But that will not work as the redirection applies to the <code>xargs</code> cmd, not the <code>osadecompile</code> cmd that xargs is calling. So a quick fix is to create a subshell and include the redirection in the passed cmd string (via <code>-c</code>)</p>
+
+<p>So this will work:</p>
+
+<pre><code>find *.scpt -print0 | xargs -0 -n 1 -I {} sh -c "osadecompile '{}' &gt; '{}.txt'"
+</code></pre>
+
+<p>Still simple enough, and since I only have a couple of dozen files in this case the performance impact of creaing subshells is not a problem&hellip;</p>
+
+<p><strong>Homework:</strong> How would you get around this in using a bash <a href="https://en.wikipedia.org/wiki/One-liner_program">one-liner</a> without a subshell?</p>
+]]></content>
+  </entry>
+  
+</feed>

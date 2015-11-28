@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/using-redirection-within-xargs/</loc>
+    <lastmod>2015-11-28T06:29:15-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/xamarin-c-number-uipickerview/</loc>
     <lastmod>2015-11-25T13:23:13-08:00</lastmod>
   </url>
@@ -877,6 +881,12 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/uipickerviewmodel/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/xargs/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/redirection/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/posts/2/</loc>
