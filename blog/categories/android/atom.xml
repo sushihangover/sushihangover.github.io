@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-28T06:49:35-08:00</updated>
+  <updated>2015-12-05T20:23:15-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)]]></title>
+    <link href="http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/"/>
+    <updated>2015-12-05T20:19:59-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library</id>
+    <content type="html"><![CDATA[<p>I posted a Samba/JCIFS binding library to my <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">Github</a> account&hellip;</p>
+
+<h1>Xamarin.Android.jCIFS</h1>
+
+<p>This is a <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">C# binding library</a> for the The Java CIFS (jCIFS) Client Library (version 1.3.18).</p>
+
+<p><a href="http://jcifs.samba.org">JCIFS</a> is an Open Source client library that implements the CIFS/SMB networking protocol in 100% Java.</p>
+
+<blockquote><p>You can read/write, delete, make directories, rename, list contents of a directory, list the workgroups/ntdomains and servers on the network, list the shares of a server, open named pipes, authenticate web clients &hellip;etc.</p></blockquote>
+
+<h3>License:</h3>
+
+<p>As <a href="http://www.gnu.org/licenses/lgpl-2.1.txt">JCIFS</a> is Licensed Under the LGPL, so is this project&rsquo;s <a href="http://opensource.org/licenses/LGPL-3.0">license</a>.</p>
+
+<h3>API Documentation:</h3>
+
+<p>Consult the jCIFS site for <a href="http://jcifs.samba.org/src/docs/api/">API</a> documention and usage, this is a C# binding library and does not implement/change anything within the <code>jcifs-1.3.18.jar</code>.</p>
+
+<h3>Example:</h3>
+
+<h4>Usage of <code>Jcifs.Smb.SmbFileInputStream</code>:</h4>
+
+<pre><code>// This is NOT best-practice code, just showing a demo Jcifs api call
+public async Task getFileContents ()
+{
+    await Task.Run (() =&gt; {
+        var smbStream = new SmbFileInputStream ("smb://guest@10.10.10.5/code/test.txt");
+        byte[] b = new byte[8192];
+        int n;
+        while ((n = smbStream.Read (b)) &gt; 0) {
+            Console.Write (Encoding.UTF8.GetString (b).ToCharArray (), 0, n);
+        }
+        Button button = FindViewById&lt;Button&gt; (Resource.Id.myButton);
+        RunOnUiThread(() =&gt; {
+            button.Text = Encoding.UTF8.GetString (b);
+        });
+    }
+    ).ContinueWith ((Task arg) =&gt; {
+        Console.WriteLine (arg.Status);
+        if (arg.Status == TaskStatus.Faulted)
+            Console.WriteLine (arg.Exception);
+    }
+    );
+}
+</code></pre>
+
+<h3>Note:</h3>
+
+<p><strong>The entire jCIFS library is not bound by this project, consult the &ldquo;Metadata.xml&rdquo; file in the binding project for method renames and class exclusions.
+</strong></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin Android Player / Genymotion - Foobar 101]]></title>

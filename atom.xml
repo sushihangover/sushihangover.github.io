@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-11-28T06:49:35-08:00</updated>
+  <updated>2015-12-05T20:23:15-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)]]></title>
+    <link href="http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/"/>
+    <updated>2015-12-05T20:19:59-08:00</updated>
+    <id>http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library</id>
+    <content type="html"><![CDATA[<p>I posted a Samba/JCIFS binding library to my <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">Github</a> account&hellip;</p>
+
+<h1>Xamarin.Android.jCIFS</h1>
+
+<p>This is a <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">C# binding library</a> for the The Java CIFS (jCIFS) Client Library (version 1.3.18).</p>
+
+<p><a href="http://jcifs.samba.org">JCIFS</a> is an Open Source client library that implements the CIFS/SMB networking protocol in 100% Java.</p>
+
+<blockquote><p>You can read/write, delete, make directories, rename, list contents of a directory, list the workgroups/ntdomains and servers on the network, list the shares of a server, open named pipes, authenticate web clients &hellip;etc.</p></blockquote>
+
+<h3>License:</h3>
+
+<p>As <a href="http://www.gnu.org/licenses/lgpl-2.1.txt">JCIFS</a> is Licensed Under the LGPL, so is this project&rsquo;s <a href="http://opensource.org/licenses/LGPL-3.0">license</a>.</p>
+
+<h3>API Documentation:</h3>
+
+<p>Consult the jCIFS site for <a href="http://jcifs.samba.org/src/docs/api/">API</a> documention and usage, this is a C# binding library and does not implement/change anything within the <code>jcifs-1.3.18.jar</code>.</p>
+
+<h3>Example:</h3>
+
+<h4>Usage of <code>Jcifs.Smb.SmbFileInputStream</code>:</h4>
+
+<pre><code>// This is NOT best-practice code, just showing a demo Jcifs api call
+public async Task getFileContents ()
+{
+    await Task.Run (() =&gt; {
+        var smbStream = new SmbFileInputStream ("smb://guest@10.10.10.5/code/test.txt");
+        byte[] b = new byte[8192];
+        int n;
+        while ((n = smbStream.Read (b)) &gt; 0) {
+            Console.Write (Encoding.UTF8.GetString (b).ToCharArray (), 0, n);
+        }
+        Button button = FindViewById&lt;Button&gt; (Resource.Id.myButton);
+        RunOnUiThread(() =&gt; {
+            button.Text = Encoding.UTF8.GetString (b);
+        });
+    }
+    ).ContinueWith ((Task arg) =&gt; {
+        Console.WriteLine (arg.Status);
+        if (arg.Status == TaskStatus.Faulted)
+            Console.WriteLine (arg.Exception);
+    }
+    );
+}
+</code></pre>
+
+<h3>Note:</h3>
+
+<p><strong>The entire jCIFS library is not bound by this project, consult the &ldquo;Metadata.xml&rdquo; file in the binding project for method renames and class exclusions.
+</strong></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using redirection within xargs]]></title>
@@ -1041,195 +1099,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
 <p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.
 <img src="http://sushihangover.github.io/images/ICSharpCode.NRefactory.GtkDemo.png" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Playscript | Xamarin / Monodevelop Language Addin (Part 1)]]></title>
-    <link href="http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/"/>
-    <updated>2015-11-01T01:22:10-08:00</updated>
-    <id>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
-
-<h2>Goal:</h2>
-
-<p>In this first part we are going to create an <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Addin</a> that does the most basic language syntax highlighing using a SyntaxMode xml file.</p>
-
-<h2>Prerequisites</h2>
-
-<p>You have the <a href="https://github.com/mono/mono-addins">MonoDevelop.AddinMaker</a> installed and enabled within Xamarin Studio/MonoDevelop (XS/MD).</p>
-
-<h2>Create the Solution/Project</h2>
-
-<p>With XS/MD, create a new solution/project. In this example we are using version 1.21 of the Addin Maker.</p>
-
-<p><img src="images/XamarinStudioAddin.png" alt="" /></p>
-
-<h2>Add the Syntax files</h2>
-
-<p>Language syntax files are XML documents that describe how the visual representation of language will appear within the editor.</p>
-
-<p>i.e.</p>
-
-<pre><code>&lt;Keywords color = "Keyword(Jump)"&gt;
-    &lt;Word&gt;break&lt;/Word&gt;
-    &lt;Word&gt;continue&lt;/Word&gt;
-    &lt;Word&gt;return&lt;/Word&gt;
-&lt;/Keywords&gt;
-</code></pre>
-
-<p>Note: A definition of the contents of these XML files is out of scope for this posting. The best reference is the files themself. There are quite a number of them in the MonoDevelop <code>./main/src/core/Mono.Texteditor/SyntaxModes</code> directory, you should start the C# <a href="https://github.com/mono/monodevelop/blob/bc908c9e791b0ee6f4951fb65495f82735bc95b7/main/src/core/Mono.Texteditor/SyntaxModes/CSharpSyntaxMode.xml">one</a>.</p>
-
-<p>In our case we are adding two syntax mode files, one for ActionScript and one for PlayScript.</p>
-
-<p>Each file contains also has an mime-type attribute that will be used within our addin to provide a reference of the sourcefile extension to its mime type.</p>
-
-<p>i.e.</p>
-
-<pre><code>&lt;SyntaxMode name = "ActionScript" mimeTypes="text/x-actionscript"&gt;
-
-&lt;SyntaxMode name = "PlayScript" mimeTypes="text/x-playscript"&gt;
-</code></pre>
-
-<p><strong>Note</strong>: Make sure you flag these files as <code>EmbeddedResources</code> so that they are included in the addin assembly.</p>
-
-<h2>Mime-type to file ext. linkage</h2>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Core/MimeTypes"&gt;
-    &lt;MimeType id="text/x-actionscript" _description="ActionScript source code" icon="md-actionscript-file" isText="true"&gt;
-        &lt;File pattern="*.as" /&gt;
-    &lt;/MimeType&gt;     
-    &lt;MimeType id="text/x-playscript" _description="PlayScript source code" icon="md-playscript-file" isText="true"&gt;
-        &lt;File pattern="*.play" /&gt;
-    &lt;/MimeType&gt;     
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>Add the File Filter Extension</h2>
-
-<p>This will allow the IDE to provide filter options to the various file dialogs.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Ide/FileFilters"&gt;
-    &lt;FileFilter id = "ActionScript"
-                insertbefore = "Assemblies"
-                _label = "ActionScript Files"
-                extensions = "*.as"/&gt;
-    &lt;FileFilter id = "PlayScript"
-                insertbefore = "Assemblies"
-                _label = "PlayScript Files"
-                extensions = "*.play"/&gt;                                     
-&lt;/Extension&gt;
-</code></pre>
-
-<p>If you debug the project you will now find the ActionScript and PlayScript file filters are available:</p>
-
-<p><img src="images/MD-Addin-FileFilter.png" alt="" /></p>
-
-<h2>Add the Syntaxmode Extension</h2>
-
-<p>Add the extension templates to the <code>Manifest.addin.xml</code> file.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/SourceEditor2/SyntaxModes"&gt;
-    &lt;Templates resource="ActionScriptSyntaxMode.xml" /&gt;
-    &lt;Templates resource="PlayScriptSyntaxMode.xml" /&gt;
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>Add the mime-type resolver extension</h2>
-
-<p>Add the resolver extension class to the  <code>Manifest.addin.xml</code> file.</p>
-
-<pre><code>&lt;Extension path = "/MonoDevelop/Ide/TextEditorResolver"&gt;
-    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-actionscript" /&gt;
-    &lt;Resolver class = "MonoDevelop.PlayScript.Resolver.TextEditorResolverProvider" mimeType="text/x-playscript" /&gt;
-&lt;/Extension&gt;
-</code></pre>
-
-<h2>ProjectParameters Class</h2>
-
-<p>Add a new class called <code>PlayScriptProjectParameters</code>, this class will inherit from <code>MonoDevelop.Projects.ProjectParameters</code> and for now will be completely empty. We will be adding code to it in a future posting, but right now we just need to be able to create the class object.</p>
-
-<h2>ActionScriptLanguageBinding Class</h2>
-
-<p>This class inherits from IDotNetLanguageBinding and other then stubbing out some methods and assigning the file extension that this class is related to (<code>.as</code>), the other thing that we need to do it call the static method <code>SyntaxModeService.LoadStylesAndModes</code> in the constructor in other for the Editor to load and parse the embedded xml file that contains our language&rsquo;s syntax:</p>
-
-<pre><code>    public ActionScriptLanguageBinding() {
-        SyntaxModeService.LoadStylesAndModes (Assembly.GetExecutingAssembly ());
-    }
-
-    public string Language {
-        get {
-            return "ActionScript";
-        }
-    }
-
-    public string ProjectStockIcon {
-        get { 
-            return "md-project";
-        }
-    }
-
-    public FilePath GetFileName (FilePath baseName)
-    {
-        return baseName + ".as";
-    }
-
-    public bool IsSourceCodeFile (FilePath fileName)
-    {
-        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".as");
-    }
-</code></pre>
-
-<h2>PlayScriptScriptLanguageBinding Class</h2>
-
-<p>This is a repeat of the ActionScriptLanguageBinding class, but updated for the PlayScript <code>.play</code> extension.</p>
-
-<pre><code>    public string Language {
-        get {
-            return "PlayScript";
-        }
-    }
-
-    public string ProjectStockIcon {
-        get { 
-            return "md-project";
-        }
-    }
-
-    public FilePath GetFileName (FilePath baseName)
-    {
-        return baseName + ".play";
-    }
-
-    public bool IsSourceCodeFile (FilePath fileName)
-    {
-        return StringComparer.OrdinalIgnoreCase.Equals (Path.GetExtension (fileName), ".play");
-    }
-</code></pre>
-
-<p>Running this and you will have very basic language highlighting in any <code>.as</code> and <code>.play</code> that you add to Xamarin Studio or MonoDevelop.</p>
-
-<p><img src="images/ActionScript-highlighting.png" alt="" /></p>
-
-<h3>Addition Required Reading:</h3>
-
-<h4>Michael Hutchinson&rsquo;s MonoDevelop.AddinMaker References:</h4>
-
-<p><a href="http://www.monodevelop.com/developers/articles/creating-a-simple-add-in/">Creating a Simple Add-in</a></p>
-
-<p><a href="https://mhut.ch/addinmaker/1.2">MonoDevelop.AddinMaker 1.2</a></p>
-
-<p><a href="https://mhut.ch/addinmaker/1.2.1">MonoDevelop.AddinMaker 1.2.1</a></p>
-
-<p><a href="https://mhut.ch/journal/2015/03/12/monodevelopaddinmaker_12">MonoDevelop.AddinMaker 1.2</a></p>
-
-<p>Source : <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a></p>
-
-<h4>Mono.Addin References:</h4>
-
-<p>Documentation : <a href="http://monoaddins.codeplex.com/">Mono.Addins</a></p>
-
-<p>Source : <a href="https://github.com/mono/mono-addins">mono/mono-addins</a></p>
 ]]></content>
   </entry>
   
