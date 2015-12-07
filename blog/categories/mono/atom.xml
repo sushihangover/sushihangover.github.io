@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-12-05T20:23:15-08:00</updated>
+  <updated>2015-12-06T20:09:26-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C# AppleScript calls with functions, arguments and results]]></title>
+    <link href="http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results/"/>
+    <updated>2015-12-06T20:06:17-08:00</updated>
+    <id>http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results</id>
+    <content type="html"><![CDATA[<p>Posted a new C# library to <a href="https://github.com/sushihangover/Sushi.AppleScript">Github</a> to allow the calling of AppleScript by function name, passing in arguments and receiving a return value.</p>
+
+<h1>Sushi.AppleScript</h1>
+
+<p><a href="https://github.com/sushihangover/Sushi.AppleScript">https://github.com/sushihangover/Sushi.AppleScript</a></p>
+
+<p>The C# library allows you to execute AppleScript code that originates from a file or <code>string</code> and:</p>
+
+<ul>
+<li>Call function by name (Optional)</li>
+<li>Pass multiple arguments to a function (Optional)</li>
+<li>Execution success or failure</li>
+<li>Return results from the function call</li>
+</ul>
+
+
+<h3>Build:</h3>
+
+<pre><code>cd Sushi.AppleScript.Native
+xcodebuild
+cd -
+xbuild Sushi.AppleScript.sln
+</code></pre>
+
+<h3>Test:</h3>
+
+<p><strong>Mono&rsquo;s supplied nunit-console:</strong></p>
+
+<pre><code>MONO_IOMAP=all nunit-console Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>NUnit 3.x console:</strong></p>
+
+<pre><code>mono $(MTOOLS)/nunit3-console.exe Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<pre><code>AppleScript.cs(7,7): error CS0246: The type or namespace name `MonoMac' could not be found. Are you missing an assembly reference?
+</code></pre>
+
+<p>If you do not have a local copy of <a href="https://github.com/mono/monomac">MonoMac</a>, xbuild will fail. It is available via &ldquo;Xamarin Studio&rdquo;:</p>
+
+<pre><code>mdtool build Sushi.AppleScript.sln
+</code></pre>
+
+<h4>Example Usage:</h4>
+
+<pre><code>var scptInfo = new FileInfo ("./AppleScripts/FunctionTests.txt");
+string funcName = "IsRunning";
+List&lt;string&gt; argList = new List&lt;string&gt; () {
+    @"Finder",
+};
+string scriptReturnValue;
+var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptReturnValue);
+</code></pre>
+
+<ul>
+<li>Consult <a href="https://github.com/sushihangover/Sushi.AppleScript/blob/master/Sushi.AppleScript.Test/Test.cs">Test.cs</a> for more examples</li>
+</ul>
+
+
+<h3>Supports:</h3>
+
+<ul>
+<li>MonoMac</li>
+<li>Xamarin.Mac</li>
+<li>i386 and x86_64 Mono Support</li>
+</ul>
+
+
+<h3>Runtime/Deployment debugging:</h3>
+
+<p>Runtime/Deployment debugging available by setting an environment variable, <code>APPLE_SCRIPT_DEBUG</code>:</p>
+
+<p><code>export APPLE_SCRIPT_DEBUG=true</code></p>
+
+<p>The results are logged with the prefix <code>AppleScript:</code>, output is avaiable via Console.app.</p>
+
+<h3>Sushi.AppleScript</h3>
+
+<p>The C# library that provides the P/Invoke wrapper to execute AppleScript functions</p>
+
+<h3>Sushi.AppleScript.Native</h3>
+
+<p>An OS-X Universial (i386 &amp; x86_64) Shared Library:</p>
+
+<ul>
+<li><code>libAppleScriptEvent.dylib</code></li>
+</ul>
+
+
+<h3>Sushi.AppleScript.Test</h3>
+
+<p>NUnit tests for Sushi.AppleScript library</p>
+
+<h3>Sushi.AppleScript.CLI</h3>
+
+<p>TODO: Provides an <code>osascript</code> style CLI utility to execute functions with AppleScript files (<code>osascript</code> does not contain this feature)</p>
+
+<h3>License:</h3>
+
+<ul>
+<li>The MIT License (MIT)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MonoMac - Demo / Samples updated]]></title>
@@ -420,133 +534,6 @@ Available tools:
 - account: Xamarin account tool
 - mac-bundle: Mac application bundle and installer generator.
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NUnit Console 2.4.8 vs 3.0 using .csproj files]]></title>
-    <link href="http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0/"/>
-    <updated>2015-11-19T21:14:42-08:00</updated>
-    <id>http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0</id>
-    <content type="html"><![CDATA[<p>When using NUnit console 2.4.x and 3.x with <code>.csproj</code> files, it expects a valid and fairly complete MSBuild/xbuild project to determine the assembly name, dir location, and namespace that it will test in the Library-based project (Exe-based projects are possible if you have defined the proper entry point). In this example I used NUnit 2.4.x and 3.x <strong>console</strong> as there are execution differences but the same <code>.csproj</code> is being used so if you are using MonoDevelop/Xamarin Studio the IDE&rsquo;s built-in NUnit 2.4.x test pad will also work.</p>
-
-<p><strong>NUnit 3.0 console (Install via nuget):</strong></p>
-
-<pre><code>mono $(MTOOLS)/nunit3-console.exe  nunit-lib/nunit-lib.csproj --config=Debug
-
-NUnit Console Runner 3.0.5797 
-Copyright (C) 2015 Charlie Poole
-
-Runtime Environment
-   OS Version: MacOSX 15.0.0.0 
-  CLR Version: 4.0.30319.17020
-
-Test Files
-    nunit-lib/nunit-lib.csproj
-
-Errors and Failures
-
-1) Failed : nunitlib.Test.TestCase
-  Expected string length 8 but was 5. Strings differ at index 0.
-  Expected: "Overflow"
-  But was:  "Stack"
-  -----------^
-at nunitlib.Test.TestCase () in &lt;filename unknown&gt;:line 0
-
-Test Run Summary
-    Overall result: Failed
-   Tests run: 1, Passed: 0, Errors: 0, Failures: 1, Inconclusive: 0
-     Not run: 0, Invalid: 0, Ignored: 0, Explicit: 0, Skipped: 0
-  Start time: 2015-11-20 12:36:28Z
-    End time: 2015-11-20 12:36:28Z
-    Duration: 0.132 seconds
-</code></pre>
-
-<p><strong>NUnit 2.4.8 (installed via Mono):</strong></p>
-
-<p><strong>NOTE</strong>: NUnit console 2.4.x is <code>broken</code> due a hard-coded Windows-style Directory Separator when parsing <code>.csproj</code> files and creating the expected CIL/assembly location, use <code>MONO_IOMAP</code> to work around it. This is not a issue in 3.0.</p>
-
-<p><strong>NUnit Console 2.4.x w/o MONO_IOMAP:</strong></p>
-
-<pre><code>nunit-console nunit-lib/nunit-lib.csproj -config=Debug
-~~~~
-Unhandled Exception:
-System.IO.DirectoryNotFoundException: Directory "/Users/sushi/code/XamTests/nunit-lib/nunit-lib/bin\Debug" not found.
-~~~~
-</code></pre>
-
-<p><strong>NUnit Console 2.4.x with MONO_IOMAP:</strong></p>
-
-<pre><code>MONO_IOMAP=all nunit-console nunit-lib/nunit-lib.csproj -config=Debug
-
-NUnit version 2.4.8
-Copyright (C) 2002-2007 Charlie Poole.
-Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
-Copyright (C) 2000-2002 Philip Craig.
-All Rights Reserved.
-
-Runtime Environment - 
-   OS Version: Unix 15.0.0.0
-  CLR Version: 4.0.30319.17020 ( 4.2.1 (explicit/8862921 Thu Oct 29 17:09:16 EDT 2015) )
-
-.F
-Tests run: 1, Failures: 1, Not run: 0, Time: 0.115 seconds
-
-Test Case Failures:
-1) nunitlib.Test.TestCase :   Expected string length 8 but was 5. Strings differ at index 0.
-  Expected: "Overflow"
-  But was:  "Stack"
-  -----------^
-</code></pre>
-
-<p><strong>.csproj example used in for example:</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-  &lt;PropertyGroup&gt;
-    &lt;Configuration Condition=" '$(Configuration)' == '' "&gt;Debug&lt;/Configuration&gt;
-    &lt;Platform Condition=" '$(Platform)' == '' "&gt;AnyCPU&lt;/Platform&gt;
-    &lt;ProjectGuid&gt;{944946CD-39B2-4A16-A8A8-9F70F0450506}&lt;/ProjectGuid&gt;
-    &lt;OutputType&gt;Library&lt;/OutputType&gt;
-    &lt;RootNamespace&gt;nunitlib&lt;/RootNamespace&gt;
-    &lt;AssemblyName&gt;nunit-lib&lt;/AssemblyName&gt;
-    &lt;TargetFrameworkVersion&gt;v4.5&lt;/TargetFrameworkVersion&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "&gt;
-    &lt;DebugSymbols&gt;true&lt;/DebugSymbols&gt;
-    &lt;DebugType&gt;full&lt;/DebugType&gt;
-    &lt;Optimize&gt;false&lt;/Optimize&gt;
-    &lt;OutputPath&gt;bin\Debug&lt;/OutputPath&gt;
-    &lt;DefineConstants&gt;DEBUG;&lt;/DefineConstants&gt;
-    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
-    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
-    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "&gt;
-    &lt;DebugType&gt;full&lt;/DebugType&gt;
-    &lt;Optimize&gt;true&lt;/Optimize&gt;
-    &lt;OutputPath&gt;bin\Release&lt;/OutputPath&gt;
-    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
-    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
-    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Reference Include="System" /&gt;
-    &lt;Reference Include="nunit.framework"&gt;
-      &lt;HintPath&gt;..\packages\NUnit.2.6.4\lib\nunit.framework.dll&lt;/HintPath&gt;
-    &lt;/Reference&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Compile Include="Test.cs" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
-  &lt;ItemGroup&gt;
-    &lt;None Include="packages.config" /&gt;
-  &lt;/ItemGroup&gt;
-&lt;/Project&gt;
-</code></pre>
-
-<p>Ref: This was my <a href="http://stackoverflow.com/a/33827575/4984832">answer</a> on StackOverflow</p>
 ]]></content>
   </entry>
   

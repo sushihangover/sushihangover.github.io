@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2015-12-05T20:23:15-08:00</updated>
+  <updated>2015-12-06T20:09:26-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[C# AppleScript calls with functions, arguments and results]]></title>
+    <link href="http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results/"/>
+    <updated>2015-12-06T20:06:17-08:00</updated>
+    <id>http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results</id>
+    <content type="html"><![CDATA[<p>Posted a new C# library to <a href="https://github.com/sushihangover/Sushi.AppleScript">Github</a> to allow the calling of AppleScript by function name, passing in arguments and receiving a return value.</p>
+
+<h1>Sushi.AppleScript</h1>
+
+<p><a href="https://github.com/sushihangover/Sushi.AppleScript">https://github.com/sushihangover/Sushi.AppleScript</a></p>
+
+<p>The C# library allows you to execute AppleScript code that originates from a file or <code>string</code> and:</p>
+
+<ul>
+<li>Call function by name (Optional)</li>
+<li>Pass multiple arguments to a function (Optional)</li>
+<li>Execution success or failure</li>
+<li>Return results from the function call</li>
+</ul>
+
+
+<h3>Build:</h3>
+
+<pre><code>cd Sushi.AppleScript.Native
+xcodebuild
+cd -
+xbuild Sushi.AppleScript.sln
+</code></pre>
+
+<h3>Test:</h3>
+
+<p><strong>Mono&rsquo;s supplied nunit-console:</strong></p>
+
+<pre><code>MONO_IOMAP=all nunit-console Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>NUnit 3.x console:</strong></p>
+
+<pre><code>mono $(MTOOLS)/nunit3-console.exe Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<pre><code>AppleScript.cs(7,7): error CS0246: The type or namespace name `MonoMac' could not be found. Are you missing an assembly reference?
+</code></pre>
+
+<p>If you do not have a local copy of <a href="https://github.com/mono/monomac">MonoMac</a>, xbuild will fail. It is available via &ldquo;Xamarin Studio&rdquo;:</p>
+
+<pre><code>mdtool build Sushi.AppleScript.sln
+</code></pre>
+
+<h4>Example Usage:</h4>
+
+<pre><code>var scptInfo = new FileInfo ("./AppleScripts/FunctionTests.txt");
+string funcName = "IsRunning";
+List&lt;string&gt; argList = new List&lt;string&gt; () {
+    @"Finder",
+};
+string scriptReturnValue;
+var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptReturnValue);
+</code></pre>
+
+<ul>
+<li>Consult <a href="https://github.com/sushihangover/Sushi.AppleScript/blob/master/Sushi.AppleScript.Test/Test.cs">Test.cs</a> for more examples</li>
+</ul>
+
+
+<h3>Supports:</h3>
+
+<ul>
+<li>MonoMac</li>
+<li>Xamarin.Mac</li>
+<li>i386 and x86_64 Mono Support</li>
+</ul>
+
+
+<h3>Runtime/Deployment debugging:</h3>
+
+<p>Runtime/Deployment debugging available by setting an environment variable, <code>APPLE_SCRIPT_DEBUG</code>:</p>
+
+<p><code>export APPLE_SCRIPT_DEBUG=true</code></p>
+
+<p>The results are logged with the prefix <code>AppleScript:</code>, output is avaiable via Console.app.</p>
+
+<h3>Sushi.AppleScript</h3>
+
+<p>The C# library that provides the P/Invoke wrapper to execute AppleScript functions</p>
+
+<h3>Sushi.AppleScript.Native</h3>
+
+<p>An OS-X Universial (i386 &amp; x86_64) Shared Library:</p>
+
+<ul>
+<li><code>libAppleScriptEvent.dylib</code></li>
+</ul>
+
+
+<h3>Sushi.AppleScript.Test</h3>
+
+<p>NUnit tests for Sushi.AppleScript library</p>
+
+<h3>Sushi.AppleScript.CLI</h3>
+
+<p>TODO: Provides an <code>osascript</code> style CLI utility to execute functions with AppleScript files (<code>osascript</code> does not contain this feature)</p>
+
+<h3>License:</h3>
+
+<ul>
+<li>The MIT License (MIT)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)]]></title>
@@ -242,117 +356,6 @@ namespace Slots
 <p><strong>Notes:</strong></p>
 
 <p>Personally when I see someone saving shopping cart data, using JSON to serialize objects in and out of SharedPerferences string values, etc&hellip;, my head starts to pound in a <em>bad way</em>. At that time you should really start looking for an <strong>asynchronous</strong>, persistent key-value store, like <a href="https://github.com/akavache/Akavache">Akavache</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
-    <link href="http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/"/>
-    <updated>2015-11-14T03:08:38-08:00</updated>
-    <id>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number</id>
-    <content type="html"><![CDATA[<p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
-
-<h1>Question</h1>
-
-<p>How can you write an Android FileObserver in C#?</p>
-
-<p>i.e. Native Java example:</p>
-
-<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
-    public String basePath;
-
-    @Override
-    public void onEvent(int event, String path) {
-        String fullPath = basePath;
-        if(path != null) {
-            fullPath += path;
-        }
-        Log.d(TAG, "FILE: "+fullPath);
-    }
-};
-observer.basePath = imageUri.getPath();
-observer.startWatching();
-</code></pre>
-
-<h1>Answer</h1>
-
-<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
-
-<p><strong>Quick Notes:</strong></p>
-
-<ul>
-<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
-<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
-<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
-</ul>
-
-
-<p><strong>C# FileObserver Class:</strong></p>
-
-<pre><code>using System;
-using Android.OS;
-using Android.Util;
-
-namespace MyFileObserver
-{
-    public class MyPathObserver : Android.OS.FileObserver
-    {
-        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
-        const string tag = "StackoverFlow";
-
-        public MyPathObserver (String rootPath) : base(rootPath, _Events)
-        {
-            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
-        }
-
-        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
-        {
-            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
-        }
-
-        public override void OnEvent(FileObserverEvents e, String path)
-        {
-            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
-        }
-    }
-}
-</code></pre>
-
-<p><strong>Example Usage:</strong></p>
-
-<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
-myFileObserver = new MyPathObserver (pathToWatch);
-myFileObserver.StartWatching (); // and StopWatching () when you are done...
-var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
-button.Click += delegate {
-    if (File.Exists (document)) {
-        button.Text = "Delete File";
-        File.Delete (document);
-    } else {
-        button.Text = "Create File";
-        File.WriteAllText (document, "Foobar");
-    }
-};
-</code></pre>
-
-<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
-
-<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-</code></pre>
 ]]></content>
   </entry>
   
