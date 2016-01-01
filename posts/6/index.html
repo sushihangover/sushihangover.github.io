@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="The simplest Interop case HelloWorld I can create, give it a try and see what happens: &gt;cat countbyone.cpp extern "C" int SomeMethod(int num) { &hellip;">
+  <meta name="description" content="So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github based fork's pull request is rejected, kind-of, now what?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T07:46:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:46 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right" src="http://sushihangover.github.io/images/github_logo.png"></p>
+
+<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
+
+<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
+
+<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
+
+<h3>Move last commit to a new branch</h3>
+
+<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
+
+<pre><code>git branch newbranch
+git reset --hard HEAD~1 # Go back 1 commit or use SHA
+git checkout newbranch
+</code></pre>
+
+<h3>Re-sync your Github fork</h3>
+
+<p>Now, lets get everything re-sync&rsquo;d.</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>Since you already push this branch to your Github fork, you will see the message:</p>
+
+<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
+</code></pre>
+
+<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
+
+<pre><code>git fetch upstream
+git merge upstream/master
+</code></pre>
+
+<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
+
+<pre><code>git push --force
+</code></pre>
+
+<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
+
+<pre><code>git push --all --force
+</code></pre>
+
+<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
+
+<h3>Moral of the story:</h3>
+
+<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -916,39 +994,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-moved-it-a-github-organization/">PlayScript - Moved it a Github organization</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T08:24:28-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:24 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I transfered my PlayScript repo to an Github organization to help maintain the structure of the project.</p>
-
-<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
-
-<p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -966,6 +1011,10 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
+      </li>
+    
+      <li class="post">
         <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
       </li>
     
@@ -979,10 +1028,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
     
       <li class="post">
         <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
-      </li>
-    
-      <li class="post">
-        <a href="/safari-changing-the-quit-shortcut/">Safari - Changing the Quit Shortcut</a>
       </li>
     
   </ul>
@@ -1027,7 +1072,7 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - RobertN -
+  Copyright &copy; 2016 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

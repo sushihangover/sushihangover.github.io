@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="For some reason everytime I need to do this I forget the option. Maybe it is because the help for git checkout &ndash;help does not actually provide &hellip;">
+  <meta name="description" content="PlayScript (.play) now has Exception Filters like C# 6.0. These are actually really cool and nice addition to ActionScript. From the C# Frequently &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-exception-filters/">PlayScript | Exception Filters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
+
+<p>These are actually really cool and nice addition to ActionScript.</p>
+
+<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
+
+<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
+
+<pre><code>try { … } 
+catch (MyException e) if (myfilter(e)) 
+{ 
+     … 
+}
+</code></pre>
+
+<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
+
+<p>And here is what they look like in PlayScript:</p>
+
+<h3>play/test-ps-ex-filter-01.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            throw new Error("Throw");
+        } catch (e:Error) if (x &gt; 0) {
+            trace("Catch");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<h3>play/test-ps-ex-filter-02.play</h3>
+
+<pre><code>package {
+    public class Foo {
+        public static function Main():int {
+        var x:int = 4;
+        try {
+            x = 5;
+            throw new Error("Throw");
+        } catch (e:Error) if (x &lt; 5) {
+            trace("No Catch Please");
+            return 0;
+        } catch (myError:Error) {
+            trace("Catch Here");
+            return 0;
+        }
+        return 1;
+        }
+    }
+}
+</code></pre>
+
+<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -623,43 +711,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-23T11:21:41-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:21 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
-
-<p>If you are also getting it build failure, please add your findings to:</p>
-
-<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
-
-<p>It appears not to be OS dependent either:</p>
-
-<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -677,6 +728,10 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
+      </li>
+    
+      <li class="post">
         <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
       </li>
     
@@ -690,10 +745,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
     
       <li class="post">
         <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
-      </li>
-    
-      <li class="post">
-        <a href="/safari-changing-the-quit-shortcut/">Safari - Changing the Quit Shortcut</a>
       </li>
     
   </ul>
@@ -738,7 +789,7 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - RobertN -
+  Copyright &copy; 2016 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
