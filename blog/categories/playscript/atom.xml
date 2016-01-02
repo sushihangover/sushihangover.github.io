@@ -4,7 +4,7 @@
   <title><![CDATA[Category: playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-01T11:32:11-08:00</updated>
+  <updated>2016-01-01T22:03:52-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Adding nuget packages to your MonoDevelop Addin Templates]]></title>
+    <link href="http://sushihangover.github.io/adding-nuget-packages-to-your-addin-templates/"/>
+    <updated>2016-01-01T21:48:44-08:00</updated>
+    <id>http://sushihangover.github.io/adding-nuget-packages-to-your-addin-templates</id>
+    <content type="html"><![CDATA[<p>I recently created nugets for the PlayScript AOT assemblies as well as a separtate MSBuild target nuget and it ended up working really well in a x-plat way.</p>
+
+<p>But one thing that I could not find quickly was how to tag my templates with the package info so they are automatically installed when the solution/projects are created.</p>
+
+<p>Well the answer was kind-of right under my nose (<a href="https://en.wikipedia.org/wiki/RTFM">RTFM</a>):</p>
+
+<blockquote><p>Conditionally Adding a NuGet Package from a Project Template
+A NuGet package be conditionally installed based on a boolean parameter defined by the project template wizard.</p></blockquote>
+
+<pre><code>&lt;Packages&gt;
+    &lt;Package id="Xamarin.GooglePlayServices" version="19.0.0.1" if="UseGooglePlayServices" /&gt;
+&lt;/Packages&gt;
+</code></pre>
+
+<blockquote><p>The conditions that can be specified do not support the more complicated condition that grouped templates do.</p></blockquote>
+
+<p>Re: <a href="http://www.monodevelop.com/developers/articles/project-templates/#conditionally-adding-a-nuget-package-from-a-project-template">Conditionally Adding a NuGet Package from a Project Template</a></p>
+
+<p>So in my templates I currently do not have to lock them to a version and want the most recent ones available so I skip the version attribute:</p>
+
+<pre><code>&lt;Packages&gt;
+    &lt;Package id="PlayScript.AOT" /&gt;
+    &lt;package id="PlayScript.MSBuild" /&gt;
+&lt;/Packages&gt;
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MSBuild / xbuild - Steps of a build]]></title>
@@ -311,20 +344,6 @@ index 986ff28..a84aeae 100644
 <p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
 </code>
 <code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NRefactory | PlayScript & ActionScript]]></title>
-    <link href="http://sushihangover.github.io/nrefactory-playscript-and-actionscript/"/>
-    <updated>2015-11-05T16:51:17-08:00</updated>
-    <id>http://sushihangover.github.io/nrefactory-playscript-and-actionscript</id>
-    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"></p>
-
-<p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
-
-<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.
-<img src="/images/ICSharpCode.NRefactory.GtkDemo.png" alt="" /></p>
 ]]></content>
   </entry>
   

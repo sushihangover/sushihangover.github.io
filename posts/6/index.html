@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. &hellip;">
+  <meta name="description" content="After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them. You can not do a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-review-a-merge-before-committing/">Git - Review a Merge before committing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-24T09:44:07-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:44 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
+
+<p>You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
+
+<pre><code>git merge --no-commit --no-ff branchname
+</code></pre>
+
+<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
+
+<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
+
+<pre><code>review = merge --no-ff --no-commit
+</code></pre>
+
+<p>So in looking at upstream changes:</p>
+
+<pre><code>git fetch upstream
+git review upstream/master
+git status
+</code></pre>
+
+<p>If you wish to back those changes, just reset that merge:</p>
+
+<pre><code>git reset --merge
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -908,92 +961,6 @@ Signed    : 0
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/ms-corflags-showing-incorrect-flags/">MS CorFlags - Showing incorrect flags</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T10:40:23-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:40 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged CIL PE image, it does not show that the COMIMAGE_FLAGS_32BITREQUIRED as being set.</p>
-
-<p>In the case of this output:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 0
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 0x20003 flags breaks down into:</p>
-
-<ul>
-<li>32BITPREFERRED (0x20000)</li>
-<li>32BITREQUIRED (0x00002)</li>
-<li>ILONLY (0x00001)</li>
-</ul>
-
-
-<p>So why is <strong>32BITREQ</strong> not shown as selected?</p>
-
-<p>My <a href="https://github.com/sushihangover/corflags">xplat version of CorFlags</a> shows the following:</p>
-
-<pre><code>Version   : v4.0.30319
-CLR Header: 2.5
-PE        : PE32
-CorFlags  : 0x20003
-ILONLY    : 1
-32BITREQ  : 1
-32BITPREF : 1
-Signed    : 0
-</code></pre>
-
-<p>The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag&hellip;. so who is right?</p>
-
-<p>Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), is that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat <a href="https://github.com/sushihangover/corflags/issues/new">CorFlags</a> project (Thanks).</p>
-
-<h2>Misc:</h2>
-
-<p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
-
-<blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5...)</p></blockquote>
-
-
-<p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
-
-<pre><code>COMIMAGE_FLAGS_ILONLY               =0x00000001,
-COMIMAGE_FLAGS_32BITREQUIRED        =0x00000002,
-COMIMAGE_FLAGS_IL_LIBRARY           =0x00000004,
-COMIMAGE_FLAGS_STRONGNAMESIGNED     =0x00000008,
-COMIMAGE_FLAGS_NATIVE_ENTRYPOINT    =0x00000010,
-COMIMAGE_FLAGS_TRACKDEBUGDATA       =0x00010000,
-COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -1011,6 +978,10 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
+      </li>
+    
+      <li class="post">
         <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
       </li>
     
@@ -1024,10 +995,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
     
       <li class="post">
         <a href="/using-redirection-within-xargs/">Using redirection within xargs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
       </li>
     
   </ul>

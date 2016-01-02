@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="When using NUnit console 2.4.x and 3.x with .csproj files, it expects a valid and fairly complete MSBuild/xbuild project to determine the assembly &hellip;">
+  <meta name="description" content="I&rsquo;m not sure if it is a bug or not, but older versions of Xamarin Studio (and MonoDevelop) on OS-X (prior to El Capitan) installed a mdtool &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-studio-mdtool-where-is-it/">Xamarin Studio mdtool - Where is it?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-21T08:36:11-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m not sure if it is a bug or not, but older versions of Xamarin Studio (and MonoDevelop) on OS-X (prior to El Capitan) installed a <code>mdtool</code> shell script in <code>/usr/local/bin</code> but that no longer happens(?).</p>
+
+<p><code>mdtool</code> original/missing shell script:</p>
+
+<pre><code>#!/bin/bash
+MONO_EXEC="exec mono-sgen"
+EXE_PATH="/Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/bin/mdtool.exe"
+$MONO_EXEC $MONO_OPTIONS "$EXE_PATH" "$@"
+</code></pre>
+
+<p>So create the script with the content above and place it into a directory in your path. <code>/usr/local/bin</code> is fine, but I personally install my shell scripts into a <code>$HOME/.scripts</code> directory that is included in my path so I can backup, via a git repo, my personal scripts and distinguish what I have created verus what gets installed in the <code>/usr/local/bin</code> by applications such a <code>brew</code>&hellip;</p>
+
+<p>Note: Make sure that you <code>chmod a+x mdtool</code> in order to make it executable&hellip;</p>
+
+<p>As always, have fun&hellip; ;-)</p>
+
+<pre><code>$mdtool
+
+Xamarin Studio Tool Runner
+
+Usage: mdtool [options] &lt;tool&gt; ... : Runs a tool.
+       mdtool setup ... : Runs the setup utility.
+       mdtool -q : Lists available tools.
+
+Options:
+  --verbose (-v)   Increases log verbosity. Can be used multiple times.
+  --no-reg-update  Skip updating addin registry. Faster but results in
+                   random errors if registry is not up to date.
+
+Available tools:
+- build: Project build tool
+- dbgen: Parser database generation tool
+- project-export: Project conversion tool
+- gsetup: Graphical add-in setup utility
+- archive: Project archiving tool
+- account: Xamarin account tool
+- mac-bundle: Mac application bundle and installer generator.
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -708,60 +774,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-08T09:59:55-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:59 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?</p>
-
-<p>Within the <code>~/Library/Application Support</code> directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:</p>
-
-<ul>
-<li><code>MonoDevelop-4.0</code></li>
-<li><code>MonoDevelop-5.0</code></li>
-<li><code>MonoDevelop-6.0</code></li>
-<li><code>XamarinStudio-4.0</code></li>
-<li><code>XamarinStudio-5.0</code></li>
-<li><code>XamarinStudio-6.0</code></li>
-</ul>
-
-
-<p>Within one of those directories you will find:</p>
-
-<ul>
-<li><code>LocalInstall/Addins</code></li>
-</ul>
-
-
-<p>So for me, that ended up being:</p>
-
-<p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
-</code>
-<code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -779,6 +791,10 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
+      </li>
+    
+      <li class="post">
         <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
       </li>
     
@@ -792,10 +808,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
     
       <li class="post">
         <a href="/using-redirection-within-xargs/">Using redirection within xargs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a>
       </li>
     
   </ul>
