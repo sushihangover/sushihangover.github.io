@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I made some updates to the CursesSharp project, so check out the update README.md for details: CursesSharp INTRODUCTION CursesSharp is a C# wrapper &hellip;">
+  <meta name="description" content="I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/monomac-where-is-slash-caemittercell-content-propery/">MonoMac - Where is the CAEmitterCell Content propery?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-23T06:01:10-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:01 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/MonoMac-Fire.gif" title="Fire" >
+I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
+
+<p>The MonoMac project is missing the maccore <code>CoreAnimation/CAEmitterCell.cs</code> in the Make.shared and thus the <code>MonoMac.dll</code> that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.</p>
+
+<p>Example:</p>
+
+<pre><code>            // Create the fire emitter cell
+            CAEmitterCell fire = CAEmitterCell.EmitterCell ();
+            fire.EmissionLongitude = (float)Math.PI;
+            fire.BirthRate = 0;
+            fire.Velocity = 80;
+            fire.VelocityRange = 30;
+            fire.EmissionRange = 1.1f;
+            fire.AccelerationY = 200;
+            fire.ScaleSpeed = 0.3f;
+
+            RectangleF rect = RectangleF.Empty;
+            CGColor color = new CGColor (0.8f,0.4f,0.2f,0.10f);
+            fire.Color = color;
+            fire.Contents = NSImage.ImageNamed ("fire.png").AsCGImage (ref rect, null, null);
+</code></pre>
+
+<p>I have updated PlayScript&rsquo;s <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> (forked from <a href="https://github.com/mono/monomac">Mono/MonoMac</a>) to fix this.</p>
+
+<p><strong>git diff src/Make.shared</strong></p>
+
+<pre><code>diff --git a/src/Make.shared b/src/Make.shared
+index 986ff28..a84aeae 100644
+--- a/src/Make.shared
++++ b/src/Make.shared
+@@ -44,6 +44,7 @@ SHARED_SOURCE = \
+        ./CoreAnimation/CALayer.cs                      \
+        ./CoreAnimation/CATextLayer.cs                  \
+        ./CoreAnimation/CAMediaTimingFunction.cs        \
++       ./CoreAnimation/CAEmitterCell.cs                \
+        ./CoreFoundation/CFArray.cs                     \
+        ./CoreFoundation/CFBoolean.cs                   \
+        ./CoreFoundation/CFDictionary.cs                \
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -966,50 +1034,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-os-x-credentials/">Git OS-X Credentials</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-09T03:33:38-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:33 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Setting up a fresh install of El Capitan&hellip;</p>
-
-<p>I installed <code>git</code> via <a href="http://brew.sh">homebrew</a>:</p>
-
-<p><code>brew git</code></p>
-
-<p>And since it has been such a long time since I had to link git to the OS-X key chain, I totally forgot how&hellip; After way to much searching, I figured I&rsquo;d post this as a reminder for at least myself ;-)</p>
-
-<p>But if you installed git using homebrew, you should already have the osxkeychain helper. You can verify this by trying to run it:</p>
-
-<p><code>git credential-osxkeychain</code></p>
-
-<p>To tell git to use osxkeychain, simply set the global git config:</p>
-
-<p><code>git config --global credential.helper osxkeychain
-</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1027,6 +1051,10 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
       </li>
     
@@ -1040,10 +1068,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
     
       <li class="post">
         <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/">Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)</a>
       </li>
     
   </ul>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/</loc>
+    <lastmod>2016-01-11T00:16:49-08:00</lastmod>
+  </url>
+  <url>
     <loc>http://sushihangover.github.io/playscript-and-nunit/</loc>
     <lastmod>2016-01-10T23:29:28-08:00</lastmod>
   </url>
@@ -922,6 +926,9 @@
   </url>
   <url>
     <loc>http://sushihangover.github.io/blog/categories/nuint/</loc>
+  </url>
+  <url>
+    <loc>http://sushihangover.github.io/blog/categories/visual-studio/</loc>
   </url>
   <url>
     <loc>http://sushihangover.github.io/posts/2/</loc>

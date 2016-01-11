@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="From my Answer for &ldquo;Run NUnit test on Ubuntu from command line&rdquo; on Stackoverflow: Lets start from the beginning: Get the latest and &hellip;">
+  <meta name="description" content="CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are documented here. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-plus-rosyln-plus-codeformatter/">OS-X + Mono + Rosyln + CodeFormatter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-25T06:20:17-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:20 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CodeFormatter is a tool that uses Roslyn to automatically rewrite the source to follow Microsoft&rsquo;s coding styles, which are <a href="https://github.com/dotnet/corefx/blob/master/Documentation/coding-style.md">documented here</a>.</p>
+
+<p>CodeFormatter has been released as open-source for 6 months now, but I have not had a chance to look at it.</p>
+
+<p>With Roslyn compiling on OS-X and I had a couple of projects that really needed to be cleaned up, I thought I would give it a try.</p>
+
+<p>15 minutes in total to clone the repo and get things built properly, would have been quicker but the VS solution file is not very Xamanin Studio/MonoDevelop friendly as it includes ToolVersion 14 items (That would be included in VS 2015 beta).</p>
+
+<p>But those projects are not needed to get the main program working&hellip;</p>
+
+<h3>mono ./CodeFormatter.exe</h3>
+
+<pre><code>Must specify at least one project / solution / rsp to format
+CodeFormatter [/file:&lt;filename&gt;] [/lang:&lt;language&gt;] [/c:&lt;config&gt;[,&lt;config&gt;...]&gt;]
+    [/copyright:&lt;file&gt; | /nocopyright] [/tables] [/nounicode]
+    [/rule(+|-):rule1,rule2,...]  [/verbose]
+    &lt;project, solution or response file&gt;
+
+    /file        - Only apply changes to files with specified name
+    /lang        - Specifies the language to use when a responsefile is
+                   specified. i.e. 'C#', 'Visual Basic', ... (default: 'C#')
+    /c           - Additional preprocessor configurations the formatter
+                   should run under.
+    /copyright   - Specifies file containing copyright header.
+                   Use ConvertTests to convert MSTest tests to xUnit.
+    /nocopyright - Do not update the copyright message.
+    /tables      - Let tables opt out of formatting by defining
+                   DOTNET_FORMATTER
+    /nounicode   - Do not convert unicode strings to escape sequences
+    /rule(+|-)   - Enable (default) or disable the specified rule
+    /rules       - List the available rules
+    /verbose     - Verbose output
+</code></pre>
+
+<h3>mono ./CodeFormatter.exe /rules</h3>
+
+<pre><code>Name                 Description
+==============================================
+BraceNewLine         :Ensure all braces occur on a new line
+Copyright            :Insert the copyright header into every file
+NewLineAbove         :Ensure there is a new line above the first namespace and using in the file
+CustomCopyright      :Remove any custom copyright header from the file
+UsingLocation        :Place using directives outside namespace declarations
+UnicodeLiterals      :Use unicode escape sequence instead of unicode literals
+ExplicitVisibility   :Ensure all members have an explicit visibility modifier
+IllegalHeaders       :Remove illegal headers from files
+FormatDocument       :Run the language specific formatter on every document
+ExplicitThis         :Remove explicit this/Me prefixes on expressions except where necessary
+ReadonlyFields       :Mark fields which can be readonly as readonly
+FieldNames           :Prefix private fields with _ and statics with s_
+</code></pre>
+
+<p> I&rsquo;ll be checking next to see if it really works on some source code. ;-)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -847,77 +928,6 @@ Fix absolute paths to the assemblies that are passed in
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-set-up-a-fetch-only-remote/">Git: Set up a fetch-only remote | Disabling push</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-14T14:57:37-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:57 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> The PlayScript repo on the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> Github organization I maintain is a down-stream fork of <a href="https://github.com/mono/mono">Mono</a> so I can fetch the changes to their master branch. I also have my own <a href="https://github.com/sushihangover/playscript">fork</a> of the PlayScript repo so I can code, issue pull-requests and review other people&rsquo;s pull-requests. But I do not want to screw up and push directly to the <a href="https://github.com/PlayScriptRedux/playscript">Redux based repo</a> from my local repo, only my own fork on GitHub. Also I do not have any push permissions on the Mono repo and want to not even have git try to push to that repo if I screw up on the cmd line.</p>
-
-<p>So after adding my additional remotes my local repo, it looks like this:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   https://github.com/PlayScriptRedux/playscript.git (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    https://github.com/mono/mono.git (push)
-</code></pre>
-
-<p>I want to keep the fetch/pull ability from the redux and upstream remotes and remove the  &lsquo;push&rsquo; ability to those remotes.</p>
-
-<p>You can not totally clear the push uri as it will be replaced with the fetch uri. So setting the push uri to something nonexistent works, i.e.</p>
-
-<pre><code> git remote set-url --push upstream DISABLE
- git remote set-url --push redux DISABLE
-</code></pre>
-
-<p>And to see what that looks like now:</p>
-
-<pre><code>git remote -v
-origin  https://github.com/sushihangover/playscript.git (fetch)
-origin  https://github.com/sushihangover/playscript.git (push)
-redux   https://github.com/PlayScriptRedux/playscript.git (fetch)
-redux   DISABLE (push)
-upstream    https://github.com/mono/mono.git (fetch)
-upstream    DISABLE (push)
-</code></pre>
-
-<p>Now if you push to the one of the &lsquo;disable&rsquo; remotes, you will recieve the following error:</p>
-
-<pre><code>git push redux
-fatal: 'DISABLE' does not appear to be a git repository
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-</code></pre>
-
-<p>NOTE: You do not have to use &ldquo;DISABLE&rdquo;, any nonsensical URI will do. I like DISABLE as seeing it in the git push error message is a clear indicator of the brain fart that I just typed&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -935,6 +945,10 @@ and the repository exists.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
       </li>
     
@@ -948,10 +962,6 @@ and the repository exists.
     
       <li class="post">
         <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
-      </li>
-    
-      <li class="post">
-        <a href="/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/">Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)</a>
       </li>
     
   </ul>

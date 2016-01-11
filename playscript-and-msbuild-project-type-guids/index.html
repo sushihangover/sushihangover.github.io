@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PlayScript and MSBuild Project Type GUIDs - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="Within the PlayScriptRedux/PlayScript.Addin there are two project guids defined for PlayScript and ActionScript projects. Note: I do not know a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+
+</td>
+<td>
+
+<table>
+<tr>
+<td>
+<a href="https://github.com/PlayScriptRedux/playscript"><img class="right" src="/images/Playscript-TransBackground-Small.png"></a>
+</td>
+<td>
+<table>
+<tr>
+<td align="center"><a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://camo.githubusercontent.com/9c3fab3d568fc5663618f2fb9c8f7b1d8ea99532/68747470733a2f2f7472617669732d63692e6f72672f506c617953637269707452656475782f706c61797363726970742e7376673f6272616e63683d706c6179736372697074" alt="master nix" data-canonical-src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" style="max-width:100%;"></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="https://gitter.im/PlayScriptRedux/playscript?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=body_badge"><img src="https://camo.githubusercontent.com/5369be009b0edd6354d3351d0dc1a47adee512bf/68747470733a2f2f6261646765732e6769747465722e696d2f506c617953637269707452656475782f706c61797363726970742e737667" alt="Gitter" data-canonical-src="https://badges.gitter.im/PlayScriptRedux/playscript.svg" style="max-width:100%;"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</table>
+
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PlayScript and MSBuild Project Type GUIDs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T00:16:49-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:16 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">PlayScriptRedux/PlayScript.Addin</a> there are two project guids defined for PlayScript and ActionScript projects.</p>
+
+<p>Note: I do not know a single authoritative source for Project GUIDs, seems like it <em>should</em> be Microsoft, but I can not find a master published list on their website.</p>
+
+<h4>Highlighted below (PlayScript &amp; ActionScript):</h4>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=600
+ style='width:600.0pt;border-collapse:collapse'>
+ <tr style='height:17.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;border-top:solid black 1.0pt;
+  border-left:none;border-bottom:solid black 1.0pt;border-right:none;
+  background:#4472C4;padding:0in 5.4pt 0in 5.4pt;height:17.0pt'>
+  <p class=MsoNormal><b><span style='color:white'>Project Type</span></b></p>
+  </td>
+  <td width=300 nowrap valign=bottom style='width:300.0pt;border-top:solid black 1.0pt;
+  border-left:none;border-bottom:solid black 1.0pt;border-right:none;
+  background:#4472C4;padding:0in 5.4pt 0in 5.4pt;height:17.0pt'>
+  <p class=MsoNormal><b><span style='color:white'>Guid</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>ActionScript (via PlayScript)</span></b></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>{464403d2-eb41-442a-a1f1-9bf858b8865f}</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 1</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{603C0E0B-DB56-11DC-BE95-000D561079B0}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 2</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F85E285D-A4E0-4152-9332-AB1D724D3325}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 3</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E53F8FEA-EAE0-44A6-8774-FFD645390401}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 4</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E3E379DF-F4C6-4180-9B81-6769533ABE47}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 5</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>C#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>C++</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Database</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A9ACE9BB-CECE-4E62-9AA4-C7E7C5BD2124}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Database (other project types)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{4F174C21-8C12-11D0-8340-0000F80270F8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Cab</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3EA9E505-35AC-4774-B492-AD1749C4943A}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Merge Module</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{06A35CCD-C46D-44D5-987B-CF40FF872267}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Setup</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{978C614F-708E-4E1A-B201-565925725DBA}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Smart Device Cab</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{AB322303-2255-48EF-A496-5904EB18DA55}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Distributed System</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F135691A-BF7E-435D-8960-F99683D2D49C}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Dynamics 2012 AX C# in AOT</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BF6F8E12-879D-49E7-ADF0-5503146B24B8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>F#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F2A71F9B-5D33-465A-A702-920D77279786}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>J#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Legacy (2003) Smart Device (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{20D4826A-C6FA-45DB-90F4-C717570B9F32}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Legacy (2003) Smart Device
+  (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{CB4CE8C6-1BDB-4DC7-A4D3-65A1999772F8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v2 (MVC 2)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F85E285D-A4E0-4152-9332-AB1D724D3325}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v3 (MVC 3)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E53F8FEA-EAE0-44A6-8774-FFD645390401}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v4 (MVC 4)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E3E379DF-F4C6-4180-9B81-6769533ABE47}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v5 (MVC 5)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Mono for Android</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>MonoTouch</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6BC8ED88-2882-458C-8E55-DFD12B67127B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>MonoTouch Binding</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F5B4F3BC-B597-4E2B-B552-EF5D8A32436F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>PlayScript</span></b></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>{464403d2-eb41-442a-a1f1-9bf858b8865f}</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Portable Class Library</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{786C830F-07A1-408B-BD7F-6EE04809D6DB}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{593B0543-81F6-4436-BA1E-4747859CAAE2}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EC05E597-79D4-47f3-ADA0-324C4F7C7484}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint Workflow</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F8810EC1-6754-47FC-A15F-DFABD2E3FA90}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Silverlight</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A1591282-1198-4647-A2B1-27E5FF5F6F3B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Smart Device (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{4D628B5B-2FBC-4AA6-8C16-197242AEB884}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Smart Device (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{68B1623D-7FB9-47D8-8664-7ECEA3297D4F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Solution Folder</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{2150E333-8FDC-42A3-9474-1A3956D46DE8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Test</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3AC096D0-A1C2-E12C-1390-A8335801FDAB}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>VB.NET</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Database Tools</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{C252FEB5-A946-4202-B1D4-9916A0590387}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Studio Tools for
+  Applications (VSTA)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A860303F-1F3F-4691-B57E-529FC101A107}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Studio Tools for Office
+  (VSTO)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BAA0C2D2-18E2-41B9-852F-F413020CAA33}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Web Application</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Web Site</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E24C65DC-7377-472B-9ABA-BC803B73C61A}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (Visual C++)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Communication Foundation
+  (WCF)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3D9AD99F-2412-4246-B90B-4EAA41C64699}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 App (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{C089C8C0-30E0-4E22-80C0-CE093F111A43}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 App (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{DB03555F-0C8B-43BE-9FF9-57896B3C5E56}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 Blank/Hub/Webview</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{76F1466A-8B6D-4E39-A767-685A06062A39}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Presentation Foundation
+  (WPF)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Store (Metro) Apps &amp;
+  Components</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BC8A1FFA-BEE3-4634-8014-F334798102B3}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{14822709-B5A1-4724-98CA-57A101D1B079}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{D59BE175-2ED0-4C54-BE3D-CDAA9F3214C8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow Foundation</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{32F31D43-81CC-4C15-9DE6-3FC5453562B6}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Xamarin.Android</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Xamarin.iOS</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6BC8ED88-2882-458C-8E55-DFD12B67127B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (Windows)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (XBox)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{2DF5C3F4-5A5F-47a9-8E94-23B4456F55E2}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;border:none;
+  border-bottom:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (Zune)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;border:none;
+  border-bottom:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{D399B71A-8929-442a-A9AC-8BEC78BB2433}</span></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-01-11T00:16:49-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:16 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/msbuild/'>msbuild</a>, <a class='category' href='/blog/categories/playscript/'>playscript</a>, <a class='category' href='/blog/categories/visual-studio/'>visual studio</a>, <a class='category' href='/blog/categories/xamarin/'>xamarin</a>, <a class='category' href='/blog/categories/xamarin-studio/'>xamarin studio</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/" data-via="" data-counturl="http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/playscript-and-nunit/" title="Previous Post: PlayScript and NUnit">&laquo; PlayScript and NUnit</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
+      </li>
+    
+      <li class="post">
+        <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
+      </li>
+    
+      <li class="post">
+        <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/';
+        var disqus_url = 'http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
