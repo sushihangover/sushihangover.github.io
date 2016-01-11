@@ -9,11 +9,16 @@ categories:
 - visual studio
 - xamarin studio
 - playscript
+- ProjectTypeGuids
 ---
 
 Within the [PlayScriptRedux/PlayScript.Addin](https://github.com/PlayScriptRedux/PlayScript.Addin) there are two project guids defined for PlayScript and ActionScript projects.
 
-Note: I do not know a single authoritative source for Project GUIDs, seems like it *should* be Microsoft, but I can not find a master published list on their website.
+These are the Project Types, *not* the unique ProjectGuid, i.e:
+
+	<ProjectTypeGuids></ProjectTypeGuids> 
+
+> Note: I do not know of a single authoritative source for Project Type GUIDs, seems like it *should* be Microsoft, but I can not find a master published list on their website.
 
 ####Highlighted below (PlayScript & ActionScript):
 
