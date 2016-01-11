@@ -1,0 +1,640 @@
+---
+layout: post
+title: "PlayScript and MSBuild Project Type GUIDs"
+date: 2016-01-11 00:16:49 -0800
+comments: true
+categories: 
+- msbuild
+- xamarin
+- visual studio
+- xamarin studio
+- playscript
+---
+
+Within the [PlayScriptRedux/PlayScript.Addin](https://github.com/PlayScriptRedux/PlayScript.Addin) there are two project guids defined for PlayScript and ActionScript projects.
+
+Note: I do not know a single authoritative source for Project GUIDs, seems like it *should* be Microsoft, but I can not find a master published list on their website.
+
+####Highlighted below (PlayScript & ActionScript):
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=600
+ style='width:600.0pt;border-collapse:collapse'>
+ <tr style='height:17.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;border-top:solid black 1.0pt;
+  border-left:none;border-bottom:solid black 1.0pt;border-right:none;
+  background:#4472C4;padding:0in 5.4pt 0in 5.4pt;height:17.0pt'>
+  <p class=MsoNormal><b><span style='color:white'>Project Type</span></b></p>
+  </td>
+  <td width=300 nowrap valign=bottom style='width:300.0pt;border-top:solid black 1.0pt;
+  border-left:none;border-bottom:solid black 1.0pt;border-right:none;
+  background:#4472C4;padding:0in 5.4pt 0in 5.4pt;height:17.0pt'>
+  <p class=MsoNormal><b><span style='color:white'>Guid</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>ActionScript (via PlayScript)</span></b></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>{464403d2-eb41-442a-a1f1-9bf858b8865f}</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 1</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{603C0E0B-DB56-11DC-BE95-000D561079B0}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 2</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F85E285D-A4E0-4152-9332-AB1D724D3325}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 3</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E53F8FEA-EAE0-44A6-8774-FFD645390401}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 4</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E3E379DF-F4C6-4180-9B81-6769533ABE47}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>ASP.NET MVC 5</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>C#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>C++</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Database</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A9ACE9BB-CECE-4E62-9AA4-C7E7C5BD2124}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Database (other project types)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{4F174C21-8C12-11D0-8340-0000F80270F8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Cab</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3EA9E505-35AC-4774-B492-AD1749C4943A}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Merge Module</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{06A35CCD-C46D-44D5-987B-CF40FF872267}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Setup</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{978C614F-708E-4E1A-B201-565925725DBA}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Deployment Smart Device Cab</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{AB322303-2255-48EF-A496-5904EB18DA55}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Distributed System</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F135691A-BF7E-435D-8960-F99683D2D49C}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Dynamics 2012 AX C# in AOT</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BF6F8E12-879D-49E7-ADF0-5503146B24B8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>F#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F2A71F9B-5D33-465A-A702-920D77279786}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>J#</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Legacy (2003) Smart Device (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{20D4826A-C6FA-45DB-90F4-C717570B9F32}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Legacy (2003) Smart Device
+  (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{CB4CE8C6-1BDB-4DC7-A4D3-65A1999772F8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v2 (MVC 2)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F85E285D-A4E0-4152-9332-AB1D724D3325}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v3 (MVC 3)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E53F8FEA-EAE0-44A6-8774-FFD645390401}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v4 (MVC 4)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E3E379DF-F4C6-4180-9B81-6769533ABE47}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Model-View-Controller v5 (MVC 5)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Mono for Android</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>MonoTouch</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6BC8ED88-2882-458C-8E55-DFD12B67127B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>MonoTouch Binding</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F5B4F3BC-B597-4E2B-B552-EF5D8A32436F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>PlayScript</span></b></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:yellow;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><b><span style='color:black'>{464403d2-eb41-442a-a1f1-9bf858b8865f}</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Portable Class Library</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{786C830F-07A1-408B-BD7F-6EE04809D6DB}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{593B0543-81F6-4436-BA1E-4747859CAAE2}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EC05E597-79D4-47f3-ADA0-324C4F7C7484}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>SharePoint Workflow</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F8810EC1-6754-47FC-A15F-DFABD2E3FA90}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Silverlight</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A1591282-1198-4647-A2B1-27E5FF5F6F3B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Smart Device (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{4D628B5B-2FBC-4AA6-8C16-197242AEB884}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Smart Device (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{68B1623D-7FB9-47D8-8664-7ECEA3297D4F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Solution Folder</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{2150E333-8FDC-42A3-9474-1A3956D46DE8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Test</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3AC096D0-A1C2-E12C-1390-A8335801FDAB}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>VB.NET</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Database Tools</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{C252FEB5-A946-4202-B1D4-9916A0590387}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Studio Tools for
+  Applications (VSTA)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{A860303F-1F3F-4691-B57E-529FC101A107}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Visual Studio Tools for Office
+  (VSTO)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BAA0C2D2-18E2-41B9-852F-F413020CAA33}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Web Application</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{349C5851-65DF-11DA-9384-00065B846F21}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Web Site</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{E24C65DC-7377-472B-9ABA-BC803B73C61A}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows (Visual C++)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Communication Foundation
+  (WCF)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{3D9AD99F-2412-4246-B90B-4EAA41C64699}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 App (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{C089C8C0-30E0-4E22-80C0-CE093F111A43}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 App (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{DB03555F-0C8B-43BE-9FF9-57896B3C5E56}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Phone 8/8.1 Blank/Hub/Webview</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{76F1466A-8B6D-4E39-A767-685A06062A39}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Presentation Foundation
+  (WPF)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Windows Store (Metro) Apps &amp;
+  Components</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{BC8A1FFA-BEE3-4634-8014-F334798102B3}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow (C#)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{14822709-B5A1-4724-98CA-57A101D1B079}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow (VB.NET)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{D59BE175-2ED0-4C54-BE3D-CDAA9F3214C8}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Workflow Foundation</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{32F31D43-81CC-4C15-9DE6-3FC5453562B6}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Xamarin.Android</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>Xamarin.iOS</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6BC8ED88-2882-458C-8E55-DFD12B67127B}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (Windows)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (XBox)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;background:#D9D9D9;
+  padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{2DF5C3F4-5A5F-47a9-8E94-23B4456F55E2}</span></p>
+  </td>
+ </tr>
+ <tr style='height:16.0pt'>
+  <td width=256 nowrap valign=bottom style='width:256.0pt;border:none;
+  border-bottom:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>XNA (Zune)</span></p>
+  </td>
+  <td width=250 nowrap valign=bottom style='width:250.0pt;border:none;
+  border-bottom:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:16.0pt'>
+  <p class=MsoNormal><span style='color:black'>{D399B71A-8929-442a-A9AC-8BEC78BB2433}</span></p>
+  </td>
+ </tr>
+</table>
