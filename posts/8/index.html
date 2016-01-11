@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses &hellip;">
+  <meta name="description" content="In testing out 64-bit ncurses on OS-X, I grabbed the C# version of Midnight Commander to do some manual testing. After tweaking the Makefile for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/os-x-64-bit-mono-midnight-commander/">OS-X 64-bit Mono : Midnight Commander</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-08T18:43:29-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:43 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/midnightcommander.png" alt="" /></p>
+
+<p>In testing out 64-bit ncurses on OS-X, I grabbed the C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a> to do some manual testing.</p>
+
+<p>After tweaking the Makefile for PE32+ images and changing my path to include a 64-bit mono, I ended up with the needed project&rsquo;s exe, dll, and dylib:</p>
+
+<pre><code>file *.exe *.dll *.dylib
+mc.exe:               PE32+ executable for MS Windows (console) Mono/.Net assembly
+mono-curses.dll:      PE32+ executable for MS Windows (DLL) (console) Mono/.Net/assembly
+libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
+</code></pre>
+
+<p>There are some minor painting issues which I do not know if they are related to the arch type, OS-X terminal or bugs in the actual C# code (mc or the ncurses wrapper), but overall it works very well.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -608,44 +649,6 @@ A       mcs/class/Facades/System.Runtime.InteropServices.WindowsRuntime/Assembly
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-3-dot-2-3003-posted/">Playscript 3.2.3003 Posted</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-03T19:22:01-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:22 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/PlayscriptLogo_small.png" alt="" /></p>
-
-<p>I posted up the PlayScript compiler 3.2.3003 to <a href="https://github.com/sushihangover/playscript">Github</a> which fixes a bunch of build issues, including a clang/ld failure if you are running the latest and greatest version from Apple.</p>
-
-<p>Root repo : playscript-small-build.sh</p>
-
-<pre><code>./autogen.sh --with-mcs-docs=no --with-profile2=no --with-profile4=no --with-profile4_5=yes --with-moonlight=no --with-tls=posix --enable-nls=no --prefix=$HOME/playscript-install
-make
-make install
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -663,6 +666,10 @@ make install
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
+      </li>
+    
+      <li class="post">
         <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
       </li>
     
@@ -676,10 +683,6 @@ make install
     
       <li class="post">
         <a href="/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/">Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/using-redirection-within-xargs/">Using redirection within xargs</a>
       </li>
     
   </ul>

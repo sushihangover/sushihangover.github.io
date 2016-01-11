@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-01T22:03:52-08:00</updated>
+  <updated>2016-01-10T23:42:00-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript and NUnit]]></title>
+    <link href="http://sushihangover.github.io/playscript-and-nunit/"/>
+    <updated>2016-01-10T23:29:28-08:00</updated>
+    <id>http://sushihangover.github.io/playscript-and-nunit</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I&rsquo;ve add a NUnit template to the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">PlayScriptRedux/PlayScript.Addin</a></p>
+
+<p>I do not have a website for the <code>.mpack</code> setup yet, so grab the latest release <a href="https://github.com/PlayScriptRedux/PlayScript.Addin/releases">here</a>.</p>
+
+<p><img src="images/XS_Play_NUnit.png" alt="PlayScript NUnit" /></p>
+
+<h3>MonoDevelop.PlayScript_5.10.2.2.mpack</h3>
+
+<h4>New:</h4>
+
+<ul>
+<li>Added NUnit template</li>
+</ul>
+
+
+<h3>Prior:</h3>
+
+<ul>
+<li>Support for the nuget feed (<a href="https://www.myget.org/F/playscript/">https://www.myget.org/F/playscript/</a>)</li>
+<li>Initial Release for Xamarin Studio v5.10.2.0+</li>
+</ul>
+
+
+<p>Functional, but it still needs a lot of love to be on par with CSharp&rsquo;s NRefactory&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding nuget packages to your MonoDevelop Addin Templates]]></title>
@@ -1322,27 +1354,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
 <p><code>git config --global credential.helper osxkeychain
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MonoDevelop.AddinMaker - CI Build and Install .mpack]]></title>
-    <link href="http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/"/>
-    <updated>2015-11-08T11:54:48-08:00</updated>
-    <id>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack</id>
-    <content type="html"><![CDATA[<p>Using mhutch/MonoDevelop.AddinMaker to create your Addins? If not, you should convert your Addin Project (see his &ldquo;Migrating Existing Projects&rdquo; notes in the repo&rsquo;s <a href="https://github.com/mhutch/MonoDevelop.AddinMaker/blob/master/README.md">README.md</a> file)</p>
-
-<p>Need to intergate building, creating the <code>.mpack</code>, and installing it into Xamarin Studio into your CI process?</p>
-
-<h3>Package your Addin to a .mpack file</h3>
-
-<p><code>xbuild PlayScript.Addin.csproj /t:CreatePackage</code></p>
-
-<h3>Install your .mpack</h3>
-
-<p><code>mdtool setup install bin/Debug/PlayScript.Addin.PlayScript.Addin_1.0.mpack</code></p>
-
-<p>FYI: Using <a href="https://github.com/mhutch/MonoDevelop.AddinMaker">mhutch/MonoDevelop.AddinMaker</a> makes developing and debugging Addins so much easier, there is still a <strong>huge</strong> documention gap in the MonoDevelop Addin system, but M. Hutch&rsquo;s AddinMaker sure helps a ton (thanks mhutch!).</p>
 ]]></content>
   </entry>
   

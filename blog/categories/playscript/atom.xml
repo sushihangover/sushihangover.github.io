@@ -4,7 +4,7 @@
   <title><![CDATA[Category: playscript | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/playscript/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-01T22:03:52-08:00</updated>
+  <updated>2016-01-10T23:42:00-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript and NUnit]]></title>
+    <link href="http://sushihangover.github.io/playscript-and-nunit/"/>
+    <updated>2016-01-10T23:29:28-08:00</updated>
+    <id>http://sushihangover.github.io/playscript-and-nunit</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I&rsquo;ve add a NUnit template to the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">PlayScriptRedux/PlayScript.Addin</a></p>
+
+<p>I do not have a website for the <code>.mpack</code> setup yet, so grab the latest release <a href="https://github.com/PlayScriptRedux/PlayScript.Addin/releases">here</a>.</p>
+
+<p><img src="images/XS_Play_NUnit.png" alt="PlayScript NUnit" /></p>
+
+<h3>MonoDevelop.PlayScript_5.10.2.2.mpack</h3>
+
+<h4>New:</h4>
+
+<ul>
+<li>Added NUnit template</li>
+</ul>
+
+
+<h3>Prior:</h3>
+
+<ul>
+<li>Support for the nuget feed (<a href="https://www.myget.org/F/playscript/">https://www.myget.org/F/playscript/</a>)</li>
+<li>Initial Release for Xamarin Studio v5.10.2.0+</li>
+</ul>
+
+
+<p>Functional, but it still needs a lot of love to be on par with CSharp&rsquo;s NRefactory&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding nuget packages to your MonoDevelop Addin Templates]]></title>
@@ -310,40 +342,6 @@ index 986ff28..a84aeae 100644
         ./CoreFoundation/CFBoolean.cs                   \
         ./CoreFoundation/CFDictionary.cs                \
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xamarin OS-X Addins Location]]></title>
-    <link href="http://sushihangover.github.io/xamarin-os-x-addins-location/"/>
-    <updated>2015-11-08T09:59:55-08:00</updated>
-    <id>http://sushihangover.github.io/xamarin-os-x-addins-location</id>
-    <content type="html"><![CDATA[<p>In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?</p>
-
-<p>Within the <code>~/Library/Application Support</code> directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:</p>
-
-<ul>
-<li><code>MonoDevelop-4.0</code></li>
-<li><code>MonoDevelop-5.0</code></li>
-<li><code>MonoDevelop-6.0</code></li>
-<li><code>XamarinStudio-4.0</code></li>
-<li><code>XamarinStudio-5.0</code></li>
-<li><code>XamarinStudio-6.0</code></li>
-</ul>
-
-
-<p>Within one of those directories you will find:</p>
-
-<ul>
-<li><code>LocalInstall/Addins</code></li>
-</ul>
-
-
-<p>So for me, that ended up being:</p>
-
-<p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
-</code>
-<code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
 ]]></content>
   </entry>
   

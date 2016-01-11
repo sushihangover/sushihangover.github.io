@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-01T22:03:52-08:00</updated>
+  <updated>2016-01-10T23:42:00-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PlayScript and NUnit]]></title>
+    <link href="http://sushihangover.github.io/playscript-and-nunit/"/>
+    <updated>2016-01-10T23:29:28-08:00</updated>
+    <id>http://sushihangover.github.io/playscript-and-nunit</id>
+    <content type="html"><![CDATA[<p><img class="left <a" src="href="http://sushihangover.github.io/images/PlayscriptLogo_small.png">http://sushihangover.github.io/images/PlayscriptLogo_small.png</a>"> I&rsquo;ve add a NUnit template to the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">PlayScriptRedux/PlayScript.Addin</a></p>
+
+<p>I do not have a website for the <code>.mpack</code> setup yet, so grab the latest release <a href="https://github.com/PlayScriptRedux/PlayScript.Addin/releases">here</a>.</p>
+
+<p><img src="images/XS_Play_NUnit.png" alt="PlayScript NUnit" /></p>
+
+<h3>MonoDevelop.PlayScript_5.10.2.2.mpack</h3>
+
+<h4>New:</h4>
+
+<ul>
+<li>Added NUnit template</li>
+</ul>
+
+
+<h3>Prior:</h3>
+
+<ul>
+<li>Support for the nuget feed (<a href="https://www.myget.org/F/playscript/">https://www.myget.org/F/playscript/</a>)</li>
+<li>Initial Release for Xamarin Studio v5.10.2.0+</li>
+</ul>
+
+
+<p>Functional, but it still needs a lot of love to be on par with CSharp&rsquo;s NRefactory&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding nuget packages to your MonoDevelop Addin Templates]]></title>
@@ -316,27 +348,6 @@ namespace Slots
 </code></pre>
 
 <p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xamarin Android Player / Genymotion - Foobar 101]]></title>
-    <link href="http://sushihangover.github.io/xamarin-android-player-delete/"/>
-    <updated>2015-11-18T15:16:42-08:00</updated>
-    <id>http://sushihangover.github.io/xamarin-android-player-delete</id>
-    <content type="html"><![CDATA[<p>I was really happy with Xamarin&rsquo;s Android Player (XAP) on OS-X 10.11 (and 10.10.x before I upgraded). It is much better the Google&rsquo;s plain-jane Android emulator, way way faster, easier setup as the images are pre-packaged Nexus images, etc&hellip; But you can not create custom images and that ends up being a problem as you need to test different configurations.</p>
-
-<p>Someone recommended Genymotion and everything seemed fine, I could create custom Genymotion images and still use XAP for the basic testing&hellip;</p>
-
-<p>BUT after a reboot of OS-X, <strong>everything went to @#$@#$@#</strong>. Android sessions in either player would take 10 minutes or more to start up and get to the lock screen and when I say &lsquo;more&rsquo;, I mean up to 20 minutes&hellip;or MORE. Even then, services would die, the VirtualBox instance would hang, Xamarin Studio would not connect, XAP would report that the OpenGL server is not available, Genymotion would report no IP address could be retrieved&hellip;</p>
-
-<p>Removing Genymotion did not help. Deleting and re-install XAP did not help. Installing the latest VirtualBox did not help. Uninstall VirtualBox via their installer, deleting the XAP app and restarting from stratch did not help&hellip;. Removing all the original XAP Andriod images and re-downloading them did not help (I thought maybe the new VirtualBox updated them and caused a XAP issue, but no to that idea)&hellip;</p>
-
-<p>Seems that I am not alone, if you started with Genymotion and later installed XAP, you could be in the same boot&hellip; after you reboot the first time. Seems Geny users call it <strong>&ldquo;surviving the reboot&rdquo;</strong>, if you make it past a reboot and everything is still working you should be golden, if not, your system is @#$#@$#.</p>
-
-<p>I&rsquo;m still looking for a solution other then <strong>re-installing the OS as some people have resorted to</strong>&hellip; I just do not have time do a fresh OS-X install so right now I can only test via actual physical devices :-(</p>
-
-<p><strong>AHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!</strong></p>
 ]]></content>
   </entry>
   
