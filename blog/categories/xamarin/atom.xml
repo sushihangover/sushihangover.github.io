@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xamarin | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xamarin/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-11T00:47:34-08:00</updated>
+  <updated>2016-01-11T00:54:51-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -20,7 +20,12 @@
     <id>http://sushihangover.github.io/playscript-and-msbuild-project-type-guids</id>
     <content type="html"><![CDATA[<p>Within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">PlayScriptRedux/PlayScript.Addin</a> there are two project guids defined for PlayScript and ActionScript projects.</p>
 
-<p>Note: I do not know a single authoritative source for Project GUIDs, seems like it <em>should</em> be Microsoft, but I can not find a master published list on their website.</p>
+<p>These are the Project Types, <em>not</em> the unique ProjectGuid, i.e:</p>
+
+<pre><code>&lt;ProjectTypeGuids&gt;&lt;/ProjectTypeGuids&gt; 
+</code></pre>
+
+<blockquote><p>Note: I do not know of a single authoritative source for Project Type GUIDs, seems like it <em>should</em> be Microsoft, but I can not find a master published list on their website.</p></blockquote>
 
 <h4>Highlighted below (PlayScript &amp; ActionScript):</h4>
 
