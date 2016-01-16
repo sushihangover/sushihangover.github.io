@@ -9,9 +9,9 @@ categories:
 - OS-X
 - C#
 ---
-[{% img left images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png  360 240 'Irony.GtkSharp.Explorer' 'Irony GtkSharp Explorer' %}](images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png) I was working on a [Irony/C#](https://irony.codeplex.com) based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin's Stetic Designer, not sure how those naming conflicts were not a compile time error...).
+[{% img left /images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png 360 240 'Irony.GtkSharp.Explorer' 'Irony GtkSharp Explorer' %}](/images/Irony-GtkSharp-Explorer-OS-X-ScreenCap.png) I was working on a [Irony/C#](https://irony.codeplex.com) based DSL that I wrote awhile back and noticed that I had some strange NameSpace issues with the GTK UI (exposed only within Xamarin's Stetic Designer, not sure how those naming conflicts were not a compile time error...).
 
-Updated source for my Gtk# addition to Irony is on GitHub now. **Remember that my additions are on the "gtksharp-explorer" branch.**
+Updated source for my Gtk# addition to Irony is on [GitHub](https://github.com/sushihangover/Irony) now. **Remember that my additions are on the "gtksharp-explorer" branch.**
 {% codeblock lang:bash %}
 git branch --all
 * master
