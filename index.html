@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Within the PlayScriptRedux/PlayScript.Addin there are two project guids defined for PlayScript and ActionScript projects. These are the Project Types &hellip;">
+  <meta name="description" content="In adding support for incremental MSBuild support for Mono&rsquo;s Jay (Yacc-based) parser generator I could not get my resulting MSBuild target to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-01-17T00:18:21-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:18 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In adding support for <a href="https://msdn.microsoft.com/en-us/library/ms171483.aspx">incremental</a> MSBuild support for Mono&rsquo;s <a href="https://github.com/mono/mono/tree/master/mcs/jay">Jay</a> (Yacc-based) parser generator I could not get my resulting MSBuild target to automatically add the import statement to the <code>.csproj</code> via the nuget I created. The <code>.target</code> file was functional and correct and inside a &ldquo;build&rdquo; dir, but it would not update the project file, over and over I tested, looked at different nuget version, re-read the docs, etc&hellip; still no luck&hellip;</p>
+
+<p>I ended up reading the blog posting for the Nuget v2.5 release for &ldquo;Support for Native Projects&rdquo; was my answer:</p>
+
+<blockquote><p>the file name must match your package id with either a “.props” or “.targets” extension</p></blockquote>
+
+<p>Also the release notes for version 2.5 they state this:</p>
+
+<blockquote><p>Under this folder, you can place two files with fixed names, {packageid}.targets or {packageid}.props.</p></blockquote>
+
+<p>Why are these &lsquo;notes&rsquo; not in the &lsquo;normal&rsquo; documention section and only listed on a blog posting and in release notes?</p>
+
+<p>So in-case someone else needs this information:</p>
+
+<p><a href="http://blog.nuget.org/20130426/native-support.html">Support for Native Projects</a></p>
+
+<p><a href="http://docs.nuget.org/release-notes/nuget-2.5">NuGet 2.5 Release Notes</a></p>
+
+<h2>Automatic import of msbuild targets and props files</h2>
+
+<p>A new conventional folder has been created at the top level of the NuGet package. As a peer to \lib, \content, and \tools, you can now include a &lsquo;\build&rsquo; folder in your package. Under this folder, you can place two files with fixed names, {packageid}.targets or {packageid}.props. These two files can be either directly under \build or under framework-specific folders just like the other folders. The rule for picking the best-matched framework folder is exactly the same as in those.</p>
+
+<p>When NuGet installs a package with \build files, it will add an MSBuild <Import> element in the project file pointing to the .targets and .props files. The .props file is added at the top, whereas the .targets file is added to the bottom.</p>
+
+<h2>MSBuild Integration</h2>
+
+<p>C++ projects tend to have many different configurations–more than what NuGet is able to handle. To address NuGet’s configuration limitations, we are relying heavily on MSBuild properties and targets for native packages. These MSBuild properties and targets do the heavy lifting of providing references at build time, based on your project’s configuration.</p>
+
+<p>To make MSBuild integration better, NuGet has created a new convention for automatically importing MSBuild properties and targets from a NuGet package. Alongside the existing \content, \lib, and \tools folders, NuGet now recognizes a new top-level folder: \build.</p>
+
+<p>Within the \build folder, you can provide a “.props” file and/or a “.targets” file that will be automatically imported into the project. For this convention, the file name must match your package id with either a “.props” or “.targets” extension. For example, the ‘cpprestsdk’ package includes a ‘cpprestsdk.targets’ file in its \build folder. Files with the “.props” extension will be imported at the top of the project file, and files with the “.targets” extension will be imported at the bottom of the project file.</p>
+
+<p>Note that this \build folder can be used for all NuGet packages and not just native packages. The \build folder respects target frameworks just like the \content, \lib, and \tools folders do. This means you can create a \build\net40 folder and a \build\net45 folder and NuGet will import the appropriate props and targets files into the project. You no longer need to write PowerShell install.ps1/uninstall.ps1 scripts to import MSBuild targets files!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1470,85 +1531,6 @@ namespace Slots
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/monomac-samples-updates/">MonoMac - Demo / Samples updated</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-23T20:51:39-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:51 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A number of the MonoMac demos were broken in various ways so as I was using some of them in my PlayScript / ActionScript work with Stage3d, Away3d and Starling, I update the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> repo with the corrected versions.</p>
-
-<p><img src="/images/MonoMac-Demos.gif" alt="" /></p>
-
-<pre><code>./AnimatingViews/bin/Debug/AnimatingViews.app
-./attic/Hello/Hello.app
-./ButtonMadness/bin/Debug/ButtonMadness.app
-./CAQuartzComposition/bin/Debug/CAQuartzComposition.app
-./CoreAnimationBook/BackgroundFilteredView/bin/Debug/BackgroundFilteredView.app
-./CoreAnimationBook/CustomAnimationTiming/bin/Debug/CustomAnimationTiming.app
-./CoreAnimationBook/CustomizeAnimation/bin/Debug/CustomizeAnimation.app
-./CoreAnimationBook/CustomizeAnimation2/bin/Debug/CustomizeAnimation.app
-./CoreAnimationBook/FilteredView/bin/Debug/FilteredView.app
-./CoreAnimationBook/GroupAnimation/bin/Debug/GroupAnimation.app
-./CoreAnimationBook/KeyFrameMoveAView/bin/Debug/KeyFrameMoveAView.app
-./CoreAnimationBook/LayerBackedControls/bin/Debug/LayerBackedControls.app
-./CoreAnimationBook/QCBackground/bin/Debug/QCBackground.app
-./CoreAnimationBook/TimedAnimation/bin/Debug/TimedAnimation.app
-./CoreTextArcMonoMac/bin/Debug/CoreTextArcMonoMac.app
-./CoreWLANWirelessManager/bin/Debug/CoreWLANWirelessManager.app
-./DatePicker/bin/Debug/DatePicker.app
-./DockAppIcon/bin/Debug/DockAppIcon.app
-./DocumentSample/bin/Debug/DocumentSample.app
-./DrawerMadness/DrawerMadness/bin/Debug/DrawerMadness.app
-./Fire/bin/Debug/Fire.app
-./GLFullScreen/bin/Debug/GLFullScreen.app
-./GlossyClock/bin/Debug/GlossyClock.app
-./GLSLShader/bin/Debug/GLSLShader.app
-./ImageKitDemoStep1/bin/Debug/ImageKitDemo.app
-./macdoc/bin/Debug/macdoc.app
-./MonoMacGameWindow/bin/Debug/MonoMacGameView.app
-./NSAlert/bin/Debug/NSAlertSample.app
-./NSTableViewBinding/bin/Debug/NSTableViewBinding.app
-./OpenGL-NeHe/NeHeLesson1/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson13/bin/Debug/NeHeLesson13.app
-./OpenGL-NeHe/NeHeLesson17/bin/Debug/NeHeLesson17.app
-./OpenGL-NeHe/NeHeLesson2/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson3/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson4/bin/Debug/NeHeLesson4.app
-./OpenGL-NeHe/NeHeLesson5/bin/Debug/NeHeLesson5.app
-./OpenGL-NeHe/NeHeLesson6/bin/Debug/NeHeLesson6.app
-./OpenGL-NeHe/NeHeLesson7/bin/Debug/NeHeLesson7.app
-./OpenGL-NeHe/NeHeLesson8/bin/Debug/NeHeLesson8.app
-./OpenGL-NeHe/NeHeLesson9/bin/Debug/NeHeLesson9.app
-./OpenGLLayer/bin/Debug/OpenGLLayer.app
-./OpenGLViewSample/OpenGLViewSample/bin/Debug/MMOpenTK.app
-./PopupBindings/bin/Debug/PopupBindings.app
-./PredicateEditorSample/bin/Debug/PredicateEditorSample.app
-./QTRecorder/bin/Debug/QTRecorder.app
-./RoundedTransparentWindow/bin/Debug/RoundedTransparentWindow.app
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1564,6 +1546,10 @@ namespace Slots
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
       </li>
     
@@ -1577,10 +1563,6 @@ namespace Slots
     
       <li class="post">
         <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
-      </li>
-    
-      <li class="post">
-        <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
       </li>
     
   </ul>

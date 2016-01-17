@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="The PlayScript repo on the PlayScriptRedux Github organization I maintain is a down-stream fork of Mono so I can fetch the changes to their master &hellip;">
+  <meta name="description" content="xCorFlags Version 1.0.5643.30429 The first full release of the cross-platform CorFlags Conversion Tool is up on Github. This is a cross-platform &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/">Corflags - Release xCorFlags Version 1.0.5643.30429</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T19:09:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:09 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1><a href="https://github.com/sushihangover/CorFlags/releases/tag/v1.0.5643.30429">xCorFlags Version 1.0.5643.30429</a></h1>
+
+<p>The first full release of the cross-platform CorFlags Conversion Tool is up on  <a href="https://github.com/sushihangover/corflags">Github</a>.</p>
+
+<p>This is a cross-platform version of the Microsoft CorFlags tool that is included in the .Net Framework SDK installations and is a self-contained x86 CIL Image (via <a href="https://github.com/gluck/il-repack">ILRepack</a>) that runs on:</p>
+
+<ul>
+<li>Windows (xCorFlags)</li>
+<li>OS-X (mono ./xCorFlags.exe)</li>
+<li>Linux (mono ./xCorFlags.exe)</li>
+</ul>
+
+
+<p>For additional information:</p>
+
+<ul>
+<li><a href="">https://github.com/sushihangover/corflags</a></li>
+<li><a href="">https://github.com/sushihangover/CorFlags/blob/master/README.md</a></li>
+<li><a href="">http://sushihangover.github.io/blog/categories/corflags/</a></li>
+<li><a href="">https://msdn.microsoft.com/en-us/library/ms164699%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -807,41 +857,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-using-llvm/">Mono - Using LLVM? Make sure your targets match</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T07:21:58-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:21 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> When configuring Mono to use llvm, if you receive the error:</p>
-
-<p><strong>configure: error: Cross compiling is not supported for target i386-apple-darwin11.2.0</strong></p>
-
-<p>Then the llvm-config that is currently the first hit in your path and that is begin picked up by the mono autogen/configure script is does not match the target that you are trying to build in mono.</p>
-
-<p><strong>llvm-config &ndash;host-target</strong> should help you out and change your path so the correct llvm bin directory is first in the list so when mono&rsquo;s configure runs llvm-config it gets the correct info.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -859,6 +874,10 @@ The results are not really that surprising in regards to is 64-bit number crunch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
+      </li>
+    
+      <li class="post">
         <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
       </li>
     
@@ -872,10 +891,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
     
       <li class="post">
         <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
-      </li>
-    
-      <li class="post">
-        <a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-15T21:35:49-08:00</updated>
+  <updated>2016-01-17T00:34:53-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nuget and MSBuild Targets]]></title>
+    <link href="http://sushihangover.github.io/nuget-and-msbuild-targets/"/>
+    <updated>2016-01-17T00:18:21-08:00</updated>
+    <id>http://sushihangover.github.io/nuget-and-msbuild-targets</id>
+    <content type="html"><![CDATA[<p>In adding support for <a href="https://msdn.microsoft.com/en-us/library/ms171483.aspx">incremental</a> MSBuild support for Mono&rsquo;s <a href="https://github.com/mono/mono/tree/master/mcs/jay">Jay</a> (Yacc-based) parser generator I could not get my resulting MSBuild target to automatically add the import statement to the <code>.csproj</code> via the nuget I created. The <code>.target</code> file was functional and correct and inside a &ldquo;build&rdquo; dir, but it would not update the project file, over and over I tested, looked at different nuget version, re-read the docs, etc&hellip; still no luck&hellip;</p>
+
+<p>I ended up reading the blog posting for the Nuget v2.5 release for &ldquo;Support for Native Projects&rdquo; was my answer:</p>
+
+<blockquote><p>the file name must match your package id with either a “.props” or “.targets” extension</p></blockquote>
+
+<p>Also the release notes for version 2.5 they state this:</p>
+
+<blockquote><p>Under this folder, you can place two files with fixed names, {packageid}.targets or {packageid}.props.</p></blockquote>
+
+<p>Why are these &lsquo;notes&rsquo; not in the &lsquo;normal&rsquo; documention section and only listed on a blog posting and in release notes?</p>
+
+<p>So in-case someone else needs this information:</p>
+
+<p><a href="http://blog.nuget.org/20130426/native-support.html">Support for Native Projects</a></p>
+
+<p><a href="http://docs.nuget.org/release-notes/nuget-2.5">NuGet 2.5 Release Notes</a></p>
+
+<h2>Automatic import of msbuild targets and props files</h2>
+
+<p>A new conventional folder has been created at the top level of the NuGet package. As a peer to \lib, \content, and \tools, you can now include a &lsquo;\build&rsquo; folder in your package. Under this folder, you can place two files with fixed names, {packageid}.targets or {packageid}.props. These two files can be either directly under \build or under framework-specific folders just like the other folders. The rule for picking the best-matched framework folder is exactly the same as in those.</p>
+
+<p>When NuGet installs a package with \build files, it will add an MSBuild <Import> element in the project file pointing to the .targets and .props files. The .props file is added at the top, whereas the .targets file is added to the bottom.</p>
+
+<h2>MSBuild Integration</h2>
+
+<p>C++ projects tend to have many different configurations–more than what NuGet is able to handle. To address NuGet’s configuration limitations, we are relying heavily on MSBuild properties and targets for native packages. These MSBuild properties and targets do the heavy lifting of providing references at build time, based on your project’s configuration.</p>
+
+<p>To make MSBuild integration better, NuGet has created a new convention for automatically importing MSBuild properties and targets from a NuGet package. Alongside the existing \content, \lib, and \tools folders, NuGet now recognizes a new top-level folder: \build.</p>
+
+<p>Within the \build folder, you can provide a “.props” file and/or a “.targets” file that will be automatically imported into the project. For this convention, the file name must match your package id with either a “.props” or “.targets” extension. For example, the ‘cpprestsdk’ package includes a ‘cpprestsdk.targets’ file in its \build folder. Files with the “.props” extension will be imported at the top of the project file, and files with the “.targets” extension will be imported at the bottom of the project file.</p>
+
+<p>Note that this \build folder can be used for all NuGet packages and not just native packages. The \build folder respects target frameworks just like the \content, \lib, and \tools folders do. This means you can create a \build\net40 folder and a \build\net45 folder and NuGet will import the appropriate props and targets files into the project. You no longer need to write PowerShell install.ps1/uninstall.ps1 scripts to import MSBuild targets files!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PlayScript and MSBuild Project Type GUIDs]]></title>
@@ -1953,24 +1994,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
 
 
 <p><img src="http://sushihangover.github.io/images/iterm-jump-words.png" alt="iTerm Jump/Tab Words" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OS-X El Capitan Adobe Air Installer]]></title>
-    <link href="http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/"/>
-    <updated>2015-11-09T04:39:23-08:00</updated>
-    <id>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer</id>
-    <content type="html"><![CDATA[<p>Have problems trying to install Adobe Air on a fresh install of OS-X 10.11? The current version of the installer that linked @ <a href="https://get.adobe.com/air/">https://get.adobe.com/air/</a> will just hang and you will have to <code>force</code> quit it.</p>
-
-<p>Try the latest<a href="http://labs.adobe.com/downloads/air.html"> Adobe Air Beta</a> 20 and your problems will be sovled.</p>
-
-<p>Note: This also solves the issue for older versions of Adobe CS (6 and others) failing to install properly. Install the latest Air version and retry your Adove CS install.</p>
-
-<ul>
-<li><a href="http://download.macromedia.com/pub/labs/flashruntimes/shared/air20_flashplayer20_releasenotes.pdf">Adobe Air 20 Release Notes</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
