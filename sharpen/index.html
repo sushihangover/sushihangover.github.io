@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sharpen - SushiHangover</title>
+  <meta name="author" content="RobertN">
+
+  
+  <meta name="description" content="I needed to convert some Java code to C# and one of the best ways that I ever found is to use Sharpen. This used to be available as a Eclipse plugin &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://sushihangover.github.io/sharpen/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28024782-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+<table style="width:100%">
+  <tr>
+    <td>
+  <h1><a href="/">SushiHangover</a></h1>
+  
+    <h2>PowerShell, Learn it or Perish ;-)</h2>
+  
+</td>
+<td>
+
+</td>
+<td>
+
+<table>
+<tr>
+<td>
+<a href="https://github.com/PlayScriptRedux/playscript"><img class="right" src="/images/Playscript-TransBackground-Small.png"></a>
+</td>
+<td>
+<table>
+<tr>
+<td align="center"><a href="https://travis-ci.org/PlayScriptRedux/playscript/branches"><img src="https://camo.githubusercontent.com/9c3fab3d568fc5663618f2fb9c8f7b1d8ea99532/68747470733a2f2f7472617669732d63692e6f72672f506c617953637269707452656475782f706c61797363726970742e7376673f6272616e63683d706c6179736372697074" alt="master nix" data-canonical-src="https://travis-ci.org/PlayScriptRedux/playscript.svg?branch=playscript" style="max-width:100%;"></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="https://gitter.im/PlayScriptRedux/playscript?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=body_badge"><img src="https://camo.githubusercontent.com/5369be009b0edd6354d3351d0dc1a47adee512bf/68747470733a2f2f6261646765732e6769747465722e696d2f506c617953637269707452656475782f706c61797363726970742e737667" alt="Gitter" data-canonical-src="https://badges.gitter.im/PlayScriptRedux/playscript.svg" style="max-width:100%;"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</table>
+
+</td>
+  </tr>
+</table>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="sushihangover.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sharpen</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-25T10:44:44-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I needed to convert some Java code to C# and one of the best ways that I ever found is to use <code>Sharpen</code>. This used to be available as a Eclipse plugin but you can find a cli version at Mono&rsquo;s Github account:</p>
+
+<ul>
+<li><a href="https://github.com/mono/sharpen">https://github.com/mono/sharpen</a></li>
+</ul>
+
+
+<p>One of the <em>issues</em> in running Sharpen is that it requires Java 1.7, <strong>NOT 1.6, nor 1.8.</strong>.</p>
+
+<p>So you need to have a Java 7 install. An easy way if you are already using homebrew, is available via a cask:</p>
+
+<pre><code>brew install Caskroom/versions/java7
+</code></pre>
+
+<p>Note: If you get errors, make sure that your casks are updated, <code>brew upgrade brew-cask</code></p>
+
+<h4>Current JDK:</h4>
+
+<pre><code>/usr/libexec/java_home
+/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home
+</code></pre>
+
+<h4>Get a list of Install JDKs:</h4>
+
+<pre><code>ls -l1 /Library/Java/JavaVirtualMachines/
+1.6.0.jdk
+jdk1.7.0_71.jdk
+jdk1.7.0_80.jdk
+jdk1.8.0_92.jdk
+</code></pre>
+
+<h4>Export a &ldquo;new home&rdquo;:</h4>
+
+<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+</code></pre>
+
+<p>Now I can build and run <code>sharpen</code>, i.e.:</p>
+
+<pre><code>mvn clean test
+mvn install
+java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users/sushi/github/PlayParser
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">RobertN</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-09-25T10:44:44-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>, <a class='category' href='/blog/categories/sharpen/'>sharpen</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/sharpen/" data-via="" data-counturl="http://sushihangover.github.io/sharpen/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/nuget-and-msbuild-targets/" title="Previous Post: Nuget and MSBuild Targets">&laquo; Nuget and MSBuild Targets</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/sharpen/">Sharpen</a>
+      </li>
+    
+      <li class="post">
+        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/sushihangover">@sushihangover</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'sushihangover',
+            count: 0,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - RobertN -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sushihangover';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://sushihangover.github.io/sharpen/';
+        var disqus_url = 'http://sushihangover.github.io/sharpen/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

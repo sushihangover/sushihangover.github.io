@@ -9,7 +9,9 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Have problems trying to install Adobe Air on a fresh install of OS-X 10.11? The current version of the installer that linked @ https://get.adobe.com/ &hellip;">
+  <meta name="description" content="Jumping word-wise in the iTerm2 (3.0 beta): Open the Preferences Pane
+Goto Tab Keys
+Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +112,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iterm2-osx-jump-word-wise-left-and-right-in-navigation/">iTerm2 OSX: Jump Word-wise left and right in Navigation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-09T04:48:55-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:48 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jumping word-wise in the iTerm2 (3.0 beta):</p>
+
+<ul>
+<li>Open the Preferences Pane</li>
+<li>Goto Tab Keys</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + ←” and use “Send Escape Sequence” as the Action and Set “Esc + b”</li>
+<li>Create a new Key Binding with the Shortcut “⌥ + →” and use “Send Escape Sequence” as the Action and Set “Esc + f”</li>
+</ul>
+
+
+<p><img src="/images/iterm-jump-words.png" alt="iTerm Jump/Tab Words" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -789,53 +830,6 @@ sudo apt-get isntall monodevelop
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-compiler-optim/">PlayScript | Optimizing psc/mcs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-10-27T22:20:18-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
-
-<p><a href="http://ericlippert.com">Eric Lippert</a> has a couple of recent posts that I have been reviewing in conjuction with the PlayScript version of Mono&rsquo;s mcs (psc) as some of the things devs do in ActionScript 3.0 are targeted to making Flash&rsquo;s AVM run efficiently does not always make the cut for a C#/CLR oriented compiler. Many of these items revolve around arrays and vector and misuse of the generic (dynamic) Object types, but strings, associative operations, and nulls need some love also and his posts are very insightful as how C# is optimized in certain areas.</p>
-
-<p><span class='pullquote-right' data-pullquote='including PowerShell DevOps'>
-<strong>Great</strong> reading for any C#/CLR devs, including PowerShell DevOps that are bundling their custom C# written assemblies to speed up their PS modules.
-</span></p>
-
-<p><a href="http://ericlippert.com/2015/10/27/optimizing-associative-operations/">Optimizing associative operations</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/17/string-concatenation-behind-the-scenes-part-one/">String concatenation behind the scenes, part one</a></p>
-
-<p><a href="http://ericlippert.com/2013/06/24/string-concatenation-behind-the-scenes-part-two/">String concatenation behind the scenes, part two</a></p>
-
-<p>He also has a great series on Nullable micro-optimizations that start here:</p>
-
-<p><a href="http://ericlippert.com/2012/12/20/nullable-micro-optimizations-part-one/">Nullable micro-optimizations, part one</a></p>
-
-<p>PlayScript Github repo is <a href="https://github.com/PlayScriptRedux/playscript">here</a> check it out now!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -853,6 +847,10 @@ sudo apt-get isntall monodevelop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen/">Sharpen</a>
+      </li>
+    
+      <li class="post">
         <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
       </li>
     
@@ -866,10 +864,6 @@ sudo apt-get isntall monodevelop
     
       <li class="post">
         <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
-      </li>
-    
-      <li class="post">
-        <a href="/msbuild-slash-xbuild-steps-of-a-build/">MSBuild / xbuild - Steps of a build</a>
       </li>
     
   </ul>

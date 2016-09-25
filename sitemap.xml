@@ -1,966 +1,973 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://sushihangover.github.io/nuget-and-msbuild-targets/</loc>
-    <lastmod>2016-01-17T00:18:21-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/</loc>
-    <lastmod>2016-01-11T00:16:49-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-and-nunit/</loc>
-    <lastmod>2016-01-10T23:29:28-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/adding-nuget-packages-to-your-addin-templates/</loc>
-    <lastmod>2016-01-01T21:48:44-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/msbuild-slash-xbuild-steps-of-a-build/</loc>
-    <lastmod>2016-01-01T10:22:54-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results/</loc>
-    <lastmod>2015-12-06T20:06:17-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/</loc>
-    <lastmod>2015-12-05T20:19:59-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/using-redirection-within-xargs/</loc>
-    <lastmod>2015-11-28T06:29:15-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-c-number-uipickerview/</loc>
-    <lastmod>2015-11-25T13:23:13-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/safari-changing-the-quit-shortcut/</loc>
-    <lastmod>2015-11-25T08:44:09-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monomac-samples-updates/</loc>
-    <lastmod>2015-11-23T20:51:39-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery/</loc>
-    <lastmod>2015-11-23T06:01:10-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/</loc>
-    <lastmod>2015-11-21T15:10:58-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/</loc>
-    <lastmod>2015-11-21T08:36:11-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0/</loc>
-    <lastmod>2015-11-19T21:14:42-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-android-player-delete/</loc>
-    <lastmod>2015-11-18T15:16:42-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-android-shared-preferences/</loc>
-    <lastmod>2015-11-18T13:56:58-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/</loc>
-    <lastmod>2015-11-14T03:40:21-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/</loc>
-    <lastmod>2015-11-14T03:08:38-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation/</loc>
-    <lastmod>2015-11-09T04:48:55-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/</loc>
-    <lastmod>2015-11-09T04:39:23-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-os-x-credentials/</loc>
-    <lastmod>2015-11-09T03:33:38-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/</loc>
-    <lastmod>2015-11-08T11:54:48-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-os-x-addins-location/</loc>
-    <lastmod>2015-11-08T09:59:55-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xkcd-does-git/</loc>
-    <lastmod>2015-11-08T08:39:32-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/nrefactory-playscript-and-actionscript/</loc>
-    <lastmod>2015-11-05T16:51:17-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/</loc>
-    <lastmod>2015-11-01T01:22:10-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers/</loc>
-    <lastmod>2015-10-31T06:30:29-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-ubuntu-broken/</loc>
-    <lastmod>2015-10-30T21:55:07-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-compiler-optim/</loc>
-    <lastmod>2015-10-27T22:20:18-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monos-new-tls-provider/</loc>
-    <lastmod>2015-10-26T23:10:57-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/starswarsFA/</loc>
-    <lastmod>2015-10-19T16:12:50-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/</loc>
-    <lastmod>2015-10-14T05:49:56-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-tags-and-playscript/</loc>
-    <lastmod>2015-09-02T21:47:36-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-exception-filters/</loc>
-    <lastmod>2015-08-17T18:34:18-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/</loc>
-    <lastmod>2015-08-06T17:29:21-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-away3d-basic-shader/</loc>
-    <lastmod>2015-08-05T05:10:20-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/</loc>
-    <lastmod>2015-08-04T06:06:28-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-away3d-firedemowithscout/</loc>
-    <lastmod>2015-08-03T16:12:50-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/</loc>
-    <lastmod>2015-08-03T12:54:06-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-away3d-intermediate-playscript/</loc>
-    <lastmod>2015-07-29T17:05:50-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/</loc>
-    <lastmod>2015-07-24T14:01:50-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-a-company-with-a-cool-dev-sense/</loc>
-    <lastmod>2015-07-23T21:49:16-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-away3d-world-global-example/</loc>
-    <lastmod>2015-07-23T18:17:12-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/</loc>
-    <lastmod>2015-07-23T11:21:41-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-squash-last-x-commits-into-one/</loc>
-    <lastmod>2015-07-17T10:35:06-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/</loc>
-    <lastmod>2015-07-16T20:08:45-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-now-has-a-repl-playshell/</loc>
-    <lastmod>2015-07-15T06:35:49-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-redux-make2csprojupdater/</loc>
-    <lastmod>2015-07-14T15:06:01-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/</loc>
-    <lastmod>2015-06-30T18:10:36-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/</loc>
-    <lastmod>2015-06-29T05:28:05-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/</loc>
-    <lastmod>2015-06-25T06:20:17-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-nunit-world-world/</loc>
-    <lastmod>2015-06-24T22:11:16-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-review-a-merge-before-committing/</loc>
-    <lastmod>2015-06-24T09:44:07-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/</loc>
-    <lastmod>2015-06-24T07:46:41-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/c-number-native-interop-helloworld/</loc>
-    <lastmod>2015-06-23T18:40:28-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/</loc>
-    <lastmod>2015-06-15T21:33:29-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/</loc>
-    <lastmod>2015-06-15T21:07:53-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monocov-building-on-os-x/</loc>
-    <lastmod>2015-06-15T10:52:29-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/</loc>
-    <lastmod>2015-06-15T06:09:45-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/</loc>
-    <lastmod>2015-06-14T19:09:45-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-set-up-a-fetch-only-remote/</loc>
-    <lastmod>2015-06-14T14:57:37-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/corflags-cross-platform-release-on-github/</loc>
-    <lastmod>2015-06-14T11:24:42-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/</loc>
-    <lastmod>2015-06-14T10:40:23-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-moved-it-a-github-organization/</loc>
-    <lastmod>2015-06-14T08:24:28-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/what-is-code/</loc>
-    <lastmod>2015-06-14T06:32:37-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/</loc>
-    <lastmod>2015-06-09T20:24:45-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</loc>
-    <lastmod>2015-06-09T19:42:27-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/</loc>
-    <lastmod>2015-06-09T17:20:35-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/</loc>
-    <lastmod>2015-06-09T07:42:41-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-using-llvm/</loc>
-    <lastmod>2015-06-09T07:21:58-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/</loc>
-    <lastmod>2015-06-09T06:14:24-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/</loc>
-    <lastmod>2015-06-08T18:43:29-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-curses-os-x-64-bit/</loc>
-    <lastmod>2015-06-08T17:07:00-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/</loc>
-    <lastmod>2015-06-08T10:41:32-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/octopress-deploy-and-update-git-source/</loc>
-    <lastmod>2015-06-08T06:39:42-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/os-x-brew-clean-it-up/</loc>
-    <lastmod>2015-06-07T20:10:40-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-6001-posted/</loc>
-    <lastmod>2015-06-04T08:12:01-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-renaming-a-got-tag/</loc>
-    <lastmod>2015-06-04T07:39:49-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/</loc>
-    <lastmod>2015-06-04T07:01:32-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-5001-posted/</loc>
-    <lastmod>2015-06-04T06:12:01-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-4001-posted/</loc>
-    <lastmod>2015-06-03T20:04:56-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-3003-posted/</loc>
-    <lastmod>2015-06-03T19:22:01-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/</loc>
-    <lastmod>2015-06-03T15:06:35-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-3001-posted/</loc>
-    <lastmod>2015-06-03T06:10:59-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-3-dot-2-2002-posted/</loc>
-    <lastmod>2015-05-31T22:16:23-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/</loc>
-    <lastmod>2015-05-29T17:22:05-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge/</loc>
-    <lastmod>2015-05-28T18:24:08-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo/</loc>
-    <lastmod>2015-05-27T19:34:36-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts/</loc>
-    <lastmod>2015-05-24T17:54:37-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-commit-only-specific-staged-files/</loc>
-    <lastmod>2015-05-14T17:34:13-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version/</loc>
-    <lastmod>2015-05-11T16:10:28-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/</loc>
-    <lastmod>2014-04-22T18:35:15-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/</loc>
-    <lastmod>2014-04-17T23:20:36-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/0-60msps-logic-analyzer/</loc>
-    <lastmod>2014-04-15T20:16:37-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/llvm-3-dot-4-1/</loc>
-    <lastmod>2014-04-12T06:05:07-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/heartbleed-explanation/</loc>
-    <lastmod>2014-04-11T07:51:37-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-llvm-and-why-no-gpl/</loc>
-    <lastmod>2014-04-11T07:28:16-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-starts-move-to-llvm/</loc>
-    <lastmod>2014-04-10T22:03:36-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/qemu-machine-and-cpu-list/</loc>
-    <lastmod>2014-04-05T12:27:42-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/</loc>
-    <lastmod>2014-03-26T20:54:58-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-compiler-price/</loc>
-    <lastmod>2014-03-18T06:30:29-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/</loc>
-    <lastmod>2014-03-14T23:32:19-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts/</loc>
-    <lastmod>2014-03-09T19:24:34-07:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0/</loc>
-    <lastmod>2014-03-05T22:34:20-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld/</loc>
-    <lastmod>2014-03-05T06:30:13-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib/</loc>
-    <lastmod>2014-03-04T18:18:56-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger/</loc>
-    <lastmod>2014-02-26T23:19:58-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu/</loc>
-    <lastmod>2014-02-24T21:02:34-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section/</loc>
-    <lastmod>2014-02-23T06:39:45-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/</loc>
-    <lastmod>2014-02-22T20:43:28-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/</loc>
-    <lastmod>2014-02-19T20:56:11-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/llvm-arm-triple-cpu-targets/</loc>
-    <lastmod>2014-02-19T06:36:42-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/building-lldb-on-mac-os-x/</loc>
-    <lastmod>2014-02-18T08:21:07-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/powershell-and-bash-dot-sourcing/</loc>
-    <lastmod>2014-02-17T06:21:11-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/arm-cortex-m0-overview/</loc>
-    <lastmod>2014-02-17T06:02:25-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/bare-metal-arm-terminology/</loc>
-    <lastmod>2014-02-16T21:35:45-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/homebrew-git-1-dot-9-0-release/</loc>
-    <lastmod>2014-02-16T10:32:41-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/what-is-bare-metal-arm/</loc>
-    <lastmod>2014-02-16T08:12:02-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/fleafpga-experimenters-board/</loc>
-    <lastmod>2014-02-15T07:14:40-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/</loc>
-    <lastmod>2014-02-14T10:12:07-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1/</loc>
-    <lastmod>2014-02-14T06:01:48-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/octopress-backing-up-your-source-directory/</loc>
-    <lastmod>2014-02-12T21:00:12-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/gtksharp-explorer-update-for-irony/</loc>
-    <lastmod>2014-02-12T08:14:14-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/</loc>
-    <lastmod>2014-02-12T00:00:00-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/os-x-llvm-slash-clang-build/</loc>
-    <lastmod>2014-02-11T00:00:00-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/ometa-binary-data-parsing/</loc>
-    <lastmod>2014-02-10T00:00:00-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/moving-to-github-pages/</loc>
-    <lastmod>2014-02-09T16:49:16-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/</loc>
-    <lastmod>2014-01-12T20:44:00-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github/</loc>
-    <lastmod>2013-12-27T19:04:55-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/archives/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/ironshell/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/bitcoin/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/BlueStacks/xamarin-studio-bluestacks-addin.html</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/mono/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/playscript/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/actionscript/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/c-number/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/github/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/os-x/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/monomac/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xamarin/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ometa/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ometa-slash-js/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/javascript/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/llvm/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/clang/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/arm/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/embedded/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/bare-metal/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/qemu/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ellcc/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/irony/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/octopress/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/git/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/programming/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/arm-beginners/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/compiler/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/oshw/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/fpga/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/hardware/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/arm-none-eabi/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/homebrew/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cortex/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/m0/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/powershell/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/bash/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cmd-line/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/lldb/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xcode/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/triple/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/diff/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/merge/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/meld/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/diffmerge/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/beyond-compare/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/arm-gcc/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cortex-m/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/gdb/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/affinic/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/newlib/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cmsis/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cortex-m0/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cortex-m3/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/systick/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ds-5/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/gcc/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/semi-hosting/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/gpl/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xkcd/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/openssl/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/heartbleed/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/logic-analyser/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/logic-pirate/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/dangerousprototypes/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/arm-none-eabi/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/smartgit/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/syntevo/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/brew/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/mono-curses/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ncurses/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/curses/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/midnightcommander/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/scimark/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/benchmark/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/playscriptredux/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/corflags/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/corflags-dot-exe/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xcorflags-dot-exe/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/monocov/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cursessharp/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/64-bit/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/profile/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/codecoverage/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/interop/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/pull-request/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/nunit/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/nunit-console/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/cmdline/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/microsoft/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/rosyln/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/codeformatter/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/redux/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/playshell/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/repl/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/csharp/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/playc-tester/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/compiler-tester/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/monodevelop/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xamarinstudio/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/away3d/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/travis/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/linux/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/tls/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/mcs/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/eric-lippert/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ubunutu/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/apt-get/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/apt-file/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/ubuntu/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xamarin-studio/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/addin/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/nrefactory/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/osx/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/adobe/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/air/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/elcapitan/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/iterm2/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/iterm/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/android/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/windows/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/sharedperferences/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/player/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/genymotion/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/mdtool/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/safari/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/uipickerview/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/iphone/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/uipickerviewmodel/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xargs/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/redirection/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/samba/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/java/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/msbuild/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/xbuild/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/nuint/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/visual-studio/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/projecttypeguids/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/nuget/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/blog/categories/jay/</loc>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>
-    <lastmod>2015-11-09T01:22:14-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/play/playscript-away3d-global-demo.html</loc>
-    <lastmod>2015-11-09T01:22:14-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/play/playscript-away3d-Intermediate-ParticleExplosions-demo.html</loc>
-    <lastmod>2015-11-09T01:22:14-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/play/playscript-away3d-PlayscriptLogoParticles.html</loc>
-    <lastmod>2015-11-09T01:22:14-08:00</lastmod>
-  </url>
-  <url>
-    <loc>http://sushihangover.github.io/play/playscript-away3d-shading.html</loc>
-    <lastmod>2015-11-09T01:22:14-08:00</lastmod>
-  </url>
+<url>
+<loc>http://sushihangover.github.io/sharpen/</loc>
+<lastmod>2016-09-25T10:44:44-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/nuget-and-msbuild-targets/</loc>
+<lastmod>2016-01-17T00:18:21-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-and-msbuild-project-type-guids/</loc>
+<lastmod>2016-01-11T00:16:49-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-and-nunit/</loc>
+<lastmod>2016-01-10T23:29:28-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/adding-nuget-packages-to-your-addin-templates/</loc>
+<lastmod>2016-01-01T21:48:44-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/msbuild-slash-xbuild-steps-of-a-build/</loc>
+<lastmod>2016-01-01T10:22:54-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/c-number-applescript-calls-with-functions-arguments-and-results/</loc>
+<lastmod>2015-12-06T20:06:17-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/</loc>
+<lastmod>2015-12-05T20:19:59-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/using-redirection-within-xargs/</loc>
+<lastmod>2015-11-28T06:29:15-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-c-number-uipickerview/</loc>
+<lastmod>2015-11-25T13:23:13-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/safari-changing-the-quit-shortcut/</loc>
+<lastmod>2015-11-25T08:44:09-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monomac-samples-updates/</loc>
+<lastmod>2015-11-23T20:51:39-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery/</loc>
+<lastmod>2015-11-23T06:01:10-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/cursessharp-c-number-ncurses-updated/</loc>
+<lastmod>2015-11-21T15:10:58-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-studio-mdtool-where-is-it/</loc>
+<lastmod>2015-11-21T08:36:11-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0/</loc>
+<lastmod>2015-11-19T21:14:42-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-android-player-delete/</loc>
+<lastmod>2015-11-18T15:16:42-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-android-shared-preferences/</loc>
+<lastmod>2015-11-18T13:56:58-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/windows-dependency-walker-for-debugging-missing-dlls/</loc>
+<lastmod>2015-11-14T03:40:21-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/</loc>
+<lastmod>2015-11-14T03:08:38-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/iterm2-osx-jump-word-wise-left-and-right-in-navigation/</loc>
+<lastmod>2015-11-09T04:48:55-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/os-x-el-capitan-adobe-air-installer/</loc>
+<lastmod>2015-11-09T04:39:23-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-os-x-credentials/</loc>
+<lastmod>2015-11-09T03:33:38-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monodevelop-dot-addinmaker-build-and-install-mpack/</loc>
+<lastmod>2015-11-08T11:54:48-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-os-x-addins-location/</loc>
+<lastmod>2015-11-08T09:59:55-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xkcd-does-git/</loc>
+<lastmod>2015-11-08T08:39:32-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/nrefactory-playscript-and-actionscript/</loc>
+<lastmod>2015-11-05T16:51:17-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-cmonodevelop-language-addin-part-1/</loc>
+<lastmod>2015-11-01T01:22:10-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/apt-file-finding-packages-by-search-fing-headers/</loc>
+<lastmod>2015-10-31T06:30:29-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-ubuntu-broken/</loc>
+<lastmod>2015-10-30T21:55:07-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-compiler-optim/</loc>
+<lastmod>2015-10-27T22:20:18-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monos-new-tls-provider/</loc>
+<lastmod>2015-10-26T23:10:57-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/starswarsFA/</loc>
+<lastmod>2015-10-19T16:12:50-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/</loc>
+<lastmod>2015-10-14T05:49:56-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-tags-and-playscript/</loc>
+<lastmod>2015-09-02T21:47:36-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-exception-filters/</loc>
+<lastmod>2015-08-17T18:34:18-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-resetting-a-file-back-to-its-conflicted-state/</loc>
+<lastmod>2015-08-06T17:29:21-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-away3d-basic-shader/</loc>
+<lastmod>2015-08-05T05:10:20-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-linux-based-builds-now-avaiable/</loc>
+<lastmod>2015-08-04T06:06:28-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-away3d-firedemowithscout/</loc>
+<lastmod>2015-08-03T16:12:50-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-travis-ci-enabled-for-repo/</loc>
+<lastmod>2015-08-03T12:54:06-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-away3d-intermediate-playscript/</loc>
+<lastmod>2015-07-29T17:05:50-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-away3d-intermediate-iparticle-explosions/</loc>
+<lastmod>2015-07-24T14:01:50-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-a-company-with-a-cool-dev-sense/</loc>
+<lastmod>2015-07-23T21:49:16-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-away3d-world-global-example/</loc>
+<lastmod>2015-07-23T18:17:12-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/</loc>
+<lastmod>2015-07-23T11:21:41-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-squash-last-x-commits-into-one/</loc>
+<lastmod>2015-07-17T10:35:06-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-tests-are-now-structured-like-monos/</loc>
+<lastmod>2015-07-16T20:08:45-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-now-has-a-repl-playshell/</loc>
+<lastmod>2015-07-15T06:35:49-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-redux-make2csprojupdater/</loc>
+<lastmod>2015-07-14T15:06:01-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-turn-multiple-commits-into-a-single-commit/</loc>
+<lastmod>2015-06-30T18:10:36-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-create-a-new-branch-with-non-commited-changes/</loc>
+<lastmod>2015-06-29T05:28:05-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-plus-rosyln-plus-codeformatter/</loc>
+<lastmod>2015-06-25T06:20:17-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-nunit-world-world/</loc>
+<lastmod>2015-06-24T22:11:16-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-review-a-merge-before-committing/</loc>
+<lastmod>2015-06-24T09:44:07-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/</loc>
+<lastmod>2015-06-24T07:46:41-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/c-number-native-interop-helloworld/</loc>
+<lastmod>2015-06-23T18:40:28-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-code-coverage-using-the-new-coverage-filter/</loc>
+<lastmod>2015-06-15T21:33:29-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/cursessharp-64-bit-ncurses-on-os-x-and-mono/</loc>
+<lastmod>2015-06-15T21:07:53-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monocov-building-on-os-x/</loc>
+<lastmod>2015-06-15T10:52:29-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-36015/</loc>
+<lastmod>2015-06-15T06:09:45-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/corflags-release-xcorflags-version-1-dot-0-5643-dot-30429/</loc>
+<lastmod>2015-06-14T19:09:45-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-set-up-a-fetch-only-remote/</loc>
+<lastmod>2015-06-14T14:57:37-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/corflags-cross-platform-release-on-github/</loc>
+<lastmod>2015-06-14T11:24:42-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/ms-corflags-showing-incorrect-flags/</loc>
+<lastmod>2015-06-14T10:40:23-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-moved-it-a-github-organization/</loc>
+<lastmod>2015-06-14T08:24:28-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/what-is-code/</loc>
+<lastmod>2015-06-14T06:32:37-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/</loc>
+<lastmod>2015-06-09T20:24:45-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</loc>
+<lastmod>2015-06-09T19:42:27-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/</loc>
+<lastmod>2015-06-09T17:20:35-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-speeding-up-your-llvm-compile/</loc>
+<lastmod>2015-06-09T07:42:41-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-using-llvm/</loc>
+<lastmod>2015-06-09T07:21:58-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/stripping-the-build-prefix-from-cross-compiled-b-binaries/</loc>
+<lastmod>2015-06-09T06:14:24-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/os-x-64-bit-mono-midnight-commander/</loc>
+<lastmod>2015-06-08T18:43:29-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-curses-os-x-64-bit/</loc>
+<lastmod>2015-06-08T17:07:00-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/mono-unable-to-find-the-ldylib-native-library/</loc>
+<lastmod>2015-06-08T10:41:32-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/octopress-deploy-and-update-git-source/</loc>
+<lastmod>2015-06-08T06:39:42-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/os-x-brew-clean-it-up/</loc>
+<lastmod>2015-06-07T20:10:40-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-6001-posted/</loc>
+<lastmod>2015-06-04T08:12:01-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-renaming-a-got-tag/</loc>
+<lastmod>2015-06-04T07:39:49-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-getting-a-list-of-files-changed-between-branches/</loc>
+<lastmod>2015-06-04T07:01:32-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-5001-posted/</loc>
+<lastmod>2015-06-04T06:12:01-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-4001-posted/</loc>
+<lastmod>2015-06-03T20:04:56-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-3003-posted/</loc>
+<lastmod>2015-06-03T19:22:01-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/smartgit-the-best-git-gui-there-is-dot-dot-dot-and-its-free/</loc>
+<lastmod>2015-06-03T15:06:35-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-3001-posted/</loc>
+<lastmod>2015-06-03T06:10:59-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-3-dot-2-2002-posted/</loc>
+<lastmod>2015-05-31T22:16:23-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/keeping-a-github-fork-up-to-date-with-origin-repo/</loc>
+<lastmod>2015-05-29T17:22:05-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/undo-your-most-recent-screwed-up-git-merge/</loc>
+<lastmod>2015-05-28T18:24:08-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/add-a-local-repo-as-a-remote-to-a-different-local-repo/</loc>
+<lastmod>2015-05-27T19:34:36-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-accept-another-branchs-changes-without-generated-conflicts/</loc>
+<lastmod>2015-05-24T17:54:37-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-commit-only-specific-staged-files/</loc>
+<lastmod>2015-05-14T17:34:13-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/git-overlay-a-directory-with-a-different-branch-version/</loc>
+<lastmod>2015-05-11T16:10:28-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/gcc-4-dot-9-is-out-with-arm-enhancements/</loc>
+<lastmod>2014-04-22T18:35:15-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/qemu-2-dot-0-0-is-released-as-1-dot-7-9/</loc>
+<lastmod>2014-04-17T23:20:36-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/0-60msps-logic-analyzer/</loc>
+<lastmod>2014-04-15T20:16:37-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/llvm-3-dot-4-1/</loc>
+<lastmod>2014-04-12T06:05:07-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/heartbleed-explanation/</loc>
+<lastmod>2014-04-11T07:51:37-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-llvm-and-why-no-gpl/</loc>
+<lastmod>2014-04-11T07:28:16-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-starts-move-to-llvm/</loc>
+<lastmod>2014-04-10T22:03:36-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/qemu-machine-and-cpu-list/</loc>
+<lastmod>2014-04-05T12:27:42-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/bkpt-service-calls-on-the-cortex-m0/</loc>
+<lastmod>2014-03-26T20:54:58-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-compiler-price/</loc>
+<lastmod>2014-03-18T06:30:29-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/new-arm-features-in-qemu-2-dot-0/</loc>
+<lastmod>2014-03-14T23:32:19-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/cortex-m-systick-polling-vs-interrupts/</loc>
+<lastmod>2014-03-09T19:24:34-07:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/llvm-cmsis-dsp-and-cortex-m3-and-m0/</loc>
+<lastmod>2014-03-05T22:34:20-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/cortex-m0-vs-m3-llvm-and-ld/</loc>
+<lastmod>2014-03-05T06:30:13-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-cortex-m3-bare-metal-with-newlib/</loc>
+<lastmod>2014-03-04T18:18:56-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/bare-metal-debugging-with-affinic-debugger/</loc>
+<lastmod>2014-02-26T23:19:58-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-cortex-m-semihosting-with-qemu/</loc>
+<lastmod>2014-02-24T21:02:34-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/llvm-and-the-arm-elf-arm-dot-exidx-star-section/</loc>
+<lastmod>2014-02-23T06:39:45-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-bare-metal-comparing-llvm-to-arm-gcc/</loc>
+<lastmod>2014-02-22T20:43:28-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/using-diffmerge-as-your-git-visual-merge-and-diff-tool/</loc>
+<lastmod>2014-02-19T20:56:11-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/llvm-arm-triple-cpu-targets/</loc>
+<lastmod>2014-02-19T06:36:42-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/building-lldb-on-mac-os-x/</loc>
+<lastmod>2014-02-18T08:21:07-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/powershell-and-bash-dot-sourcing/</loc>
+<lastmod>2014-02-17T06:21:11-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/arm-cortex-m0-overview/</loc>
+<lastmod>2014-02-17T06:02:25-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/bare-metal-arm-terminology/</loc>
+<lastmod>2014-02-16T21:35:45-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/homebrew-git-1-dot-9-0-release/</loc>
+<lastmod>2014-02-16T10:32:41-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/what-is-bare-metal-arm/</loc>
+<lastmod>2014-02-16T08:12:02-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/fleafpga-experimenters-board/</loc>
+<lastmod>2014-02-15T07:14:40-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-2/</loc>
+<lastmod>2014-02-14T10:12:07-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/embedded-bare-metal-arm-development-part-1/</loc>
+<lastmod>2014-02-14T06:01:48-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/octopress-backing-up-your-source-directory/</loc>
+<lastmod>2014-02-12T21:00:12-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/gtksharp-explorer-update-for-irony/</loc>
+<lastmod>2014-02-12T08:14:14-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/ellcc-dot-org-build-fix-for-os-x/</loc>
+<lastmod>2014-02-12T00:00:00-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/os-x-llvm-slash-clang-build/</loc>
+<lastmod>2014-02-11T00:00:00-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/ometa-binary-data-parsing/</loc>
+<lastmod>2014-02-10T00:00:00-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/moving-to-github-pages/</loc>
+<lastmod>2014-02-09T16:49:16-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/monomac-detect-when-mac-sleeps-or-wakes/</loc>
+<lastmod>2014-01-12T20:44:00-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/playscript-what-happened-to-the-open-source-version-on-github/</loc>
+<lastmod>2013-12-27T19:04:55-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/archives/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/bitcoin/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/ironshell/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/BlueStacks/xamarin-studio-bluestacks-addin.html</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/mono/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/playscript/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/actionscript/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/c-number/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/github/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/os-x/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/monomac/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xamarin/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ometa/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ometa-slash-js/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/javascript/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/llvm/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/clang/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/arm/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/embedded/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/bare-metal/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/qemu/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ellcc/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/irony/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/octopress/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/git/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/programming/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/arm-beginners/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/compiler/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/oshw/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/fpga/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/hardware/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/arm-none-eabi/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/homebrew/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cortex/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/m0/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/powershell/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/bash/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cmd-line/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/lldb/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xcode/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/triple/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/diff/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/merge/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/meld/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/diffmerge/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/beyond-compare/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/arm-gcc/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cortex-m/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/gdb/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/affinic/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/newlib/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cmsis/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cortex-m0/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cortex-m3/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/systick/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ds-5/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/gcc/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/semi-hosting/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/gpl/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xkcd/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/openssl/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/heartbleed/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/logic-analyser/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/logic-pirate/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/dangerousprototypes/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/arm-none-eabi/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/smartgit/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/syntevo/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/brew/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/mono-curses/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ncurses/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/curses/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/midnightcommander/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/scimark/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/benchmark/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/playscriptredux/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/corflags/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/corflags-dot-exe/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xcorflags-dot-exe/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/monocov/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cursessharp/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/64-bit/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/profile/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/codecoverage/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/interop/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/pull-request/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/nunit/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/nunit-console/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/cmdline/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/microsoft/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/rosyln/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/codeformatter/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/redux/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/playshell/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/repl/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/csharp/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/playc-tester/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/compiler-tester/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/monodevelop/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xamarinstudio/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/away3d/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/travis/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/linux/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/tls/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/mcs/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/eric-lippert/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ubunutu/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/apt-get/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/apt-file/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/ubuntu/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xamarin-studio/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/addin/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/nrefactory/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/osx/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/adobe/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/air/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/elcapitan/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/iterm2/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/iterm/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/android/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/windows/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/sharedperferences/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/player/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/genymotion/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/mdtool/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/safari/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/uipickerview/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/iphone/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/uipickerviewmodel/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xargs/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/redirection/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/samba/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/java/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/msbuild/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/xbuild/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/nuint/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/visual-studio/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/projecttypeguids/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/nuget/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/jay/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/blog/categories/sharpen/</loc>
+</url>
+<url>
+<loc>http://sushihangover.github.io/play/playscript-away3d-FireDemoWithScout.html</loc>
+<lastmod>2015-11-09T01:22:14-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/play/playscript-away3d-global-demo.html</loc>
+<lastmod>2015-11-09T01:22:14-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/play/playscript-away3d-Intermediate-ParticleExplosions-demo.html</loc>
+<lastmod>2015-11-09T01:22:14-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/play/playscript-away3d-PlayscriptLogoParticles.html</loc>
+<lastmod>2015-11-09T01:22:14-08:00</lastmod>
+</url>
+<url>
+<loc>http://sushihangover.github.io/play/playscript-away3d-shading.html</loc>
+<lastmod>2015-11-09T01:22:14-08:00</lastmod>
+</url>
 </urlset>

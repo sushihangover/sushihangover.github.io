@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-17T00:34:53-08:00</updated>
+  <updated>2016-09-25T10:59:53-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sharpen]]></title>
+    <link href="http://sushihangover.github.io/sharpen/"/>
+    <updated>2016-09-25T10:44:44-07:00</updated>
+    <id>http://sushihangover.github.io/sharpen</id>
+    <content type="html"><![CDATA[<p>I needed to convert some Java code to C# and one of the best ways that I ever found is to use <code>Sharpen</code>. This used to be available as a Eclipse plugin but you can find a cli version at Mono&rsquo;s Github account:</p>
+
+<ul>
+<li><a href="https://github.com/mono/sharpen">https://github.com/mono/sharpen</a></li>
+</ul>
+
+
+<p>One of the <em>issues</em> in running Sharpen is that it requires Java 1.7, <strong>NOT 1.6, nor 1.8.</strong>.</p>
+
+<p>So you need to have a Java 7 install. An easy way if you are already using homebrew, is available via a cask:</p>
+
+<pre><code>brew install Caskroom/versions/java7
+</code></pre>
+
+<p>Note: If you get errors, make sure that your casks are updated, <code>brew upgrade brew-cask</code></p>
+
+<h4>Current JDK:</h4>
+
+<pre><code>/usr/libexec/java_home
+/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home
+</code></pre>
+
+<h4>Get a list of Install JDKs:</h4>
+
+<pre><code>ls -l1 /Library/Java/JavaVirtualMachines/
+1.6.0.jdk
+jdk1.7.0_71.jdk
+jdk1.7.0_80.jdk
+jdk1.8.0_92.jdk
+</code></pre>
+
+<h4>Export a &ldquo;new home&rdquo;:</h4>
+
+<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+</code></pre>
+
+<p>Now I can build and run <code>sharpen</code>, i.e.:</p>
+
+<pre><code>mvn clean test
+mvn install
+java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users/sushi/github/PlayParser
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding nuget packages to your MonoDevelop Addin Templates]]></title>
@@ -375,54 +425,6 @@ var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptR
 ./PredicateEditorSample/bin/Debug/PredicateEditorSample.app
 ./QTRecorder/bin/Debug/QTRecorder.app
 ./RoundedTransparentWindow/bin/Debug/RoundedTransparentWindow.app
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MonoMac - Where is the CAEmitterCell Content propery?]]></title>
-    <link href="http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery/"/>
-    <updated>2015-11-23T06:01:10-08:00</updated>
-    <id>http://sushihangover.github.io/monomac-where-is-slash-caemittercell-content-propery</id>
-    <content type="html"><![CDATA[<p><img class="left" src="/images/MonoMac-Fire.gif" title="Fire" >
-I was trying to integrate ActionScript and Away3d with the CAEmitterCell particles using MonoMac for users that do not have access (a license) to Xamarin.Mac, but&hellip;</p>
-
-<p>The MonoMac project is missing the maccore <code>CoreAnimation/CAEmitterCell.cs</code> in the Make.shared and thus the <code>MonoMac.dll</code> that is distributed via Xamarin Studio is broken in this regard as it is missing the ability to assign an Image to the emitter.</p>
-
-<p>Example:</p>
-
-<pre><code>            // Create the fire emitter cell
-            CAEmitterCell fire = CAEmitterCell.EmitterCell ();
-            fire.EmissionLongitude = (float)Math.PI;
-            fire.BirthRate = 0;
-            fire.Velocity = 80;
-            fire.VelocityRange = 30;
-            fire.EmissionRange = 1.1f;
-            fire.AccelerationY = 200;
-            fire.ScaleSpeed = 0.3f;
-
-            RectangleF rect = RectangleF.Empty;
-            CGColor color = new CGColor (0.8f,0.4f,0.2f,0.10f);
-            fire.Color = color;
-            fire.Contents = NSImage.ImageNamed ("fire.png").AsCGImage (ref rect, null, null);
-</code></pre>
-
-<p>I have updated PlayScript&rsquo;s <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> (forked from <a href="https://github.com/mono/monomac">Mono/MonoMac</a>) to fix this.</p>
-
-<p><strong>git diff src/Make.shared</strong></p>
-
-<pre><code>diff --git a/src/Make.shared b/src/Make.shared
-index 986ff28..a84aeae 100644
---- a/src/Make.shared
-+++ b/src/Make.shared
-@@ -44,6 +44,7 @@ SHARED_SOURCE = \
-        ./CoreAnimation/CALayer.cs                      \
-        ./CoreAnimation/CATextLayer.cs                  \
-        ./CoreAnimation/CAMediaTimingFunction.cs        \
-+       ./CoreAnimation/CAEmitterCell.cs                \
-        ./CoreFoundation/CFArray.cs                     \
-        ./CoreFoundation/CFBoolean.cs                   \
-        ./CoreFoundation/CFDictionary.cs                \
 </code></pre>
 ]]></content>
   </entry>

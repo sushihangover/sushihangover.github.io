@@ -4,7 +4,7 @@
   <title><![CDATA[Category: os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-01-17T00:34:53-08:00</updated>
+  <updated>2016-09-25T10:59:53-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sharpen]]></title>
+    <link href="http://sushihangover.github.io/sharpen/"/>
+    <updated>2016-09-25T10:44:44-07:00</updated>
+    <id>http://sushihangover.github.io/sharpen</id>
+    <content type="html"><![CDATA[<p>I needed to convert some Java code to C# and one of the best ways that I ever found is to use <code>Sharpen</code>. This used to be available as a Eclipse plugin but you can find a cli version at Mono&rsquo;s Github account:</p>
+
+<ul>
+<li><a href="https://github.com/mono/sharpen">https://github.com/mono/sharpen</a></li>
+</ul>
+
+
+<p>One of the <em>issues</em> in running Sharpen is that it requires Java 1.7, <strong>NOT 1.6, nor 1.8.</strong>.</p>
+
+<p>So you need to have a Java 7 install. An easy way if you are already using homebrew, is available via a cask:</p>
+
+<pre><code>brew install Caskroom/versions/java7
+</code></pre>
+
+<p>Note: If you get errors, make sure that your casks are updated, <code>brew upgrade brew-cask</code></p>
+
+<h4>Current JDK:</h4>
+
+<pre><code>/usr/libexec/java_home
+/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home
+</code></pre>
+
+<h4>Get a list of Install JDKs:</h4>
+
+<pre><code>ls -l1 /Library/Java/JavaVirtualMachines/
+1.6.0.jdk
+jdk1.7.0_71.jdk
+jdk1.7.0_80.jdk
+jdk1.8.0_92.jdk
+</code></pre>
+
+<h4>Export a &ldquo;new home&rdquo;:</h4>
+
+<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+</code></pre>
+
+<p>Now I can build and run <code>sharpen</code>, i.e.:</p>
+
+<pre><code>mvn clean test
+mvn install
+java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users/sushi/github/PlayParser
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[C# AppleScript calls with functions, arguments and results]]></title>
@@ -521,26 +571,6 @@ Test Case Failures:
 </code></pre>
 
 <p>Ref: This was my <a href="http://stackoverflow.com/a/33827575/4984832">answer</a> on StackOverflow</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OSX 10.11 El Capitan, Which Mono version?]]></title>
-    <link href="http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version/"/>
-    <updated>2015-10-14T05:49:56-07:00</updated>
-    <id>http://sushihangover.github.io/osx-10-dot-11-el-capitan-which-mono-version</id>
-    <content type="html"><![CDATA[<p>Moving to El Capitan? Then you need <a href="http://www.mono-project.com/download/">Mono</a> version 4.2.x or 4.0.4.4.</p>
-
-<p>From the Mono mailing list:</p>
-
-<blockquote><p>What is the difference between the latest Mono 4.0.4.4 package for Mac and the 4.2.1 El Capitan Preview?
-The changelog of 4.0.4.4 includes &ldquo;33585: El Capitan System Integrity
-Protection support.&rdquo; so i suppose that the 4.0.4.4 also works on El
-Capitan?.</p></blockquote>
-
-<p>Reply from Miguel de Icaza:</p>
-
-<blockquote><p>One is based on Mono 4.0 series, with minimal changes just to enable the support on El Capitan;   The 4.2 has the same changes, on top of the latest Mono 4.2, available on Alpha and the release candidate.</p></blockquote>
 ]]></content>
   </entry>
   
