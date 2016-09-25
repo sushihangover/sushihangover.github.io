@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Sharpen - SushiHangover</title>
+  <title>Sharpen - Part 3 - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I needed to convert some Java code to C# and one of the best ways that I ever found is to use Sharpen. This used to be available as a Eclipse plugin &hellip;">
+  <meta name="description" content="Sharpen Part 1: The correct Java version Part 2: Building Sharpen Sharpen Support Classes: Converting your Java classes using the default config from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/sharpen/">
+  <link rel="canonical" href="http://sushihangover.github.io/sharpen-part-3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -113,7 +113,7 @@
   
   <header>
     
-      <h1 class="entry-title">Sharpen</h1>
+      <h1 class="entry-title">Sharpen - Part 3</h1>
     
     
       <p class="meta">
@@ -122,54 +122,218 @@
 
 
 
-<time class='entry-date' datetime='2016-09-25T10:44:44-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+<time class='entry-date' datetime='2016-09-25T13:12:19-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:12 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I needed to convert some Java code to C# and one of the best ways that I ever found is to use <code>Sharpen</code>. This used to be available as a Eclipse plugin but you can find a cli version at Mono&rsquo;s Github account:</p>
+<div class="entry-content"><h2>Sharpen</h2>
+
+<p>Part 1: <a href="http://sushihangover.github.io/sharpen/">The correct Java version</a></p>
+
+<p>Part 2: <a href="http://sushihangover.github.io/sharpen-part-2/">Building Sharpen</a></p>
+
+<h3>Sharpen Support Classes:</h3>
+
+<p>Converting your Java classes using the default config from <a href="https://github.com/ydanila">ydanila</a> you might want to look at the Sharpen support classes from <a href="https://github.com/mono/ngit"><code>ngit</code></a>:</p>
 
 <ul>
-<li><a href="https://github.com/mono/sharpen">https://github.com/mono/sharpen</a></li>
+<li><p><a href="https://github.com/mono/ngit/tree/master/Sharpen">https://github.com/mono/ngit/tree/master/Sharpen</a></p></li>
+<li><p><a href="https://github.com/mono/ngit/tree/master/Sharpen.Unix">https://github.com/mono/ngit/tree/master/Sharpen.Unix</a></p></li>
 </ul>
 
 
-<p>One of the <em>issues</em> in running Sharpen is that it requires Java 1.7, <strong>NOT 1.6, nor 1.8.</strong>.</p>
+<h3>Type.FullName:</h3>
 
-<p>So you need to have a Java 7 install. An easy way if you are already using homebrew, is available via a cask:</p>
-
-<pre><code>brew install Caskroom/versions/java7
+<pre><code>Sharpen.AccessController
+Sharpen.AList`1
+Sharpen.Arrays
+Sharpen.AtomicInteger
+Sharpen.AtomicLong
+Sharpen.AtomicReference`1
+Sharpen.AtomicReferenceArray`1
+Sharpen.BufferedInputStream
+Sharpen.BufferedOutputStream
+Sharpen.BufferedReader
+Sharpen.ByteArrayInputStream
+Sharpen.ByteArrayOutputStream
+Sharpen.Callable`1
+Sharpen.CharBuffer
+Sharpen.CharsetDecoder
+Sharpen.CharsetEncoder
+Sharpen.CodingErrorAction
+Sharpen.Collections`1
+Sharpen.Collections
+Sharpen.ConcurrentHashMap`2
+Sharpen.ConcurrentMap`2
+Sharpen.CopyOnWriteArrayList`1
+Sharpen.CountDownLatch
+Sharpen.CRC32
+Sharpen.CyclicBarrier
+Sharpen.DataConverter
+Sharpen.DataConverter+PackContext
+Sharpen.DataConverter+CopyConverter
+Sharpen.DataConverter+SwapConverter
+Sharpen.DeflaterOutputStream
+Sharpen.EnumerableWrapper`1
+Sharpen.EnumeratorWrapper`1
+Sharpen.Executors
+Sharpen.FixedThreadPoolExecutorService
+Sharpen.FutureBase
+Sharpen.TaskFuture`1
+Sharpen.CancellationException
+Sharpen.RejectedExecutionException
+Sharpen.ExecutorService
+Sharpen.Extensions
+Sharpen.FileChannel
+Sharpen.FileChannel+MapMode
+Sharpen.FileInputStream
+Sharpen.FileLock
+Sharpen.FileOutputStream
+Sharpen.FileReader
+Sharpen.FileWriter
+Sharpen.Future`1
+Sharpen.GZIPInputStream
+Sharpen.GZIPOutputStream
+Sharpen.InflaterInputStream
+Sharpen.InheritableThreadLocal`1
+Sharpen.InputStreamReader
+Sharpen.LinkageError
+Sharpen.LinkedHashMap`2
+Sharpen.ListIterator`1
+Sharpen.MappedByteBuffer
+Sharpen.Matcher
+Sharpen.MessageFormat
+Sharpen.ObjectInputStream
+Sharpen.ObjectOutputStream
+Sharpen.OutputStreamWriter
+Sharpen.Pattern
+Sharpen.PipedInputStream
+Sharpen.PipedOutputStream
+Sharpen.PrintWriter
+Sharpen.PrivilegedAction`1
+Sharpen.RandomAccessFile
+Sharpen.ReentrantLock
+Sharpen.Reference`1
+Sharpen.ReferenceQueue`1
+Sharpen.Runtime
+Sharpen.Runtime+ShutdownHook
+Sharpen.SimpleDateFormat
+Sharpen.SingletonList
+Sharpen.SoftReference`1
+Sharpen.SynchronizedList`1
+Sharpen.Thread
+Sharpen.ThreadGroup
+Sharpen.TimeUnit
+Sharpen.TimeUnitExtensions
+Sharpen.WrappedSystemStream
+Sharpen.AbstractCollection`1
+Sharpen.AbstractList`1
+Sharpen.AbstractList`1+SimpleIterator
+Sharpen.AbstractMap`2
+Sharpen.AbstractSet`1
+Sharpen.Authenticator
+Sharpen.ByteBuffer
+Sharpen.ByteOrder
+Sharpen.CharSequence
+Sharpen.StringCharSequence
+Sharpen.DigestOutputStream
+Sharpen.EnumSet
+Sharpen.EnumSet`1
+Sharpen.VirtualMachineError
+Sharpen.StackOverflowError
+Sharpen.BrokenBarrierException
+Sharpen.BufferUnderflowException
+Sharpen.CharacterCodingException
+Sharpen.DataFormatException
+Sharpen.EOFException
+Sharpen.Error
+Sharpen.ExecutionException
+Sharpen.InstantiationException
+Sharpen.InterruptedIOException
+Sharpen.MissingResourceException
+Sharpen.NoSuchAlgorithmException
+Sharpen.NoSuchElementException
+Sharpen.NoSuchMethodException
+Sharpen.OverlappingFileLockException
+Sharpen.ParseException
+Sharpen.RuntimeException
+Sharpen.StringIndexOutOfBoundsException
+Sharpen.UnknownHostException
+Sharpen.UnsupportedEncodingException
+Sharpen.URISyntaxException
+Sharpen.ZipException
+Sharpen.GitException
+Sharpen.ConnectException
+Sharpen.KeyManagementException
+Sharpen.IllegalCharsetNameException
+Sharpen.UnsupportedCharsetException
+Sharpen.Executor
+Sharpen.FilenameFilter
+Sharpen.FilePath
+Sharpen.FilterInputStream
+Sharpen.FilterOutputStream
+Sharpen.InputStream
+Sharpen.Iterable`1
+Sharpen.Iterator
+Sharpen.Iterator`1
+Sharpen.MessageDigest
+Sharpen.MessageDigest`1
+Sharpen.OutputStream
+Sharpen.PasswordAuthentication
+Sharpen.ResourceBundle
+Sharpen.Runnable
+Sharpen.TreeSet`1
+Sharpen.LinkedHashSet`1
+Sharpen.ProxySelector
+Sharpen.Proxy
+Sharpen.URLConnection
+Sharpen.HttpsURLConnection
+Sharpen.HttpURLConnection
+Sharpen.URLEncoder
+Sharpen.BitSet
+Sharpen.Channels
+Sharpen.BufferedWriter
+Sharpen.X509TrustManager
+Sharpen.X509Certificate
+Sharpen.TrustManager
+Sharpen.SSLContext
+Sharpen.AtomicBoolean
+Sharpen.ScheduledThreadPoolExecutor
+Sharpen.ScheduledThreadPoolExecutor+Task`1
+Sharpen.IScheduledITask
+Sharpen.Scheduler
+Sharpen.ThreadFactory
+Sharpen.ThreadPoolExecutor
+Sharpen.RunnableAction
+Sharpen.JavaWeakReference`1
+Sharpen.SystemProcess
+Sharpen.DateFormat
+Sharpen.DigestInputStream
+Sharpen.FileHelper
+Sharpen.JavaCalendar
+Sharpen.JavaGregorianCalendar
+&lt;PrivateImplementationDetails&gt;
+&lt;PrivateImplementationDetails&gt;+$ArrayType=1024
+Sharpen.FixedThreadPoolExecutorService+&lt;Submit&gt;c__AnonStorey0`1
+Sharpen.Extensions+&lt;ContainsAll&gt;c__AnonStorey0`2
+Sharpen.Extensions+&lt;Contains&gt;c__AnonStorey1`1
+Sharpen.LinkedHashMap`2+&lt;Put&gt;c__AnonStorey0
+Sharpen.LinkedHashMap`2+&lt;Remove&gt;c__AnonStorey1
+Sharpen.AbstractMap`2+&lt;ContainsKey&gt;c__AnonStorey0
+Sharpen.AbstractMap`2+&lt;Get&gt;c__AnonStorey1
+Sharpen.Scheduler+&lt;HasTasks&gt;c__AnonStorey0
 </code></pre>
 
-<p>Note: If you get errors, make sure that your casks are updated, <code>brew upgrade brew-cask</code></p>
+<h3>Via:</h3>
 
-<h4>Current JDK:</h4>
-
-<pre><code>/usr/libexec/java_home
-/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home
-</code></pre>
-
-<h4>Get a list of Install JDKs:</h4>
-
-<pre><code>ls -l1 /Library/Java/JavaVirtualMachines/
-1.6.0.jdk
-jdk1.7.0_71.jdk
-jdk1.7.0_80.jdk
-jdk1.8.0_92.jdk
-</code></pre>
-
-<h4>Export a &ldquo;new home&rdquo;:</h4>
-
-<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
-</code></pre>
-
-<p>Now I can build and run <code>sharpen</code>, i.e.:</p>
-
-<pre><code>mvn clean test
-mvn install
-java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users/sushi/github/PlayParser
+<pre><code>Assembly assembly = Assembly.ReflectionOnlyLoad("Sharpen");
+foreach (Type type in assembly.GetTypes())
+{
+   Console.WriteLine(type.FullName);
+}
 </code></pre>
 </div>
 
@@ -186,7 +350,7 @@ java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users
 
 
 
-<time class='entry-date' datetime='2016-09-25T10:44:44-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:44 am</span></time>
+<time class='entry-date' datetime='2016-09-25T13:12:19-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:12 pm</span></time>
       
 
 <span class="categories">
@@ -200,7 +364,7 @@ java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/sharpen/" data-via="" data-counturl="http://sushihangover.github.io/sharpen/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/sharpen-part-3/" data-via="" data-counturl="http://sushihangover.github.io/sharpen-part-3/" >Tweet</a>
   
   
   
@@ -209,10 +373,8 @@ java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/nuget-and-msbuild-targets/" title="Previous Post: Nuget and MSBuild Targets">&laquo; Nuget and MSBuild Targets</a>
+        <a class="basic-alignment left" href="/sharpen-part-2/" title="Previous Post: Sharpen - Part 2">&laquo; Sharpen - Part 2</a>
       
-      
-        <a class="basic-alignment right" href="/sharpen-part-2/" title="Next Post: Sharpen - Part 2">Sharpen - Part 2 &raquo;</a>
       
     </p>
   </footer>
@@ -307,8 +469,8 @@ java -jar src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/sharpen/';
-        var disqus_url = 'http://sushihangover.github.io/sharpen/';
+        var disqus_identifier = 'http://sushihangover.github.io/sharpen-part-3/';
+        var disqus_url = 'http://sushihangover.github.io/sharpen-part-3/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I do not normally use a Linux Desktop, more of a CLI kind-of guy, but in trying to support some C# projects that are using MonoDevelop, I needed to &hellip;">
+  <meta name="description" content="When you need a file or package and can&rsquo;t find it: Use apt-file First, install apt-file and update it. sudo apt-get install apt-file
+sudo apt- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +111,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/apt-file-finding-packages-by-search-fing-headers/">apt~file | Finding packages by searching headers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-31T06:30:29-07:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:30 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>When you need a file or package and can&rsquo;t find it:</h2>
+
+<h3>Use apt-file</h3>
+
+<p>First, install <code>apt-file</code> and update it.</p>
+
+<pre><code>sudo apt-get install apt-file
+sudo apt-file update
+</code></pre>
+
+<p>You can search with <code>apt-file</code> needed files or packages.</p>
+
+<pre><code>apt-file search curses.h
+apt-file search panel.h
+apt-file search iconv.h
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -769,37 +814,6 @@ Royalty Free Background Music:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-linux-based-builds-now-avaiable/">PlayScript | Linux based builds now available</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-04T06:06:28-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:06 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> I have cleaned up issues for the Linux builds and they are now working properly. See the <strong>Travis CI</strong> files in the CI directory and the .travis.yml file in the root of the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo for details.</p>
-
-<p><img class="right" src="http://blog.travis-ci.com/images/travis-mascot-200px.png"> <a href="http://travis-ci.org/">Travis CI </a> has also enabled OS-X builds for the PlayScript repo. Very cool company, great support and amazing that they offer this service for free to open source projects. They have a great company <a href="http://blog.travis-ci.com">blog</a> also&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -817,6 +831,10 @@ Royalty Free Background Music:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen-part-3/">Sharpen - Part 3</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-2/">Sharpen - Part 2</a>
       </li>
     
@@ -830,10 +848,6 @@ Royalty Free Background Music:
     
       <li class="post">
         <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
       </li>
     
   </ul>
