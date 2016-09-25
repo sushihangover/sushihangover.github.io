@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I not sure when exactly -Xtheirs was added to git (~1.7.? timeframe), but it is a great and fast way to replace (overlay) all the changed files from &hellip;">
+  <meta name="description" content="Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo? Will, you are in luck, git allows a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/add-a-local-repo-as-a-remote-to-a-different-local-repo/">Add a local repo as a remote to a different local repo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-27T19:34:36-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Have a two local repos that you what to mash and merge together so you can live with just one local/remote repo?</p>
+
+<p>Will, you are in luck, git allows a file based uri to be used vs. using https or git protocols.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add NewRemoteName /file/path/to/existing/repo/.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git remote add 2013nov22 /Users/administrator/Documents/Code/playscript/playscript-mono-2013nov22-compile/.git
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -581,43 +624,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/arm-starts-move-to-llvm/">ARM starts move to LLVM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-10T22:03:36-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:03 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very cool news from ARM Holding the other day. They are formally adopting clang/LLVM as their future compiler. If you have been following LLVM commits, you might have noticed that AArch64 support has been making progress for quite some time, and now ARM is publicly releasing v6 of their compiler:</p>
-
-<blockquote><p>ARM announces the availability of version 6 of the ARM Compiler, the reference code generation toolchain for the ARM® architecture. ARM Compiler 6 adopts the Clang and LLVM open source compiler framework, channeling contributions from the whole ARM Partnership to improve code quality, performance and power efficiency of software on ARM processors.</p>
-
-<p>The flexible and modern Clang and LLVM infrastructure provides a solid foundation for ARM&rsquo;s code generation tools. Clang is a C/C++ compiler front end based on a modular architecture with well-defined interfaces for applying complimentary tools such as code analyzers and code generators. Clang also offers improved diagnostic capabilities, leading to higher quality code and shorter development cycles.</p></blockquote>
-
-<p><a href="http://www.arm.com/about/newsroom/arm-compiler-builds-on-open-source-llvm-technology.php">ARM&rsquo;s Press Release</a></p>
-
-<p>I am really looking forward to when they start contributing on the existing Cortex-M backend in LLVM. :-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -635,6 +641,10 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen/">Sharpen</a>
       </li>
     
@@ -648,10 +658,6 @@ Doing point releases have been talked a lot about in the past but they&rsquo;ve 
     
       <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
       </li>
     
   </ul>

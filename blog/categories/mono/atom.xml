@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-09-25T10:59:53-07:00</updated>
+  <updated>2016-09-25T12:56:05-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sharpen - Part 2]]></title>
+    <link href="http://sushihangover.github.io/sharpen-part-2/"/>
+    <updated>2016-09-25T12:33:03-07:00</updated>
+    <id>http://sushihangover.github.io/sharpen-part-2</id>
+    <content type="html"><![CDATA[<h2>Sharpen Setup</h2>
+
+<h3>Get Maven:</h3>
+
+<pre><code>brew install maven
+</code></pre>
+
+<h3>Check Maven:</h3>
+
+<pre><code>mvn --version
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
+</code></pre>
+
+<h3>Clone the repo(s):</h3>
+
+<pre><code>git clone https://github.com/mono/sharpen.git
+git clone https://github.com/ydanila/sharpen_imazen_config.git
+</code></pre>
+
+<h3>Set your Java/JDK version to 1.7</h3>
+
+<ul>
+<li><a href="http://sushihangover.github.io/sharpen/">http://sushihangover.github.io/sharpen/</a></li>
+</ul>
+
+
+<h3>Build the Sharpen config:</h3>
+
+<pre><code>pushd sharpen_imazen_config
+mvn install
+popd
+</code></pre>
+
+<p>Note: This is a sample config and a great starting point</p>
+
+<h3>Build Sharpen</h3>
+
+<h5>Note: Make sure that you are on the develop branch of Sharpen!</h5>
+
+<pre><code>pushd sharpen
+git checkout develop 
+</code></pre>
+
+<h4>Edit the <code>pom.xml</code> file so the cmd line <code>-help</code> option works:</h4>
+
+<pre><code>git diff pom.xml
+
+diff --git a/pom.xml b/pom.xml
+index 1098a2d..4fedcbc 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -122,7 +122,7 @@
+     &lt;testSourceDirectory&gt;src/test&lt;/testSourceDirectory&gt;
+     &lt;resources&gt;
+       &lt;resource&gt;
+-        &lt;directory&gt;src/test/resources&lt;/directory&gt;
++        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+       &lt;/resource&gt;
+     &lt;/resources&gt;
+     &lt;testResources&gt;
+</code></pre>
+
+<p>mvn clean test
+mvn install</p>
+
+<h3>Running Sharpen:</h3>
+
+<h4>Cmd line help:</h4>
+
+<pre><code>java -jar ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help     
+</code></pre>
+
+<h4>Convert Java to C# (with config)</h4>
+
+<h5>Copy config:</h5>
+
+<pre><code>cp ../sharpen_imazen_config/sharpen-all-options .
+cp ../sharpen_imazen_config/sharpen.config/target/MEConfiguration.sharpenconfig .
+</code></pre>
+
+<h4>Run with config:</h4>
+
+<pre><code>java -jar \
+   ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+   /Users/sushi/code/github/PlayScriptParser/src \
+   -configurationClass \
+   MEConfiguration.sharpenconfig-jar @sharpen-all-options
+
+~~~
+Configuration Class: sharpen.config.MEConfiguration
+Configuration Class: Sharpen.Runtime
+project: asc
+Pascal case mode: NamespaceAndIdentifiers
+Native type system mode on.
+Separating interface constants to their own classes.
+Organize usings mode on.
+~~~
+</code></pre>
+
+<h4>Convert C# Location:</h4>
+
+<p>Your converted C# classes will be located <strong>NEXT</strong> the original source directory, <code>/Users/sushi/code/github/PlayScriptParser</code>, in my case, the <strong>asc.net</strong> directory</p>
+
+<pre><code>cd /Users/sushi/code/github/PlayScriptParser
+ls -1
+    asc.net
+    build
+    src
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sharpen]]></title>
@@ -367,65 +490,6 @@ var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptR
 <li>The MIT License (MIT)</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MonoMac - Demo / Samples updated]]></title>
-    <link href="http://sushihangover.github.io/monomac-samples-updates/"/>
-    <updated>2015-11-23T20:51:39-08:00</updated>
-    <id>http://sushihangover.github.io/monomac-samples-updates</id>
-    <content type="html"><![CDATA[<p>A number of the MonoMac demos were broken in various ways so as I was using some of them in my PlayScript / ActionScript work with Stage3d, Away3d and Starling, I update the <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> <a href="https://github.com/PlayScriptRedux/monomac">MonoMac</a> repo with the corrected versions.</p>
-
-<p><img src="/images/MonoMac-Demos.gif" alt="" /></p>
-
-<pre><code>./AnimatingViews/bin/Debug/AnimatingViews.app
-./attic/Hello/Hello.app
-./ButtonMadness/bin/Debug/ButtonMadness.app
-./CAQuartzComposition/bin/Debug/CAQuartzComposition.app
-./CoreAnimationBook/BackgroundFilteredView/bin/Debug/BackgroundFilteredView.app
-./CoreAnimationBook/CustomAnimationTiming/bin/Debug/CustomAnimationTiming.app
-./CoreAnimationBook/CustomizeAnimation/bin/Debug/CustomizeAnimation.app
-./CoreAnimationBook/CustomizeAnimation2/bin/Debug/CustomizeAnimation.app
-./CoreAnimationBook/FilteredView/bin/Debug/FilteredView.app
-./CoreAnimationBook/GroupAnimation/bin/Debug/GroupAnimation.app
-./CoreAnimationBook/KeyFrameMoveAView/bin/Debug/KeyFrameMoveAView.app
-./CoreAnimationBook/LayerBackedControls/bin/Debug/LayerBackedControls.app
-./CoreAnimationBook/QCBackground/bin/Debug/QCBackground.app
-./CoreAnimationBook/TimedAnimation/bin/Debug/TimedAnimation.app
-./CoreTextArcMonoMac/bin/Debug/CoreTextArcMonoMac.app
-./CoreWLANWirelessManager/bin/Debug/CoreWLANWirelessManager.app
-./DatePicker/bin/Debug/DatePicker.app
-./DockAppIcon/bin/Debug/DockAppIcon.app
-./DocumentSample/bin/Debug/DocumentSample.app
-./DrawerMadness/DrawerMadness/bin/Debug/DrawerMadness.app
-./Fire/bin/Debug/Fire.app
-./GLFullScreen/bin/Debug/GLFullScreen.app
-./GlossyClock/bin/Debug/GlossyClock.app
-./GLSLShader/bin/Debug/GLSLShader.app
-./ImageKitDemoStep1/bin/Debug/ImageKitDemo.app
-./macdoc/bin/Debug/macdoc.app
-./MonoMacGameWindow/bin/Debug/MonoMacGameView.app
-./NSAlert/bin/Debug/NSAlertSample.app
-./NSTableViewBinding/bin/Debug/NSTableViewBinding.app
-./OpenGL-NeHe/NeHeLesson1/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson13/bin/Debug/NeHeLesson13.app
-./OpenGL-NeHe/NeHeLesson17/bin/Debug/NeHeLesson17.app
-./OpenGL-NeHe/NeHeLesson2/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson3/bin/Debug/NeHeLesson1.app
-./OpenGL-NeHe/NeHeLesson4/bin/Debug/NeHeLesson4.app
-./OpenGL-NeHe/NeHeLesson5/bin/Debug/NeHeLesson5.app
-./OpenGL-NeHe/NeHeLesson6/bin/Debug/NeHeLesson6.app
-./OpenGL-NeHe/NeHeLesson7/bin/Debug/NeHeLesson7.app
-./OpenGL-NeHe/NeHeLesson8/bin/Debug/NeHeLesson8.app
-./OpenGL-NeHe/NeHeLesson9/bin/Debug/NeHeLesson9.app
-./OpenGLLayer/bin/Debug/OpenGLLayer.app
-./OpenGLViewSample/OpenGLViewSample/bin/Debug/MMOpenTK.app
-./PopupBindings/bin/Debug/PopupBindings.app
-./PredicateEditorSample/bin/Debug/PredicateEditorSample.app
-./QTRecorder/bin/Debug/QTRecorder.app
-./RoundedTransparentWindow/bin/Debug/RoundedTransparentWindow.app
-</code></pre>
 ]]></content>
   </entry>
   

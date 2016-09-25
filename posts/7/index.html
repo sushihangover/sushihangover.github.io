@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="xCorFlags Version 1.0.5643.36015 Maintenance release of the cross-platform CorFlags Conversion Tool is up on Github. git log v1.0.5643.30429..v1.0. &hellip;">
+  <meta name="description" content="My answer from Stackoverflow on compiling MonoCov on OS-X and Mono 4.0.x # Clone the MonoCov repo
+git clone https://github.com/mono/monocov.git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +111,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/monocov-building-on-os-x/">MonoCov - Building on OS-X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-15T10:52:29-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:52 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My <a href="http://stackoverflow.com/questions/20757444/how-to-compile-c-sharp-code-to-64-bit-in-xamarin-studio-on-os-x/30714801#30714801">answer</a> from Stackoverflow on compiling MonoCov on OS-X and Mono 4.0.x</p>
+
+<pre><code># Clone the MonoCov repo
+git clone https://github.com/mono/monocov.git MonoCov
+cd MonoCov
+# A really old version of cecil and it not available as a nuget
+curl http://go-mono.com/archive/cecil/cecil-0.6-bin.zip -o cecil-0.6-bin.zip
+unzip cecil-0.6-bin.zip
+# Make sure configure can find the Mono.Option source file
+export PKG_CONFIG_PATH=/Library/Frameworks/Mono.framework/Versions/4.0.1/lib:/Library/Frameworks/Mono.framework/Versions/4.0.1/lib/pkgconfig:$PKG_CONFIG_PATH
+export 
+# Config to install to users home dir
+./configure --cecil=$PWD/monocov/cecil-0.6/Mono.Cecil.dll --prefix $HOME/monocov
+# Fix Makefile, gmcs no longer exists under Mono 4.x and Makefile is hard coded
+sed -i.bak s/gmcs/mcs/g Makefile
+# Pass -m32 to make since OS-X Mono framework is still 32-bit
+CC="cc -m32" make
+# Install does not properly create bin dir, do it before the first install
+mkdir $HOME/monocov/bin
+# Install..
+make install
+</code></pre>
+
+<h2>Compile a test app and test MonoCov:</h2>
+
+<pre><code>// Save this to a file named Program.cs
+using System;
+namespace Foobar
+{
+    class MainClass
+    {
+        public static void Main (string[] args)
+        {
+            Console.WriteLine ("Hello MonoCov");
+        }
+    }
+}
+</code></pre>
+
+<h2>Profile a Mono (.Net) application</h2>
+
+<pre><code># Compile a sample app
+mcs Program.cs
+# Update path to include MonoCov so mono can load it as a profiler
+export PATH=$HOME/monocov:$PATH
+mono --debug --profile=monocov Program.exe
+</code></pre>
+
+<h2>Launch the MonoCov GUI</h2>
+
+<pre><code># GUI Framework DllNotFoundException fix (if needed)
+export DYLD_FALLBACK_LIBRARY_PATH="/Library/Frameworks/Mono.framework/Versions/Current/lib:/usr/local/lib:/usr/lib"
+# Update path to include MonoCov
+export PATH=$HOME/monocov/bin:$PATH
+monocov
+</code></pre>
+
+<p><a href="http://www.mono-project.com/docs/debug+profile/profile/code-coverage/">Mono Code Coverage Profiler : MonoCov</a></p>
+
+<p><a href="http://evain.net/blog/articles/2007/10/05/mono-cecil-0-6">Mono.Cecil 0.6 05 Oct 2007</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -829,59 +918,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-libtool-version-mismatch-error-this-is-libtool-2-dot-4-6/">Mono - libtool: Version mismatch error.  This is libtool 2.4.6</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T17:20:35-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:20 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > If you are receiving the following error when compiling mono 4.x &ldquo;Version mismatch error.  This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.2.&rdquo;, then the aclocal.m4 file needs to be rebuilt. It appears something in the mono autogen/configure and/or make clean is not deleting and rebuilding it (or is picking an older libtool vs. actually using glibtool).</p>
-
-<p>I have find that the &ldquo;libgc/aclocal.m4&rdquo; has been my main problem:</p>
-
-<pre><code> ....   
-    make[4]: Nothing to be done for `all-am'.
-    Making all in doc
-    make[3]: Nothing to be done for `all'.
-      CC       pthread_support.lo
-    libtool: Version mismatch error.  This is libtool 2.4.6, but the
-    libtool: definition of this LT_INIT comes from libtool 2.4.2.
-    libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6
-    libtool: and run autoconf again.
-    make[3]: *** [pthread_support.lo] Error 63
-    make[2]: *** [all-recursive] Error 1
-    make[1]: *** [all-recursive] Error 1
-    make: *** [all] Error 2
-</code></pre>
-
-<p>Remove that file:</p>
-
-<pre><code>rm libgc/aclocal.m4 
-</code></pre>
-
-<p>And re-run the make and it will be recreated correctly.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -899,6 +935,10 @@ The results are not really that surprising in regards to is 64-bit number crunch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen/">Sharpen</a>
       </li>
     
@@ -912,10 +952,6 @@ The results are not really that surprising in regards to is 64-bit number crunch
     
       <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
       </li>
     
   </ul>

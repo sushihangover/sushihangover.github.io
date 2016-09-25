@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-09-25T10:59:53-07:00</updated>
+  <updated>2016-09-25T12:56:05-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sharpen - Part 2]]></title>
+    <link href="http://sushihangover.github.io/sharpen-part-2/"/>
+    <updated>2016-09-25T12:33:03-07:00</updated>
+    <id>http://sushihangover.github.io/sharpen-part-2</id>
+    <content type="html"><![CDATA[<h2>Sharpen Setup</h2>
+
+<h3>Get Maven:</h3>
+
+<pre><code>brew install maven
+</code></pre>
+
+<h3>Check Maven:</h3>
+
+<pre><code>mvn --version
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
+</code></pre>
+
+<h3>Clone the repo(s):</h3>
+
+<pre><code>git clone https://github.com/mono/sharpen.git
+git clone https://github.com/ydanila/sharpen_imazen_config.git
+</code></pre>
+
+<h3>Set your Java/JDK version to 1.7</h3>
+
+<ul>
+<li><a href="http://sushihangover.github.io/sharpen/">http://sushihangover.github.io/sharpen/</a></li>
+</ul>
+
+
+<h3>Build the Sharpen config:</h3>
+
+<pre><code>pushd sharpen_imazen_config
+mvn install
+popd
+</code></pre>
+
+<p>Note: This is a sample config and a great starting point</p>
+
+<h3>Build Sharpen</h3>
+
+<h5>Note: Make sure that you are on the develop branch of Sharpen!</h5>
+
+<pre><code>pushd sharpen
+git checkout develop 
+</code></pre>
+
+<h4>Edit the <code>pom.xml</code> file so the cmd line <code>-help</code> option works:</h4>
+
+<pre><code>git diff pom.xml
+
+diff --git a/pom.xml b/pom.xml
+index 1098a2d..4fedcbc 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -122,7 +122,7 @@
+     &lt;testSourceDirectory&gt;src/test&lt;/testSourceDirectory&gt;
+     &lt;resources&gt;
+       &lt;resource&gt;
+-        &lt;directory&gt;src/test/resources&lt;/directory&gt;
++        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+       &lt;/resource&gt;
+     &lt;/resources&gt;
+     &lt;testResources&gt;
+</code></pre>
+
+<p>mvn clean test
+mvn install</p>
+
+<h3>Running Sharpen:</h3>
+
+<h4>Cmd line help:</h4>
+
+<pre><code>java -jar ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help     
+</code></pre>
+
+<h4>Convert Java to C# (with config)</h4>
+
+<h5>Copy config:</h5>
+
+<pre><code>cp ../sharpen_imazen_config/sharpen-all-options .
+cp ../sharpen_imazen_config/sharpen.config/target/MEConfiguration.sharpenconfig .
+</code></pre>
+
+<h4>Run with config:</h4>
+
+<pre><code>java -jar \
+   ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+   /Users/sushi/code/github/PlayScriptParser/src \
+   -configurationClass \
+   MEConfiguration.sharpenconfig-jar @sharpen-all-options
+
+~~~
+Configuration Class: sharpen.config.MEConfiguration
+Configuration Class: Sharpen.Runtime
+project: asc
+Pascal case mode: NamespaceAndIdentifiers
+Native type system mode on.
+Separating interface constants to their own classes.
+Organize usings mode on.
+~~~
+</code></pre>
+
+<h4>Convert C# Location:</h4>
+
+<p>Your converted C# classes will be located <strong>NEXT</strong> the original source directory, <code>/Users/sushi/code/github/PlayScriptParser</code>, in my case, the <strong>asc.net</strong> directory</p>
+
+<pre><code>cd /Users/sushi/code/github/PlayScriptParser
+ls -1
+    asc.net
+    build
+    src
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sharpen]]></title>
@@ -1914,117 +2037,6 @@ Test Case Failures:
 <p>FYI: I remember using that program on Window&rsquo;s ARCH types long forgotten&hellip; and the site still has versions available (unsupported of course) for Alpha, AXP64, MIPS, and PowerPC architectures&hellip;. wow, remember when Windows ran on those ;-)</p>
 
 <p><img src="http://www.dependencywalker.com/snapshot.png" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android FileObserver example in Xamarin/C#]]></title>
-    <link href="http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number/"/>
-    <updated>2015-11-14T03:08:38-08:00</updated>
-    <id>http://sushihangover.github.io/android-fileobserver-example-in-xamarin-slash-c-number</id>
-    <content type="html"><![CDATA[<p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
-
-<h1>Question</h1>
-
-<p>How can you write an Android FileObserver in C#?</p>
-
-<p>i.e. Native Java example:</p>
-
-<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
-    public String basePath;
-
-    @Override
-    public void onEvent(int event, String path) {
-        String fullPath = basePath;
-        if(path != null) {
-            fullPath += path;
-        }
-        Log.d(TAG, "FILE: "+fullPath);
-    }
-};
-observer.basePath = imageUri.getPath();
-observer.startWatching();
-</code></pre>
-
-<h1>Answer</h1>
-
-<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
-
-<p><strong>Quick Notes:</strong></p>
-
-<ul>
-<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
-<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
-<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
-</ul>
-
-
-<p><strong>C# FileObserver Class:</strong></p>
-
-<pre><code>using System;
-using Android.OS;
-using Android.Util;
-
-namespace MyFileObserver
-{
-    public class MyPathObserver : Android.OS.FileObserver
-    {
-        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
-        const string tag = "StackoverFlow";
-
-        public MyPathObserver (String rootPath) : base(rootPath, _Events)
-        {
-            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
-        }
-
-        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
-        {
-            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
-        }
-
-        public override void OnEvent(FileObserverEvents e, String path)
-        {
-            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
-        }
-    }
-}
-</code></pre>
-
-<p><strong>Example Usage:</strong></p>
-
-<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
-myFileObserver = new MyPathObserver (pathToWatch);
-myFileObserver.StartWatching (); // and StopWatching () when you are done...
-var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
-button.Click += delegate {
-    if (File.Exists (document)) {
-        button.Text = "Delete File";
-        File.Delete (document);
-    } else {
-        button.Text = "Create File";
-        File.WriteAllText (document, "Foobar");
-    }
-};
-</code></pre>
-
-<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
-
-<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-</code></pre>
 ]]></content>
   </entry>
   

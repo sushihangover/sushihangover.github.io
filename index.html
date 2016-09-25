@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I needed to convert some Java code to C# and one of the best ways that I ever found is to use Sharpen. This used to be available as a Eclipse plugin &hellip;">
+  <meta name="description" content="Sharpen Setup Get Maven: brew install maven Check Maven: mvn --version Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,149 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/sharpen-part-2/">Sharpen - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-09-25T12:33:03-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:33 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Sharpen Setup</h2>
+
+<h3>Get Maven:</h3>
+
+<pre><code>brew install maven
+</code></pre>
+
+<h3>Check Maven:</h3>
+
+<pre><code>mvn --version
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
+</code></pre>
+
+<h3>Clone the repo(s):</h3>
+
+<pre><code>git clone https://github.com/mono/sharpen.git
+git clone https://github.com/ydanila/sharpen_imazen_config.git
+</code></pre>
+
+<h3>Set your Java/JDK version to 1.7</h3>
+
+<ul>
+<li><a href="http://sushihangover.github.io/sharpen/">http://sushihangover.github.io/sharpen/</a></li>
+</ul>
+
+
+<h3>Build the Sharpen config:</h3>
+
+<pre><code>pushd sharpen_imazen_config
+mvn install
+popd
+</code></pre>
+
+<p>Note: This is a sample config and a great starting point</p>
+
+<h3>Build Sharpen</h3>
+
+<h5>Note: Make sure that you are on the develop branch of Sharpen!</h5>
+
+<pre><code>pushd sharpen
+git checkout develop 
+</code></pre>
+
+<h4>Edit the <code>pom.xml</code> file so the cmd line <code>-help</code> option works:</h4>
+
+<pre><code>git diff pom.xml
+
+diff --git a/pom.xml b/pom.xml
+index 1098a2d..4fedcbc 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -122,7 +122,7 @@
+     &lt;testSourceDirectory&gt;src/test&lt;/testSourceDirectory&gt;
+     &lt;resources&gt;
+       &lt;resource&gt;
+-        &lt;directory&gt;src/test/resources&lt;/directory&gt;
++        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+       &lt;/resource&gt;
+     &lt;/resources&gt;
+     &lt;testResources&gt;
+</code></pre>
+
+<p>mvn clean test
+mvn install</p>
+
+<h3>Running Sharpen:</h3>
+
+<h4>Cmd line help:</h4>
+
+<pre><code>java -jar ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help     
+</code></pre>
+
+<h4>Convert Java to C# (with config)</h4>
+
+<h5>Copy config:</h5>
+
+<pre><code>cp ../sharpen_imazen_config/sharpen-all-options .
+cp ../sharpen_imazen_config/sharpen.config/target/MEConfiguration.sharpenconfig .
+</code></pre>
+
+<h4>Run with config:</h4>
+
+<pre><code>java -jar \
+   ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+   /Users/sushi/code/github/PlayScriptParser/src \
+   -configurationClass \
+   MEConfiguration.sharpenconfig-jar @sharpen-all-options
+
+~~~
+Configuration Class: sharpen.config.MEConfiguration
+Configuration Class: Sharpen.Runtime
+project: asc
+Pascal case mode: NamespaceAndIdentifiers
+Native type system mode on.
+Separating interface constants to their own classes.
+Organize usings mode on.
+~~~
+</code></pre>
+
+<h4>Convert C# Location:</h4>
+
+<p>Your converted C# classes will be located <strong>NEXT</strong> the original source directory, <code>/Users/sushi/code/github/PlayScriptParser</code>, in my case, the <strong>asc.net</strong> directory</p>
+
+<pre><code>cd /Users/sushi/code/github/PlayScriptParser
+ls -1
+    asc.net
+    build
+    src
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1447,127 +1590,6 @@ find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt'
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-25T13:23:13-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:23 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A real quickie example of a <a href="https://developer.xamarin.com/api/type/MonoTouch.UIKit.UIPickerView/">UIPickerView</a>: (<a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIPickerView_Class/index.html">iOS SDK</a>)</p>
-
-<p><img src="/images/Xamarin-iPhone-Picker.gif" alt="" /></p>
-
-<p>Add a <code>UIPickerView</code> to your xib or Storyboard called <code>slotMachineView</code> and a label (named <code>selectedLbl</code>) to show the currently selected items.</p>
-
-<pre><code>using System;
-using UIKit;
-
-namespace Slots
-{
-    public partial class ViewController : UIViewController
-    {
-        public ViewController (IntPtr handle) : base (handle)
-        {
-        }
-
-        public override void ViewDidLoad ()
-        {
-            base.ViewDidLoad ();
-                slotMachineView.Model = new StackOverflowModel (selectedLbl);
-        }
-
-        public override void DidReceiveMemoryWarning ()
-        {
-            base.DidReceiveMemoryWarning ();
-        }
-    }
-
-    public class StackOverflowModel : UIPickerViewModel
-    {
-        static string[] names = new string [] {
-            "pscorlib.dll",
-            "pscorlib_aot.dll",
-            "Mono.PlayScript.dll",
-            "PlayScript.Dynamic.dll",
-            "PlayScript.Dynamic_aot.dll",
-            "PlayScript.Optimization.dll",
-            "playshell.exe",
-            "psc.exe"
-        };
-
-        UILabel lbl;
-
-        public StackOverflowModel (UILabel lbl)
-        {
-            this.lbl = lbl;
-        }
-
-        public override nint GetComponentCount (UIPickerView v)
-        {
-            return 3;
-        }
-
-        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
-        {
-            return names.Length;
-        }
-
-        public override string GetTitle (UIPickerView picker, nint row, nint component)
-        {
-            switch (component) {
-            case 0:
-                return names [row];
-            case 1:
-                return row.ToString ();
-            case 2:
-                return new string ((char)('A' + row), 1);
-            default:
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override void Selected (UIPickerView picker, nint row, nint component)
-        {
-            lbl.Text = String.Format ("{0} : {1} : {2}",
-                names [picker.SelectedRowInComponent (0)],
-                picker.SelectedRowInComponent (1),
-                picker.SelectedRowInComponent (2));
-        }
-
-        public override nfloat GetComponentWidth (UIPickerView picker, nint component)
-        {
-            if (component == 0)
-                return 220f;
-            else
-                return 30f;
-        }
-    }
-}
-</code></pre>
-
-<p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1583,6 +1605,10 @@ namespace Slots
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen/">Sharpen</a>
       </li>
     
@@ -1596,10 +1622,6 @@ namespace Slots
     
       <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
       </li>
     
   </ul>

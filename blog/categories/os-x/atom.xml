@@ -4,7 +4,7 @@
   <title><![CDATA[Category: os-x | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/os-x/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-09-25T10:59:53-07:00</updated>
+  <updated>2016-09-25T12:56:05-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sharpen - Part 2]]></title>
+    <link href="http://sushihangover.github.io/sharpen-part-2/"/>
+    <updated>2016-09-25T12:33:03-07:00</updated>
+    <id>http://sushihangover.github.io/sharpen-part-2</id>
+    <content type="html"><![CDATA[<h2>Sharpen Setup</h2>
+
+<h3>Get Maven:</h3>
+
+<pre><code>brew install maven
+</code></pre>
+
+<h3>Check Maven:</h3>
+
+<pre><code>mvn --version
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
+</code></pre>
+
+<h3>Clone the repo(s):</h3>
+
+<pre><code>git clone https://github.com/mono/sharpen.git
+git clone https://github.com/ydanila/sharpen_imazen_config.git
+</code></pre>
+
+<h3>Set your Java/JDK version to 1.7</h3>
+
+<ul>
+<li><a href="http://sushihangover.github.io/sharpen/">http://sushihangover.github.io/sharpen/</a></li>
+</ul>
+
+
+<h3>Build the Sharpen config:</h3>
+
+<pre><code>pushd sharpen_imazen_config
+mvn install
+popd
+</code></pre>
+
+<p>Note: This is a sample config and a great starting point</p>
+
+<h3>Build Sharpen</h3>
+
+<h5>Note: Make sure that you are on the develop branch of Sharpen!</h5>
+
+<pre><code>pushd sharpen
+git checkout develop 
+</code></pre>
+
+<h4>Edit the <code>pom.xml</code> file so the cmd line <code>-help</code> option works:</h4>
+
+<pre><code>git diff pom.xml
+
+diff --git a/pom.xml b/pom.xml
+index 1098a2d..4fedcbc 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -122,7 +122,7 @@
+     &lt;testSourceDirectory&gt;src/test&lt;/testSourceDirectory&gt;
+     &lt;resources&gt;
+       &lt;resource&gt;
+-        &lt;directory&gt;src/test/resources&lt;/directory&gt;
++        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+       &lt;/resource&gt;
+     &lt;/resources&gt;
+     &lt;testResources&gt;
+</code></pre>
+
+<p>mvn clean test
+mvn install</p>
+
+<h3>Running Sharpen:</h3>
+
+<h4>Cmd line help:</h4>
+
+<pre><code>java -jar ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help     
+</code></pre>
+
+<h4>Convert Java to C# (with config)</h4>
+
+<h5>Copy config:</h5>
+
+<pre><code>cp ../sharpen_imazen_config/sharpen-all-options .
+cp ../sharpen_imazen_config/sharpen.config/target/MEConfiguration.sharpenconfig .
+</code></pre>
+
+<h4>Run with config:</h4>
+
+<pre><code>java -jar \
+   ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+   /Users/sushi/code/github/PlayScriptParser/src \
+   -configurationClass \
+   MEConfiguration.sharpenconfig-jar @sharpen-all-options
+
+~~~
+Configuration Class: sharpen.config.MEConfiguration
+Configuration Class: Sharpen.Runtime
+project: asc
+Pascal case mode: NamespaceAndIdentifiers
+Native type system mode on.
+Separating interface constants to their own classes.
+Organize usings mode on.
+~~~
+</code></pre>
+
+<h4>Convert C# Location:</h4>
+
+<p>Your converted C# classes will be located <strong>NEXT</strong> the original source directory, <code>/Users/sushi/code/github/PlayScriptParser</code>, in my case, the <strong>asc.net</strong> directory</p>
+
+<pre><code>cd /Users/sushi/code/github/PlayScriptParser
+ls -1
+    asc.net
+    build
+    src
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sharpen]]></title>
@@ -444,133 +567,6 @@ CI/build.osx.sh
 <p>Looking for contributors in these areas and/or any other areas that you would help out on.</p>
 
 <p><a href="https://github.com/sushihangover/CursesSharp">Fork and Contribute</a> ;-)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NUnit Console 2.4.8 vs 3.0 using .csproj files]]></title>
-    <link href="http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0/"/>
-    <updated>2015-11-19T21:14:42-08:00</updated>
-    <id>http://sushihangover.github.io/nunit-console-2-dot-4-8-vs-3-dot-0</id>
-    <content type="html"><![CDATA[<p>When using NUnit console 2.4.x and 3.x with <code>.csproj</code> files, it expects a valid and fairly complete MSBuild/xbuild project to determine the assembly name, dir location, and namespace that it will test in the Library-based project (Exe-based projects are possible if you have defined the proper entry point). In this example I used NUnit 2.4.x and 3.x <strong>console</strong> as there are execution differences but the same <code>.csproj</code> is being used so if you are using MonoDevelop/Xamarin Studio the IDE&rsquo;s built-in NUnit 2.4.x test pad will also work.</p>
-
-<p><strong>NUnit 3.0 console (Install via nuget):</strong></p>
-
-<pre><code>mono $(MTOOLS)/nunit3-console.exe  nunit-lib/nunit-lib.csproj --config=Debug
-
-NUnit Console Runner 3.0.5797 
-Copyright (C) 2015 Charlie Poole
-
-Runtime Environment
-   OS Version: MacOSX 15.0.0.0 
-  CLR Version: 4.0.30319.17020
-
-Test Files
-    nunit-lib/nunit-lib.csproj
-
-Errors and Failures
-
-1) Failed : nunitlib.Test.TestCase
-  Expected string length 8 but was 5. Strings differ at index 0.
-  Expected: "Overflow"
-  But was:  "Stack"
-  -----------^
-at nunitlib.Test.TestCase () in &lt;filename unknown&gt;:line 0
-
-Test Run Summary
-    Overall result: Failed
-   Tests run: 1, Passed: 0, Errors: 0, Failures: 1, Inconclusive: 0
-     Not run: 0, Invalid: 0, Ignored: 0, Explicit: 0, Skipped: 0
-  Start time: 2015-11-20 12:36:28Z
-    End time: 2015-11-20 12:36:28Z
-    Duration: 0.132 seconds
-</code></pre>
-
-<p><strong>NUnit 2.4.8 (installed via Mono):</strong></p>
-
-<p><strong>NOTE</strong>: NUnit console 2.4.x is <code>broken</code> due a hard-coded Windows-style Directory Separator when parsing <code>.csproj</code> files and creating the expected CIL/assembly location, use <code>MONO_IOMAP</code> to work around it. This is not a issue in 3.0.</p>
-
-<p><strong>NUnit Console 2.4.x w/o MONO_IOMAP:</strong></p>
-
-<pre><code>nunit-console nunit-lib/nunit-lib.csproj -config=Debug
-~~~~
-Unhandled Exception:
-System.IO.DirectoryNotFoundException: Directory "/Users/sushi/code/XamTests/nunit-lib/nunit-lib/bin\Debug" not found.
-~~~~
-</code></pre>
-
-<p><strong>NUnit Console 2.4.x with MONO_IOMAP:</strong></p>
-
-<pre><code>MONO_IOMAP=all nunit-console nunit-lib/nunit-lib.csproj -config=Debug
-
-NUnit version 2.4.8
-Copyright (C) 2002-2007 Charlie Poole.
-Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
-Copyright (C) 2000-2002 Philip Craig.
-All Rights Reserved.
-
-Runtime Environment - 
-   OS Version: Unix 15.0.0.0
-  CLR Version: 4.0.30319.17020 ( 4.2.1 (explicit/8862921 Thu Oct 29 17:09:16 EDT 2015) )
-
-.F
-Tests run: 1, Failures: 1, Not run: 0, Time: 0.115 seconds
-
-Test Case Failures:
-1) nunitlib.Test.TestCase :   Expected string length 8 but was 5. Strings differ at index 0.
-  Expected: "Overflow"
-  But was:  "Stack"
-  -----------^
-</code></pre>
-
-<p><strong>.csproj example used in for example:</strong></p>
-
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-  &lt;PropertyGroup&gt;
-    &lt;Configuration Condition=" '$(Configuration)' == '' "&gt;Debug&lt;/Configuration&gt;
-    &lt;Platform Condition=" '$(Platform)' == '' "&gt;AnyCPU&lt;/Platform&gt;
-    &lt;ProjectGuid&gt;{944946CD-39B2-4A16-A8A8-9F70F0450506}&lt;/ProjectGuid&gt;
-    &lt;OutputType&gt;Library&lt;/OutputType&gt;
-    &lt;RootNamespace&gt;nunitlib&lt;/RootNamespace&gt;
-    &lt;AssemblyName&gt;nunit-lib&lt;/AssemblyName&gt;
-    &lt;TargetFrameworkVersion&gt;v4.5&lt;/TargetFrameworkVersion&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "&gt;
-    &lt;DebugSymbols&gt;true&lt;/DebugSymbols&gt;
-    &lt;DebugType&gt;full&lt;/DebugType&gt;
-    &lt;Optimize&gt;false&lt;/Optimize&gt;
-    &lt;OutputPath&gt;bin\Debug&lt;/OutputPath&gt;
-    &lt;DefineConstants&gt;DEBUG;&lt;/DefineConstants&gt;
-    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
-    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
-    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "&gt;
-    &lt;DebugType&gt;full&lt;/DebugType&gt;
-    &lt;Optimize&gt;true&lt;/Optimize&gt;
-    &lt;OutputPath&gt;bin\Release&lt;/OutputPath&gt;
-    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
-    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
-    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Reference Include="System" /&gt;
-    &lt;Reference Include="nunit.framework"&gt;
-      &lt;HintPath&gt;..\packages\NUnit.2.6.4\lib\nunit.framework.dll&lt;/HintPath&gt;
-    &lt;/Reference&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Compile Include="Test.cs" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
-  &lt;ItemGroup&gt;
-    &lt;None Include="packages.config" /&gt;
-  &lt;/ItemGroup&gt;
-&lt;/Project&gt;
-</code></pre>
-
-<p>Ref: This was my <a href="http://stackoverflow.com/a/33827575/4984832">answer</a> on StackOverflow</p>
 ]]></content>
   </entry>
   

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using redirection within xargs - SushiHangover</title>
+  <title>Sharpen - Part 2 - SushiHangover</title>
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I needed to convert a bunch of AppleScript .scpt files to uncompiled .txt files, so a simple find piped to xargs and I&rsquo;ll be done&hellip; well& &hellip;">
+  <meta name="description" content="Sharpen Setup Get Maven: brew install maven Check Maven: mvn --version Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sushihangover.github.io/using-redirection-within-xargs/">
+  <link rel="canonical" href="http://sushihangover.github.io/sharpen-part-2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="SushiHangover" type="application/atom+xml">
@@ -113,7 +113,7 @@
   
   <header>
     
-      <h1 class="entry-title">Using redirection within xargs</h1>
+      <h1 class="entry-title">Sharpen - Part 2</h1>
     
     
       <p class="meta">
@@ -122,32 +122,128 @@
 
 
 
-<time class='entry-date' datetime='2015-11-28T06:29:15-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:29 am</span></time>
+<time class='entry-date' datetime='2016-09-25T12:33:03-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:33 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I needed to convert a bunch of AppleScript <code>.scpt</code> files to uncompiled <code>.txt</code> files, so a simple <code>find</code> piped to <code>xargs</code> and I&rsquo;ll be done&hellip; well&hellip;</p>
+<div class="entry-content"><h2>Sharpen Setup</h2>
 
-<p>OS-X provides a <code>osadecompile</code> cmd that will read a <code>.scpt</code> file and output the text to <code>stdout</code> (It does not provide a output file option). So a simple redirection and I should be done:</p>
+<h3>Get Maven:</h3>
 
-<pre><code># This will not work, you will end up with a file 
-# named {}.txt that includes the test of all the scripts
-find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt' 
+<pre><code>brew install maven
 </code></pre>
 
-<p>But that will not work as the redirection applies to the <code>xargs</code> cmd, not the <code>osadecompile</code> cmd that xargs is calling. So a quick fix is to create a subshell and include the redirection in the passed cmd string (via <code>-c</code>)</p>
+<h3>Check Maven:</h3>
 
-<p>So this will work:</p>
+<pre><code>mvn --version
 
-<pre><code>find *.scpt -print0 | xargs -0 -n 1 -I {} sh -c "osadecompile '{}' &gt; '{}.txt'"
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_92, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.11.6", arch: "x86_64", family: "mac"
 </code></pre>
 
-<p>Still simple enough, and since I only have a couple of dozen files in this case the performance impact of creaing subshells is not a problem&hellip;</p>
+<h3>Clone the repo(s):</h3>
 
-<p><strong>Homework:</strong> How would you get around this in using a bash <a href="https://en.wikipedia.org/wiki/One-liner_program">one-liner</a> without a subshell?</p>
+<pre><code>git clone https://github.com/mono/sharpen.git
+git clone https://github.com/ydanila/sharpen_imazen_config.git
+</code></pre>
+
+<h3>Set your Java/JDK version to 1.7</h3>
+
+<ul>
+<li><a href="http://sushihangover.github.io/sharpen/">http://sushihangover.github.io/sharpen/</a></li>
+</ul>
+
+
+<h3>Build the Sharpen config:</h3>
+
+<pre><code>pushd sharpen_imazen_config
+mvn install
+popd
+</code></pre>
+
+<p>Note: This is a sample config and a great starting point</p>
+
+<h3>Build Sharpen</h3>
+
+<h5>Note: Make sure that you are on the develop branch of Sharpen!</h5>
+
+<pre><code>pushd sharpen
+git checkout develop 
+</code></pre>
+
+<h4>Edit the <code>pom.xml</code> file so the cmd line <code>-help</code> option works:</h4>
+
+<pre><code>git diff pom.xml
+
+diff --git a/pom.xml b/pom.xml
+index 1098a2d..4fedcbc 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -122,7 +122,7 @@
+     &lt;testSourceDirectory&gt;src/test&lt;/testSourceDirectory&gt;
+     &lt;resources&gt;
+       &lt;resource&gt;
+-        &lt;directory&gt;src/test/resources&lt;/directory&gt;
++        &lt;directory&gt;src/main/resources&lt;/directory&gt;
+       &lt;/resource&gt;
+     &lt;/resources&gt;
+     &lt;testResources&gt;
+</code></pre>
+
+<p>mvn clean test
+mvn install</p>
+
+<h3>Running Sharpen:</h3>
+
+<h4>Cmd line help:</h4>
+
+<pre><code>java -jar ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar -help     
+</code></pre>
+
+<h4>Convert Java to C# (with config)</h4>
+
+<h5>Copy config:</h5>
+
+<pre><code>cp ../sharpen_imazen_config/sharpen-all-options .
+cp ../sharpen_imazen_config/sharpen.config/target/MEConfiguration.sharpenconfig .
+</code></pre>
+
+<h4>Run with config:</h4>
+
+<pre><code>java -jar \
+   ${PWD}/src/target/sharpencore-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+   /Users/sushi/code/github/PlayScriptParser/src \
+   -configurationClass \
+   MEConfiguration.sharpenconfig-jar @sharpen-all-options
+
+~~~
+Configuration Class: sharpen.config.MEConfiguration
+Configuration Class: Sharpen.Runtime
+project: asc
+Pascal case mode: NamespaceAndIdentifiers
+Native type system mode on.
+Separating interface constants to their own classes.
+Organize usings mode on.
+~~~
+</code></pre>
+
+<h4>Convert C# Location:</h4>
+
+<p>Your converted C# classes will be located <strong>NEXT</strong> the original source directory, <code>/Users/sushi/code/github/PlayScriptParser</code>, in my case, the <strong>asc.net</strong> directory</p>
+
+<pre><code>cd /Users/sushi/code/github/PlayScriptParser
+ls -1
+    asc.net
+    build
+    src
+</code></pre>
 </div>
 
 
@@ -163,12 +259,12 @@ find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt'
 
 
 
-<time class='entry-date' datetime='2015-11-28T06:29:15-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:29 am</span></time>
+<time class='entry-date' datetime='2016-09-25T12:33:03-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:33 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/redirection/'>redirection</a>, <a class='category' href='/blog/categories/xargs/'>xargs</a>
+    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/mono/'>mono</a>, <a class='category' href='/blog/categories/os-x/'>os-x</a>, <a class='category' href='/blog/categories/sharpen/'>sharpen</a>
   
 </span>
 
@@ -177,7 +273,7 @@ find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt'
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/using-redirection-within-xargs/" data-via="" data-counturl="http://sushihangover.github.io/using-redirection-within-xargs/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://sushihangover.github.io/sharpen-part-2/" data-via="" data-counturl="http://sushihangover.github.io/sharpen-part-2/" >Tweet</a>
   
   
   
@@ -186,10 +282,8 @@ find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt'
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/xamarin-c-number-uipickerview/" title="Previous Post: Xamarin C# UIPickerView">&laquo; Xamarin C# UIPickerView</a>
+        <a class="basic-alignment left" href="/sharpen/" title="Previous Post: Sharpen">&laquo; Sharpen</a>
       
-      
-        <a class="basic-alignment right" href="/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/" title="Next Post: Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)">Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba) &raquo;</a>
       
     </p>
   </footer>
@@ -284,8 +378,8 @@ find *.scpt -print0 | xargs -0 -n 1 -I {} osadecompile '{}' &gt; '{}.txt'
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sushihangover.github.io/using-redirection-within-xargs/';
-        var disqus_url = 'http://sushihangover.github.io/using-redirection-within-xargs/';
+        var disqus_identifier = 'http://sushihangover.github.io/sharpen-part-2/';
+        var disqus_url = 'http://sushihangover.github.io/sharpen-part-2/';
         var disqus_script = 'embed.js';
       
     (function () {

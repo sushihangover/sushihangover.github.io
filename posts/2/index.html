@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I tend to hit the Cmd-Q instead of Cmd-W when I am closing a tab and in my older installs on OS-X I had changed the shortcut for Safari Quit and that &hellip;">
+  <meta name="description" content="A real quickie example of a UIPickerView: (iOS SDK) Add a UIPickerView to your xib or Storyboard called slotMachineView and a label (named &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,127 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-c-number-uipickerview/">Xamarin C# UIPickerView</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-25T13:23:13-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:23 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A real quickie example of a <a href="https://developer.xamarin.com/api/type/MonoTouch.UIKit.UIPickerView/">UIPickerView</a>: (<a href="http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIPickerView_Class/index.html">iOS SDK</a>)</p>
+
+<p><img src="/images/Xamarin-iPhone-Picker.gif" alt="" /></p>
+
+<p>Add a <code>UIPickerView</code> to your xib or Storyboard called <code>slotMachineView</code> and a label (named <code>selectedLbl</code>) to show the currently selected items.</p>
+
+<pre><code>using System;
+using UIKit;
+
+namespace Slots
+{
+    public partial class ViewController : UIViewController
+    {
+        public ViewController (IntPtr handle) : base (handle)
+        {
+        }
+
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
+                slotMachineView.Model = new StackOverflowModel (selectedLbl);
+        }
+
+        public override void DidReceiveMemoryWarning ()
+        {
+            base.DidReceiveMemoryWarning ();
+        }
+    }
+
+    public class StackOverflowModel : UIPickerViewModel
+    {
+        static string[] names = new string [] {
+            "pscorlib.dll",
+            "pscorlib_aot.dll",
+            "Mono.PlayScript.dll",
+            "PlayScript.Dynamic.dll",
+            "PlayScript.Dynamic_aot.dll",
+            "PlayScript.Optimization.dll",
+            "playshell.exe",
+            "psc.exe"
+        };
+
+        UILabel lbl;
+
+        public StackOverflowModel (UILabel lbl)
+        {
+            this.lbl = lbl;
+        }
+
+        public override nint GetComponentCount (UIPickerView v)
+        {
+            return 3;
+        }
+
+        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
+        {
+            return names.Length;
+        }
+
+        public override string GetTitle (UIPickerView picker, nint row, nint component)
+        {
+            switch (component) {
+            case 0:
+                return names [row];
+            case 1:
+                return row.ToString ();
+            case 2:
+                return new string ((char)('A' + row), 1);
+            default:
+                throw new NotImplementedException ();
+            }
+        }
+
+        public override void Selected (UIPickerView picker, nint row, nint component)
+        {
+            lbl.Text = String.Format ("{0} : {1} : {2}",
+                names [picker.SelectedRowInComponent (0)],
+                picker.SelectedRowInComponent (1),
+                picker.SelectedRowInComponent (2));
+        }
+
+        public override nfloat GetComponentWidth (UIPickerView picker, nint component)
+        {
+            if (component == 0)
+                return 220f;
+            else
+                return 30f;
+        }
+    }
+}
+</code></pre>
+
+<p>From my <a href="http://stackoverflow.com/a/33902474/4984832">answer</a> on StackOverflow.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -938,137 +1059,6 @@ Test Case Failures:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/android-fileobserver-example-in-xamarin-slash-c-number/">Android FileObserver example in Xamarin/C#</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-14T03:08:38-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:08 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is from my answer on StackOverflow from a question that got closed. As not to lose it to the SO &lsquo;on-hold/close&rsquo; flush, I am re-posting it.</p>
-
-<h1>Question</h1>
-
-<p>How can you write an Android FileObserver in C#?</p>
-
-<p>i.e. Native Java example:</p>
-
-<pre><code>FileObserver observer = new FileObserver(imageUri.getPath()) {
-    public String basePath;
-
-    @Override
-    public void onEvent(int event, String path) {
-        String fullPath = basePath;
-        if(path != null) {
-            fullPath += path;
-        }
-        Log.d(TAG, "FILE: "+fullPath);
-    }
-};
-observer.basePath = imageUri.getPath();
-observer.startWatching();
-</code></pre>
-
-<h1>Answer</h1>
-
-<p>Create a class that inherits from <a href="http://developer.xamarin.com/api/type/Android.OS.FileObserver/"><code>Android.OS.FileObserver</code></a>, you only need to implement the <a href="http://developer.xamarin.com/api/member/Android.OS.FileObserver.OnEvent/p/Android.OS.FileObserverEvents/System.String/"><code>OnEvent()</code></a> and one(+) Constructors. Its a really simple pattern after you see it once&hellip; ;-)</p>
-
-<p><strong>Quick Notes:</strong></p>
-
-<ul>
-<li>Watch on a <strong>path</strong>, if you need to filter by file, do it in the OnEvent</li>
-<li>Do not let your FileObserver object get GC&rsquo;d or your OnEvents will magically stop :-/</li>
-<li>Remember to call StartWatching() in order to receive OnEvent calls</li>
-</ul>
-
-
-<p><strong>C# FileObserver Class:</strong></p>
-
-<pre><code>using System;
-using Android.OS;
-using Android.Util;
-
-namespace MyFileObserver
-{
-    public class MyPathObserver : Android.OS.FileObserver
-    {
-        static FileObserverEvents _Events = (FileObserverEvents.AllEvents);
-        const string tag = "StackoverFlow";
-
-        public MyPathObserver (String rootPath) : base(rootPath, _Events)
-        {
-            Log.Info(tag, String.Format("Watching : {0}", rootPath)); 
-        }
-
-        public MyPathObserver (String rootPath, FileObserverEvents events) : base(rootPath, events)
-        {
-            Log.Info(tag, String.Format("Watching : {0} : {1}", rootPath, events)); 
-        }
-
-        public override void OnEvent(FileObserverEvents e, String path)
-        {
-            Log.Info(tag, String.Format("{0}:{1}",path, e)); 
-        }
-    }
-}
-</code></pre>
-
-<p><strong>Example Usage:</strong></p>
-
-<pre><code>var pathToWatch = System.Environment.GetFolderPath (System.Environment.SpecialFolder.Personal);
-// Do not let myFileObserver get GC'd, stash it's ref in an activty, or ...
-myFileObserver = new MyPathObserver (pathToWatch);
-myFileObserver.StartWatching (); // and StopWatching () when you are done...
-var document = Path.Combine(pathToWatch, "StackOverFlow.txt");
-button.Click += delegate {
-    if (File.Exists (document)) {
-        button.Text = "Delete File";
-        File.Delete (document);
-    } else {
-        button.Text = "Create File";
-        File.WriteAllText (document, "Foobar");
-    }
-};
-</code></pre>
-
-<p><strong>adb logcat Output (when clicking on the test button):</strong></p>
-
-<pre><code>I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-I/StackoverFlow( 3596): StackOverFlow.txt:Delete
-I/StackoverFlow( 3596): StackOverFlow.txt:Create
-I/StackoverFlow( 3596): StackOverFlow.txt:Open
-I/StackoverFlow( 3596): StackOverFlow.txt:Modify
-I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1086,6 +1076,10 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen/">Sharpen</a>
       </li>
     
@@ -1099,10 +1093,6 @@ I/StackoverFlow( 3596): StackOverFlow.txt:CloseWrite
     
       <li class="post">
         <a href="/playscript-and-nunit/">PlayScript and NUnit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/adding-nuget-packages-to-your-addin-templates/">Adding nuget packages to your MonoDevelop Addin Templates</a>
       </li>
     
   </ul>
