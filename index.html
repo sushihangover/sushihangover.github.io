@@ -198,7 +198,7 @@ View.Add(imageView);
       
   <header>
     
-      <h1 class="entry-title"><a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a></h1>
+      <h1 class="entry-title"><a href="/json-apis-to-a-realm-instance/">JSON APIs to a Xamarin Realm Instance</a></h1>
     
     
       <p class="meta">
@@ -218,7 +218,16 @@ View.Add(imageView);
 
 <h1>SushiHangover.RealmJson.Extensions</h1>
 
-<h4>Extension Methods for adding JSON APIs to a Realm Instance</h4>
+<h4>Extension Methods for adding JSON APIs to a Xamarin-based Realm Instance</h4>
+
+<p>Supported:</p>
+
+<ul>
+<li>Xamarin.Forms</li>
+<li>Xamarin.iOs</li>
+<li>Xamarin.Android</li>
+</ul>
+
 
 <h2>Usage / Examples:</h2>
 
@@ -239,7 +248,7 @@ using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 }
 </code></pre>
 
-<h3>Using Json Arrays from a Android Asset Stream:</h3>
+<h3>Using Json Arrays from a <code>Xamarin.Android</code> Asset Stream:</h3>
 
 <pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 using (var assetStream = Application.Context.Assets.Open("States.json"))
@@ -248,7 +257,7 @@ using (var assetStream = Application.Context.Assets.Open("States.json"))
 }
 </code></pre>
 
-<h3>Using Json Arrays from a iOS Bundled Resource Stream:</h3>
+<h3>Using Json Arrays from a <code>Xamarin.iOS</code> Bundled Resource Stream:</h3>
 
 <pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 using (var fileStream = new FileStream("./Data/States.json", FileMode.Open, FileAccess.Read))
@@ -1736,7 +1745,7 @@ Time Elapsed 00:00:01.8555370
       </li>
     
       <li class="post">
-        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a>
+        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Xamarin Realm Instance</a>
       </li>
     
       <li class="post">

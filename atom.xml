@@ -4,7 +4,7 @@
   <title><![CDATA[SushiHangover]]></title>
   <link href="http://sushihangover.github.io/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-11-13T15:45:31-08:00</updated>
+  <updated>2016-11-13T15:49:44-08:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -75,7 +75,7 @@ View.Add(imageView);
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[JSON APIs to a Realm Instance]]></title>
+    <title type="html"><![CDATA[JSON APIs to a Xamarin Realm Instance]]></title>
     <link href="http://sushihangover.github.io/json-apis-to-a-realm-instance/"/>
     <updated>2016-11-06T06:40:42-08:00</updated>
     <id>http://sushihangover.github.io/json-apis-to-a-realm-instance</id>
@@ -83,7 +83,16 @@ View.Add(imageView);
 
 <h1>SushiHangover.RealmJson.Extensions</h1>
 
-<h4>Extension Methods for adding JSON APIs to a Realm Instance</h4>
+<h4>Extension Methods for adding JSON APIs to a Xamarin-based Realm Instance</h4>
+
+<p>Supported:</p>
+
+<ul>
+<li>Xamarin.Forms</li>
+<li>Xamarin.iOs</li>
+<li>Xamarin.Android</li>
+</ul>
+
 
 <h2>Usage / Examples:</h2>
 
@@ -104,7 +113,7 @@ using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 }
 </code></pre>
 
-<h3>Using Json Arrays from a Android Asset Stream:</h3>
+<h3>Using Json Arrays from a <code>Xamarin.Android</code> Asset Stream:</h3>
 
 <pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 using (var assetStream = Application.Context.Assets.Open("States.json"))
@@ -113,7 +122,7 @@ using (var assetStream = Application.Context.Assets.Open("States.json"))
 }
 </code></pre>
 
-<h3>Using Json Arrays from a iOS Bundled Resource Stream:</h3>
+<h3>Using Json Arrays from a <code>Xamarin.iOS</code> Bundled Resource Stream:</h3>
 
 <pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 using (var fileStream = new FileStream("./Data/States.json", FileMode.Open, FileAccess.Read))
