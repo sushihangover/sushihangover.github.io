@@ -4,10 +4,10 @@ title: "Xamarin.iOS binding project for SVGKit"
 date: 2016-11-13 15:38:34 -0800
 comments: true
 categories: 
--xamarin
--xamarin.ios
--svgkit
--ios
+- xamarin
+- xamarin.ios
+- svgkit
+- ios
 ---
 
 #SushiHangover.SVGKit
