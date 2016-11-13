@@ -9,8 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="CursesSharp is a C# wrapper for curses library. The latest version of this &lsquo;fork&rsquo;&lsquo; can be found at Github.
-The original version can &hellip;">
+  <meta name="description" content="New code coverage filter: Using the new coverage filter on the mono log profiler, you can get output like this: Coverage Summary: xCorFlags (/Users/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +110,85 @@ The original version can &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/mono-code-coverage-using-the-new-coverage-filter/">Mono - Code Coverage using the new coverage filter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-15T21:33:29-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:33 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>New code coverage filter:</h2>
+
+<p>Using the new coverage filter on the mono log profiler, you can get output like this:</p>
+
+<pre><code>Coverage Summary:
+    xCorFlags (/Users/administrator/monocov/lib/xCorFlags.exe) 26% covered (42 methods - 11 covered)
+        &lt;Module&gt; ?% covered (0 methods - 1 covered)
+        CorFlags.CorFlagsSettings 25% covered (4 methods - 1 covered)
+        CorFlags.MainClass 50% covered (2 methods - 1 covered)
+        CorFlags.CommandLineParser 40% covered (20 methods - 8 covered)
+</code></pre>
+
+<blockquote><p>Having a suite of existing unit-tests, you can enable the coverage filter and get some quick answers to your question about how much code you are really exercising and testing.</p></blockquote>
+
+
+<h2>Background:</h2>
+
+<p>Well, it appears that Xamarin has removed the &lsquo;internal&rsquo; cov profiler and monocov will not produce any output (besides mono actually loading the shared library, no functions are called) as the api has changed.</p>
+
+<p>They have added a code coverage filter (Apr 7 2015) to the core log profilers and while I could not find any published documentation(?). It is easy enough to enable.</p>
+
+<pre><code>--profile=log:coverage
+
+coverage             enable collection of code coverage data
+covfilter=ASSEMBLY   add an assembly to the code coverage filters
+                     add a + to include the assembly or a - to exclude it
+                     filter=-mscorlib
+covfilter-file=FILE  use FILE to generate the list of assemblies to be filtered
+</code></pre>
+
+<p>Git log info on cov removal and log coverage filter addition:</p>
+
+<pre><code>commit 16570265149730ec6a4760cc0fa34decc1a9d981
+Author: Alex Rønne Petersen &lt;alexrp@xamarin.com&gt;
+Date:   Tue Apr 7 14:51:27 2015 +0200
+        [profiler] Remove old mono-cov profiler.
+        We're replacing this with coverage support in the log profiler.
+
+commit e91693fbb87f687a2fdb5a495c945c1872b3066c
+Author: iain holmes &lt;iain@xamarin.com&gt;
+Date:   Fri Feb 27 10:13:54 2015 +0000
+        [cov] Install a coverage filter
+</code></pre>
+
+<p>If you are still using Mono 3.x, then my other MonoCov post as it would still work:</p>
+
+<ul>
+<li><a href="http://sushihangover.github.io/monocov-building-on-os-x/">http://sushihangover.github.io/monocov-building-on-os-x/</a></li>
+<li><a href="http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374">http://stackoverflow.com/questions/30847262/how-to-build-and-use-monocov-on-a-mac/30853374#30853374</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,117 +890,6 @@ COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-another-benchmark-between-32-bit-and-64-bit-mono-and-llvm/">Mono - Another benchmark between 32-bit and 64-bit Mono / LLVM</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-09T20:24:45-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:24 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> While I was still in the []benchmark mood](<a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/</a>), I thought I would run a perf test that someone wrote years ago. Not sure where it came from originally, but it includes 5 simple tests with only one being numeric related.</p>
-
-<p>Per the <a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM web page</a>, LLVM is not able to support some of the features that Mono needs, so in those cases the JIT compiler will still fall back to Mono’s JIT engine (i.e. Methods that contain try/catch clauses or methods that do interface calls).</p>
-
-<p>One of the included tests is throwing and catching 100,000 exceptions and the 32/64-bit results show that enabling LLVM does not help.</p>
-
-<pre><code>    Note: The Mono web pages are notorious for begin out of date or lacking of details, even the 'new' ones, so I usually like confirmation. 
-</code></pre>
-
-<p>As the <a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">SciMark test</a> showed, numeric operations under LLVM native code jit totally rocks over the built-in one, over 2x faster in this simple test.</p>
-
-<p>String related functions can be 2x faster in the 64-bit mono, but enabling LLVM for either 32 or 64-bit does not really help that much, LLVM is still better but by micro-seconds (uS).</p>
-
-<p>Enabling LLVM in Mono:</p>
-
-<ul>
-<li>Methods with Exceptions: No Help at all</li>
-<li>Numerics: Still rule</li>
-<li>String functions: No much help using LLVM, but 64-bit Mono kicks its 32-bit brother in the butt.</li>
-<li>Refection: Not much help either, as expected, but again 64-bit rules.</li>
-</ul>
-
-
-<p>Net Results:</p>
-
-<p>I am still not seeing a reason not to use a 64-bit version of Mono and not enabling LLVM as I am not using any 32-bit frameworks on OS-X (i.e.: OS-X Carbon API wrappers or GTK# 2.x).</p>
-
-<p>Try it yourself: <a href="https://gist.github.com/sushihangover/3d4d9d53770c501bf054">Gist</a></p>
-
-<pre><code>mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-</code></pre>
-
-<p>Next up: <a href="http://sushihangover.github.io/mono-32-bit-vs-64-bit-ahead-of-time-compilation-aot/">How much does AOT'ing your CIL exe/dll images help&hellip;or not.</a>)</p>
-
-<h2>Additional Reading:</h2>
-
-<ul>
-<li><a href="http://www.mono-project.com/docs/advanced/mono-llvm/">Mono LLVM</a></li>
-<li><a href="http://www.mono-project.com/docs/advanced/runtime/docs/llvm-backend/">LLVM Backend</a></li>
-<li><a href="http://sushihangover.github.io/mono-64-bit-vs-32-bit-benchmark-using-scimark/">Mono - 64-bit vs. 32-bit Benchmark Using SciMark</a></li>
-</ul>
-
-
-<h2>Sample output:</h2>
-
-<pre><code>$which mono
-/Users/administrator/mono/mono-llvm-64/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x64 perftest.cs -out:perftest-64-release.exe
-
-$mono perftest-64-release.exe 
-ArrayList strings test.............408 ms
-StringBuilder test.................499 ms
-Integer &amp; Floating ADD.............3616 ms
-Exception test.....................375 ms
-Reflection and recursion...........2730 ms
-
-$ mono --llvm perftest-64-release.exe 
-ArrayList strings test.............497 ms
-StringBuilder test.................505 ms
-Integer &amp; Floating ADD.............1620 ms
-Exception test.....................407 ms
-Reflection and recursion...........2790 ms
-
-$which mono
-/Users/administrator/mono/mono-llvm-32/bin/mono
-
-$mcs -optimize+ -debug- -sdk:4.5 -target:exe -platform:x86 perftest.cs -out:perftest-32-release.exe
-
-$mono perftest-32-release.exe 
-ArrayList strings test.............777 ms
-StringBuilder test.................958 ms
-Integer &amp; Floating ADD.............3610 ms
-Exception test.....................589 ms
-Reflection and recursion...........4557 ms
-
-mono --llvm perftest-32-release.exe 
-ArrayList strings test.............830 ms
-StringBuilder test.................873 ms
-Integer &amp; Floating ADD.............1731 ms
-Exception test.....................617 ms
-Reflection and recursion...........4441 ms
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -940,6 +907,10 @@ Reflection and recursion...........4441 ms
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -953,10 +924,6 @@ Reflection and recursion...........4441 ms
     
       <li class="post">
         <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
       </li>
     
   </ul>

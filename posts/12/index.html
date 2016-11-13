@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I am not currently using a full IDE for my bare metal C coding on OS-X. Thus is mainly due to my usage of an ARM targeting Clang/LLVM build) since I &hellip;">
+  <meta name="description" content="I am working on a custom NEWLIB but first I wanted to make sure that NEWLIB compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,391 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/arm-cortex-m3-bare-metal-with-newlib/">ARM Cortex-M3 Bare-metal with NEWLIB</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-04T18:18:56-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am working on a custom NEWLIB but first I wanted to make sure that <a href="https://sourceware.org/newlib/">NEWLIB</a> compiled for ARM-NONE-EABI works out of the box with my ARM bare-metal <a href="http://llvm.org">Clang/LLVM</a> build and Qemu.</p>
+
+<p>Lets start with a simple main() that includes printf, puts and malloc. The first test is related to malloc, as if your linker script is not setting up your heap properly and providing the heap &ldquo;end&rdquo; address as defined in NEWLIB then not much else is going to work (i.e. printf uses malloc). If malloc works, then lets so some printfs including one with a random string. After that lets keep increasing the size of our mallocs till we run out of heap space.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;      </span><span class="cm">/* printf, scanf, NULL */</span><span class="cp"></span>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;     </span><span class="cm">/* malloc, free, rand */</span><span class="cp"></span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">extern</span> <span class="kt">char</span> <span class="n">_heap_start</span><span class="p">;</span> <span class="cm">/* Defined by the linker from src/cortex_M3.ld */</span>
+</span><span class='line'>  <span class="k">extern</span> <span class="kt">char</span> <span class="n">_heap_end</span><span class="p">;</span> <span class="cm">/* Defined by the linker from src/cortex_M3.Ld. */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span> <span class="n">buffer</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">i</span> <span class="o">=</span> <span class="mi">43</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span> <span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">buffer</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>     <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;Malloc failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>     <span class="n">exit</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;Printf string</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="n">buffer</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">26</span><span class="o">+</span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;Random string: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">buffer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">i</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">do</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>     <span class="n">buffer</span> <span class="o">=</span> <span class="n">realloc</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span><span class='line'>     <span class="k">if</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">{</span>
+</span><span class='line'>        <span class="n">puts</span><span class="p">(</span><span class="s">&quot;Out of memory!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">exit</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d bytes @ address 0x%X (Low=0x%X:Hi=0x%X)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+</span><span class='line'>           <span class="n">i</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">buffer</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">_heap_start</span><span class="p">,</span>
+</span><span class='line'>           <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="o">&amp;</span><span class="n">_heap_end</span>
+</span><span class='line'>       <span class="p">);</span>
+</span><span class='line'>       <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="cm">/* cause qemu to exit */</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Easy enough, so lets create a linker script that is geared for a Cortex-M3, the main section to pay attention to in this example is <strong>.heap</strong>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>OUTPUT_FORMAT <span class="o">(</span><span class="s2">&quot;elf32-littlearm&quot;</span>, <span class="s2">&quot;elf32-bigarm&quot;</span>, <span class="s2">&quot;elf32-littlearm&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>ENTRY<span class="o">(</span>Reset_Handler<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>/* Specify the memory areas */
+</span><span class='line'>MEMORY
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  FLASH <span class="o">(</span>rx<span class="o">)</span>      : <span class="nv">ORIGIN</span> <span class="o">=</span> 0x00000000, <span class="nv">LENGTH</span> <span class="o">=</span> 0x10000 /* 64K */
+</span><span class='line'>  RAM <span class="o">(</span>xrw<span class="o">)</span>       : <span class="nv">ORIGIN</span> <span class="o">=</span> 0x00020000, <span class="nv">LENGTH</span> <span class="o">=</span> 0x04000 /* 16K */
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">heap_size</span> <span class="o">=</span> 0x800<span class="p">;</span> /* 2K */
+</span><span class='line'>
+</span><span class='line'>SECTIONS <span class="o">{</span>
+</span><span class='line'>    . <span class="o">=</span> ORIGIN<span class="o">(</span>FLASH<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    .vectors :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        KEEP<span class="o">(</span>*<span class="o">(</span>.vectors<span class="o">))</span> /* Startup code */
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;FLASH
+</span><span class='line'>
+</span><span class='line'>    .text :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_start_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.text<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.text*<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.rodata<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.rodata*<span class="o">)</span>
+</span><span class='line'>        <span class="nv">_end_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;FLASH
+</span><span class='line'>
+</span><span class='line'>        .ARM.extab :
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>                *<span class="o">(</span>.ARM.extab* .gnu.linkonce.armextab.*<span class="o">)</span>
+</span><span class='line'>        <span class="o">}</span> &gt; FLASH
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">__exidx_start</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        .ARM.exidx :
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>                *<span class="o">(</span>.ARM.exidx* .gnu.linkonce.armexidx.*<span class="o">)</span>
+</span><span class='line'>        <span class="o">}</span> &gt; FLASH
+</span><span class='line'>        <span class="nv">__exidx_end</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">_end_text</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    .data : AT <span class="o">(</span>_end_text<span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">_start_data</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.data<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.data*<span class="o">)</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_end_data</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    .bss :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>         . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_start_bss</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.bss<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>.bss*<span class="o">)</span>
+</span><span class='line'>        *<span class="o">(</span>COMMON<span class="o">)</span>
+</span><span class='line'>        . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">_end_bss</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    . <span class="o">=</span> ALIGN<span class="o">(</span>4<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    .heap :
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">__end__</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        /* <span class="nv">_heap_start</span> <span class="o">=</span> .<span class="p">;</span> */
+</span><span class='line'>        /* <span class="s2">&quot;end&quot;</span> is used by newlib<span class="err">&#39;</span>s syscalls!!! */
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">end</span> <span class="o">=</span> .<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">_heap_start</span> <span class="o">=</span> end <span class="o">)</span><span class="p">;</span>
+</span><span class='line'>        . <span class="o">=</span> . + heap_size<span class="p">;</span>
+</span><span class='line'>        PROVIDE<span class="o">(</span><span class="nv">_heap_end</span> <span class="o">=</span> .<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">}</span> &gt;RAM
+</span><span class='line'>
+</span><span class='line'>    .ARM.attributes <span class="m">0</span> : <span class="o">{</span> *<span class="o">(</span>.ARM.attributes<span class="o">)</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    .stack_dummy <span class="o">(</span>COPY<span class="o">)</span>:
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="nv">_end_stack</span> <span class="o">=</span> .<span class="p">;</span>
+</span><span class='line'>        *<span class="o">(</span>.stack*<span class="o">)</span>
+</span><span class='line'>    <span class="o">}</span> &gt; RAM
+</span><span class='line'>
+</span><span class='line'>    /* Set stack top to end of RAM, and stack limit move down by
+</span><span class='line'>     * size of stack_dummy section */
+</span><span class='line'>    <span class="nv">_start_stack</span> <span class="o">=</span> ORIGIN<span class="o">(</span>RAM<span class="o">)</span> + LENGTH<span class="o">(</span>RAM<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">_size_stack</span> <span class="o">=</span> _start_stack - SIZEOF<span class="o">(</span>.stack_dummy<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>    PROVIDE<span class="o">(</span><span class="nv">__stack</span> <span class="o">=</span> _start_stack<span class="o">)</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    /* Check <span class="k">if</span> data + heap + stack exceeds RAM limit */
+</span><span class='line'>    ASSERT<span class="o">(</span>_size_stack &gt;<span class="o">=</span> _heap_end, <span class="s2">&quot;region RAM overflowed with stack&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="nv">_end</span> <span class="o">=</span> .<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, now that we have a linker script that defines our stack and heap properly, lets reuse our startup.c routine for the Cortex-M cores and compile it all with CLang/LLVM and link it with arm-none-eabi-ld:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu<span class="o">=</span>cortex-m3  -mfloat-abi<span class="o">=</span>soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/printf_with_malloc.o -c src/printf_with_malloc.c
+</span><span class='line'>clang -g -nostdlib -ffreestanding  -O0  -target arm-none-eabi -mcpu<span class="o">=</span>cortex-m3  -mfloat-abi<span class="o">=</span>soft -mthumb -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include  -o obj/startup.o -c src/startup.c
+</span><span class='line'>arm-none-eabi-ld -Map bin/main.axf.map -T src/cortex_M3.ld --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/thumb -g   obj/printf_with_malloc.o obj/startup.o --start-group -lgcc -lc --end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now we can run a simulation of it with QEMU:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Puts string
+</span><span class='line'>Printf string
+</span><span class='line'>Random string: lvqdyoqykfdbxnqdquhydjaeebzqmtblcabwgmscrno
+</span><span class='line'><span class="m">32</span> bytes @ address 0x209C0 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">64</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">96</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">128</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">160</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">192</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">224</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">256</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">288</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">320</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">352</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">384</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">416</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'><span class="m">448</span> bytes @ address 0x20DF8 <span class="o">(</span><span class="nv">Low</span><span class="o">=</span>0x209B4:Hi<span class="o">=</span>0x211B4<span class="o">)</span>
+</span><span class='line'>Out of memory!
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1286,60 +1671,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/bare-metal-arm-terminology/">Bare Metal ARM Terminology</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-16T21:35:45-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:35 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">CMSIS</a> : ARM® <strong>C</strong>ortex™ <strong>M</strong>icrocontroller <strong>S</strong>oftware <strong>I</strong>nterface <strong>S</strong>tandard</p>
-
-<p>Thread mode :</p>
-
-<blockquote><p>Used to execute application software. The processor enters Thread mode when it comes out of reset.</p></blockquote>
-
-<p>Privileged or unprivileged software execution :</p>
-
-<blockquote><p>Cortex-M0 do not support different privilege levels. Software execution is always privileged; i.e. Software can access all the features of the processor. Other ARM series do support pri and unpri execution.</p></blockquote>
-
-<p>Handler mode :</p>
-
-<blockquote><p>Used to handle exceptions. The processor returns to Thread mode when it has finished all exception processing</p></blockquote>
-
-<p>SysTick : A 24-bit count-down timer.</p>
-
-<blockquote><p>This timer is the basis for a <em>ticktimer</em> for an embedded Real Time Operating System (RTOS) like FreeRTOS. And, yes, it can be used as a simple counter.</p></blockquote>
-
-<p>System Control Block :</p>
-
-<blockquote><p>Provides system implementation information and system control, including configuration, control,and reporting of system exceptions.</p></blockquote>
-
-<p>NVIC : Nested Vectored Interrupt Controller</p>
-
-<blockquote><p>In the Cortex-M0, Cortex-M0+ and Cortex-M1 processors, the NVIC support up to 32 interrupts (IRQ), a Non-Maskable Interrupt (NMI) and various system exceptions, other M series, like M3/M4, can support up to 240 IRQs.
-Tail chaining > If another exception is pending when an ISR exits, the processor does not restore all saved registers from the stack and instead moves on to the next ISR. This reduces the latency when switching from one exception handler to another.</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/13">&larr; Older</a>
@@ -1357,6 +1688,10 @@ Tail chaining > If another exception is pending when an ISR exits, the processor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -1370,10 +1705,6 @@ Tail chaining > If another exception is pending when an ISR exits, the processor
     
       <li class="post">
         <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
       </li>
     
   </ul>

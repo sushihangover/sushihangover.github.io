@@ -9,7 +9,8 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Sharpen Part 1: The correct Java version Part 2: Building Sharpen Sharpen Support Classes: Converting your Java classes using the default config from &hellip;">
+  <meta name="description" content="SushiHangover.SVGKit This is a Xamarin.iOS binding project for SVGKit SVGKit v2.x - live development, latest fixes/features
+Xamarin.iOS Version: 10.4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +111,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-13T15:38:34-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:38 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>SushiHangover.SVGKit</h1>
+
+<p>This is a <code>Xamarin.iOS</code> binding project for <code>SVGKit</code></p>
+
+<ul>
+<li>SVGKit v2.x - live development, latest fixes/features</li>
+<li>Xamarin.iOS Version: 10.4.0.4</li>
+<li>Xcode 8.1 (11544) Build 8B62</li>
+</ul>
+
+
+<h2>SVGKit</h2>
+
+<blockquote><p>SVGKit is a Cocoa framework for rendering SVG files natively: it&rsquo;s fast and powerful. Some additional info and links are on the wiki</p></blockquote>
+
+<p>Ref: <a href="https://github.com/SVGKit/SVGKit">https://github.com/SVGKit/SVGKit</a></p>
+
+<h2>Nuget:</h2>
+
+<p><code>PM&gt; Install-Package SushiHangover.SVGKit.Binding</code></p>
+
+<p>Ref: <a href="https://www.nuget.org/packages/SushiHangover.SVGKit.Binding">https://www.nuget.org/packages/SushiHangover.SVGKit.Binding</a></p>
+
+<h2>Usage:</h2>
+
+<h3>Namespace: <code>SVGKit</code></h3>
+
+<pre><code>using SVGKit;
+</code></pre>
+
+<h3>Load SVG from a Bundle Resource</h3>
+
+<h4>Build action: <code>BundleResource</code></h4>
+
+<pre><code>var image = new SVGKImage("Media/Sushi.svg");
+var imageView = new SVGKFastImageView(image);
+imageView.Frame = View.Frame;
+View.Add(imageView);
+</code></pre>
+
+<p><img src="https://github.com/sushihangover/SVGKit.Binding/raw/master/Media/SimulatorScreen.png" alt="" /></p>
+
+<h3>Load SVG from a Bundle Path</h3>
+
+<h4>Build action: <code>Content</code></h4>
+
+<pre><code>var image = new SVGKImage(Path.Combine(NSBundle.MainBundle.BundlePath, "Media/Joker.svg"));
+var imageView = new SVGKFastImageView(image);
+imageView.Frame = View.Frame;
+View.Add(imageView);
+</code></pre>
+
+<p><img src="https://github.com/sushihangover/SVGKit.Binding/raw/master/Media/SimulatorScreen2.png" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1699,84 +1781,6 @@ var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptR
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/xamarin-android-c-number-bindings-for-java-cifs-jcifs-client-library/">Xamarin Android C# bindings for Java CIFS (jCIFS) Client Library (Samba)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-05T20:19:59-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:19 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I posted a Samba/JCIFS binding library to my <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">Github</a> account&hellip;</p>
-
-<h1>Xamarin.Android.jCIFS</h1>
-
-<p>This is a <a href="https://github.com/sushihangover/Xamarin.Android.jCIFS">C# binding library</a> for the The Java CIFS (jCIFS) Client Library (version 1.3.18).</p>
-
-<p><a href="http://jcifs.samba.org">JCIFS</a> is an Open Source client library that implements the CIFS/SMB networking protocol in 100% Java.</p>
-
-<blockquote><p>You can read/write, delete, make directories, rename, list contents of a directory, list the workgroups/ntdomains and servers on the network, list the shares of a server, open named pipes, authenticate web clients &hellip;etc.</p></blockquote>
-
-<h3>License:</h3>
-
-<p>As <a href="http://www.gnu.org/licenses/lgpl-2.1.txt">JCIFS</a> is Licensed Under the LGPL, so is this project&rsquo;s <a href="http://opensource.org/licenses/LGPL-3.0">license</a>.</p>
-
-<h3>API Documentation:</h3>
-
-<p>Consult the jCIFS site for <a href="http://jcifs.samba.org/src/docs/api/">API</a> documention and usage, this is a C# binding library and does not implement/change anything within the <code>jcifs-1.3.18.jar</code>.</p>
-
-<h3>Example:</h3>
-
-<h4>Usage of <code>Jcifs.Smb.SmbFileInputStream</code>:</h4>
-
-<pre><code>// This is NOT best-practice code, just showing a demo Jcifs api call
-public async Task getFileContents ()
-{
-    await Task.Run (() =&gt; {
-        var smbStream = new SmbFileInputStream ("smb://guest@10.10.10.5/code/test.txt");
-        byte[] b = new byte[8192];
-        int n;
-        while ((n = smbStream.Read (b)) &gt; 0) {
-            Console.Write (Encoding.UTF8.GetString (b).ToCharArray (), 0, n);
-        }
-        Button button = FindViewById&lt;Button&gt; (Resource.Id.myButton);
-        RunOnUiThread(() =&gt; {
-            button.Text = Encoding.UTF8.GetString (b);
-        });
-    }
-    ).ContinueWith ((Task arg) =&gt; {
-        Console.WriteLine (arg.Status);
-        if (arg.Status == TaskStatus.Faulted)
-            Console.WriteLine (arg.Exception);
-    }
-    );
-}
-</code></pre>
-
-<h3>Note:</h3>
-
-<p><strong>The entire jCIFS library is not bound by this project, consult the &ldquo;Metadata.xml&rdquo; file in the binding project for method renames and class exclusions.
-</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1792,6 +1796,10 @@ public async Task getFileContents ()
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -1805,10 +1813,6 @@ public async Task getFileContents ()
     
       <li class="post">
         <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
-      </li>
-    
-      <li class="post">
-        <a href="/playscript-and-msbuild-project-type-guids/">PlayScript and MSBuild Project Type GUIDs</a>
       </li>
     
   </ul>
