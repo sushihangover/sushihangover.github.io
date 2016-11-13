@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted a Samba/JCIFS binding library to my Github account&hellip; Xamarin.Android.jCIFS This is a C# binding library for the The Java CIFS (jCIFS) &hellip;">
+  <meta name="description" content="Posted a new C# library to Github to allow the calling of AppleScript by function name, passing in arguments and receiving a return value. Sushi. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,140 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-06T20:06:17-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:06 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Posted a new C# library to <a href="https://github.com/sushihangover/Sushi.AppleScript">Github</a> to allow the calling of AppleScript by function name, passing in arguments and receiving a return value.</p>
+
+<h1>Sushi.AppleScript</h1>
+
+<p><a href="https://github.com/sushihangover/Sushi.AppleScript">https://github.com/sushihangover/Sushi.AppleScript</a></p>
+
+<p>The C# library allows you to execute AppleScript code that originates from a file or <code>string</code> and:</p>
+
+<ul>
+<li>Call function by name (Optional)</li>
+<li>Pass multiple arguments to a function (Optional)</li>
+<li>Execution success or failure</li>
+<li>Return results from the function call</li>
+</ul>
+
+
+<h3>Build:</h3>
+
+<pre><code>cd Sushi.AppleScript.Native
+xcodebuild
+cd -
+xbuild Sushi.AppleScript.sln
+</code></pre>
+
+<h3>Test:</h3>
+
+<p><strong>Mono&rsquo;s supplied nunit-console:</strong></p>
+
+<pre><code>MONO_IOMAP=all nunit-console Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>NUnit 3.x console:</strong></p>
+
+<pre><code>mono $(MTOOLS)/nunit3-console.exe Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<pre><code>AppleScript.cs(7,7): error CS0246: The type or namespace name `MonoMac' could not be found. Are you missing an assembly reference?
+</code></pre>
+
+<p>If you do not have a local copy of <a href="https://github.com/mono/monomac">MonoMac</a>, xbuild will fail. It is available via &ldquo;Xamarin Studio&rdquo;:</p>
+
+<pre><code>mdtool build Sushi.AppleScript.sln
+</code></pre>
+
+<h4>Example Usage:</h4>
+
+<pre><code>var scptInfo = new FileInfo ("./AppleScripts/FunctionTests.txt");
+string funcName = "IsRunning";
+List&lt;string&gt; argList = new List&lt;string&gt; () {
+    @"Finder",
+};
+string scriptReturnValue;
+var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptReturnValue);
+</code></pre>
+
+<ul>
+<li>Consult <a href="https://github.com/sushihangover/Sushi.AppleScript/blob/master/Sushi.AppleScript.Test/Test.cs">Test.cs</a> for more examples</li>
+</ul>
+
+
+<h3>Supports:</h3>
+
+<ul>
+<li>MonoMac</li>
+<li>Xamarin.Mac</li>
+<li>i386 and x86_64 Mono Support</li>
+</ul>
+
+
+<h3>Runtime/Deployment debugging:</h3>
+
+<p>Runtime/Deployment debugging available by setting an environment variable, <code>APPLE_SCRIPT_DEBUG</code>:</p>
+
+<p><code>export APPLE_SCRIPT_DEBUG=true</code></p>
+
+<p>The results are logged with the prefix <code>AppleScript:</code>, output is avaiable via Console.app.</p>
+
+<h3>Sushi.AppleScript</h3>
+
+<p>The C# library that provides the P/Invoke wrapper to execute AppleScript functions</p>
+
+<h3>Sushi.AppleScript.Native</h3>
+
+<p>An OS-X Universial (i386 &amp; x86_64) Shared Library:</p>
+
+<ul>
+<li><code>libAppleScriptEvent.dylib</code></li>
+</ul>
+
+
+<h3>Sushi.AppleScript.Test</h3>
+
+<p>NUnit tests for Sushi.AppleScript library</p>
+
+<h3>Sushi.AppleScript.CLI</h3>
+
+<p>TODO: Provides an <code>osascript</code> style CLI utility to execute functions with AppleScript files (<code>osascript</code> does not contain this feature)</p>
+
+<h3>License:</h3>
+
+<ul>
+<li>The MIT License (MIT)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1027,47 +1161,6 @@ Test Case Failures:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/xamarin-android-player-delete/">Xamarin Android Player / Genymotion - Foobar 101</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-11-18T15:16:42-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:16 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was really happy with Xamarin&rsquo;s Android Player (XAP) on OS-X 10.11 (and 10.10.x before I upgraded). It is much better the Google&rsquo;s plain-jane Android emulator, way way faster, easier setup as the images are pre-packaged Nexus images, etc&hellip; But you can not create custom images and that ends up being a problem as you need to test different configurations.</p>
-
-<p>Someone recommended Genymotion and everything seemed fine, I could create custom Genymotion images and still use XAP for the basic testing&hellip;</p>
-
-<p>BUT after a reboot of OS-X, <strong>everything went to @#$@#$@#</strong>. Android sessions in either player would take 10 minutes or more to start up and get to the lock screen and when I say &lsquo;more&rsquo;, I mean up to 20 minutes&hellip;or MORE. Even then, services would die, the VirtualBox instance would hang, Xamarin Studio would not connect, XAP would report that the OpenGL server is not available, Genymotion would report no IP address could be retrieved&hellip;</p>
-
-<p>Removing Genymotion did not help. Deleting and re-install XAP did not help. Installing the latest VirtualBox did not help. Uninstall VirtualBox via their installer, deleting the XAP app and restarting from stratch did not help&hellip;. Removing all the original XAP Andriod images and re-downloading them did not help (I thought maybe the new VirtualBox updated them and caused a XAP issue, but no to that idea)&hellip;</p>
-
-<p>Seems that I am not alone, if you started with Genymotion and later installed XAP, you could be in the same boot&hellip; after you reboot the first time. Seems Geny users call it <strong>&ldquo;surviving the reboot&rdquo;</strong>, if you make it past a reboot and everything is still working you should be golden, if not, your system is @#$#@$#.</p>
-
-<p>I&rsquo;m still looking for a solution other then <strong>re-installing the OS as some people have resorted to</strong>&hellip; I just do not have time do a fresh OS-X install so right now I can only test via actual physical devices :-(</p>
-
-<p><strong>AHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1089,6 +1182,10 @@ Test Case Failures:
       </li>
     
       <li class="post">
+        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -1098,10 +1195,6 @@ Test Case Failures:
     
       <li class="post">
         <a href="/sharpen/">Sharpen</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
       </li>
     
   </ul>

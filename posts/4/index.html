@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Goal: In this first part we are going to create an Addin that does the most basic language syntax highlighing using a SyntaxMode xml file. &hellip;">
+  <meta name="description" content="I posted up the initial fork of NRefactory that replaces the parser with the PlayScript mcs compiler to allow PlayScript &amp; ActionScript parsing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,40 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/nrefactory-playscript-and-actionscript/">NRefactory | PlayScript & ActionScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-05T16:51:17-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p>I posted up the initial fork of <a href="https://github.com/PlayScriptRedux/NRefactory">NRefactory</a> that replaces the parser with the <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> mcs compiler to allow PlayScript &amp; ActionScript parsing. This will be used within the <a href="https://github.com/PlayScriptRedux/PlayScript.Addin">Xamarin Studio / MonoDevelop PlayScript Language Addin</a>.</p>
+
+<p>Fork and clone it and give the <code>ICSharpCode.NRefactory.GtkDemo</code> project a try.
+<img src="/images/ICSharpCode.NRefactory.GtkDemo.png" alt="" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -930,42 +964,6 @@ catch (MyException e) if (myfilter(e))
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git - Resetting a file back to its conflicted state</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-06T17:29:21-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:29 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
-
-<p><code>git checkout -m &lt;filename&gt;
-</code></p>
-
-<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
-
-<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -987,6 +985,10 @@ catch (MyException e) if (myfilter(e))
       </li>
     
       <li class="post">
+        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -996,10 +998,6 @@ catch (MyException e) if (myfilter(e))
     
       <li class="post">
         <a href="/sharpen/">Sharpen</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
       </li>
     
   </ul>

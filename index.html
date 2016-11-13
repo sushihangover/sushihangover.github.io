@@ -198,6 +198,76 @@ View.Add(imageView);
       
   <header>
     
+      <h1 class="entry-title"><a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-06T06:40:42-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:40 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="https://github.com/sushihangover/Realm.Json.Extensions/raw/master/media/SushiHangover.RealmJson.png" alt="RealmJson.Extensions" /></p>
+
+<h1>SushiHangover.RealmJson.Extensions</h1>
+
+<h4>Extension Methods for adding JSON APIs to a Realm Instance</h4>
+
+<h2>Usage / Examples:</h2>
+
+<h3>Single RealmObject from Json-based Strings:</h3>
+
+<pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
+{
+    var realmObject = theRealm.CreateObjectFromJson&lt;StateUnique&gt;(jsonString);
+}
+</code></pre>
+
+<h3>Single RealmObject from a Stream:</h3>
+
+<pre><code>using (var stream = new MemoryStream(byteArray))
+using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
+{
+    var testObject = theRealm.CreateObjectFromJson&lt;StateUnique&gt;(stream);
+}
+</code></pre>
+
+<h3>Using Json Arrays from a Android Asset Stream:</h3>
+
+<pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
+using (var assetStream = Application.Context.Assets.Open("States.json"))
+{
+    theRealm.CreateAllFromJson&lt;State&gt;(assetStream);
+}
+</code></pre>
+
+<h3>Using Json Arrays from a iOS Bundled Resource Stream:</h3>
+
+<pre><code>using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
+using (var fileStream = new FileStream("./Data/States.json", FileMode.Open, FileAccess.Read))
+{
+    theRealm.CreateAllFromJson&lt;State&gt;(fileStream);
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/sharpen-part-3/">Sharpen - Part 3</a></h1>
     
     
@@ -1647,140 +1717,6 @@ Time Elapsed 00:00:01.8555370
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/c-number-applescript-calls-with-functions-arguments-and-results/">C# AppleScript calls with functions, arguments and results</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-06T20:06:17-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:06 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Posted a new C# library to <a href="https://github.com/sushihangover/Sushi.AppleScript">Github</a> to allow the calling of AppleScript by function name, passing in arguments and receiving a return value.</p>
-
-<h1>Sushi.AppleScript</h1>
-
-<p><a href="https://github.com/sushihangover/Sushi.AppleScript">https://github.com/sushihangover/Sushi.AppleScript</a></p>
-
-<p>The C# library allows you to execute AppleScript code that originates from a file or <code>string</code> and:</p>
-
-<ul>
-<li>Call function by name (Optional)</li>
-<li>Pass multiple arguments to a function (Optional)</li>
-<li>Execution success or failure</li>
-<li>Return results from the function call</li>
-</ul>
-
-
-<h3>Build:</h3>
-
-<pre><code>cd Sushi.AppleScript.Native
-xcodebuild
-cd -
-xbuild Sushi.AppleScript.sln
-</code></pre>
-
-<h3>Test:</h3>
-
-<p><strong>Mono&rsquo;s supplied nunit-console:</strong></p>
-
-<pre><code>MONO_IOMAP=all nunit-console Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
-</code></pre>
-
-<p><strong>NUnit 3.x console:</strong></p>
-
-<pre><code>mono $(MTOOLS)/nunit3-console.exe Sushi.AppleScript.Test/SushiAppleScript.Test.csproj
-</code></pre>
-
-<p><strong>Note:</strong></p>
-
-<pre><code>AppleScript.cs(7,7): error CS0246: The type or namespace name `MonoMac' could not be found. Are you missing an assembly reference?
-</code></pre>
-
-<p>If you do not have a local copy of <a href="https://github.com/mono/monomac">MonoMac</a>, xbuild will fail. It is available via &ldquo;Xamarin Studio&rdquo;:</p>
-
-<pre><code>mdtool build Sushi.AppleScript.sln
-</code></pre>
-
-<h4>Example Usage:</h4>
-
-<pre><code>var scptInfo = new FileInfo ("./AppleScripts/FunctionTests.txt");
-string funcName = "IsRunning";
-List&lt;string&gt; argList = new List&lt;string&gt; () {
-    @"Finder",
-};
-string scriptReturnValue;
-var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptReturnValue);
-</code></pre>
-
-<ul>
-<li>Consult <a href="https://github.com/sushihangover/Sushi.AppleScript/blob/master/Sushi.AppleScript.Test/Test.cs">Test.cs</a> for more examples</li>
-</ul>
-
-
-<h3>Supports:</h3>
-
-<ul>
-<li>MonoMac</li>
-<li>Xamarin.Mac</li>
-<li>i386 and x86_64 Mono Support</li>
-</ul>
-
-
-<h3>Runtime/Deployment debugging:</h3>
-
-<p>Runtime/Deployment debugging available by setting an environment variable, <code>APPLE_SCRIPT_DEBUG</code>:</p>
-
-<p><code>export APPLE_SCRIPT_DEBUG=true</code></p>
-
-<p>The results are logged with the prefix <code>AppleScript:</code>, output is avaiable via Console.app.</p>
-
-<h3>Sushi.AppleScript</h3>
-
-<p>The C# library that provides the P/Invoke wrapper to execute AppleScript functions</p>
-
-<h3>Sushi.AppleScript.Native</h3>
-
-<p>An OS-X Universial (i386 &amp; x86_64) Shared Library:</p>
-
-<ul>
-<li><code>libAppleScriptEvent.dylib</code></li>
-</ul>
-
-
-<h3>Sushi.AppleScript.Test</h3>
-
-<p>NUnit tests for Sushi.AppleScript library</p>
-
-<h3>Sushi.AppleScript.CLI</h3>
-
-<p>TODO: Provides an <code>osascript</code> style CLI utility to execute functions with AppleScript files (<code>osascript</code> does not contain this feature)</p>
-
-<h3>License:</h3>
-
-<ul>
-<li>The MIT License (MIT)</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1800,6 +1736,10 @@ var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptR
       </li>
     
       <li class="post">
+        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -1809,10 +1749,6 @@ var executionSuccess = AppleScript.Run (scptInfo, funcName, argList, out scriptR
     
       <li class="post">
         <a href="/sharpen/">Sharpen</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
       </li>
     
   </ul>

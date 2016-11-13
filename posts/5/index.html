@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="This is the Away3d Fire example running via Mono and Xamarin Studio using the PlayScript compiler. Fork me on github. Away3d example source code &hellip;">
+  <meta name="description" content="For some reason everytime I need to do this I forget the option. Maybe it is because the help for git checkout &ndash;help does not actually provide &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/git-resetting-a-file-back-to-its-conflicted-state/">Git - Resetting a file back to its conflicted state</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-06T17:29:21-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:29 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> For some reason everytime I need to do this I forget the option. Maybe it is because the help for <em>git checkout &ndash;help</em> does not actually provide details for &ldquo;-m&rdquo; option.</p>
+
+<p><code>git checkout -m &lt;filename&gt;
+</code></p>
+
+<p>This restores the unresolved state, including all information about parent and merge base, which allows restarting the resolution.</p>
+
+<p>There is of course the <em>&ndash;theirs</em> and <em>&ndash;ours</em> options available during a checkout if a merge is underway, but those options are explained in the help and the name of the option is self-explanatory, but <strong>-m</strong> does not stick in my head for some reason&hellip;.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -624,84 +660,6 @@ Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-squash-last-x-commits-into-one/">Git - Squash last X commits into one</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-17T10:35:06-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:35 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"></p>
-
-<p>Use git rebase -i <after> and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described in the Git <a href="http://git-scm.com/docs/git-rebase#_interactive_mode">manual</a>.</p>
-
-<p><after> is the commit after the last one that you wish squash together, i.e. parent of the oldest commit you want to squash.</p>
-
-<p>Example:</p>
-
-<p>You want to squash the last three commits into one, so lets look at the log to make sure that is want you want and to grab the commit SHA:</p>
-
-<blockquote><p>git log -n 4 &ndash;pretty=oneline</p></blockquote>
-
-<pre><code>f57f7f9c28646d5049aa6b90f33de23e1e53ad2e More test cleanups
-07074c8058ed69224670987860c9db47858dab6e PlayScript compiler tests using a variant of compiler-tester
-3b80dc06b990553042b4b0cde486e36522f4171b Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-db6506ca17e49f0829ca9859a7994ddf840dbff4 * Tamarin-Redux Test Cleanup * Remove old Tamarin tests, the redux versions are the last released version
-</code></pre>
-
-<p>I want to squash the first three commits, so grab the forth SHA and:</p>
-
-<blockquote><p>git rebase -i db6506ca17e49f0829ca9859a7994ddf840dbff4</p></blockquote>
-
-<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-pick 07074c8 PlayScript compiler tests using a variant of compiler-tester
-pick f57f7f9 More test cleanups
-
-# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
-</code></pre>
-
-<p>Following the directions in the commentted text. In this example: change the second and third items to squash:</p>
-
-<pre><code>pick 3b80dc0 Remove .as/.play from mcs/tests These have been already moved to mcs/play_tests/[as|play] and intregrated into the mono compiler-tester (make [astest|playtest|playscript]
-squash 07074c8 PlayScript compiler tests using a variant of compiler-tester
-squash f57f7f9 More test cleanups
-
-# Rebase db6506c..f57f7f9 onto db6506c (3 command(s))
-</code></pre>
-
-<p>Save those changes and exit the editor and the rebase will execute</p>
-
-<pre><code>[detached HEAD ~~~
-~~~
-Successfully rebased and updated refs/heads/play-tests.
-</code></pre>
-
-<p>Confirm via:</p>
-
-<blockquote><p>git log -n 2</p></blockquote>
-
-<p>FYI: This is something you should do to your feature branch before pushing to your fork to make that <a href="http://github.com/playscriptredux/playscript">PlayScript</a> pull request. ;-)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/6">&larr; Older</a>
@@ -723,6 +681,10 @@ Successfully rebased and updated refs/heads/play-tests.
       </li>
     
       <li class="post">
+        <a href="/json-apis-to-a-realm-instance/">JSON APIs to a Realm Instance</a>
+      </li>
+    
+      <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
       </li>
     
@@ -732,10 +694,6 @@ Successfully rebased and updated refs/heads/play-tests.
     
       <li class="post">
         <a href="/sharpen/">Sharpen</a>
-      </li>
-    
-      <li class="post">
-        <a href="/nuget-and-msbuild-targets/">Nuget and MSBuild Targets</a>
       </li>
     
   </ul>
