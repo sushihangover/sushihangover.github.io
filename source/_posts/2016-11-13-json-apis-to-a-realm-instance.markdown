@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JSON APIs to a Realm Instance"
+title: "JSON APIs to a Xamarin Realm Instance"
 date: 2016-11-06 06:40:42 -0800
 comments: true
 categories: 
@@ -13,7 +13,13 @@ categories:
 
 #SushiHangover.RealmJson.Extensions
 
-####Extension Methods for adding JSON APIs to a Realm Instance 
+####Extension Methods for adding JSON APIs to a Xamarin-based Realm Instance 
+
+Supported:
+
+* Xamarin.Forms
+* Xamarin.iOs
+* Xamarin.Android
 
 ##Usage / Examples:
 	
@@ -33,7 +39,7 @@ categories:
 	}
 
 
-###Using Json Arrays from a Android Asset Stream:
+###Using Json Arrays from a `Xamarin.Android` Asset Stream:
 
 	using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 	using (var assetStream = Application.Context.Assets.Open("States.json"))
@@ -41,7 +47,7 @@ categories:
 		theRealm.CreateAllFromJson<State>(assetStream);
 	}
 
-###Using Json Arrays from a iOS Bundled Resource Stream:
+###Using Json Arrays from a `Xamarin.iOS` Bundled Resource Stream:
 
 	using (var theRealm = Realm.GetInstance(RealmDBTempPath()))
 	using (var fileStream = new FileStream("./Data/States.json", FileMode.Open, FileAccess.Read))
