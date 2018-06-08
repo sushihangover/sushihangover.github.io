@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mono | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/mono/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-11-13T15:49:44-08:00</updated>
+  <updated>2018-06-07T17:19:51-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging MSBuild/Xbuild Task with Xamarin Studio]]></title>
+    <link href="http://sushihangover.github.io/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/"/>
+    <updated>2016-12-24T17:55:03-08:00</updated>
+    <id>http://sushihangover.github.io/debugging-msbuild-slash-xbuild-task-with-xamarin-studio</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sharpen - Part 3]]></title>
@@ -430,166 +439,6 @@ A NuGet package be conditionally installed based on a boolean parameter defined 
     &lt;package id="PlayScript.MSBuild" /&gt;
 &lt;/Packages&gt;
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MSBuild / xbuild - Steps of a build]]></title>
-    <link href="http://sushihangover.github.io/msbuild-slash-xbuild-steps-of-a-build/"/>
-    <updated>2016-01-01T10:22:54-08:00</updated>
-    <id>http://sushihangover.github.io/msbuild-slash-xbuild-steps-of-a-build</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m working on adding MSBuild style building to  PlayScript.</p>
-
-<p>The end goal is two fold.</p>
-
-<p>1st) To support the standard MSBuild process in order to allow VS/MD/XS&rsquo;s IDEs to use this std process via the project file&rsquo;s target import tag.</p>
-
-<p>2nd) Can I replace the <em>compile</em> portion of the process (with the PlayScript compiler) so I directly create Xamarin.Mac, Xamarin.iOS and Xamarin.Android libraries that are written in PlayScript/ActionScript by using Xamarin&rsquo;s custom MSBuild process, but via a different compiler that produces the IL code?</p>
-
-<p>A compiled PlayScript library (or exe) is <strong>just</strong> a standard CIL assembly and can be referenced by C# projects, Xamarin mobile projects or not, but directly referencing Xamarin iOS, Android or Mac libraries will not work as those project types are <em>special</em> (mainly licensing checks and build steps). So the 2nd part of this is really an experient is to see if we are stuck to only linking to PlayScript libraries or can we use PlayScript to directly code against the Xamarin&rsquo;s mobile libraries and still comply with their licensing/build process.</p>
-
-<p>Building via the <code>psc</code> CLI compiler is almost identical to using <code>csc</code> or <code>mcs</code>. There are a few different options are available in order to support <em>some</em> of the ActionScript 3 compiler options, but I digress&hellip;</p>
-
-<p>The normal MSBuild / xbuild steps to compile a CSharp project (<code>.csproj</code>) involved the following high-level Targets:</p>
-
-<ul>
-<li>PrepareForBuild:</li>
-<li>CopyFilesMarkedCopyLocal:</li>
-<li>GenerateSatelliteAssemblies:</li>
-<li>CoreCompile:</li>
-<li>DeployOutputFiles:</li>
-</ul>
-
-
-<p>Ignoring the multimedia pipeline processing of assets (images, SWFs, vector transformations, 3D models, etc..) the only step that we need to focus on is the <code>CoreCompile</code>:</p>
-
-<p><strong>Import Project=&ldquo;$(MSBuildBinPath)\Microsoft.CSharp.targets&rdquo;</strong></p>
-
-<pre><code>~~~
-&lt;Target
-        Name="CoreCompile"
-        Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);
-                $(KeyOriginatorFile);@(ReferencePath);$(Win32Icon);$(Win32Resource)"
-        Outputs="@(DocFileItem);@(IntermediateAssembly)"
-        DependsOnTargets="$(CoreCompileDependsOn)"&gt;
-        &lt;Csc
-                AdditionalLibPaths="$(AdditionalLibPaths)"
-                AddModules="@(AddModules)"
-                AllowUnsafeBlocks="$(AllowUnsafeBlocks)"
-                BaseAddress="$(BaseAddress)"
-~~~
-                Win32Icon="$(Win32Icon)"
-                Win32Resource="$(Win32Resource)"
-                Resources="@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile)"
-                ToolExe="$(CscToolExe)"
-                ToolPath="$(CscToolPath)" /&gt;
-
-&lt;/Target&gt;
-~~~
-</code></pre>
-
-<p>Looking at the <code>Csc</code> section, if I can replace <code>ToolExe</code> and <code>CscToolPath</code> properties then I can have this Target use PlayScript (<code>psc</code>) vs. <code>csc</code> or <code>mcs</code>.</p>
-
-<p>So as a quick test, copying <code>Microsoft.CSharp.targets</code> to PlayScript.MSBuild.Targets<code>and adding this</code>PropertyGroup<code>section with hardcoded paths before the</code>CoreCompile` target section:</p>
-
-<pre><code>    &lt;PropertyGroup&gt;
-            &lt;PlayScriptBinPath Condition=" '$(PsBuildBinPath)' == '' "&gt;/Users/sushi/Library/Application Support/XamarinStudio-5.0/LocalInstall/Addins/MonoDevelop.PlayScript.5.10.2/MonoDevelop.PlayScript.SupportPackages&lt;/PlayScriptBinPath&gt;
-            &lt;CscToolExe Condition=" '$(CscToolExe)' == '' "&gt;psc&lt;/CscToolExe&gt;
-            &lt;CscToolPath Condition=" '$(CscToolPath)' == '' "&gt;$(PsBuildBinPath)&lt;/CscToolPath&gt;
-    &lt;/PropertyGroup&gt;
-</code></pre>
-
-<p>And replacing:</p>
-
-<pre><code>&lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
-</code></pre>
-
-<p>with:</p>
-
-<pre><code>&lt;Import Project="packages\PlayScript.MSBuild.5.10.2.2\build\PlayScript.MSBuild.Targets" /&gt;
-</code></pre>
-
-<p><strong>>xbuild nuget-test.psproj</strong></p>
-
-<pre><code>XBuild Engine Version 12.0
-Mono, Version 4.2.2.0
-Copyright (C) 2005-2013 Various Mono authors
-
-Build started 1/1/2016 11:05:25 AM.
-__________________________________________________
-Project "/Users/sushi/code/XamTests/nuget-test/nuget-test.psproj" (default target(s)):
-    Target PrepareForBuild:
-        Configuration: Debug Platform: x86
-    Target BeforeResolveReferences:
-                         AssemblySearchPaths: {CandidateAssemblyFiles};{HintPathFromItem};{TargetFrameworkDirectory};{PkgConfig};{GAC};{RawFileName};bin/Debug/;/Users/sushi/mono/play32/bin
-    Target GenerateSatelliteAssemblies:
-    No input files were specified for target GenerateSatelliteAssemblies, skipping.
-    Target GenerateTargetFrameworkMonikerAttribute:
-    Skipping target "GenerateTargetFrameworkMonikerAttribute" because its outputs are up-to-date.
-    Target CoreCompile:
-         psc
-         /Users/sushi/mono/play32/bin
-
-        Tool /Users/sushi/mono/play32/bin/psc execution started with arguments: /noconfig /debug:full /debug+ /optimize- /out:obj/x86/Debug/nuget-test.exe Main.play /target:exe /define:DEBUG /nostdlib /platform:x86 /reference:/Library/Frameworks/Mono.framework/Versions/4.2.2/lib/mono/4.5/System.dll /reference:packages/PlayScript.AOT.5.10.2.0/lib/net45/PlayScript.Dynamic_aot.dll /reference:packages/PlayScript.AOT.5.10.2.0/lib/net45/pscorlib_aot.dll /reference:/Library/Frameworks/Mono.framework/Versions/4.2.2/lib/mono/4.5/System.Core.dll /reference:/Library/Frameworks/Mono.framework/Versions/4.2.2/lib/mono/4.5/mscorlib.dll /warn:4
-    Target DeployOutputFiles:
-        Copying file from '/Users/sushi/code/XamTests/nuget-test/obj/x86/Debug/nuget-test.exe.mdb' to '/Users/sushi/code/XamTests/nuget-test/bin/Debug/nuget-test.exe.mdb'
-        Copying file from '/Users/sushi/code/XamTests/nuget-test/obj/x86/Debug/nuget-test.exe' to '/Users/sushi/code/XamTests/nuget-test/bin/Debug/nuget-test.exe'
-Done building project "/Users/sushi/code/XamTests/nuget-test/nuget-test.psproj".
-
-Build succeeded.
-     0 Warning(s)
-     0 Error(s)
-
-Time Elapsed 00:00:01.8555370
-</code></pre>
-
-<p>That works, <strong>cool</strong>&hellip;</p>
-
-<p>But that requires mod'ing complete copy of <code>Microsoft.CSharp.targets</code>.</p>
-
-<p>So lets strip out everything but our PlayScript changes and import the std CSharp targets.</p>
-
-<pre><code>&lt;Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-    &lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
-
-    &lt;PropertyGroup&gt;
-        &lt;DefaultLanguageSourceExtension&gt;.cs&lt;/DefaultLanguageSourceExtension&gt;
-        &lt;Language&gt;PlayScript&lt;/Language&gt;
-    &lt;/PropertyGroup&gt;
-
-&lt;!-- PlayScript --&gt;
-    &lt;PropertyGroup&gt;
-        &lt;PlayScriptBinPath Condition=" '$(PsBuildBinPath)' == '' "&gt;/Users/sushi/Library/Application Support/XamarinStudio-5.0/LocalInstall/Addins/MonoDevelop.PlayScript.5.10.2/MonoDevelop.PlayScript.SupportPackages&lt;/PlayScriptBinPath&gt;
-        &lt;CscToolExe Condition=" '$(CscToolExe)' == '' "&gt;psc&lt;/CscToolExe&gt;
-        &lt;CscToolPath Condition=" '$(CscToolPath)' == '' "&gt;$(PsBuildBinPath)&lt;/CscToolPath&gt;
-    &lt;/PropertyGroup&gt;
-&lt;!-- PlayScript --&gt;
-
-&lt;!--
-    Note: Microsoft.CSharp.targets already imports Microsoft.Common.targets
-          so if we need to override/replacement would need to do it after the 
-          Microsoft.CSharp.targets import either in this file or by importing another
-          file, i.e. PlayScript.Common.targets
-          (this is where we will include our multimedia pipeline tasks)
-    &lt;Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" /&gt;
---&gt;
-
-&lt;!-- PlayScript --&gt;
-    &lt;Target Name="BeforeResolveReferences"&gt;
-        &lt;CreateProperty
-            Value="$(AssemblySearchPaths);$(PsBuildBinPath)"&gt;
-            &lt;Output TaskParameter="Value" PropertyName="AssemblySearchPaths" /&gt;
-        &lt;/CreateProperty&gt;
-    &lt;/Target&gt;
-&lt;!-- PlayScript --&gt;
-
-    &lt;Import Project="$(MSBuildThisFileDirectory)\PlayScript.MSBuild.Debug.Targets" /&gt;
-&lt;/Project&gt;
-</code></pre>
-
-<p>That works&hellip;</p>
-
-<p>We still need to look into the custom Xamarin Mobile targets and  remove the hardcoded paths from our PlayScript targets, but lets leave that for another post.</p>
 ]]></content>
   </entry>
   

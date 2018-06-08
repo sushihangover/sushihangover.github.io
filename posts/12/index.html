@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="One of the issues that you run into using Clang/LLVM as your compiler for bare-metal ARM Cortex cores is you have to directly use arm-none-eabi-ld &hellip;">
+  <meta name="description" content="This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral. This peripheral can be used to provide the core timer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,477 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cortex-m-systick-polling-vs-interrupts/">Cortex-M0 & M3 SysTick: Polling vs. Interrupt driven</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-09T19:24:34-07:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:24 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="/images/ARM_CortexM_CMSIS_large.png"><img class="left" src="/images/ARM_CortexM_CMSIS_small.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a>
+This time around, lets use the CMSIS abstraction layer to access the SysTick core peripheral.</p>
+
+<p>This peripheral can be used to provide the core timer to an embedded RTOS kernel, such as FreeRTOS, or to provide application timing events to know when to read some attached sensors or such. In the most basic form, it provides a pollable countdown value. This value is decreased from a user settable value (<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html">Reload Value</a>) on every clock tick. If it configured as an interrupt, the function assigned activates every n+1 clock ticks.</p>
+
+<p>I used Clang/LLVM to compile a simple app that shows you how to set the reload value, read (poll) the internal SysTick value or enable it as an interrupt.</p>
+
+<p>The semihosting output of this app (via QEMU):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -M lm3s811evb -cpu cortex-m3 -semihosting -kernel  bin/main.axf
+</span><span class='line'>SysTick should not be active yet...
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>...Current value: 0
+</span><span class='line'>Enable SysTick and lets poll it...
+</span><span class='line'>...Current value: 6913
+</span><span class='line'>...Current value: 2825
+</span><span class='line'>...Current value: 2450
+</span><span class='line'>...Current value: 2138
+</span><span class='line'>...Current value: 1825
+</span><span class='line'>...Current value: 1525
+</span><span class='line'>...Current value: 1225
+</span><span class='line'>...Current value: 913
+</span><span class='line'>...Current value: 613
+</span><span class='line'>...Current value: 313
+</span><span class='line'>Enable SysTick Interrupts and watch <span class="nb">local </span>var get incremented...
+</span><span class='line'>...myTicks <span class="o">=</span> 1<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 0
+</span><span class='line'>...myTicks <span class="o">=</span> 2<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3425
+</span><span class='line'>...myTicks <span class="o">=</span> 3<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8725
+</span><span class='line'>...myTicks <span class="o">=</span> 4<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 5<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8113
+</span><span class='line'>...myTicks <span class="o">=</span> 6<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2550
+</span><span class='line'>...myTicks <span class="o">=</span> 7<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 7725
+</span><span class='line'>...myTicks <span class="o">=</span> 8<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2938
+</span><span class='line'>...myTicks <span class="o">=</span> 9<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8125
+</span><span class='line'>...myTicks <span class="o">=</span> 10<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 2563
+</span><span class='line'>...myTicks <span class="o">=</span> 11<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 8100
+</span><span class='line'>...myTicks <span class="o">=</span> 12<span class="p">;</span> SysTick-&gt;VAL <span class="o">=</span> 3038
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &quot;CortexM3_xx.h&quot;</span>
+</span><span class='line'><span class="cp">#include &lt;core_cm3.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdint.h&gt; </span>
+</span><span class='line'><span class="cp">#include &quot;svc.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">myTicks</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">SysTick_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">myTicks</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...myTicks = %lu; SysTick-&gt;VAL = %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">myTicks</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;SysTick should not be active yet...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick and lets poll it...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">clock</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">LOAD</span> <span class="o">=</span> <span class="n">clock</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_CLKSOURCE_Msk : Use core&#39;s clock</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_ENABLE_Msk    : Enable SysTick</span>
+</span><span class='line'><span class="cm">     * SysTick_CTRL_TICKINT_Msk   : Active the SysTick interrupt on the NVIC</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_ENABLE_Msk</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;...Current value: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">VAL</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enable SysTick Interrupts and watch local var get incremented...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">myTicks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">SysTick</span><span class="o">-&gt;</span><span class="n">CTRL</span> <span class="o">=</span> <span class="n">SysTick_CTRL_CLKSOURCE_Msk</span> <span class="o">|</span>  <span class="n">SysTick_CTRL_ENABLE_Msk</span> <span class="o">|</span> <span class="n">SysTick_CTRL_TICKINT_Msk</span><span class="p">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">myTicks</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">asm</span><span class="p">(</span><span class="s">&quot;nop&quot;</span><span class="p">);</span> <span class="c1">// Do nothing till SysTick_Handler been been called at least 10 times</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/llvm-cmsis-dsp-and-cortex-m3-and-m0/">LLVM, CMSIS DSP and Cortex-M3 &amp; M0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-05T22:34:20-08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:34 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"><img class="left" src="/images/cmsis-version-3-block-diagram.png" title="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;" alt="&#34;CMSIS Version 3 Block Diagram (Source: Arm.com)&#34;"></a> I added ARM&rsquo;s CMSIS 3.01 to my LLVM project and wanted to test out the pre-compiled DSP libraries that are supplied.</p>
+
+<p>I borrowed one of the cos/sin examples and added some semihosting <em>printf</em>s using NEWLIB and cleaned up the code a bit.</p>
+
+<blockquote><p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php?tab=Download+CMSIS">CMSIS-DSP</a>: DSP Library Collection with over 60 Functions for various data types: fix-point (fractional q7, q15, q31) and single precision floating-point (32-bit). The library is available for Cortex-M0, Cortex-M3, and Cortex-M4. The Cortex-M4 implementation is optimized for the SIMD instruction set.</p></blockquote>
+
+<p>Updating my Makefile to include the correct CMSIS libraries (<em>arm_cortexM3l_math</em>) for the ld and the currect headers for Clang/LLVM and the result <em>works great</em> for Cortex-M3. I copied the project over and mod&rsquo;d the Makefile so it picks up the correct Cortex-M0 lib (<em>arm_cortexM0l_math</em>) and everything looks on this core also.</p>
+
+<p>Clang/LLVM compile and link:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/arm_sin_cos_example_f32.o -c src/arm_sin_cos_example_f32.c
+</span><span class='line'>clang -Os  -nostdlib -ffreestanding   -target arm-none-eabi  -mcpu<span class="o">=</span>cortex-m0   -mfloat-abi<span class="o">=</span>soft  -mthumb  -DARM_MATH_CM3 -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/arm-none-eabi/include -I/Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/Include   -o obj/startup.o -c src/startup.c
+</span><span class='line'>arm-none-eabi-ld -nostartfiles   -nostdlib -nostartupfiles  --gc-sections  --print-gc-sections  -Map bin/main.axf.map  -T src/cortex_M0.ld  --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/newlib-syscalls/arm-none-eabi/lib/thumb/thumb2 --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/lib/gcc/arm-none-eabi/4.8.3/armv7-m --library-path /Users/administrator/Code/llvm_superproject/install/arm-none-eabi/CMSIS/LIB/GCC    obj/arm_sin_cos_example_f32.o obj/startup.o --start-group --library<span class="o">=</span>gcc --library<span class="o">=</span>c --library<span class="o">=</span>m --library<span class="o">=</span>arm_cortexM0l_math --end-group -o bin/main.axf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Sample semihousting output from a Cortex-M3:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu-system-arm -cpu cortex-m3  -semihosting -nographic -kernel  bin/main.axf
+</span><span class='line'>Starting Test...
+</span><span class='line'>Cos -1.244917 <span class="o">=</span> 0.320142
+</span><span class='line'>Sin -1.244917 <span class="o">=</span> -0.947370
+</span><span class='line'>Cos squared 0.320142 <span class="o">=</span> 0.102491
+</span><span class='line'>Sin squared -0.947370 <span class="o">=</span> 0.897509
+</span><span class='line'>Add 0.102491 and 0.897509 <span class="o">=</span> 1.000000
+</span><span class='line'>Cos -4.793534 <span class="o">=</span> 0.081056
+</span><span class='line'>Sin -4.793534 <span class="o">=</span> 0.996710
+</span><span class='line'>Cos squared 0.081056 <span class="o">=</span> 0.006570
+</span><span class='line'>Sin squared 0.996710 <span class="o">=</span> 0.993430
+</span><span class='line'>Add 0.006570 and 0.993430 <span class="o">=</span> 1.000000
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>Cos 1.985805 <span class="o">=</span> -0.403198
+</span><span class='line'>Sin 1.985805 <span class="o">=</span> 0.915113
+</span><span class='line'>Cos squared -0.403198 <span class="o">=</span> 0.162568
+</span><span class='line'>Sin squared 0.915113 <span class="o">=</span> 0.837431
+</span><span class='line'>Add 0.162568 and 0.837431 <span class="o">=</span> 1.000000
+</span><span class='line'>Ending Test...
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>https://github.com/sushihangover/llvm_baremetal </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt; </span>
+</span><span class='line'><span class="cp">#include &lt;math.h&gt;     </span>
+</span><span class='line'><span class="cp">#include &quot;arm_math.h&quot; </span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Defines each of the tests performed </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'><span class="cp">#define MAX_BLOCKSIZE    32 </span>
+</span><span class='line'><span class="cp">#define DELTA           (0.000001f) </span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Test input data for Floating point sin_cos example for 32-blockSize </span>
+</span><span class='line'><span class="cm">* Generated by the MATLAB randn() function </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="kt">float32_t</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">MAX_BLOCKSIZE</span><span class="p">]</span> <span class="o">=</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.244916875853235400</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.793533929171324800</span><span class="p">,</span>  <span class="mf">0.360705030233248850</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.827929644170887320</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.299532218312426900</span><span class="p">,</span>  <span class="mf">3.427441903227623800</span><span class="p">,</span> 
+</span><span class='line'>  <span class="mf">3.422401784294607700</span><span class="p">,</span>    <span class="o">-</span><span class="mf">0.108308165334010680</span><span class="p">,</span>  <span class="mf">0.941943896490312180</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.502609575000365850</span><span class="p">,</span>    <span class="o">-</span><span class="mf">0.537345278736373500</span><span class="p">,</span>  <span class="mf">2.088817392965764500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.693168684143455700</span><span class="p">,</span>  <span class="mf">6.283185307179590700</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.392545884746175080</span><span class="p">,</span>
+</span><span class='line'>  <span class="mf">0.327893095115825040</span><span class="p">,</span>     <span class="mf">3.070147440456292300</span><span class="p">,</span>  <span class="mf">0.170611405884662230</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">0.275275082396073010</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.395492805446796300</span><span class="p">,</span>  <span class="mf">0.847311163536506600</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">3.845517018083148800</span><span class="p">,</span>  <span class="mf">2.055818378415868300</span><span class="p">,</span>  <span class="mf">4.672594161978930800</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.990923030266425800</span><span class="p">,</span>  <span class="mf">2.469305197656249500</span><span class="p">,</span>  <span class="mf">3.609002606064021000</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">4.586736582331667500</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.147080139136136300</span><span class="p">,</span>  <span class="mf">1.643756718868359500</span><span class="p">,</span>
+</span><span class='line'> <span class="o">-</span><span class="mf">1.150866392366494800</span><span class="p">,</span>  <span class="mf">1.985805026477433800</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">const</span> <span class="kt">float32_t</span> <span class="n">testRefOutput_f32</span> <span class="o">=</span> <span class="mf">1.000000000</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Declare Global variables  </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'><span class="kt">uint32_t</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">testOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">cosOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">sinOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">cosSquareOutput</span><span class="p">;</span>
+</span><span class='line'><span class="kt">float32_t</span>  <span class="n">sinSquareOutput</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* ---------------------------------------------------------------------- </span>
+</span><span class='line'><span class="cm">* Max magnitude FFT Bin test </span>
+</span><span class='line'><span class="cm">* ------------------------------------------------------------------- */</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">arm_status</span> <span class="n">status</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int32_t</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>   <span class="kt">float32_t</span> <span class="n">diff</span><span class="p">;</span>
+</span><span class='line'>   <span class="kt">uint32_t</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Starting Test...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>   <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">blockSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>   <span class="p">{</span>
+</span><span class='line'>      <span class="n">cosOutput</span> <span class="o">=</span> <span class="n">arm_cos_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cosOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">sinOutput</span> <span class="o">=</span> <span class="n">arm_sin_f32</span><span class="p">(</span><span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">testInput_f32</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sinOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cosOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cos squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosOutput</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_mult_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sin squared %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sinOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">arm_add_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cosSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sinSquareOutput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">testOutput</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Add %f and %f = %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cosSquareOutput</span><span class="p">,</span> <span class="n">sinSquareOutput</span><span class="p">,</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="cm">/* absolute value of difference between ref and test */</span>
+</span><span class='line'>      <span class="n">diff</span> <span class="o">=</span> <span class="n">fabsf</span><span class="p">(</span><span class="n">testRefOutput_f32</span> <span class="o">-</span> <span class="n">testOutput</span><span class="p">);</span>
+</span><span class='line'>      <span class="cm">/* Comparison of sin_cos value with reference */</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="n">DELTA</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Diff failure %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">diff</span><span class="p">);</span>
+</span><span class='line'>         <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
+</span><span class='line'>         <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'>   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ending Test...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>   <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span> <span class="cm">/* just for QEMU testing */</span>
+</span><span class='line'>   <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="cm">/* main function does not return */</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1664,150 +2135,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/building-lldb-on-mac-os-x/">BUILDING LLDB ON MAC OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-18T08:21:07-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:21 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/llvm/tools/lldb/tools/debugserver/source/MacOSX/dbgnub-mig.defs:13:10: fatal error: 'DNBConfig.h' file not found
-</span><span class='line'>#include "DNBConfig.h"
-</span><span class='line'>         ^
-</span><span class='line'>1 error generated.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I was trying to build LLDB &lsquo;out-of-source&rsquo; at the same time as LLVM, Polly, cloog, libcxx, etc&hellip; using ninja and got the error above. Missing source from a LLVM sub-project? I really doubted that and was right&hellip;</p>
-
-<blockquote><p>DNBConfig.h is autogenerated by a perl script that is run as a build script in XCode. XCode is responsible for calling the script and setting the include paths correctly to locate it. The file will exist in the derived sources directory in the build folder.</p></blockquote>
-
-<p>Well, the <a href="http://lldb.llvm.org/build.html">LLDB build instructions</a> are <em>clear</em> in that you need to build lldb from Xcode when on OS-X but I &lsquo;assumed&rsquo; that the <em>make</em> would call &ldquo;"xcodebuild -workspace lldb.xcworkspace -configuration Release -scheme LLVB clean build&rdquo; or some like that to build it&hellip; but I assumed wrong :-( &hellip; thus your ninja/make build will always fail&hellip;</p>
-
-<p>I also can not find a disable option for LLDB when running llvm&rsquo;s &lsquo;configure&rsquo;, so if you have the lldb source in llvm/tools your configure will always include it and thus your build will always fail..?&hellip;</p>
-
-<p>Why is this? Is this due to Apple preventing an <strong><em>un-codesigned</em></strong> version to be built/run on OS-X? Really confused by the whole thing. If someone knows, ping me&hellip; thanks&hellip;</p>
-
-<p>Note: This is only on OS-X, building LLDB that has been included under llvm/tools under Linux/FreeBSD works as expected&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/powershell-and-bash-dot-sourcing/">PowerShell and Bash 'Dot' Sourcing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-17T06:21:11-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:21 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Parent/Child scoping of variables and functions can really mess with people starting out with PowerShell (or Bash).</p>
-
-<p>In terms of &ldquo;Dot-sourcing&rdquo; a .ps1 file, it is like running the PowerShell script it contains <strong>inline</strong> in the current scope. Thus when that script finishes, any variables set/updated within it are changed within the current scope.</p>
-
-<p>Let create a .ps1 file that increments the variable $x by one and &lsquo;outputs&rsquo; it to the pipe:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>echo "`$x++;`$x;" &gt; inc_x_by_one.ps1</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now assign the variable $x to be 1</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$x=1
-</span><span class='line'>$x
-</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now run the <em>inc_x_by_one.ps1</em> routine:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
-</span><span class='line'>2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So we got a result of 2 which is what you wanted right? Well, maybe&hellip; Let run the same thing again:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.\inc_x_by_one.ps1
-</span><span class='line'>2
-</span><span class='line'>$x
-</span><span class='line'>1</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What? Why is it not 3(?), and it is still 1!!! Well that is because the $x++ is executing in a <em>child scope</em>. Basically your script is getting a copy of $x, not a reference (pointer) to that variable. Same thing that you experience in passing variables to functions in C, C#, Java, etc&hellip;</p>
-
-<p>If your desire is to actually change $x in your shell (the current scope), you can &lsquo;dot-source&rsquo; the call.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>. .\inc_x_by_one.ps1
-</span><span class='line'>2
-</span><span class='line'>. .\inc_x_by_one.ps1
-</span><span class='line'>3
-</span><span class='line'>$x
-</span><span class='line'>3</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is compariable to the way shell variables work under bash, zsh, &hellip; and I&rsquo;m assuming the PowerShell term borrowed &lsquo;dot sourcing&rsquo; in that regard as the syntax if the same: <strong>Period Space File.ps1|.sh</strong></p>
-
-<p>Take a few minutes and read the help on <strong>scope</strong>, it just might save you a headache in the future ;-)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>help scope</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note: In PowerShell, you can assign variables to the global scope and not &lsquo;worry&rsquo; about parent/child scoping rules. Normally this is not a preferred way  as it create it creates messy code, issues of which function/module is changing it, debugging nightmares, etc&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/13">&larr; Older</a>
@@ -1825,6 +2152,14 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/app-blocker--data-saver/">App Blocker | Data Saver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/">Debugging MSBuild/Xbuild Task with Xamarin Studio</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
       </li>
     
@@ -1834,14 +2169,6 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
     
       <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen/">Sharpen</a>
       </li>
     
   </ul>
@@ -1886,7 +2213,7 @@ I tend to stay on the cmd line as much as possible, but for visual diffs, an ncu
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - RobertN -
+  Copyright &copy; 2018 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

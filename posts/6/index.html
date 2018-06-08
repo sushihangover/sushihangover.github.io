@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="Use git rebase -i and replace &ldquo;pick&rdquo; on the second and subsequent commits with &ldquo;squash&rdquo; or &ldquo;fixup&rdquo;, as described &hellip;">
+  <meta name="description" content="I finally got all the bits together to get the OS-X OpenGL version of the PlayScript flash stage running the Away3d 3D engine. 500 ActionScript &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,168 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-away3d-world-global-example/">PlayScript | Away3d World Global Example</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-23T18:17:12-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>6:17 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"></p>
+
+<p>I finally got all the bits together to get the OS-X OpenGL version of the <a href="http://playscriptredux.github.io">PlayScript</a> flash stage running the <a href="http://away3d.com">Away3d</a> 3D engine.</p>
+
+<p>500 ActionScript files with over 20000 lines of actual code from <a href="https://github.com/PlayScriptRedux/away3d-core-fp11">away3d-core-fp11</a> and <a href="https://github.com/PlayScriptRedux/away3d-examples-fp11">away3d-examples-fp11</a> compiled to <a href="https://en.wikipedia.org/wiki/Common_Intermediate_Language">CIL</a> using the PlayScript mcs compiler. :-)</p>
+
+<div class="ratio-4-3 embed-video-container" onclick="var myAnchor = document.getElementById('XlC93cXRlgI');var tmpDiv = document.createElement('div');tmpDiv.innerHTML = '&lt;iframe style=&quot;vertical-align:top;width:100%;height:100%;position:absolute;&quot; src=&quot;http://www.youtube.com/embed/XlC93cXRlgI?autoplay=1&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;';myAnchor.parentNode.replaceChild(tmpDiv.firstChild, myAnchor);return false;" title="click here to play">
+<a class="youtube-lazy-link" style="width:100%;height:100%;background:#000 url(http://i2.ytimg.com/vi/XlC93cXRlgI/0.jpg) center center no-repeat;background-size:contain;position:absolute" href="http://www.youtube.com/watch?v=XlC93cXRlgI" id="XlC93cXRlgI" onclick="return false;">
+<div class="youtube-lazy-link-div"></div>
+<div class="youtube-lazy-link-info">Away3d Globe example running in PlayScript</div>
+</a>
+<div class="video-info" >Using PlayScript, the Actionscript compiler for Mono, to compile and run the Away3d core and Intermediate_Globe example within Xamarin Studio 5.9.x
+PlayScript @ http://playscriptredux.github.io
+
+PlayScript Source Code @ https://github.com/playscriptredux
+
+Blogging @ http://sushihangover.github.io/
+
+Royalty Free Background Music by Origen from: http://www.origenmusic.com/origen-licensing.html</div>
+</div>
+
+
+<p><a href="https://github.com/PlayScriptRedux/away3d-examples-fp11/blob/playscript/src/Intermediate_Globe.as">Away3d example source code that is running in the demo</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;cloc away3d-core-fp11
+</span><span class='line'>     464 text files.
+</span><span class='line'>     464 unique files.
+</span><span class='line'>      16 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=3.45 s (130.1 files/s, 23410.8 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                   443          12601          12443          54059
+</span><span class='line'>MSBuild script                   3              0              0           1551
+</span><span class='line'>C#                               3             39             11            111
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                           449          12640          12454          55721
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>&gt;cloc away3d-examples-fp11
+</span><span class='line'>     110 text files.
+</span><span class='line'>     109 unique files.
+</span><span class='line'>      60 files ignored.
+</span><span class='line'>
+</span><span class='line'>http://cloc.sourceforge.net v 1.62  T=5.05 s (10.5 files/s, 3247.7 lines/s)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Language                     files          blank        comment           code
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>ActionScript                    36           1936           2592           8073
+</span><span class='line'>Javascript                       2            121            148           1186
+</span><span class='line'>MSBuild script                   3              0              0            808
+</span><span class='line'>C#                               7            414             99            740
+</span><span class='line'>XML                              2             19             10            105
+</span><span class='line'>HTML                             2              7             29            102
+</span><span class='line'>CSS                              1              1              1              4
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>SUM:                            53           2498           2879          11018
+</span><span class='line'>-------------------------------------------------------------------------------</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: <a href="http://www.telestream.net/screenflow/overview.htm">ScreenFlow</a> is running on the background so the world rotation is a little choppy at times, without the screen/video capture running, the example runs at 60 fps @ 4% CPU on this old MacBookPro with a Intel Core 2 Duo 2.53 GHz processor.</p>
+
+<p>FYI: ScreenFlow is a <strong>must</strong> have if you are screen capturing video on OS-X. It really is the <em>bomb</em> at what it does.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-studio-slash-monodevelop-unexpected-binary-element-0-build-failure/">Xamarin Studio / MonoDevelop - 'Unexpected binary element: 0' build failure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-23T11:21:41-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:21 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Getting an &lsquo;Unexpected binary element: 0&rsquo; when you are trying to build a project in Xamarin Studio / MonoDevelop? I found this when using a parallal mono install on OS-X and it seems others have also.</p>
+
+<p>If you are also getting it build failure, please add your findings to:</p>
+
+<p><a href="https://bugzilla.xamarin.com/show_bug.cgi?id=29958">Bug 29958 - Mono 4.0 - Causing &lsquo;Unexpected binary element: 0&rsquo; build failure when compiling against previous mono version</a></p>
+
+<p>It appears not to be OS dependent either:</p>
+
+<p><a href="http://stackoverflow.com/questions/31594099/building-empty-asp-net-project-in-monodevelop-xamarin-studio-generates-unexpe">Building empty ASP.NET project in MonoDevelop (Xamarin Studio) generates “Unexpected binary element: 0” error</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -690,137 +852,6 @@ Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0.0280499 seconds
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-review-a-merge-before-committing/">Git - Review a Merge before committing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-24T09:44:07-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:44 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> After you perform a fetch on an upstream or someone&rsquo;s forked repo, you want to review the changes before committing them.</p>
-
-<p>You can not do a what-if or a dry-run merge but it does not matter as git is your friend in this matter. Just do the merge and review it, BUT, do not let it commit or fast forward during the merge.</p>
-
-<pre><code>git merge --no-commit --no-ff branchname
-</code></pre>
-
-<p>Without the <strong>&ndash;no-ff</strong> flag, if Git can do a fast-forward then it will do that and commit anyway <em>despite</em> the &ndash;no-commit flag.</p>
-
-<p>Setup an alias in your ~/.gitconfig for a simple shortcut</p>
-
-<pre><code>review = merge --no-ff --no-commit
-</code></pre>
-
-<p>So in looking at upstream changes:</p>
-
-<pre><code>git fetch upstream
-git review upstream/master
-git status
-</code></pre>
-
-<p>If you wish to back those changes, just reset that merge:</p>
-
-<pre><code>git reset --merge
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-your-githubs-fork-pull-request-is-rejected-kind-of-now-what/">Git : Your Github based fork's pull request is rejected, kind-of, now what?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-24T07:46:41-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:46 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/gitlogo.png"> So you have a Github fork of a project and you find a problem. You whip up a fix, commit it in a local branch and push it to your fork you Github. Than you issue a pull request to the upstream repo. Life is good. <img class="right" src="http://sushihangover.github.io/images/github_logo.png"></p>
-
-<p>But&hellip; your pull request is &lsquo;rejected&rsquo;, kind-of, as the fix is applied differently to their branch. Now your GitHub and local repo are history mismatched to the upstream master. Fetching upstream and merging upstream/master produces conflicts ;-(</p>
-
-<p>First, I do not want to lose the commit that I did do. I want to keep the work/history so a &lsquo;simple&rsquo; git hard reset to a prior sha is out of the question.</p>
-
-<p>So lets put your changes on a new branch and reset the master branch back to match the upstream.</p>
-
-<h3>Move last commit to a new branch</h3>
-
-<p>Note: You <em>will</em> lose uncommitted work, stash first if needed!</p>
-
-<pre><code>git branch newbranch
-git reset --hard HEAD~1 # Go back 1 commit or use SHA
-git checkout newbranch
-</code></pre>
-
-<h3>Re-sync your Github fork</h3>
-
-<p>Now, lets get everything re-sync&rsquo;d.</p>
-
-<pre><code>git checkout master
-</code></pre>
-
-<p>Since you already push this branch to your Github fork, you will see the message:</p>
-
-<pre><code>"Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded."
-</code></pre>
-
-<p>That contains <em>your</em> fix, but you need to merge in the upstream/master changes.</p>
-
-<pre><code>git fetch upstream
-git merge upstream/master
-</code></pre>
-
-<p>And your local master should <em>Fast-forward</em> to match the upstream. All is good, except your repo on Github is not correct as it contains your original commit on the wrong branch.</p>
-
-<pre><code>git push --force
-</code></pre>
-
-<p>If you want to keep (backup) that new branch to Github than use the following instead:</p>
-
-<pre><code>git push --all --force
-</code></pre>
-
-<p><strong>Note:</strong> You should not be forcing a push if others have already pulled from your repo/fork. That causes bad git mojo and everyone else that pulled your repo will need to be notified that you &lsquo;changed&rsquo; history&hellip; That is a git fixup story for another day.</p>
-
-<h3>Moral of the story:</h3>
-
-<p>Create a bugfix branch with your fixes. It should have one commit (rebase if needed) that will fast-forward and issue your pull-request from that branch.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -838,6 +869,14 @@ git merge upstream/master
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/app-blocker--data-saver/">App Blocker | Data Saver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/">Debugging MSBuild/Xbuild Task with Xamarin Studio</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
       </li>
     
@@ -847,14 +886,6 @@ git merge upstream/master
     
       <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen/">Sharpen</a>
       </li>
     
   </ul>
@@ -899,7 +930,7 @@ git merge upstream/master
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - RobertN -
+  Copyright &copy; 2018 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

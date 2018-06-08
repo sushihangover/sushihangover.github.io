@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="No matter what the Slate says, Paul Ford&rsquo;s &ldquo;What is Code&rdquo; desires to be read, if not by every programmer, then surely by every &hellip;">
+  <meta name="description" content="In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,125 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ms-corflags-showing-incorrect-flags/">MS CorFlags - Showing incorrect flags</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T10:40:23-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:40 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the Microsoft supplied CorFlags.exe, when displaying the flags on a COMIMAGE_FLAGS_32BITPREFERRED &amp;&amp; COMIMAGE_FLAGS_32BITREQUIRED flagged CIL PE image, it does not show that the COMIMAGE_FLAGS_32BITREQUIRED as being set.</p>
+
+<p>In the case of this output:</p>
+
+<pre><code>Version   : v4.0.30319
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 0x20003
+ILONLY    : 1
+32BITREQ  : 0
+32BITPREF : 1
+Signed    : 0
+</code></pre>
+
+<p>The 0x20003 flags breaks down into:</p>
+
+<ul>
+<li>32BITPREFERRED (0x20000)</li>
+<li>32BITREQUIRED (0x00002)</li>
+<li>ILONLY (0x00001)</li>
+</ul>
+
+
+<p>So why is <strong>32BITREQ</strong> not shown as selected?</p>
+
+<p>My <a href="https://github.com/sushihangover/corflags">xplat version of CorFlags</a> shows the following:</p>
+
+<pre><code>Version   : v4.0.30319
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 0x20003
+ILONLY    : 1
+32BITREQ  : 1
+32BITPREF : 1
+Signed    : 0
+</code></pre>
+
+<p>The 32BITREQ is shown as flagged as the value of 0x20003 includes that flag&hellip;. so who is right?</p>
+
+<p>Microsoft in hiding that the 32BITREQ flag is set on PEs that have 32BITPREF set (while still showing the actual flag value), is that right? a bug? Should I do the same in my xplat version of the tool? Let me know in the comments below, or even better post an issue over at my xplat <a href="https://github.com/sushihangover/corflags/issues/new">CorFlags</a> project (Thanks).</p>
+
+<h2>Misc:</h2>
+
+<p>In setting the compiler /platform flag to &lsquo;anycpu32bitpreferred&rsquo; you are targeting 32-bit even if on a 64-bit system, thus the 32BITREQ and 32BITPREF flags are set.</p>
+
+<blockquote><p>anycpu32bitpreferred compiles your assembly to run on any platform. Your application runs in 32-bit mode on systems that support both 64-bit and 32-bit applications. You can specify this option only for projects that target the .NET Framework 4.5. (Or Mono 4.5...)</p></blockquote>
+
+
+<p>IMAGE_COR20_HEADER.Flags values from \Include\um\CorHdr.h</p>
+
+<pre><code>COMIMAGE_FLAGS_ILONLY               =0x00000001,
+COMIMAGE_FLAGS_32BITREQUIRED        =0x00000002,
+COMIMAGE_FLAGS_IL_LIBRARY           =0x00000004,
+COMIMAGE_FLAGS_STRONGNAMESIGNED     =0x00000008,
+COMIMAGE_FLAGS_NATIVE_ENTRYPOINT    =0x00000010,
+COMIMAGE_FLAGS_TRACKDEBUGDATA       =0x00010000,
+COMIMAGE_FLAGS_32BITPREFERRED       =0x00020000,
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/playscript-moved-it-a-github-organization/">PlayScript - Moved it a Github organization</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-14T08:24:28-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:24 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png">  I transfered my PlayScript repo to an Github organization to help maintain the structure of the project.</p>
+
+<p>The new org is named <a href="https://github.com/PlayScriptRedux">PlayScriptRedux</a> and any forks should be made from there as it will be the master and now my personal PlayScript repo will also be a fork of that master.</p>
+
+<p>I&rsquo;ll be (slowly) posting the other PlayScript related repo (Starling, Away3d, IDE add-ins, etc.) to the PlayScriptRedux as they are tested.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -608,176 +727,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-curses-os-x-64-bit/">Mono-Curses OS-X 64-bit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-08T17:07:00-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:07 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png" title="" > I am looking in writing a git merge assistant that handles a specific work-flow (more on that in a later post) and as such am looking a ncurses interface. There are a couple of C# wrappers but they are old projects and have not been touched in years, so to even get them to compiled in order to even test them, I had to do some minor tweaking.</p>
-
-<p>The first one is from Mono and it called <a href="http://www.mono-project.com/MonoCurses">Mono-curses</a> and I forked it on Github and tweaked it to produce a 64-bit dylib and a PE32+ assembly.</p>
-
-<p>It appears to work ok, but there is a issue with timeouts; tryout the mltest.cs sample code and you will see the inconsistent timeout events&hellip;.</p>
-
-<p>It also is missing mouse support&hellip; not a deal breaker for me, but it would be a nice to-have.</p>
-
-<p>There are some apps such as the out-dated <a href="http://www.mono-project.com/archived/monotorrent/">MonoTorrent</a> and a C# version of <a href="https://github.com/migueldeicaza/mc">Midnight Commander</a>.</p>
-
-<p><a href="http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/">http://www.mono-project.com/docs/tools+libraries/libraries/monocurses/</a></p>
-
-<h1>Mono-Curses OS-X 64-bit</h1>
-
-<p>Note: <em>This is a fork of the <a href="http://www.mono-project.com/MonoCurses">mono/mono-curses</a> project</em></p>
-
-<p>Clone the repo and checkout the <strong>osx-64bit</strong> branch</p>
-
-<pre><code>git clone https://github.com/sushihangover/mono-curses.git
-git check osx-64bit 
-</code></pre>
-
-<p>Set our path to your 64-bit version of Mono and set your Mono package config env var to that install, configure and make the project.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre><code>export PATH=$HOME/mono-install/bin
-export PKG_CONFIG_PATH=/$HOME/mono-install/lib/pkgconfig
-#WARNING: by default it installs into /usr/local
-./configure --prefix=/$HOME/mono-install
-make 
-make install
-</code></pre>
-
-<p>That should do it, lets do a quick arch check:</p>
-
-<pre><code>file libmono-curses.dylib 
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-
-file mono-curses.dll
-mono-curses.dll: PE32+ executable for MS Windows (DLL) (console) Mono/.Net assembly
-</code></pre>
-
-<p>FYI: The difference in a <a href="http://en.wikipedia.org/wiki/Portable_Executable">PE 32-bit and 64-bit</a> is show below:</p>
-
-<pre><code>file mono-curses.dll
-mono-curses.dll: **PE32+** executable for MS Windows (DLL) (console) Mono/.Net assembly
-
-file mono-curses-32.dll 
-mono-curses-32.dll: **PE32 **executable for MS Windows (DLL) (console) **Intel 80386 32-bit **Mono/.Net assembly
-</code></pre>
-
-<h2>There are a couple of tests that are built during the <em>make</em> you can run:</h2>
-
-<pre><code>(make test) mono test.exe (Unicode sample, any key to exit)
-(make gtest) mono gtest.exe (Ctrl-C to exit app)
-(make mltest) mono mltest.exe (Timer events do not work as expected(?), Ctrl-C to exit app)
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mono-unable-to-find-the-ldylib-native-library/">OS-X Mono - Unable to find the dylib native library</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-08T10:41:32-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:41 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/mono-logo.png"> Using Mono/.Net libraries that have native binding and you are receiving errors like
-&ldquo;<strong>Unable to find the xxxx native library</strong>&rdquo; or &ldquo;<strong>DllImport error loading library</strong>&rdquo;.</p>
-
-<p>You can easily find where mono is looking for that native library by setting the MONO_LOG_LEVEL to debug and MONO_LOG_MASK filtering to only DLL related messages.</p>
-
-<pre><code>export MONO_LOG_LEVEL=debug
-export MONO_LOG_MASK=dll
-mono yourprogram.exe
-</code></pre>
-
-<p>I was recently using the <a href="https://github.com/mono/mono-curses">mono-curses</a> wrapper, or at least trying to ;-) and I knew my DYLD_LIBRARY_PATH was set properly to pick up the &ldquo;libmono-curses.dylib&rdquo; that I just built. But the program failed to run so I set the MONO_LOG_LEVEL and MONO_LOG_MASK env vars and re-ran the program. Yes it was finding the dylib OK <strong>but</strong> it was complaining about it being the wrong architecture&hellip;</p>
-
-<pre><code>Mono: DllImport attempting to load: 'libmono-curses.dylib'.
-Mono: DllImport error loading library '/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib': 'dlopen(/Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib, 9): no suitable image found.
-Did find:  /Users/administrator/Documents/Code/github/mono-curses/libmono-curses.dylib: mach-o, but wrong architecture        
-</code></pre>
-
-<p>Checking with <strong>file</strong> and yes, it was a 32-bit version of the library:</p>
-
-<pre><code>file libmono-curses.dylib
-libmono-curses.dylib: Mach-O dynamically linked shared library i386
-</code></pre>
-
-<p>I am compiling using a 64-bit version of Mono on OS-X and need 64-bit libraries (and native libs), so a quick fix in the mono-curses Makefile and re-compile and I have a 64-bit version (I&rsquo;ll fork and fix the <a href="https://github.com/mono/mono-curses">mono-curses</a> project and post it to my GitHub).</p>
-
-<pre><code>file libmono-curses.dylib 
-libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
-</code></pre>
-
-<p>After that, testing the C# ncurses wrapper went fine&hellip; ;-)</p>
-
-<h2><a href="http://www.mono-project.com/docs/advanced/pinvoke/#mac-os-x-framework-and-dylib-search-path">Mac OS X Framework and .dylib Search Path</a></h2>
-
-<h3>The Framework and library search path is:</h3>
-
-<ul>
-<li>A colon-separated list of directories in the user’s DYLD_FRAMEWORK_PATH environment variable.</li>
-<li>A colon-separated list of directories in the user’s DYLD_LIBRARY_PATH environment variable.</li>
-<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_FRAMEWORK_PATH environment variable, which defaults to the directories:</p>
-
-<pre><code>  ~/Library/Frameworks
-  /Library/Frameworks
-  /Network/Library/Frameworks
-  /System/Library/Frameworks
-</code></pre></li>
-<li><p>A colon-separated list of directories in the user’s DYLD_FALLBACK_LIBRARY_PATH environment variable, which defaults to the directories:</p>
-
-<pre><code>  ~/lib
-  /usr/local/lib
-  /lib
-  /usr/lib
-</code></pre></li>
-</ul>
-
-
-<p>Note: Mono will automatically append the appropriate suffix depending on the platform (.dylib on Mac, .so on Linux and .dll on Windows).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -795,6 +744,14 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/app-blocker--data-saver/">App Blocker | Data Saver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/">Debugging MSBuild/Xbuild Task with Xamarin Studio</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
       </li>
     
@@ -804,14 +761,6 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
     
       <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen/">Sharpen</a>
       </li>
     
   </ul>
@@ -856,7 +805,7 @@ libmono-curses.dylib: Mach-O 64-bit dynamically linked shared library x86_64
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - RobertN -
+  Copyright &copy; 2018 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

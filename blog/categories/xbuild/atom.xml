@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xbuild | SushiHangover]]></title>
   <link href="http://sushihangover.github.io/blog/categories/xbuild/atom.xml" rel="self"/>
   <link href="http://sushihangover.github.io/"/>
-  <updated>2016-11-13T15:49:44-08:00</updated>
+  <updated>2018-06-07T17:19:51-07:00</updated>
   <id>http://sushihangover.github.io/</id>
   <author>
     <name><![CDATA[RobertN]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging MSBuild/Xbuild Task with Xamarin Studio]]></title>
+    <link href="http://sushihangover.github.io/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/"/>
+    <updated>2016-12-24T17:55:03-08:00</updated>
+    <id>http://sushihangover.github.io/debugging-msbuild-slash-xbuild-task-with-xamarin-studio</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MSBuild / xbuild - Steps of a build]]></title>

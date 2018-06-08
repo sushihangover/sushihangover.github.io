@@ -9,7 +9,7 @@
   <meta name="author" content="RobertN">
 
   
-  <meta name="description" content="I posted up the initial fork of NRefactory that replaces the parser with the PlayScript mcs compiler to allow PlayScript &amp; ActionScript parsing &hellip;">
+  <meta name="description" content="In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-os-x-addins-location/">Xamarin OS-X Addins Location</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-08T09:59:55-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:59 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the process of working on an Xamarin Studio Language Addin for PlayScript I needed to to manually find and update some of the installed Addin files. But where are the Addin files?</p>
+
+<p>Within the <code>~/Library/Application Support</code> directory you will find one based on the version of Xamarin Studio or Monodevelop that you are using:</p>
+
+<ul>
+<li><code>MonoDevelop-4.0</code></li>
+<li><code>MonoDevelop-5.0</code></li>
+<li><code>MonoDevelop-6.0</code></li>
+<li><code>XamarinStudio-4.0</code></li>
+<li><code>XamarinStudio-5.0</code></li>
+<li><code>XamarinStudio-6.0</code></li>
+</ul>
+
+
+<p>Within one of those directories you will find:</p>
+
+<ul>
+<li><code>LocalInstall/Addins</code></li>
+</ul>
+
+
+<p>So for me, that ended up being:</p>
+
+<p><code>~/Library/Application Support/XamarinStudio-6.0/LocalInstall/Addins
+</code>
+<code>~/Library/Application Support/MonoDevelop-6.0/LocalInstall/Addins</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xkcd-does-git/">xkcd does git ;-)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-08T08:39:32-08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:39 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Using Git:</h3>
+
+<p><a href="http://www.xkcd.com/1597/"><img src="http://imgs.xkcd.com/comics/git.png" alt="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." /></a></p>
+
+<h3>Git Commit:</h3>
+
+<p><a href="http://xkcd.com/1296/"><img src="http://imgs.xkcd.com/comics/git_commit.png" alt="Merge branch 'asdfasjkfdlas/alkdjf' into sdkjfls-final" /></a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -807,163 +896,6 @@ Capitan?.</p></blockquote>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/git-tags-and-playscript/">Git tags and PlayScript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-09-02T21:47:36-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>9:47 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> Seems I not found a way to update the &lsquo;upstream&rsquo; master of <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> without actually push the tag directly to the repo.</p>
-
-<p>So first I de-reference the tags to get the matching commit SHA for the tag I need to push:</p>
-
-<pre><code>git show-ref --tags --dereference | grep play
-9e82533b52d5be2f10f8c0ddacff848810b8d736 refs/tags/play-3.10.0001
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7
-a317c758ea3136347c4bc2a360c34fbacfce6d34 refs/tags/play-3.2.7001
-e97e27071414fdafba9ce95d4b7ca6c0c6da2a3c refs/tags/play-3.4.1001
-cfc55b6a587eba190042045e1a686388923310b0 refs/tags/play-3.6.1001
-b509d6711135bfba5b32cf3f7e2090964c67daa0 refs/tags/play-3.8.1001
-</code></pre>
-
-<p>That is done on my fork of the <a href="https://github.com/sushihangover/playscript">PlayScript</a> repo as I try to never work directly on the &lsquo;upstream&rsquo; master.</p>
-
-<p>So in the case of tag &ldquo;play-3.10.0001&rdquo; that is not in the upstream PlayScript repo, I need to add it to the repo.</p>
-
-<p>I switch the PlayScriptRedux org&rsquo;s <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> repo that I have a local clone of and update it.</p>
-
-<p>First pull the latest changes, all done through pull-requests:</p>
-
-<pre><code>git pull origin playscript
-</code></pre>
-
-<p>Now I can add the new tag:</p>
-
-<pre><code>git tag play-3.10.0001 9e82533b52d5be2f10f8c0ddacff848810b8d736
-</code></pre>
-
-<p>And finally push it to the repo:</p>
-
-<pre><code>git push origin play-3.10.0001
-
-Total 0 (delta 0), reused 0 (delta 0)
-To https://github.com/PlayScriptRedux/playscript.git
- * [new tag]         play-3.10.0001 -&gt; play-3.10.0001
-</code></pre>
-
-<p>I still want to know if this is available through pull-requests somehow.</p>
-
-<p><img class="right" src="http://sushihangover.github.io/images/gitlogo.png"></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/playscript-exception-filters/">PlayScript | Exception Filters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-08-17T18:34:18-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:34 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://sushihangover.github.io/images/PlayscriptLogo_small.png"> <a href="https://github.com/PlayScriptRedux/playscript">PlayScript</a> (.play) now has Exception Filters like C# 6.0.</p>
-
-<p>These are actually really cool and nice addition to ActionScript.</p>
-
-<p>From the <a href="http://blogs.msdn.com/b/csharpfaq">C# Frequently Asked Questions</a> blog:</p>
-
-<blockquote><p>Exception filters are a CLR capability that is exposed in Visual Basic and F#, but hasn’t been in C# – until now. This is what they look like in C#:</p></blockquote>
-
-<pre><code>try { … } 
-catch (MyException e) if (myfilter(e)) 
-{ 
-     … 
-}
-</code></pre>
-
-<p><a href="http://blogs.msdn.com/b/csharpfaq/archive/2014/11/20/new-features-in-c-6.aspx">New Features in C# 6</a></p>
-
-<p>And here is what they look like in PlayScript:</p>
-
-<h3>play/test-ps-ex-filter-01.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            throw new Error("Throw");
-        } catch (e:Error) if (x &gt; 0) {
-            trace("Catch");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<h3>play/test-ps-ex-filter-02.play</h3>
-
-<pre><code>package {
-    public class Foo {
-        public static function Main():int {
-        var x:int = 4;
-        try {
-            x = 5;
-            throw new Error("Throw");
-        } catch (e:Error) if (x &lt; 5) {
-            trace("No Catch Please");
-            return 0;
-        } catch (myError:Error) {
-            trace("Catch Here");
-            return 0;
-        }
-        return 1;
-        }
-    }
-}
-</code></pre>
-
-<p>If you have any problems with them, post an <a href="https://github.com/PlayScriptRedux/playscript/issues">issue</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -981,6 +913,14 @@ catch (MyException e) if (myfilter(e))
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/app-blocker--data-saver/">App Blocker | Data Saver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/debugging-msbuild-slash-xbuild-task-with-xamarin-studio/">Debugging MSBuild/Xbuild Task with Xamarin Studio</a>
+      </li>
+    
+      <li class="post">
         <a href="/xamarin-dot-ios-binding-project-for-svgkit/">Xamarin.iOS binding project for SVGKit</a>
       </li>
     
@@ -990,14 +930,6 @@ catch (MyException e) if (myfilter(e))
     
       <li class="post">
         <a href="/sharpen-part-3/">Sharpen - Part 3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen-part-2/">Sharpen - Part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/sharpen/">Sharpen</a>
       </li>
     
   </ul>
@@ -1042,7 +974,7 @@ catch (MyException e) if (myfilter(e))
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - RobertN -
+  Copyright &copy; 2018 - RobertN -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
